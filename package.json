@@ -10,6 +10,8 @@
     "test": "pnpm --recursive run test"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.9.2"
   },
   "author": "",

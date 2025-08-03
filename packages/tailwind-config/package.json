@@ -1,0 +1,25 @@
+{
+  "name": "@nuclear/tailwind-config",
+  "version": "0.1.0",
+  "description": "Shared Tailwind CSS configuration for Nuclear monorepo",
+  "type": "module",
+  "main": "./src/index.css",
+  "exports": {
+    ".": "./src/index.css",
+    "./base": "./src/base.css"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@nuclear/eslint-config": "workspace:*"
+  }
+}
