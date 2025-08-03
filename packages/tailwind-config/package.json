@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "tw-animate-css": "^1.3.6"
   },
   "devDependencies": {
     "@nuclear/eslint-config": "workspace:*"
