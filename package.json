@@ -1,0 +1,17 @@
+{
+  "name": "nuclear-xrd",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --parallel --recursive run dev",
+    "build": "pnpm --recursive run build",
+    "lint": "pnpm --recursive run lint",
+    "test": "pnpm --recursive run test"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "author": "",
+  "license": "AGPL-3.0-only"
+}
