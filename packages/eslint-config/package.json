@@ -6,7 +6,7 @@
   "main": "eslint.config.ts",
   "exports": {
     ".": "./eslint.config.ts",
-    "./prettier": "./prettier.config.ts"
+    "./prettier": "./prettier.config.js"
   },
   "files": [
     "eslint.config.ts",

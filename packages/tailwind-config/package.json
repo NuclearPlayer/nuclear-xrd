@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "Shared Tailwind CSS configuration for Nuclear",
   "type": "module",
-  "main": "./src/index.css",
+  "main": "./global.css",
   "exports": {
-    ".": "./src/index.css",
-    "./base": "./src/base.css"
+    ".": "./global.css"
   },
   "files": [
-    "src"
+    "global.css"
   ],
   "scripts": {
     "lint": "eslint .",
