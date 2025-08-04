@@ -1,7 +1,7 @@
 {
   "name": "@nuclear/tailwind-config",
-  "version": "0.1.0",
-  "description": "Shared Tailwind CSS configuration for Nuclear monorepo",
+  "version": "1.0.0",
+  "description": "Shared Tailwind CSS configuration for Nuclear",
   "type": "module",
   "main": "./src/index.css",
   "exports": {

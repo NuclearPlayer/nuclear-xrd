@@ -1,7 +1,7 @@
 {
-  "name": "@nuclear/ui",
+  "name": "@nuclear/plugin-sdk",
   "version": "1.0.0",
-  "description": "Shared UI component library for Nuclear",
+  "description": "Plugin SDK for Nuclear music player",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -18,12 +18,14 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:npm": "vite build --mode npm",
     "test": "vitest --run",
     "test:watch": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nuclear/ui": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.460.0",
