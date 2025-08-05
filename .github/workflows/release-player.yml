@@ -86,6 +86,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build frontend
+        run: pnpm --filter @nuclearplayer/player build:frontend
+
       - name: Build Tauri app
         uses: tauri-apps/tauri-action@v0
         env:
@@ -98,4 +101,5 @@ jobs:
           releaseDraft: false
           prerelease: false
           projectPath: packages/player
+          tauriScript: pnpm tauri
           args: ${{ matrix.args }}

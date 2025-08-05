@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "tauri dev",
     "build": "tsc && vite build && tauri build",
+    "build:frontend": "tsc && vite build",
+    "tauri": "tauri",
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
