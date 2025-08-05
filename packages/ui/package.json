@@ -1,5 +1,5 @@
 {
-  "name": "@nuclear/ui",
+  "name": "@nuclearplayer/ui",
   "version": "1.0.0",
   "description": "Shared UI component library for Nuclear",
   "type": "module",
@@ -31,8 +31,8 @@
     "react-dom": "^18.3.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
-    "@nuclear/eslint-config": "workspace:*",
-    "@nuclear/tailwind-config": "workspace:*"
+    "@nuclearplayer/eslint-config": "workspace:*",
+    "@nuclearplayer/tailwind-config": "workspace:*"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",

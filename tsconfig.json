@@ -19,10 +19,10 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@nuclear/ui": ["./packages/ui/src"],
-      "@nuclear/plugin-sdk": ["./packages/plugin-sdk/src"],
-      "@nuclear/tailwind-config": ["./packages/tailwind-config/src"],
-      "@nuclear/eslint-config": ["./packages/eslint-config/src"]
+      "@nuclearplayer/ui": ["./packages/ui/src"],
+      "@nuclearplayer/plugin-sdk": ["./packages/plugin-sdk/src"],
+      "@nuclearplayer/tailwind-config": ["./packages/tailwind-config/src"],
+      "@nuclearplayer/eslint-config": ["./packages/eslint-config/src"]
     }
   },
   "include": ["packages/**/*.ts", "packages/**/*.tsx"],

@@ -69,16 +69,16 @@ importers:
 
   packages/player:
     dependencies:
-      '@nuclear/eslint-config':
+      '@nuclearplayer/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@nuclear/plugin-sdk':
+      '@nuclearplayer/plugin-sdk':
         specifier: workspace:*
         version: link:../plugin-sdk
-      '@nuclear/tailwind-config':
+      '@nuclearplayer/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config
-      '@nuclear/ui':
+      '@nuclearplayer/ui':
         specifier: workspace:*
         version: link:../ui
       '@tauri-apps/api':
@@ -145,7 +145,7 @@ importers:
 
   packages/plugin-sdk:
     dependencies:
-      '@nuclear/ui':
+      '@nuclearplayer/ui':
         specifier: workspace:*
         version: link:../ui
       class-variance-authority:
@@ -164,10 +164,10 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
     devDependencies:
-      '@nuclear/eslint-config':
+      '@nuclearplayer/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@nuclear/tailwind-config':
+      '@nuclearplayer/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config
       '@tailwindcss/vite':
@@ -219,16 +219,16 @@ importers:
         specifier: ^1.3.6
         version: 1.3.6
     devDependencies:
-      '@nuclear/eslint-config':
+      '@nuclearplayer/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
 
   packages/ui:
     dependencies:
-      '@nuclear/eslint-config':
+      '@nuclearplayer/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@nuclear/tailwind-config':
+      '@nuclearplayer/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config
       class-variance-authority:

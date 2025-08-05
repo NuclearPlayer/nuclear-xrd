@@ -1,5 +1,5 @@
 {
-  "name": "@nuclear/tailwind-config",
+  "name": "@nuclearplayer/tailwind-config",
   "version": "1.0.0",
   "description": "Shared Tailwind CSS configuration for Nuclear",
   "type": "module",
@@ -20,6 +20,6 @@
     "tw-animate-css": "^1.3.6"
   },
   "devDependencies": {
-    "@nuclear/eslint-config": "workspace:*"
+    "@nuclearplayer/eslint-config": "workspace:*"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@nuclear/eslint-config",
+  "name": "@nuclearplayer/eslint-config",
   "version": "1.0.0",
   "description": "Shared ESLint and Prettier configuration for Nuclear",
   "type": "module",

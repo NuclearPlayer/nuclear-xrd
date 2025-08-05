@@ -1,5 +1,5 @@
 {
-  "name": "@nuclear/plugin-sdk",
+  "name": "@nuclearplayer/plugin-sdk",
   "version": "1.0.0",
   "description": "Plugin SDK for Nuclear music player",
   "type": "module",
@@ -25,7 +25,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@nuclear/ui": "workspace:*",
+    "@nuclearplayer/ui": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.460.0",
@@ -33,8 +33,8 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@nuclear/eslint-config": "workspace:*",
-    "@nuclear/tailwind-config": "workspace:*",
+    "@nuclearplayer/eslint-config": "workspace:*",
+    "@nuclearplayer/tailwind-config": "workspace:*",
     "@tailwindcss/vite": "^4.1.11",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",

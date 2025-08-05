@@ -1,8 +1,7 @@
+import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
+import { Button } from '@nuclearplayer/ui';
 import { invoke } from '@tauri-apps/api/core';
 import { useEffect, useState } from 'react';
-
-import { NuclearPluginAPI } from '@nuclear/plugin-sdk';
-import { Button } from '@nuclear/ui';
 
 function App() {
   const [greetMsg, setGreetMsg] = useState('');

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App';
 
-import '@nuclear/tailwind-config';
+import '@nuclearplayer/tailwind-config';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
