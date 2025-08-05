@@ -20,7 +20,6 @@
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@nuclearplayer/ui": "workspace:*",
     "@tauri-apps/api": "^2.0.0",
-    "@tauri-apps/plugin-shell": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
