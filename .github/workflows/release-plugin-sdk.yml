@@ -1,0 +1,77 @@
+name: Release Plugin SDK
+
+on:
+  push:
+    tags:
+      - "plugin-sdk@*.*.*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG#plugin-sdk@}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Get PNPM store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup PNPM cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build package for npm
+        run: pnpm --filter @nuclearplayer/plugin-sdk build:npm
+
+      - name: Prepare package.json for publishing
+        run: |
+          cd packages/plugin-sdk
+          node -e "
+            const pkg = require('./package.json');
+            
+            pkg.main = './dist/index.js';
+            pkg.module = './dist/index.js';
+            pkg.exports['.'].import = './dist/index.js';
+            
+            delete pkg.dependencies['@nuclearplayer/ui'];
+            
+            require('fs').writeFileSync('./package.json', JSON.stringify(pkg, null, 2));
+          "
+
+      - name: Run tests
+        run: pnpm --filter @nuclearplayer/plugin-sdk test
+
+      - name: Publish to npm
+        run: |
+          cd packages/plugin-sdk
+          pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

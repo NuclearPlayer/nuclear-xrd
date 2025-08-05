@@ -13,7 +13,8 @@
     }
   },
   "files": [
-    "src"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "dev": "vite",
@@ -52,5 +53,27 @@
   },
   "peerDependencies": {
     "react": "^18.3.1"
+  },
+  "keywords": [
+    "nuclear",
+    "music",
+    "player",
+    "plugin",
+    "sdk",
+    "react"
+  ],
+  "author": {
+    "name": "nukeop",
+    "email": "12746779+nukeop@users.noreply.github.com"
+  },
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NuclearPlayer/nuclear-xrd.git",
+    "directory": "packages/plugin-sdk"
+  },
+  "homepage": "https://github.com/NuclearPlayer/nuclear-xrd#readme",
+  "bugs": {
+    "url": "https://github.com/NuclearPlayer/nuclear-xrd/issues"
   }
 }
