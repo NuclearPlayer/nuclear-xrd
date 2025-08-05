@@ -18,6 +18,7 @@ const ignores = [
   '**/*.d.ts',
   '**/*.d.ts.map',
   '**/*.js.map',
+  'packages/*/coverage',
 ];
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config([
@@ -51,7 +52,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config([
       'css/no-invalid-at-rules': 0,
     },
   },
-  prettierPlugin,
+  { ...prettierPlugin, ignores: ['**/*.md'] },
 ]);
 
 export default config;
