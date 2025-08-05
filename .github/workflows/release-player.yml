@@ -5,6 +5,9 @@ on:
     tags:
       - "player@*.*.*"
 
+permissions:
+  contents: write
+
 jobs:
   release:
     strategy:
@@ -32,11 +35,10 @@ jobs:
 
       - name: Extract version from tag
         id: version
+        shell: bash
         run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          VERSION=${TAG#player@}
+          VERSION=${GITHUB_REF#refs/tags/player@}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -95,11 +97,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_BUNDLER_DMG_IGNORE_CI: false
         with:
-          tagName: ${{ steps.version.outputs.tag }}
+          tagName: ${{ github.ref_name }}
           releaseName: "Nuclear Player v${{ steps.version.outputs.version }}"
           releaseBody: "Nuclear Player release v${{ steps.version.outputs.version }}"
           releaseDraft: false
           prerelease: false
-          projectPath: packages/player
-          tauriScript: pnpm tauri
           args: ${{ matrix.args }}
