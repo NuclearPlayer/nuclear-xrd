@@ -1,2 +1,3 @@
-import "@nuclear/tailwind-config";
-export * from "./components";
+import '@nuclear/tailwind-config';
+
+export * from './components';

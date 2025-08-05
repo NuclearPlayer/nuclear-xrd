@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
-import { Button } from "@nuclear/ui";
-import { NuclearPluginAPI } from "@nuclear/plugin-sdk";
+import { NuclearPluginAPI } from '@nuclear/plugin-sdk';
+import { Button } from '@nuclear/ui';
+import { invoke } from '@tauri-apps/api/core';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [greetMsg, setGreetMsg] = useState('');
+  const [name, setName] = useState('');
 
   async function greet() {
-    setGreetMsg(await invoke("greet", { name }));
+    setGreetMsg(await invoke('greet', { name }));
   }
 
   useEffect(() => {

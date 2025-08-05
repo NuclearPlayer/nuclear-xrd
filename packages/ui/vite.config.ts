@@ -1,11 +1,11 @@
 /// <reference types="vitest" />
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import dts from "vite-plugin-dts";
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig(({ command }) => {
-  const isProduction = command === "build";
+  const isProduction = command === 'build';
 
   return {
     plugins: [
@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => {
             dts({
               insertTypesEntry: true,
               copyDtsFiles: false,
-              exclude: ["**/*.test.ts", "**/*.test.tsx"],
+              exclude: ['**/*.test.ts', '**/*.test.tsx'],
             }),
           ]
         : []),
@@ -24,17 +24,17 @@ export default defineConfig(({ command }) => {
     ...(isProduction && {
       build: {
         lib: {
-          entry: "src/index.ts",
-          name: "NuclearUI",
-          formats: ["es"],
-          fileName: "index",
+          entry: 'src/index.ts',
+          name: 'NuclearUI',
+          formats: ['es'],
+          fileName: 'index',
         },
         rollupOptions: {
-          external: ["react", "react-dom"],
+          external: ['react', 'react-dom'],
           output: {
             globals: {
-              react: "React",
-              "react-dom": "ReactDOM",
+              react: 'React',
+              'react-dom': 'ReactDOM',
             },
           },
         },
@@ -42,8 +42,8 @@ export default defineConfig(({ command }) => {
     }),
     test: {
       globals: true,
-      environment: "jsdom",
-      setupFiles: ["./src/test/setup.ts"],
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.ts'],
     },
   };
 });

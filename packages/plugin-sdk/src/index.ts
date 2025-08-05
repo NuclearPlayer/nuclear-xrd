@@ -1,1 +1,1 @@
-export { NuclearPluginAPI } from "./api";
+export { NuclearPluginAPI } from './api';
