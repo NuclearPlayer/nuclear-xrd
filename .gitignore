@@ -4,3 +4,4 @@ build
 *.d.ts
 *.d.ts.map
 *.js.map
+packages/*/coverage/*

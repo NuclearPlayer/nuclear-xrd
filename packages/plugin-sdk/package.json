@@ -21,6 +21,7 @@
     "build:npm": "vite build --mode npm",
     "test": "vitest --run",
     "test:watch": "vitest",
+    "test:coverage": "vitest --run --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -40,13 +41,14 @@
     "@testing-library/react": "^16.3.0",
     "@types/react": "^18.3.12",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "jsdom": "^26.1.0",
     "react-dom": "^18.3.1",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
     "vite-plugin-dts": "^4.3.0",
-    "vitest": "^2.1.8"
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "react": "^18.3.1"

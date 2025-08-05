@@ -8,7 +8,8 @@
     "build": "pnpm --recursive run build",
     "lint": "pnpm --recursive run lint",
     "lint:fix": "pnpm --recursive run lint:fix",
-    "test": "pnpm --recursive run test"
+    "test": "pnpm --recursive run test",
+    "test:coverage": "pnpm --recursive run test:coverage"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",

@@ -48,6 +48,16 @@ export default defineConfig(({ command, mode }) => {
       globals: true,
       environment: 'jsdom',
       setupFiles: ['./src/test/setup.ts'],
+      coverage: {
+        reporter: ['text', 'lcov', 'html'],
+        exclude: [
+          'node_modules/',
+          'src/test/',
+          '**/*.test.{ts,tsx}',
+          '**/*.config.{ts,js}',
+          'dist/',
+        ],
+      },
     },
   };
 });
