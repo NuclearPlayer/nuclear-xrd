@@ -7,13 +7,13 @@ export default {
   singleQuote: true,
   tabWidth: 2,
   importOrder: [
-    '^@?(.*)$',
     '<BUILTIN_MODULES>',
     '<THIRD_PARTY_MODULES>',
     ' ',
+    '^@nuclear/(.*)$',
     ' ',
-    '^[./]',
-    '^[../]',
+    '^[.]',
+    '^[..]',
   ],
   importOrderParserPlugins: ['typescript', 'jsx'],
   plugins: [
