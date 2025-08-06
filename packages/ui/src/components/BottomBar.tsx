@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react';
 
-interface BottomBarProps {
+type BottomBarProps = {
   children?: ReactNode;
   className?: string;
-}
+};
 
 export const BottomBar: FC<BottomBarProps> = ({ children, className = '' }) => {
   return (

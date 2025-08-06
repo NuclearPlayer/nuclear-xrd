@@ -1,5 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { FC, ReactNode, useCallback, useRef, useState } from 'react';
+import { FC, ReactNode, useRef } from 'react';
+
+import { SIDEBAR_CONFIG } from './constants';
+import { useSidebarResize } from './hooks';
 
 export type PlayerWorkspaceSidebarPropsBase = {
   children?: ReactNode;
@@ -14,8 +17,6 @@ type PlayerWorkspaceSidebarProps = PlayerWorkspaceSidebarPropsBase & {
   side: 'left' | 'right';
 };
 
-const COLLAPSED_WIDTH = 40;
-
 export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
   children,
   isCollapsed,
@@ -26,43 +27,14 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
   className = '',
 }) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const isResizing = useRef(false);
-  const [isResizingState, setIsResizingState] = useState(false);
-
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      if (isCollapsed) return;
-
-      isResizing.current = true;
-      setIsResizingState(true);
-      e.preventDefault();
-
-      const startX = e.clientX;
-      const startWidth = width;
-
-      const handleMouseMove = (e: MouseEvent) => {
-        if (!isResizing.current) return;
-
-        const deltaX =
-          side === 'left' ? e.clientX - startX : startX - e.clientX;
-        const newWidth = Math.max(150, Math.min(400, startWidth + deltaX));
-        onWidthChange(newWidth);
-      };
-
-      const handleMouseUp = () => {
-        isResizing.current = false;
-        setIsResizingState(false);
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    },
-    [width, onWidthChange, side, isCollapsed],
+  const { handleMouseDown, isResizingState } = useSidebarResize(
+    width,
+    onWidthChange,
+    side,
+    isCollapsed,
   );
 
-  const currentWidth = isCollapsed ? COLLAPSED_WIDTH : width;
+  const currentWidth = isCollapsed ? SIDEBAR_CONFIG.COLLAPSED_WIDTH : width;
 
   return (
     <motion.div

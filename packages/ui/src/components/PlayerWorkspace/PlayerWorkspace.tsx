@@ -3,15 +3,15 @@ import { FC, ReactNode } from 'react';
 import { PlayerWorkspaceLeftSidebar } from './PlayerWorkspaceLeftSidebar';
 import { PlayerWorkspaceRightSidebar } from './PlayerWorkspaceRightSidebar';
 
-interface PlayerWorkspaceProps {
+type PlayerWorkspaceProps = {
   children: ReactNode;
   className?: string;
-}
+};
 
-interface MainProps {
+type MainProps = {
   children?: ReactNode;
   className?: string;
-}
+};
 
 const PlayerWorkspaceMain: FC<MainProps> = ({ children, className = '' }) => {
   return (

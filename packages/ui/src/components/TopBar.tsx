@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react';
 
-interface TopBarProps {
+type TopBarProps = {
   children?: ReactNode;
   className?: string;
-}
+};
 
 export const TopBar: FC<TopBarProps> = ({ children, className = '' }) => {
   return (

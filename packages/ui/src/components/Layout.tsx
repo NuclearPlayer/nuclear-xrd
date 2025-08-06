@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react';
 
-interface PlayerShellProps {
+type PlayerShellProps = {
   children: ReactNode;
   className?: string;
-}
+};
 
 export const PlayerShell: FC<PlayerShellProps> = ({
   children,
