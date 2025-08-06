@@ -1,16 +1,24 @@
-import { invoke } from '@tauri-apps/api/core';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
-import { Button } from '@nuclearplayer/ui';
+import {
+  BottomBar,
+  PlayerShell,
+  PlayerWorkspace,
+  TopBar,
+} from '@nuclearplayer/ui';
+
+import { useLayoutStore } from './stores/layoutStore';
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState('');
-  const [name, setName] = useState('');
-
-  async function greet() {
-    setGreetMsg(await invoke('greet', { name }));
-  }
+  const {
+    leftSidebar,
+    rightSidebar,
+    toggleLeftSidebar,
+    toggleRightSidebar,
+    setLeftSidebarWidth,
+    setRightSidebarWidth,
+  } = useLayoutStore();
 
   useEffect(() => {
     new NuclearPluginAPI().ping().then((res) => {
@@ -19,20 +27,29 @@ function App() {
   }, []);
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-8">Nuclear Player</h1>
+    <PlayerShell>
+      <TopBar />
 
-      <div className="space-y-4">
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-          className="border border-gray-300 rounded px-3 py-2"
+      <PlayerWorkspace>
+        <PlayerWorkspace.LeftSidebar
+          width={leftSidebar.width}
+          isCollapsed={leftSidebar.isCollapsed}
+          onWidthChange={setLeftSidebarWidth}
+          onToggle={toggleLeftSidebar}
         />
-        <Button onClick={() => greet()}>Greet</Button>
-        <p>{greetMsg}</p>
-      </div>
-    </div>
+
+        <PlayerWorkspace.Main />
+
+        <PlayerWorkspace.RightSidebar
+          width={rightSidebar.width}
+          isCollapsed={rightSidebar.isCollapsed}
+          onWidthChange={setRightSidebarWidth}
+          onToggle={toggleRightSidebar}
+        />
+      </PlayerWorkspace>
+
+      <BottomBar />
+    </PlayerShell>
   );
 }
 
