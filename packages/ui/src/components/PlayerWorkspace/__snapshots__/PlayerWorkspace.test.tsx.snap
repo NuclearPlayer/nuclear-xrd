@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
+<DocumentFragment>
+  <div
+    class="grid grid-cols-[auto_1fr_auto] h-full "
+  >
+    <div
+      class="bg-gray-800 border-gray-700 flex relative border-r "
+    >
+      <button
+        class="absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 right-1"
+      >
+        ›
+      </button>
+    </div>
+    <main
+      class="bg-gray-100 overflow-auto "
+    />
+    <div
+      class="bg-gray-800 border-gray-700 flex relative border-l "
+    >
+      <button
+        class="absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 left-1"
+      >
+        ‹
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
+<DocumentFragment>
+  <div
+    class="grid grid-cols-[auto_1fr_auto] h-full "
+  >
+    <div
+      class="bg-gray-800 border-gray-700 flex relative border-r "
+    >
+      <div
+        class="flex-1 overflow-hidden"
+        style="opacity: 0; transform: translateX(-20px);"
+      />
+      <div
+        class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg-blue-500 transition-colors right-0"
+      />
+      <button
+        class="absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 right-1"
+      >
+        ‹
+      </button>
+    </div>
+    <main
+      class="bg-gray-100 overflow-auto "
+    />
+    <div
+      class="bg-gray-800 border-gray-700 flex relative border-l "
+    >
+      <div
+        class="flex-1 overflow-hidden"
+        style="opacity: 0; transform: translateX(20px);"
+      />
+      <div
+        class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg-blue-500 transition-colors left-0"
+      />
+      <button
+        class="absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 left-1"
+      >
+        ›
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
