@@ -12,7 +12,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest --run",
-    "test:coverage": "vitest --run --coverage"
+    "test:coverage": "vitest --run --coverage",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist build .turbo node_modules/.vite"
   },
   "dependencies": {
     "@nuclearplayer/eslint-config": "workspace:*",

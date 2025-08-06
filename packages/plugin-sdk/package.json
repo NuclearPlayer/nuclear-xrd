@@ -24,7 +24,9 @@
     "test:watch": "vitest",
     "test:coverage": "vitest --run --coverage",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist build .turbo node_modules/.vite"
   },
   "dependencies": {
     "@nuclearplayer/ui": "workspace:*",
