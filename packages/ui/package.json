@@ -1,6 +1,6 @@
 {
   "name": "@nuclearplayer/ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Shared UI component library for Nuclear",
   "type": "module",
   "main": "./src/index.ts",
