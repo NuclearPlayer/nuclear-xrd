@@ -10,15 +10,24 @@
     "lint:fix": "pnpm --recursive run lint:fix",
     "test": "pnpm --recursive run test",
     "test:coverage": "pnpm --recursive run test:coverage",
-    "tauri": "pnpm --filter player tauri"
+    "tauri": "pnpm --filter player tauri",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
     "@tailwindcss/vite": "^4.1.11",
     "eslint": "^9.32.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.4",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.9.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "author": {
     "name": "nukeop <12746779+nukeop@users.noreply.github.com>"
