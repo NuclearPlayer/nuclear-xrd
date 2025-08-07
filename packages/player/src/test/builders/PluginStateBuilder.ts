@@ -39,12 +39,12 @@ export class PluginStateBuilder {
   withError(
     message: string,
     stack?: string,
-    timestamp?: Date,
+    timestamp?: number,
   ): PluginStateBuilder {
     this.state.error = {
       message,
       stack,
-      timestamp: timestamp || new Date(),
+      timestamp: timestamp || new Date().valueOf(),
     };
     return this;
   }
