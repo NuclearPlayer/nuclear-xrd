@@ -1,6 +1,3 @@
-import { useEffect } from 'react';
-
-import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 import {
   BottomBar,
   PlayerShell,
@@ -19,12 +16,6 @@ function App() {
     setLeftSidebarWidth,
     setRightSidebarWidth,
   } = useLayoutStore();
-
-  useEffect(() => {
-    new NuclearPluginAPI().ping().then((res) => {
-      console.log(res);
-    });
-  }, []);
 
   return (
     <PlayerShell>
