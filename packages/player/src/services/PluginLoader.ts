@@ -52,10 +52,11 @@ export class PluginLoader {
   evaluatePlugin(code: string): NuclearPlugin {
     const exports = {};
     const module = { exports };
+    const ALLOWED_MODULES: Record<string, unknown> = {
+      '@nuclearplayer/plugin-sdk': { NuclearPluginAPI },
+    };
     const require = (id: string) => {
-      if (id === '@nuclearplayer/plugin-sdk') {
-        return { NuclearPluginAPI };
-      }
+      if (id in ALLOWED_MODULES) return ALLOWED_MODULES[id];
       throw new Error(`Module ${id} not found`);
     };
 
