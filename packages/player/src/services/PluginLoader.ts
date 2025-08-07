@@ -21,7 +21,6 @@ export class PluginLoader {
   private path: string;
   private manifest?: PluginManifest;
   private pluginCode?: string;
-  private instance?: NuclearPlugin;
 
   constructor(path: string) {
     this.path = path;
@@ -66,6 +65,7 @@ export class PluginLoader {
       require,
     );
 
+    // @ts-expect-error exports are actually unknown
     const plugin = (module.exports as unknown).default || module.exports;
 
     if (!plugin || typeof plugin !== 'object') {
@@ -78,22 +78,17 @@ export class PluginLoader {
       throw new Error('Plugin must have name and version properties');
     }
 
-    this.instance = plugin;
     return plugin;
-  }
-
-  async callOnLoad(plugin: NuclearPlugin): Promise<void> {
-    if (plugin.onLoad) {
-      const api = new NuclearPluginAPI();
-      await plugin.onLoad(api);
-    }
   }
 
   async load(): Promise<LoadedPlugin> {
     const manifest = await this.readManifest();
     const code = await this.readPluginCode();
     const plugin = this.evaluatePlugin(code);
-    await this.callOnLoad(plugin);
+    if (plugin.onLoad) {
+      const api = new NuclearPluginAPI();
+      await plugin.onLoad(api);
+    }
 
     return {
       id: manifest.name,
