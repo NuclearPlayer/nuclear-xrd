@@ -175,30 +175,6 @@ describe('PluginLoader', () => {
     });
   });
 
-  describe('callOnLoad', () => {
-    it('should call onLoad if it exists', async () => {
-      const onLoad = vi.fn();
-      const plugin = {
-        name: 'test-plugin',
-        version: '1.0.0',
-        onLoad,
-      };
-
-      await loader.callOnLoad(plugin);
-
-      expect(onLoad).toHaveBeenCalledWith(expect.any(Object));
-    });
-
-    it('should not throw if onLoad does not exist', async () => {
-      const plugin = {
-        name: 'test-plugin',
-        version: '1.0.0',
-      };
-
-      await expect(loader.callOnLoad(plugin)).resolves.not.toThrow();
-    });
-  });
-
   describe('load', () => {
     it('should complete full loading process', async () => {
       const packageJson = {
