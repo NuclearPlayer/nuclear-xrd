@@ -64,7 +64,7 @@ describe('usePluginStore', () => {
 
   describe('PluginState interface', () => {
     it('should support plugin state with error details', () => {
-      const errorTimestamp = new Date();
+      const errorTimestamp = new Date().valueOf();
       const pluginWithError = new PluginStateBuilder()
         .withStatus('failed')
         .withError(
