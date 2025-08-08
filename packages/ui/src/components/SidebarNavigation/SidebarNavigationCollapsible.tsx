@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { FC, ReactNode, useState } from 'react';
 
@@ -22,13 +23,26 @@ export const SidebarNavigationCollapsible: FC<
       >
         {icon}
         {title}
-        <ChevronRight
-          className={clsx({
-            'rotate-90': !isCollapsed,
-          })}
-        />
+        <motion.div
+          animate={{ rotate: isCollapsed ? 0 : 90 }}
+          transition={{ duration: 0.2, ease: 'easeInOut' }}
+        >
+          <ChevronRight />
+        </motion.div>
       </Button>
-      {!isCollapsed && children}
+      <AnimatePresence>
+        {!isCollapsed && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
