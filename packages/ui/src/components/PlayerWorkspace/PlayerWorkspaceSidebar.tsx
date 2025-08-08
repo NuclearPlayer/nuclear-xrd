@@ -1,6 +1,9 @@
+import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import { PanelLeft, PanelRight } from 'lucide-react';
 import { FC, ReactNode, useRef } from 'react';
 
+import { Button } from '../Button';
 import { SIDEBAR_CONFIG } from './constants';
 import { useSidebarResize } from './hooks';
 
@@ -39,9 +42,11 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
   return (
     <motion.div
       ref={sidebarRef}
-      className={`bg-gray-800 border-gray-700 flex relative ${
-        side === 'left' ? 'border-r' : 'border-l'
-      } ${className}`}
+      className={clsx(
+        'bg-background-secondary border-border flex flex-col relative p-2',
+        { 'border-r-2': side === 'left', 'border-l-2': side === 'right' },
+        className,
+      )}
       animate={{ width: currentWidth }}
       transition={
         isResizingState
@@ -54,6 +59,23 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
             }
       }
     >
+      <span
+        className={clsx('flex flex-row items-center mb-4', {
+          'justify-end': side === 'left',
+          'justify-start': side === 'right',
+        })}
+      >
+        <Button
+          className={clsx('top-2 px-2', {
+            'right-1': side === 'left',
+            'left-1': side === 'right',
+          })}
+          size="icon"
+          onClick={onToggle}
+        >
+          {side === 'left' ? <PanelLeft /> : <PanelRight />}
+        </Button>
+      </span>
       <AnimatePresence mode="wait">
         {!isCollapsed && (
           <motion.div
@@ -75,27 +97,12 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
 
       {!isCollapsed && (
         <div
-          className={`absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg-blue-500 transition-colors ${
+          className={`absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg- transition-colors ${
             side === 'left' ? 'right-0' : 'left-0'
           }`}
           onMouseDown={handleMouseDown}
         />
       )}
-
-      <button
-        onClick={onToggle}
-        className={`absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 ${
-          side === 'left' ? 'right-1' : 'left-1'
-        }`}
-      >
-        {isCollapsed
-          ? side === 'left'
-            ? '›'
-            : '‹'
-          : side === 'left'
-            ? '‹'
-            : '›'}
-      </button>
     </motion.div>
   );
 };

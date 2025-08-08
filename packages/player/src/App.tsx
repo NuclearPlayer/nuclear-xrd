@@ -2,6 +2,9 @@ import {
   BottomBar,
   PlayerShell,
   PlayerWorkspace,
+  SidebarNavigation,
+  SidebarNavigationCollapsible,
+  SidebarNavigationItem,
   TopBar,
 } from '@nuclearplayer/ui';
 
@@ -27,7 +30,18 @@ function App() {
           isCollapsed={leftSidebar.isCollapsed}
           onWidthChange={setLeftSidebarWidth}
           onToggle={toggleLeftSidebar}
-        />
+        >
+          <SidebarNavigation>
+            <SidebarNavigationCollapsible title="Navigation">
+              <SidebarNavigationItem>Test</SidebarNavigationItem>
+              <SidebarNavigationItem>Test2</SidebarNavigationItem>
+            </SidebarNavigationCollapsible>
+            <SidebarNavigationCollapsible title="Your library">
+              <SidebarNavigationItem>Favorite albums</SidebarNavigationItem>
+              <SidebarNavigationItem>Favorite tracks</SidebarNavigationItem>
+            </SidebarNavigationCollapsible>
+          </SidebarNavigation>
+        </PlayerWorkspace.LeftSidebar>
 
         <PlayerWorkspace.Main />
 

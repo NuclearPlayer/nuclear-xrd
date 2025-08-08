@@ -258,6 +258,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@fontsource/dm-sans':
+        specifier: ^5.2.6
+        version: 5.2.6
       '@nuclearplayer/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
@@ -808,6 +811,9 @@ packages:
   '@eslint/plugin-kit@0.3.4':
     resolution: {integrity: sha512-Ul5l+lHEcw3L5+k8POx6r74mxEYKG5kOb6Xpy2gCRW6zweT6TEhAf8vhxGgjhqrd/VO/Dirhsb+1hNpD1ue9hw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fontsource/dm-sans@5.2.6':
+    resolution: {integrity: sha512-3AmJcX93hqmevsC2ixNwHj3iO3sNY/YHBqGhg0MjIyfhk6aZLNv1s2HqJ6xf8yf1rXXK3yR56rzyA3O21htKkg==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -4063,6 +4069,8 @@ snapshots:
     dependencies:
       '@eslint/core': 0.15.1
       levn: 0.4.1
+
+  '@fontsource/dm-sans@5.2.6': {}
 
   '@humanfs/core@0.19.1': {}
 

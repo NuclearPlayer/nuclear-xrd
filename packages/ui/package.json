@@ -27,6 +27,7 @@
     "clean": "rm -rf dist build .turbo node_modules/.vite"
   },
   "dependencies": {
+    "@fontsource/dm-sans": "^5.2.6",
     "@nuclearplayer/eslint-config": "workspace:*",
     "@nuclearplayer/tailwind-config": "workspace:*",
     "class-variance-authority": "^0.7.1",

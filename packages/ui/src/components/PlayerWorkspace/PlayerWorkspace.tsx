@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { FC, ReactNode } from 'react';
 
 import { PlayerWorkspaceLeftSidebar } from './PlayerWorkspaceLeftSidebar';
@@ -15,7 +16,9 @@ type MainProps = {
 
 const PlayerWorkspaceMain: FC<MainProps> = ({ children, className = '' }) => {
   return (
-    <main className={`bg-gray-100 overflow-auto ${className}`}>{children}</main>
+    <main className={clsx('bg-background-secondary overflow-auto', className)}>
+      {children}
+    </main>
   );
 };
 
@@ -28,7 +31,9 @@ type PlayerWorkspaceComponent = FC<PlayerWorkspaceProps> & {
 export const PlayerWorkspace: PlayerWorkspaceComponent = Object.assign(
   ({ children, className = '' }: PlayerWorkspaceProps) => {
     return (
-      <div className={`grid grid-cols-[auto_1fr_auto] h-full ${className}`}>
+      <div
+        className={`grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary ${className}`}
+      >
         {children}
       </div>
     );

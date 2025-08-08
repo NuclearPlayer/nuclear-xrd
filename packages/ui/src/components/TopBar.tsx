@@ -8,7 +8,7 @@ type TopBarProps = {
 export const TopBar: FC<TopBarProps> = ({ children, className = '' }) => {
   return (
     <header
-      className={`h-12 bg-gray-900 border-b border-gray-700 flex items-center px-4 ${className}`}
+      className={`h-12 bg-background border-b-2 border-border flex items-center px-4 ${className}`}
     >
       {children}
     </header>

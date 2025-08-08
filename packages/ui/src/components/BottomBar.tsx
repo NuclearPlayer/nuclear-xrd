@@ -8,7 +8,7 @@ type BottomBarProps = {
 export const BottomBar: FC<BottomBarProps> = ({ children, className = '' }) => {
   return (
     <footer
-      className={`h-16 bg-gray-900 border-t border-gray-700 flex items-center px-4 ${className}`}
+      className={`h-16 bg-background border-t-2 border-border flex items-center px-4 ${className}`}
     >
       {children}
     </footer>

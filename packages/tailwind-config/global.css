@@ -1,5 +1,107 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @source "../player";
 @source "../ui";
+
+@theme {
+    --color-background: var(--background);
+    --color-background-secondary: var(--background-secondary);
+    --color-background-input: var(--background-input);
+
+    --color-foreground: var(--foreground);
+    --color-foreground-secondary: var(--foreground-secondary);
+    --color-foreground-input: var(--foreground-input);
+
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-primary-active: var(--primary-active);
+
+    --color-border: var(--border);
+    --color-border-input: var(--border-input);
+    --color-ring: var(--ring);
+
+    --color-accent-green: var(--accent-green);
+    --color-accent-yellow: var(--accent-yellow);
+    --color-accent-purple: var(--accent-purple);
+    --color-accent-blue: var(--accent-blue);
+    --color-accent-orange: var(--accent-orange);
+    --color-accent-cyan: var(--accent-cyan);
+    --color-accent-red: var(--accent-red);
+
+    --color-shadow: var(--shadow-color);
+
+    --radius: var(--radius);
+    --radius-sm: var(--radius-sm);
+    --radius-lg: var(--radius-lg);
+
+    --font-weight-normal: var(--font-weight-normal);
+    --font-weight-bold: var(--font-weight-bold);
+
+    --font-sans: var(--font-family);
+
+    --shadow: var(--shadow-x) var(--shadow-y) 0px 0px var(--border);
+    --shadow-shadow: var(--shadow);
+    --shadow-nav: 4px 4px 0px 0px var(--border);
+    --shadow-darkNav: 4px 4px 0px 0px var(--dark-border);
+    --spacing-shadow-x: var(--shadow-x);
+    --spacing-shadow-y: var(--shadow-y);
+}
+
+:root {
+    /* Core Backgrounds */
+    --background: oklch(0.9491 0.023 341.75);
+    --background-secondary: oklch(100% 0 0);
+    --background-input: oklch(100% 0 0);
+
+    /* Text Colors */
+    --foreground: oklch(0% 0 0);
+    --foreground-secondary: oklch(0% 0 0);
+    --foreground-input: oklch(0% 0 0);
+
+    /* Interactive Elements */
+    --primary: oklch(76.91% 0.173 341.75);
+    --primary-hover: oklch(0% 0 0);
+    --primary-active: oklch(0% 0 0);
+
+    /* Borders & Outlines */
+    --border: oklch(0% 0 0);
+    --ring: oklch(100% 0 0);
+
+    /* Accent Colors */
+    --accent-green: oklch(79.05% 0.209 147.58);
+    --accent-yellow: oklch(95.53% 0.134 112.76);
+    --accent-purple: oklch(74.2% 0.149 301.88);
+    --accent-blue: oklch(55.98% 0.08 270.09);
+    --accent-orange: oklch(83.39% 0.124 66.56);
+    --accent-cyan: oklch(88.26% 0.093 212.85);
+    --accent-red: oklch(68.22% 0.206 24.43);
+
+    /* Shadows */
+    --shadow-color: oklch(0% 0 0);
+    --shadow-x: 4px;
+    --shadow-y: 4px;
+    --shadow-blur: 0px;
+
+    /* Typography */
+    --font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+
+    /* Border Radius */
+    --radius: 8px;
+    --radius-sm: 4px;
+    --radius-lg: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: oklch(0% 0 0);
+        --background-secondary: oklch(39.49% 0.031 277.49);
+        --background-input: oklch(0% 0 0);
+
+        --foreground: oklch(0% 0 0);
+        --foreground-secondary: oklch(0% 0 0);
+        --foreground-input: oklch(0% 0 0);
+    }
+}
