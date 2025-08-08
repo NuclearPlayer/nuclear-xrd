@@ -3,28 +3,80 @@
 exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
 <DocumentFragment>
   <div
-    class="grid grid-cols-[auto_1fr_auto] h-full "
+    class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary "
   >
     <div
-      class="bg-gray-800 border-gray-700 flex relative border-r "
+      class="bg-background-secondary border-border flex flex-col relative p-2 border-r-2"
     >
-      <button
-        class="absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 right-1"
+      <span
+        class="flex flex-row items-center mb-4 justify-end"
       >
-        ›
-      </button>
+        <button
+          class="inline-flex items-center transition-all rounded text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 top-2 px-2 right-1"
+        >
+          <svg
+            class="lucide lucide-panel-left"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              height="18"
+              rx="2"
+              width="18"
+              x="3"
+              y="3"
+            />
+            <path
+              d="M9 3v18"
+            />
+          </svg>
+        </button>
+      </span>
     </div>
     <main
-      class="bg-gray-100 overflow-auto "
+      class="bg-background-secondary overflow-auto"
     />
     <div
-      class="bg-gray-800 border-gray-700 flex relative border-l "
+      class="bg-background-secondary border-border flex flex-col relative p-2 border-l-2"
     >
-      <button
-        class="absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 left-1"
+      <span
+        class="flex flex-row items-center mb-4 justify-start"
       >
-        ‹
-      </button>
+        <button
+          class="inline-flex items-center transition-all rounded text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 top-2 px-2 left-1"
+        >
+          <svg
+            class="lucide lucide-panel-right"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              height="18"
+              rx="2"
+              width="18"
+              x="3"
+              y="3"
+            />
+            <path
+              d="M15 3v18"
+            />
+          </svg>
+        </button>
+      </span>
     </div>
   </div>
 </DocumentFragment>
@@ -33,42 +85,94 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
 exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
 <DocumentFragment>
   <div
-    class="grid grid-cols-[auto_1fr_auto] h-full "
+    class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary "
   >
     <div
-      class="bg-gray-800 border-gray-700 flex relative border-r "
+      class="bg-background-secondary border-border flex flex-col relative p-2 border-r-2"
     >
+      <span
+        class="flex flex-row items-center mb-4 justify-end"
+      >
+        <button
+          class="inline-flex items-center transition-all rounded text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 top-2 px-2 right-1"
+        >
+          <svg
+            class="lucide lucide-panel-left"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              height="18"
+              rx="2"
+              width="18"
+              x="3"
+              y="3"
+            />
+            <path
+              d="M9 3v18"
+            />
+          </svg>
+        </button>
+      </span>
       <div
         class="flex-1 overflow-hidden"
         style="opacity: 0; transform: translateX(-20px);"
       />
       <div
-        class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg-blue-500 transition-colors right-0"
+        class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg- transition-colors right-0"
       />
-      <button
-        class="absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 right-1"
-      >
-        ‹
-      </button>
     </div>
     <main
-      class="bg-gray-100 overflow-auto "
+      class="bg-background-secondary overflow-auto"
     />
     <div
-      class="bg-gray-800 border-gray-700 flex relative border-l "
+      class="bg-background-secondary border-border flex flex-col relative p-2 border-l-2"
     >
+      <span
+        class="flex flex-row items-center mb-4 justify-start"
+      >
+        <button
+          class="inline-flex items-center transition-all rounded text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 top-2 px-2 left-1"
+        >
+          <svg
+            class="lucide lucide-panel-right"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              height="18"
+              rx="2"
+              width="18"
+              x="3"
+              y="3"
+            />
+            <path
+              d="M15 3v18"
+            />
+          </svg>
+        </button>
+      </span>
       <div
         class="flex-1 overflow-hidden"
         style="opacity: 0; transform: translateX(20px);"
       />
       <div
-        class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg-blue-500 transition-colors left-0"
+        class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg- transition-colors left-0"
       />
-      <button
-        class="absolute top-2 w-4 h-4 bg-gray-600 hover:bg-gray-500 rounded-sm flex items-center justify-center text-xs text-gray-300 left-1"
-      >
-        ›
-      </button>
     </div>
   </div>
 </DocumentFragment>
