@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import App from './App';
 import { AppWrapper } from './App.test-wrapper';
@@ -8,8 +8,9 @@ describe('App', () => {
     AppWrapper.resetState();
   });
 
-  it('should render snapshot', () => {
+  it('should render snapshot', async () => {
     const component = render(<App />);
+    await screen.findByTestId('player-workspace-main');
     expect(component.asFragment()).toMatchSnapshot();
   });
 

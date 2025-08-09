@@ -21,6 +21,7 @@
     "@nuclearplayer/plugin-sdk": "workspace:*",
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@nuclearplayer/ui": "workspace:*",
+    "@tanstack/react-router": "^1.131.2",
     "@tauri-apps/api": "^2.0.0",
     "@tauri-apps/plugin-fs": "~2.4.1",
     "@tauri-apps/plugin-updater": "~2.9.0",

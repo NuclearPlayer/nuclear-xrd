@@ -79,8 +79,8 @@
 
   /* Shadows */
   --shadow-color: oklch(0% 0 0);
-  --shadow-x: 4px;
-  --shadow-y: 4px;
+  --shadow-x: 2px;
+  --shadow-y: 2px;
   --shadow-blur: 0px;
 
   /* Typography */

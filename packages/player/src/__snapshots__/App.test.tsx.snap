@@ -112,7 +112,9 @@ exports[`App > should render snapshot 1`] = `
                   </svg>
                   Explore
                 </span>
-                <div>
+                <div
+                  style="transform: none;"
+                >
                   <svg
                     class="lucide lucide-chevron-right"
                     fill="none"
@@ -164,7 +166,9 @@ exports[`App > should render snapshot 1`] = `
                   </svg>
                   Preferences
                 </span>
-                <div>
+                <div
+                  style="transform: none;"
+                >
                   <svg
                     class="lucide lucide-chevron-right"
                     fill="none"
@@ -220,7 +224,9 @@ exports[`App > should render snapshot 1`] = `
                   </svg>
                   Collection
                 </span>
-                <div>
+                <div
+                  style="transform: none;"
+                >
                   <svg
                     class="lucide lucide-chevron-right"
                     fill="none"
@@ -248,7 +254,21 @@ exports[`App > should render snapshot 1`] = `
       </div>
       <main
         class="bg-background-secondary overflow-auto"
-      />
+        data-testid="player-workspace-main"
+      >
+        <div
+          class="p-6"
+        >
+          <h1
+            class="text-2xl font-bold mb-4"
+          >
+            Dashboard
+          </h1>
+          <p>
+            Welcome to Nuclear XRD! This is the main dashboard.
+          </p>
+        </div>
+      </main>
       <div
         class="bg-background-secondary border-border flex flex-col relative p-2 border-l-2"
       >

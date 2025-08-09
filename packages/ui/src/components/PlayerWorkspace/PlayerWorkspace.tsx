@@ -16,7 +16,10 @@ type MainProps = {
 
 const PlayerWorkspaceMain: FC<MainProps> = ({ children, className = '' }) => {
   return (
-    <main className={clsx('bg-background-secondary overflow-auto', className)}>
+    <main
+      data-testid="player-workspace-main"
+      className={clsx('bg-background-secondary overflow-auto', className)}
+    >
       {children}
     </main>
   );
