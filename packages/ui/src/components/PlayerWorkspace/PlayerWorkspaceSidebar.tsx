@@ -66,6 +66,7 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
         })}
       >
         <Button
+          data-testid={`sidebar-toggle-${side}`}
           className={clsx('top-2 px-2', {
             'right-1': side === 'left',
             'left-1': side === 'right',

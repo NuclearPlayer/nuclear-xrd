@@ -19,24 +19,24 @@ describe('App', () => {
     expect(AppWrapper.getLayoutState().leftSidebar.isCollapsed).toBe(false);
     expect(AppWrapper.getLayoutState().rightSidebar.isCollapsed).toBe(false);
 
-    await AppWrapper.collapseLeftSidebar();
+    await AppWrapper.toggleLeftSidebar();
     expect(AppWrapper.getLayoutState().leftSidebar.isCollapsed).toBe(true);
     expect(AppWrapper.getLayoutState().rightSidebar.isCollapsed).toBe(false);
 
-    await AppWrapper.collapseRightSidebar();
+    await AppWrapper.toggleRightSidebar();
     expect(AppWrapper.getLayoutState().leftSidebar.isCollapsed).toBe(true);
     expect(AppWrapper.getLayoutState().rightSidebar.isCollapsed).toBe(true);
 
-    await AppWrapper.expandLeftSidebar();
+    await AppWrapper.toggleLeftSidebar();
     expect(AppWrapper.getLayoutState().leftSidebar.isCollapsed).toBe(false);
     expect(AppWrapper.getLayoutState().rightSidebar.isCollapsed).toBe(true);
 
-    await AppWrapper.expandRightSidebar();
+    await AppWrapper.toggleRightSidebar();
     expect(AppWrapper.getLayoutState().leftSidebar.isCollapsed).toBe(false);
     expect(AppWrapper.getLayoutState().rightSidebar.isCollapsed).toBe(false);
 
-    await AppWrapper.collapseLeftSidebar();
-    await AppWrapper.expandLeftSidebar();
+    await AppWrapper.toggleLeftSidebar();
+    await AppWrapper.toggleLeftSidebar();
     expect(AppWrapper.getLayoutState().leftSidebar.isCollapsed).toBe(false);
   });
 });

@@ -4,51 +4,17 @@ import { userEvent } from '@testing-library/user-event';
 import { useLayoutStore } from './stores/layoutStore';
 
 export const AppWrapper = {
-  async collapseLeftSidebar() {
-    const user = userEvent.setup();
-    const leftToggle = screen
-      .getAllByRole('button')
-      .find(
-        (btn) => btn.textContent === '‹' && btn.className.includes('right-1'),
-      );
-    if (leftToggle) {
-      await user.click(leftToggle);
-    }
+  async toggleLeftSidebar() {
+    const leftToggle = screen.getByTestId('sidebar-toggle-left');
+    if (!leftToggle) throw new Error('Left toggle not found');
+    await userEvent.click(leftToggle);
   },
 
-  async expandLeftSidebar() {
-    const user = userEvent.setup();
-    const leftExpand = screen
-      .getAllByRole('button')
-      .find(
-        (btn) => btn.textContent === '›' && btn.className.includes('right-1'),
-      );
-    if (leftExpand) {
-      await user.click(leftExpand);
-    }
-  },
-
-  async collapseRightSidebar() {
-    const user = userEvent.setup();
-    const rightToggle = screen
-      .getAllByRole('button')
-      .find(
-        (btn) => btn.textContent === '›' && btn.className.includes('left-1'),
-      );
+  async toggleRightSidebar() {
+    const rightToggle = screen.getByTestId('sidebar-toggle-right');
+    if (!rightToggle) throw new Error('Right toggle not found');
     if (rightToggle) {
-      await user.click(rightToggle);
-    }
-  },
-
-  async expandRightSidebar() {
-    const user = userEvent.setup();
-    const rightExpand = screen
-      .getAllByRole('button')
-      .find(
-        (btn) => btn.textContent === '‹' && btn.className.includes('left-1'),
-      );
-    if (rightExpand) {
-      await user.click(rightExpand);
+      await userEvent.click(rightToggle);
     }
   },
 
