@@ -6,3 +6,4 @@ export * from './SidebarNavigation';
 export * from './Button';
 export * from './Box';
 export * from './Toggle';
+export * from './ThemeController';

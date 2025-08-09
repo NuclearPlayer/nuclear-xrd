@@ -7,6 +7,7 @@ import prettierPlugin from 'eslint-plugin-prettier/recommended';
 import pluginReact from 'eslint-plugin-react';
 import { globalIgnores } from 'eslint/config';
 import globals from 'globals';
+import { tailwind4 } from 'tailwind-csstree';
 import tseslint from 'typescript-eslint';
 
 const ignores = [
@@ -47,6 +48,13 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config([
     files: ['**/*.css'],
     plugins: { css },
     language: 'css/css',
+    languageOptions: {
+      // @ts-expect-error broken in the typescript-eslint package
+      tolerant: true,
+      customSyntax: {
+        ...tailwind4,
+      },
+    },
     extends: [css.configs.recommended],
     rules: {
       'css/no-invalid-at-rules': 0,

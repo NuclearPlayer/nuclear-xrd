@@ -49,6 +49,8 @@
   --spacing-shadow-y: var(--shadow-y);
 }
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 :root {
   /* Core Backgrounds */
   --background: oklch(0.9491 0.023 341.75);
@@ -95,14 +97,27 @@
   --radius-lg: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: oklch(0% 0 0);
-    --background-secondary: oklch(39.49% 0.031 277.49);
-    --background-input: oklch(0% 0 0);
-
-    --foreground: oklch(0% 0 0);
-    --foreground-secondary: oklch(0% 0 0);
-    --foreground-input: oklch(0% 0 0);
+@layer base {
+  body {
+    @apply text-foreground bg-background font-normal;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold;
+  }
+}
+
+[data-theme='dark'] {
+  --background: oklch(0.4408 0.0838 341.75);
+  --background-secondary: oklch(39.49% 0.031 277.49);
+  --background-input: oklch(0% 0 0);
+
+  --foreground: oklch(0.9249 0 0);
+  --foreground-secondary: oklch(0.9249 0 0);
+  --foreground-input: oklch(100% 0 0);
 }

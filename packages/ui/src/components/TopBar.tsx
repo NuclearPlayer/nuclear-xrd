@@ -2,6 +2,7 @@ import { FC, ReactNode } from 'react';
 
 import LogoComponent from '../resources/logotype.svg?react';
 import { cn } from '../utils';
+import { ThemeController } from './ThemeController';
 
 type TopBarProps = {
   children?: ReactNode;
@@ -18,6 +19,8 @@ export const TopBar: FC<TopBarProps> = ({ children, className = '' }) => {
     >
       <LogoComponent className="inline-flex w-6 h-6" />
       {children}
+      <div className="flex-1" />
+      <ThemeController />
     </header>
   );
 };
