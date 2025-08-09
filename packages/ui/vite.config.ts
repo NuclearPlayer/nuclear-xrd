@@ -1,8 +1,10 @@
 /// <reference types="vitest" />
+/// <reference types="vite-plugin-svgr/client" />
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ command }) => {
   const isProduction = command === 'build';
@@ -11,6 +13,7 @@ export default defineConfig(({ command }) => {
     plugins: [
       react(),
       tailwindcss(),
+      svgr(),
       ...(isProduction
         ? [
             dts({

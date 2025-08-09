@@ -22,8 +22,10 @@ export const SidebarNavigationCollapsible: FC<
         className="inline-flex flex-row items-center justify-between"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
-        {icon}
-        {title}
+        <span className="inline-flex flex-row gap-2 items-center">
+          {icon}
+          {title}
+        </span>
         <motion.div
           animate={{ rotate: isCollapsed ? 0 : 90 }}
           transition={{ duration: 0.2, ease: 'easeInOut' }}
