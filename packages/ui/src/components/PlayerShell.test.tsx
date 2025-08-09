@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 
 import { BottomBar } from './BottomBar';
-import { PlayerShell } from './Layout';
+import { PlayerShell } from './PlayerShell';
 import { PlayerWorkspace } from './PlayerWorkspace';
 import { TopBar } from './TopBar';
 
