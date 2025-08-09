@@ -4,5 +4,6 @@ build
 *.d.ts
 *.d.ts.map
 *.js.map
-packages/*/coverage/*
 .turbo
+storybook-static
+coverage

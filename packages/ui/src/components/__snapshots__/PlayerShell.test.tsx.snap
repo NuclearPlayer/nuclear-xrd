@@ -3,10 +3,10 @@
 exports[`PlayerShell > matches snapshot with complete layout 1`] = `
 <DocumentFragment>
   <div
-    class="h-screen w-screen overflow-hidden grid grid-rows-[auto_1fr_auto] "
+    class="h-screen w-screen overflow-hidden grid grid-rows-[auto_1fr_auto]"
   >
     <header
-      class="h-12 bg-background border-b-2 border-border flex items-center px-4 "
+      class="h-12 bg-background border-b-2 border-border flex items-center px-4"
     >
       <svg
         class="inline-flex w-6 h-6"
@@ -36,7 +36,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
       </svg>
     </header>
     <div
-      class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary "
+      class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary"
     >
       <div
         class="bg-background-secondary border-border flex flex-col relative p-2 border-r-2"
@@ -45,7 +45,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
           class="flex flex-row items-center mb-4 justify-end"
         >
           <button
-            class="inline-flex items-center transition-all rounded text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 top-2 px-2 right-1"
+            class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-testid="sidebar-toggle-left"
           >
             <svg
@@ -92,7 +92,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
           class="flex flex-row items-center mb-4 justify-start"
         >
           <button
-            class="inline-flex items-center transition-all rounded text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 top-2 px-2 left-1"
+            class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-testid="sidebar-toggle-right"
           >
             <svg
@@ -130,7 +130,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
       </div>
     </div>
     <footer
-      class="h-16 bg-background border-t-2 border-border flex items-center px-4 "
+      class="h-16 bg-background border-t-2 border-border flex items-center px-4"
     />
   </div>
 </DocumentFragment>

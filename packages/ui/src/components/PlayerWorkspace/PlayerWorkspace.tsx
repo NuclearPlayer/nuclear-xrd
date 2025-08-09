@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { FC, ReactNode } from 'react';
 
+import { cn } from '../../utils';
 import { PlayerWorkspaceLeftSidebar } from './PlayerWorkspaceLeftSidebar';
 import { PlayerWorkspaceRightSidebar } from './PlayerWorkspaceRightSidebar';
 
@@ -35,7 +36,10 @@ export const PlayerWorkspace: PlayerWorkspaceComponent = Object.assign(
   ({ children, className = '' }: PlayerWorkspaceProps) => {
     return (
       <div
-        className={`grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary ${className}`}
+        className={cn(
+          'grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary',
+          className,
+        )}
       >
         {children}
       </div>

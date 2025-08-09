@@ -3,6 +3,7 @@
 
 @source "../player";
 @source "../ui";
+@source "../storybook";
 
 @theme {
   --color-background: var(--background);
