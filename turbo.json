@@ -35,6 +35,14 @@
     },
     "type-check": {
       "dependsOn": ["^build"]
+    },
+    "@nuclearplayer/storybook#dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "@nuclearplayer/storybook#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"]
     }
   }
 }

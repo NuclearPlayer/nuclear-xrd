@@ -6,7 +6,8 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": ["vitest/globals", "vite-plugin-svgr/client"]
   },
   "include": ["vite.config.ts"]
 }

@@ -1,0 +1,100 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { MusicIcon } from 'lucide-react';
+
+import { Button } from '@nuclearplayer/ui';
+
+const meta = {
+  title: 'Components/Button',
+  component: Button,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: { type: 'select' },
+      options: ['default', 'noShadow', 'text'],
+    },
+    size: {
+      control: { type: 'select' },
+      options: ['default', 'sm', 'lg', 'icon'],
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+  },
+} satisfies Meta<typeof Button>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    children: 'Button',
+  },
+};
+
+export const NoShadow: Story = {
+  args: {
+    variant: 'noShadow',
+    children: 'No Shadow',
+  },
+};
+
+export const Text: Story = {
+  args: {
+    variant: 'text',
+    children: 'Text Button',
+  },
+};
+
+export const Small: Story = {
+  args: {
+    size: 'sm',
+    children: 'Small',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: 'lg',
+    children: 'Large',
+  },
+};
+
+export const Icon: Story = {
+  args: {
+    size: 'icon',
+    children: <MusicIcon />,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    children: 'Disabled',
+  },
+};
+
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-4 items-center">
+        <Button variant="default">Default</Button>
+        <Button variant="noShadow">No Shadow</Button>
+        <Button variant="text">Text</Button>
+      </div>
+      <div className="flex gap-4 items-center">
+        <Button size="sm">Small</Button>
+        <Button size="default">Default</Button>
+        <Button size="lg">Large</Button>
+        <Button size="icon">
+          <MusicIcon />
+        </Button>
+      </div>
+      <div className="flex gap-4 items-center">
+        <Button disabled>Disabled</Button>
+      </div>
+    </div>
+  ),
+};
