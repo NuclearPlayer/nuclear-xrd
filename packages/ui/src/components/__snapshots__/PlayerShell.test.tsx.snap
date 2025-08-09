@@ -3,11 +3,38 @@
 exports[`PlayerShell > matches snapshot with complete layout 1`] = `
 <DocumentFragment>
   <div
-    class="h-screen w-screen grid grid-rows-[auto_1fr_auto] "
+    class="h-screen w-screen overflow-hidden grid grid-rows-[auto_1fr_auto] "
   >
     <header
       class="h-12 bg-background border-b-2 border-border flex items-center px-4 "
-    />
+    >
+      <svg
+        class="inline-flex w-6 h-6"
+        height="100"
+        viewBox="0 0 100 100"
+        width="100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="8"
+          transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+        >
+          <rect
+            height="96"
+            rx="19.2"
+            ry="19.2"
+            width="96"
+            x="2"
+            y="2"
+          />
+          <path
+            d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
+          />
+        </g>
+      </svg>
+    </header>
     <div
       class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary "
     >
@@ -56,6 +83,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
       </div>
       <main
         class="bg-background-secondary overflow-auto"
+        data-testid="player-workspace-main"
       />
       <div
         class="bg-background-secondary border-border flex flex-col relative p-2 border-l-2"
