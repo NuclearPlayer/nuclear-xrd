@@ -20,6 +20,7 @@ const buttonVariants = cva('inline-flex items-center transition-all rounded', {
   },
   defaultVariants: {
     variant: 'default',
+    size: 'default',
   },
 });
 

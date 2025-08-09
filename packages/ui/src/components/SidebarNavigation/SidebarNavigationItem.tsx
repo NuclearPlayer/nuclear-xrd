@@ -8,5 +8,9 @@ type SidebarNavigationItemProps = {
 export const SidebarNavigationItem: FC<SidebarNavigationItemProps> = ({
   children,
 }) => {
-  return <div>{children}</div>;
+  return (
+    <div className="flex flex-row items-center justify-start gap-2 px-2">
+      {children}
+    </div>
+  );
 };

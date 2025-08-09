@@ -15,9 +15,10 @@ export const SidebarNavigationCollapsible: FC<
 > = ({ children, title, icon }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
-    <div className={clsx('flex flex-col gap-2 w-full')}>
+    <div className={clsx('flex flex-col mb-4 w-full text-sm')}>
       <Button
-        variant="text"
+        variant={isCollapsed ? 'text' : 'noShadow'}
+        size="sm"
         className="inline-flex flex-row items-center justify-between"
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
@@ -37,7 +38,7 @@ export const SidebarNavigationCollapsible: FC<
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: 'easeInOut' }}
-            className="overflow-hidden"
+            className="overflow-hidden flex flex-col gap-2 border-l-2 border-l-foreground ml-4 pt-2"
           >
             {children}
           </motion.div>

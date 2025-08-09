@@ -1,4 +1,16 @@
 import {
+  BlocksIcon,
+  CompassIcon,
+  DiscIcon,
+  GaugeIcon,
+  LibraryIcon,
+  MusicIcon,
+  Settings2Icon,
+  SettingsIcon,
+  UserIcon,
+} from 'lucide-react';
+
+import {
   BottomBar,
   PlayerShell,
   PlayerWorkspace,
@@ -32,13 +44,44 @@ function App() {
           onToggle={toggleLeftSidebar}
         >
           <SidebarNavigation>
-            <SidebarNavigationCollapsible title="Navigation">
-              <SidebarNavigationItem>Test</SidebarNavigationItem>
-              <SidebarNavigationItem>Test2</SidebarNavigationItem>
+            <SidebarNavigationCollapsible
+              title="Explore"
+              icon={<CompassIcon />}
+            >
+              <SidebarNavigationItem>
+                <GaugeIcon />
+                Dashboard
+              </SidebarNavigationItem>
             </SidebarNavigationCollapsible>
-            <SidebarNavigationCollapsible title="Your library">
-              <SidebarNavigationItem>Favorite albums</SidebarNavigationItem>
-              <SidebarNavigationItem>Favorite tracks</SidebarNavigationItem>
+            <SidebarNavigationCollapsible
+              title="Preferences"
+              icon={<SettingsIcon />}
+            >
+              <SidebarNavigationItem>
+                <Settings2Icon />
+                Settings
+              </SidebarNavigationItem>
+              <SidebarNavigationItem>
+                <BlocksIcon />
+                Plugins
+              </SidebarNavigationItem>
+            </SidebarNavigationCollapsible>
+            <SidebarNavigationCollapsible
+              title="Collection"
+              icon={<LibraryIcon />}
+            >
+              <SidebarNavigationItem>
+                <DiscIcon />
+                Favorite albums
+              </SidebarNavigationItem>
+              <SidebarNavigationItem>
+                <MusicIcon />
+                Favorite tracks
+              </SidebarNavigationItem>
+              <SidebarNavigationItem>
+                <UserIcon />
+                Favorite artists
+              </SidebarNavigationItem>
             </SidebarNavigationCollapsible>
           </SidebarNavigation>
         </PlayerWorkspace.LeftSidebar>

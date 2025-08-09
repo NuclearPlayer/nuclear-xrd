@@ -24,6 +24,7 @@
     "@tauri-apps/api": "^2.0.0",
     "@tauri-apps/plugin-fs": "~2.4.1",
     "@tauri-apps/plugin-updater": "~2.9.0",
+    "lucide-react": "^0.460.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^5.0.7"
