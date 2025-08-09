@@ -19,6 +19,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
         >
           <button
             class="inline-flex items-center transition-all rounded text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 top-2 px-2 right-1"
+            data-testid="sidebar-toggle-left"
           >
             <svg
               class="lucide lucide-panel-left"
@@ -64,6 +65,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
         >
           <button
             class="inline-flex items-center transition-all rounded text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 top-2 px-2 left-1"
+            data-testid="sidebar-toggle-right"
           >
             <svg
               class="lucide lucide-panel-right"
