@@ -40,7 +40,7 @@ export const SidebarNavigationCollapsible: FC<
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: 'easeInOut' }}
-            className="overflow-hidden flex flex-col gap-2 border-l-2 border-l-foreground ml-4 pt-2"
+            className="overflow-hidden flex flex-col gap-4 border-l-2 border-l-foreground ml-4 pt-2"
           >
             {children}
           </motion.div>

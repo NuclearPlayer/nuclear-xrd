@@ -29,7 +29,7 @@ export const RouteTransition = () => {
   }
 
   const TransitionContent = forwardRef<HTMLDivElement>((props, ref) => (
-    <div ref={ref} {...props}>
+    <div ref={ref} {...props} className="h-full w-full max-h-full">
       <RouterContextProvider router={renderedContext.current}>
         <Outlet />
       </RouterContextProvider>
