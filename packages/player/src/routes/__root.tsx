@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
+import { createRootRoute, Link } from '@tanstack/react-router';
 import {
   BlocksIcon,
   CompassIcon,
@@ -15,6 +15,7 @@ import {
   BottomBar,
   PlayerShell,
   PlayerWorkspace,
+  RouteTransition,
   SidebarNavigation,
   SidebarNavigationCollapsible,
   SidebarNavigationItem,
@@ -92,7 +93,7 @@ const RootComponent = () => {
         </PlayerWorkspace.LeftSidebar>
 
         <PlayerWorkspace.Main>
-          <Outlet />
+          <RouteTransition />
         </PlayerWorkspace.Main>
 
         <PlayerWorkspace.RightSidebar

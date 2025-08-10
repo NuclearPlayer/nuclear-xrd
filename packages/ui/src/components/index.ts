@@ -2,6 +2,7 @@ export * from './PlayerShell';
 export * from './TopBar';
 export * from './BottomBar';
 export * from './PlayerWorkspace';
+export * from './RouteTransition';
 export * from './SidebarNavigation';
 export * from './Button';
 export * from './Box';
