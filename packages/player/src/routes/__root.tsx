@@ -6,6 +6,7 @@ import {
   GaugeIcon,
   LibraryIcon,
   MusicIcon,
+  PaletteIcon,
   Settings2Icon,
   SettingsIcon,
   UserIcon,
@@ -67,10 +68,18 @@ const RootComponent = () => {
                   Settings
                 </SidebarNavigationItem>
               </Link>
-              <SidebarNavigationItem>
-                <BlocksIcon />
-                Plugins
-              </SidebarNavigationItem>
+              <Link to="/plugins">
+                <SidebarNavigationItem>
+                  <BlocksIcon />
+                  Plugins
+                </SidebarNavigationItem>
+              </Link>
+              <Link to="/themes">
+                <SidebarNavigationItem>
+                  <PaletteIcon />
+                  Themes
+                </SidebarNavigationItem>
+              </Link>
             </SidebarNavigationCollapsible>
             <SidebarNavigationCollapsible
               title="Collection"
