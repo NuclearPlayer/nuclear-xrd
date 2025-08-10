@@ -1,4 +1,3 @@
-import { Transition } from '@headlessui/react';
 import {
   AnyRouter,
   getRouterContext,
@@ -7,6 +6,7 @@ import {
   useMatch,
   useMatches,
 } from '@tanstack/react-router';
+import { AnimatePresence, motion } from 'framer-motion';
 import { cloneDeep } from 'lodash-es';
 import { forwardRef, useContext, useEffect, useState } from 'react';
 
@@ -14,6 +14,30 @@ type OutletInstance = {
   id: string;
   context: AnyRouter;
   isLeaving: boolean;
+};
+
+const SLIDE_DISTANCE = 24;
+const SCALE_FACTOR = 0.96;
+
+const slideVariants = {
+  enter: {
+    x: SLIDE_DISTANCE,
+    scale: SCALE_FACTOR,
+    opacity: 0,
+    filter: 'blur(4px)',
+  },
+  center: {
+    x: 0,
+    scale: 1,
+    opacity: 1,
+    filter: 'blur(0px)',
+  },
+  exit: {
+    x: -SLIDE_DISTANCE,
+    scale: SCALE_FACTOR,
+    opacity: 0,
+    filter: 'blur(4px)',
+  },
 };
 
 const AnimatedOutlet = forwardRef<
@@ -26,24 +50,29 @@ const AnimatedOutlet = forwardRef<
   const { instance, onExited } = props;
 
   return (
-    <Transition
-      show={!instance.isLeaving}
-      appear={true}
-      enter="transition-opacity duration-200 ease-out"
-      enterFrom="opacity-0"
-      enterTo="opacity-100"
-      leave="transition-opacity duration-150 ease-in"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0"
-      afterLeave={onExited}
-      as="div"
+    <motion.div
+      key={instance.id}
       ref={ref}
       className="absolute inset-0 h-full w-full"
+      variants={slideVariants}
+      initial="enter"
+      animate={instance.isLeaving ? 'exit' : 'center'}
+      transition={{
+        type: 'spring',
+        stiffness: 400,
+        damping: 30,
+        mass: 0.8,
+      }}
+      onAnimationComplete={() => {
+        if (instance.isLeaving) {
+          onExited();
+        }
+      }}
     >
       <RouterContextProvider router={instance.context}>
         <Outlet />
       </RouterContextProvider>
-    </Transition>
+    </motion.div>
   );
 });
 
@@ -97,13 +126,15 @@ export const RouteTransition = () => {
 
   return (
     <div className="relative h-full w-full overflow-hidden">
-      {outlets.map((instance) => (
-        <AnimatedOutlet
-          key={instance.id}
-          instance={instance}
-          onExited={() => handleOutletExited(instance.id)}
-        />
-      ))}
+      <AnimatePresence mode="popLayout">
+        {outlets.map((instance) => (
+          <AnimatedOutlet
+            key={instance.id}
+            instance={instance}
+            onExited={() => handleOutletExited(instance.id)}
+          />
+        ))}
+      </AnimatePresence>
     </div>
   );
 };
