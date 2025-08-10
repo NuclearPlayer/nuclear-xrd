@@ -16,7 +16,7 @@
     "src"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch",
     "build": "tsc && vite build",
     "test": "vitest --run",
     "test:watch": "vitest",
