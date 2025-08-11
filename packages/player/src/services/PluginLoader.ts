@@ -9,6 +9,7 @@ import type {
   PluginMetadata,
 } from '@nuclearplayer/plugin-sdk';
 
+import { compilePlugin } from './pluginCompiler';
 import { parsePluginManifest } from './pluginManifest';
 
 export class PluginLoader {
@@ -67,6 +68,11 @@ export class PluginLoader {
   }
 
   private async readPluginCode(entryPath: string): Promise<string> {
+    const compiled = await compilePlugin(entryPath);
+    if (compiled != null) {
+      this.pluginCode = compiled;
+      return compiled;
+    }
     this.pluginCode = await readTextFile(entryPath);
     return this.pluginCode;
   }

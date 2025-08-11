@@ -235,4 +235,16 @@ describe('PluginLoader', () => {
       });
     });
   });
+
+  describe('typescript plugin compilation', () => {
+    it('compiles and loads a .ts plugin', async () => {
+      const manifest = makeManifest({ main: 'index.ts' });
+      const tsCode = 'export default { onLoad(){} };';
+      mockReadTextFile
+        .mockResolvedValueOnce(JSON.stringify(manifest)) // manifest
+        .mockResolvedValueOnce(tsCode); // ts entry source
+      const result = await loader.load();
+      expect(result.instance).toHaveProperty('onLoad');
+    });
+  });
 });
