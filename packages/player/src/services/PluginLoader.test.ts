@@ -2,6 +2,15 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { PluginLoader } from './PluginLoader';
 
+vi.mock('./pluginCompiler', () => ({
+  compilePlugin: vi.fn(async (path: string) => {
+    if (path.endsWith('.ts') || path.endsWith('.tsx')) {
+      return 'module.exports = { onLoad(){} };';
+    }
+    return undefined;
+  }),
+}));
+
 vi.mock('@tauri-apps/api/path', () => ({
   join: vi.fn((...parts: string[]) => Promise.resolve(parts.join('/'))),
 }));
@@ -180,7 +189,7 @@ describe('PluginLoader', () => {
         .mockResolvedValueOnce(code)
         .mockResolvedValueOnce(code);
       await expect(loader.load()).rejects.toThrow(
-        'Plugin must export a default object (hooks).',
+        'Plugin must export a default object.',
       );
     });
 
@@ -239,10 +248,7 @@ describe('PluginLoader', () => {
   describe('typescript plugin compilation', () => {
     it('compiles and loads a .ts plugin', async () => {
       const manifest = makeManifest({ main: 'index.ts' });
-      const tsCode = 'export default { onLoad(){} };';
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest)) // manifest
-        .mockResolvedValueOnce(tsCode); // ts entry source
+      mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
       const result = await loader.load();
       expect(result.instance).toHaveProperty('onLoad');
     });

@@ -1,14 +1,8 @@
 import { readTextFile } from '@tauri-apps/plugin-fs';
-import * as esbuild from 'esbuild-wasm';
+import type * as EsbuildTypes from 'esbuild-wasm';
+import wasmUrl from 'esbuild-wasm/esbuild.wasm?url';
 
-let wasmInitializedUrl: string | null = null;
-
-async function getWasmUrl(): Promise<string> {
-  if (wasmInitializedUrl) return wasmInitializedUrl;
-  const local = '/esbuild.wasm';
-  wasmInitializedUrl = local;
-  return wasmInitializedUrl;
-}
+let esbuildMod: typeof EsbuildTypes | null = null;
 
 let initialized = false;
 let initPromise: Promise<void> | null = null;
@@ -34,11 +28,13 @@ const resolvePath = (baseDir: string, rel: string) => {
 async function ensureInit() {
   if (initialized) return;
   if (!initPromise) {
-    const wasmURL = await getWasmUrl();
-    initPromise = esbuild.initialize({ wasmURL, worker: true });
+    initPromise = (async () => {
+      if (!esbuildMod) esbuildMod = await import('esbuild-wasm');
+      await esbuildMod.initialize({ wasmURL: wasmUrl, worker: true });
+      initialized = true;
+    })();
   }
   await initPromise;
-  initialized = true;
 }
 
 const simpleHash = (str: string) => {
@@ -56,7 +52,7 @@ export async function compilePlugin(
   if (cache.has(key)) return cache.get(key);
   await ensureInit();
   const entryDir = entryPath.slice(0, entryPath.lastIndexOf('/')) || '/';
-  const result = await esbuild.build({
+  const result = await esbuildMod!.build({
     entryPoints: [entryPath],
     bundle: true,
     write: false,
@@ -79,7 +75,7 @@ export async function compilePlugin(
               args.path === entryPath
                 ? entrySource
                 : await readTextFile(args.path);
-            const loader: esbuild.Loader = args.path.endsWith('.tsx')
+            const loader: EsbuildTypes.Loader = args.path.endsWith('.tsx')
               ? 'tsx'
               : args.path.endsWith('.ts')
                 ? 'ts'

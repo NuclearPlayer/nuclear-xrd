@@ -34,9 +34,66 @@ exports[`App > should render snapshot 1`] = `
           />
         </g>
       </svg>
+      <div
+        class="flex-1"
+      />
+      <button
+        aria-checked="false"
+        aria-label="Toggle theme"
+        class="relative inline-flex items-center h-6 w-11 rounded-full border-2 border-border transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-white"
+        role="switch"
+        type="button"
+      >
+        <span
+          class="pointer-events-none flex items-center justify-center h-4 w-4 rounded-full bg-white border-2 border-border ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1"
+        >
+          <svg
+            class="lucide lucide-sun text-foreground"
+            fill="none"
+            height="12"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="4"
+            />
+            <path
+              d="M12 2v2"
+            />
+            <path
+              d="M12 20v2"
+            />
+            <path
+              d="m4.93 4.93 1.41 1.41"
+            />
+            <path
+              d="m17.66 17.66 1.41 1.41"
+            />
+            <path
+              d="M2 12h2"
+            />
+            <path
+              d="M20 12h2"
+            />
+            <path
+              d="m6.34 17.66-1.41 1.41"
+            />
+            <path
+              d="m19.07 4.93-1.41 1.41"
+            />
+          </svg>
+        </span>
+      </button>
     </header>
     <div
-      class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary"
+      class="grid h-full min-h-0 grid-cols-[auto_1fr_auto] bg-background-secondary relative"
     >
       <div
         class="bg-background-secondary border-border flex flex-col relative p-2 border-r-2"
@@ -257,16 +314,27 @@ exports[`App > should render snapshot 1`] = `
         data-testid="player-workspace-main"
       >
         <div
-          class="p-6"
+          class="relative h-full w-full overflow-hidden"
         >
-          <h1
-            class="text-2xl font-bold mb-4"
+          <div
+            class="absolute inset-0 h-full w-full"
+            style="opacity: 0; filter: blur(4px); transform: translateX(24px) scale(0.96);"
           >
-            Dashboard
-          </h1>
-          <p>
-            Welcome to Nuclear XRD! This is the main dashboard.
-          </p>
+            <div
+              class="flex flex-col items-start justify-start w-full h-full p-6"
+            >
+              <h1
+                class="text-3xl font-bold text-center"
+              >
+                Dashboard
+              </h1>
+              <div
+                class="overflow-auto w-full flex-1"
+              >
+                Dashboard view
+              </div>
+            </div>
+          </div>
         </div>
       </main>
       <div
