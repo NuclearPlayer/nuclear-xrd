@@ -48,10 +48,7 @@ describe('usePluginStore', () => {
       const mockPlugin2 = new PluginStateBuilder().withId('plugin-2').build();
 
       usePluginStore.setState({
-        plugins: {
-          'plugin-1': mockPlugin1,
-          'plugin-2': mockPlugin2,
-        },
+        plugins: { 'plugin-1': mockPlugin1, 'plugin-2': mockPlugin2 },
       });
 
       const { getAllPlugins } = usePluginStore.getState();
@@ -66,6 +63,7 @@ describe('usePluginStore', () => {
     it('should support plugin state with error details', () => {
       const errorTimestamp = new Date().valueOf();
       const pluginWithError = new PluginStateBuilder()
+        .withId('failed-plugin')
         .withStatus('failed')
         .withError(
           'Plugin crashed during initialization',
@@ -105,9 +103,7 @@ describe('usePluginStore', () => {
           .withStatus(status)
           .build();
 
-        usePluginStore.setState({
-          plugins: { [`plugin-${index}`]: plugin },
-        });
+        usePluginStore.setState({ plugins: { [`plugin-${index}`]: plugin } });
 
         const { getPlugin } = usePluginStore.getState();
         const result = getPlugin(`plugin-${index}`);
@@ -122,6 +118,7 @@ describe('usePluginStore', () => {
         .build();
 
       const pluginWithInstance = new PluginStateBuilder()
+        .withId('plugin-with-instance')
         .withInstance(mockInstance)
         .build();
 
