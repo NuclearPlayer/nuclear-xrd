@@ -217,26 +217,56 @@ export async function compilePlugin(
           // Given a path in our "tauri-fs" namespace, fetch the file content
           // via Tauri's filesystem API and tell esbuild how to treat it.
           build.onLoad(
-            { filter: /\.[tj]sx?$/, namespace: 'tauri-fs' },
+            { filter: /.*/, namespace: 'tauri-fs' },
             async (args) => {
-              // Use the already-read entry for the entry path; otherwise, load from Tauri fs.
-              const source =
-                args.path === entryPath
-                  ? entrySource
-                  : await readTextFile(args.path);
+              // Special-case the entry file: we already have its contents and loader.
+              if (args.path === entryPath) {
+                const thisDir = entryDir;
+                return {
+                  contents: entrySource,
+                  loader: entryLoader,
+                  resolveDir: thisDir,
+                };
+              }
 
-              // Pick a loader based on the file extension.
-              const loader: EsbuildTypes.Loader = args.path.endsWith('.tsx')
-                ? 'tsx'
-                : args.path.endsWith('.ts')
-                  ? 'ts'
-                  : 'js';
+              const tryRead = async (p: string): Promise<string | null> => {
+                try {
+                  return await readTextFile(p);
+                } catch {
+                  return null;
+                }
+              };
 
-              // Provide a resolveDir so relative imports inside this file work.
-              const thisDir =
-                args.path.slice(0, args.path.lastIndexOf('/')) || '/';
+              const hasExt = /\.[^/]+$/.test(args.path);
+              const candidates: string[] = [];
 
-              return { contents: source, loader, resolveDir: thisDir };
+              if (hasExt) {
+                candidates.push(args.path);
+              } else {
+                candidates.push(
+                  args.path + '.ts',
+                  args.path + '.tsx',
+                  args.path + '.js',
+                  args.path + '/index.ts',
+                  args.path + '/index.tsx',
+                  args.path + '/index.js',
+                );
+              }
+
+              for (const p of candidates) {
+                const contents = await tryRead(p);
+                if (contents != null) {
+                  const loader: EsbuildTypes.Loader = p.endsWith('.tsx')
+                    ? 'tsx'
+                    : p.endsWith('.ts')
+                      ? 'ts'
+                      : 'js';
+                  const thisDir = p.slice(0, p.lastIndexOf('/')) || '/';
+                  return { contents, loader, resolveDir: thisDir };
+                }
+              }
+
+              throw new Error(`Module not found (tauri-fs): ${args.path}`);
             },
           );
           // Bare module specifiers are handled as external in the unified onResolve above.
