@@ -8,6 +8,7 @@
   "permissions": [
     "core:default",
     "dialog:allow-open",
-    "log:default"
+    "log:default",
+    "fs:read-all"
   ]
 }
