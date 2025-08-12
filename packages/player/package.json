@@ -30,6 +30,7 @@
     "esbuild-wasm": "^0.21.5",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.460.0",
+    "zod": "^3.23.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^5.0.7"

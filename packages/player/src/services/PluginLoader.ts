@@ -10,13 +10,14 @@ import type {
 } from '@nuclearplayer/plugin-sdk';
 
 import { compilePlugin } from './pluginCompiler';
-import { parsePluginManifest } from './pluginManifest';
+import { safeParsePluginManifest } from './pluginManifest';
 
 export class PluginLoader {
   private path: string;
   private manifest?: PluginManifest;
   private entryPath?: string;
   private pluginCode?: string;
+  private warnings: string[] = [];
 
   constructor(path: string) {
     this.path = path;
@@ -70,7 +71,13 @@ export class PluginLoader {
 
   private async readManifest(): Promise<PluginManifest> {
     const raw = await this.readRawPackageJson();
-    this.manifest = parsePluginManifest(raw);
+    const res = safeParsePluginManifest(raw);
+    if (!res.success) {
+      const msg = res.errors.join('; ');
+      throw new Error(`Invalid package.json: ${msg}`);
+    }
+    this.warnings = res.warnings;
+    this.manifest = res.data;
     return this.manifest;
   }
 
@@ -124,5 +131,9 @@ export class PluginLoader {
       instance,
       path: this.path,
     };
+  }
+
+  getWarnings(): string[] {
+    return this.warnings;
   }
 }

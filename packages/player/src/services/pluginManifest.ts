@@ -47,11 +47,63 @@ const PackageJsonSchema = z
   })
   .passthrough();
 
-export const safeParsePluginManifest = (
-  raw: unknown,
-):
-  | { success: true; data: PluginManifest; warnings: string[] }
-  | { success: false; errors: string[]; warnings: string[] } => {
+type NuclearType = NonNullable<PluginManifest['nuclear']>;
+
+const normalizePermissions = (
+  perms: unknown,
+  warnings: string[],
+): string[] | undefined => {
+  if (!Array.isArray(perms)) return undefined;
+  const trimmed = perms
+    .map((p) => (typeof p === 'string' ? p.trim() : ''))
+    .filter((p) => p.length > 0);
+  const before = trimmed.length;
+  const deduped = Array.from(new Set(trimmed));
+  if (deduped.length < before) warnings.push('Duplicate permissions removed.');
+  return deduped.sort((a, b) => a.localeCompare(b));
+};
+
+const collectUnknownNuclearKeys = (
+  nuclear: Record<string, unknown>,
+): string[] =>
+  Object.keys(nuclear).filter(
+    (k) => !['displayName', 'category', 'icon', 'permissions'].includes(k),
+  );
+
+const normalizeNuclear = (
+  nuclear: z.infer<typeof NuclearSchema> | undefined,
+  warnings: string[],
+): NuclearType | undefined => {
+  if (!nuclear) return undefined;
+  const unknown = collectUnknownNuclearKeys(nuclear as Record<string, unknown>);
+  if (unknown.length > 0)
+    warnings.push(
+      `nuclear contains unknown keys: ${unknown.join(', ')} (kept via passthrough)`,
+    );
+  const permissions = normalizePermissions(nuclear.permissions, warnings);
+  return {
+    displayName: nuclear.displayName?.trim(),
+    category: nuclear.category?.trim(),
+    icon: nuclear.icon as NuclearType['icon'],
+    permissions,
+  };
+};
+
+type SafeParseSuccess = {
+  success: true;
+  data: PluginManifest;
+  warnings: string[];
+};
+
+type SafeParseFailure = {
+  success: false;
+  errors: string[];
+  warnings: string[];
+};
+
+type SafeParseResult = SafeParseSuccess | SafeParseFailure;
+
+export const safeParsePluginManifest = (raw: unknown): SafeParseResult => {
   const warnings: string[] = [];
   const result = PackageJsonSchema.safeParse(raw);
   if (!result.success) {
@@ -63,7 +115,11 @@ export const safeParsePluginManifest = (
 
   const data = result.data;
 
-  type NuclearType = NonNullable<PluginManifest['nuclear']>;
+  if (!data.main) {
+    warnings.push(
+      'package.json missing "main"; will attempt fallback resolution (index.js/ts or dist variants).',
+    );
+  }
 
   const manifest: PluginManifest = {
     name: data.name.trim(),
@@ -71,18 +127,7 @@ export const safeParsePluginManifest = (
     description: data.description.trim(),
     author: data.author.trim(),
     main: data.main?.trim(),
-    nuclear: data.nuclear
-      ? {
-          displayName: data.nuclear.displayName?.trim(),
-          category: data.nuclear.category?.trim(),
-          icon: data.nuclear.icon as NuclearType['icon'],
-          permissions: Array.isArray(data.nuclear.permissions)
-            ? Array.from(
-                new Set(data.nuclear.permissions.map((p) => p.trim())),
-              ).filter((p) => p.length > 0)
-            : undefined,
-        }
-      : undefined,
+    nuclear: normalizeNuclear(data.nuclear, warnings),
   };
 
   return { success: true, data: manifest, warnings };
@@ -94,3 +139,6 @@ export const parsePluginManifest = (raw: unknown): PluginManifest => {
   const msg = res.errors.join('; ');
   throw new Error(`Invalid package.json: ${msg}`);
 };
+
+export const isPluginManifest = (raw: unknown): raw is PluginManifest =>
+  PackageJsonSchema.safeParse(raw).success;

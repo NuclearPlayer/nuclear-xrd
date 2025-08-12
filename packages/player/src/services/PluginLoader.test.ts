@@ -77,7 +77,7 @@ describe('PluginLoader', () => {
       delete manifest.name;
       mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
       await expect(loader.load()).rejects.toThrow(
-        'package.json missing required field: name',
+        /Invalid package.json: name: Required/,
       );
     });
 
@@ -86,7 +86,7 @@ describe('PluginLoader', () => {
       delete manifest.version;
       mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
       await expect(loader.load()).rejects.toThrow(
-        'package.json missing required field: version',
+        /Invalid package.json: version: Required/,
       );
     });
 
@@ -95,7 +95,7 @@ describe('PluginLoader', () => {
       delete manifest.description;
       mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
       await expect(loader.load()).rejects.toThrow(
-        'package.json missing required field: description',
+        /Invalid package.json: description: Required/,
       );
     });
 
@@ -104,7 +104,7 @@ describe('PluginLoader', () => {
       delete manifest.author;
       mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
       await expect(loader.load()).rejects.toThrow(
-        'package.json missing required field: author',
+        /Invalid package.json: author: Required/,
       );
     });
   });
@@ -217,6 +217,52 @@ describe('PluginLoader', () => {
         category: 'integration',
         permissions: ['net'],
       });
+    });
+
+    it('adds a warning when main is missing and still loads via fallback', async () => {
+      const manifest = makeManifest({
+        nuclear: { permissions: [] },
+      });
+      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      const result = await loader.load();
+      expect(result.instance).toBeDefined();
+      expect(loader.getWarnings()).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(/package.json missing "main"/),
+        ]),
+      );
+    });
+
+    it('dedupes and sorts permissions and warns on duplicates', async () => {
+      const manifest = makeManifest({
+        main: 'index.js',
+        nuclear: { permissions: ['net', ' net ', 'fs', 'net'] },
+      });
+      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      const result = await loader.load();
+      expect(result.metadata.permissions).toEqual(['fs', 'net']);
+      expect(loader.getWarnings()).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(/Duplicate permissions removed\./),
+        ]),
+      );
+    });
+
+    it('warns about unknown nuclear keys but keeps parsing', async () => {
+      const manifest = makeManifest({
+        main: 'index.js',
+        nuclear: { permissions: ['net'], foo: 'bar' } as unknown as Record<
+          string,
+          unknown
+        >,
+      });
+      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      await loader.load();
+      expect(loader.getWarnings()).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(/nuclear contains unknown keys: foo/),
+        ]),
+      );
     });
   });
 
