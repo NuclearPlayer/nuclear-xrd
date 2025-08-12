@@ -1,45 +1,96 @@
+import { z } from 'zod';
+
 import type { PluginManifest } from '@nuclearplayer/plugin-sdk';
 
+const PluginIconNamedSchema = z
+  .object({
+    type: z.literal('named'),
+    name: z.string().min(1),
+    background: z
+      .enum([
+        'primary',
+        'accent-green',
+        'accent-yellow',
+        'accent-purple',
+        'accent-blue',
+        'accent-orange',
+        'accent-cyan',
+        'accent-red',
+      ])
+      .optional(),
+  })
+  .strict();
+
+const PluginIconLinkSchema = z
+  .object({ type: z.literal('link'), link: z.string().min(1) })
+  .strict();
+
+const PluginIconSchema = z.union([PluginIconNamedSchema, PluginIconLinkSchema]);
+
+const NuclearSchema = z
+  .object({
+    displayName: z.string().min(1).optional(),
+    category: z.string().min(1).optional(),
+    icon: PluginIconSchema.optional(),
+    permissions: z.array(z.string().min(1)).optional(),
+  })
+  .passthrough();
+
+const PackageJsonSchema = z
+  .object({
+    name: z.string().min(1),
+    version: z.string().min(1),
+    description: z.string().min(1),
+    author: z.string().min(1),
+    main: z.string().min(1).optional(),
+    nuclear: NuclearSchema.optional(),
+  })
+  .passthrough();
+
+export const safeParsePluginManifest = (
+  raw: unknown,
+):
+  | { success: true; data: PluginManifest; warnings: string[] }
+  | { success: false; errors: string[]; warnings: string[] } => {
+  const warnings: string[] = [];
+  const result = PackageJsonSchema.safeParse(raw);
+  if (!result.success) {
+    const errors = result.error.issues.map(
+      (i) => `${i.path.join('.')}: ${i.message}`,
+    );
+    return { success: false, errors, warnings };
+  }
+
+  const data = result.data;
+
+  type NuclearType = NonNullable<PluginManifest['nuclear']>;
+
+  const manifest: PluginManifest = {
+    name: data.name.trim(),
+    version: data.version.trim(),
+    description: data.description.trim(),
+    author: data.author.trim(),
+    main: data.main?.trim(),
+    nuclear: data.nuclear
+      ? {
+          displayName: data.nuclear.displayName?.trim(),
+          category: data.nuclear.category?.trim(),
+          icon: data.nuclear.icon as NuclearType['icon'],
+          permissions: Array.isArray(data.nuclear.permissions)
+            ? Array.from(
+                new Set(data.nuclear.permissions.map((p) => p.trim())),
+              ).filter((p) => p.length > 0)
+            : undefined,
+        }
+      : undefined,
+  };
+
+  return { success: true, data: manifest, warnings };
+};
+
 export const parsePluginManifest = (raw: unknown): PluginManifest => {
-  if (!raw || typeof raw !== 'object') {
-    throw new Error('Invalid package.json');
-  }
-  const r = raw as Record<string, unknown>;
-  const name = r.name;
-  const version = r.version;
-  const description = r.description;
-  const author = r.author;
-  if (typeof name !== 'string' || name.length === 0) {
-    throw new Error('package.json missing required field: name');
-  }
-  if (typeof version !== 'string' || version.length === 0) {
-    throw new Error('package.json missing required field: version');
-  }
-  if (typeof description !== 'string' || description.length === 0) {
-    throw new Error('package.json missing required field: description');
-  }
-  if (typeof author !== 'string' || author.length === 0) {
-    throw new Error('package.json missing required field: author');
-  }
-  const main = typeof r.main === 'string' ? (r.main as string) : undefined;
-  const nuclearRaw = r.nuclear;
-  let nuclear: PluginManifest['nuclear'];
-  if (nuclearRaw && typeof nuclearRaw === 'object') {
-    const nr = nuclearRaw as Record<string, unknown>;
-    nuclear = {
-      displayName:
-        typeof nr.displayName === 'string' && nr.displayName.length > 0
-          ? (nr.displayName as string)
-          : undefined,
-      category:
-        typeof nr.category === 'string' && nr.category.length > 0
-          ? (nr.category as string)
-          : undefined,
-      icon: nr.icon as PluginManifest['nuclear']['icon'],
-      permissions: Array.isArray(nr.permissions)
-        ? (nr.permissions.filter((p) => typeof p === 'string') as string[])
-        : undefined,
-    };
-  }
-  return { name, version, description, author, main, nuclear };
+  const res = safeParsePluginManifest(raw);
+  if (res.success) return res.data;
+  const msg = res.errors.join('; ');
+  throw new Error(`Invalid package.json: ${msg}`);
 };
