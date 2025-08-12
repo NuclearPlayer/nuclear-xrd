@@ -17,8 +17,7 @@ export default {
   ],
   importOrderParserPlugins: ['typescript', 'jsx'],
   plugins: [
-    'prettier-plugin-tailwindcss',
     '@ianvs/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
   ],
-  tailwindFunctions: ['cn', 'clsx'],
 };
