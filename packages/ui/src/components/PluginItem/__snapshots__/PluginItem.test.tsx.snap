@@ -3,13 +3,13 @@
 exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 <DocumentFragment>
   <div
-    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow opacity-30 relative"
+    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow opacity-30 relative transition-opacity duration-250"
   >
     <div
       class="flex flex-wrap items-start gap-4 w-full"
     >
       <div
-        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none flex-shrink-0 w-12 h-12 p-0 items-center justify-center"
+        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none flex-shrink-0 w-12 h-12 p-0 items-center justify-center overflow-hidden"
       >
         <svg
           class="lucide lucide-music"
@@ -68,7 +68,7 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 <DocumentFragment>
   <div
-    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow relative"
+    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow relative transition-opacity duration-250"
   >
     <div
       class="flex flex-wrap items-start gap-4 w-full"
@@ -107,13 +107,13 @@ exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 exports[`PluginItem > (Snapshot) renders with all props 1`] = `
 <DocumentFragment>
   <div
-    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow relative"
+    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow relative transition-opacity duration-250"
   >
     <div
       class="flex flex-wrap items-start gap-4 w-full"
     >
       <div
-        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none flex-shrink-0 w-12 h-12 p-0 items-center justify-center"
+        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none flex-shrink-0 w-12 h-12 p-0 items-center justify-center overflow-hidden"
       >
         <svg
           class="lucide lucide-music"

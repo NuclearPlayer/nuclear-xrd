@@ -38,7 +38,7 @@ export const PluginItem: FC<PluginItemProps> = ({
           'ring-2 ring-accent-orange ring-inset': warning,
           'opacity-30': disabled,
         },
-        'relative',
+        'relative transition-opacity duration-250',
         className,
       )}
     >
@@ -47,7 +47,7 @@ export const PluginItem: FC<PluginItemProps> = ({
           <Box
             variant="tertiary"
             shadow="none"
-            className="flex-shrink-0 w-12 h-12 p-0 items-center justify-center"
+            className="flex-shrink-0 w-12 h-12 p-0 items-center justify-center overflow-hidden"
           >
             {icon}
           </Box>

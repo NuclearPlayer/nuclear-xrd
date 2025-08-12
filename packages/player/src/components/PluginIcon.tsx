@@ -15,7 +15,14 @@ export const PluginIconComponent = ({ icon }: PluginIconComponentProps) => {
       const Cmp = (Lucide as Record<string, unknown>)[
         name
       ] as React.ComponentType<{ size?: number }>;
-      return <Cmp size={20} />;
+
+      return (
+        <div
+          className={`flex items-center justify-center w-full h-full bg-${icon.background}`}
+        >
+          <Cmp size={20} />
+        </div>
+      );
     }
   }
 
