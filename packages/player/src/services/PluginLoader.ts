@@ -46,19 +46,26 @@ export class PluginLoader {
     if (manifest.main) {
       return join(this.path, manifest.main);
     }
-    // Fallback attempts
-    const candidates = ['index.js', 'dist/index.js'];
+    const candidates = [
+      'index.js',
+      'index.ts',
+      'index.tsx',
+      'dist/index.js',
+      'dist/index.ts',
+      'dist/index.tsx',
+    ];
     for (const candidate of candidates) {
       try {
         const full = await join(this.path, candidate);
-        // Attempt reading (will throw if not exists)
         await readTextFile(full);
         return full;
       } catch {
-        // continue
+        /* Do nothing */
       }
     }
-    throw new Error('Could not resolve plugin entry file (main or index.js)');
+    throw new Error(
+      'Could not resolve plugin entry file (main, index.js, index.ts, index.tsx, dist/index.js, dist/index.ts, dist/index.tsx)',
+    );
   }
 
   private async readManifest(): Promise<PluginManifest> {

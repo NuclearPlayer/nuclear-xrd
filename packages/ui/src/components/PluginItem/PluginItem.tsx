@@ -1,6 +1,7 @@
-import { ExternalLink } from 'lucide-react';
+import { SettingsIcon, TriangleAlertIcon } from 'lucide-react';
 import { FC, ReactNode } from 'react';
 
+import { cn } from '../../utils';
 import { Box } from '../Box';
 import { Button } from '../Button';
 
@@ -11,6 +12,10 @@ type PluginItemProps = {
   icon?: ReactNode;
   onViewDetails?: () => void;
   className?: string;
+  disabled?: boolean;
+  warning?: boolean;
+  warningText?: string;
+  rightAccessory?: ReactNode;
 };
 
 export const PluginItem: FC<PluginItemProps> = ({
@@ -20,10 +25,24 @@ export const PluginItem: FC<PluginItemProps> = ({
   icon,
   onViewDetails,
   className,
+  disabled = false,
+  warning = false,
+  warningText,
+  rightAccessory,
 }) => {
   return (
-    <Box variant="secondary" className={className}>
-      <div className="flex items-start gap-4 w-full">
+    <Box
+      variant="secondary"
+      className={cn(
+        {
+          'ring-2 ring-accent-orange ring-inset': warning,
+          'opacity-30': disabled,
+        },
+        'relative',
+        className,
+      )}
+    >
+      <div className={'flex flex-wrap items-start gap-4 w-full'}>
         {icon && (
           <Box
             variant="tertiary"
@@ -35,31 +54,33 @@ export const PluginItem: FC<PluginItemProps> = ({
         )}
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0 flex-1">
-              <h3 className="font-bold text-foreground text-lg leading-tight">
-                {name}
-              </h3>
-              <p className="text-sm text-foreground-secondary mt-1">
-                by {author}
-              </p>
-              <p className="text-sm text-foreground-secondary mt-2 leading-relaxed">
-                {description}
-              </p>
-            </div>
-
+          <h3 className="font-bold text-foreground text-lg gap-4 leading-tight inline-flex items-center">
+            {name}
             {onViewDetails && (
-              <Button
-                size="sm"
-                variant="noShadow"
-                onClick={onViewDetails}
-                className="flex-shrink-0"
-              >
-                <ExternalLink size={14} className="mr-2" />
-                View Details
+              <Button size="icon" onClick={onViewDetails} disabled={disabled}>
+                <SettingsIcon size={20} />
               </Button>
             )}
+          </h3>
+          <p className="text-sm text-foreground-secondary mt-1">by {author}</p>
+          <p className="text-sm text-foreground-secondary mt-2 leading-relaxed">
+            {description}
+          </p>
+        </div>
+
+        {/* TODO: Add a tooltip for the warning text */}
+        {(warning || warningText) && (
+          <div className="absolute -top-4 -left-2 flex items-center w-12 h-12">
+            {warning && (
+              <span className="inline-flex items-center justify-center bg-accent-orange text-black text-xs font-semibold rounded p-1 border-2 border-border">
+                <TriangleAlertIcon className="fill-accent-yellow" />
+              </span>
+            )}
           </div>
+        )}
+
+        <div className="flex flex-col shrink-0 h-full sm:w-auto items-start justify-center sm:items-end">
+          {rightAccessory}
         </div>
       </div>
     </Box>

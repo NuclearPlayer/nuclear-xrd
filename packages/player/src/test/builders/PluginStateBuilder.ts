@@ -16,7 +16,9 @@ export class PluginStateBuilder {
   private state: PluginState = {
     metadata: defaultMetadata,
     path: '/path/to/default-plugin',
-    status: 'loaded',
+    enabled: false,
+    warning: false,
+    warnings: [],
   };
 
   withId(id: string): PluginStateBuilder {
@@ -49,21 +51,14 @@ export class PluginStateBuilder {
     return this;
   }
 
-  withStatus(status: PluginState['status']): PluginStateBuilder {
-    this.state.status = status;
+  withEnabled(enabled: boolean): PluginStateBuilder {
+    this.state.enabled = enabled;
     return this;
   }
 
-  withError(
-    message: string,
-    stack?: string,
-    timestamp?: number,
-  ): PluginStateBuilder {
-    this.state.error = {
-      message,
-      stack,
-      timestamp: timestamp || new Date().valueOf(),
-    };
+  withWarning(warning: boolean, warnings: string[] = []): PluginStateBuilder {
+    this.state.warning = warning;
+    this.state.warnings = warnings;
     return this;
   }
 

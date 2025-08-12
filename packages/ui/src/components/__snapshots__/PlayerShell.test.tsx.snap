@@ -93,7 +93,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
       </button>
     </header>
     <div
-      class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary"
+      class="grid h-full min-h-0 grid-cols-[auto_1fr_auto] bg-background-secondary relative"
     >
       <div
         class="bg-background-secondary border-border flex flex-col relative p-2 border-r-2"

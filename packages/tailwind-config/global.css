@@ -15,8 +15,6 @@
   --color-foreground-input: var(--foreground-input);
 
   --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-primary-active: var(--primary-active);
 
   --color-border: var(--border);
   --color-border-input: var(--border-input);
@@ -64,8 +62,6 @@
 
   /* Interactive Elements */
   --primary: oklch(76.91% 0.173 341.75);
-  --primary-hover: oklch(0% 0 0);
-  --primary-active: oklch(0% 0 0);
 
   /* Borders & Outlines */
   --border: oklch(0% 0 0);

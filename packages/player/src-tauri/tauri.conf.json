@@ -70,7 +70,9 @@
   "plugins": {
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDczRDk0QzBFODNCNDEyNUUKUldSZUVyU0REa3paYzdTaE9IdlErcjNoTmdyMkNLL0d3alFZTHVMcytxQzJ3K1NJRlFWQlVaYk4K",
-      "endpoints": ["https://github.com/NuclearPlayer/nuclear-xrd/releases/latest/download/latest.json"]
+      "endpoints": [
+        "https://github.com/NuclearPlayer/nuclear-xrd/releases/latest/download/latest.json"
+      ]
     }
   }
 }

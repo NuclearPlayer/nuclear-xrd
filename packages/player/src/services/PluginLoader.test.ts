@@ -4,9 +4,8 @@ import { PluginLoader } from './PluginLoader';
 
 vi.mock('./pluginCompiler', () => ({
   compilePlugin: vi.fn(async (path: string) => {
-    if (path.endsWith('.ts') || path.endsWith('.tsx')) {
+    if (path.endsWith('.ts') || path.endsWith('.tsx'))
       return 'module.exports = { onLoad(){} };';
-    }
     return undefined;
   }),
 }));
@@ -62,10 +61,7 @@ describe('PluginLoader', () => {
   describe('manifest validation via load()', () => {
     it('parses manifest with required fields', async () => {
       const manifest = makeManifest();
-      const pluginCode = 'module.exports = { onLoad(){} };';
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockResolvedValueOnce(pluginCode);
+      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
       const result = await loader.load();
       expect(result.metadata).toMatchObject({
         id: manifest.name,
@@ -116,104 +112,87 @@ describe('PluginLoader', () => {
   describe('entry resolution', () => {
     it('uses main field path', async () => {
       const manifest = makeManifest({ main: 'custom/entry.js' });
-      const code = 'module.exports = { onLoad(){} };';
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockResolvedValueOnce(code); // readPluginCode only (no pre-read)
+      setFsMock(manifest, {
+        'custom/entry.js': 'module.exports = { onLoad(){} };',
+      });
       const result = await loader.load();
       expect(result.instance).toBeDefined();
-      expect(mockReadTextFile).toHaveBeenNthCalledWith(
-        2,
-        '/test/plugin/path/custom/entry.js',
-      );
     });
 
-    it('falls back to dist/index.js when index.js missing', async () => {
+    it('falls back to index.ts when index.js missing', async () => {
       const manifest = makeManifest();
-      const code = 'module.exports = { onEnable(){} };';
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockRejectedValueOnce(new Error('not found')) // index.js existence check
-        .mockResolvedValueOnce(code) // dist/index.js existence check
-        .mockResolvedValueOnce(code); // actual read
+      setFsMock(manifest, { 'index.ts': 'module.exports = { onEnable(){} };' });
       const result = await loader.load();
       expect(result.instance).toBeDefined();
-      expect(mockReadTextFile).toHaveBeenLastCalledWith(
-        '/test/plugin/path/dist/index.js',
-      );
+    });
+
+    it('falls back to dist/index.js after index.js/.ts/.tsx missing', async () => {
+      const manifest = makeManifest();
+      setFsMock(manifest, {
+        'dist/index.js': 'module.exports = { onEnable(){} };',
+      });
+      const result = await loader.load();
+      expect(result.instance).toBeDefined();
+    });
+
+    it('falls back to dist/index.ts after other candidates missing', async () => {
+      const manifest = makeManifest();
+      setFsMock(manifest, {
+        'dist/index.ts': 'module.exports = { onEnable(){} };',
+      });
+      const result = await loader.load();
+      expect(result.instance).toBeDefined();
     });
 
     it('throws if no entry file found', async () => {
       const manifest = makeManifest();
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockRejectedValueOnce(new Error('not found')) // index.js
-        .mockRejectedValueOnce(new Error('not found')); // dist/index.js
+      setFsMock(manifest, {});
       await expect(loader.load()).rejects.toThrow(
-        'Could not resolve plugin entry file',
+        'Could not resolve plugin entry file (main, index.js, index.ts, index.tsx, dist/index.js, dist/index.ts, dist/index.tsx)',
       );
     });
   });
 
   describe('plugin code evaluation via load()', () => {
     it('returns hooks object', async () => {
-      const manifest = makeManifest();
-      const code = 'module.exports = { onLoad(){} };';
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockRejectedValueOnce(new Error('not found'))
-        .mockResolvedValueOnce(code)
-        .mockResolvedValueOnce(code);
+      const manifest = makeManifest({ main: 'index.js' });
+      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
       const result = await loader.load();
       expect(result.instance).toHaveProperty('onLoad');
     });
 
     it('supports default export', async () => {
-      const manifest = makeManifest();
-      const code = 'module.exports.default = { onEnable(){} };';
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockRejectedValueOnce(new Error('not found'))
-        .mockResolvedValueOnce(code)
-        .mockResolvedValueOnce(code);
+      const manifest = makeManifest({ main: 'index.js' });
+      setFsMock(manifest, {
+        'index.js': 'module.exports.default = { onEnable(){} };',
+      });
       const result = await loader.load();
       expect(result.instance).toHaveProperty('onEnable');
     });
 
     it('throws on non-object export', async () => {
-      const manifest = makeManifest();
-      const code = 'module.exports = "not an object";';
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockRejectedValueOnce(new Error('not found'))
-        .mockResolvedValueOnce(code)
-        .mockResolvedValueOnce(code);
+      const manifest = makeManifest({ main: 'index.js' });
+      setFsMock(manifest, { 'index.js': 'module.exports = 42;' });
       await expect(loader.load()).rejects.toThrow(
         'Plugin must export a default object.',
       );
     });
 
     it('provides limited require for plugin-sdk', async () => {
-      const manifest = makeManifest();
-      const code =
-        "const { NuclearPluginAPI } = require('@nuclearplayer/plugin-sdk'); module.exports = { testAdd: NuclearPluginAPI.add() };";
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockRejectedValueOnce(new Error('not found'))
-        .mockResolvedValueOnce(code)
-        .mockResolvedValueOnce(code);
+      const manifest = makeManifest({ main: 'index.js' });
+      setFsMock(manifest, {
+        'index.js':
+          "const { NuclearPluginAPI } = require('@nuclearplayer/plugin-sdk'); module.exports = { testAdd: NuclearPluginAPI.add() };",
+      });
       const result = await loader.load();
-      expect('testAdd' in result.instance).toBe(true);
+      expect(result.instance).toHaveProperty('testAdd', 4);
     });
 
     it('throws for unknown required modules', async () => {
-      const manifest = makeManifest();
-      const code = "require('unknown-module'); module.exports = {};";
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockRejectedValueOnce(new Error('not found'))
-        .mockResolvedValueOnce(code)
-        .mockResolvedValueOnce(code);
+      const manifest = makeManifest({ main: 'index.js' });
+      setFsMock(manifest, {
+        'index.js': "require('unknown-module'); module.exports = {};",
+      });
       await expect(loader.load()).rejects.toThrow(
         'Module unknown-module not found',
       );
@@ -223,18 +202,14 @@ describe('PluginLoader', () => {
   describe('load metadata assembly', () => {
     it('builds metadata including nuclear section', async () => {
       const manifest = makeManifest({
+        main: 'index.js',
         nuclear: {
           displayName: 'Display Name',
           category: 'integration',
           permissions: ['net'],
         },
       });
-      const code = 'module.exports = { onLoad(){} };';
-      mockReadTextFile
-        .mockResolvedValueOnce(JSON.stringify(manifest))
-        .mockRejectedValueOnce(new Error('not found'))
-        .mockResolvedValueOnce(code)
-        .mockResolvedValueOnce(code);
+      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
       const result = await loader.load();
       expect(result.metadata).toMatchObject({
         id: 'test-plugin',
@@ -254,3 +229,16 @@ describe('PluginLoader', () => {
     });
   });
 });
+
+const setFsMock = (
+  manifest: Record<string, unknown>,
+  files: Record<string, string>,
+) => {
+  mockReadTextFile.mockImplementation(async (p: string | URL) => {
+    const pathStr = p.toString();
+    if (pathStr.includes('package.json')) return JSON.stringify(manifest);
+    const rel = pathStr.replace('/test/plugin/path/', '');
+    if (rel in files) return files[rel];
+    throw new Error('not found');
+  });
+};

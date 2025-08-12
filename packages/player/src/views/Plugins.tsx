@@ -1,50 +1,54 @@
-import * as Lucide from 'lucide-react';
+import { open } from '@tauri-apps/plugin-dialog';
 
-import { PluginIcon } from '@nuclearplayer/plugin-sdk';
-import { PluginItem, ViewShell } from '@nuclearplayer/ui';
+import { Button, PluginItem, Toggle, ViewShell } from '@nuclearplayer/ui';
 
+import { PluginIconComponent } from '../components/PluginIcon';
 import { usePluginStore } from '../stores/pluginStore';
 
-const resolveIcon = (pluginIcon: unknown) => {
-  if (!pluginIcon || typeof pluginIcon !== 'object') return null;
-  const icon = pluginIcon as PluginIcon;
-  if (icon.type === 'named') {
-    const name = icon.name;
-    if (name && name in Lucide) {
-      const Cmp = (Lucide as Record<string, unknown>)[
-        name
-      ] as React.ComponentType<{ size?: number }>;
-      return <Cmp size={20} />;
-    }
-  }
-  if (icon.type === 'link' && typeof icon.link === 'string') {
-    return (
-      <img
-        src={icon.link}
-        alt="plugin icon"
-        className="w-5 h-5 object-contain"
-        draggable={false}
-      />
-    );
-  }
-  return null;
-};
-
 export const Plugins = () => {
-  const plugins = usePluginStore().getAllPlugins();
+  const store = usePluginStore();
+  const plugins = store.getAllPlugins();
+
+  const handleAdd = async () => {
+    const path = await open({ directory: true, multiple: false });
+    if (typeof path === 'string') {
+      await store.loadPluginFromPath(path);
+    }
+  };
+
   return (
     <ViewShell title="Plugins">
-      <div className="flex flex-col my-6 gap-4">
-        {plugins.map((p) => (
-          <PluginItem
-            key={p.metadata.id}
-            icon={resolveIcon(p.metadata.icon)}
-            name={p.metadata.displayName}
-            author={p.metadata.author}
-            description={p.metadata.description}
-            onViewDetails={() => {}}
-          />
-        ))}
+      <div className="flex flex-col gap-6 my-6">
+        <div className="flex items-center gap-4">
+          <Button onClick={handleAdd} size="sm">
+            Add Plugin
+          </Button>
+        </div>
+        <div className="flex flex-col gap-4">
+          {plugins.map((p) => (
+            <PluginItem
+              key={p.metadata.id}
+              icon={<PluginIconComponent icon={p.metadata.icon} />}
+              name={p.metadata.displayName}
+              author={p.metadata.author}
+              description={p.metadata.description}
+              disabled={!p.enabled}
+              warning={p.warning}
+              warningText={p.warnings.length > 0 ? p.warnings[0] : undefined}
+              rightAccessory={
+                <Toggle
+                  checked={p.enabled}
+                  onCheckedChange={(checked) =>
+                    checked
+                      ? store.enablePlugin(p.metadata.id)
+                      : store.disablePlugin(p.metadata.id)
+                  }
+                  aria-label={`Toggle ${p.metadata.displayName}`}
+                />
+              }
+            />
+          ))}
+        </div>
       </div>
     </ViewShell>
   );

@@ -1,3 +1,4 @@
+import * as Logger from '@tauri-apps/plugin-log';
 import { create } from 'zustand';
 
 import type {
@@ -9,66 +10,26 @@ import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
 import { PluginLoader } from '../services/PluginLoader';
 
-export type PluginStatus = 'loaded' | 'enabled' | 'disabled' | 'failed';
+const allowedPermissions: string[] = [];
 
 export type PluginState = {
   metadata: PluginMetadata;
   path: string;
-  status: PluginStatus;
-  error?: {
-    message: string;
-    stack?: string;
-    timestamp: number;
-  };
+  enabled: boolean;
+  warning: boolean;
+  warnings: string[];
   instance?: NuclearPlugin;
 };
 
 type PluginStore = {
   plugins: Record<string, PluginState>;
-  loadPlugin: (path: string) => Promise<void>;
+  loadPluginFromPath: (path: string) => Promise<void>;
   unloadPlugin: (id: string) => Promise<void>;
   enablePlugin: (id: string) => Promise<void>;
   disablePlugin: (id: string) => Promise<void>;
   getPlugin: (id: string) => PluginState | undefined;
   getAllPlugins: () => PluginState[];
 };
-
-const VALID_TRANSITIONS: Record<PluginStatus, PluginStatus[]> = {
-  loaded: ['enabled', 'failed'],
-  enabled: ['disabled', 'failed'],
-  disabled: ['enabled', 'failed'],
-  failed: ['failed'],
-};
-
-const transitionPluginState = (
-  pluginId: string,
-  targetStatus: PluginStatus,
-  overrides: Partial<PluginState> = {},
-) => {
-  const plugin = usePluginStore.getState().getPlugin(pluginId);
-  if (!plugin) throw new Error(`Plugin ${pluginId} not found`);
-  if (!VALID_TRANSITIONS[plugin.status].includes(targetStatus)) {
-    throw new Error(
-      `Plugin ${pluginId} cannot be ${targetStatus} from status: ${plugin.status}`,
-    );
-  }
-  usePluginStore.setState((state) => ({
-    plugins: {
-      ...state.plugins,
-      [pluginId]: {
-        ...state.plugins[pluginId],
-        status: targetStatus,
-        ...overrides,
-      },
-    },
-  }));
-};
-
-const createErrorInfo = (error: unknown) => ({
-  message: String(error),
-  stack: error instanceof Error ? error.stack : undefined,
-  timestamp: new Date().valueOf(),
-});
 
 const requireInstance = (id: string) => {
   const plugin = usePluginStore.getState().plugins[id];
@@ -80,59 +41,94 @@ const requireInstance = (id: string) => {
 export const usePluginStore = create<PluginStore>((set, get) => ({
   plugins: {},
 
-  loadPlugin: async (path: string) => {
-    const loader = new PluginLoader(path);
-    const loaded: LoadedPlugin = await loader.load();
-    const id = loaded.metadata.id;
-    if (get().plugins[id]) throw new Error(`Plugin ${id} already loaded`);
+  loadPluginFromPath: async (path: string) => {
+    try {
+      const loader = new PluginLoader(path);
+      const loaded: LoadedPlugin = await loader.load();
+      const id = loaded.metadata.id;
+      if (get().plugins[id]) {
+        Logger.debug(`Plugin ${id} already loaded.`);
+        return;
+      }
+      const permissions = loaded.metadata.permissions || [];
+      const unknown = permissions.filter(
+        (p) => !allowedPermissions.includes(p),
+      );
+      const warnings: string[] = unknown.length
+        ? [`Unknown permissions: ${unknown.join(', ')}`]
+        : [];
+
+      if (warnings.length > 0) {
+        Logger.warn(
+          `Plugin ${id} loaded with warnings: ${warnings.join(', ')}`,
+        );
+      }
+
+      set((state) => ({
+        plugins: {
+          ...state.plugins,
+          [loaded.metadata.id]: {
+            metadata: loaded.metadata,
+            path: loaded.path,
+            enabled: false,
+            warning: warnings.length > 0,
+            warnings,
+            instance: loaded.instance,
+          },
+        },
+      }));
+    } catch (error) {
+      // No toast system yet
+      // TODO: Show a toast here
+
+      Logger.error(`Failed to load plugin: ${(error as Error).message}`);
+    }
+  },
+
+  enablePlugin: async (id: string) => {
+    const plugin = requireInstance(id);
+    if (plugin.enabled) {
+      Logger.debug(`Plugin ${id} is already enabled.`);
+      return;
+    }
+    if (plugin.instance!.onEnable) {
+      const api = new NuclearPluginAPI();
+      await plugin.instance!.onEnable(api);
+    }
     set((state) => ({
       plugins: {
         ...state.plugins,
-        [id]: {
-          metadata: loaded.metadata,
-          path: loaded.path,
-          status: 'loaded',
-          instance: loaded.instance,
-        },
+        [id]: { ...state.plugins[id], enabled: true },
       },
     }));
   },
 
-  enablePlugin: async (id: string) => {
-    const plugin = get().plugins[id];
-    requireInstance(id);
-    try {
-      if (plugin.instance!.onEnable) {
-        const api = new NuclearPluginAPI();
-        await plugin.instance!.onEnable(api);
-      }
-      transitionPluginState(id, 'enabled', { error: undefined });
-    } catch (error) {
-      transitionPluginState(id, 'failed', { error: createErrorInfo(error) });
-      throw error;
-    }
-  },
-
   disablePlugin: async (id: string) => {
-    const plugin = get().plugins[id];
-    requireInstance(id);
-    try {
-      if (plugin.instance!.onDisable) {
-        await plugin.instance!.onDisable();
-      }
-      transitionPluginState(id, 'disabled', { error: undefined });
-    } catch (error) {
-      transitionPluginState(id, 'failed', { error: createErrorInfo(error) });
-      throw error;
+    const plugin = requireInstance(id);
+    if (!plugin.enabled) {
+      Logger.debug(`Plugin ${id} is already disabled.`);
+      return;
     }
+    if (plugin.instance!.onDisable) {
+      await plugin.instance!.onDisable();
+    }
+    set((state) => ({
+      plugins: {
+        ...state.plugins,
+        [id]: { ...state.plugins[id], enabled: false },
+      },
+    }));
   },
 
   unloadPlugin: async (id: string) => {
     const plugin = get().plugins[id];
-    if (!plugin) throw new Error(`Plugin ${id} not found`);
+    if (!plugin) {
+      Logger.error(`Plugin ${id} not found`);
+      throw new Error(`Plugin ${id} not found`);
+    }
     let unloadError: unknown = null;
     try {
-      if (plugin.status === 'enabled') {
+      if (plugin.enabled) {
         await get().disablePlugin(id);
       }
       if (plugin.instance?.onUnload) {
@@ -141,12 +137,22 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
     } catch (error) {
       unloadError = error;
     }
+
+    // Plugin will be removed regardless of unload errors
     set((state) => {
+      // _removed is intentionally unused
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { [id]: _removed, ...rest } = state.plugins;
       return { plugins: rest };
     });
-    if (unloadError) throw unloadError;
+
+    if (unloadError) {
+      Logger.error(
+        `Failed to unload plugin ${id}. It was removed, but might not have been able to complete cleanup.`,
+        unloadError,
+      );
+      throw unloadError;
+    }
   },
 
   getPlugin: (id: string) => get().plugins[id],
