@@ -3,13 +3,13 @@
 exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
 <DocumentFragment>
   <div
-    class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary"
+    class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
   >
     <div
-      class="bg-background-secondary border-border flex flex-col relative p-2 border-r-2"
+      class="bg-background-secondary border-border relative flex flex-col p-2 border-r-2"
     >
       <span
-        class="flex flex-row items-center mb-4 justify-end"
+        class="mb-4 flex flex-row items-center justify-end"
       >
         <button
           class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 right-1"
@@ -46,10 +46,10 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
       data-testid="player-workspace-main"
     />
     <div
-      class="bg-background-secondary border-border flex flex-col relative p-2 border-l-2"
+      class="bg-background-secondary border-border relative flex flex-col p-2 border-l-2"
     >
       <span
-        class="flex flex-row items-center mb-4 justify-start"
+        class="mb-4 flex flex-row items-center justify-start"
       >
         <button
           class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 left-1"
@@ -88,13 +88,13 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
 exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
 <DocumentFragment>
   <div
-    class="grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary"
+    class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
   >
     <div
-      class="bg-background-secondary border-border flex flex-col relative p-2 border-r-2"
+      class="bg-background-secondary border-border relative flex flex-col p-2 border-r-2"
     >
       <span
-        class="flex flex-row items-center mb-4 justify-end"
+        class="mb-4 flex flex-row items-center justify-end"
       >
         <button
           class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 right-1"
@@ -130,7 +130,7 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
         style="opacity: 0; transform: translateX(-20px);"
       />
       <div
-        class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg- transition-colors right-0"
+        class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors right-0"
       />
     </div>
     <main
@@ -138,10 +138,10 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
       data-testid="player-workspace-main"
     />
     <div
-      class="bg-background-secondary border-border flex flex-col relative p-2 border-l-2"
+      class="bg-background-secondary border-border relative flex flex-col p-2 border-l-2"
     >
       <span
-        class="flex flex-row items-center mb-4 justify-start"
+        class="mb-4 flex flex-row items-center justify-start"
       >
         <button
           class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 left-1"
@@ -177,7 +177,7 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
         style="opacity: 0; transform: translateX(20px);"
       />
       <div
-        class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg- transition-colors left-0"
+        class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors left-0"
       />
     </div>
   </div>

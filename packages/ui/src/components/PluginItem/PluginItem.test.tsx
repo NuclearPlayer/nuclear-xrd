@@ -17,4 +17,31 @@ describe('PluginItem', () => {
 
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('(Snapshot) renders disabled state', () => {
+    const { asFragment } = render(
+      <PluginItem
+        name="Disabled Plugin"
+        author="Nuclear Team"
+        description="This plugin is currently disabled."
+        icon={<Music size={24} />}
+        disabled
+      />,
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('(Snapshot) renders rightAccessory content', () => {
+    const { asFragment } = render(
+      <PluginItem
+        name="Accessory Plugin"
+        author="Nuclear Team"
+        description="Has accessory on the right."
+        rightAccessory={<span>Accessory</span>}
+      />,
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

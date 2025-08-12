@@ -13,11 +13,11 @@ export const TopBar: FC<TopBarProps> = ({ children, className = '' }) => {
   return (
     <header
       className={cn(
-        'h-12 bg-background border-b-2 border-border flex items-center px-4',
+        'bg-background border-border flex h-12 items-center border-b-2 px-4',
         className,
       )}
     >
-      <LogoComponent className="inline-flex w-6 h-6" />
+      <LogoComponent className="inline-flex h-6 w-6" />
       {children}
       <div className="flex-1" />
       <ThemeController />

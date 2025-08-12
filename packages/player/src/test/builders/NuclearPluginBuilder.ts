@@ -1,20 +1,7 @@
 import type { NuclearPlugin } from '@nuclearplayer/plugin-sdk';
 
 export class NuclearPluginBuilder {
-  private plugin: NuclearPlugin = {
-    name: 'Test Plugin',
-    version: '1.0.0',
-  };
-
-  withName(name: NuclearPlugin['name']): NuclearPluginBuilder {
-    this.plugin.name = name;
-    return this;
-  }
-
-  withVersion(version: NuclearPlugin['version']): NuclearPluginBuilder {
-    this.plugin.version = version;
-    return this;
-  }
+  private plugin: NuclearPlugin = {};
 
   withOnLoad(onLoad: NuclearPlugin['onLoad']): NuclearPluginBuilder {
     this.plugin.onLoad = onLoad;

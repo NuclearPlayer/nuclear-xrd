@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -19,12 +23,28 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@nuclearplayer/ui": ["./packages/ui/src"],
-      "@nuclearplayer/plugin-sdk": ["./packages/plugin-sdk/src"],
-      "@nuclearplayer/tailwind-config": ["./packages/tailwind-config/src"],
-      "@nuclearplayer/eslint-config": ["./packages/eslint-config/src"]
+      "@nuclearplayer/ui": [
+        "./packages/ui/src"
+      ],
+      "@nuclearplayer/plugin-sdk": [
+        "./packages/plugin-sdk/src"
+      ],
+      "@nuclearplayer/tailwind-config": [
+        "./packages/tailwind-config/src"
+      ],
+      "@nuclearplayer/eslint-config": [
+        "./packages/eslint-config/src"
+      ]
     }
   },
-  "include": ["packages/**/*.ts", "packages/**/*.tsx"],
-  "exclude": ["node_modules", "**/dist", "**/build"]
+  "include": [
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/build"
+  ]
 }

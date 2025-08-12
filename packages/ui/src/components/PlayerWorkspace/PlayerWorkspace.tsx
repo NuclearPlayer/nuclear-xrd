@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { FC, ReactNode } from 'react';
 
 import { cn } from '../../utils';
@@ -19,7 +18,7 @@ const PlayerWorkspaceMain: FC<MainProps> = ({ children, className = '' }) => {
   return (
     <main
       data-testid="player-workspace-main"
-      className={clsx('bg-background-secondary overflow-auto', className)}
+      className={cn('bg-background-secondary overflow-auto', className)}
     >
       {children}
     </main>
@@ -37,7 +36,7 @@ export const PlayerWorkspace: PlayerWorkspaceComponent = Object.assign(
     return (
       <div
         className={cn(
-          'grid grid-cols-[auto_1fr_auto] h-full bg-background-secondary',
+          'bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]',
           className,
         )}
       >

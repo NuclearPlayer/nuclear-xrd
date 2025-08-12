@@ -1,28 +1,48 @@
-import type { NuclearPlugin } from '@nuclearplayer/plugin-sdk';
+import type { NuclearPlugin, PluginMetadata } from '@nuclearplayer/plugin-sdk';
 
 import type { PluginState } from '../../stores/pluginStore';
 
+const defaultMetadata: PluginMetadata = {
+  id: 'default-plugin',
+  name: 'default-plugin',
+  displayName: 'Default Plugin',
+  version: '1.0.0',
+  description: 'Default description',
+  author: 'Test Author',
+  permissions: [],
+};
+
 export class PluginStateBuilder {
   private state: PluginState = {
-    id: 'default-plugin',
-    name: 'Default Plugin',
-    version: '1.0.0',
+    metadata: defaultMetadata,
     path: '/path/to/default-plugin',
-    status: 'loaded',
+    enabled: false,
+    warning: false,
+    warnings: [],
   };
 
   withId(id: string): PluginStateBuilder {
-    this.state.id = id;
+    this.state.metadata = { ...this.state.metadata, id, name: id };
     return this;
   }
 
-  withName(name: string): PluginStateBuilder {
-    this.state.name = name;
+  withDisplayName(displayName: string): PluginStateBuilder {
+    this.state.metadata = { ...this.state.metadata, displayName };
     return this;
   }
 
   withVersion(version: string): PluginStateBuilder {
-    this.state.version = version;
+    this.state.metadata = { ...this.state.metadata, version };
+    return this;
+  }
+
+  withDescription(description: string): PluginStateBuilder {
+    this.state.metadata = { ...this.state.metadata, description };
+    return this;
+  }
+
+  withAuthor(author: string): PluginStateBuilder {
+    this.state.metadata = { ...this.state.metadata, author };
     return this;
   }
 
@@ -31,21 +51,14 @@ export class PluginStateBuilder {
     return this;
   }
 
-  withStatus(status: PluginState['status']): PluginStateBuilder {
-    this.state.status = status;
+  withEnabled(enabled: boolean): PluginStateBuilder {
+    this.state.enabled = enabled;
     return this;
   }
 
-  withError(
-    message: string,
-    stack?: string,
-    timestamp?: number,
-  ): PluginStateBuilder {
-    this.state.error = {
-      message,
-      stack,
-      timestamp: timestamp || new Date().valueOf(),
-    };
+  withWarning(warning: boolean, warnings: string[] = []): PluginStateBuilder {
+    this.state.warning = warning;
+    this.state.warnings = warnings;
     return this;
   }
 
@@ -55,6 +68,6 @@ export class PluginStateBuilder {
   }
 
   build(): PluginState {
-    return { ...this.state };
+    return { ...this.state, metadata: { ...this.state.metadata } };
   }
 }

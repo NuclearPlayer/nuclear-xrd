@@ -14,7 +14,7 @@ type SidebarNavigationProps = {
 
 export const SidebarNavigation: FC<SidebarNavigationProps> = ({ children }) => {
   return (
-    <div className="flex flex-col justify-start items-start flex-1">
+    <div className="flex flex-1 flex-col items-start justify-start">
       {children}
     </div>
   );

@@ -1,16 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import {
-  Download,
-  Headphones,
-  Heart,
-  Music,
-  Palette,
-  Radio,
-  Star,
-  Zap,
-} from 'lucide-react';
+import { Music, Palette } from 'lucide-react';
 
-import { PluginItem } from '@nuclearplayer/ui';
+import { PluginItem, Toggle } from '@nuclearplayer/ui';
 
 const meta = {
   title: 'Components/PluginItem',
@@ -46,103 +37,88 @@ export const WithoutIcon: Story = {
   },
 };
 
-export const ThemeExample: Story = {
-  args: {
-    name: 'Dark Theme Pro',
-    author: 'ThemeStudio',
-    description:
-      'A sleek dark theme with customizable accent colors and improved readability.',
-    icon: <Palette size={24} />,
-  },
-};
-
 export const LongDescription: Story = {
   args: {
     name: 'Advanced Equalizer',
     author: 'AudioTech Solutions',
     description:
       'Professional-grade 10-band equalizer with presets for different music genres, custom curve editing, and real-time spectrum analysis. Includes bass boost, treble enhancement, and spatial audio effects.',
-    icon: <Zap size={24} />,
+    icon: <Palette size={24} />,
   },
 };
 
-export const PluginShowcase = () => (
-  <div className="space-y-4 max-w-2xl">
-    <h2 className="text-xl font-bold text-foreground mb-6">
-      Available Plugins
-    </h2>
+// New variants showcasing the enhanced API
 
-    <PluginItem
-      name="YouTube Music"
-      author="Nuclear Team"
-      description="Stream music directly from YouTube Music with full search and playlist support."
-      icon={<Music size={24} />}
-      onViewDetails={() => console.log('YouTube Music details')}
-    />
-
-    <PluginItem
-      name="Spotify Connect"
-      author="Community"
-      description="Connect to your Spotify account and access your playlists, liked songs, and recommendations."
-      icon={<Headphones size={24} />}
-      onViewDetails={() => console.log('Spotify details')}
-    />
-
-    <PluginItem
-      name="Radio Browser"
-      author="Nuclear Team"
-      description="Browse and play thousands of internet radio stations from around the world."
-      icon={<Radio size={24} />}
-      onViewDetails={() => console.log('Radio details')}
-    />
-
-    <PluginItem
-      name="Download Manager"
-      author="DevTools Inc"
-      description="Download your favorite tracks for offline listening with metadata and artwork."
-      icon={<Download size={24} />}
-      onViewDetails={() => console.log('Download Manager details')}
-    />
-  </div>
-);
-
-export const ThemeShowcase = () => (
-  <div className="space-y-4 max-w-2xl">
-    <h2 className="text-xl font-bold text-foreground mb-6">Available Themes</h2>
-
-    <PluginItem
-      name="Neon Nights"
-      author="DesignStudio"
-      description="Vibrant neon colors with a cyberpunk aesthetic. Perfect for late-night listening sessions."
-      icon={<Palette size={24} />}
-      onViewDetails={() => console.log('Neon Nights details')}
-    />
-
-    <PluginItem
-      name="Minimal White"
-      author="CleanDesign Co"
-      description="Clean, minimalist white theme with subtle shadows and excellent readability."
-      icon={<Heart size={24} />}
-      onViewDetails={() => console.log('Minimal White details')}
-    />
-
-    <PluginItem
-      name="Retro Vinyl"
-      author="VintageThemes"
-      description="Nostalgic theme inspired by classic vinyl records and vintage audio equipment."
-      icon={<Star size={24} />}
-      onViewDetails={() => console.log('Retro Vinyl details')}
-    />
-  </div>
-);
-
-export const WithoutButton: Story = {
+export const Disabled: Story = {
   args: {
-    name: 'System Integration',
-    author: 'Nuclear Core',
-    description:
-      'Built-in system integration features for media keys and notifications.',
-    icon: <Zap size={24} />,
-    onViewDetails: undefined,
+    name: 'Disabled Plugin',
+    author: 'Nuclear Team',
+    description: 'This plugin is currently disabled.',
+    icon: <Music size={24} />,
+    disabled: true,
+  },
+};
+
+export const Warning: Story = {
+  args: {
+    name: 'Warned Plugin',
+    author: 'Nuclear Team',
+    description: 'This plugin has warnings.',
+    icon: <Music size={24} />,
+    warning: true,
+    warningText: 'Unknown permissions',
+  },
+};
+
+export const WithRightAccessory: Story = {
+  args: {
+    name: 'Toggleable Plugin',
+    author: 'Nuclear Team',
+    description: 'This plugin shows a right accessory toggle.',
+    icon: <Music size={24} />,
+    rightAccessory: (
+      <Toggle
+        defaultChecked={false}
+        aria-label="Enable plugin"
+        onCheckedChange={(checked) => console.log('Toggle changed:', checked)}
+      />
+    ),
+  },
+};
+
+export const WarningWithRightAccessory: Story = {
+  args: {
+    name: 'Warned + Toggle',
+    author: 'Nuclear Team',
+    description: 'Warned plugin with a right accessory toggle.',
+    icon: <Music size={24} />,
+    warning: true,
+    warningText: 'Requires network permission',
+    rightAccessory: (
+      <Toggle
+        defaultChecked={true}
+        aria-label="Enable plugin"
+        onCheckedChange={(checked) => console.log('Toggle changed:', checked)}
+      />
+    ),
+  },
+};
+
+export const DisabledWarningWithRightAccessory: Story = {
+  args: {
+    name: 'Disabled + Warned + Toggle',
+    author: 'Nuclear Team',
+    description: 'Disabled plugin with warnings and a toggle in the top-right.',
+    icon: <Music size={24} />,
+    disabled: true,
+    warning: true,
+    warningText: 'Unknown permissions',
+    rightAccessory: (
+      <Toggle
+        defaultChecked={false}
+        aria-label="Enable plugin"
+        onCheckedChange={(checked) => console.log('Toggle changed:', checked)}
+      />
+    ),
   },
 };

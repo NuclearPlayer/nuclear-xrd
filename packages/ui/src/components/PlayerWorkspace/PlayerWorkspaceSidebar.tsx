@@ -43,7 +43,7 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
     <motion.div
       ref={sidebarRef}
       className={clsx(
-        'bg-background-secondary border-border flex flex-col relative p-2',
+        'bg-background-secondary border-border relative flex flex-col p-2',
         { 'border-r-2': side === 'left', 'border-l-2': side === 'right' },
         className,
       )}
@@ -60,7 +60,7 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
       }
     >
       <span
-        className={clsx('flex flex-row items-center mb-4', {
+        className={clsx('mb-4 flex flex-row items-center', {
           'justify-end': side === 'left',
           'justify-start': side === 'right',
         })}
@@ -98,7 +98,7 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
 
       {!isCollapsed && (
         <div
-          className={`absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg- transition-colors ${
+          className={`absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors ${
             side === 'left' ? 'right-0' : 'left-0'
           }`}
           onMouseDown={handleMouseDown}
