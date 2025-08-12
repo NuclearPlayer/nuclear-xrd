@@ -1,3 +1,28 @@
+/**
+ * Nuclear Player - Plugin Compiler (browser/Tauri, esbuild-wasm)
+ *
+ * Why this exists:
+ * - We need to compile third-party plugins written in TS/TSX inside the Tauri webview,
+ *   where we don't have Node's fs or a native esbuild binary.
+ * - esbuild-wasm runs in the browser context but has limited filesystem APIs.
+ * - Vite HMR and test environments may reload this module multiple times, so we must
+ *   prevent calling esbuild.initialize() more than once per JS context.
+ *
+ * Core ideas:
+ * - Keep a single, typed global singleton for the esbuild-wasm runtime to survive HMR
+ *   and avoid the "Cannot call initialize more than once" error.
+ * - Feed the entry file content to esbuild and handle ALL path resolutions/loads via
+ *   Tauri's readTextFile (a virtual filesystem plugin), never touching the real fs.
+ * - Only compile TS/TSX. For plain JS we skip compilation and just read the file.
+ * - Externalize bare module imports (e.g., @nuclearplayer/plugin-sdk) so plugins don't
+ *   accidentally try to bundle our runtime dependencies.
+ *
+ * Problems solved here:
+ * - "Cannot call initialize more than once": HMR re-evaluates modules; local flags reset
+ *   but esbuild stays initialized. We use a globalThis-backed singleton to coordinate.
+ * - "Cannot read directory '.' not implemented on js": esbuild's default fs behavior
+ *   isn't available in WASM/web. We redirect all resolution/loading to Tauri fs.
+ */
 import { readTextFile } from '@tauri-apps/plugin-fs';
 import type * as EsbuildTypes from 'esbuild-wasm';
 import wasmUrl from 'esbuild-wasm/esbuild.wasm?url';
@@ -14,6 +39,21 @@ declare global {
   var __NUCLEAR_ESBUILD_WASM__: EsbuildGlobal | undefined;
 }
 
+/**
+ * Return the single esbuild-wasm runtime state shared across this JS context.
+ *
+ * Why globalThis:
+ * - Vite HMR can re-evaluate this module many times in dev. Module-local singletons
+ *   would be lost on every re-evaluation, but esbuild's internal state isn't.
+ * - By storing the state on globalThis, we preserve the "initialized once" guarantee
+ *   across HMR and repeated imports within the same window/worker.
+ * - Each worker/window has its own globalThis. That's okay: we want one esbuild
+ *   instance per JS context (not globally across processes).
+ *
+ * Typing:
+ * - The global is declared via an ambient type (declare global) above, so we avoid
+ *   any/unknown casts and keep the state strongly typed.
+ */
 function getEsbuildState(): EsbuildGlobal {
   if (!globalThis.__NUCLEAR_ESBUILD_WASM__) {
     globalThis.__NUCLEAR_ESBUILD_WASM__ = {
@@ -46,6 +86,16 @@ const resolvePath = (baseDir: string, rel: string) => {
   return normalize((baseDir + '/' + rel).split('/'));
 };
 
+/**
+ * Initialize esbuild-wasm exactly once within this JS context.
+ *
+ * Why this pattern:
+ * - esbuild-wasm throws if initialize() is called more than once per context.
+ * - HMR re-executes this module. Local flags would reset, but esbuild remains
+ *   initialized internally, so a naive second initialize() would crash.
+ * - We keep the init state on a global singleton, and expose an initPromise so
+ *   concurrent callers share the same in-flight initialization.
+ */
 async function ensureInit() {
   if (es.initialized) return;
   if (!es.initPromise) {
@@ -60,43 +110,13 @@ async function ensureInit() {
   await es.initPromise;
 }
 
+/**
+ * Wait for initialization and return the esbuild module instance.
+ * Kept separate so call-sites don't need to remember to call ensureInit().
+ */
 async function getEsbuild(): Promise<EsbuildModule> {
   await ensureInit();
   return es.mod!;
-}
-
-/**
- * Returns whether esbuild-wasm has been initialized in this JS context.
- */
-export function isEsbuildInitialized(): boolean {
-  return es.initialized;
-}
-
-/**
- * Resets the shared esbuild-wasm runtime and clears the in-memory bundle cache.
- * Intended for tests or explicit teardown. Safe to call when not initialized.
- */
-export async function resetEsbuildCompiler(): Promise<void> {
-  // Wait for an in-flight init to settle (ignore errors to ensure teardown)
-  if (es.initPromise) {
-    try {
-      await es.initPromise;
-    } catch {
-      /* no-op */
-    }
-  }
-
-  // Stop service if available (esbuild-wasm exposes stop() in some builds)
-  try {
-    es.mod?.stop?.();
-  } catch {
-    /* no-op */
-  }
-
-  es.mod = null;
-  es.initialized = false;
-  es.initPromise = null;
-  cache.clear();
 }
 
 const simpleHash = (str: string) => {
@@ -114,40 +134,112 @@ export async function compilePlugin(
   if (cache.has(key)) return cache.get(key);
   const mod = await getEsbuild();
   const entryDir = entryPath.slice(0, entryPath.lastIndexOf('/')) || '/';
+  const entryLoader: EsbuildTypes.Loader = entryPath.endsWith('.tsx')
+    ? 'tsx'
+    : entryPath.endsWith('.ts')
+      ? 'ts'
+      : 'js';
+
   const result = await mod.build({
-    entryPoints: [entryPath],
+    // Feed the entry file through "stdin" so esbuild never tries to open it
+    // from a real filesystem. In WASM/web there is no Node fs, and letting
+    // esbuild fall back to its default fs behavior will cause errors.
+    //
+    // - sourcefile: preserves meaningful file names in stack traces and is used
+    //   as the base for resolving relative imports.
+    // - resolveDir: tells esbuild where to resolve "./" and "../" from.
+    // - loader: matches the entry extension so esbuild parses TS/TSX correctly.
+    stdin: {
+      contents: entrySource,
+      sourcefile: entryPath,
+      resolveDir: entryDir,
+      loader: entryLoader,
+    },
     bundle: true,
     write: false,
     format: 'cjs',
     platform: 'browser',
     target: ['es2020'],
     sourcemap: 'inline',
+    // Do not bundle our host SDK. Plugins import it at runtime from the app,
+    // not from the plugin bundle.
     external: ['@nuclearplayer/plugin-sdk'],
+
+    // Keep a neutral working directory. Real resolution happens inside our
+    // virtual "tauri-fs" plugin (below).
     absWorkingDir: '/',
+
+    // Inline tsconfig so esbuild doesn't try to read tsconfig.json from disk.
+    tsconfigRaw: { compilerOptions: {} },
+
     logLevel: 'silent',
+
+    // A tiny "virtual filesystem" implemented with Tauri's readTextFile.
+    // The goal is to keep esbuild away from any Node fs code paths that
+    // don't exist in WASM/web.
     plugins: [
       {
         name: 'tauri-fs',
         setup(build) {
-          build.onResolve({ filter: /^(\.\.?\/).+/ }, (args) => ({
-            path: resolvePath(args.resolveDir || entryDir, args.path),
-          }));
-          build.onLoad({ filter: /\.[tj]sx?$/ }, async (args) => {
-            const source =
-              args.path === entryPath
-                ? entrySource
-                : await readTextFile(args.path);
-            const loader: EsbuildTypes.Loader = args.path.endsWith('.tsx')
-              ? 'tsx'
-              : args.path.endsWith('.ts')
-                ? 'ts'
-                : 'js';
-            return { contents: source, loader };
+          // Unify all "where is this import?" questions behind a single rule set,
+          // and force them into a custom namespace ("tauri-fs"). Anything that
+          // lands in this namespace will be loaded by our onLoad hook below,
+          // using Tauri's readTextFile instead of Node's fs.
+          build.onResolve({ filter: /.*/ }, (args) => {
+            // 1) The entry point itself.
+            //    Tag it with our namespace to keep it in the virtual fs flow.
+            if (args.kind === 'entry-point') {
+              return { path: args.path, namespace: 'tauri-fs' };
+            }
+
+            // 2) Absolute paths like "/Users/…/index.ts".
+            //    Keep the absolute path as-is, just force the namespace.
+            if (args.path.startsWith('/')) {
+              return { path: args.path, namespace: 'tauri-fs' };
+            }
+
+            // 3) Relative paths like "./foo" or "../bar".
+            //    Resolve them to an absolute path based on the current file's directory.
+            if (/^(\.\.?\/)/.test(args.path)) {
+              return {
+                path: resolvePath(args.resolveDir || entryDir, args.path),
+                namespace: 'tauri-fs',
+              };
+            }
+
+            // 4) Bare module specifiers (e.g., "react", "@nuclearplayer/plugin-sdk").
+            //    We do not bundle those. The host app should provide them at runtime.
+            if (args.path === '@nuclearplayer/plugin-sdk') {
+              return { path: args.path, external: true };
+            }
+            return { path: args.path, external: true };
           });
-          build.onResolve({ filter: /^[^./].*/ }, (args) => ({
-            path: args.path,
-            external: true,
-          }));
+          // Given a path in our "tauri-fs" namespace, fetch the file content
+          // via Tauri's filesystem API and tell esbuild how to treat it.
+          build.onLoad(
+            { filter: /\.[tj]sx?$/, namespace: 'tauri-fs' },
+            async (args) => {
+              // Use the already-read entry for the entry path; otherwise, load from Tauri fs.
+              const source =
+                args.path === entryPath
+                  ? entrySource
+                  : await readTextFile(args.path);
+
+              // Pick a loader based on the file extension.
+              const loader: EsbuildTypes.Loader = args.path.endsWith('.tsx')
+                ? 'tsx'
+                : args.path.endsWith('.ts')
+                  ? 'ts'
+                  : 'js';
+
+              // Provide a resolveDir so relative imports inside this file work.
+              const thisDir =
+                args.path.slice(0, args.path.lastIndexOf('/')) || '/';
+
+              return { contents: source, loader, resolveDir: thisDir };
+            },
+          );
+          // Bare module specifiers are handled as external in the unified onResolve above.
         },
       },
     ],
