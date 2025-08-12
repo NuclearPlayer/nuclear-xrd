@@ -11,7 +11,7 @@ export const BottomBar: FC<BottomBarProps> = ({ children, className = '' }) => {
   return (
     <footer
       className={cn(
-        'h-16 bg-background border-t-2 border-border flex items-center px-4',
+        'bg-background border-border flex h-16 items-center border-t-2 px-4',
         className,
       )}
     >

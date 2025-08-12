@@ -6,10 +6,10 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
     class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow opacity-30 relative transition-opacity duration-250"
   >
     <div
-      class="flex flex-wrap items-start gap-4 w-full"
+      class="flex w-full flex-wrap items-start gap-4"
     >
       <div
-        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none flex-shrink-0 w-12 h-12 p-0 items-center justify-center overflow-hidden"
+        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden p-0"
       >
         <svg
           class="lucide lucide-music"
@@ -39,26 +39,26 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
         </svg>
       </div>
       <div
-        class="flex-1 min-w-0"
+        class="min-w-0 flex-1"
       >
         <h3
-          class="font-bold text-foreground text-lg gap-4 leading-tight inline-flex items-center"
+          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
         >
           Disabled Plugin
         </h3>
         <p
-          class="text-sm text-foreground-secondary mt-1"
+          class="text-foreground-secondary mt-1 text-sm"
         >
           by Nuclear Team
         </p>
         <p
-          class="text-sm text-foreground-secondary mt-2 leading-relaxed"
+          class="text-foreground-secondary mt-2 text-sm leading-relaxed"
         >
           This plugin is currently disabled.
         </p>
       </div>
       <div
-        class="flex flex-col shrink-0 h-full sm:w-auto items-start justify-center sm:items-end"
+        class="flex h-full shrink-0 flex-col items-start justify-center sm:w-auto sm:items-end"
       />
     </div>
   </div>
@@ -71,29 +71,29 @@ exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
     class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow relative transition-opacity duration-250"
   >
     <div
-      class="flex flex-wrap items-start gap-4 w-full"
+      class="flex w-full flex-wrap items-start gap-4"
     >
       <div
-        class="flex-1 min-w-0"
+        class="min-w-0 flex-1"
       >
         <h3
-          class="font-bold text-foreground text-lg gap-4 leading-tight inline-flex items-center"
+          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
         >
           Accessory Plugin
         </h3>
         <p
-          class="text-sm text-foreground-secondary mt-1"
+          class="text-foreground-secondary mt-1 text-sm"
         >
           by Nuclear Team
         </p>
         <p
-          class="text-sm text-foreground-secondary mt-2 leading-relaxed"
+          class="text-foreground-secondary mt-2 text-sm leading-relaxed"
         >
           Has accessory on the right.
         </p>
       </div>
       <div
-        class="flex flex-col shrink-0 h-full sm:w-auto items-start justify-center sm:items-end"
+        class="flex h-full shrink-0 flex-col items-start justify-center sm:w-auto sm:items-end"
       >
         <span>
           Accessory
@@ -110,10 +110,10 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
     class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow relative transition-opacity duration-250"
   >
     <div
-      class="flex flex-wrap items-start gap-4 w-full"
+      class="flex w-full flex-wrap items-start gap-4"
     >
       <div
-        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none flex-shrink-0 w-12 h-12 p-0 items-center justify-center overflow-hidden"
+        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden p-0"
       >
         <svg
           class="lucide lucide-music"
@@ -143,10 +143,10 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
         </svg>
       </div>
       <div
-        class="flex-1 min-w-0"
+        class="min-w-0 flex-1"
       >
         <h3
-          class="font-bold text-foreground text-lg gap-4 leading-tight inline-flex items-center"
+          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
         >
           YouTube Music
           <button
@@ -176,18 +176,18 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
           </button>
         </h3>
         <p
-          class="text-sm text-foreground-secondary mt-1"
+          class="text-foreground-secondary mt-1 text-sm"
         >
           by Nuclear Team
         </p>
         <p
-          class="text-sm text-foreground-secondary mt-2 leading-relaxed"
+          class="text-foreground-secondary mt-2 text-sm leading-relaxed"
         >
           Stream music directly from YouTube Music with full search and playlist support.
         </p>
       </div>
       <div
-        class="flex flex-col shrink-0 h-full sm:w-auto items-start justify-center sm:items-end"
+        class="flex h-full shrink-0 flex-col items-start justify-center sm:w-auto sm:items-end"
       />
     </div>
   </div>

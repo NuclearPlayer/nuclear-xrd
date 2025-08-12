@@ -18,7 +18,7 @@ export const PluginIconComponent = ({ icon }: PluginIconComponentProps) => {
 
       return (
         <div
-          className={`flex items-center justify-center w-full h-full bg-${icon.background}`}
+          className={`flex h-full w-full items-center justify-center bg-${icon.background}`}
         >
           <Cmp size={20} />
         </div>
@@ -31,7 +31,7 @@ export const PluginIconComponent = ({ icon }: PluginIconComponentProps) => {
       <img
         src={icon.link}
         alt="plugin icon"
-        className="w-5 h-5 object-contain"
+        className="h-5 w-5 object-contain"
         draggable={false}
       />
     );

@@ -3,13 +3,13 @@
 exports[`PlayerShell > matches snapshot with complete layout 1`] = `
 <DocumentFragment>
   <div
-    class="h-screen w-screen overflow-hidden grid grid-rows-[auto_1fr_auto]"
+    class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
   >
     <header
-      class="h-12 bg-background border-b-2 border-border flex items-center px-4"
+      class="bg-background border-border flex h-12 items-center border-b-2 px-4"
     >
       <svg
-        class="inline-flex w-6 h-6"
+        class="inline-flex h-6 w-6"
         height="100"
         viewBox="0 0 100 100"
         width="100"
@@ -40,12 +40,12 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
       <button
         aria-checked="false"
         aria-label="Toggle theme"
-        class="relative inline-flex items-center h-6 w-11 rounded-full border-2 border-border transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-white"
+        class="border-border focus:ring-primary relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-offset-2 focus:outline-none bg-white"
         role="switch"
         type="button"
       >
         <span
-          class="pointer-events-none flex items-center justify-center h-4 w-4 rounded-full bg-white border-2 border-border ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1"
+          class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1"
         >
           <svg
             class="lucide lucide-sun text-foreground"
@@ -93,13 +93,13 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
       </button>
     </header>
     <div
-      class="grid h-full min-h-0 grid-cols-[auto_1fr_auto] bg-background-secondary relative"
+      class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
     >
       <div
-        class="bg-background-secondary border-border flex flex-col relative p-2 border-r-2"
+        class="bg-background-secondary border-border relative flex flex-col p-2 border-r-2"
       >
         <span
-          class="flex flex-row items-center mb-4 justify-end"
+          class="mb-4 flex flex-row items-center justify-end"
         >
           <button
             class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 right-1"
@@ -135,7 +135,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
           style="opacity: 0; transform: translateX(-20px);"
         />
         <div
-          class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg- transition-colors right-0"
+          class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors right-0"
         />
       </div>
       <main
@@ -143,10 +143,10 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
         data-testid="player-workspace-main"
       />
       <div
-        class="bg-background-secondary border-border flex flex-col relative p-2 border-l-2"
+        class="bg-background-secondary border-border relative flex flex-col p-2 border-l-2"
       >
         <span
-          class="flex flex-row items-center mb-4 justify-start"
+          class="mb-4 flex flex-row items-center justify-start"
         >
           <button
             class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 left-1"
@@ -182,12 +182,12 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
           style="opacity: 0; transform: translateX(20px);"
         />
         <div
-          class="absolute top-0 bottom-0 w-1 cursor-col-resize hover:bg- transition-colors left-0"
+          class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors left-0"
         />
       </div>
     </div>
     <footer
-      class="h-16 bg-background border-t-2 border-border flex items-center px-4"
+      class="bg-background border-border flex h-16 items-center border-t-2 px-4"
     />
   </div>
 </DocumentFragment>

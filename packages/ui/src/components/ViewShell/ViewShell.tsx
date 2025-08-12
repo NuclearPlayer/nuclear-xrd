@@ -7,9 +7,13 @@ type ViewShellProps = {
 
 export const ViewShell: FC<ViewShellProps> = ({ children, title }) => {
   return (
-    <div className="flex flex-col items-start justify-start w-full h-full p-6">
-      <h1 className="text-3xl font-bold text-center">{title}</h1>
-      <div className="overflow-auto w-full flex-1">{children}</div>
+    <div className="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6">
+      <h1 className="flex w-full flex-0 flex-row text-center text-3xl font-bold">
+        {title}
+      </h1>
+      <div className="flex w-full flex-1 flex-col overflow-hidden">
+        {children}
+      </div>
     </div>
   );
 };

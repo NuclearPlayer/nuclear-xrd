@@ -190,16 +190,16 @@ const Scrollbar: FC<BarProps> = ({
   return (
     <div
       className={cn(
-        'absolute bg-transparent flex select-none',
+        'absolute flex bg-transparent select-none',
         vertical
-          ? 'right-0 top-0 bottom-0 w-3 flex-col items-center'
-          : 'left-0 right-0 bottom-0 h-3 flex-row items-center',
+          ? 'top-0 right-0 bottom-0 w-3 flex-col items-center'
+          : 'right-0 bottom-0 left-0 h-3 flex-row items-center',
       )}
       onClick={onTrackClick}
     >
       <div
         className={cn(
-          'bg-foreground/80 hover:bg-foreground rounded-sm cursor-pointer transition-opacity duration-200',
+          'bg-foreground/80 hover:bg-foreground cursor-pointer rounded-sm transition-opacity duration-200',
           vertical ? 'w-2' : 'h-2',
           show ? 'opacity-100' : 'opacity-0',
         )}
@@ -231,10 +231,10 @@ export const ScrollableArea: FC<ScrollableAreaProps> = ({
   const needsCorner = needsVertical && needsHorizontal;
 
   return (
-    <div className={cn('relative h-full w-full', className)}>
+    <div className={cn('relative h-auto w-full', className)}>
       <div
         ref={ref}
-        className="overflow-auto h-full w-full scrollbar-hide"
+        className="scrollbar-hide flex h-full w-full flex-col overflow-auto"
         onScroll={handleScroll}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
@@ -256,7 +256,7 @@ export const ScrollableArea: FC<ScrollableAreaProps> = ({
         isScrolling={isScrolling}
       />
       {needsCorner && (
-        <div className="absolute bottom-0 right-0 w-3 h-3 bg-transparent" />
+        <div className="absolute right-0 bottom-0 h-3 w-3 bg-transparent" />
       )}
     </div>
   );

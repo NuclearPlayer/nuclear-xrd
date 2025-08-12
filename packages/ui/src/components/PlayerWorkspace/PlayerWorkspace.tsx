@@ -36,7 +36,7 @@ export const PlayerWorkspace: PlayerWorkspaceComponent = Object.assign(
     return (
       <div
         className={cn(
-          'grid h-full min-h-0 grid-cols-[auto_1fr_auto] bg-background-secondary relative',
+          'bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]',
           className,
         )}
       >

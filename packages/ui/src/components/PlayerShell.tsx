@@ -14,7 +14,7 @@ export const PlayerShell: FC<PlayerShellProps> = ({
   return (
     <div
       className={cn(
-        'h-screen w-screen overflow-hidden grid grid-rows-[auto_1fr_auto]',
+        'grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden',
         className,
       )}
     >

@@ -43,11 +43,11 @@ export const Toggle: FC<ToggleProps> = ({
       aria-label={label}
       disabled={disabled}
       className={cn(
-        'relative inline-flex items-center h-6 w-11 rounded-full border-2 border-border transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+        'border-border focus:ring-primary relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-offset-2 focus:outline-none',
         {
           'bg-primary': checked,
           'bg-white': !checked,
-          'opacity-50 cursor-not-allowed': disabled,
+          'cursor-not-allowed opacity-50': disabled,
         },
         className,
       )}
@@ -56,7 +56,7 @@ export const Toggle: FC<ToggleProps> = ({
     >
       <span
         className={cn(
-          'pointer-events-none flex items-center justify-center h-4 w-4 rounded-full bg-white border-2 border-border ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black',
+          'border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black',
           {
             'translate-x-5': checked,
             'translate-x-1': !checked,
