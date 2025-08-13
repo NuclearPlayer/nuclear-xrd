@@ -3,8 +3,8 @@ import type { SettingDefinition } from '@nuclearplayer/plugin-sdk';
 import { registerCoreSettings } from '../stores/settingsStore';
 
 const LANGUAGE_OPTIONS = [
-  { value: 'en', label: 'English' },
-  { value: 'pl', label: 'Polski' },
+  { value: 'en_US', label: 'English' },
+  { value: 'fr_FR', label: 'Français' },
 ];
 
 export const CORE_SETTINGS: SettingDefinition[] = [
