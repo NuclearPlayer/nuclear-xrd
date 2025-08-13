@@ -9,6 +9,7 @@ import type {
   PluginMetadata,
 } from '@nuclearplayer/plugin-sdk';
 
+import { createPluginSettingsHost } from '../stores/settingsStore';
 import { compilePlugin } from './pluginCompiler';
 import { safeParsePluginManifest } from './pluginManifest';
 
@@ -123,7 +124,12 @@ export class PluginLoader {
     const code = await this.readPluginCode(this.entryPath);
     const instance = this.evaluatePlugin(code);
     if (instance.onLoad) {
-      const api = new NuclearPluginAPI();
+      const api = new NuclearPluginAPI({
+        settingsHost: createPluginSettingsHost(
+          metadata.id,
+          metadata.displayName,
+        ),
+      });
       await instance.onLoad(api);
     }
     return {
