@@ -1,40 +1,39 @@
-import type {
-  SettingDefinition,
-  SettingsHost,
-  SettingSource,
-  SettingValue,
-} from '../types/settings';
+import type { SettingsHost, SettingValue } from '../types/settings';
+import { SettingsDomain } from './settings';
 
-export class NuclearPluginAPI {
-  #settings?: SettingsHost;
+export class NuclearAPI {
+  readonly Settings: SettingsDomain;
 
   constructor(opts?: { settingsHost?: SettingsHost }) {
-    this.#settings = opts?.settingsHost;
+    this.Settings = new SettingsDomain(opts?.settingsHost);
   }
 
-  async registerSettings(defs: SettingDefinition[], source: SettingSource) {
-    if (!this.#settings) throw new Error('Settings host not available');
-    return this.#settings.register(defs, source);
-  }
-
-  async getSetting<T extends SettingValue = SettingValue>(id: string) {
-    if (!this.#settings) throw new Error('Settings host not available');
-    return this.#settings.get<T>(id);
-  }
-
-  async setSetting<T extends SettingValue = SettingValue>(
-    id: string,
-    value: T,
+  registerSettings(
+    defs: Parameters<SettingsDomain['register']>[0],
+    source?: Parameters<SettingsDomain['register']>[1],
   ) {
-    if (!this.#settings) throw new Error('Settings host not available');
-    return this.#settings.set<T>(id, value);
+    // source is optional for convenience in plugins
+    // plugin hosts can ignore it; core can pass it
+    // @ts-expect-error optional source for plugin convenience
+    return this.Settings.register(defs, source);
+  }
+
+  getSetting<T extends SettingValue = SettingValue>(id: string) {
+    return this.Settings.get<T>(id);
+  }
+
+  setSetting<T extends SettingValue = SettingValue>(id: string, value: T) {
+    return this.Settings.set<T>(id, value);
   }
 
   onSettingChange<T extends SettingValue = SettingValue>(
     id: string,
     listener: (value: T | undefined) => void,
   ) {
-    if (!this.#settings) throw new Error('Settings host not available');
-    return this.#settings.subscribe<T>(id, listener);
+    return this.Settings.subscribe<T>(id, listener);
   }
 }
+
+export { SettingsDomain };
+
+export class NuclearPluginAPI extends NuclearAPI {}

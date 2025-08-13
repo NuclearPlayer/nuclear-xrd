@@ -136,3 +136,39 @@ export const setSetting = async (
   value: SettingValue,
 ): Promise<void> =>
   useSettingsStore.getState().setValue(fullyQualifiedId, value);
+
+export const createCoreSettingsHost = (): SettingsHost => {
+  const coreSource: SettingSource = { type: 'core' };
+  return {
+    register: async (defs) => {
+      const registered = useSettingsStore.getState().register(defs, coreSource);
+      return { registered };
+    },
+    get: async <T extends SettingValue = SettingValue>(id: string) => {
+      const fq = normalizeId(coreSource, id);
+      const v = useSettingsStore.getState().getValue(fq);
+      return v as T | undefined;
+    },
+    set: async (id: string, value: SettingValue) => {
+      const fq = normalizeId(coreSource, id);
+      await useSettingsStore.getState().setValue(fq, value);
+    },
+    subscribe: <T extends SettingValue = SettingValue>(
+      id: string,
+      listener: (value: T | undefined) => void,
+    ) => {
+      const fq = normalizeId(coreSource, id);
+      let prev = useSettingsStore.getState().getValue(fq) as T | undefined;
+      const unsub = useSettingsStore.subscribe((state) => {
+        const next = state.getValue(fq) as T | undefined;
+        if (next !== prev) {
+          prev = next;
+          listener(next);
+        }
+      });
+      return unsub;
+    },
+  };
+};
+
+export const coreSettingsHost: SettingsHost = createCoreSettingsHost();
