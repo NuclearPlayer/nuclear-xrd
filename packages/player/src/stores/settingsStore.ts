@@ -95,8 +95,10 @@ export const createPluginSettingsHost = (
     },
     get: async <T extends SettingValue = SettingValue>(id: string) => {
       const fullyQualifiedId = normalizeId(pluginSource, id);
-      const current = useSettingsStore.getState().getValue(fullyQualifiedId);
-      return current as T | undefined;
+      const currentValue = useSettingsStore
+        .getState()
+        .getValue(fullyQualifiedId);
+      return currentValue as T | undefined;
     },
     set: async (id: string, value: SettingValue) => {
       const fullyQualifiedId = normalizeId(pluginSource, id);
@@ -140,33 +142,39 @@ export const setSetting = async (
 export const createCoreSettingsHost = (): SettingsHost => {
   const coreSource: SettingSource = { type: 'core' };
   return {
-    register: async (defs) => {
-      const registered = useSettingsStore.getState().register(defs, coreSource);
-      return { registered };
+    register: async (definitions) => {
+      const registeredIds = useSettingsStore
+        .getState()
+        .register(definitions, coreSource);
+      return { registered: registeredIds };
     },
     get: async <T extends SettingValue = SettingValue>(id: string) => {
-      const fq = normalizeId(coreSource, id);
-      const v = useSettingsStore.getState().getValue(fq);
-      return v as T | undefined;
+      const fullyQualifiedId = normalizeId(coreSource, id);
+      const currentValue = useSettingsStore
+        .getState()
+        .getValue(fullyQualifiedId);
+      return currentValue as T | undefined;
     },
     set: async (id: string, value: SettingValue) => {
-      const fq = normalizeId(coreSource, id);
-      await useSettingsStore.getState().setValue(fq, value);
+      const fullyQualifiedId = normalizeId(coreSource, id);
+      await useSettingsStore.getState().setValue(fullyQualifiedId, value);
     },
     subscribe: <T extends SettingValue = SettingValue>(
       id: string,
       listener: (value: T | undefined) => void,
     ) => {
-      const fq = normalizeId(coreSource, id);
-      let prev = useSettingsStore.getState().getValue(fq) as T | undefined;
-      const unsub = useSettingsStore.subscribe((state) => {
-        const next = state.getValue(fq) as T | undefined;
-        if (next !== prev) {
-          prev = next;
-          listener(next);
+      const fullyQualifiedId = normalizeId(coreSource, id);
+      let previousValue = useSettingsStore
+        .getState()
+        .getValue(fullyQualifiedId) as T | undefined;
+      const unsubscribe = useSettingsStore.subscribe((state) => {
+        const nextValue = state.getValue(fullyQualifiedId) as T | undefined;
+        if (nextValue !== previousValue) {
+          previousValue = nextValue;
+          listener(nextValue);
         }
       });
-      return unsub;
+      return unsubscribe;
     },
   };
 };

@@ -9,32 +9,34 @@ export const useSetting = <T extends SettingValue = SettingValue>(
   const hostRef = useRef(host);
   hostRef.current = host;
 
-  const [value, setValue] = useState<T | undefined>(undefined);
+  const [currentValue, setCurrentValue] = useState<T | undefined>(undefined);
 
   useEffect(() => {
     if (!hostRef.current) return;
-    let unsub: (() => void) | undefined;
-    let mounted = true;
+    let unsubscribe: (() => void) | undefined;
+    let isMounted = true;
 
-    hostRef.current.get<T>(id).then((initial) => {
-      if (!mounted) return;
-      setValue(initial);
-      unsub = hostRef.current?.subscribe<T>(id, (v) => setValue(v));
+    hostRef.current.get<T>(id).then((initialValue) => {
+      if (!isMounted) return;
+      setCurrentValue(initialValue);
+      unsubscribe = hostRef.current?.subscribe<T>(id, (nextValue) =>
+        setCurrentValue(nextValue),
+      );
     });
 
     return () => {
-      mounted = false;
-      if (unsub) unsub();
+      isMounted = false;
+      if (unsubscribe) unsubscribe();
     };
   }, [id, hostRef]);
 
-  const set = useMemo(
-    () => (next: T) => {
+  const setValue = useMemo(
+    () => (nextValue: T) => {
       if (!hostRef.current) return;
-      void hostRef.current.set<T>(id, next);
+      void hostRef.current.set<T>(id, nextValue);
     },
     [id],
   );
 
-  return [value, set] as const;
+  return [currentValue, setValue] as const;
 };
