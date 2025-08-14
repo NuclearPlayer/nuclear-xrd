@@ -25,6 +25,7 @@ export const CORE_SETTINGS: SettingDefinition[] = [
     category: 'playback',
     kind: 'boolean',
     default: false,
+    hidden: true,
     widget: { type: 'toggle' },
   },
   {
@@ -43,6 +44,7 @@ export const CORE_SETTINGS: SettingDefinition[] = [
     category: 'layout',
     kind: 'number',
     default: 200,
+    hidden: true,
     widget: { type: 'slider', min: 120, max: 480, step: 4, unit: 'px' },
   },
   {
@@ -52,6 +54,7 @@ export const CORE_SETTINGS: SettingDefinition[] = [
     category: 'layout',
     kind: 'number',
     default: 200,
+    hidden: true,
     widget: { type: 'slider', min: 120, max: 480, step: 4, unit: 'px' },
   },
   {
@@ -61,7 +64,7 @@ export const CORE_SETTINGS: SettingDefinition[] = [
     category: 'general',
     kind: 'enum',
     options: LANGUAGE_OPTIONS,
-    default: 'en',
+    default: 'en_US',
     widget: { type: 'select' },
   },
 ];
