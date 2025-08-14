@@ -11,3 +11,4 @@ export * from './Toggle';
 export * from './ThemeController';
 export * from './PluginItem';
 export * from './ViewShell';
+export * from './Slider';
