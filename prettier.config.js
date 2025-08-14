@@ -20,4 +20,5 @@ export default {
     '@ianvs/prettier-plugin-sort-imports',
     'prettier-plugin-tailwindcss',
   ],
+  tailwindFunctions: ['clsx', 'cn', 'cva'],
 };
