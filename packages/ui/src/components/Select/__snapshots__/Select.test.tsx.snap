@@ -1,0 +1,117 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Select snapshots > (Snapshot) renders basic with description 1`] = `
+<div
+  class="relative flex w-full flex-col gap-2"
+>
+  <label
+    class="text-foreground text-sm font-semibold"
+    for="select-quality"
+    id="select-quality-label"
+  >
+    Quality
+  </label>
+  <button
+    aria-controls="select-quality-listbox"
+    aria-describedby="select-quality-description"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    aria-labelledby="select-quality-label"
+    class="border-border bg-primary text-foreground focus-visible:ring-primary relative flex h-11 w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none px-3 py-2 text-sm"
+    id="select-quality"
+    type="button"
+  >
+    <span
+      class="block truncate"
+    >
+      Medium
+    </span>
+    <span
+      class="flex items-center"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-chevron-down text-foreground transition-transform"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="m6 9 6 6 6-6"
+        />
+      </svg>
+    </span>
+  </button>
+  <p
+    class="text-foreground-secondary text-sm select-none"
+    id="select-quality-description"
+  >
+    Choose your preferred playback quality.
+  </p>
+</div>
+`;
+
+exports[`Select snapshots > (Snapshot) renders error without description 1`] = `
+<div
+  class="relative flex w-full flex-col gap-2"
+>
+  <label
+    class="text-foreground text-sm font-semibold"
+    for="select-quality-error"
+    id="select-quality-error-label"
+  >
+    Quality
+  </label>
+  <button
+    aria-controls="select-quality-error-listbox"
+    aria-describedby="select-quality-error-error"
+    aria-errormessage="select-quality-error-error"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    aria-invalid="true"
+    aria-labelledby="select-quality-error-label"
+    class="bg-primary text-foreground focus-visible:ring-primary relative flex h-11 w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none px-3 py-2 text-sm border-accent-red"
+    id="select-quality-error"
+    type="button"
+  >
+    <span
+      class="block truncate"
+    >
+      Low
+    </span>
+    <span
+      class="flex items-center"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-chevron-down text-foreground transition-transform"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="m6 9 6 6 6-6"
+        />
+      </svg>
+    </span>
+  </button>
+  <p
+    class="text-accent-red text-xs select-none"
+    id="select-quality-error-error"
+  >
+    Please make a selection
+  </p>
+</div>
+`;
