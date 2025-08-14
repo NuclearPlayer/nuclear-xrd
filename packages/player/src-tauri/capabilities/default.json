@@ -9,6 +9,7 @@
     "core:default",
     "dialog:allow-open",
     "log:default",
-    "fs:read-all"
+    "fs:read-all",
+    "store:default"
   ]
 }

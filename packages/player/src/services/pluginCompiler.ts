@@ -159,7 +159,7 @@ export async function compilePlugin(
     write: false,
     format: 'cjs',
     platform: 'browser',
-    target: ['es2020'],
+    target: ['es2022'],
     sourcemap: 'inline',
     // Do not bundle our host SDK. Plugins import it at runtime from the app,
     // not from the plugin bundle.
