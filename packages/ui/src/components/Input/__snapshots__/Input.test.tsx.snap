@@ -14,7 +14,7 @@ exports[`Input > (Snapshot) renders text input with description 1`] = `
   <input
     aria-describedby="input-username-description"
     aria-labelledby="input-username-label"
-    class="w-full rounded border-2 border-border bg-background-input text-foreground placeholder:text-foreground-secondary px-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary h-11"
+    class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary focus-visible:ring-primary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:outline-none h-11"
     id="input-username"
     placeholder="your-username"
     type="text"
@@ -44,7 +44,7 @@ exports[`Input > (Snapshot) renders with error and no description 1`] = `
     aria-errormessage="input-username-error-error"
     aria-invalid="true"
     aria-labelledby="input-username-error-label"
-    class="w-full rounded border-2 bg-background-input text-foreground placeholder:text-foreground-secondary px-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary h-11 border-accent-red"
+    class="bg-background-input text-foreground placeholder:text-foreground-secondary focus-visible:ring-primary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:outline-none h-11 border-accent-red"
     id="input-username-error"
     placeholder="your-username"
     type="text"

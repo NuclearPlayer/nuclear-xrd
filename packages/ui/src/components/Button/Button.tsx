@@ -4,7 +4,7 @@ import { ComponentProps, FC } from 'react';
 import { cn } from '../../utils';
 
 const buttonVariants = cva(
-  'inline-flex cursor-pointer items-center rounded transition-all',
+  'inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       variant: {

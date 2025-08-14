@@ -102,7 +102,7 @@ exports[`App > should render snapshot 1`] = `
           class="mb-4 flex flex-row items-center justify-end"
         >
           <button
-            class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-testid="sidebar-toggle-left"
           >
             <svg
@@ -141,7 +141,7 @@ exports[`App > should render snapshot 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="transition-all rounded cursor-pointer text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -195,7 +195,7 @@ exports[`App > should render snapshot 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="transition-all rounded cursor-pointer text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -249,7 +249,7 @@ exports[`App > should render snapshot 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="transition-all rounded cursor-pointer text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -344,7 +344,7 @@ exports[`App > should render snapshot 1`] = `
           class="mb-4 flex flex-row items-center justify-start"
         >
           <button
-            class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-testid="sidebar-toggle-right"
           >
             <svg

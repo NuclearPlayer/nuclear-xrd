@@ -6,7 +6,7 @@ import { FC, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { cn } from '../../utils';
 
 const selectVariants = cva(
-  'border-border bg-primary text-foreground focus-visible:ring-primary relative flex h-11 w-full items-center justify-between rounded border-2 px-3 pr-8 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none',
+  'border-border bg-primary text-foreground focus-visible:ring-primary relative flex h-11 w-full items-center justify-between rounded border-2 px-3 pr-8 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       size: {
@@ -112,6 +112,7 @@ export const Select: FC<SelectProps> = ({
   const onTriggerKeyDown: React.KeyboardEventHandler<HTMLButtonElement> = (
     e,
   ) => {
+    if (disabled) return;
     if (
       e.key === 'ArrowDown' ||
       e.key === 'ArrowUp' ||
@@ -177,7 +178,10 @@ export const Select: FC<SelectProps> = ({
         aria-invalid={!!error || undefined}
         aria-errormessage={error ? errorId : undefined}
         className={cn(selectVariants({ size, state, className }))}
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => {
+          if (disabled) return;
+          setOpen((o) => !o);
+        }}
         onKeyDown={onTriggerKeyDown}
         disabled={disabled}
       >

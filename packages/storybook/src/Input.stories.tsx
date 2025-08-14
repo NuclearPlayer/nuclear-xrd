@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Input } from '@nuclearplayer/ui';
 
 const meta: Meta<typeof Input> = {
-  title: 'Primitives/Input',
+  title: 'Components/Input',
   component: Input,
   tags: ['autodocs'],
 };

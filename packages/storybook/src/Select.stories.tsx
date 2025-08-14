@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Select } from '@nuclearplayer/ui';
 
 const meta: Meta<typeof Select> = {
-  title: 'Primitives/Select',
+  title: 'Components/Select',
   component: Select,
 };
 
@@ -49,5 +49,15 @@ export const WithError: Story = {
     label: 'Quality',
     options: OPTIONS,
     error: 'Please make a selection',
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: 'Quality',
+    options: OPTIONS,
+    defaultValue: 'medium',
+    description: 'Disabled control',
+    disabled: true,
   },
 };
