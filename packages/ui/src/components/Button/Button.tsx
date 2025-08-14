@@ -4,13 +4,13 @@ import { ComponentProps, FC } from 'react';
 import { cn } from '../../utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center transition-all rounded cursor-pointer',
+  'inline-flex cursor-pointer items-center rounded transition-all',
   {
     variants: {
       variant: {
         default:
-          'text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none',
-        noShadow: 'text-foreground bg-primary border-2 border-border',
+          'text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none',
+        noShadow: 'text-foreground bg-primary border-border border-2',
         text: 'text-foreground bg-transparent',
       },
       size: {

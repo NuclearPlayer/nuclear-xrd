@@ -4,7 +4,7 @@ import { ComponentProps, FC, useId } from 'react';
 import { cn } from '../../utils';
 
 const inputVariants = cva(
-  'w-full rounded border-2 border-border bg-background-input text-foreground placeholder:text-foreground-secondary px-3 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+  'border-border bg-background-input text-foreground placeholder:text-foreground-secondary focus-visible:ring-primary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:outline-none',
   {
     variants: {
       variant: {
