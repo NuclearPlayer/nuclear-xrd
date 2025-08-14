@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { NuclearAPI } from '../api';
+import { NuclearAPI } from '.';
+import { InMemorySettingsHost } from '../test/utils/inMemorySettingsHost';
 import type { SettingDefinition } from '../types/settings';
-import { InMemorySettingsHost } from './utils/inMemorySettingsHost';
 
-describe('SettingsDomain (SDK)', () => {
+describe('Settings (SDK)', () => {
   it('exposes register/get/set/subscribe methods', async () => {
     const host = new InMemorySettingsHost({ type: 'plugin', pluginId: 'p1' });
     const api = new NuclearAPI({ settingsHost: host });
@@ -39,7 +39,7 @@ describe('SettingsDomain (SDK)', () => {
     await api.Settings.set('feature.enabled', true);
     unsubscribe();
 
-    expect(values[0]).toBe(true);
+    expect(values.at(-1)).toBe(true);
     const updated = await api.Settings.get<boolean>('feature.enabled');
     expect(updated).toBe(true);
   });

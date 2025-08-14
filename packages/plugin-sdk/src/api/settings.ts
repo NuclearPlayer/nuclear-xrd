@@ -5,7 +5,7 @@ import type {
   SettingValue,
 } from '../types/settings';
 
-export class SettingsDomain {
+export class Settings {
   #host?: SettingsHost;
 
   constructor(host?: SettingsHost) {
