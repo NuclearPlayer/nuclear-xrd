@@ -39,7 +39,7 @@ describe('SettingsDomain (SDK)', () => {
     await api.Settings.set('feature.enabled', true);
     unsubscribe();
 
-    expect(values.at(-1)).toBe(true);
+    expect(values[0]).toBe(true);
     const updated = await api.Settings.get<boolean>('feature.enabled');
     expect(updated).toBe(true);
   });

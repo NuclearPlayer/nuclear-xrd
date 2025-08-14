@@ -74,7 +74,7 @@ describe('useSettingsStore', () => {
       );
       await host.set('general.language', 'fr');
       unsubscribe();
-      expect(seen.at(0)).toBe('fr');
+      expect(seen[0]).toBe('fr');
     });
   });
 
