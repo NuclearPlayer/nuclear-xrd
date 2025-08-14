@@ -14,7 +14,9 @@ export class SettingsDomain {
 
   #withHost<T>(fn: (host: SettingsHost) => T): T {
     const host = this.#host;
-    if (!host) throw new Error('Settings host not available');
+    if (!host) {
+      throw new Error('Settings host not available');
+    }
     return fn(host);
   }
 
