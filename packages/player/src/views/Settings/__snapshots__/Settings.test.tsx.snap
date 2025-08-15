@@ -1,0 +1,661 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Settings view > (Snapshot) renders the settings view 1`] = `
+<DocumentFragment>
+  <div
+    class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
+  >
+    <header
+      class="bg-background border-border flex h-12 items-center border-b-2 px-4"
+    >
+      <svg
+        class="inline-flex h-6 w-6"
+        height="100"
+        viewBox="0 0 100 100"
+        width="100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="8"
+          transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+        >
+          <rect
+            height="96"
+            rx="19.2"
+            ry="19.2"
+            width="96"
+            x="2"
+            y="2"
+          />
+          <path
+            d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
+          />
+        </g>
+      </svg>
+      <div
+        class="flex-1"
+      />
+      <button
+        aria-checked="false"
+        aria-label="Toggle theme"
+        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+        data-headlessui-state=""
+        id="headlessui-switch-:r0:"
+        role="switch"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1 group-data-checked:translate-x-5"
+        >
+          <svg
+            class="lucide lucide-sun text-foreground"
+            fill="none"
+            height="12"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="4"
+            />
+            <path
+              d="M12 2v2"
+            />
+            <path
+              d="M12 20v2"
+            />
+            <path
+              d="m4.93 4.93 1.41 1.41"
+            />
+            <path
+              d="m17.66 17.66 1.41 1.41"
+            />
+            <path
+              d="M2 12h2"
+            />
+            <path
+              d="M20 12h2"
+            />
+            <path
+              d="m6.34 17.66-1.41 1.41"
+            />
+            <path
+              d="m19.07 4.93-1.41 1.41"
+            />
+          </svg>
+        </span>
+      </button>
+    </header>
+    <div
+      class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
+    >
+      <div
+        class="bg-background-secondary border-border relative flex flex-col p-2 border-r-2"
+        style="width: 111.90554773014463px;"
+      >
+        <span
+          class="mb-4 flex flex-row items-center justify-end"
+        >
+          <button
+            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            data-headlessui-state=""
+            data-testid="sidebar-toggle-left"
+            type="submit"
+          >
+            <svg
+              class="lucide lucide-panel-left"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                height="18"
+                rx="2"
+                width="18"
+                x="3"
+                y="3"
+              />
+              <path
+                d="M9 3v18"
+              />
+            </svg>
+          </button>
+        </span>
+        <div
+          class="flex-1 overflow-hidden"
+          style="opacity: 0.8040826458822117; transform: translateX(-3.9183470823557673px);"
+        >
+          <div
+            class="flex flex-1 flex-col items-start justify-start"
+          >
+            <div
+              class="mb-4 flex w-full flex-col text-sm"
+            >
+              <button
+                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <span
+                  class="inline-flex flex-row items-center gap-2"
+                >
+                  <svg
+                    class="lucide lucide-compass"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                    />
+                  </svg>
+                  Explore
+                </span>
+                <div
+                  style="transform: none;"
+                >
+                  <svg
+                    class="lucide lucide-chevron-right"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m9 18 6-6-6-6"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+            <div
+              class="mb-4 flex w-full flex-col text-sm"
+            >
+              <button
+                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 h-9 px-3 inline-flex flex-row items-center justify-between"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <span
+                  class="inline-flex flex-row items-center gap-2"
+                >
+                  <svg
+                    class="lucide lucide-settings"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3"
+                    />
+                  </svg>
+                  Preferences
+                </span>
+                <div
+                  style="transform: rotate(6.599672367156018deg);"
+                >
+                  <svg
+                    class="lucide lucide-chevron-right"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m9 18 6-6-6-6"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <div
+                class="border-l-foreground ml-4 flex flex-col gap-4 overflow-hidden border-l-2 pt-2"
+                style="opacity: 0.0733296929684002; height: auto;"
+              >
+                <a
+                  aria-current="page"
+                  class="active"
+                  data-status="active"
+                  href="/settings"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      class="lucide lucide-settings2"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 7h-9"
+                      />
+                      <path
+                        d="M14 17H5"
+                      />
+                      <circle
+                        cx="17"
+                        cy="17"
+                        r="3"
+                      />
+                      <circle
+                        cx="7"
+                        cy="7"
+                        r="3"
+                      />
+                    </svg>
+                    Settings
+                  </div>
+                </a>
+                <a
+                  href="/plugins"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      class="lucide lucide-blocks"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        height="7"
+                        rx="1"
+                        width="7"
+                        x="14"
+                        y="3"
+                      />
+                      <path
+                        d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3"
+                      />
+                    </svg>
+                    Plugins
+                  </div>
+                </a>
+                <a
+                  href="/themes"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      class="lucide lucide-palette"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="13.5"
+                        cy="6.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="17.5"
+                        cy="10.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="8.5"
+                        cy="7.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="6.5"
+                        cy="12.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <path
+                        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
+                      />
+                    </svg>
+                    Themes
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div
+              class="mb-4 flex w-full flex-col text-sm"
+            >
+              <button
+                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <span
+                  class="inline-flex flex-row items-center gap-2"
+                >
+                  <svg
+                    class="lucide lucide-library"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m16 6 4 14"
+                    />
+                    <path
+                      d="M12 6v14"
+                    />
+                    <path
+                      d="M8 8v12"
+                    />
+                    <path
+                      d="M4 4v16"
+                    />
+                  </svg>
+                  Collection
+                </span>
+                <div
+                  style="transform: none;"
+                >
+                  <svg
+                    class="lucide lucide-chevron-right"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m9 18 6-6-6-6"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors right-0"
+        />
+      </div>
+      <main
+        class="bg-background-secondary overflow-auto"
+        data-testid="player-workspace-main"
+      >
+        <div
+          class="relative h-full w-full overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 h-full w-full"
+            style="opacity: 0.6976455229764298; filter: blur(1.24629px); transform: translateX(7.2446565453586125px) scale(0.9879058209190572);"
+          >
+            <div
+              class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
+            >
+              <h1
+                class="flex w-full flex-0 flex-row text-center text-3xl font-bold"
+              >
+                Dashboard
+              </h1>
+              <div
+                class="flex w-full flex-1 flex-col overflow-hidden"
+              >
+                Dashboard view
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute inset-0 h-full w-full"
+            style="opacity: 0.00024689381681419764; filter: blur(3.99901px); transform: translateX(23.99407454839646px) scale(0.9600098757526725);"
+          >
+            <div
+              class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
+            >
+              <h1
+                class="flex w-full flex-0 flex-row text-center text-3xl font-bold"
+              >
+                Settings
+              </h1>
+              <div
+                class="flex w-full flex-1 flex-col overflow-hidden"
+              >
+                <div
+                  class="relative h-auto w-full mt-6 max-w-100 flex-1 overflow-hidden"
+                >
+                  <div
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
+                    style="scrollbar-width: none;"
+                  >
+                    <section
+                      class="flex flex-col gap-4 px-2"
+                    >
+                      <h2
+                        class="text-foreground text-lg font-semibold"
+                      >
+                        General
+                      </h2>
+                      <div
+                        class="flex flex-col gap-6"
+                      >
+                        <div
+                          class="relative flex w-full flex-col gap-2"
+                        >
+                          <label
+                            class="text-foreground text-sm font-semibold"
+                            for="select-:rb:"
+                            id="select-:rb:-label"
+                          >
+                            settings.general.language.title
+                          </label>
+                          <button
+                            aria-expanded="false"
+                            aria-haspopup="listbox"
+                            class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
+                            data-headlessui-state=""
+                            id="select-:rb:"
+                            type="button"
+                          >
+                            <span
+                              class="block truncate"
+                            >
+                              English
+                            </span>
+                            <span
+                              class="flex items-center"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class="lucide lucide-chevron-down text-foreground transition-transform"
+                                fill="none"
+                                height="16"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="m6 9 6 6 6-6"
+                                />
+                              </svg>
+                            </span>
+                          </button>
+                          <p
+                            class="text-foreground-secondary text-sm select-none"
+                            id="select-:rb:-description"
+                          >
+                            settings.general.language.description
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      class="flex flex-col gap-4 px-2"
+                    >
+                      <h2
+                        class="text-foreground text-lg font-semibold"
+                      >
+                        Playback
+                      </h2>
+                      <div
+                        class="flex flex-col gap-6"
+                      >
+                        <div
+                          class="flex w-full flex-col gap-2"
+                        >
+                          <label
+                            class="text-foreground text-sm font-semibold"
+                            for="input-:rg:"
+                            id="input-:rg:-label"
+                          >
+                            settings.playback.skipSeconds.title
+                          </label>
+                          <input
+                            class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
+                            data-headlessui-state=""
+                            id="input-:rg:"
+                            inputmode="numeric"
+                            type="number"
+                            value=""
+                          />
+                          <p
+                            class="text-foreground-secondary text-sm select-none"
+                            id="input-:rg:-description"
+                          >
+                            settings.playback.skipSeconds.description
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div
+        class="bg-background-secondary border-border relative flex flex-col p-2 border-l-2"
+        style="width: 111.90554773014463px;"
+      >
+        <span
+          class="mb-4 flex flex-row items-center justify-start"
+        >
+          <button
+            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            data-headlessui-state=""
+            data-testid="sidebar-toggle-right"
+            type="submit"
+          >
+            <svg
+              class="lucide lucide-panel-right"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                height="18"
+                rx="2"
+                width="18"
+                x="3"
+                y="3"
+              />
+              <path
+                d="M15 3v18"
+              />
+            </svg>
+          </button>
+        </span>
+        <div
+          class="flex-1 overflow-hidden"
+          style="opacity: 0.8040826458822117; transform: translateX(3.9183470823557673px);"
+        />
+        <div
+          class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors left-0"
+        />
+      </div>
+    </div>
+    <footer
+      class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+    />
+  </div>
+</DocumentFragment>
+`;

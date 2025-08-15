@@ -1,7 +1,7 @@
 import { ScrollableArea, ViewShell } from '@nuclearplayer/ui';
 
-import { SettingsSection } from './Settings/SettingsSection';
-import { capitalize, useSettingsGroups } from './Settings/useSettingsGroups';
+import { SettingsSection } from './SettingsSection';
+import { capitalize, useSettingsGroups } from './useSettingsGroups';
 
 export const Settings = () => {
   const groups = useSettingsGroups();
