@@ -1,6 +1,7 @@
 export * from './PlayerShell';
 export * from './TopBar';
 export * from './BottomBar';
+export * from './PlayerBar';
 export * from './PlayerWorkspace';
 export * from './RouteTransition';
 export * from './ScrollableArea';
