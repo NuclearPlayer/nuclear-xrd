@@ -43,7 +43,7 @@ export const ThemeController: FC<ThemeControllerProps> = ({
     <Toggle
       checked={isDark}
       defaultChecked={defaultIsDark}
-      onCheckedChange={handleThemeChange}
+      onChange={handleThemeChange}
       disabled={disabled}
       className={className}
       label="Toggle theme"

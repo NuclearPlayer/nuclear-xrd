@@ -13,7 +13,9 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
       >
         <button
           class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+          data-headlessui-state=""
           data-testid="sidebar-toggle-left"
+          type="submit"
         >
           <svg
             class="lucide lucide-panel-left"
@@ -53,7 +55,9 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
       >
         <button
           class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+          data-headlessui-state=""
           data-testid="sidebar-toggle-right"
+          type="submit"
         >
           <svg
             class="lucide lucide-panel-right"
@@ -98,7 +102,9 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
       >
         <button
           class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+          data-headlessui-state=""
           data-testid="sidebar-toggle-left"
+          type="submit"
         >
           <svg
             class="lucide lucide-panel-left"
@@ -145,7 +151,9 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
       >
         <button
           class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+          data-headlessui-state=""
           data-testid="sidebar-toggle-right"
+          type="submit"
         >
           <svg
             class="lucide lucide-panel-right"

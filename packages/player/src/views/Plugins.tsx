@@ -45,7 +45,7 @@ export const Plugins = () => {
                 rightAccessory={
                   <Toggle
                     checked={p.enabled}
-                    onCheckedChange={(checked) =>
+                    onChange={(checked) =>
                       checked
                         ? store.enablePlugin(p.metadata.id)
                         : store.disablePlugin(p.metadata.id)

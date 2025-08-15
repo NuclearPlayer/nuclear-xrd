@@ -17,11 +17,7 @@ export const ToggleField: FC<Props> = ({
 }) => (
   <div className="flex flex-col gap-2">
     <div className="flex items-center gap-3">
-      <Toggle
-        aria-label={label}
-        checked={Boolean(value)}
-        onCheckedChange={setValue}
-      />
+      <Toggle aria-label={label} checked={Boolean(value)} onChange={setValue} />
       <span className="text-foreground text-sm font-semibold">{label}</span>
     </div>
     {description && (
