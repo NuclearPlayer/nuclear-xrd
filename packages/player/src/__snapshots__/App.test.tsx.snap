@@ -40,12 +40,15 @@ exports[`App > should render snapshot 1`] = `
       <button
         aria-checked="false"
         aria-label="Toggle theme"
-        class="border-border focus:ring-primary relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-offset-2 focus:outline-none bg-white"
+        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+        data-headlessui-state=""
+        id="headlessui-switch-:r0:"
         role="switch"
+        tabindex="0"
         type="button"
       >
         <span
-          class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1"
+          class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1 group-data-checked:translate-x-5"
         >
           <svg
             class="lucide lucide-sun text-foreground"
@@ -96,14 +99,18 @@ exports[`App > should render snapshot 1`] = `
       class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
     >
       <div
+        animate="[object Object]"
         class="bg-background-secondary border-border relative flex flex-col p-2 border-r-2"
+        transition="[object Object]"
       >
         <span
           class="mb-4 flex flex-row items-center justify-end"
         >
           <button
             class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            data-headlessui-state=""
             data-testid="sidebar-toggle-left"
+            type="submit"
           >
             <svg
               class="lucide lucide-panel-left"
@@ -131,8 +138,11 @@ exports[`App > should render snapshot 1`] = `
           </button>
         </span>
         <div
+          animate="[object Object]"
           class="flex-1 overflow-hidden"
-          style="opacity: 0; transform: translateX(-20px);"
+          exit="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
         >
           <div
             class="flex flex-1 flex-col items-start justify-start"
@@ -142,6 +152,8 @@ exports[`App > should render snapshot 1`] = `
             >
               <button
                 class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                data-headlessui-state=""
+                type="submit"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -170,7 +182,8 @@ exports[`App > should render snapshot 1`] = `
                   Explore
                 </span>
                 <div
-                  style="transform: none;"
+                  animate="[object Object]"
+                  transition="[object Object]"
                 >
                   <svg
                     class="lucide lucide-chevron-right"
@@ -196,6 +209,8 @@ exports[`App > should render snapshot 1`] = `
             >
               <button
                 class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                data-headlessui-state=""
+                type="submit"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -224,7 +239,8 @@ exports[`App > should render snapshot 1`] = `
                   Preferences
                 </span>
                 <div
-                  style="transform: none;"
+                  animate="[object Object]"
+                  transition="[object Object]"
                 >
                   <svg
                     class="lucide lucide-chevron-right"
@@ -250,6 +266,8 @@ exports[`App > should render snapshot 1`] = `
             >
               <button
                 class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                data-headlessui-state=""
+                type="submit"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -282,7 +300,8 @@ exports[`App > should render snapshot 1`] = `
                   Collection
                 </span>
                 <div
-                  style="transform: none;"
+                  animate="[object Object]"
+                  transition="[object Object]"
                 >
                   <svg
                     class="lucide lucide-chevron-right"
@@ -317,8 +336,11 @@ exports[`App > should render snapshot 1`] = `
           class="relative h-full w-full overflow-hidden"
         >
           <div
+            animate="center"
             class="absolute inset-0 h-full w-full"
-            style="opacity: 0; filter: blur(4px); transform: translateX(24px) scale(0.96);"
+            initial="enter"
+            transition="[object Object]"
+            variants="[object Object]"
           >
             <div
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
@@ -338,14 +360,18 @@ exports[`App > should render snapshot 1`] = `
         </div>
       </main>
       <div
+        animate="[object Object]"
         class="bg-background-secondary border-border relative flex flex-col p-2 border-l-2"
+        transition="[object Object]"
       >
         <span
           class="mb-4 flex flex-row items-center justify-start"
         >
           <button
             class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            data-headlessui-state=""
             data-testid="sidebar-toggle-right"
+            type="submit"
           >
             <svg
               class="lucide lucide-panel-right"
@@ -373,8 +399,11 @@ exports[`App > should render snapshot 1`] = `
           </button>
         </span>
         <div
+          animate="[object Object]"
           class="flex-1 overflow-hidden"
-          style="opacity: 0; transform: translateX(20px);"
+          exit="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
         />
         <div
           class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors left-0"

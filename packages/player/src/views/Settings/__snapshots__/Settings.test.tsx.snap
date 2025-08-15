@@ -99,8 +99,9 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
       class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
     >
       <div
+        animate="[object Object]"
         class="bg-background-secondary border-border relative flex flex-col p-2 border-r-2"
-        style="width: 111.90554773014463px;"
+        transition="[object Object]"
       >
         <span
           class="mb-4 flex flex-row items-center justify-end"
@@ -137,8 +138,11 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
           </button>
         </span>
         <div
+          animate="[object Object]"
           class="flex-1 overflow-hidden"
-          style="opacity: 0.8040826458822117; transform: translateX(-3.9183470823557673px);"
+          exit="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
         >
           <div
             class="flex flex-1 flex-col items-start justify-start"
@@ -178,7 +182,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                   Explore
                 </span>
                 <div
-                  style="transform: none;"
+                  animate="[object Object]"
+                  transition="[object Object]"
                 >
                   <svg
                     class="lucide lucide-chevron-right"
@@ -234,7 +239,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                   Preferences
                 </span>
                 <div
-                  style="transform: rotate(6.599672367156018deg);"
+                  animate="[object Object]"
+                  transition="[object Object]"
                 >
                   <svg
                     class="lucide lucide-chevron-right"
@@ -255,8 +261,11 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                 </div>
               </button>
               <div
+                animate="[object Object]"
                 class="border-l-foreground ml-4 flex flex-col gap-4 overflow-hidden border-l-2 pt-2"
-                style="opacity: 0.0733296929684002; height: auto;"
+                exit="[object Object]"
+                initial="[object Object]"
+                transition="[object Object]"
               >
                 <a
                   aria-current="page"
@@ -421,7 +430,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                   Collection
                 </span>
                 <div
-                  style="transform: none;"
+                  animate="[object Object]"
+                  transition="[object Object]"
                 >
                   <svg
                     class="lucide lucide-chevron-right"
@@ -456,8 +466,11 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
           class="relative h-full w-full overflow-hidden"
         >
           <div
+            animate="exit"
             class="absolute inset-0 h-full w-full"
-            style="opacity: 0.6976455229764298; filter: blur(1.24629px); transform: translateX(7.2446565453586125px) scale(0.9879058209190572);"
+            initial="enter"
+            transition="[object Object]"
+            variants="[object Object]"
           >
             <div
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
@@ -475,8 +488,11 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
             </div>
           </div>
           <div
+            animate="center"
             class="absolute inset-0 h-full w-full"
-            style="opacity: 0.00024689381681419764; filter: blur(3.99901px); transform: translateX(23.99407454839646px) scale(0.9600098757526725);"
+            initial="enter"
+            transition="[object Object]"
+            variants="[object Object]"
           >
             <div
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
@@ -512,8 +528,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                         >
                           <label
                             class="text-foreground text-sm font-semibold"
-                            for="select-:rb:"
-                            id="select-:rb:-label"
+                            for="select-:r1:"
+                            id="select-:r1:-label"
                           >
                             settings.general.language.title
                           </label>
@@ -522,7 +538,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                             aria-haspopup="listbox"
                             class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
                             data-headlessui-state=""
-                            id="select-:rb:"
+                            id="select-:r1:"
                             type="button"
                           >
                             <span
@@ -554,7 +570,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                           </button>
                           <p
                             class="text-foreground-secondary text-sm select-none"
-                            id="select-:rb:-description"
+                            id="select-:r1:-description"
                           >
                             settings.general.language.description
                           </p>
@@ -577,22 +593,22 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                         >
                           <label
                             class="text-foreground text-sm font-semibold"
-                            for="input-:rg:"
-                            id="input-:rg:-label"
+                            for="input-:r5:"
+                            id="input-:r5:-label"
                           >
                             settings.playback.skipSeconds.title
                           </label>
                           <input
                             class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
                             data-headlessui-state=""
-                            id="input-:rg:"
+                            id="input-:r5:"
                             inputmode="numeric"
                             type="number"
                             value=""
                           />
                           <p
                             class="text-foreground-secondary text-sm select-none"
-                            id="input-:rg:-description"
+                            id="input-:r5:-description"
                           >
                             settings.playback.skipSeconds.description
                           </p>
@@ -607,8 +623,9 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
         </div>
       </main>
       <div
+        animate="[object Object]"
         class="bg-background-secondary border-border relative flex flex-col p-2 border-l-2"
-        style="width: 111.90554773014463px;"
+        transition="[object Object]"
       >
         <span
           class="mb-4 flex flex-row items-center justify-start"
@@ -645,8 +662,11 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
           </button>
         </span>
         <div
+          animate="[object Object]"
           class="flex-1 overflow-hidden"
-          style="opacity: 0.8040826458822117; transform: translateX(3.9183470823557673px);"
+          exit="[object Object]"
+          initial="[object Object]"
+          transition="[object Object]"
         />
         <div
           class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors left-0"

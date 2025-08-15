@@ -1,5 +1,4 @@
 import { createRouter, RouterProvider } from '@tanstack/react-router';
-import { MotionConfig } from 'framer-motion';
 
 import { routeTree } from './routeTree.gen';
 
@@ -12,13 +11,7 @@ declare module '@tanstack/react-router' {
 }
 
 function App() {
-  return (
-    <MotionConfig
-      reducedMotion={process.env.NODE_ENV === 'test' ? 'always' : 'user'}
-    >
-      <RouterProvider router={router} />
-    </MotionConfig>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

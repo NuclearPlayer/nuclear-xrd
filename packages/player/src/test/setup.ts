@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom';
 
+import { MotionGlobalConfig } from 'framer-motion';
 import { vi } from 'vitest';
 
+import { createFramerMotionMock } from './mocks/mockFramerMotion';
 import { joinPath, readFile } from './utils/testPluginFolder';
 
 type ResizeObserverLike = new (callback: ResizeObserverCallback) => {
@@ -11,6 +13,7 @@ type ResizeObserverLike = new (callback: ResizeObserverCallback) => {
 };
 
 process.env.NODE_ENV = 'test';
+MotionGlobalConfig.skipAnimations = true;
 const g = globalThis as unknown as { ResizeObserver?: ResizeObserverLike };
 
 if (typeof g.ResizeObserver === 'undefined') {
@@ -32,6 +35,12 @@ if (typeof g.ResizeObserver === 'undefined') {
 vi.mock('@tauri-apps/plugin-fs', () => ({
   readTextFile: (path: string) => Promise.resolve(readFile(path)),
 }));
+
+// This mock is needed to completely disable animations in the test environment
+vi.mock('framer-motion', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('framer-motion')>();
+  return createFramerMotionMock(mod);
+});
 
 vi.mock('@tauri-apps/api/path', () => ({
   join: async (...parts: string[]) => joinPath(...parts),

@@ -34,7 +34,6 @@
     "@tanstack/react-router": "^1.131.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.23.12",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.460.0",
     "react": "^18.3.1",
@@ -59,6 +58,7 @@
     "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "react": "^18.3.1"
+  "react": "^18.3.1",
+  "framer-motion": "^12.23.12"
   }
 }
