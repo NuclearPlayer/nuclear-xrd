@@ -470,7 +470,6 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
             class="absolute inset-0 h-full w-full"
             initial="enter"
             transition="[object Object]"
-            variants="[object Object]"
           >
             <div
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
@@ -492,7 +491,6 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
             class="absolute inset-0 h-full w-full"
             initial="enter"
             transition="[object Object]"
-            variants="[object Object]"
           >
             <div
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
