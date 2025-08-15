@@ -1,0 +1,23 @@
+root: ./
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md
+
+title: Nuclear Documentation
+description: Complete documentation for Nuclear music player
+
+plugins:
+  - search
+  - sharing
+  - fontsettings
+  - theme-default
+
+pdf:
+  fontSize: 12
+  paperSize: a4
+  margin:
+    top: 56
+    bottom: 56
+    left: 62
+    right: 62
