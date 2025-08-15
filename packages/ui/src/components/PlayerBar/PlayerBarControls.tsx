@@ -23,24 +23,22 @@ export const PlayerBarControls: FC<PlayerBarControlsProps> = ({
   isShuffleActive = false,
   isRepeatActive = false,
   className = '',
-}) => {
-  return (
-    <div className={cn('flex items-center justify-center gap-2', className)}>
-      <Button size="icon" variant={isShuffleActive ? 'default' : 'text'}>
-        <Shuffle size={16} />
-      </Button>
-      <Button size="icon" variant="text">
-        <SkipBack size={16} />
-      </Button>
-      <Button size="icon">
-        {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-      </Button>
-      <Button size="icon" variant="text">
-        <SkipForward size={16} />
-      </Button>
-      <Button size="icon" variant={isRepeatActive ? 'default' : 'text'}>
-        <Repeat size={16} />
-      </Button>
-    </div>
-  );
-};
+}) => (
+  <div className={cn('flex items-center justify-center gap-2', className)}>
+    <Button size="icon" variant={isShuffleActive ? 'default' : 'text'}>
+      <Shuffle size={16} />
+    </Button>
+    <Button size="icon" variant="text">
+      <SkipBack size={16} />
+    </Button>
+    <Button size="icon">
+      {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+    </Button>
+    <Button size="icon" variant="text">
+      <SkipForward size={16} />
+    </Button>
+    <Button size="icon" variant={isRepeatActive ? 'default' : 'text'}>
+      <Repeat size={16} />
+    </Button>
+  </div>
+);

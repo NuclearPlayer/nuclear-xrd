@@ -15,3 +15,4 @@ export * from './ViewShell';
 export * from './Slider';
 export * from './Input';
 export * from './Select';
+export * from '../utils/time';

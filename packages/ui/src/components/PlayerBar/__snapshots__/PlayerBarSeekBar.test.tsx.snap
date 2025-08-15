@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PlayerBarSeekBar > (Snapshot) default render 1`] = `
+<DocumentFragment>
+  <div
+    class="w-full px-4 select-none"
+  >
+    <div
+      class="mb-1 flex items-center justify-between text-xs leading-none"
+    >
+      <span
+        class="text-foreground-secondary tabular-nums"
+      >
+        1:37
+      </span>
+      <span
+        class="text-foreground-secondary tabular-nums"
+      >
+        -21:37
+      </span>
+    </div>
+    <div
+      aria-disabled="false"
+      class="relative h-2 w-full"
+    >
+      <div
+        class="border-border bg-background-secondary shadow-shadow absolute inset-0 border"
+      >
+        <div
+          class="bg-primary h-full transition-none"
+          style="width: 25%;"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
