@@ -1,5 +1,6 @@
+import { Button as HeadlessButton } from '@headlessui/react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { ComponentProps, FC } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '../../utils';
 
@@ -27,20 +28,22 @@ const buttonVariants = cva(
   },
 );
 
-type ButtonProps = ComponentProps<'button'> &
+type ButtonProps = ComponentPropsWithoutRef<'button'> &
   VariantProps<typeof buttonVariants>;
 
-export const Button: FC<ButtonProps> = ({
-  variant,
-  size,
-  className,
-  children,
-  ...rest
-}) => (
-  <button
-    className={cn(buttonVariants({ variant, size, className }))}
-    {...rest}
-  >
-    {children}
-  </button>
-);
+export const Button = forwardRef<HTMLElement, ButtonProps>(function Button(
+  { variant, size, className, children, type, ...rest },
+  ref,
+) {
+  return (
+    <HeadlessButton
+      as="button"
+      ref={ref}
+      className={cn(buttonVariants({ variant, size, className }))}
+      type={type ?? 'submit'}
+      {...rest}
+    >
+      {children}
+    </HeadlessButton>
+  );
+});
