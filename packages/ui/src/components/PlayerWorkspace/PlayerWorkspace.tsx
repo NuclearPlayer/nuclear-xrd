@@ -31,22 +31,23 @@ type PlayerWorkspaceComponent = FC<PlayerWorkspaceProps> & {
   Main: typeof PlayerWorkspaceMain;
 };
 
-export const PlayerWorkspace: PlayerWorkspaceComponent = Object.assign(
-  ({ children, className = '' }: PlayerWorkspaceProps) => {
-    return (
-      <div
-        className={cn(
-          'bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]',
-          className,
-        )}
-      >
-        {children}
-      </div>
-    );
-  },
-  {
-    LeftSidebar: PlayerWorkspaceLeftSidebar,
-    RightSidebar: PlayerWorkspaceRightSidebar,
-    Main: PlayerWorkspaceMain,
-  },
-);
+const PlayerWorkspaceImpl: FC<PlayerWorkspaceProps> = ({
+  children,
+  className = '',
+}) => {
+  return (
+    <div
+      className={cn(
+        'bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const PlayerWorkspace = PlayerWorkspaceImpl as PlayerWorkspaceComponent;
+PlayerWorkspace.LeftSidebar = PlayerWorkspaceLeftSidebar;
+PlayerWorkspace.RightSidebar = PlayerWorkspaceRightSidebar;
+PlayerWorkspace.Main = PlayerWorkspaceMain;

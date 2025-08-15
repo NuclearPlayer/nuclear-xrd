@@ -1,0 +1,58 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input > (Snapshot) renders text input with description 1`] = `
+<div
+  class="flex w-full flex-col gap-2"
+>
+  <label
+    class="text-foreground text-sm font-semibold"
+    for="input-username"
+    id="input-username-label"
+  >
+    Username
+  </label>
+  <input
+    class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
+    data-headlessui-state=""
+    id="input-username"
+    placeholder="your-username"
+    type="text"
+  />
+  <p
+    class="text-foreground-secondary text-sm select-none"
+    id="input-username-description"
+  >
+    This is your public display name.
+  </p>
+</div>
+`;
+
+exports[`Input > (Snapshot) renders with error and no description 1`] = `
+<div
+  class="flex w-full flex-col gap-2"
+>
+  <label
+    class="text-foreground text-sm font-semibold"
+    for="input-username-error"
+    id="input-username-error-label"
+  >
+    Username
+  </label>
+  <input
+    aria-errormessage="input-username-error-error"
+    aria-invalid="true"
+    class="bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11 border-accent-red"
+    data-headlessui-state="invalid"
+    data-invalid=""
+    id="input-username-error"
+    placeholder="your-username"
+    type="text"
+  />
+  <p
+    class="text-accent-red text-xs select-none"
+    id="input-username-error-error"
+  >
+    Username is already taken
+  </p>
+</div>
+`;

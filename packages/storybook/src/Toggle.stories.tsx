@@ -56,13 +56,13 @@ export const Controlled: Story = {
     const [checked, setChecked] = useState(false);
 
     return (
-      <div className="flex flex-col gap-4 items-center">
+      <div className="flex flex-col items-center gap-4">
         <Toggle
           label="Controlled Toggle"
           checked={checked}
-          onCheckedChange={setChecked}
+          onChange={setChecked}
         />
-        <p className="text-sm text-foreground">
+        <p className="text-foreground text-sm">
           Status: {checked ? 'On' : 'Off'}
         </p>
       </div>
@@ -72,22 +72,22 @@ export const Controlled: Story = {
 
 export const AllStates: Story = {
   render: () => (
-    <div className="flex gap-4 items-center">
-      <div className="flex flex-col gap-2 items-center">
+    <div className="flex items-center gap-4">
+      <div className="flex flex-col items-center gap-2">
         <Toggle label="Default" />
-        <span className="text-xs text-foreground">Default</span>
+        <span className="text-foreground text-xs">Default</span>
       </div>
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col items-center gap-2">
         <Toggle defaultChecked label="Checked" />
-        <span className="text-xs text-foreground">Checked</span>
+        <span className="text-foreground text-xs">Checked</span>
       </div>
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col items-center gap-2">
         <Toggle disabled label="Disabled" />
-        <span className="text-xs text-foreground">Disabled</span>
+        <span className="text-foreground text-xs">Disabled</span>
       </div>
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col items-center gap-2">
         <Toggle disabled defaultChecked label="Disabled Checked" />
-        <span className="text-xs text-foreground">Disabled + Checked</span>
+        <span className="text-foreground text-xs">Disabled + Checked</span>
       </div>
     </div>
   ),

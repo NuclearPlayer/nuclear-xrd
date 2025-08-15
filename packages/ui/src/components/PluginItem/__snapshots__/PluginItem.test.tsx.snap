@@ -3,13 +3,13 @@
 exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 <DocumentFragment>
   <div
-    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow opacity-30 relative transition-opacity duration-250"
+    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow opacity-30 relative transition-opacity duration-250"
   >
     <div
       class="flex w-full flex-wrap items-start gap-4"
     >
       <div
-        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden p-0"
+        class="border-border text-foreground flex rounded border-2 bg-background-secondary shadow-none h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden p-0"
       >
         <svg
           class="lucide lucide-music"
@@ -68,7 +68,7 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 <DocumentFragment>
   <div
-    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow relative transition-opacity duration-250"
+    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow relative transition-opacity duration-250"
   >
     <div
       class="flex w-full flex-wrap items-start gap-4"
@@ -107,13 +107,13 @@ exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 exports[`PluginItem > (Snapshot) renders with all props 1`] = `
 <DocumentFragment>
   <div
-    class="flex h-full w-full rounded border-2 border-border text-foreground p-4 bg-background shadow-shadow relative transition-opacity duration-250"
+    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow relative transition-opacity duration-250"
   >
     <div
       class="flex w-full flex-wrap items-start gap-4"
     >
       <div
-        class="flex rounded border-2 border-border text-foreground bg-background-secondary shadow-none h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden p-0"
+        class="border-border text-foreground flex rounded border-2 bg-background-secondary shadow-none h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden p-0"
       >
         <svg
           class="lucide lucide-music"
@@ -150,7 +150,9 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
         >
           YouTube Music
           <button
-            class="inline-flex items-center transition-all rounded cursor-pointer text-foreground bg-primary border-2 border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none size-10 justify-center"
+            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
+            data-headlessui-state=""
+            type="submit"
           >
             <svg
               class="lucide lucide-settings"

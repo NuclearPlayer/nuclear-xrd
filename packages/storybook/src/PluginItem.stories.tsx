@@ -80,7 +80,7 @@ export const WithRightAccessory: Story = {
       <Toggle
         defaultChecked={false}
         aria-label="Enable plugin"
-        onCheckedChange={(checked) => console.log('Toggle changed:', checked)}
+        onChange={(checked) => console.log('Toggle changed:', checked)}
       />
     ),
   },
@@ -98,7 +98,7 @@ export const WarningWithRightAccessory: Story = {
       <Toggle
         defaultChecked={true}
         aria-label="Enable plugin"
-        onCheckedChange={(checked) => console.log('Toggle changed:', checked)}
+        onChange={(checked) => console.log('Toggle changed:', checked)}
       />
     ),
   },
@@ -117,7 +117,7 @@ export const DisabledWarningWithRightAccessory: Story = {
       <Toggle
         defaultChecked={false}
         aria-label="Enable plugin"
-        onCheckedChange={(checked) => console.log('Toggle changed:', checked)}
+        onChange={(checked) => console.log('Toggle changed:', checked)}
       />
     ),
   },

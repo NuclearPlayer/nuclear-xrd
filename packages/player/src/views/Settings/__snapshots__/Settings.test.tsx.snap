@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`App > should render snapshot 1`] = `
+exports[`Settings view > (Snapshot) renders the settings view 1`] = `
 <DocumentFragment>
   <div
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
@@ -208,7 +208,7 @@ exports[`App > should render snapshot 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="submit"
               >
@@ -260,6 +260,136 @@ exports[`App > should render snapshot 1`] = `
                   </svg>
                 </div>
               </button>
+              <div
+                animate="[object Object]"
+                class="border-l-foreground ml-4 flex flex-col gap-4 overflow-hidden border-l-2 pt-2"
+                exit="[object Object]"
+                initial="[object Object]"
+                transition="[object Object]"
+              >
+                <a
+                  aria-current="page"
+                  class="active"
+                  data-status="active"
+                  href="/settings"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      class="lucide lucide-settings2"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 7h-9"
+                      />
+                      <path
+                        d="M14 17H5"
+                      />
+                      <circle
+                        cx="17"
+                        cy="17"
+                        r="3"
+                      />
+                      <circle
+                        cx="7"
+                        cy="7"
+                        r="3"
+                      />
+                    </svg>
+                    Settings
+                  </div>
+                </a>
+                <a
+                  href="/plugins"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      class="lucide lucide-blocks"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        height="7"
+                        rx="1"
+                        width="7"
+                        x="14"
+                        y="3"
+                      />
+                      <path
+                        d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3"
+                      />
+                    </svg>
+                    Plugins
+                  </div>
+                </a>
+                <a
+                  href="/themes"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      class="lucide lucide-palette"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="13.5"
+                        cy="6.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="17.5"
+                        cy="10.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="8.5"
+                        cy="7.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="6.5"
+                        cy="12.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <path
+                        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
+                      />
+                    </svg>
+                    Themes
+                  </div>
+                </a>
+              </div>
             </div>
             <div
               class="mb-4 flex w-full flex-col text-sm"
@@ -336,7 +466,7 @@ exports[`App > should render snapshot 1`] = `
           class="relative h-full w-full overflow-hidden"
         >
           <div
-            animate="center"
+            animate="exit"
             class="absolute inset-0 h-full w-full"
             initial="enter"
             transition="[object Object]"
@@ -353,6 +483,138 @@ exports[`App > should render snapshot 1`] = `
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
                 Dashboard view
+              </div>
+            </div>
+          </div>
+          <div
+            animate="center"
+            class="absolute inset-0 h-full w-full"
+            initial="enter"
+            transition="[object Object]"
+          >
+            <div
+              class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
+            >
+              <h1
+                class="flex w-full flex-0 flex-row text-center text-3xl font-bold"
+              >
+                Settings
+              </h1>
+              <div
+                class="flex w-full flex-1 flex-col overflow-hidden"
+              >
+                <div
+                  class="relative h-auto w-full mt-6 max-w-100 flex-1 overflow-hidden"
+                >
+                  <div
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
+                    style="scrollbar-width: none;"
+                  >
+                    <section
+                      class="flex flex-col gap-4 px-2"
+                    >
+                      <h2
+                        class="text-foreground text-lg font-semibold"
+                      >
+                        General
+                      </h2>
+                      <div
+                        class="flex flex-col gap-6"
+                      >
+                        <div
+                          class="relative flex w-full flex-col gap-2"
+                        >
+                          <label
+                            class="text-foreground text-sm font-semibold"
+                            for="select-:r1:"
+                            id="select-:r1:-label"
+                          >
+                            settings.general.language.title
+                          </label>
+                          <button
+                            aria-expanded="false"
+                            aria-haspopup="listbox"
+                            class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
+                            data-headlessui-state=""
+                            id="select-:r1:"
+                            type="button"
+                          >
+                            <span
+                              class="block truncate"
+                            >
+                              English
+                            </span>
+                            <span
+                              class="flex items-center"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class="lucide lucide-chevron-down text-foreground transition-transform"
+                                fill="none"
+                                height="16"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="m6 9 6 6 6-6"
+                                />
+                              </svg>
+                            </span>
+                          </button>
+                          <p
+                            class="text-foreground-secondary text-sm select-none"
+                            id="select-:r1:-description"
+                          >
+                            settings.general.language.description
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      class="flex flex-col gap-4 px-2"
+                    >
+                      <h2
+                        class="text-foreground text-lg font-semibold"
+                      >
+                        Playback
+                      </h2>
+                      <div
+                        class="flex flex-col gap-6"
+                      >
+                        <div
+                          class="flex w-full flex-col gap-2"
+                        >
+                          <label
+                            class="text-foreground text-sm font-semibold"
+                            for="input-:r5:"
+                            id="input-:r5:-label"
+                          >
+                            settings.playback.skipSeconds.title
+                          </label>
+                          <input
+                            class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
+                            data-headlessui-state=""
+                            id="input-:r5:"
+                            inputmode="numeric"
+                            type="number"
+                            value=""
+                          />
+                          <p
+                            class="text-foreground-secondary text-sm select-none"
+                            id="input-:r5:-description"
+                          >
+                            settings.playback.skipSeconds.description
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
