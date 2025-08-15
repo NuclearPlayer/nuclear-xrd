@@ -12,12 +12,10 @@ exports[`Select snapshots > (Snapshot) renders basic with description 1`] = `
     Quality
   </label>
   <button
-    aria-controls="select-quality-listbox"
-    aria-describedby="select-quality-description"
     aria-expanded="false"
     aria-haspopup="listbox"
-    aria-labelledby="select-quality-label"
     class="border-border bg-primary text-foreground focus-visible:ring-primary relative flex h-11 w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
+    data-headlessui-state=""
     id="select-quality"
     type="button"
   >
@@ -69,14 +67,12 @@ exports[`Select snapshots > (Snapshot) renders error without description 1`] = `
     Quality
   </label>
   <button
-    aria-controls="select-quality-error-listbox"
-    aria-describedby="select-quality-error-error"
     aria-errormessage="select-quality-error-error"
     aria-expanded="false"
     aria-haspopup="listbox"
     aria-invalid="true"
-    aria-labelledby="select-quality-error-label"
     class="bg-primary text-foreground focus-visible:ring-primary relative flex h-11 w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm border-accent-red"
+    data-headlessui-state=""
     id="select-quality-error"
     type="button"
   >
