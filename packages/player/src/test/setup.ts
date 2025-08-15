@@ -10,10 +10,10 @@ type ResizeObserverLike = new (callback: ResizeObserverCallback) => {
   disconnect(): void;
 };
 
+process.env.NODE_ENV = 'test';
 const g = globalThis as unknown as { ResizeObserver?: ResizeObserverLike };
 
 if (typeof g.ResizeObserver === 'undefined') {
-  console.info('[test-setup] Using ResizeObserver mock');
   class ResizeObserverMock {
     constructor(callback: ResizeObserverCallback) {
       void callback; // avoid unused param lint
