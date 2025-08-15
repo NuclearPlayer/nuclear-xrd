@@ -2,4 +2,5 @@
 
 ## Plugins
 
-* [Settings](README.md)
+* [Getting started](getting-started.md)
+* [Settings](settings.md)
