@@ -1,10 +1,11 @@
+import { Input as HeadlessInput } from '@headlessui/react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { ComponentProps, FC, useId } from 'react';
+import { ComponentPropsWithoutRef, forwardRef, useId } from 'react';
 
 import { cn } from '../../utils';
 
 const inputVariants = cva(
-  'border-border bg-background-input text-foreground placeholder:text-foreground-secondary focus-visible:ring-primary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:outline-none',
+  'border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none',
   {
     variants: {
       variant: {
@@ -30,23 +31,17 @@ const inputVariants = cva(
   },
 );
 
-type InputProps = Omit<ComponentProps<'input'>, 'type'> &
+type InputProps = Omit<ComponentPropsWithoutRef<'input'>, 'type'> &
   VariantProps<typeof inputVariants> & {
     label?: string;
     description?: string;
     error?: string;
   };
 
-export const Input: FC<InputProps> = ({
-  id,
-  label,
-  description,
-  error,
-  variant = 'text',
-  size,
-  className,
-  ...rest
-}) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  { id, label, description, error, variant = 'text', size, className, ...rest },
+  ref,
+) {
   const reactId = useId();
   const inputId = id ?? `input-${reactId}`;
   const labelId = `${inputId}-label`;
@@ -77,14 +72,17 @@ export const Input: FC<InputProps> = ({
           {label}
         </label>
       )}
-      <input
+      <HeadlessInput
+        as="input"
         id={inputId}
+        ref={ref}
         type={inputType}
         aria-labelledby={label ? labelId : undefined}
         aria-describedby={describedBy || undefined}
         aria-invalid={!!error || undefined}
         aria-errormessage={error ? errorId : undefined}
         inputMode={variant === 'number' ? 'numeric' : undefined}
+        invalid={!!error}
         className={cn(inputVariants({ variant, size, state, className }))}
         {...rest}
       />
@@ -103,4 +101,4 @@ export const Input: FC<InputProps> = ({
       )}
     </div>
   );
-};
+});
