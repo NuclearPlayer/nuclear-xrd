@@ -20,7 +20,6 @@ import {
   SidebarNavigation,
   SidebarNavigationCollapsible,
   SidebarNavigationItem,
-  Toast,
   Toaster,
   TopBar,
 } from '@nuclearplayer/ui';
@@ -41,7 +40,6 @@ const RootComponent = () => {
 
   return (
     <PlayerShell>
-      <Toast.Toaster />
       <TopBar />
 
       <PlayerWorkspace>
