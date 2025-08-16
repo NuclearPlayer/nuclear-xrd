@@ -21,7 +21,9 @@ describe('Theme store', () => {
 
   it('(Snapshot) applies defaults from settings', async () => {
     await initializeThemeStore();
-    const light = document.documentElement.getAttribute('style') ?? '';
+    const light = (
+      document.getElementById('theme-light-variables')?.textContent ?? ''
+    ).trim();
     const dark = (
       document.getElementById('theme-dark-overrides')?.textContent ?? ''
     ).trim();
@@ -39,9 +41,10 @@ describe('Theme store', () => {
       '#theme-dark-overrides',
     ).length;
     expect(afterCount).toBe(1);
-    expect(document.documentElement.getAttribute('style')).toContain(
-      'oklch(60% 0.2 210)',
-    );
+    const light = (
+      document.getElementById('theme-light-variables')?.textContent ?? ''
+    ).trim();
+    expect(light).toContain('oklch(60% 0.2 210)');
   });
 
   it('(Snapshot) applies advanced theme from JSON file', async () => {

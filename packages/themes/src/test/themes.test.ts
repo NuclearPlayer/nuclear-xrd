@@ -55,7 +55,7 @@ describe('Themes utilities', () => {
     expect(resolved.light.border).toBe(defaultTheme.light.border);
   });
 
-  it('applyTheme writes CSS variables and a dark override block', () => {
+  it('applyTheme writes CSS variables in a light block and a dark override block', () => {
     const theme: ResolvedTheme = {
       light: {
         background: 'oklch(0.9 0.02 40)',
@@ -68,18 +68,22 @@ describe('Themes utilities', () => {
 
     applyTheme(theme);
 
-    const prop =
-      document.documentElement.style.getPropertyValue('--background');
-    expect(prop.trim()).toBe(theme.light.background);
+    const lightStyle = document.getElementById(
+      'theme-light-variables',
+    ) as HTMLStyleElement | null;
+    expect(lightStyle).not.toBeNull();
+    expect(lightStyle!.textContent).toContain(
+      '--background: ' + theme.light.background + ';',
+    );
 
-    const style = document.getElementById(
+    const darkStyle = document.getElementById(
       'theme-dark-overrides',
     ) as HTMLStyleElement | null;
-    expect(style).not.toBeNull();
-    expect(style!.textContent).toContain(
+    expect(darkStyle).not.toBeNull();
+    expect(darkStyle!.textContent).toContain(
       '--background: ' + theme.dark.background + ';',
     );
-    expect(style!.textContent).toContain("[data-theme='dark']");
+    expect(darkStyle!.textContent).toContain("[data-theme='dark']");
   });
 
   it('parseThemeJson validates and returns a ThemeFileV1', () => {
