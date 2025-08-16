@@ -1,4 +1,5 @@
 import type { SettingDefinition } from '@nuclearplayer/plugin-sdk';
+import { defaultTheme } from '@nuclearplayer/themes';
 
 import { registerCoreSettings } from '../stores/settingsStore';
 
@@ -8,6 +9,39 @@ const LANGUAGE_OPTIONS = [
 ];
 
 export const CORE_SETTINGS: SettingDefinition[] = [
+  {
+    id: 'theme.tier',
+    title: 'settings.theme.tier.title',
+    description: 'settings.theme.tier.description',
+    category: 'theme',
+    kind: 'enum',
+    options: [
+      { value: 'basic', label: 'Basic' },
+      { value: 'advanced', label: 'Advanced' },
+    ],
+    default: 'basic',
+    widget: { type: 'select' },
+  },
+  {
+    id: 'theme.primary',
+    title: 'settings.theme.primary.title',
+    description: 'settings.theme.primary.description',
+    category: 'theme',
+    kind: 'string',
+    default: String(defaultTheme.light.primary ?? ''),
+    widget: { type: 'text', placeholder: 'oklch(L C H)' },
+  },
+  {
+    id: 'theme.activeThemePath',
+    title: 'settings.theme.activeThemePath.title',
+    description: 'settings.theme.activeThemePath.description',
+    category: 'theme',
+    kind: 'string',
+    default: undefined,
+    hidden: true,
+    widget: { type: 'text' },
+    format: 'path',
+  },
   {
     id: 'playback.volume',
     title: 'settings.playback.volume.title',
