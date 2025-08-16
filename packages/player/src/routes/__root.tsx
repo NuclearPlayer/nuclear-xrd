@@ -13,17 +13,21 @@ import {
 } from 'lucide-react';
 
 import {
-  BottomBar,
+  PlayerBar,
   PlayerShell,
   PlayerWorkspace,
   RouteTransition,
   SidebarNavigation,
   SidebarNavigationCollapsible,
   SidebarNavigationItem,
+  Toast,
+  Toaster,
   TopBar,
 } from '@nuclearplayer/ui';
 
 import { useLayoutStore } from '../stores/layoutStore';
+
+const cover = 'https://picsum.photos/64';
 
 const RootComponent = () => {
   const {
@@ -37,6 +41,7 @@ const RootComponent = () => {
 
   return (
     <PlayerShell>
+      <Toast.Toaster />
       <TopBar />
 
       <PlayerWorkspace>
@@ -113,7 +118,18 @@ const RootComponent = () => {
         />
       </PlayerWorkspace>
 
-      <BottomBar />
+      <PlayerBar
+        left={
+          <PlayerBar.NowPlaying
+            title="Song Title"
+            artist="Artist Name"
+            coverUrl={cover}
+          />
+        }
+        center={<PlayerBar.Controls />}
+        right={<PlayerBar.Volume defaultValue={75} />}
+      />
+      <Toaster />
     </PlayerShell>
   );
 };

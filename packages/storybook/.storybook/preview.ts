@@ -1,5 +1,7 @@
 import type { Preview } from '@storybook/react';
 
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/700.css';
 import '@nuclearplayer/tailwind-config';
 
 const preview: Preview = {

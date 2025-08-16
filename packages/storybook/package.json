@@ -11,6 +11,7 @@
     "clean": "rm -rf storybook-static .turbo node_modules/.cache"
   },
   "dependencies": {
+    "@fontsource/dm-sans": "^5.2.6",
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@nuclearplayer/ui": "workspace:*",
     "lucide-react": "^0.460.0",
@@ -28,6 +29,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "@types/react": "^18.3.12",
     "@vitejs/plugin-react": "^4.3.4",
+    "sonner": "^2.0.7",
     "storybook": "^8.4.7",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.7.2",
