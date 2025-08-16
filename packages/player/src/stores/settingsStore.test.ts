@@ -20,7 +20,7 @@ vi.mock('@tauri-apps/plugin-store', async () => {
   return { LazyStore: mod.LazyStore };
 });
 
-describe('useSettingsStore', () => {
+describe('Settings store', () => {
   beforeEach(() => {
     resetInMemoryTauriStore();
     useSettingsStore.setState({ definitions: {}, values: {}, loaded: false });

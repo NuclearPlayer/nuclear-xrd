@@ -7,7 +7,7 @@ import { PluginStateBuilder } from '../test/builders/PluginStateBuilder';
 import { createPluginFolder, resetVfs } from '../test/utils/testPluginFolder';
 import { usePluginStore } from './pluginStore';
 
-describe('usePluginStore', () => {
+describe('Plugin store', () => {
   beforeEach(() => {
     resetVfs();
     usePluginStore.setState({ plugins: {} });
