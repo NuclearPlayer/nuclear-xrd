@@ -1,6 +1,6 @@
 {
   "name": "nuclear",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.14.0",
