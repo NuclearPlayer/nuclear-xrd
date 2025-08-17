@@ -1,19 +1,25 @@
 import { useMemo } from 'react';
 
 import { listBasicThemes } from '@nuclearplayer/themes';
-import { Button, ViewShell } from '@nuclearplayer/ui';
+import { Button, Select, ViewShell } from '@nuclearplayer/ui';
 
 import { useCoreSetting } from '../hooks/useCoreSetting';
-import { setAndPersistThemeId } from '../services/themeService';
+import { loadAndApplyAdvancedThemeFromFile } from '../services/advancedThemeService';
+import {
+  resetToDefaultTheme,
+  setAndPersistThemeId,
+} from '../services/themeService';
+import { useAdvancedThemeStore } from '../stores/advancedThemeStore';
 
 export const Themes = () => {
-  const themes = useMemo(() => listBasicThemes(), []);
+  const basicThemes = useMemo(() => listBasicThemes(), []);
   const [selected] = useCoreSetting<string>('theme.id');
+  const { themes } = useAdvancedThemeStore();
 
   return (
     <ViewShell title="Themes">
       <div className="flex flex-wrap gap-4">
-        {themes.map((t) => {
+        {basicThemes.map((t) => {
           const isActive = selected === t.id;
           return (
             <Button
@@ -26,6 +32,23 @@ export const Themes = () => {
             </Button>
           );
         })}
+      </div>
+      <div className="mt-6 max-w-120">
+        <Select
+          label="Advanced themes"
+          description="Themes found in your app data themes directory"
+          options={[
+            { id: '', label: 'Default' },
+            ...themes.map((t) => ({ id: t.path, label: t.name })),
+          ]}
+          onValueChange={async (val) => {
+            if (!val) {
+              await resetToDefaultTheme();
+              return;
+            }
+            await loadAndApplyAdvancedThemeFromFile(val);
+          }}
+        />
       </div>
     </ViewShell>
   );

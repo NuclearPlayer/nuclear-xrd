@@ -1,5 +1,12 @@
-import { generateAdvancedThemeCSS } from './advanced/generator';
-import { AdvancedTheme, AdvancedThemeSchema } from './advanced/schema';
+import {
+  generateAdvancedThemeCSS,
+  generateAdvancedThemeCSSFromJSON,
+} from './advanced/generator';
+import {
+  AdvancedTheme,
+  AdvancedThemeSchema,
+  parseAdvancedTheme,
+} from './advanced/schema';
 import { BUILTIN_BASIC_THEME_IDS } from './basic';
 
 import './basic/aurora.css';
@@ -50,3 +57,4 @@ export function clearAdvancedTheme(): void {
 
 export type { AdvancedTheme };
 export { BUILTIN_BASIC_THEME_IDS };
+export { parseAdvancedTheme, generateAdvancedThemeCSSFromJSON };

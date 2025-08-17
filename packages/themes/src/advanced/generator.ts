@@ -1,4 +1,5 @@
 import type { AdvancedTheme } from './schema';
+import { parseAdvancedTheme } from './schema';
 
 const escapeValue = (v: string) => v.replace(/\n/g, ' ').trim();
 
@@ -15,4 +16,9 @@ export function generateAdvancedThemeCSS(theme: AdvancedTheme): string {
   if (light) parts.push(`:root{${light}}`);
   if (dark) parts.push(`[data-theme='dark']{${dark}}`);
   return parts.join('\n');
+}
+
+export function generateAdvancedThemeCSSFromJSON(input: unknown): string {
+  const parsed = parseAdvancedTheme(input);
+  return generateAdvancedThemeCSS(parsed);
 }

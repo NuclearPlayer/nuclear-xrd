@@ -20,3 +20,6 @@ export const AdvancedThemeSchema = z
   .strict();
 
 export type AdvancedTheme = z.infer<typeof AdvancedThemeSchema>;
+
+export const parseAdvancedTheme = (input: unknown): AdvancedTheme =>
+  AdvancedThemeSchema.parse(input);
