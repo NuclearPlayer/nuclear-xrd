@@ -20,9 +20,13 @@ export function listBasicThemes(): BasicThemeMeta[] {
   return BUILT_INS.filter((t) => allowed.has(t.id));
 }
 
-export function setBasicTheme(id: string): void {
+export function setThemeId(id: string): void {
   const root = document.documentElement;
   root.setAttribute('data-theme-id', id);
+}
+
+export function setBasicTheme(id: string): void {
+  setThemeId(id);
 }
 
 const ADV_STYLE_ID = 'advanced-theme';
@@ -45,3 +49,4 @@ export function clearAdvancedTheme(): void {
 }
 
 export type { AdvancedTheme };
+export { BUILTIN_BASIC_THEME_IDS };
