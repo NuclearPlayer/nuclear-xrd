@@ -3,13 +3,13 @@ import { useMemo } from 'react';
 import { listBasicThemes } from '@nuclearplayer/themes';
 import { Button, cn, SectionShell, Select, ViewShell } from '@nuclearplayer/ui';
 
-import { useCoreSetting } from '../hooks/useCoreSetting';
-import { loadAndApplyAdvancedThemeFromFile } from '../services/advancedThemeService';
+import { useCoreSetting } from '../../hooks/useCoreSetting';
+import { loadAndApplyAdvancedThemeFromFile } from '../../services/advancedThemeService';
 import {
   resetToDefaultTheme,
   setAndPersistThemeId,
-} from '../services/themeService';
-import { useAdvancedThemeStore } from '../stores/advancedThemeStore';
+} from '../../services/themeService';
+import { useAdvancedThemeStore } from '../../stores/advancedThemeStore';
 
 export const Themes = () => {
   const basicThemes = useMemo(() => listBasicThemes(), []);
@@ -18,7 +18,7 @@ export const Themes = () => {
 
   return (
     <ViewShell title="Themes">
-      <SectionShell title="Basic themes">
+      <SectionShell data-testid="basic-themes" title="Basic themes">
         <div className="flex flex-wrap gap-4 p-1">
           {basicThemes.map((t) => {
             const isActive = selected === t.id;
@@ -53,7 +53,7 @@ export const Themes = () => {
           })}
         </div>
       </SectionShell>
-      <SectionShell title="Advanced themes">
+      <SectionShell data-testid="advanced-themes" title="Advanced themes">
         <div className="max-w-80 p-1">
           <Select
             description="Themes found in your app data themes directory"

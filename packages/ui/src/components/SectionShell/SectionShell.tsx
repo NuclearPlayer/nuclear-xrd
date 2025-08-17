@@ -6,14 +6,17 @@ type SectionShellProps = {
   children: ReactNode;
   title: string;
   className?: string;
+  'data-testid'?: string;
 };
 
 export const SectionShell: FC<SectionShellProps> = ({
   children,
   title,
   className,
+  'data-testid': dataTestId,
 }) => (
   <section
+    data-testid={dataTestId}
     className={cn(
       'mb-6 flex w-full flex-col items-start justify-start',
       className,
