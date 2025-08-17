@@ -1,0 +1,9 @@
+:root[data-theme-id='nuclear:ember'] {
+  --background: oklch(0.97 0.02 70);
+  --primary: oklch(0.76 0.14 30);
+}
+
+:root[data-theme-id='nuclear:ember'][data-theme='dark'] {
+  --background: oklch(0.4 0.03 277);
+  --primary: oklch(0.76 0.14 30);
+}
