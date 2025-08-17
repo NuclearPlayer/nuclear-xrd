@@ -8,7 +8,7 @@ export const Settings = () => {
 
   return (
     <ViewShell title="Settings">
-      <ScrollableArea className="mt-6 max-w-100 flex-1 overflow-hidden">
+      <ScrollableArea className="max-w-100 flex-1 overflow-hidden">
         {groups.map((group) => (
           <SettingsSection
             key={group.name}

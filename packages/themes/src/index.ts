@@ -11,15 +11,56 @@ import { BUILTIN_BASIC_THEME_IDS } from './basic';
 
 import './basic/aurora.css';
 import './basic/ember.css';
+import './basic/lagoon.css';
+import './basic/canyon.css';
 
 export type BasicThemeMeta = {
   id: string;
   name: string;
+  palette: [string, string, string, string];
 };
 
 const BUILT_INS: BasicThemeMeta[] = [
-  { id: 'nuclear:aurora', name: 'Aurora' },
-  { id: 'nuclear:ember', name: 'Ember' },
+  {
+    id: 'nuclear:aurora',
+    name: 'Aurora',
+    palette: [
+      'oklch(0.74 0.15 305)',
+      'oklch(0.98 0.01 340)',
+      'oklch(0.74 0.15 305)',
+      'oklch(0.42 0.04 278)',
+    ],
+  },
+  {
+    id: 'nuclear:ember',
+    name: 'Ember',
+    palette: [
+      'oklch(0.76 0.14 30)',
+      'oklch(0.97 0.02 70)',
+      'oklch(0.76 0.14 30)',
+      'oklch(0.4 0.03 277)',
+    ],
+  },
+  {
+    id: 'nuclear:lagoon',
+    name: 'Lagoon',
+    palette: [
+      'oklch(0.67 0.16 205)',
+      'oklch(0.985 0.018 210)',
+      'oklch(0.67 0.16 205)',
+      'oklch(0.33 0.035 245)',
+    ],
+  },
+  {
+    id: 'nuclear:canyon',
+    name: 'Canyon',
+    palette: [
+      'oklch(0.68 0.19 38)',
+      'oklch(0.975 0.02 70)',
+      'oklch(0.68 0.19 38)',
+      'oklch(0.36 0.03 30)',
+    ],
+  },
 ];
 
 export function listBasicThemes(): BasicThemeMeta[] {

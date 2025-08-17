@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { useSetting, type SettingDefinition } from '@nuclearplayer/plugin-sdk';
+import { SectionShell } from '@nuclearplayer/ui';
 
 import { coreSettingsHost } from '../../stores/settingsStore';
 import { SettingField } from './SettingField';
@@ -14,8 +15,7 @@ export const SettingsSection: FC<SettingsSectionProps> = ({
   title,
   settings,
 }) => (
-  <section className="flex flex-col gap-4 px-2">
-    <h2 className="text-foreground text-lg font-semibold">{title}</h2>
+  <SectionShell title={title}>
     <div className="flex flex-col gap-6">
       {settings.map((definition) => {
         const [value, setValue] = useSetting(coreSettingsHost, definition.id);
@@ -29,5 +29,5 @@ export const SettingsSection: FC<SettingsSectionProps> = ({
         );
       })}
     </div>
-  </section>
+  </SectionShell>
 );
