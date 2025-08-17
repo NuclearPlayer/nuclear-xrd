@@ -9,6 +9,16 @@ const LANGUAGE_OPTIONS = [
 
 export const CORE_SETTINGS: SettingDefinition[] = [
   {
+    id: 'theme.id',
+    title: 'settings.theme.id.title',
+    description: 'settings.theme.id.description',
+    category: 'appearance',
+    kind: 'string',
+    default: '',
+    hidden: true,
+    widget: { type: 'text' },
+  },
+  {
     id: 'playback.volume',
     title: 'settings.playback.volume.title',
     description: 'settings.playback.volume.description',
