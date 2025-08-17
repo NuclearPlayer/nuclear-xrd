@@ -13,6 +13,8 @@ import { parseAdvancedTheme } from '@nuclearplayer/themes';
 
 import type { AdvancedThemeFile } from '../stores/advancedThemeStore';
 import { useAdvancedThemeStore } from '../stores/advancedThemeStore';
+import { useSettingsStore } from '../stores/settingsStore';
+import { loadAndApplyAdvancedThemeFromFile } from './advancedThemeService';
 
 let unwatch: (() => void) | null = null;
 
@@ -86,8 +88,34 @@ export const startAdvancedThemeWatcher = async (): Promise<void> => {
   await refreshAdvancedThemeList();
   if (unwatch) return;
   try {
-    unwatch = await watch(dir, async () => {
+    unwatch = await watch(dir, async (event) => {
       await refreshAdvancedThemeList();
+
+      const state = useSettingsStore.getState();
+      const mode = state.getValue('core.theme.mode');
+      const currentPath = state.getValue('core.theme.advanced.path');
+
+      if (
+        mode !== 'advanced' ||
+        typeof currentPath !== 'string' ||
+        !currentPath
+      ) {
+        return;
+      }
+
+      if (!event.paths.some((p) => p === currentPath)) {
+        return;
+      }
+
+      try {
+        await loadAndApplyAdvancedThemeFromFile(currentPath);
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        toast.error('Theme reload failed', { description: msg });
+        await logError(
+          `[themes/watch] reload failed for ${currentPath}: ${msg}`,
+        );
+      }
     });
   } catch (e) {
     await reportFsError('fs.watch', dir, e);
