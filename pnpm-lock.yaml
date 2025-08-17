@@ -104,6 +104,9 @@ importers:
       '@nuclearplayer/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config
+      '@nuclearplayer/themes':
+        specifier: workspace:*
+        version: link:../themes
       '@nuclearplayer/ui':
         specifier: workspace:*
         version: link:../ui

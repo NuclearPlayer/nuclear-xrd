@@ -17,7 +17,7 @@ Built-in basic theme IDs are namespaced with `nuclear:` to avoid collisions.
 
 ## Advanced theme JSON (v1)
 
-```
+```json
 {
   "version": 1,
   "name": "My Theme",
