@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Mock } from 'vitest';
 
-import { applyAdvancedTheme, setThemeId } from '@nuclearplayer/themes';
+import * as themes from '@nuclearplayer/themes';
 
 import { useSettingsStore } from '../../stores/settingsStore';
 import { ThemesWrapper } from './Themes.test-wrapper';
@@ -23,6 +23,11 @@ const advancedThemes = [
 ];
 
 describe('Themes view', async () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+    vi.spyOn(themes, 'setThemeId');
+    vi.spyOn(themes, 'applyAdvancedTheme');
+  });
   it('(Snapshot) renders the themes view', async () => {
     const { asFragment } = await ThemesWrapper.mount();
     expect(asFragment()).toMatchSnapshot();
@@ -50,8 +55,8 @@ describe('Themes view', async () => {
     await ThemesWrapper.selectAdvancedTheme('My Theme');
 
     expect(fs.readTextFile).toHaveBeenCalledWith('/themes/my.json');
-    expect(setThemeId).toHaveBeenCalledWith('');
-    expect(applyAdvancedTheme).toHaveBeenCalledTimes(1);
+    expect(themes.setThemeId).toHaveBeenCalledWith('');
+    expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
     expect(useSettingsStore.getState().getValue('core.theme.mode')).toBe(
       'advanced',
     );
