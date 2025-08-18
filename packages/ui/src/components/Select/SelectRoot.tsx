@@ -58,7 +58,9 @@ export const SelectRoot: FC<SelectRootProps> = ({
   );
 
   const commit = (val: string) => {
-    if (!isControlled) setInternal(val);
+    if (!isControlled) {
+      setInternal(val);
+    }
     onValueChange?.(val);
   };
 
@@ -69,7 +71,6 @@ export const SelectRoot: FC<SelectRootProps> = ({
           value={{
             ids: { selectId, labelId, descriptionId, errorId, listboxId },
             value: currentValue,
-            commit,
             size,
             disabled,
             state,
