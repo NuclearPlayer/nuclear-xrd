@@ -11,14 +11,14 @@ export const SettingsWrapper = {
     registerBuiltInCoreSettings();
     const component = render(<App />);
     await userEvent.click(
-      await component.findByRole('button', { name: /preferences/i }),
+      await component.findByRole('button', { name: 'Preferences' }),
     );
     await userEvent.click(
       await component.findByRole('link', {
-        name: /settings/i,
+        name: 'Settings',
       }),
     );
-    await screen.findByRole('heading', { name: /settings/i });
+    await screen.findByRole('heading', { name: 'Settings' });
 
     return component;
   },

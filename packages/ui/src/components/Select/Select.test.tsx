@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
 import '@nuclearplayer/tailwind-config';
@@ -35,5 +36,13 @@ describe('Select snapshots', () => {
       />,
     );
     expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it('runs onValueChange callback on selection', async () => {
+    const onValueChange = vi.fn();
+    render(<Select options={OPTIONS} onValueChange={onValueChange} />);
+    await userEvent.click(await screen.findByRole('button'));
+    await userEvent.click(await screen.findByRole('option', { name: 'High' }));
+    expect(onValueChange).toHaveBeenCalledWith('high');
   });
 });

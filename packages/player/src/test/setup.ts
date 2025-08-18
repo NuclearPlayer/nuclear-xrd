@@ -2,32 +2,13 @@ import '@testing-library/jest-dom';
 
 import { vi } from 'vitest';
 
+import { setupResizeObserverMock } from '@nuclearplayer/ui';
+
 import { joinPath, readFile } from './utils/testPluginFolder';
 
-type ResizeObserverLike = new (callback: ResizeObserverCallback) => {
-  observe(target: Element): void;
-  unobserve(target: Element): void;
-  disconnect(): void;
-};
-
 process.env.NODE_ENV = 'test';
-const g = globalThis as unknown as { ResizeObserver?: ResizeObserverLike };
 
-if (typeof g.ResizeObserver === 'undefined') {
-  class ResizeObserverMock {
-    constructor(callback: ResizeObserverCallback) {
-      void callback; // avoid unused param lint
-    }
-    observe(target: Element): void {
-      void target; // avoid unused param lint
-    }
-    unobserve(target: Element): void {
-      void target; // avoid unused param lint
-    }
-    disconnect(): void {}
-  }
-  g.ResizeObserver = ResizeObserverMock;
-}
+setupResizeObserverMock();
 
 // Silences react's pointless warning spam
 // give it a rest already
