@@ -24,13 +24,6 @@ vi.mock('@tauri-apps/plugin-fs', () => ({
   readTextFile: (path: string) => Promise.resolve(readFile(path)),
 }));
 
-vi.mock('framer-motion', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('framer-motion')>();
-  const mockMod = await import('./mocks/mockFramerMotion');
-  const factory = mockMod.default;
-  return factory(mod);
-});
-
 vi.mock('@tauri-apps/api/path', () => ({
   join: async (...parts: string[]) => joinPath(...parts),
 }));
@@ -62,3 +55,12 @@ vi.mock('@tauri-apps/plugin-log', () => ({
   info: () => Promise.resolve(),
   error: () => Promise.resolve(),
 }));
+
+vi.mock('framer-motion', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('framer-motion')>();
+
+  // Ugly as shit cross-package import but importing @nuclearplayer/ui here causes tests to hang indefinitely
+  const mockMod = await import('../../../ui/src/test/mockFramerMotion');
+  const factory = mockMod.createFramerMotionMock;
+  return factory(mod);
+});

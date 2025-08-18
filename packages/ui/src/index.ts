@@ -6,3 +6,4 @@ export * from './components';
 export * from './utils';
 
 export { setupResizeObserverMock } from './test/resizeObserverMock';
+export { createFramerMotionMock } from './test/mockFramerMotion';
