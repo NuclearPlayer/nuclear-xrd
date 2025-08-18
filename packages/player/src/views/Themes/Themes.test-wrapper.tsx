@@ -25,14 +25,22 @@ export const ThemesWrapper = {
     );
     return component;
   },
-  async selectAdvancedTheme(label: string): Promise<void> {
+  async getAdvancedTheme(name: string | RegExp) {
+    const section = await screen.findByTestId('advanced-themes');
+    return within(section).getByRole('option', { name });
+  },
+  async openAdvancedThemeSelect() {
     const section = await screen.findByTestId('advanced-themes');
     const trigger = within(section).getByRole('button');
     await userEvent.click(trigger);
+    return section;
+  },
+  async selectAdvancedTheme(label: string) {
+    const section = await this.openAdvancedThemeSelect();
     const labelElement = within(section).getByRole('option', { name: label });
     await userEvent.click(labelElement);
   },
-  async selectDefaultTheme(): Promise<void> {
+  async selectDefaultTheme() {
     await this.selectAdvancedTheme('Default');
   },
 };

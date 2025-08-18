@@ -1,10 +1,14 @@
 import * as fs from '@tauri-apps/plugin-fs';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Mock } from 'vitest';
 
 import * as themes from '@nuclearplayer/themes';
 
+import {
+  startAdvancedThemeWatcher,
+  stopAdvancedThemeWatcher,
+} from '../../services/advancedThemeDirService';
 import { useSettingsStore } from '../../stores/settingsStore';
 import { ThemesWrapper } from './Themes.test-wrapper';
 
@@ -13,8 +17,32 @@ vi.mock('@tauri-apps/plugin-store', async () => {
   return { LazyStore: mod.LazyStore };
 });
 
+let watchCb: ((evt: { paths: string[] }) => void) | null = null;
 vi.mock('@tauri-apps/plugin-fs', () => ({
+  exists: vi.fn(),
+  mkdir: vi.fn(),
+  readDir: vi.fn(),
   readTextFile: vi.fn(),
+  watch: vi.fn(async (_dir: string, cb: (evt: { paths: string[] }) => void) => {
+    watchCb = cb;
+    return () => {};
+  }),
+}));
+
+vi.mock('@tauri-apps/api/path', () => ({
+  appDataDir: vi.fn(async () => '/appdata'),
+  join: vi.fn(async (...parts: string[]) =>
+    parts.join('/').replace(/\/+/g, '/').replace(/\/+/g, '/'),
+  ),
+}));
+
+const logError = vi.fn();
+const toastError = vi.fn();
+vi.mock('@tauri-apps/plugin-log', () => ({
+  error: (...args: unknown[]) => logError(...args),
+}));
+vi.mock('sonner', () => ({
+  toast: { error: (...args: unknown[]) => toastError(...args) },
 }));
 
 const advancedThemes = [
@@ -28,9 +56,13 @@ describe('Themes view', async () => {
     vi.spyOn(themes, 'setThemeId');
     vi.spyOn(themes, 'applyAdvancedTheme');
   });
-  it('(Snapshot) renders the themes view', async () => {
-    const { asFragment } = await ThemesWrapper.mount();
-    expect(asFragment()).toMatchSnapshot();
+  afterEach(() => {
+    stopAdvancedThemeWatcher();
+  });
+  it('renders the Themes view sections', async () => {
+    await ThemesWrapper.mount();
+    expect(await screen.findByTestId('basic-themes')).toBeInTheDocument();
+    expect(await screen.findByTestId('advanced-themes')).toBeInTheDocument();
   });
 
   it('switches to basic themes', async () => {
@@ -87,5 +119,113 @@ describe('Themes view', async () => {
     expect(
       useSettingsStore.getState().getValue('core.theme.advanced.path'),
     ).toBe('');
+  });
+
+  it('populates advanced themes from the app data themes directory on watcher start and shows them in the UI', async () => {
+    (fs.exists as Mock).mockResolvedValue(false);
+    (fs.mkdir as Mock).mockResolvedValue(undefined);
+    (fs.readDir as Mock).mockResolvedValue([
+      { name: 'another.json', isDirectory: false },
+      { name: 'my.json', isDirectory: false },
+      { name: 'ignore.txt', isDirectory: false },
+      { name: 'nested', isDirectory: true },
+    ]);
+    (fs.readTextFile as Mock).mockImplementation(async (p: string) => {
+      if (p.endsWith('/my.json')) {
+        return JSON.stringify({ version: 1, name: 'My Theme', vars: {} });
+      }
+      if (p.endsWith('/another.json')) {
+        return JSON.stringify({ version: 1, name: 'Another', vars: {} });
+      }
+      throw new Error('unexpected file');
+    });
+
+    await startAdvancedThemeWatcher();
+
+    await ThemesWrapper.mount();
+    await ThemesWrapper.openAdvancedThemeSelect();
+
+    expect(await ThemesWrapper.getAdvancedTheme(/Default/)).toBeInTheDocument();
+    expect(await ThemesWrapper.getAdvancedTheme('Another')).toBeInTheDocument();
+    expect(
+      await ThemesWrapper.getAdvancedTheme('My Theme'),
+    ).toBeInTheDocument();
+
+    expect(fs.mkdir as Mock).toHaveBeenCalledWith('/appdata/themes', {
+      recursive: true,
+    });
+  });
+
+  it('reloads the currently selected advanced theme when the watched file changes', async () => {
+    (fs.exists as Mock).mockResolvedValue(true);
+    (fs.readDir as Mock).mockResolvedValue([
+      { name: 'my.json', isDirectory: false },
+    ]);
+    (fs.readTextFile as Mock).mockResolvedValue(
+      JSON.stringify({ version: 1, name: 'My Theme', vars: { p: '#111' } }),
+    );
+
+    await startAdvancedThemeWatcher();
+
+    await ThemesWrapper.mount();
+    await ThemesWrapper.selectAdvancedTheme('My Theme');
+    expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
+
+    watchCb?.({ paths: ['/appdata/themes/my.json'] });
+
+    await waitFor(() =>
+      expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(2),
+    );
+    expect(fs.readTextFile as Mock).toHaveBeenCalledWith(
+      '/appdata/themes/my.json',
+    );
+  });
+
+  it("doesn't reload when a different file changes or when not in advanced mode", async () => {
+    (fs.exists as Mock).mockResolvedValue(true);
+    (fs.readDir as Mock).mockResolvedValue([
+      { name: 'my.json', isDirectory: false },
+      { name: 'other.json', isDirectory: false },
+    ]);
+    (fs.readTextFile as Mock).mockImplementation(async (p: string) =>
+      JSON.stringify({
+        version: 1,
+        name: p.endsWith('my.json') ? 'My Theme' : 'Other',
+        vars: {},
+      }),
+    );
+
+    await startAdvancedThemeWatcher();
+
+    await ThemesWrapper.mount();
+    await ThemesWrapper.selectAdvancedTheme('My Theme');
+    expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
+
+    // Change unrelated file -> no reload
+    watchCb?.({ paths: ['/appdata/themes/other.json'] });
+    await new Promise((r) => setTimeout(r, 0));
+    expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
+
+    // Switch back to Default (basic mode)
+    await ThemesWrapper.selectDefaultTheme();
+
+    // Now even if the same file changes, no reload should occur
+    watchCb?.({ paths: ['/appdata/themes/my.json'] });
+    expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
+  });
+
+  it('gracefully reports errors when reading the themes directory fails', async () => {
+    (fs.exists as Mock).mockResolvedValue(true);
+    (fs.readDir as Mock).mockRejectedValue(new Error('boom'));
+
+    await startAdvancedThemeWatcher();
+
+    await ThemesWrapper.mount();
+    expect(toastError).toHaveBeenCalledWith('fs.readDir', {
+      description: 'boom',
+    });
+    expect(logError).toHaveBeenCalledWith(
+      '[themes/fs] fs.readDir failed for /appdata/themes: boom',
+    );
   });
 });
