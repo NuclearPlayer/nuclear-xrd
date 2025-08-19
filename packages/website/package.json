@@ -1,0 +1,36 @@
+{
+  "name": "@nuclearplayer/website",
+  "version": "0.0.8",
+  "description": "Nuclear website deployed to GitHub Pages",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build && next export",
+    "lint": "echo 'Linting skipped for website package'",
+    "lint:fix": "echo 'Linting skipped for website package'",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next out dist build .turbo node_modules/.cache"
+  },
+  "dependencies": {
+    "@nuclearplayer/tailwind-config": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "next": "^15.1.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@nuclearplayer/eslint-config": "workspace:*",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "eslint": "^9.32.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.7.2"
+  }
+}
