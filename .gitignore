@@ -6,3 +6,6 @@ build
 .turbo
 storybook-static
 coverage
+.next
+out
+next-env.d.ts
