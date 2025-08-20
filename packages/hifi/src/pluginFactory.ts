@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export type PluginFactoryProps<N = AudioNode> = {
   audioContext: AudioContext;
@@ -19,7 +19,6 @@ export function pluginFactory<P, N = AudioNode | AudioNode[]>(
     const nodeRef = useRef<N | null>(null);
     const { audioContext, previousNode, onRegister, ...pluginProps } = props;
 
-    // Create node and connect to previousNode
     useEffect(() => {
       if (!audioContext || !previousNode) return;
       const node = plugin.createNode(audioContext, pluginProps as P);
@@ -45,7 +44,6 @@ export function pluginFactory<P, N = AudioNode | AudioNode[]>(
       };
     }, [audioContext, previousNode]);
 
-    // Update node when props change
     useEffect(() => {
       if (!audioContext || !nodeRef.current || !plugin.updateNode) return;
       plugin.updateNode(nodeRef.current, pluginProps as P, audioContext);
