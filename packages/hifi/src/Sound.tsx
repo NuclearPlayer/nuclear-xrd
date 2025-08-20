@@ -41,9 +41,9 @@ export const Sound: React.FC<SoundProps> = ({
   onError,
   children,
 }) => {
-  const audioRefA = useRef<HTMLAudioElement>(null);
-  const audioRefB = useRef<HTMLAudioElement>(null);
-  const [active, setActive] = useState<'A' | 'B'>('A');
+  const audioRefA = useRef<HTMLAudioElement | null>(null);
+  const audioRefB = useRef<HTMLAudioElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
   const [context, setContext] = useState<AudioContext | null>(null);
   const [sourceA, setSourceA] = useState<MediaElementAudioSourceNode | null>(
     null,
@@ -53,22 +53,32 @@ export const Sound: React.FC<SoundProps> = ({
   );
   const [gainA, setGainA] = useState<GainNode | null>(null);
   const [gainB, setGainB] = useState<GainNode | null>(null);
-  const [isReady, setIsReady] = useState(false);
+  const [isReady, setIsReady] = useState<boolean>(false);
   const prevSrc = useRef<AudioSource>(src);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (!context) setContext(new window.AudioContext());
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (context === null) {
+      setContext(new window.AudioContext());
+    }
     return () => {
       context?.close();
     };
-  }, []);
+  }, [context]);
 
   useEffect(() => {
-    if (!context) return;
-    if (!audioRefA.current || !audioRefB.current) return;
-    const srcA = context.createMediaElementSource(audioRefA.current);
-    const srcB = context.createMediaElementSource(audioRefB.current);
+    if (!context) {
+      return;
+    }
+    const audioA = audioRefA.current;
+    const audioB = audioRefB.current;
+    if (!audioA || !audioB) {
+      return;
+    }
+    const srcA = context.createMediaElementSource(audioA);
+    const srcB = context.createMediaElementSource(audioB);
     const gainNodeA = context.createGain();
     const gainNodeB = context.createGain();
     srcA.connect(gainNodeA).connect(context.destination);
@@ -87,92 +97,76 @@ export const Sound: React.FC<SoundProps> = ({
   }, [context]);
 
   useEffect(() => {
-    if (!isReady) return;
-    const audio = active === 'A' ? audioRefA.current : audioRefB.current;
-    if (!audio) return;
+    if (!isReady) {
+      return;
+    }
+    const audio = activeIndex === 0 ? audioRefA.current : audioRefB.current;
+    if (!audio) {
+      return;
+    }
     switch (status) {
-      case 'playing':
+      case 'playing': {
         context?.resume();
         audio.play();
         break;
-      case 'paused':
+      }
+      case 'paused': {
         audio.pause();
         break;
-      case 'stopped':
+      }
+      case 'stopped': {
         audio.pause();
         audio.currentTime = 0;
         break;
+      }
     }
-  }, [status, isReady, active, context]);
+  }, [status, isReady, activeIndex, context]);
 
   useEffect(() => {
-    if (!isReady || seek == null) return;
-    const audio = active === 'A' ? audioRefA.current : audioRefB.current;
-    if (audio) audio.currentTime = seek;
-  }, [seek, isReady, active]);
-  useEffect(() => {
-    if (!isReady || seek == null) return;
-    const audio = active === 'A' ? audioRefA.current : audioRefB.current;
-    if (audio) audio.currentTime = seek;
-  }, [seek, isReady, active]);
+    if (!isReady || seek == null) {
+      return;
+    }
+    const audio = activeIndex === 0 ? audioRefA.current : audioRefB.current;
+    if (audio) {
+      audio.currentTime = seek;
+    }
+  }, [seek, isReady, activeIndex]);
 
   useEffect(() => {
-    if (!isReady) return;
-    if (src === prevSrc.current) return;
+    if (!isReady) {
+      return;
+    }
+    if (src === prevSrc.current) {
+      return;
+    }
+    const nextIndex = 1 - activeIndex;
     if (crossfadeMs === 0) {
-      setActive(active === 'A' ? 'B' : 'A');
+      setActiveIndex(nextIndex);
       prevSrc.current = src;
       return;
     }
-    const fadeOut = active === 'A' ? gainA : gainB;
-    const fadeIn = active === 'A' ? gainB : gainA;
-    const nextAudio = active === 'A' ? audioRefB.current : audioRefA.current;
-    if (!fadeOut || !fadeIn || !nextAudio) return;
-    fadeIn.gain.setValueAtTime(0, context!.currentTime);
-    nextAudio.load();
-    nextAudio.play();
-    fadeIn.gain.linearRampToValueAtTime(
-      1,
-      context!.currentTime + crossfadeMs / 1000,
-    );
-    fadeOut.gain.linearRampToValueAtTime(
-      0,
-      context!.currentTime + crossfadeMs / 1000,
-    );
-    setTimeout(() => {
-      setActive(active === 'A' ? 'B' : 'A');
-      prevSrc.current = src;
-    }, crossfadeMs);
-  }, [src, crossfadeMs, isReady, active, gainA, gainB, context]);
-  useEffect(() => {
-    if (!isReady) return;
-    if (src === prevSrc.current) return;
-    if (crossfadeMs === 0) {
-      setActive(active === 'A' ? 'B' : 'A');
-      prevSrc.current = src;
+    const currentGain = activeIndex === 0 ? gainA : gainB;
+    const nextGain = nextIndex === 0 ? gainA : gainB;
+    const nextAudio = nextIndex === 0 ? audioRefA.current : audioRefB.current;
+    if (!currentGain || !nextGain || !nextAudio || !context) {
       return;
     }
-    // Crossfade logic
-    const fadeOut = active === 'A' ? gainA : gainB;
-    const fadeIn = active === 'A' ? gainB : gainA;
-    const nextAudio = active === 'A' ? audioRefB.current : audioRefA.current;
-    if (!fadeOut || !fadeIn || !nextAudio) return;
-    fadeIn.gain.setValueAtTime(0, context!.currentTime);
+    nextGain.gain.setValueAtTime(0, context.currentTime);
     nextAudio.load();
     nextAudio.play();
-    fadeIn.gain.linearRampToValueAtTime(
+    nextGain.gain.linearRampToValueAtTime(
       1,
-      context!.currentTime + crossfadeMs / 1000,
+      context.currentTime + crossfadeMs / 1000,
     );
-    fadeOut.gain.linearRampToValueAtTime(
+    currentGain.gain.linearRampToValueAtTime(
       0,
-      context!.currentTime + crossfadeMs / 1000,
+      context.currentTime + crossfadeMs / 1000,
     );
     setTimeout(() => {
-      setActive(active === 'A' ? 'B' : 'A');
+      setActiveIndex(nextIndex);
       prevSrc.current = src;
     }, crossfadeMs);
-  }, [src, crossfadeMs, isReady, active, gainA, gainB, context]);
+  }, [src, crossfadeMs, isReady, activeIndex, gainA, gainB, context]);
 
   const handleTimeUpdate = useCallback(
     (e: React.SyntheticEvent<HTMLAudioElement>) => {
@@ -187,38 +181,19 @@ export const Sound: React.FC<SoundProps> = ({
   const handleError = useCallback(
     (e: React.SyntheticEvent<HTMLAudioElement>) => {
       if (onError) {
-        const err = (e.currentTarget as any).error;
-        onError(new Error(err?.message || 'Unknown audio error'));
-      }
-    },
-    [onError],
-  );
-  const handleTimeUpdate = useCallback(
-    (e: React.SyntheticEvent<HTMLAudioElement>) => {
-      if (onTimeUpdate) {
-        const el = e.currentTarget;
-        onTimeUpdate({ position: el.currentTime, duration: el.duration });
-      }
-    },
-    [onTimeUpdate],
-  );
-
-  const handleError = useCallback(
-    (e: React.SyntheticEvent<HTMLAudioElement>) => {
-      if (onError) {
-        const err = (e.currentTarget as any).error;
-        onError(new Error(err?.message || 'Unknown audio error'));
+        const el = e.currentTarget as HTMLAudioElement & {
+          error: MediaError | null;
+        };
+        onError(new Error(el.error?.message || 'Unknown audio error'));
       }
     },
     [onError],
   );
 
   const renderSources = (src: AudioSource) => {
-    if (typeof src === 'string') return <source src={src} />;
-    return src.map((s, i) => <source key={i} src={s.src} type={s.type} />);
-  };
-  const renderSources = (src: AudioSource) => {
-    if (typeof src === 'string') return <source src={src} />;
+    if (typeof src === 'string') {
+      return <source src={src} />;
+    }
     return src.map((s, i) => <source key={i} src={s.src} type={s.type} />);
   };
 
@@ -235,7 +210,7 @@ export const Sound: React.FC<SoundProps> = ({
         onCanPlay={onCanPlay}
         onError={handleError}
       >
-        {renderSources(active === 'A' ? src : prevSrc.current)}
+        {renderSources(activeIndex === 0 ? src : prevSrc.current)}
       </audio>
       <audio
         ref={audioRefB}
@@ -248,18 +223,25 @@ export const Sound: React.FC<SoundProps> = ({
         onCanPlay={onCanPlay}
         onError={handleError}
       >
-        {renderSources(active === 'B' ? src : prevSrc.current)}
+        {renderSources(activeIndex === 1 ? src : prevSrc.current)}
       </audio>
       {isReady &&
         context &&
         children &&
         React.Children.map(children, (child, idx) =>
           React.isValidElement(child)
-            ? React.cloneElement(child as React.ReactElement<any>, {
-                audioContext: context,
-                previousNode:
-                  idx === 0 ? (active === 'A' ? sourceA : sourceB) : undefined,
-              })
+            ? React.cloneElement(
+                child as React.ReactElement<Record<string, unknown>>,
+                {
+                  audioContext: context,
+                  previousNode:
+                    idx === 0
+                      ? activeIndex === 0
+                        ? sourceA
+                        : sourceB
+                      : undefined,
+                },
+              )
             : child,
         )}
     </>
