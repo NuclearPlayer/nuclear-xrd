@@ -1,7 +1,8 @@
+import '../../test/mocks/plugin-fs';
+
 import * as fs from '@tauri-apps/plugin-fs';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Mock } from 'vitest';
 
 import * as themes from '@nuclearplayer/themes';
 
@@ -10,24 +11,13 @@ import {
   stopAdvancedThemeWatcher,
 } from '../../services/advancedThemeDirService';
 import { useSettingsStore } from '../../stores/settingsStore';
+import { PluginFsMock, watchCb } from '../../test/mocks/plugin-fs';
 import { ThemesWrapper } from './Themes.test-wrapper';
 
 vi.mock('@tauri-apps/plugin-store', async () => {
   const mod = await import('../../test/utils/inMemoryTauriStore');
   return { LazyStore: mod.LazyStore };
 });
-
-let watchCb: ((evt: { paths: string[] }) => void) | null = null;
-vi.mock('@tauri-apps/plugin-fs', () => ({
-  exists: vi.fn(),
-  mkdir: vi.fn(),
-  readDir: vi.fn(),
-  readTextFile: vi.fn(),
-  watch: vi.fn(async (_dir: string, cb: (evt: { paths: string[] }) => void) => {
-    watchCb = cb;
-    return () => {};
-  }),
-}));
 
 vi.mock('@tauri-apps/api/path', () => ({
   appDataDir: vi.fn(async () => '/appdata'),
@@ -74,7 +64,7 @@ describe('Themes view', async () => {
   });
 
   it('loads and applies selected advanced theme file', async () => {
-    (fs.readTextFile as Mock).mockResolvedValue(
+    PluginFsMock.setReadTextFile(
       JSON.stringify({
         version: 1,
         name: 'My Theme',
@@ -98,7 +88,7 @@ describe('Themes view', async () => {
   });
 
   it('reset to default from advanced themes select', async () => {
-    (fs.readTextFile as Mock).mockResolvedValue(
+    PluginFsMock.setReadTextFile(
       JSON.stringify({
         version: 1,
         name: 'My Theme',
@@ -122,22 +112,21 @@ describe('Themes view', async () => {
   });
 
   it('populates advanced themes from the app data themes directory on watcher start and shows them in the UI', async () => {
-    (fs.exists as Mock).mockResolvedValue(false);
-    (fs.mkdir as Mock).mockResolvedValue(undefined);
-    (fs.readDir as Mock).mockResolvedValue([
+    PluginFsMock.setExists(false);
+    PluginFsMock.setMkdir(undefined);
+    PluginFsMock.setReadDir([
       { name: 'another.json', isDirectory: false },
       { name: 'my.json', isDirectory: false },
       { name: 'ignore.txt', isDirectory: false },
       { name: 'nested', isDirectory: true },
     ]);
-    (fs.readTextFile as Mock).mockImplementation(async (p: string) => {
-      if (p.endsWith('/my.json')) {
-        return JSON.stringify({ version: 1, name: 'My Theme', vars: {} });
-      }
-      if (p.endsWith('/another.json')) {
-        return JSON.stringify({ version: 1, name: 'Another', vars: {} });
-      }
-      throw new Error('unexpected file');
+    PluginFsMock.setReadTextFileByMap({
+      '/my.json': JSON.stringify({ version: 1, name: 'My Theme', vars: {} }),
+      '/another.json': JSON.stringify({
+        version: 1,
+        name: 'Another',
+        vars: {},
+      }),
     });
 
     await startAdvancedThemeWatcher();
@@ -151,17 +140,15 @@ describe('Themes view', async () => {
       await ThemesWrapper.getAdvancedTheme('My Theme'),
     ).toBeInTheDocument();
 
-    expect(fs.mkdir as Mock).toHaveBeenCalledWith('/appdata/themes', {
+    expect(fs.mkdir).toHaveBeenCalledWith('/appdata/themes', {
       recursive: true,
     });
   });
 
   it('reloads the currently selected advanced theme when the watched file changes', async () => {
-    (fs.exists as Mock).mockResolvedValue(true);
-    (fs.readDir as Mock).mockResolvedValue([
-      { name: 'my.json', isDirectory: false },
-    ]);
-    (fs.readTextFile as Mock).mockResolvedValue(
+    PluginFsMock.setExists(true);
+    PluginFsMock.setReadDir([{ name: 'my.json', isDirectory: false }]);
+    PluginFsMock.setReadTextFile(
       JSON.stringify({ version: 1, name: 'My Theme', vars: { p: '#111' } }),
     );
 
@@ -176,24 +163,27 @@ describe('Themes view', async () => {
     await waitFor(() =>
       expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(2),
     );
-    expect(fs.readTextFile as Mock).toHaveBeenCalledWith(
-      '/appdata/themes/my.json',
-    );
+    expect(fs.readTextFile).toHaveBeenCalledWith('/appdata/themes/my.json');
   });
 
   it("doesn't reload when a different file changes or when not in advanced mode", async () => {
-    (fs.exists as Mock).mockResolvedValue(true);
-    (fs.readDir as Mock).mockResolvedValue([
+    PluginFsMock.setExists(true);
+    PluginFsMock.setReadDir([
       { name: 'my.json', isDirectory: false },
       { name: 'other.json', isDirectory: false },
     ]);
-    (fs.readTextFile as Mock).mockImplementation(async (p: string) =>
-      JSON.stringify({
+    PluginFsMock.setReadTextFileByMap({
+      '/appdata/themes/my.json': JSON.stringify({
         version: 1,
-        name: p.endsWith('my.json') ? 'My Theme' : 'Other',
-        vars: {},
+        name: 'My Theme',
+        vars: { p: '#111' },
       }),
-    );
+      '/appdata/themes/other.json': JSON.stringify({
+        version: 1,
+        name: 'Other',
+        vars: { p: '#222' },
+      }),
+    });
 
     await startAdvancedThemeWatcher();
 
@@ -215,8 +205,8 @@ describe('Themes view', async () => {
   });
 
   it('gracefully reports errors when reading the themes directory fails', async () => {
-    (fs.exists as Mock).mockResolvedValue(true);
-    (fs.readDir as Mock).mockRejectedValue(new Error('boom'));
+    PluginFsMock.setExists(true);
+    PluginFsMock.setReadDirError(new Error('boom'));
 
     await startAdvancedThemeWatcher();
 
