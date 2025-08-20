@@ -1,0 +1,11 @@
+{
+  "name": "@nuclearplayer/hifi",
+  "version": "0.0.8",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "packageManager": "pnpm@10.14.0"
+}
