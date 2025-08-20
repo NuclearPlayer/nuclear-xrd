@@ -24,7 +24,7 @@ export const Plugins = () => {
 
   return (
     <ViewShell title="Plugins">
-      <div className="relative mt-6 flex w-full flex-col gap-4 overflow-hidden">
+      <div className="relative flex w-full flex-col gap-4 overflow-hidden">
         <div className="flex items-center">
           <Button onClick={handleAdd} size="sm">
             Add Plugin

@@ -12,7 +12,6 @@ type SelectContextValue = {
     listboxId: string;
   };
   value: string;
-  commit: (v: string) => void;
   size?: VariantProps<typeof selectVariants>['size'];
   disabled?: boolean;
   state: 'normal' | 'error';

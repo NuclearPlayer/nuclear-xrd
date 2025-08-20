@@ -22,7 +22,7 @@ export const SelectOptions: FC<PropsWithChildren> = ({ children }) => {
             damping: 22,
             mass: 0.9,
           }}
-          className="absolute top-18 left-0 z-50 w-full"
+          className="absolute top-16 left-0 z-50 w-full"
         >
           <ListboxOptions
             as="ul"

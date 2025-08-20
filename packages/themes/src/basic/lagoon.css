@@ -1,0 +1,9 @@
+:root[data-theme-id='nuclear:lagoon'] {
+  --background: oklch(0.985 0.018 210);
+  --primary: oklch(0.67 0.16 205);
+}
+
+:root[data-theme-id='nuclear:lagoon'][data-theme='dark'] {
+  --background: oklch(0.33 0.035 245);
+  --primary: oklch(0.67 0.16 205);
+}

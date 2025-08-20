@@ -1,0 +1,9 @@
+:root[data-theme-id='nuclear:canyon'] {
+  --background: oklch(0.975 0.02 70);
+  --primary: oklch(0.68 0.19 38);
+}
+
+:root[data-theme-id='nuclear:canyon'][data-theme='dark'] {
+  --background: oklch(0.36 0.03 30);
+  --primary: oklch(0.68 0.19 38);
+}

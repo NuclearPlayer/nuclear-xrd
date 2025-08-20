@@ -475,7 +475,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
             >
               <h1
-                class="flex w-full flex-0 flex-row text-center text-3xl font-bold"
+                class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
               >
                 Dashboard
               </h1>
@@ -496,7 +496,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
             >
               <h1
-                class="flex w-full flex-0 flex-row text-center text-3xl font-bold"
+                class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
               >
                 Settings
               </h1>
@@ -504,112 +504,120 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
                 <div
-                  class="relative h-auto w-full mt-6 max-w-100 flex-1 overflow-hidden"
+                  class="relative h-auto w-full max-w-100 flex-1 overflow-hidden"
                 >
                   <div
                     class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
                     style="scrollbar-width: none;"
                   >
                     <section
-                      class="flex flex-col gap-4 px-2"
+                      class="mb-6 flex w-full flex-col items-start justify-start"
                     >
                       <h2
-                        class="text-foreground text-lg font-semibold"
+                        class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
                       >
                         General
                       </h2>
                       <div
-                        class="flex flex-col gap-6"
+                        class="flex w-full flex-1 flex-col"
                       >
                         <div
-                          class="relative flex w-full flex-col gap-2"
+                          class="flex flex-col gap-6"
                         >
-                          <label
-                            class="text-foreground text-sm font-semibold"
-                            for="select-:r2:"
-                            id="select-:r2:-label"
+                          <div
+                            class="relative flex w-full flex-col gap-2"
                           >
-                            settings.general.language.title
-                          </label>
-                          <button
-                            aria-expanded="false"
-                            aria-haspopup="listbox"
-                            class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
-                            data-headlessui-state=""
-                            id="select-:r2:"
-                            type="button"
-                          >
-                            <span
-                              class="block truncate"
+                            <label
+                              class="text-foreground text-sm font-semibold"
+                              for="select-:r2:"
+                              id="select-:r2:-label"
                             >
-                              English
-                            </span>
-                            <span
-                              class="flex items-center"
+                              settings.general.language.title
+                            </label>
+                            <button
+                              aria-expanded="false"
+                              aria-haspopup="listbox"
+                              class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
+                              data-headlessui-state=""
+                              id="select-:r2:"
+                              type="button"
                             >
-                              <svg
-                                aria-hidden="true"
-                                class="lucide lucide-chevron-down text-foreground transition-transform"
-                                fill="none"
-                                height="16"
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                width="16"
-                                xmlns="http://www.w3.org/2000/svg"
+                              <span
+                                class="block truncate"
                               >
-                                <path
-                                  d="m6 9 6 6 6-6"
-                                />
-                              </svg>
-                            </span>
-                          </button>
-                          <p
-                            class="text-foreground-secondary text-sm select-none"
-                            id="select-:r2:-description"
-                          >
-                            settings.general.language.description
-                          </p>
+                                English
+                              </span>
+                              <span
+                                class="flex items-center"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  class="lucide lucide-chevron-down text-foreground transition-transform"
+                                  fill="none"
+                                  height="16"
+                                  stroke="currentColor"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  viewBox="0 0 24 24"
+                                  width="16"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="m6 9 6 6 6-6"
+                                  />
+                                </svg>
+                              </span>
+                            </button>
+                            <p
+                              class="text-foreground-secondary text-sm select-none"
+                              id="select-:r2:-description"
+                            >
+                              settings.general.language.description
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </section>
                     <section
-                      class="flex flex-col gap-4 px-2"
+                      class="mb-6 flex w-full flex-col items-start justify-start"
                     >
                       <h2
-                        class="text-foreground text-lg font-semibold"
+                        class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
                       >
                         Playback
                       </h2>
                       <div
-                        class="flex flex-col gap-6"
+                        class="flex w-full flex-1 flex-col"
                       >
                         <div
-                          class="flex w-full flex-col gap-2"
+                          class="flex flex-col gap-6"
                         >
-                          <label
-                            class="text-foreground text-sm font-semibold"
-                            for="input-:r6:"
-                            id="input-:r6:-label"
+                          <div
+                            class="flex w-full flex-col gap-2"
                           >
-                            settings.playback.skipSeconds.title
-                          </label>
-                          <input
-                            class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
-                            data-headlessui-state=""
-                            id="input-:r6:"
-                            inputmode="numeric"
-                            type="number"
-                            value=""
-                          />
-                          <p
-                            class="text-foreground-secondary text-sm select-none"
-                            id="input-:r6:-description"
-                          >
-                            settings.playback.skipSeconds.description
-                          </p>
+                            <label
+                              class="text-foreground text-sm font-semibold"
+                              for="input-:r6:"
+                              id="input-:r6:-label"
+                            >
+                              settings.playback.skipSeconds.title
+                            </label>
+                            <input
+                              class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
+                              data-headlessui-state=""
+                              id="input-:r6:"
+                              inputmode="numeric"
+                              type="number"
+                              value=""
+                            />
+                            <p
+                              class="text-foreground-secondary text-sm select-none"
+                              id="input-:r6:-description"
+                            >
+                              settings.playback.skipSeconds.description
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </section>

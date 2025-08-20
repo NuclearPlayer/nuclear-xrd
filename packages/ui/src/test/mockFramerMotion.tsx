@@ -20,10 +20,17 @@ export const createFramerMotionMock = (mod: typeof import('framer-motion')) => {
       },
     );
 
+  const cache = new Map<string, ReturnType<typeof make>>();
   const motion = new Proxy(
     {},
     {
-      get: (_target, el: string) => make(el as unknown as ElementType),
+      get: (_target, el: string) => {
+        const key = String(el);
+        if (!cache.has(key)) {
+          cache.set(key, make(el as unknown as ElementType));
+        }
+        return cache.get(key)!;
+      },
     },
   ) as typeof mod.motion;
 

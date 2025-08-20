@@ -345,7 +345,7 @@ exports[`App > should render snapshot 1`] = `
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
             >
               <h1
-                class="flex w-full flex-0 flex-row text-center text-3xl font-bold"
+                class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
               >
                 Dashboard
               </h1>
