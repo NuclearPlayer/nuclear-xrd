@@ -1,7 +1,7 @@
 {
-  "name": "@nuclearplayer/ui",
+  "name": "@nuclearplayer/hifi",
   "version": "0.0.8",
-  "description": "Shared UI component library for Nuclear",
+  "description": "",
   "type": "module",
   "main": "./src/index.ts",
   "module": "./src/index.ts",
@@ -26,41 +26,24 @@
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist build .turbo node_modules/.vite"
   },
-  "dependencies": {
-    "@fontsource/dm-sans": "^5.2.6",
-    "@headlessui/react": "^2.2.7",
-    "@nuclearplayer/eslint-config": "workspace:*",
-    "@nuclearplayer/tailwind-config": "workspace:*",
-    "@tanstack/react-router": "^1.131.2",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lodash-es": "^4.17.21",
-    "lucide-react": "^0.460.0",
-    "luxon": "^3.7.1",
-    "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.11"
+  "keywords": [],
+  "author": "",
+  "packageManager": "pnpm@10.14.0",
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.11",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/lodash-es": "^4.17.12",
-    "@types/luxon": "^3.7.1",
     "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "^3.2.4",
     "jsdom": "^26.1.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
     "vite-plugin-dts": "^4.3.0",
-    "vite-plugin-svgr": "^4.3.0",
     "vitest": "^3.2.4"
-  },
-  "peerDependencies": {
-    "framer-motion": "^12.23.12",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sonner": "^2.0.7"
   }
 }

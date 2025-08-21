@@ -618,6 +618,31 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               settings.playback.skipSeconds.description
                             </p>
                           </div>
+                          <div
+                            class="flex w-full flex-col gap-2"
+                          >
+                            <label
+                              class="text-foreground text-sm font-semibold"
+                              for="input-:r8:"
+                              id="input-:r8:-label"
+                            >
+                              settings.playback.crossfadeMs.title
+                            </label>
+                            <input
+                              class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
+                              data-headlessui-state=""
+                              id="input-:r8:"
+                              inputmode="numeric"
+                              type="number"
+                              value=""
+                            />
+                            <p
+                              class="text-foreground-secondary text-sm select-none"
+                              id="input-:r8:-description"
+                            >
+                              settings.playback.crossfadeMs.description
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </section>

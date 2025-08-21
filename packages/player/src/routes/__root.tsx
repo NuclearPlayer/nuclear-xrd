@@ -24,6 +24,7 @@ import {
   TopBar,
 } from '@nuclearplayer/ui';
 
+import { SoundProvider } from '../components/SoundProvider';
 import { useLayoutStore } from '../stores/layoutStore';
 
 const cover = 'https://picsum.photos/64';
@@ -42,79 +43,81 @@ const RootComponent = () => {
     <PlayerShell>
       <TopBar />
 
-      <PlayerWorkspace>
-        <PlayerWorkspace.LeftSidebar
-          width={leftSidebar.width}
-          isCollapsed={leftSidebar.isCollapsed}
-          onWidthChange={setLeftSidebarWidth}
-          onToggle={toggleLeftSidebar}
-        >
-          <SidebarNavigation>
-            <SidebarNavigationCollapsible
-              title="Explore"
-              icon={<CompassIcon />}
-            >
-              <Link to="/dashboard">
+      <SoundProvider>
+        <PlayerWorkspace>
+          <PlayerWorkspace.LeftSidebar
+            width={leftSidebar.width}
+            isCollapsed={leftSidebar.isCollapsed}
+            onWidthChange={setLeftSidebarWidth}
+            onToggle={toggleLeftSidebar}
+          >
+            <SidebarNavigation>
+              <SidebarNavigationCollapsible
+                title="Explore"
+                icon={<CompassIcon />}
+              >
+                <Link to="/dashboard">
+                  <SidebarNavigationItem>
+                    <GaugeIcon />
+                    Dashboard
+                  </SidebarNavigationItem>
+                </Link>
+              </SidebarNavigationCollapsible>
+              <SidebarNavigationCollapsible
+                title="Preferences"
+                icon={<SettingsIcon />}
+              >
+                <Link to="/settings">
+                  <SidebarNavigationItem>
+                    <Settings2Icon />
+                    Settings
+                  </SidebarNavigationItem>
+                </Link>
+                <Link to="/plugins">
+                  <SidebarNavigationItem>
+                    <BlocksIcon />
+                    Plugins
+                  </SidebarNavigationItem>
+                </Link>
+                <Link to="/themes">
+                  <SidebarNavigationItem>
+                    <PaletteIcon />
+                    Themes
+                  </SidebarNavigationItem>
+                </Link>
+              </SidebarNavigationCollapsible>
+              <SidebarNavigationCollapsible
+                title="Collection"
+                icon={<LibraryIcon />}
+              >
                 <SidebarNavigationItem>
-                  <GaugeIcon />
-                  Dashboard
+                  <DiscIcon />
+                  Favorite albums
                 </SidebarNavigationItem>
-              </Link>
-            </SidebarNavigationCollapsible>
-            <SidebarNavigationCollapsible
-              title="Preferences"
-              icon={<SettingsIcon />}
-            >
-              <Link to="/settings">
                 <SidebarNavigationItem>
-                  <Settings2Icon />
-                  Settings
+                  <MusicIcon />
+                  Favorite tracks
                 </SidebarNavigationItem>
-              </Link>
-              <Link to="/plugins">
                 <SidebarNavigationItem>
-                  <BlocksIcon />
-                  Plugins
+                  <UserIcon />
+                  Favorite artists
                 </SidebarNavigationItem>
-              </Link>
-              <Link to="/themes">
-                <SidebarNavigationItem>
-                  <PaletteIcon />
-                  Themes
-                </SidebarNavigationItem>
-              </Link>
-            </SidebarNavigationCollapsible>
-            <SidebarNavigationCollapsible
-              title="Collection"
-              icon={<LibraryIcon />}
-            >
-              <SidebarNavigationItem>
-                <DiscIcon />
-                Favorite albums
-              </SidebarNavigationItem>
-              <SidebarNavigationItem>
-                <MusicIcon />
-                Favorite tracks
-              </SidebarNavigationItem>
-              <SidebarNavigationItem>
-                <UserIcon />
-                Favorite artists
-              </SidebarNavigationItem>
-            </SidebarNavigationCollapsible>
-          </SidebarNavigation>
-        </PlayerWorkspace.LeftSidebar>
+              </SidebarNavigationCollapsible>
+            </SidebarNavigation>
+          </PlayerWorkspace.LeftSidebar>
 
-        <PlayerWorkspace.Main>
-          <RouteTransition />
-        </PlayerWorkspace.Main>
+          <PlayerWorkspace.Main>
+            <RouteTransition />
+          </PlayerWorkspace.Main>
 
-        <PlayerWorkspace.RightSidebar
-          width={rightSidebar.width}
-          isCollapsed={rightSidebar.isCollapsed}
-          onWidthChange={setRightSidebarWidth}
-          onToggle={toggleRightSidebar}
-        />
-      </PlayerWorkspace>
+          <PlayerWorkspace.RightSidebar
+            width={rightSidebar.width}
+            isCollapsed={rightSidebar.isCollapsed}
+            onWidthChange={setRightSidebarWidth}
+            onToggle={toggleRightSidebar}
+          />
+        </PlayerWorkspace>
+      </SoundProvider>
 
       <PlayerBar
         left={

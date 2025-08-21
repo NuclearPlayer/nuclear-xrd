@@ -8,6 +8,9 @@ on:
 permissions:
   contents: write
 
+env:
+  DO_NOT_TRACK: 1
+
 jobs:
   release:
     strategy:
