@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-export type PluginFactoryProps<N extends AudioNode | AudioNode[], P> = {
+export type InjectedProps<N extends AudioNode | AudioNode[]> = {
   audioContext: AudioContext;
   previousNode?: AudioNode;
   onRegister?: (node: N) => void;
-} & P;
+};
 
 export type Plugin<N extends AudioNode | AudioNode[], P> = {
   createNode: (ctx: AudioContext, props: P) => N;
@@ -14,15 +14,18 @@ export type Plugin<N extends AudioNode | AudioNode[], P> = {
 export function pluginFactory<P, N extends AudioNode | AudioNode[]>(
   plugin: Plugin<N, P>,
 ) {
-  return (props: PluginFactoryProps<N, P>) => {
+  return (props: P) => {
     const nodeRef = useRef<N | null>(null);
-    const { audioContext, previousNode, onRegister, ...pluginProps } = props;
+    const injected = props as InjectedProps<N>;
+    const audioContext = injected.audioContext;
+    const previousNode = injected.previousNode;
+    const onRegister = injected.onRegister;
 
     useEffect(() => {
       if (!audioContext || !previousNode) {
         return;
       }
-      const node = plugin.createNode(audioContext, pluginProps as P);
+      const node = plugin.createNode(audioContext, props);
       nodeRef.current = node;
       if (Array.isArray(node)) {
         let last = node[0];
@@ -53,8 +56,8 @@ export function pluginFactory<P, N extends AudioNode | AudioNode[]>(
       if (!audioContext || !nodeRef.current || !plugin.updateNode) {
         return;
       }
-      plugin.updateNode(nodeRef.current, pluginProps as P, audioContext);
-    }, [audioContext, pluginProps]);
+      plugin.updateNode(nodeRef.current, props, audioContext);
+    }, [audioContext, props]);
 
     return null;
   };

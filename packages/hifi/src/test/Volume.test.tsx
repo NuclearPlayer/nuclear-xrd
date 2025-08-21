@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { cloneElement } from 'react';
 
 import { Volume } from '../plugins/Volume';
 
@@ -19,13 +20,15 @@ describe('Volume', () => {
         nodes.push(node);
         return node as unknown as GainNode;
       },
-    } as unknown as AudioContext;
+    } as AudioContext;
 
-    const prev = { connect: () => undefined } as unknown as AudioNode;
+    const previousNode = { connect: () => undefined } as unknown as AudioNode;
+    let WrappedVolume = cloneElement(<Volume value={50} />, {
+      audioContext: ctx,
+      previousNode,
+    });
 
-    const { rerender } = render(
-      <Volume audioContext={ctx} previousNode={prev} value={50} />,
-    );
+    const { rerender } = render(WrappedVolume);
     expect(nodes).toMatchInlineSnapshot(`
       [
         {
@@ -38,7 +41,8 @@ describe('Volume', () => {
       ]
     `);
 
-    rerender(<Volume audioContext={ctx} previousNode={prev} value={80} />);
+    WrappedVolume = cloneElement(WrappedVolume, { value: 80 });
+    rerender(WrappedVolume);
     expect(nodes).toMatchInlineSnapshot(`
       [
         {

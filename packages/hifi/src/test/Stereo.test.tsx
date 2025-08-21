@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { cloneElement } from 'react';
 
 import { Stereo } from '../plugins/Stereo';
 
@@ -19,13 +20,16 @@ describe('Stereo', () => {
         created.push(node);
         return node as unknown as StereoPannerNode;
       },
-    } as unknown as AudioContext;
+    } as AudioContext;
 
-    const prev = { connect: () => undefined } as unknown as AudioNode;
+    const previousNode = { connect: () => undefined } as unknown as AudioNode;
 
-    const { rerender } = render(
-      <Stereo audioContext={ctx} previousNode={prev} value={-0.5} />,
-    );
+    let WrappedStereo = cloneElement(<Stereo value={-0.5} />, {
+      audioContext: ctx,
+      previousNode,
+    });
+
+    const { rerender } = render(WrappedStereo);
 
     expect(created).toMatchInlineSnapshot(`
       [
@@ -39,7 +43,12 @@ describe('Stereo', () => {
       ]
     `);
 
-    rerender(<Stereo audioContext={ctx} previousNode={prev} value={0.75} />);
+    WrappedStereo = cloneElement(<Stereo value={0.75} />, {
+      audioContext: ctx,
+      previousNode,
+    });
+
+    rerender(WrappedStereo);
     expect(created).toMatchInlineSnapshot(`
       [
         {

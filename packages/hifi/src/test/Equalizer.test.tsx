@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { cloneElement } from 'react';
 
 import { Equalizer } from '../plugins/Equalizer';
 
@@ -29,29 +30,30 @@ describe('Equalizer', () => {
 
     const prev = { connect: () => undefined } as unknown as AudioNode;
 
-    const { rerender } = render(
-      <Equalizer
-        audioContext={ctx}
-        previousNode={prev}
-        data={{ 60: 3, 10000: 4 }}
-        preAmp={1}
-      />,
+    let WrappedEqualizer = cloneElement(
+      <Equalizer data={{ 60: 3, 10000: -1 }} />,
+      {
+        audioContext: ctx,
+        previousNode: prev,
+      },
     );
+    const { rerender } = render(WrappedEqualizer);
 
     expect(created.length).toBe(2);
     const last = created[created.length - 1];
     expect(last.frequency.value).toBe(10000);
-    expect(last.gain.value).toBe(5);
+    expect(last.gain.value).toBe(-1);
 
-    rerender(
-      <Equalizer
-        audioContext={ctx}
-        previousNode={prev}
-        data={{ 60: 0, 10000: 2 }}
-        preAmp={0}
-      />,
+    WrappedEqualizer = cloneElement(
+      <Equalizer data={{ 60: 3, 10000: -3 }} preAmp={0} />,
+      {
+        audioContext: ctx,
+        previousNode: prev,
+      },
     );
 
-    expect(last.gain.value).toBe(2);
+    rerender(WrappedEqualizer);
+
+    expect(last.gain.value).toBe(-3);
   });
 });

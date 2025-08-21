@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { cloneElement } from 'react';
 
 import { BiQuadFilter } from '../plugins/BiQuadFilter';
 
@@ -28,18 +29,17 @@ describe('BiQuadFilter', () => {
       },
     } as unknown as AudioContext;
 
-    const prev = { connect: () => undefined } as unknown as AudioNode;
+    const previousNode = { connect: () => undefined } as unknown as AudioNode;
 
-    const { rerender } = render(
-      <BiQuadFilter
-        audioContext={ctx}
-        previousNode={prev}
-        type="highpass"
-        freq={1200}
-        value={5}
-        q={0.5}
-      />,
+    let WrappedBiQuadFilter = cloneElement(
+      <BiQuadFilter type="highpass" freq={1200} value={5} q={0.5} />,
+      {
+        audioContext: ctx,
+        previousNode,
+      },
     );
+
+    const { rerender } = render(WrappedBiQuadFilter);
 
     expect(nodes).toMatchInlineSnapshot(`
       [
@@ -60,16 +60,15 @@ describe('BiQuadFilter', () => {
       ]
     `);
 
-    rerender(
-      <BiQuadFilter
-        audioContext={ctx}
-        previousNode={prev}
-        type="highpass"
-        freq={1200}
-        value={2}
-        q={1}
-      />,
+    WrappedBiQuadFilter = cloneElement(
+      <BiQuadFilter type="highpass" freq={1200} value={2} q={1} />,
+      {
+        audioContext: ctx,
+        previousNode,
+      },
     );
+
+    rerender(WrappedBiQuadFilter);
 
     expect(nodes).toMatchInlineSnapshot(`
       [

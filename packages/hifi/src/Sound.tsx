@@ -1,4 +1,7 @@
-import React, {
+import {
+  Children,
+  cloneElement,
+  isValidElement,
   ReactNode,
   useCallback,
   useEffect,
@@ -233,9 +236,9 @@ export const Sound: React.FC<SoundProps> = ({
       {isReady &&
         context &&
         children &&
-        React.Children.map(children, (child, idx) =>
-          React.isValidElement(child)
-            ? React.cloneElement(
+        Children.map(children, (child, idx) =>
+          isValidElement(child)
+            ? cloneElement(
                 child as React.ReactElement<Record<string, unknown>>,
                 {
                   audioContext: context,

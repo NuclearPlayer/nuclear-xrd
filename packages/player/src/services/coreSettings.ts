@@ -54,6 +54,16 @@ export const CORE_SETTINGS: SettingDefinition[] = [
     widget: { type: 'slider', min: 0, max: 1, step: 0.01 },
   },
   {
+    id: 'playback.muted',
+    title: 'settings.playback.muted.title',
+    description: 'settings.playback.muted.description',
+    category: 'playback',
+    kind: 'boolean',
+    default: false,
+    hidden: true,
+    widget: { type: 'toggle' },
+  },
+  {
     id: 'playback.shuffle',
     title: 'settings.playback.shuffle.title',
     description: 'settings.playback.shuffle.description',
@@ -71,6 +81,15 @@ export const CORE_SETTINGS: SettingDefinition[] = [
     kind: 'number',
     default: 10,
     widget: { type: 'number-input', min: 1, max: 60, step: 1, unit: 's' },
+  },
+  {
+    id: 'playback.crossfadeMs',
+    title: 'settings.playback.crossfadeMs.title',
+    description: 'settings.playback.crossfadeMs.description',
+    category: 'playback',
+    kind: 'number',
+    default: 0,
+    widget: { type: 'number-input', min: 0, max: 5000, step: 50, unit: 'ms' },
   },
   {
     id: 'layout.leftSidebarWidth',

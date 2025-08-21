@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { cloneElement } from 'react';
 
 import { Plugin, pluginFactory } from '../pluginFactory';
 
@@ -17,7 +18,7 @@ describe('pluginFactory', () => {
       },
     };
     const prevConnect = vi.fn();
-    const prevNode = {
+    const previousNode = {
       connect: prevConnect,
       disconnect: () => undefined,
     } as unknown as AudioNode;
@@ -25,27 +26,25 @@ describe('pluginFactory', () => {
     const Comp = pluginFactory<Props, AudioNode>(testPlugin);
     const onRegister = vi.fn();
 
-    const { rerender, unmount } = render(
-      <Comp
-        audioContext={ctx}
-        previousNode={prevNode}
-        onRegister={onRegister}
-        value={1}
-      />,
-    );
+    let WrappedComp = cloneElement(<Comp value={1} />, {
+      audioContext: ctx,
+      previousNode,
+      onRegister,
+    });
+
+    const { rerender, unmount } = render(WrappedComp);
     expect(prevConnect).toHaveBeenCalledTimes(1);
     expect(prevConnect).toHaveBeenCalledWith(createdNode);
     expect(onRegister).toHaveBeenCalledTimes(1);
     expect(onRegister).toHaveBeenCalledWith(createdNode);
 
-    rerender(
-      <Comp
-        audioContext={ctx}
-        previousNode={prevNode}
-        onRegister={onRegister}
-        value={2}
-      />,
-    );
+    WrappedComp = cloneElement(<Comp value={2} />, {
+      audioContext: ctx,
+      previousNode,
+      onRegister,
+    });
+
+    rerender(WrappedComp);
     expect(updateCalls).toBeGreaterThan(0);
 
     unmount();
@@ -72,14 +71,13 @@ describe('pluginFactory', () => {
     const Comp = pluginFactory<Props, AudioNode[]>(new ChainPlugin());
     const onRegister = vi.fn();
 
-    render(
-      <Comp
-        audioContext={ctx}
-        previousNode={prev}
-        onRegister={onRegister}
-        id="x"
-      />,
-    );
+    const WrappedComp = cloneElement(<Comp id="x" />, {
+      audioContext: ctx,
+      previousNode: prev,
+      onRegister,
+    });
+
+    render(WrappedComp);
 
     expect(prevConnect).toHaveBeenCalledWith(a);
     expect(a.connect).toHaveBeenCalledWith(b);

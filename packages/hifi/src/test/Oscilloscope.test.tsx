@@ -23,9 +23,8 @@ describe('Oscilloscope', () => {
         get: () => _fftSize,
         set: (v: number) => {
           _fftSize = v;
-          (
-            analyserNode as unknown as { frequencyBinCount: number }
-          ).frequencyBinCount = v / 2;
+          (analyserNode as { frequencyBinCount: number }).frequencyBinCount =
+            v / 2;
         },
       });
       return analyserNode as AnalyserNode;
@@ -33,7 +32,7 @@ describe('Oscilloscope', () => {
 
     const ctx = {
       createAnalyser: () => analyser,
-    } as unknown as AudioContext;
+    } as AudioContext;
 
     const prev = {
       connect: () => undefined,
