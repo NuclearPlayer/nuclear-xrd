@@ -147,6 +147,8 @@ export const Sound: React.FC<SoundProps> = ({
     }
     const currentGain = activeIndex === 0 ? gainA : gainB;
     const nextGain = nextIndex === 0 ? gainA : gainB;
+    const currentAudio =
+      activeIndex === 0 ? audioRefA.current : audioRefB.current;
     const nextAudio = nextIndex === 0 ? audioRefA.current : audioRefB.current;
     if (!currentGain || !nextGain || !nextAudio || !context) {
       return;
@@ -164,6 +166,9 @@ export const Sound: React.FC<SoundProps> = ({
     );
     setTimeout(() => {
       setActiveIndex(nextIndex);
+      if (currentAudio) {
+        currentAudio.pause();
+      }
       prevSrc.current = src;
     }, crossfadeMs);
   }, [src, crossfadeMs, isReady, activeIndex, gainA, gainB, context]);
