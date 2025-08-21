@@ -212,6 +212,7 @@ export const Sound: React.FC<SoundProps> = ({
         hidden
         preload={preload}
         crossOrigin={crossOrigin}
+        data-is-active={activeIndex === 0}
         onTimeUpdate={handleTimeUpdate}
         onEnded={onEnd}
         onLoadStart={onLoadStart}
@@ -225,6 +226,7 @@ export const Sound: React.FC<SoundProps> = ({
         hidden
         preload={preload}
         crossOrigin={crossOrigin}
+        data-is-active={activeIndex === 1}
         onTimeUpdate={handleTimeUpdate}
         onEnded={onEnd}
         onLoadStart={onLoadStart}

@@ -36,8 +36,11 @@ describe('Sound component', () => {
     await waitFor(() => expect(playMock).toHaveBeenCalled());
 
     SoundWrapper.seekTo(37);
-    const active = SoundWrapper.getAudios()[0];
-    await waitFor(() => expect(active.currentTime).toBe(37));
+    await waitFor(() => {
+      const activeAudio = SoundWrapper.getActiveAudio();
+      expect(activeAudio).toBeDefined();
+      expect(activeAudio?.currentTime).toBe(37);
+    });
   });
 
   it('crossfades on src change when crossfadeMs > 0', async () => {

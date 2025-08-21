@@ -28,4 +28,7 @@ export const SoundWrapper = {
   getAudios(): NodeListOf<HTMLAudioElement> {
     return document.querySelectorAll('audio');
   },
+  getActiveAudio(): HTMLAudioElement | null {
+    return document.querySelector('audio[data-is-active="true"]');
+  },
 };
