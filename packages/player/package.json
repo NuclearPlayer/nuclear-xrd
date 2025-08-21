@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@nuclearplayer/eslint-config": "workspace:*",
+    "@nuclearplayer/hifi": "workspace:*",
     "@nuclearplayer/plugin-sdk": "workspace:*",
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@nuclearplayer/themes": "workspace:*",
