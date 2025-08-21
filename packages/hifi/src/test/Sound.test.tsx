@@ -2,7 +2,7 @@ import { act, render } from '@testing-library/react';
 
 import { Sound } from '../Sound';
 
-describe('Sound seek', () => {
+describe('Sound', () => {
   it('sets currentTime on the active audio element when seek changes', () => {
     const origAudioContext = window.AudioContext;
     const fakeCtx = {
