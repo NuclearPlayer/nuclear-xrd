@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  DO_NOT_TRACK: 1
+
 jobs:
   coverage:
     runs-on: ubuntu-latest
