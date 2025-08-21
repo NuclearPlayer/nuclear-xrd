@@ -210,7 +210,7 @@ export const Sound: React.FC<SoundProps> = ({
         onCanPlay={onCanPlay}
         onError={handleError}
       >
-        {renderSources(activeIndex === 0 ? src : prevSrc.current)}
+        {renderSources(activeIndex === 0 ? prevSrc.current : src)}
       </audio>
       <audio
         ref={audioRefB}
@@ -223,7 +223,7 @@ export const Sound: React.FC<SoundProps> = ({
         onCanPlay={onCanPlay}
         onError={handleError}
       >
-        {renderSources(activeIndex === 1 ? src : prevSrc.current)}
+        {renderSources(activeIndex === 1 ? prevSrc.current : src)}
       </audio>
       {isReady &&
         context &&

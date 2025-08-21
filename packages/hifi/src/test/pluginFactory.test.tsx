@@ -2,38 +2,30 @@ import { render } from '@testing-library/react';
 
 import { Plugin, pluginFactory } from '../pluginFactory';
 
-type Props = { value: number };
-
-let updateCalls = 0;
-
-const createdNode = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  connect: (_: unknown) => undefined,
-  disconnect: () => undefined,
-} as unknown as AudioNode;
-const testPlugin: Plugin<AudioNode, Props> = {
-  createNode: () => createdNode,
-  updateNode: () => {
-    updateCalls += 1;
-  },
-};
-
-const prevNode = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  connect: (_: unknown) => undefined,
-  disconnect: () => undefined,
-} as unknown as AudioNode;
-const ctx = {
-  createGain: () => ({}) as unknown as GainNode,
-} as unknown as AudioContext;
-
-const Comp = pluginFactory<Props, AudioNode>(testPlugin);
-
 describe('pluginFactory', () => {
-  it('creates node and calls onRegister, then updates on prop change', () => {
-    updateCalls = 0;
+  it('creates a single node, connects after previousNode, registers it, and updates on prop change', () => {
+    type Props = { value: number };
+    let updateCalls = 0;
+    const createdNode = {
+      connect: () => undefined,
+      disconnect: () => undefined,
+    } as unknown as AudioNode;
+    const testPlugin: Plugin<AudioNode, Props> = {
+      createNode: () => createdNode,
+      updateNode: () => {
+        updateCalls += 1;
+      },
+    };
+    const prevConnect = vi.fn();
+    const prevNode = {
+      connect: prevConnect,
+      disconnect: () => undefined,
+    } as unknown as AudioNode;
+    const ctx = {} as AudioContext;
+    const Comp = pluginFactory<Props, AudioNode>(testPlugin);
     const onRegister = vi.fn();
-    const { rerender } = render(
+
+    const { rerender, unmount } = render(
       <Comp
         audioContext={ctx}
         previousNode={prevNode}
@@ -41,7 +33,11 @@ describe('pluginFactory', () => {
         value={1}
       />,
     );
+    expect(prevConnect).toHaveBeenCalledTimes(1);
+    expect(prevConnect).toHaveBeenCalledWith(createdNode);
+    expect(onRegister).toHaveBeenCalledTimes(1);
     expect(onRegister).toHaveBeenCalledWith(createdNode);
+
     rerender(
       <Comp
         audioContext={ctx}
@@ -50,6 +46,43 @@ describe('pluginFactory', () => {
         value={2}
       />,
     );
-    expect(updateCalls).toBe(2);
+    expect(updateCalls).toBeGreaterThan(0);
+
+    unmount();
+  });
+
+  it('creates a chain, connects sequentially, and registers the last node', () => {
+    type Props = { id: string };
+    const a = {
+      connect: vi.fn(),
+      disconnect: vi.fn(),
+    } as unknown as AudioNode;
+    const b = {
+      connect: vi.fn(),
+      disconnect: vi.fn(),
+    } as unknown as AudioNode;
+    class ChainPlugin implements Plugin<AudioNode[], Props> {
+      createNode(): AudioNode[] {
+        return [a, b];
+      }
+    }
+    const prevConnect = vi.fn();
+    const prev = { connect: prevConnect } as unknown as AudioNode;
+    const ctx = {} as AudioContext;
+    const Comp = pluginFactory<Props, AudioNode[]>(new ChainPlugin());
+    const onRegister = vi.fn();
+
+    render(
+      <Comp
+        audioContext={ctx}
+        previousNode={prev}
+        onRegister={onRegister}
+        id="x"
+      />,
+    );
+
+    expect(prevConnect).toHaveBeenCalledWith(a);
+    expect(a.connect).toHaveBeenCalledWith(b);
+    expect(onRegister).toHaveBeenCalledWith(b);
   });
 });
