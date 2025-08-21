@@ -5,9 +5,12 @@ import {
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
+
+import { useAudioGraph } from './useAudioGraph';
 
 type AudioSource = string | Array<{ src: string; type?: string }>;
 
@@ -47,63 +50,39 @@ export const Sound: React.FC<SoundProps> = ({
   const audioRefA = useRef<HTMLAudioElement | null>(null);
   const audioRefB = useRef<HTMLAudioElement | null>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [context, setContext] = useState<AudioContext | null>(null);
-  const [sourceA, setSourceA] = useState<MediaElementAudioSourceNode | null>(
-    null,
+  const { context, sourceA, sourceB, gainA, gainB, isReady } = useAudioGraph(
+    audioRefA,
+    audioRefB,
   );
-  const [sourceB, setSourceB] = useState<MediaElementAudioSourceNode | null>(
-    null,
-  );
-  const [gainA, setGainA] = useState<GainNode | null>(null);
-  const [gainB, setGainB] = useState<GainNode | null>(null);
-  const [isReady, setIsReady] = useState<boolean>(false);
   const prevSrc = useRef<AudioSource>(src);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-    if (context === null) {
-      setContext(new window.AudioContext());
-    }
-    return () => {
-      context?.close();
-    };
-  }, [context]);
+  const adapters = useMemo(
+    () =>
+      [
+        {
+          id: 0,
+          ref: audioRefA,
+          source: sourceA,
+          gain: gainA,
+        },
+        {
+          id: 1,
+          ref: audioRefB,
+          source: sourceB,
+          gain: gainB,
+        },
+      ] as const,
+    [sourceA, sourceB, gainA, gainB],
+  );
 
-  useEffect(() => {
-    if (!context) {
-      return;
-    }
-    const audioA = audioRefA.current;
-    const audioB = audioRefB.current;
-    if (!audioA || !audioB) {
-      return;
-    }
-    const srcA = context.createMediaElementSource(audioA);
-    const srcB = context.createMediaElementSource(audioB);
-    const gainNodeA = context.createGain();
-    const gainNodeB = context.createGain();
-    srcA.connect(gainNodeA).connect(context.destination);
-    srcB.connect(gainNodeB).connect(context.destination);
-    setSourceA(srcA);
-    setSourceB(srcB);
-    setGainA(gainNodeA);
-    setGainB(gainNodeB);
-    setIsReady(true);
-    return () => {
-      srcA.disconnect();
-      srcB.disconnect();
-      gainNodeA.disconnect();
-      gainNodeB.disconnect();
-    };
-  }, [context]);
+  const current = adapters[activeIndex];
+  const next = adapters[1 - activeIndex];
 
   useEffect(() => {
     if (!isReady) {
       return;
     }
-    const audio = activeIndex === 0 ? audioRefA.current : audioRefB.current;
+    const audio = current.ref.current;
     if (!audio) {
       return;
     }
@@ -129,7 +108,7 @@ export const Sound: React.FC<SoundProps> = ({
     if (!isReady || seek == null) {
       return;
     }
-    const audio = activeIndex === 0 ? audioRefA.current : audioRefB.current;
+    const audio = current.ref.current;
     if (audio) {
       audio.currentTime = seek;
     }
@@ -148,11 +127,10 @@ export const Sound: React.FC<SoundProps> = ({
       prevSrc.current = src;
       return;
     }
-    const currentGain = activeIndex === 0 ? gainA : gainB;
-    const nextGain = nextIndex === 0 ? gainA : gainB;
-    const currentAudio =
-      activeIndex === 0 ? audioRefA.current : audioRefB.current;
-    const nextAudio = nextIndex === 0 ? audioRefA.current : audioRefB.current;
+    const currentGain = current.gain;
+    const nextGain = next.gain;
+    const currentAudio = current.ref.current;
+    const nextAudio = next.ref.current;
     if (!currentGain || !nextGain || !nextAudio || !context) {
       return;
     }
@@ -174,7 +152,15 @@ export const Sound: React.FC<SoundProps> = ({
       }
       prevSrc.current = src;
     }, crossfadeMs);
-  }, [src, crossfadeMs, isReady, activeIndex, gainA, gainB, context]);
+  }, [
+    src,
+    crossfadeMs,
+    isReady,
+    activeIndex,
+    current.gain,
+    next.gain,
+    context,
+  ]);
 
   const handleTimeUpdate = useCallback(
     (e: React.SyntheticEvent<HTMLAudioElement>) => {
@@ -207,34 +193,23 @@ export const Sound: React.FC<SoundProps> = ({
 
   return (
     <>
-      <audio
-        ref={audioRefA}
-        hidden
-        preload={preload}
-        crossOrigin={crossOrigin}
-        data-is-active={activeIndex === 0}
-        onTimeUpdate={handleTimeUpdate}
-        onEnded={onEnd}
-        onLoadStart={onLoadStart}
-        onCanPlay={onCanPlay}
-        onError={handleError}
-      >
-        {renderSources(activeIndex === 0 ? prevSrc.current : src)}
-      </audio>
-      <audio
-        ref={audioRefB}
-        hidden
-        preload={preload}
-        crossOrigin={crossOrigin}
-        data-is-active={activeIndex === 1}
-        onTimeUpdate={handleTimeUpdate}
-        onEnded={onEnd}
-        onLoadStart={onLoadStart}
-        onCanPlay={onCanPlay}
-        onError={handleError}
-      >
-        {renderSources(activeIndex === 1 ? prevSrc.current : src)}
-      </audio>
+      {[adapters[0], adapters[1]].map((adapter) => (
+        <audio
+          key={adapter.id}
+          ref={adapter.ref}
+          hidden
+          preload={preload}
+          crossOrigin={crossOrigin}
+          data-is-active={activeIndex === adapter.id}
+          onTimeUpdate={handleTimeUpdate}
+          onEnded={onEnd}
+          onLoadStart={onLoadStart}
+          onCanPlay={onCanPlay}
+          onError={handleError}
+        >
+          {renderSources(activeIndex === adapter.id ? prevSrc.current : src)}
+        </audio>
+      ))}
       {isReady &&
         context &&
         children &&
@@ -245,11 +220,7 @@ export const Sound: React.FC<SoundProps> = ({
                 {
                   audioContext: context,
                   previousNode:
-                    idx === 0
-                      ? activeIndex === 0
-                        ? sourceA
-                        : sourceB
-                      : undefined,
+                    idx === 0 ? (current.source ?? undefined) : undefined,
                 },
               )
             : child,
