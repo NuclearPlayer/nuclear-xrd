@@ -64,3 +64,54 @@ vi.mock('framer-motion', async (importOriginal) => {
   const factory = mockMod.createFramerMotionMock;
   return factory(mod);
 });
+
+Object.defineProperty(window.HTMLMediaElement.prototype, 'play', {
+  writable: true,
+  value: vi.fn().mockImplementation(() => Promise.resolve()),
+});
+
+Object.defineProperty(window.HTMLMediaElement.prototype, 'pause', {
+  writable: true,
+  value: vi.fn(),
+});
+
+Object.defineProperty(window.HTMLMediaElement.prototype, 'load', {
+  writable: true,
+  value: vi.fn(),
+});
+
+Object.defineProperty(window.HTMLMediaElement.prototype, 'currentTime', {
+  writable: true,
+  value: 0,
+});
+
+Object.defineProperty(window.HTMLMediaElement.prototype, 'duration', {
+  writable: true,
+  value: 100,
+});
+
+const makeAudioContextMock = () => {
+  const ctx = {
+    currentTime: 0,
+    resume: vi.fn(async () => undefined),
+    close: vi.fn(async () => undefined),
+    createMediaElementSource: () => ({
+      connect: () => ({ connect: () => ctx }),
+      disconnect: vi.fn(),
+    }),
+    createGain: () => ({
+      connect: () => ctx,
+      disconnect: vi.fn(),
+      gain: {
+        setValueAtTime: vi.fn(),
+        linearRampToValueAtTime: vi.fn(),
+      },
+    }),
+    destination: {},
+  } as unknown as AudioContext;
+  return ctx;
+};
+
+(globalThis as unknown as { AudioContext: unknown }).AudioContext = vi.fn(() =>
+  makeAudioContextMock(),
+) as unknown as typeof AudioContext;

@@ -2,11 +2,11 @@ import type { FC, PropsWithChildren } from 'react';
 
 import { Sound } from '@nuclearplayer/hifi';
 
-import { useSoundState } from '../hooks/useSound';
+import { useSoundStore } from '../stores/soundStore';
 
 export const SoundProvider: FC<PropsWithChildren> = ({ children }) => {
   const { src, status, seek, crossfadeMs, preload, crossOrigin } =
-    useSoundState();
+    useSoundStore();
 
   return (
     <>
