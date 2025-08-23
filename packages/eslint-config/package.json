@@ -17,8 +17,8 @@
     "lint:fix": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-pattern node_modules --fix"
   },
   "peerDependencies": {
-    "prettier": "^3.0.0",
-    "typescript": "^5.0.0"
+    "prettier": "^3",
+    "typescript": "^5"
   },
   "devDependencies": {
     "@eslint/css": "^0.10.0",
