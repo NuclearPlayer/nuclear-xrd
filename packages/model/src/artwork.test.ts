@@ -83,4 +83,16 @@ describe('Artwork helpers', () => {
     const artwork = pickArtwork(set, 'avatar', 200);
     expect(artwork?.url).toBe('no-purpose-square-220');
   });
+
+  it('considers images without height or width as having the aspect ratio of 1', () => {
+    const set: ArtworkSet = {
+      items: [
+        { url: 'no-dimensions' },
+        { url: 'valid', width: 200, height: 100 },
+      ],
+    };
+
+    const artwork = pickArtwork(set, 'avatar', 200);
+    expect(artwork?.url).toBe('no-dimensions');
+  });
 });
