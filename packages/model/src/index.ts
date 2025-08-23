@@ -4,11 +4,10 @@ export type ProviderRef = {
   url?: string;
 };
 
-export type Credit = {
+export type ArtistCredit = {
   name: string;
-  roles?: string[];
-  kind?: 'person' | 'group';
-  joinPhrase?: string;
+  roles: string[];
+  source?: ProviderRef;
 };
 
 export type ArtworkPurpose = 'avatar' | 'cover' | 'background' | 'thumbnail';
@@ -25,15 +24,33 @@ export type ArtworkSet = {
   items: Artwork[];
 };
 
+export type ArtistRef = {
+  name: string;
+  source: ProviderRef;
+};
+
+export type AlbumRef = {
+  title: string;
+  artists?: ArtistRef[];
+  source: ProviderRef;
+};
+
+export type TrackRef = {
+  title: string;
+  artists: ArtistRef[];
+  source: ProviderRef;
+};
+
 export type Stream = {
   url: string;
+  protocol: 'file' | 'http' | 'https' | 'hls';
   mimeType?: string;
   bitrateKbps?: number;
   codec?: string;
   container?: string;
   qualityLabel?: string;
   durationMs?: number;
-  contentLength?: number;
+  contentLengthBytes?: number;
   source: ProviderRef;
 };
 
@@ -50,38 +67,37 @@ export type LocalFileInfo = {
 
 export type Track = {
   title: string;
-  artists: Credit[];
-  album?: {
-    title: string;
-    artists?: Credit[];
-  };
+  artists: ArtistCredit[];
+  album?: AlbumRef;
   durationMs?: number;
   trackNumber?: number;
-  discNumber?: number;
+  disc?: string;
   artwork?: ArtworkSet;
   tags?: string[];
-  sources?: ProviderRef[];
+  source: ProviderRef;
   localFile?: LocalFileInfo;
   streams?: Stream[];
 };
 
 export type Album = {
   title: string;
-  artists: Credit[];
-  tracks?: Track[];
-  releaseDateIso?: string;
+  artists: ArtistCredit[];
+  tracks?: TrackRef[];
+  releaseDate?: {
+    precision: 'year' | 'month' | 'day';
+    dateIso: string;
+  };
   genres?: string[];
   artwork?: ArtworkSet;
-  sources?: ProviderRef[];
+  source: ProviderRef;
 };
 
 export type Artist = {
   name: string;
-  kind?: 'person' | 'group';
   disambiguation?: string;
   artwork?: ArtworkSet;
   tags?: string[];
-  sources?: ProviderRef[];
+  source: ProviderRef;
 };
 
 export type Playlist = {
@@ -92,12 +108,27 @@ export type Playlist = {
 };
 
 export type PlaylistItem = {
+  id: string;
   title: string;
-  artists: Credit[];
+  artists: ArtistCredit[];
   album?: string;
   durationMs?: number;
   artwork?: ArtworkSet;
   note?: string;
   addedAtIso?: string;
-  sources?: ProviderRef[];
+  source: ProviderRef;
 };
+
+export type QueueItem = {
+  id: string;
+  title: string;
+  artists: ArtistCredit[];
+  album?: string;
+  durationMs?: number;
+  artwork?: ArtworkSet;
+  note?: string;
+  addedAtIso?: string;
+  source: ProviderRef;
+};
+
+export { pickArtwork } from './artwork';
