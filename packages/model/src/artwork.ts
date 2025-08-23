@@ -5,18 +5,28 @@ export function pickArtwork(
   purpose: ArtworkPurpose,
   targetPx: number,
 ): Artwork | undefined {
-  if (!set?.items?.length) return undefined;
+  if (!set?.items?.length) {
+    return undefined;
+  }
 
   const candidates = set.items.filter((item) => {
-    if (item.purpose && item.purpose !== purpose) return false;
-    if (!item.url) return false;
+    if (item.purpose && item.purpose !== purpose) {
+      return false;
+    }
+    if (!item.url) {
+      return false;
+    }
     return true;
   });
 
-  if (!candidates.length) return set.items[0];
+  if (!candidates.length) {
+    return set.items[0];
+  }
 
   const getAspectRatio = (artwork: Artwork): number => {
-    if (!artwork.width || !artwork.height) return 1;
+    if (!artwork.width || !artwork.height) {
+      return 1;
+    }
     return artwork.width / artwork.height;
   };
 

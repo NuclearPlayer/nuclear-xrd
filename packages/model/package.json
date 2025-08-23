@@ -17,11 +17,12 @@
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --run --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "type-check": "tsc --noEmit",
-    "test": "vitest",
-    "test:coverage": "vitest --run --coverage"
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@nuclearplayer/eslint-config": "workspace:*",
