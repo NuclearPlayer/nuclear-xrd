@@ -533,9 +533,6 @@ importers:
       '@nuclearplayer/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@nuclearplayer/player':
-        specifier: workspace:*
-        version: link:../player
       '@nuclearplayer/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config
