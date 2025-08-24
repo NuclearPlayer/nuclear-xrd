@@ -310,6 +310,9 @@ importers:
 
   packages/plugin-sdk:
     dependencies:
+      '@nuclearplayer/model':
+        specifier: workspace:*
+        version: link:../model
       '@nuclearplayer/ui':
         specifier: workspace:*
         version: link:../ui
