@@ -8,7 +8,6 @@ export type SearchParams = {
   query: string;
   types?: SearchCategory[];
   limit?: number;
-  cursor?: string;
 };
 
 export type SearchResults = {
@@ -16,7 +15,6 @@ export type SearchResults = {
   albums?: Album[];
   tracks?: Track[];
   playlists?: Playlist[];
-  nextCursor?: string;
 };
 
 export type ProviderKind = 'metadata' | 'streaming' | 'lyrics' | (string & {});
