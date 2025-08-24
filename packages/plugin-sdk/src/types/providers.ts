@@ -7,8 +7,5 @@ export type ProvidersHost = {
     kind?: K,
   ): ProviderDescriptor<K>[];
   get<T extends ProviderDescriptor>(providerId: string): T | undefined;
-  decorate<T extends ProviderDescriptor>(
-    providerId: string,
-    decorator: (p: T) => T,
-  ): boolean;
+  clear(): void;
 };

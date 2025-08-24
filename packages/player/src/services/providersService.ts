@@ -4,7 +4,7 @@ import type {
   ProvidersHost,
 } from '@nuclearplayer/plugin-sdk';
 
-class ProvidersRegistry implements ProvidersHost {
+class ProvidersService implements ProvidersHost {
   #byKind = new Map<ProviderKind, Map<string, ProviderDescriptor>>();
   #byId = new Map<string, ProviderDescriptor>();
 
@@ -17,16 +17,16 @@ class ProvidersRegistry implements ProvidersHost {
   }
 
   unregister(providerId: string): boolean {
-    const p = this.#byId.get(providerId);
-    if (!p) {
+    const current = this.#byId.get(providerId);
+    if (!current) {
       return false;
     }
     this.#byId.delete(providerId);
-    const kindMap = this.#byKind.get(p.kind);
+    const kindMap = this.#byKind.get(current.kind);
     if (kindMap) {
       kindMap.delete(providerId);
       if (kindMap.size === 0) {
-        this.#byKind.delete(p.kind);
+        this.#byKind.delete(current.kind);
       }
     }
     return true;
@@ -34,32 +34,26 @@ class ProvidersRegistry implements ProvidersHost {
 
   list<K extends ProviderKind = ProviderKind>(kind?: K) {
     if (kind) {
-      const m = this.#byKind.get(kind as ProviderKind);
-      return (m ? Array.from(m.values()) : []) as ProviderDescriptor<K>[];
+      const map = this.#byKind.get(kind as ProviderKind);
+      return (map ? Array.from(map.values()) : []) as ProviderDescriptor<K>[];
     }
-    const res: ProviderDescriptor[] = [];
-    for (const m of this.#byKind.values()) {
-      res.push(...m.values());
+    const all: ProviderDescriptor[] = [];
+    for (const map of this.#byKind.values()) {
+      for (const value of map.values()) {
+        all.push(value);
+      }
     }
-    return res as ProviderDescriptor<K>[];
+    return all as ProviderDescriptor<K>[];
   }
 
   get<T extends ProviderDescriptor>(providerId: string) {
     return this.#byId.get(providerId) as T | undefined;
   }
 
-  decorate<T extends ProviderDescriptor>(
-    providerId: string,
-    decorator: (p: T) => T,
-  ) {
-    const current = this.get<T>(providerId);
-    if (!current) {
-      return false;
-    }
-    this.unregister(providerId);
-    this.register(decorator(current));
-    return true;
+  clear() {
+    this.#byKind.clear();
+    this.#byId.clear();
   }
 }
 
-export const providersHost: ProvidersHost = new ProvidersRegistry();
+export const providersServiceHost: ProvidersHost = new ProvidersService();
