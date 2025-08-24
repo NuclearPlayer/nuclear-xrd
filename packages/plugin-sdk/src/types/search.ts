@@ -36,7 +36,3 @@ export type MetadataProvider = ProviderDescriptor<'metadata'> & {
     params: Omit<SearchParams, 'types'>,
   ) => Promise<Playlist[]>;
 };
-
-export type ProviderDecorator<
-  T extends ProviderDescriptor = ProviderDescriptor,
-> = (current: T) => T;
