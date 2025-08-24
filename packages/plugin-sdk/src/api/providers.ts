@@ -31,8 +31,4 @@ export class Providers {
   get<T extends ProviderDescriptor>(id: string) {
     return this.#withHost((h) => h.get<T>(id));
   }
-
-  decorate<T extends ProviderDescriptor>(id: string, d: (p: T) => T) {
-    return this.#withHost((h) => h.decorate<T>(id, d));
-  }
 }
