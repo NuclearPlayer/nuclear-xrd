@@ -1,0 +1,98 @@
+# Nuclear Music Player - Copilot Instructions
+
+## Project overview
+
+This is Nuclear Music Player, a free and open-source music player that works as a hub for many different services.
+
+It's a monorepo managed with pnpm and turbo.
+
+This particular repo is a rewrite project, with the original Nuclear codebase in a different repo. 
+
+### Key features
+
+- **Themes**: Support for basic and advanced themes, which work by customizing CSS variables that then control Tailwind classes. Users can load their own themes from JSON, or use built-in ones.
+- **Plugins**: A powerful plugin system that allows you to control any part of the player. No sandboxing.
+
+### Tech stack
+
+- Typescript - primary language.
+- Tauri - creates a native desktop application shell.
+- Tailwind - for styling. Don't use built-in colors though, we have a custom stylesheet in packages/tailwind-config/global.css.
+- Turbo repo - tool for managing the monorepo.
+- pnpm - the preferred package manager. Used for workspaces.
+- eslint + prettier - formatting and linting.
+- Storybook - used for demoing UI components.
+- Vite - build tool
+- Vitest - for all tests
+- Lucide React - icon library
+- framer-motion and tw-animate-css - for animations
+
+### Packages
+- `@nuclearplayer/player` – Main Tauri app (React + Rust).  
+- `@nuclearplayer/plugin-sdk` – Plugin system (TS/React).  
+- `@nuclearplayer/ui` – Shared UI components.  
+- `@nuclearplayer/model` - Data model.
+- `@nuclearplayer/docs` – Gitbook documentation.
+- `@nuclearplayer/tailwind-config` – Shared Tailwind config.  
+- `@nuclearplayer/eslint-config` – Shared linting & formatting rules.  
+- `@nuclearplayer/hifi` – Advanced HTML5 audio component for playback.
+- `@nuclearplayer/themes` – Theming system.
+- `@nuclearplayer/storybook` – Storybook stories.
+
+### Workflow Commands
+
+```bash
+pnpm dev        # run the project in dev mode
+pnpm build      # build all packages
+pnpm lint       # lint all packages
+pnpm test       # test all packages
+```
+
+## Coding principles
+
+### General
+
+- Prioritize readability.
+- This is a production project meant for long term maintenance and development. Cutting corners, using short term solutions, placeholders, half-baked methods, and messy code is unacceptable.
+- Avoid premature abstractions. Start concrete, extract later.
+- Prefer clarity over cleverness.
+- Do not leave comments in code. Their place is in the chat.
+- Stick to existing conventions. This is a monorepo so standardizing everything is very very important. Look at other packages when in doubt. Use centralized configs for tools like Typescript, Eslint, Prettier, Tailwind.
+- Break work into the smallest reasonable steps. Small commits > big dumps.
+
+### TypeScript / React
+- Use `type`, not `interface` (except when TS requires merging). Do not use interfaces for props.
+- Use `const Component: FC<Props> = () => {}` instead of `function Component()`.
+- No magic numbers → extract into named constants.
+- Prefer compound components (`Component.Sub`) when building complex widgets.
+- Keep business logic out of UI components.
+
+### Architecture
+- UI components should stay dumb, presentation-only.
+- State management:
+  - **Zustand** for persistent UI state.  
+  - **React state** for local, temporary state.
+  - **react-query** for server state.
+- Lift complex or performance-critical logic to Tauri (Rust).
+
+### Testing
+- Use **Vitest + React Testing Library**.
+- Test like a user: minimal mocks, simulate interactions.
+- Only mock external dependencies (HTTP, FS, Tauri).
+- Snapshot tests: **basic rendering only**. Start names with `(Snapshot)`.
+- Extract DOM querying into wrappers; assertions stay in tests.
+
+### Design & UX Philosophy
+
+- Visual style: **neo-brutalist with premium polish**.
+- Animations should enhance UX, not slow it down.
+- Disable animations during high-friction moments (e.g., resize).
+- Use **framer-motion** + **tw-animate-css** for smooth springy physics.
+- Feel: professional yet approachable, Discord-like.
+
+## Final Notes
+
+- Treat this as **production code from day one**. No shortcuts, no placeholders.
+- Prioritize long-term maintainability.
+- Work with me iteratively: pause, summarize, ask.
+- Above all: **be reliable, disciplined, and clear.**
