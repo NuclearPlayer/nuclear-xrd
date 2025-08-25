@@ -23,6 +23,7 @@
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@nuclearplayer/themes": "workspace:*",
     "@nuclearplayer/ui": "workspace:*",
+    "@tanstack/react-query": "^5.85.5",
     "@tanstack/react-router": "^1.131.2",
     "@tauri-apps/api": "^2.8.0",
     "@tauri-apps/plugin-dialog": "~2.3.2",

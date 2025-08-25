@@ -1,4 +1,6 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { FC } from 'react';
 
 import { routeTree } from './routeTree.gen';
 
@@ -10,8 +12,14 @@ declare module '@tanstack/react-router' {
   }
 }
 
-function App() {
-  return <RouterProvider router={router} />;
-}
+const queryClient = new QueryClient();
+
+const App: FC = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
+};
 
 export default App;
