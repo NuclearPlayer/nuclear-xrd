@@ -34,6 +34,13 @@ exports[`App > should render snapshot 1`] = `
           />
         </g>
       </svg>
+      <div>
+        <input
+          class="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+          placeholder="Search"
+          value=""
+        />
+      </div>
       <div
         class="flex-1"
       />
@@ -338,6 +345,7 @@ exports[`App > should render snapshot 1`] = `
           <div
             animate="center"
             class="absolute inset-0 h-full w-full"
+            exit="exit"
             initial="enter"
             transition="[object Object]"
           >

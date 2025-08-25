@@ -49,6 +49,12 @@ describe('Themes view', async () => {
   afterEach(() => {
     stopAdvancedThemeWatcher();
   });
+
+  it('(Snapshot) renders the themes view', async () => {
+    const { asFragment } = await ThemesWrapper.mount();
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('renders the Themes view sections', async () => {
     await ThemesWrapper.mount();
     expect(await screen.findByTestId('basic-themes')).toBeInTheDocument();
