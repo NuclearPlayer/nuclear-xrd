@@ -14,10 +14,14 @@ declare module '@tanstack/react-router' {
 
 const queryClient = new QueryClient();
 
-const App: FC = () => {
+type AppProps = {
+  routerProp?: typeof router;
+};
+
+const App: FC<AppProps> = ({ routerProp }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <RouterProvider router={routerProp ?? router} />
     </QueryClientProvider>
   );
 };

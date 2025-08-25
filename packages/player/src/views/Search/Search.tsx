@@ -35,7 +35,7 @@ export const Search: FC = () => {
   });
 
   return (
-    <div className="space-y-6 p-4">
+    <div className="space-y-6 p-4" data-testid="search-view">
       <div className="space-y-1">
         <h1>Search</h1>
         <div className="text-sm opacity-70">

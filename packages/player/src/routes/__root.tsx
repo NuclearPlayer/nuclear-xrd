@@ -31,7 +31,7 @@ import { useLayoutStore } from '../stores/layoutStore';
 
 const cover = 'https://picsum.photos/64';
 
-const SearchBar = () => {
+const SearchBox = () => {
   const [query, setQuery] = useState('');
   const router = useRouter();
   const submit = () => {
@@ -46,6 +46,7 @@ const SearchBar = () => {
   return (
     <div>
       <input
+        data-testid="search-box"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={(e) => {
@@ -73,7 +74,7 @@ const RootComponent = () => {
   return (
     <PlayerShell>
       <TopBar>
-        <SearchBar />
+        <SearchBox />
       </TopBar>
 
       <SoundProvider>

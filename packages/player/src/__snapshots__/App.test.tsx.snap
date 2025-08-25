@@ -37,6 +37,7 @@ exports[`App > should render snapshot 1`] = `
       <div>
         <input
           class="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+          data-testid="search-box"
           placeholder="Search"
           value=""
         />
