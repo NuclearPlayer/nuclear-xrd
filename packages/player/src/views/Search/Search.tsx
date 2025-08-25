@@ -7,9 +7,9 @@ import type {
 } from '@nuclearplayer/plugin-sdk';
 import { Button } from '@nuclearplayer/ui';
 
-import { Route } from '../routes/search';
-import { providersServiceHost } from '../services/providersService';
-import { executeMetadataSearch } from '../services/search/executeMetadataSearch';
+import { Route } from '../../routes/search';
+import { providersServiceHost } from '../../services/providersService';
+import { executeMetadataSearch } from '../../services/search/executeMetadataSearch';
 
 export const Search: FC = () => {
   const { q } = Route.useSearch();

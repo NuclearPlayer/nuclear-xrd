@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 
-import { Search } from '../views/Search';
+import { Search } from '../views/Search/Search';
 
 export const Route = createFileRoute('/search')({
   component: Search,
