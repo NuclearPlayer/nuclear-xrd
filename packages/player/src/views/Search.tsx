@@ -12,7 +12,7 @@ import { providersServiceHost } from '../services/providersService';
 import { executeMetadataSearch } from '../services/search/executeMetadataSearch';
 
 export const Search: FC = () => {
-  const { q: query = '' } = Route.useSearch();
+  const { q } = Route.useSearch();
 
   // @todo: this selects the first metadata provider, when we support switching it should use the selected one
   const provider = useMemo(() => {
@@ -28,10 +28,10 @@ export const Search: FC = () => {
     isError,
     refetch,
   } = useQuery<SearchResults>({
-    queryKey: ['metadata-search', provider?.id, query],
+    queryKey: ['metadata-search', provider?.id, q],
     queryFn: () =>
-      executeMetadataSearch(provider as MetadataProvider, { query }),
-    enabled: Boolean(provider && query),
+      executeMetadataSearch(provider as MetadataProvider, { query: q }),
+    enabled: Boolean(provider && q),
   });
 
   return (
@@ -39,14 +39,14 @@ export const Search: FC = () => {
       <div className="space-y-1">
         <h1>Search</h1>
         <div className="text-sm opacity-70">
-          {query ? `Query: "${query}"` : 'No query'}
+          {q ? `Query: "${q}"` : 'No query'}
         </div>
         <div className="text-sm opacity-70">
           {provider ? `Provider: ${provider.name}` : 'No provider'}
         </div>
       </div>
 
-      {!query || !provider ? (
+      {!q || !provider ? (
         <div className="opacity-70">Nothing to search.</div>
       ) : isLoading ? (
         <div className="opacity-70">Loading…</div>

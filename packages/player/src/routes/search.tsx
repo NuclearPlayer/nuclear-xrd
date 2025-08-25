@@ -6,6 +6,6 @@ import { Search } from '../views/Search';
 export const Route = createFileRoute('/search')({
   component: Search,
   validateSearch: z.object({
-    q: z.string().min(2).max(100).default(''),
+    q: z.string().min(1).max(100).default(''),
   }),
 });
