@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useLocation } from '@tanstack/react-router';
 import { useMemo, type FC } from 'react';
 
 import type {
@@ -8,16 +7,12 @@ import type {
 } from '@nuclearplayer/plugin-sdk';
 import { Button } from '@nuclearplayer/ui';
 
+import { Route } from '../routes/search';
 import { providersServiceHost } from '../services/providersService';
 import { executeMetadataSearch } from '../services/search/executeMetadataSearch';
 
 export const Search: FC = () => {
-  const location = useLocation();
-  const searchParams = useMemo(
-    () => new URLSearchParams(location.search ?? ''),
-    [location.search],
-  );
-  const query = searchParams.get('q') ?? '';
+  const { q: query = '' } = Route.useSearch();
 
   // @todo: this selects the first metadata provider, when we support switching it should use the selected one
   const provider = useMemo(() => {
