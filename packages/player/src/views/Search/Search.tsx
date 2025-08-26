@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useSearch } from '@tanstack/react-router';
 import { useMemo, type FC } from 'react';
 
 import { pickArtwork } from '@nuclearplayer/model';
@@ -16,12 +17,11 @@ import {
   ViewShell,
 } from '@nuclearplayer/ui';
 
-import { Route } from '../../routes/search';
 import { providersServiceHost } from '../../services/providersService';
 import { executeMetadataSearch } from '../../services/search/executeMetadataSearch';
 
 export const Search: FC = () => {
-  const { q } = Route.useSearch();
+  const { q } = useSearch({ from: '/search' });
 
   // @todo: this selects the first metadata provider, when we support switching it should use the selected one
   const provider = useMemo(() => {
@@ -109,7 +109,7 @@ export const Search: FC = () => {
           </Button>
         </div>
       ) : (
-        <Tabs items={tabsItems as TabsItem[]} />
+        <Tabs items={tabsItems as TabsItem[]} className="flex-1" />
       )}
     </ViewShell>
   );
