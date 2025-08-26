@@ -2,6 +2,7 @@ import { Tab } from '@headlessui/react';
 import { FC, Fragment, PropsWithChildren } from 'react';
 
 import { cn } from '../../utils';
+import { Button } from '../Button';
 import { useTabsContext } from './context';
 
 type TabsTabProps = PropsWithChildren<{
@@ -18,22 +19,15 @@ export const TabsTab: FC<TabsTabProps> = ({
   return (
     <Tab as={Fragment} disabled={disabled}>
       {({ selected }) => (
-        <button
+        <Button
           type="button"
           disabled={disabled}
-          className={cn(
-            'text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors',
-            'hover:underline',
-            'data-[selected=true]:bg-primary data-[selected=true]:border-border',
-            'focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none',
-            'disabled:cursor-not-allowed disabled:opacity-50',
-            tabClassName,
-            className,
-          )}
+          variant={selected ? 'default' : 'text'}
+          className={cn(tabClassName, className)}
           data-selected={selected ? '' : undefined}
         >
           {children}
-        </button>
+        </Button>
       )}
     </Tab>
   );

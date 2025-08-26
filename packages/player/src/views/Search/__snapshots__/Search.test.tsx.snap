@@ -351,30 +351,30 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
             transition="[object Object]"
           >
             <div
-              class="space-y-6 p-4"
+              class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
               data-testid="search-view"
             >
-              <div
-                class="space-y-1"
+              <h1
+                class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
               >
-                <h1>
-                  Search
-                </h1>
-                <div
-                  class="text-sm opacity-70"
-                >
-                  Query: "t"
-                </div>
-                <div
-                  class="text-sm opacity-70"
-                >
-                  No provider
-                </div>
-              </div>
-              <div
-                class="opacity-70"
+                Search
+              </h1>
+              <h2
+                class="mb-4 flex w-full flex-0 flex-row text-center text-xl font-semibold"
               >
-                Nothing to search.
+                Query: "t"
+              </h2>
+              <div
+                class="flex w-full flex-1 flex-col overflow-hidden"
+              >
+                <button
+                  aria-hidden="true"
+                  style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+                  type="button"
+                />
+                <div
+                  class="flex w-full flex-col gap-2"
+                />
               </div>
             </div>
           </div>

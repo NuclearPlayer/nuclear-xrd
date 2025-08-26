@@ -13,6 +13,7 @@ import {
   Loader,
   Tabs,
   TabsItem,
+  ViewShell,
 } from '@nuclearplayer/ui';
 
 import { Route } from '../../routes/search';
@@ -87,21 +88,15 @@ export const Search: FC = () => {
   ].filter(Boolean);
 
   return (
-    <div className="space-y-6 p-4" data-testid="search-view">
-      <div className="space-y-1">
-        <h1>Search</h1>
-        <div className="text-sm opacity-70">
-          {q ? `Query: "${q}"` : 'No query'}
+    <ViewShell
+      data-testid="search-view"
+      title="Search"
+      subtitle={`Query: "${q}"`}
+    >
+      {isLoading ? (
+        <div className="flex flex-1 items-center justify-center">
+          <Loader size="xl" />
         </div>
-        <div className="text-sm opacity-70">
-          {provider ? `Provider: ${provider.name}` : 'No provider'}
-        </div>
-      </div>
-
-      {!q || !provider ? (
-        <div className="opacity-70">Nothing to search.</div>
-      ) : isLoading ? (
-        <Loader size="xl" />
       ) : isError ? (
         <div className="space-y-3">
           <div className="text-accent-red">Failed to load results.</div>
@@ -116,6 +111,6 @@ export const Search: FC = () => {
       ) : (
         <Tabs items={tabsItems as TabsItem[]} />
       )}
-    </div>
+    </ViewShell>
   );
 };

@@ -84,6 +84,7 @@
 
   /* Typography */
   --font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --default-font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
 
