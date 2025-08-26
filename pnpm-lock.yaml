@@ -180,6 +180,9 @@ importers:
       '@nuclearplayer/hifi':
         specifier: workspace:*
         version: link:../hifi
+      '@nuclearplayer/model':
+        specifier: workspace:*
+        version: link:../model
       '@nuclearplayer/plugin-sdk':
         specifier: workspace:*
         version: link:../plugin-sdk

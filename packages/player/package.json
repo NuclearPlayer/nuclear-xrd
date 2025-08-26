@@ -20,6 +20,7 @@
     "@nuclearplayer/eslint-config": "workspace:*",
     "@nuclearplayer/hifi": "workspace:*",
     "@nuclearplayer/plugin-sdk": "workspace:*",
+    "@nuclearplayer/model": "workspace:*",
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@nuclearplayer/themes": "workspace:*",
     "@nuclearplayer/ui": "workspace:*",

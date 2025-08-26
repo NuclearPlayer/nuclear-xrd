@@ -1,11 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, type FC } from 'react';
 
+import { pickArtwork } from '@nuclearplayer/model';
 import type {
   MetadataProvider,
   SearchResults,
 } from '@nuclearplayer/plugin-sdk';
-import { Button } from '@nuclearplayer/ui';
+import {
+  Button,
+  Card,
+  CardGrid,
+  Loader,
+  Tabs,
+  TabsItem,
+} from '@nuclearplayer/ui';
 
 import { Route } from '../../routes/search';
 import { providersServiceHost } from '../../services/providersService';
@@ -34,6 +42,50 @@ export const Search: FC = () => {
     enabled: Boolean(provider && q),
   });
 
+  const tabsItems = [
+    results?.albums && {
+      id: 'albums',
+      label: 'Albums',
+      content: (
+        <CardGrid>
+          {results.albums.map((item) => (
+            <Card
+              title={item.title}
+              src={pickArtwork(item.artwork, 'cover', 300)?.url}
+            />
+          ))}
+        </CardGrid>
+      ),
+    },
+    results?.artists && {
+      id: 'artists',
+      label: 'Artists',
+      content: (
+        <CardGrid>
+          {results.artists.map((item) => (
+            <Card
+              title={item.name}
+              src={pickArtwork(item.artwork, 'cover', 300)?.url}
+            />
+          ))}
+        </CardGrid>
+      ),
+    },
+    results?.tracks && {
+      id: 'tracks',
+      label: 'Tracks',
+      content: (
+        <div className="flex flex-col">
+          {results.tracks.map((item) => (
+            <span>
+              {item.artists[0].name} - {item.title}
+            </span>
+          ))}
+        </div>
+      ),
+    },
+  ].filter(Boolean);
+
   return (
     <div className="space-y-6 p-4" data-testid="search-view">
       <div className="space-y-1">
@@ -49,7 +101,7 @@ export const Search: FC = () => {
       {!q || !provider ? (
         <div className="opacity-70">Nothing to search.</div>
       ) : isLoading ? (
-        <div className="opacity-70">Loading…</div>
+        <Loader size="xl" />
       ) : isError ? (
         <div className="space-y-3">
           <div className="text-accent-red">Failed to load results.</div>
@@ -62,34 +114,7 @@ export const Search: FC = () => {
           </Button>
         </div>
       ) : (
-        <div className="space-y-6">
-          {results?.tracks && (
-            <section className="space-y-2">
-              <h2>Tracks ({results.tracks.length})</h2>
-            </section>
-          )}
-          {results?.artists && (
-            <section className="space-y-2">
-              <h2>Artists ({results.artists.length})</h2>
-            </section>
-          )}
-          {results?.albums && (
-            <section className="space-y-2">
-              <h2>Albums ({results.albums.length})</h2>
-            </section>
-          )}
-          {results?.playlists && (
-            <section className="space-y-2">
-              <h2>Playlists ({results.playlists.length})</h2>
-            </section>
-          )}
-          {!results?.tracks &&
-            !results?.artists &&
-            !results?.albums &&
-            !results?.playlists && (
-              <div className="opacity-70">No results.</div>
-            )}
-        </div>
+        <Tabs items={tabsItems as TabsItem[]} />
       )}
     </div>
   );

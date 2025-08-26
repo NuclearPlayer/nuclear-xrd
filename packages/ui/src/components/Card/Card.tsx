@@ -6,7 +6,7 @@ import { Box } from '../Box';
 import { Button } from '../Button';
 
 type CardProps = {
-  src: string;
+  src?: string;
   title?: string;
   subtitle?: string;
   className?: string;
