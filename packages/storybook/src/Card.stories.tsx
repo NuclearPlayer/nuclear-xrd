@@ -38,3 +38,24 @@ export const WithLongText: Story = {
       'A Very Long Artist Name Featuring Another Artist With Even More Characters',
   },
 };
+
+export const WithoutText: Story = {
+  args: {
+    src: cover,
+  },
+};
+
+export const WithoutSubtitle: Story = {
+  args: {
+    src: cover,
+    title: "Joe's Garage",
+  },
+};
+
+export const WithoutImage: Story = {
+  args: {
+    src: '',
+    title: 'No Image',
+    subtitle: 'Some Artist',
+  },
+};
