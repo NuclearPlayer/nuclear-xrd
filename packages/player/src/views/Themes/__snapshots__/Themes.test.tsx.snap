@@ -492,10 +492,10 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
                 <div
-                  class="relative h-auto w-full overflow-hidden"
+                  class="relative h-full w-full overflow-hidden"
                 >
                   <div
-                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
                     style="scrollbar-width: none;"
                   >
                     <section

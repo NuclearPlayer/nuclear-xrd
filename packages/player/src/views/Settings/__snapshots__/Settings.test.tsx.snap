@@ -492,10 +492,10 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
                 <div
-                  class="relative h-auto w-full max-w-100 flex-1 overflow-hidden"
+                  class="relative h-full w-full max-w-100 flex-1 overflow-hidden"
                 >
                   <div
-                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
                     style="scrollbar-width: none;"
                   >
                     <section

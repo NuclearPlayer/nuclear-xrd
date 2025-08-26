@@ -3,7 +3,7 @@
 exports[`Tabs > (Snapshot) renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="flex w-full flex-col gap-2"
+    class="flex max-h-full w-full flex-col gap-2"
   >
     <div
       aria-orientation="horizontal"
@@ -14,8 +14,8 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
       <button
         aria-controls="headlessui-tabs-panel-:r7:"
         aria-selected="true"
-        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-        data-headlessui-state="selected"
+        class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
+        data-headlessui-state=""
         data-selected=""
         id="headlessui-tabs-tab-:r1:"
         role="tab"
@@ -25,9 +25,9 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
         Artists
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:r9:"
+        aria-controls="headlessui-tabs-panel-:re:"
         aria-selected="false"
-        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
         id="headlessui-tabs-tab-:r3:"
         role="tab"
@@ -37,9 +37,9 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
         Tracks
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:rb:"
+        aria-controls="headlessui-tabs-panel-:rg:"
         aria-selected="false"
-        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
         id="headlessui-tabs-tab-:r5:"
         role="tab"
@@ -50,12 +50,12 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
       </button>
     </div>
     <div
-      class="mt-2"
+      class="mt-2 flex flex-1 flex-col overflow-hidden"
       id="tabs-:r0:-panels"
     >
       <div
         aria-labelledby="headlessui-tabs-tab-:r1:"
-        class="outline-none"
+        class="relative flex-1 overflow-hidden outline-none"
         data-headlessui-state="selected"
         data-selected=""
         id="headlessui-tabs-panel-:r7:"
@@ -63,139 +63,388 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
         tabindex="0"
       >
         <div
-          class="text-foreground"
+          class="relative h-full w-full"
         >
           <div
-            class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4"
-            role="grid"
+            class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+            style="scrollbar-width: none;"
           >
-            <button
-              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
-              data-headlessui-state=""
-              type="submit"
+            <div
+              class="text-foreground"
             >
               <div
-                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
+                class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4"
+                role="grid"
               >
-                <img
-                  alt="Frank Zappa"
-                  class="h-full w-full object-cover"
-                  src="https://picsum.photos/seed/Frank Zappa/300"
-                />
-              </div>
-              <div
-                class="min-w-0"
-              >
-                <div
-                  class="text-foreground truncate text-sm font-bold"
+                <button
+                  class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                  data-headlessui-state=""
+                  type="submit"
                 >
-                  Frank Zappa
-                </div>
-              </div>
-            </button>
-            <button
-              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
-              data-headlessui-state=""
-              type="submit"
-            >
-              <div
-                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
-              >
-                <img
-                  alt="Ozzy Osbourne"
-                  class="h-full w-full object-cover"
-                  src="https://picsum.photos/seed/Ozzy Osbourne/300"
-                />
-              </div>
-              <div
-                class="min-w-0"
-              >
-                <div
-                  class="text-foreground truncate text-sm font-bold"
+                  <div
+                    class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                  >
+                    <div
+                      class="overflow-hidden absolute inset-0"
+                    >
+                      <img
+                        alt="Frank Zappa"
+                        class="h-full w-full object-cover"
+                        decoding="async"
+                        loading="lazy"
+                        src="https://picsum.photos/seed/Frank Zappa/300"
+                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
+                      />
+                      <div
+                        class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                        style="opacity: 0.5;"
+                      >
+                        <svg
+                          class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                          fill="none"
+                          height="96"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="0.5"
+                          viewBox="0 0 24 24"
+                          width="96"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="16"
+                            rx="2"
+                            width="20"
+                            x="2"
+                            y="4"
+                          />
+                          <circle
+                            cx="8"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="M8 12h8"
+                          />
+                          <circle
+                            cx="16"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="min-w-0"
+                  >
+                    <div
+                      class="text-foreground truncate text-sm font-bold"
+                    >
+                      Frank Zappa
+                    </div>
+                  </div>
+                </button>
+                <button
+                  class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                  data-headlessui-state=""
+                  type="submit"
                 >
-                  Ozzy Osbourne
-                </div>
-              </div>
-            </button>
-            <button
-              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
-              data-headlessui-state=""
-              type="submit"
-            >
-              <div
-                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
-              >
-                <img
-                  alt="David Bowie"
-                  class="h-full w-full object-cover"
-                  src="https://picsum.photos/seed/David Bowie/300"
-                />
-              </div>
-              <div
-                class="min-w-0"
-              >
-                <div
-                  class="text-foreground truncate text-sm font-bold"
+                  <div
+                    class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                  >
+                    <div
+                      class="overflow-hidden absolute inset-0"
+                    >
+                      <img
+                        alt="Ozzy Osbourne"
+                        class="h-full w-full object-cover"
+                        decoding="async"
+                        loading="lazy"
+                        src="https://picsum.photos/seed/Ozzy Osbourne/300"
+                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
+                      />
+                      <div
+                        class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                        style="opacity: 0.5;"
+                      >
+                        <svg
+                          class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                          fill="none"
+                          height="96"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="0.5"
+                          viewBox="0 0 24 24"
+                          width="96"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="16"
+                            rx="2"
+                            width="20"
+                            x="2"
+                            y="4"
+                          />
+                          <circle
+                            cx="8"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="M8 12h8"
+                          />
+                          <circle
+                            cx="16"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="min-w-0"
+                  >
+                    <div
+                      class="text-foreground truncate text-sm font-bold"
+                    >
+                      Ozzy Osbourne
+                    </div>
+                  </div>
+                </button>
+                <button
+                  class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                  data-headlessui-state=""
+                  type="submit"
                 >
-                  David Bowie
-                </div>
-              </div>
-            </button>
-            <button
-              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
-              data-headlessui-state=""
-              type="submit"
-            >
-              <div
-                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
-              >
-                <img
-                  alt="Kurt Cobain"
-                  class="h-full w-full object-cover"
-                  src="https://picsum.photos/seed/Kurt Cobain/300"
-                />
-              </div>
-              <div
-                class="min-w-0"
-              >
-                <div
-                  class="text-foreground truncate text-sm font-bold"
+                  <div
+                    class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                  >
+                    <div
+                      class="overflow-hidden absolute inset-0"
+                    >
+                      <img
+                        alt="David Bowie"
+                        class="h-full w-full object-cover"
+                        decoding="async"
+                        loading="lazy"
+                        src="https://picsum.photos/seed/David Bowie/300"
+                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
+                      />
+                      <div
+                        class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                        style="opacity: 0.5;"
+                      >
+                        <svg
+                          class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                          fill="none"
+                          height="96"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="0.5"
+                          viewBox="0 0 24 24"
+                          width="96"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="16"
+                            rx="2"
+                            width="20"
+                            x="2"
+                            y="4"
+                          />
+                          <circle
+                            cx="8"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="M8 12h8"
+                          />
+                          <circle
+                            cx="16"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="min-w-0"
+                  >
+                    <div
+                      class="text-foreground truncate text-sm font-bold"
+                    >
+                      David Bowie
+                    </div>
+                  </div>
+                </button>
+                <button
+                  class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                  data-headlessui-state=""
+                  type="submit"
                 >
-                  Kurt Cobain
-                </div>
-              </div>
-            </button>
-            <button
-              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
-              data-headlessui-state=""
-              type="submit"
-            >
-              <div
-                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
-              >
-                <img
-                  alt="John Lennon"
-                  class="h-full w-full object-cover"
-                  src="https://picsum.photos/seed/John Lennon/300"
-                />
-              </div>
-              <div
-                class="min-w-0"
-              >
-                <div
-                  class="text-foreground truncate text-sm font-bold"
+                  <div
+                    class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                  >
+                    <div
+                      class="overflow-hidden absolute inset-0"
+                    >
+                      <img
+                        alt="Kurt Cobain"
+                        class="h-full w-full object-cover"
+                        decoding="async"
+                        loading="lazy"
+                        src="https://picsum.photos/seed/Kurt Cobain/300"
+                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
+                      />
+                      <div
+                        class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                        style="opacity: 0.5;"
+                      >
+                        <svg
+                          class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                          fill="none"
+                          height="96"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="0.5"
+                          viewBox="0 0 24 24"
+                          width="96"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="16"
+                            rx="2"
+                            width="20"
+                            x="2"
+                            y="4"
+                          />
+                          <circle
+                            cx="8"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="M8 12h8"
+                          />
+                          <circle
+                            cx="16"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="min-w-0"
+                  >
+                    <div
+                      class="text-foreground truncate text-sm font-bold"
+                    >
+                      Kurt Cobain
+                    </div>
+                  </div>
+                </button>
+                <button
+                  class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                  data-headlessui-state=""
+                  type="submit"
                 >
-                  John Lennon
-                </div>
+                  <div
+                    class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                  >
+                    <div
+                      class="overflow-hidden absolute inset-0"
+                    >
+                      <img
+                        alt="John Lennon"
+                        class="h-full w-full object-cover"
+                        decoding="async"
+                        loading="lazy"
+                        src="https://picsum.photos/seed/John Lennon/300"
+                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
+                      />
+                      <div
+                        class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                        style="opacity: 0.5;"
+                      >
+                        <svg
+                          class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                          fill="none"
+                          height="96"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="0.5"
+                          viewBox="0 0 24 24"
+                          width="96"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            height="16"
+                            rx="2"
+                            width="20"
+                            x="2"
+                            y="4"
+                          />
+                          <circle
+                            cx="8"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="M8 12h8"
+                          />
+                          <circle
+                            cx="16"
+                            cy="10"
+                            r="2"
+                          />
+                          <path
+                            d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="min-w-0"
+                  >
+                    <div
+                      class="text-foreground truncate text-sm font-bold"
+                    >
+                      John Lennon
+                    </div>
+                  </div>
+                </button>
               </div>
-            </button>
+            </div>
           </div>
         </div>
       </div>
       <span
         aria-hidden="true"
         aria-labelledby="headlessui-tabs-tab-:r3:"
-        id="headlessui-tabs-panel-:r9:"
+        id="headlessui-tabs-panel-:re:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
@@ -203,7 +452,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
       <span
         aria-hidden="true"
         aria-labelledby="headlessui-tabs-tab-:r5:"
-        id="headlessui-tabs-panel-:rb:"
+        id="headlessui-tabs-panel-:rg:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
@@ -216,21 +465,21 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
 exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
 <DocumentFragment>
   <div
-    class="flex w-full flex-col gap-2"
+    class="flex max-h-full w-full flex-col gap-2"
   >
     <div
       aria-orientation="horizontal"
       class="flex w-full items-center gap-2"
-      id="tabs-:rq:-list"
+      id="tabs-:r14:-list"
       role="tablist"
     >
       <button
-        aria-controls="headlessui-tabs-panel-:rv:"
+        aria-controls="headlessui-tabs-panel-:r19:"
         aria-selected="true"
-        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-        data-headlessui-state="selected"
+        class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
+        data-headlessui-state=""
         data-selected=""
-        id="headlessui-tabs-tab-:rr:"
+        id="headlessui-tabs-tab-:r15:"
         role="tab"
         tabindex="0"
         type="button"
@@ -238,11 +487,11 @@ exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
         First
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:r11:"
+        aria-controls="headlessui-tabs-panel-:r1b:"
         aria-selected="false"
-        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
-        id="headlessui-tabs-tab-:rt:"
+        id="headlessui-tabs-tab-:r17:"
         role="tab"
         tabindex="-1"
         type="button"
@@ -251,26 +500,35 @@ exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
       </button>
     </div>
     <div
-      class="mt-2"
-      id="tabs-:rq:-panels"
+      class="mt-2 flex flex-1 flex-col overflow-hidden"
+      id="tabs-:r14:-panels"
     >
       <div
-        aria-labelledby="headlessui-tabs-tab-:rr:"
-        class="outline-none"
+        aria-labelledby="headlessui-tabs-tab-:r15:"
+        class="relative flex-1 overflow-hidden outline-none"
         data-headlessui-state="selected"
         data-selected=""
-        id="headlessui-tabs-panel-:rv:"
+        id="headlessui-tabs-panel-:r19:"
         role="tabpanel"
         tabindex="0"
       >
-        <div>
-          First panel content
+        <div
+          class="relative h-full w-full"
+        >
+          <div
+            class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+            style="scrollbar-width: none;"
+          >
+            <div>
+              First panel content
+            </div>
+          </div>
         </div>
       </div>
       <span
         aria-hidden="true"
-        aria-labelledby="headlessui-tabs-tab-:rt:"
-        id="headlessui-tabs-panel-:r11:"
+        aria-labelledby="headlessui-tabs-tab-:r17:"
+        id="headlessui-tabs-panel-:r1b:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
@@ -283,20 +541,20 @@ exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
 exports[`Tabs > (Snapshot) switches tabs 1`] = `
 <DocumentFragment>
   <div
-    class="flex w-full flex-col gap-2"
+    class="flex max-h-full w-full flex-col gap-2"
   >
     <div
       aria-orientation="horizontal"
       class="flex w-full items-center gap-2"
-      id="tabs-:rd:-list"
+      id="tabs-:ri:-list"
       role="tablist"
     >
       <button
-        aria-controls="headlessui-tabs-panel-:rk:"
+        aria-controls="headlessui-tabs-panel-:rp:"
         aria-selected="false"
-        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
-        id="headlessui-tabs-tab-:re:"
+        id="headlessui-tabs-tab-:rj:"
         role="tab"
         tabindex="-1"
         type="button"
@@ -304,11 +562,11 @@ exports[`Tabs > (Snapshot) switches tabs 1`] = `
         Artists
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:rm:"
+        aria-controls="headlessui-tabs-panel-:r10:"
         aria-selected="false"
-        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
-        id="headlessui-tabs-tab-:rg:"
+        id="headlessui-tabs-tab-:rl:"
         role="tab"
         tabindex="-1"
         type="button"
@@ -316,13 +574,13 @@ exports[`Tabs > (Snapshot) switches tabs 1`] = `
         Tracks
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:ro:"
+        aria-controls="headlessui-tabs-panel-:r12:"
         aria-selected="true"
-        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-        data-headlessui-state="selected hover"
+        class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
+        data-headlessui-state="hover"
         data-hover=""
         data-selected=""
-        id="headlessui-tabs-tab-:ri:"
+        id="headlessui-tabs-tab-:rn:"
         role="tab"
         tabindex="0"
         type="button"
@@ -331,41 +589,50 @@ exports[`Tabs > (Snapshot) switches tabs 1`] = `
       </button>
     </div>
     <div
-      class="mt-2"
-      id="tabs-:rd:-panels"
+      class="mt-2 flex flex-1 flex-col overflow-hidden"
+      id="tabs-:ri:-panels"
     >
       <span
         aria-hidden="true"
-        aria-labelledby="headlessui-tabs-tab-:re:"
-        id="headlessui-tabs-panel-:rk:"
+        aria-labelledby="headlessui-tabs-tab-:rj:"
+        id="headlessui-tabs-panel-:rp:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
       />
       <span
         aria-hidden="true"
-        aria-labelledby="headlessui-tabs-tab-:rg:"
-        id="headlessui-tabs-panel-:rm:"
+        aria-labelledby="headlessui-tabs-tab-:rl:"
+        id="headlessui-tabs-panel-:r10:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
       />
       <div
-        aria-labelledby="headlessui-tabs-tab-:ri:"
-        class="outline-none"
+        aria-labelledby="headlessui-tabs-tab-:rn:"
+        class="relative flex-1 overflow-hidden outline-none"
         data-headlessui-state="selected"
         data-selected=""
-        id="headlessui-tabs-panel-:ro:"
+        id="headlessui-tabs-panel-:r12:"
         role="tabpanel"
         tabindex="0"
       >
         <div
-          class="text-foreground"
+          class="relative h-full w-full"
         >
           <div
-            class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-primary shadow-shadow"
+            class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+            style="scrollbar-width: none;"
           >
-            Section in a box.
+            <div
+              class="text-foreground"
+            >
+              <div
+                class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-primary shadow-shadow"
+              >
+                Section in a box.
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -373,7 +373,7 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
                   type="button"
                 />
                 <div
-                  class="flex w-full flex-col gap-2"
+                  class="flex max-h-full w-full flex-col gap-2 flex-1"
                 />
               </div>
             </div>
