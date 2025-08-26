@@ -11,6 +11,7 @@
     "clean": "rm -rf storybook-static .turbo node_modules/.cache"
   },
   "dependencies": {
+    "@fontsource/bricolage-grotesque": "^5.2.8",
     "@fontsource/dm-sans": "^5.2.6",
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@nuclearplayer/ui": "workspace:*",

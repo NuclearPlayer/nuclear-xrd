@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { cn } from '../../utils';
 import { Box } from '../Box';
 import { Button } from '../Button';
+import { ImageReveal } from '../ImageReveal';
 
 type CardProps = {
   src?: string;
@@ -11,6 +12,7 @@ type CardProps = {
   subtitle?: string;
   className?: string;
   onClick?: () => void;
+  imageReveal?: boolean;
 };
 
 export const Card: FC<CardProps> = ({
@@ -19,6 +21,7 @@ export const Card: FC<CardProps> = ({
   subtitle,
   className,
   onClick,
+  imageReveal = true,
 }) => {
   return (
     <Button
@@ -32,12 +35,22 @@ export const Card: FC<CardProps> = ({
       <Box
         variant="primary"
         shadow="none"
-        className="aspect-square w-full items-center justify-center overflow-hidden p-0"
+        className="relative aspect-square w-full items-center justify-center overflow-hidden p-0"
       >
-        {src && (
-          <img src={src} alt={title} className="h-full w-full object-cover" />
-        )}
-        {!src && <CassetteTape size={96} absoluteStrokeWidth />}
+        <ImageReveal
+          enabled={imageReveal}
+          src={src}
+          alt={title}
+          className="absolute inset-0"
+          imgClassName="h-full w-full object-cover"
+          placeholder={
+            <CassetteTape
+              size={96}
+              absoluteStrokeWidth
+              className="animate-pulse opacity-70"
+            />
+          }
+        />
       </Box>
 
       {(title || subtitle) && (

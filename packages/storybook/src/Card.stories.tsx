@@ -13,6 +13,7 @@ const meta = {
     src: { control: 'text' },
     title: { control: 'text' },
     subtitle: { control: 'text' },
+    imageReveal: { control: 'boolean' },
   },
 } satisfies Meta<typeof Card>;
 
@@ -57,5 +58,14 @@ export const WithoutImage: Story = {
     src: '',
     title: 'No Image',
     subtitle: 'Some Artist',
+  },
+};
+
+export const WithoutReveal: Story = {
+  args: {
+    src: cover,
+    title: 'Random Album',
+    subtitle: 'Some Artist',
+    imageReveal: false,
   },
 };

@@ -36,8 +36,10 @@
 
   --font-weight-normal: var(--font-weight-normal);
   --font-weight-bold: var(--font-weight-bold);
+  --font-weight-extra-bold: var(--font-weight-extra-bold);
 
   --font-sans: var(--font-family);
+  --font-heading: var(--font-family-heading);
 
   --shadow: var(--shadow-x) var(--shadow-y) 0px 0px var(--border);
   --shadow-shadow: var(--shadow);
@@ -85,8 +87,10 @@
   /* Typography */
   --font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   --default-font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-family-heading: 'Bricolage Grotesque', var(--default-font-family);
   --font-weight-normal: 400;
   --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
 
   /* Border Radius */
   --radius: 8px;
@@ -99,7 +103,10 @@
     @apply text-foreground bg-background font-normal;
   }
 
-  h1,
+  h1 {
+    @apply font-heading font-extrabold;
+  }
+
   h2,
   h3,
   h4,

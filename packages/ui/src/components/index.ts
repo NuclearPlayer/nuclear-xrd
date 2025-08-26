@@ -10,6 +10,7 @@ export * from './PlayerShell';
 export * from './PlayerWorkspace';
 export * from './PluginItem';
 export * from './RouteTransition';
+export * from './ImageReveal';
 export * from './ScrollableArea';
 export * from './SectionShell';
 export * from './Select';

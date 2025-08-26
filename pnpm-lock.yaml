@@ -398,6 +398,9 @@ importers:
 
   packages/storybook:
     dependencies:
+      '@fontsource/bricolage-grotesque':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@fontsource/dm-sans':
         specifier: ^5.2.6
         version: 5.2.6
@@ -545,6 +548,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@fontsource/bricolage-grotesque':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@fontsource/dm-sans':
         specifier: ^5.2.6
         version: 5.2.6
@@ -1279,6 +1285,9 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@fontsource/bricolage-grotesque@5.2.8':
+    resolution: {integrity: sha512-DVCqsxTGDIL/CdDgw1tiAFmtt6OKrgUx9IbzUcMu4EMrrdq7W2/AMM2hgksVy9F0mKGfao76IVL+4gxk4T4LTw==}
 
   '@fontsource/dm-sans@5.2.6':
     resolution: {integrity: sha512-3AmJcX93hqmevsC2ixNwHj3iO3sNY/YHBqGhg0MjIyfhk6aZLNv1s2HqJ6xf8yf1rXXK3yR56rzyA3O21htKkg==}
@@ -5765,6 +5774,8 @@ snapshots:
       tabbable: 6.2.0
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@fontsource/bricolage-grotesque@5.2.8': {}
 
   '@fontsource/dm-sans@5.2.6': {}
 
