@@ -14,7 +14,14 @@ export const TabsPanels: FC<TabsPanelsProps> = ({ children, className }) => {
     panelsClassName,
   } = useTabsContext();
   return (
-    <TabPanels id={panelsId} className={cn('mt-2', panelsClassName, className)}>
+    <TabPanels
+      id={panelsId}
+      className={cn(
+        'mt-2 flex flex-1 flex-col overflow-hidden',
+        panelsClassName,
+        className,
+      )}
+    >
       {children}
     </TabPanels>
   );

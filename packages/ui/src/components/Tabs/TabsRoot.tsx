@@ -38,7 +38,7 @@ export const TabsRoot: FC<TabsRootProps> = ({
   return (
     <TabGroup
       as="div"
-      className={cn('flex w-full flex-col gap-2', className)}
+      className={cn('flex max-h-full w-full flex-col gap-2', className)}
       defaultIndex={selectedIndex === undefined ? defaultIndex : undefined}
       selectedIndex={selectedIndex}
       onChange={onChange}
