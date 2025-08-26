@@ -213,6 +213,73 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
+<DocumentFragment>
+  <div
+    class="flex w-full flex-col gap-2"
+  >
+    <div
+      aria-orientation="horizontal"
+      class="flex w-full items-center gap-2"
+      id="tabs-:rq:-list"
+      role="tablist"
+    >
+      <button
+        aria-controls="headlessui-tabs-panel-:rv:"
+        aria-selected="true"
+        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        data-headlessui-state="selected"
+        data-selected=""
+        id="headlessui-tabs-tab-:rr:"
+        role="tab"
+        tabindex="0"
+        type="button"
+      >
+        First
+      </button>
+      <button
+        aria-controls="headlessui-tabs-panel-:r11:"
+        aria-selected="false"
+        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        data-headlessui-state=""
+        id="headlessui-tabs-tab-:rt:"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Second
+      </button>
+    </div>
+    <div
+      class="mt-2"
+      id="tabs-:rq:-panels"
+    >
+      <div
+        aria-labelledby="headlessui-tabs-tab-:rr:"
+        class="outline-none"
+        data-headlessui-state="selected"
+        data-selected=""
+        id="headlessui-tabs-panel-:rv:"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div>
+          First panel content
+        </div>
+      </div>
+      <span
+        aria-hidden="true"
+        aria-labelledby="headlessui-tabs-tab-:rt:"
+        id="headlessui-tabs-panel-:r11:"
+        role="tabpanel"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        tabindex="-1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Tabs > (Snapshot) switches tabs 1`] = `
 <DocumentFragment>
   <div

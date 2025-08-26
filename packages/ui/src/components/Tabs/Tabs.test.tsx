@@ -59,4 +59,25 @@ describe('Tabs', () => {
     await userEvent.click(await screen.findByText('About'));
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('(Snapshot) renders in composition mode', async () => {
+    const { asFragment } = render(
+      <Tabs.Root>
+        <Tabs.List>
+          <Tabs.Tab>First</Tabs.Tab>
+          <Tabs.Tab>Second</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panels>
+          <Tabs.Panel>
+            <div>First panel content</div>
+          </Tabs.Panel>
+          <Tabs.Panel>
+            <div>Second panel content</div>
+          </Tabs.Panel>
+        </Tabs.Panels>
+      </Tabs.Root>,
+    );
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
