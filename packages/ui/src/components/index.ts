@@ -19,4 +19,5 @@ export * from './Toaster';
 export * from './SectionShell';
 export * from './Card';
 export * from './CardGrid';
+export * from './Loader';
 export * from '../utils/time';
