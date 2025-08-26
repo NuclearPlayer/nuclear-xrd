@@ -9,6 +9,7 @@ import type {
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
 import { PluginLoader } from '../services/PluginLoader';
+import { providersServiceHost } from '../services/providersService';
 import { createPluginSettingsHost } from './settingsStore';
 
 const allowedPermissions: string[] = [];
@@ -95,6 +96,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
     if (plugin.instance!.onEnable) {
       const api = new NuclearPluginAPI({
         settingsHost: createPluginSettingsHost(id, plugin.metadata.displayName),
+        providersHost: providersServiceHost,
       });
       await plugin.instance!.onEnable(api);
     }

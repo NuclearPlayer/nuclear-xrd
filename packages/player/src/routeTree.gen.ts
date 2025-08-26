@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThemesRouteImport } from './routes/themes'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as PluginsRouteImport } from './routes/plugins'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +24,11 @@ const ThemesRoute = ThemesRouteImport.update({
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PluginsRoute = PluginsRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/plugins': typeof PluginsRoute
+  '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/plugins': typeof PluginsRoute
+  '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
 }
@@ -60,21 +68,36 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/plugins': typeof PluginsRoute
+  '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/plugins' | '/settings' | '/themes'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/plugins'
+    | '/search'
+    | '/settings'
+    | '/themes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/plugins' | '/settings' | '/themes'
-  id: '__root__' | '/' | '/dashboard' | '/plugins' | '/settings' | '/themes'
+  to: '/' | '/dashboard' | '/plugins' | '/search' | '/settings' | '/themes'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/plugins'
+    | '/search'
+    | '/settings'
+    | '/themes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
   PluginsRoute: typeof PluginsRoute
+  SearchRoute: typeof SearchRoute
   SettingsRoute: typeof SettingsRoute
   ThemesRoute: typeof ThemesRoute
 }
@@ -93,6 +116,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/plugins': {
@@ -123,6 +153,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
   PluginsRoute: PluginsRoute,
+  SearchRoute: SearchRoute,
   SettingsRoute: SettingsRoute,
   ThemesRoute: ThemesRoute,
 }

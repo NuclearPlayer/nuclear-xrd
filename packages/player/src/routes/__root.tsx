@@ -1,4 +1,4 @@
-import { createRootRoute, Link } from '@tanstack/react-router';
+import { createRootRoute, Link, useRouter } from '@tanstack/react-router';
 import {
   BlocksIcon,
   CompassIcon,
@@ -11,6 +11,7 @@ import {
   SettingsIcon,
   UserIcon,
 } from 'lucide-react';
+import { useState } from 'react';
 
 import {
   PlayerBar,
@@ -24,10 +25,41 @@ import {
   TopBar,
 } from '@nuclearplayer/ui';
 
+import { DevTools } from '../components/DevTools';
 import { SoundProvider } from '../components/SoundProvider';
 import { useLayoutStore } from '../stores/layoutStore';
 
 const cover = 'https://picsum.photos/64';
+
+const SearchBox = () => {
+  const [query, setQuery] = useState('');
+  const router = useRouter();
+  const submit = () => {
+    const q = query.trim();
+    if (q.length === 0) {
+      return;
+    }
+
+    router.navigate({ to: '/search', search: { q } });
+  };
+
+  return (
+    <div>
+      <input
+        data-testid="search-box"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            submit();
+          }
+        }}
+        placeholder="Search"
+        className="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+      />
+    </div>
+  );
+};
 
 const RootComponent = () => {
   const {
@@ -41,7 +73,9 @@ const RootComponent = () => {
 
   return (
     <PlayerShell>
-      <TopBar />
+      <TopBar>
+        <SearchBox />
+      </TopBar>
 
       <SoundProvider>
         <PlayerWorkspace>
@@ -131,6 +165,7 @@ const RootComponent = () => {
         right={<PlayerBar.Volume defaultValue={75} />}
       />
       <Toaster />
+      <DevTools />
     </PlayerShell>
   );
 };
