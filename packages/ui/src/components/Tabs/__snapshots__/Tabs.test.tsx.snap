@@ -1,0 +1,308 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tabs > (Snapshot) renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="flex w-full flex-col gap-2"
+  >
+    <div
+      aria-orientation="horizontal"
+      class="flex w-full items-center gap-2"
+      id="tabs-:r0:-list"
+      role="tablist"
+    >
+      <button
+        aria-controls="headlessui-tabs-panel-:r7:"
+        aria-selected="true"
+        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        data-headlessui-state="selected"
+        data-selected=""
+        id="headlessui-tabs-tab-:r1:"
+        role="tab"
+        tabindex="0"
+        type="button"
+      >
+        Artists
+      </button>
+      <button
+        aria-controls="headlessui-tabs-panel-:r9:"
+        aria-selected="false"
+        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        data-headlessui-state=""
+        id="headlessui-tabs-tab-:r3:"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Tracks
+      </button>
+      <button
+        aria-controls="headlessui-tabs-panel-:rb:"
+        aria-selected="false"
+        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        data-headlessui-state=""
+        id="headlessui-tabs-tab-:r5:"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        About
+      </button>
+    </div>
+    <div
+      class="mt-2"
+      id="tabs-:r0:-panels"
+    >
+      <div
+        aria-labelledby="headlessui-tabs-tab-:r1:"
+        class="outline-none"
+        data-headlessui-state="selected"
+        data-selected=""
+        id="headlessui-tabs-panel-:r7:"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div
+          class="text-foreground"
+        >
+          <div
+            class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4"
+            role="grid"
+          >
+            <button
+              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+              data-headlessui-state=""
+              type="submit"
+            >
+              <div
+                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
+              >
+                <img
+                  alt="Frank Zappa"
+                  class="h-full w-full object-cover"
+                  src="https://picsum.photos/seed/Frank Zappa/300"
+                />
+              </div>
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-foreground truncate text-sm font-bold"
+                >
+                  Frank Zappa
+                </div>
+              </div>
+            </button>
+            <button
+              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+              data-headlessui-state=""
+              type="submit"
+            >
+              <div
+                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
+              >
+                <img
+                  alt="Ozzy Osbourne"
+                  class="h-full w-full object-cover"
+                  src="https://picsum.photos/seed/Ozzy Osbourne/300"
+                />
+              </div>
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-foreground truncate text-sm font-bold"
+                >
+                  Ozzy Osbourne
+                </div>
+              </div>
+            </button>
+            <button
+              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+              data-headlessui-state=""
+              type="submit"
+            >
+              <div
+                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
+              >
+                <img
+                  alt="David Bowie"
+                  class="h-full w-full object-cover"
+                  src="https://picsum.photos/seed/David Bowie/300"
+                />
+              </div>
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-foreground truncate text-sm font-bold"
+                >
+                  David Bowie
+                </div>
+              </div>
+            </button>
+            <button
+              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+              data-headlessui-state=""
+              type="submit"
+            >
+              <div
+                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
+              >
+                <img
+                  alt="Kurt Cobain"
+                  class="h-full w-full object-cover"
+                  src="https://picsum.photos/seed/Kurt Cobain/300"
+                />
+              </div>
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-foreground truncate text-sm font-bold"
+                >
+                  Kurt Cobain
+                </div>
+              </div>
+            </button>
+            <button
+              class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+              data-headlessui-state=""
+              type="submit"
+            >
+              <div
+                class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none aspect-square w-full items-center justify-center overflow-hidden p-0"
+              >
+                <img
+                  alt="John Lennon"
+                  class="h-full w-full object-cover"
+                  src="https://picsum.photos/seed/John Lennon/300"
+                />
+              </div>
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-foreground truncate text-sm font-bold"
+                >
+                  John Lennon
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <span
+        aria-hidden="true"
+        aria-labelledby="headlessui-tabs-tab-:r3:"
+        id="headlessui-tabs-panel-:r9:"
+        role="tabpanel"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        tabindex="-1"
+      />
+      <span
+        aria-hidden="true"
+        aria-labelledby="headlessui-tabs-tab-:r5:"
+        id="headlessui-tabs-panel-:rb:"
+        role="tabpanel"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        tabindex="-1"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Tabs > (Snapshot) switches tabs 1`] = `
+<DocumentFragment>
+  <div
+    class="flex w-full flex-col gap-2"
+  >
+    <div
+      aria-orientation="horizontal"
+      class="flex w-full items-center gap-2"
+      id="tabs-:r0:-list"
+      role="tablist"
+    >
+      <button
+        aria-controls="headlessui-tabs-panel-:r7:"
+        aria-selected="false"
+        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        data-headlessui-state=""
+        id="headlessui-tabs-tab-:r1:"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Artists
+      </button>
+      <button
+        aria-controls="headlessui-tabs-panel-:r9:"
+        aria-selected="false"
+        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        data-headlessui-state=""
+        id="headlessui-tabs-tab-:r3:"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Tracks
+      </button>
+      <button
+        aria-controls="headlessui-tabs-panel-:rb:"
+        aria-selected="true"
+        class="text-foreground rounded border-2 border-transparent bg-transparent px-3 py-2 text-sm transition-colors hover:underline data-[selected=true]:bg-primary data-[selected=true]:border-border focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        data-headlessui-state="selected hover"
+        data-hover=""
+        data-selected=""
+        id="headlessui-tabs-tab-:r5:"
+        role="tab"
+        tabindex="0"
+        type="button"
+      >
+        About
+      </button>
+    </div>
+    <div
+      class="mt-2"
+      id="tabs-:r0:-panels"
+    >
+      <span
+        aria-hidden="true"
+        aria-labelledby="headlessui-tabs-tab-:r1:"
+        id="headlessui-tabs-panel-:r7:"
+        role="tabpanel"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        tabindex="-1"
+      />
+      <span
+        aria-hidden="true"
+        aria-labelledby="headlessui-tabs-tab-:r3:"
+        id="headlessui-tabs-panel-:r9:"
+        role="tabpanel"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        tabindex="-1"
+      />
+      <div
+        aria-labelledby="headlessui-tabs-tab-:r5:"
+        class="outline-none"
+        data-headlessui-state="selected"
+        data-selected=""
+        id="headlessui-tabs-panel-:rb:"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div
+          class="text-foreground"
+        >
+          <div
+            class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-primary shadow-shadow"
+          >
+            Section in a box.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
