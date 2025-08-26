@@ -34,6 +34,14 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
           />
         </g>
       </svg>
+      <div>
+        <input
+          class="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+          data-testid="search-box"
+          placeholder="Search"
+          value=""
+        />
+      </div>
       <div
         class="flex-1"
       />
@@ -466,29 +474,9 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
           class="relative h-full w-full overflow-hidden"
         >
           <div
-            animate="exit"
-            class="absolute inset-0 h-full w-full"
-            initial="enter"
-            transition="[object Object]"
-          >
-            <div
-              class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
-            >
-              <h1
-                class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
-              >
-                Dashboard
-              </h1>
-              <div
-                class="flex w-full flex-1 flex-col overflow-hidden"
-              >
-                Dashboard view
-              </div>
-            </div>
-          </div>
-          <div
             animate="center"
             class="absolute inset-0 h-full w-full"
+            exit="exit"
             initial="enter"
             transition="[object Object]"
           >
@@ -504,10 +492,10 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
                 <div
-                  class="relative h-auto w-full max-w-100 flex-1 overflow-hidden"
+                  class="relative h-full w-full max-w-100 flex-1 overflow-hidden"
                 >
                   <div
-                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
                     style="scrollbar-width: none;"
                   >
                     <section

@@ -231,10 +231,11 @@ export const ScrollableArea: FC<ScrollableAreaProps> = ({
   const needsCorner = needsVertical && needsHorizontal;
 
   return (
-    <div className={cn('relative h-auto w-full', className)}>
+    <div className={cn('relative h-full w-full', className)}>
       <div
         ref={ref}
-        className="scrollbar-hide flex h-full w-full flex-col overflow-auto"
+        //The padding is needed here to make room for scrollbars
+        className="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
         onScroll={handleScroll}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >

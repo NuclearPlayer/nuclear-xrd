@@ -1,8 +1,86 @@
+codecov:
+  require_ci_to_pass: true
+
 coverage:
+  precision: 2
+  round: down
+  range: 80..100
+
   status:
     project:
       default:
-        informational: true
+        target: 80%
+        threshold: 1%
+        informational: false
     patch:
       default:
+        target: 80%
+        threshold: 0%
+        only_pulls: true
+        informational: false
+
+parsers:
+  javascript:
+    enable_partials: yes
+
+comment:
+  layout: "header, diff, flags, components"
+  require_changes: true
+  behavior: default
+
+github_checks:
+  annotations: true
+
+flag_management:
+  default_rules:
+    carryforward: true
+
+component_management:
+  default_rules:
+    statuses:
+      - type: project
+        target: 80%
+        threshold: 1%
         informational: true
+      - type: patch
+        target: 80%
+        threshold: 0%
+        only_pulls: true
+        informational: true
+  individual_components:
+    - component_id: player_app
+      name: Player (App)
+      paths:
+        - "packages/player/src/**"
+    - component_id: player_tauri
+      name: Player (Tauri Rust)
+      paths:
+        - "packages/player/src-tauri/**"
+    - component_id: ui
+      name: UI Library
+      paths:
+        - "packages/ui/src/**"
+    - component_id: hifi
+      name: Hifi
+      paths:
+        - "packages/hifi/src/**"
+    - component_id: model
+      name: Data Model
+      paths:
+        - "packages/model/src/**"
+    - component_id: plugin_sdk
+      name: Plugin SDK
+      paths:
+        - "packages/plugin-sdk/src/**"
+    - component_id: themes
+      name: Themes
+      paths:
+        - "packages/themes/src/**"
+
+ignore:
+  - "packages/docs/**"
+  - "packages/storybook/**"
+  - "**/__snapshots__/**"
+  - "**/*.snap"
+  - "packages/**/dist/**"
+  - "**/*.d.ts"

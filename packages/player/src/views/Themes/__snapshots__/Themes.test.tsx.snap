@@ -34,6 +34,14 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
           />
         </g>
       </svg>
+      <div>
+        <input
+          class="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+          data-testid="search-box"
+          placeholder="Search"
+          value=""
+        />
+      </div>
       <div
         class="flex-1"
       />
@@ -466,29 +474,9 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
           class="relative h-full w-full overflow-hidden"
         >
           <div
-            animate="exit"
-            class="absolute inset-0 h-full w-full"
-            initial="enter"
-            transition="[object Object]"
-          >
-            <div
-              class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
-            >
-              <h1
-                class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
-              >
-                Dashboard
-              </h1>
-              <div
-                class="flex w-full flex-1 flex-col overflow-hidden"
-              >
-                Dashboard view
-              </div>
-            </div>
-          </div>
-          <div
             animate="center"
             class="absolute inset-0 h-full w-full"
+            exit="exit"
             initial="enter"
             transition="[object Object]"
           >
@@ -503,227 +491,236 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
               <div
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
-                <section
-                  class="mb-6 flex w-full flex-col items-start justify-start"
-                  data-testid="basic-themes"
+                <div
+                  class="relative h-full w-full overflow-hidden"
                 >
-                  <h2
-                    class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
-                  >
-                    Basic themes
-                  </h2>
                   <div
-                    class="flex w-full flex-1 flex-col"
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                    style="scrollbar-width: none;"
                   >
-                    <div
-                      class="flex flex-wrap gap-4 p-1"
+                    <section
+                      class="mb-6 flex w-full flex-col items-start justify-start"
+                      data-testid="basic-themes"
                     >
-                      <button
-                        class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none"
-                        data-headlessui-state=""
-                        type="submit"
+                      <h2
+                        class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
                       >
-                        <span
-                          class="text-foreground text-left text-base font-bold"
-                        >
-                          Aurora
-                        </span>
-                        <div
-                          class="block"
-                        >
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.74 0.15 305);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.98 0.01 340);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.74 0.15 305);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.42 0.04 278);"
-                          />
-                        </div>
-                      </button>
-                      <button
-                        class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none"
-                        data-headlessui-state=""
-                        type="submit"
-                      >
-                        <span
-                          class="text-foreground text-left text-base font-bold"
-                        >
-                          Ember
-                        </span>
-                        <div
-                          class="block"
-                        >
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.76 0.14 30);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.97 0.02 70);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.76 0.14 30);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.4 0.03 277);"
-                          />
-                        </div>
-                      </button>
-                      <button
-                        class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none"
-                        data-headlessui-state=""
-                        type="submit"
-                      >
-                        <span
-                          class="text-foreground text-left text-base font-bold"
-                        >
-                          Lagoon
-                        </span>
-                        <div
-                          class="block"
-                        >
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.67 0.16 205);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.985 0.018 210);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.67 0.16 205);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.33 0.035 245);"
-                          />
-                        </div>
-                      </button>
-                      <button
-                        class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none"
-                        data-headlessui-state=""
-                        type="submit"
-                      >
-                        <span
-                          class="text-foreground text-left text-base font-bold"
-                        >
-                          Canyon
-                        </span>
-                        <div
-                          class="block"
-                        >
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.68 0.19 38);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.975 0.02 70);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.68 0.19 38);"
-                          />
-                          <span
-                            aria-hidden="true"
-                            class="ring-border inline-block size-5 rounded-full ring-2"
-                            style="background-color: oklch(0.36 0.03 30);"
-                          />
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-                </section>
-                <section
-                  class="mb-6 flex w-full flex-col items-start justify-start"
-                  data-testid="advanced-themes"
-                >
-                  <h2
-                    class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
-                  >
-                    Advanced themes
-                  </h2>
-                  <div
-                    class="flex w-full flex-1 flex-col"
-                  >
-                    <div
-                      class="max-w-80 p-1"
-                    >
+                        Basic themes
+                      </h2>
                       <div
-                        class="relative flex w-full flex-col gap-2"
+                        class="flex w-full flex-1 flex-col"
                       >
-                        <button
-                          aria-expanded="false"
-                          aria-haspopup="listbox"
-                          class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
-                          data-headlessui-state=""
-                          id="select-:r2:"
-                          type="button"
+                        <div
+                          class="flex flex-wrap gap-4 p-1"
                         >
-                          <span
-                            class="block truncate"
+                          <button
+                            class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none"
+                            data-headlessui-state=""
+                            type="submit"
                           >
-                            Default
-                          </span>
-                          <span
-                            class="flex items-center"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              class="lucide lucide-chevron-down text-foreground transition-transform"
-                              fill="none"
-                              height="16"
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              viewBox="0 0 24 24"
-                              width="16"
-                              xmlns="http://www.w3.org/2000/svg"
+                            <span
+                              class="text-foreground text-left text-base font-bold"
                             >
-                              <path
-                                d="m6 9 6 6 6-6"
+                              Aurora
+                            </span>
+                            <div
+                              class="block"
+                            >
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.74 0.15 305);"
                               />
-                            </svg>
-                          </span>
-                        </button>
-                        <p
-                          class="text-foreground-secondary text-sm select-none"
-                          id="select-:r2:-description"
-                        >
-                          Themes found in your app data themes directory
-                        </p>
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.98 0.01 340);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.74 0.15 305);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.42 0.04 278);"
+                              />
+                            </div>
+                          </button>
+                          <button
+                            class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none"
+                            data-headlessui-state=""
+                            type="submit"
+                          >
+                            <span
+                              class="text-foreground text-left text-base font-bold"
+                            >
+                              Ember
+                            </span>
+                            <div
+                              class="block"
+                            >
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.76 0.14 30);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.97 0.02 70);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.76 0.14 30);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.4 0.03 277);"
+                              />
+                            </div>
+                          </button>
+                          <button
+                            class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none"
+                            data-headlessui-state=""
+                            type="submit"
+                          >
+                            <span
+                              class="text-foreground text-left text-base font-bold"
+                            >
+                              Lagoon
+                            </span>
+                            <div
+                              class="block"
+                            >
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.67 0.16 205);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.985 0.018 210);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.67 0.16 205);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.33 0.035 245);"
+                              />
+                            </div>
+                          </button>
+                          <button
+                            class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none"
+                            data-headlessui-state=""
+                            type="submit"
+                          >
+                            <span
+                              class="text-foreground text-left text-base font-bold"
+                            >
+                              Canyon
+                            </span>
+                            <div
+                              class="block"
+                            >
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.68 0.19 38);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.975 0.02 70);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.68 0.19 38);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.36 0.03 30);"
+                              />
+                            </div>
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    </section>
+                    <section
+                      class="mb-6 flex w-full flex-col items-start justify-start"
+                      data-testid="advanced-themes"
+                    >
+                      <h2
+                        class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
+                      >
+                        Advanced themes
+                      </h2>
+                      <div
+                        class="flex w-full flex-1 flex-col"
+                      >
+                        <div
+                          class="max-w-80 p-1"
+                        >
+                          <div
+                            class="relative flex w-full flex-col gap-2"
+                          >
+                            <button
+                              aria-expanded="false"
+                              aria-haspopup="listbox"
+                              class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
+                              data-headlessui-state=""
+                              id="select-:r2:"
+                              type="button"
+                            >
+                              <span
+                                class="block truncate"
+                              >
+                                Default
+                              </span>
+                              <span
+                                class="flex items-center"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  class="lucide lucide-chevron-down text-foreground transition-transform"
+                                  fill="none"
+                                  height="16"
+                                  stroke="currentColor"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  viewBox="0 0 24 24"
+                                  width="16"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="m6 9 6 6 6-6"
+                                  />
+                                </svg>
+                              </span>
+                            </button>
+                            <p
+                              class="text-foreground-secondary text-sm select-none"
+                              id="select-:r2:-description"
+                            >
+                              Themes found in your app data themes directory
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
                   </div>
-                </section>
+                </div>
               </div>
             </div>
           </div>

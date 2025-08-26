@@ -12,7 +12,7 @@ const OPTIONS = [
   { id: 'high', label: 'High' },
 ];
 
-describe('Select snapshots', () => {
+describe('Select', () => {
   it('(Snapshot) renders basic with description', () => {
     const { container } = render(
       <Select

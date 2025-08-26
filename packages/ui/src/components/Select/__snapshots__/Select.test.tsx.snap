@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Select snapshots > (Snapshot) renders basic with description 1`] = `
+exports[`Select > (Snapshot) renders basic with description 1`] = `
 <div
   class="relative flex w-full flex-col gap-2"
 >
@@ -55,7 +55,7 @@ exports[`Select snapshots > (Snapshot) renders basic with description 1`] = `
 </div>
 `;
 
-exports[`Select snapshots > (Snapshot) renders error without description 1`] = `
+exports[`Select > (Snapshot) renders error without description 1`] = `
 <div
   class="relative flex w-full flex-col gap-2"
 >
