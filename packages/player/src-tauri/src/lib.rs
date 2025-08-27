@@ -1,6 +1,9 @@
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+fn read_text_file_unrestricted(path: String) -> Result<String, String> {
+    use std::fs;
+    use std::path::Path;
+    fs::read_to_string(Path::new(&path))
+        .map_err(|e| format!("read_text_file_unrestricted failed: {}", e))
 }
 
 #[tauri::command]
@@ -57,7 +60,10 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::new().build())
-        .invoke_handler(tauri::generate_handler![greet, copy_dir_recursive])
+        .invoke_handler(tauri::generate_handler![
+            read_text_file_unrestricted,
+            copy_dir_recursive
+        ])
         .setup(|app| {
             if cfg!(debug_assertions) {
                 app.handle().plugin(

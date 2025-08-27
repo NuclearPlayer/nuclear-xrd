@@ -6,3 +6,10 @@ export const copyDirRecursive = async (
 ): Promise<void> => {
   await invoke('copy_dir_recursive', { from, to });
 };
+
+export const readTextFileUnrestricted = async (
+  path: string,
+): Promise<string> => {
+  const content = await invoke<string>('read_text_file_unrestricted', { path });
+  return content;
+};

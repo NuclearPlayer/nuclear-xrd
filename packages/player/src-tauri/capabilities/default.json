@@ -12,38 +12,67 @@
     {
       "identifier": "fs:allow-exists",
       "allow": [
-        { "path": "$APPDATA/themes" },
-        { "path": "$APPDATA/themes/*" }
+        {
+          "path": "$APPDATA/themes"
+        },
+        {
+          "path": "$APPDATA/plugins"
+        }
       ]
     },
     {
       "identifier": "fs:allow-read-dir",
       "allow": [
-        { "path": "$APPDATA/themes" }
+        {
+          "path": "$APPDATA/themes"
+        },
+        {
+          "path": "$APPDATA/plugins"
+        }
       ]
     },
     {
       "identifier": "fs:allow-mkdir",
       "allow": [
-        { "path": "$APPDATA/themes" }
+        {
+          "path": "$APPDATA/themes"
+        },
+        {
+          "path": "$APPDATA/plugins"
+        }
       ]
     },
     {
       "identifier": "fs:allow-watch",
       "allow": [
-        { "path": "$APPDATA/themes" }
+        {
+          "path": "$APPDATA/themes"
+        },
+        {
+          "path": "$APPDATA/plugins"
+        }
       ]
     },
     {
       "identifier": "fs:allow-read-file",
       "allow": [
-        { "path": "$APPDATA/themes/*" }
+        {
+          "path": "$APPDATA/themes/*"
+        },
+        {
+          "path": "$APPDATA/plugins/*"
+        }
       ]
     },
     {
       "identifier": "fs:allow-read-text-file",
       "allow": [
-        { "path": "$APPDATA/themes/*" }
+        {
+          "path": "$APPDATA/themes/*"
+        },
+        {
+          "path": "$APPDATA/plugins/*"
+        }
       ]
     },
     "store:default"

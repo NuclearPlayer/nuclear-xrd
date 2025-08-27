@@ -1,5 +1,4 @@
 import { join } from '@tauri-apps/api/path';
-import { readTextFile } from '@tauri-apps/plugin-fs';
 import * as Logger from '@tauri-apps/plugin-log';
 import { isError, isString } from 'lodash-es';
 import { toast } from 'sonner';
@@ -21,6 +20,7 @@ import {
 } from '../services/pluginRegistry';
 import { installPluginToManagedDir } from '../services/pluginsDirService';
 import { providersServiceHost } from '../services/providersService';
+import { readTextFileUnrestricted } from '../services/rustFs';
 import { createPluginSettingsHost } from './settingsStore';
 
 const allowedPermissions: string[] = [];
@@ -58,7 +58,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
     try {
       // 1) Read manifest to get id/version without executing plugin code
       const pkgPath = await join(path, 'package.json');
-      const pkgText = await readTextFile(pkgPath);
+      const pkgText = await readTextFileUnrestricted(pkgPath);
       const manifestResult = safeParsePluginManifest(JSON.parse(pkgText));
       if (!manifestResult.success) {
         const msg = manifestResult.errors.join('; ');
