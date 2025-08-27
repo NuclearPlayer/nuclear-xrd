@@ -1,4 +1,8 @@
+import { join } from '@tauri-apps/api/path';
+import { readTextFile } from '@tauri-apps/plugin-fs';
 import * as Logger from '@tauri-apps/plugin-log';
+import { isError, isString } from 'lodash-es';
+import { toast } from 'sonner';
 import { create } from 'zustand';
 
 import type {
@@ -9,6 +13,13 @@ import type {
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
 import { PluginLoader } from '../services/PluginLoader';
+import { safeParsePluginManifest } from '../services/pluginManifest';
+import {
+  getRegistryEntry,
+  setRegistryWarnings,
+  upsertRegistryEntry,
+} from '../services/pluginRegistry';
+import { installPluginToManagedDir } from '../services/pluginsDirService';
 import { providersServiceHost } from '../services/providersService';
 import { createPluginSettingsHost } from './settingsStore';
 
@@ -45,24 +56,54 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
 
   loadPluginFromPath: async (path: string) => {
     try {
-      const loader = new PluginLoader(path);
-      const loaded: LoadedPlugin = await loader.load();
-      const id = loaded.metadata.id;
-      if (get().plugins[id]) {
-        Logger.debug(`Plugin ${id} already loaded.`);
+      // 1) Read manifest to get id/version without executing plugin code
+      const pkgPath = await join(path, 'package.json');
+      const pkgText = await readTextFile(pkgPath);
+      const manifestResult = safeParsePluginManifest(JSON.parse(pkgText));
+      if (!manifestResult.success) {
+        const msg = manifestResult.errors.join('; ');
+        toast.error('Failed to load plugin', { description: `${msg}` });
+        Logger.error(`Invalid plugin package.json: ${msg}`);
         return;
       }
-      const permissions = loaded.metadata.permissions || [];
-      const unknown = permissions.filter(
-        (p) => !allowedPermissions.includes(p),
-      );
-      const warnings: string[] = unknown.length
-        ? [`Unknown permissions: ${unknown.join(', ')}`]
-        : [];
+      const { name: id, version } = manifestResult.data;
 
-      if (warnings.length > 0) {
+      // 2) Copy folder into managed directory (overwrite semantics)
+      const managedPath = await installPluginToManagedDir(id, version, path);
+
+      // 3) Persist/merge registry entry (preserve enabled state if present)
+      const existing = await getRegistryEntry(id);
+      const now = new Date().toISOString();
+      const enabled = existing ? existing.enabled : false;
+      await upsertRegistryEntry({
+        id,
+        version,
+        path: managedPath,
+        location: 'user',
+        enabled,
+        installedAt: existing ? existing.installedAt : now,
+        lastUpdatedAt: now,
+        warnings: undefined,
+      });
+
+      // 4) Load plugin from managed path
+      const loader = new PluginLoader(managedPath);
+      const loaded: LoadedPlugin = await loader.load();
+      const permissions = loaded.metadata.permissions || [];
+      const unknown = permissions.filter((p) => {
+        return !allowedPermissions.includes(p);
+      });
+      const combinedWarnings: string[] = [];
+      if (manifestResult.warnings.length > 0) {
+        combinedWarnings.push(...manifestResult.warnings);
+      }
+      if (unknown.length > 0) {
+        combinedWarnings.push(`Unknown permissions: ${unknown.join(', ')}`);
+      }
+      if (combinedWarnings.length > 0) {
+        await setRegistryWarnings(id, combinedWarnings);
         Logger.warn(
-          `Plugin ${id} loaded with warnings: ${warnings.join(', ')}`,
+          `Plugin ${id} loaded with warnings: ${combinedWarnings.join(', ')}`,
         );
       }
 
@@ -71,18 +112,23 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
           ...state.plugins,
           [loaded.metadata.id]: {
             metadata: loaded.metadata,
-            path: loaded.path,
+            path: managedPath,
             enabled: false,
-            warning: warnings.length > 0,
-            warnings,
+            warning: combinedWarnings.length > 0,
+            warnings: combinedWarnings,
             instance: loaded.instance,
           },
         },
       }));
-    } catch (error) {
-      // No toast system yet
-      // TODO: Show a toast here
 
+      // 5) Enable the plugin if it was previously enabled
+      if (enabled) {
+        await get().enablePlugin(id);
+      }
+    } catch (error) {
+      toast.error('Failed to load plugin', {
+        description: `${isError(error) ? (error as Error).message : isString(error) ? (error as string) : 'Unknown error'}`,
+      });
       Logger.error(`Failed to load plugin: ${(error as Error).message}`);
     }
   },
