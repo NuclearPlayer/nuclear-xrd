@@ -11,12 +11,14 @@ import '@nuclearplayer/themes';
 import { startAdvancedThemeWatcher } from './services/advancedThemeDirService';
 import { applyAdvancedThemeFromSettingsIfAny } from './services/advancedThemeService';
 import { applyThemeFromSettings } from './services/themeBootstrap';
+import { usePluginStore } from './stores/pluginStore';
 
 initializeSettingsStore()
   .then(() => registerBuiltInCoreSettings())
   .then(() => startAdvancedThemeWatcher())
   .then(() => applyThemeFromSettings())
-  .then(() => applyAdvancedThemeFromSettingsIfAny());
+  .then(() => applyAdvancedThemeFromSettingsIfAny())
+  .then(() => usePluginStore.getState().hydrateFromRegistry());
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

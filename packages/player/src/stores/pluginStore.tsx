@@ -1,4 +1,5 @@
 import { join } from '@tauri-apps/api/path';
+import { exists } from '@tauri-apps/plugin-fs';
 import * as Logger from '@tauri-apps/plugin-log';
 import { isError, isString } from 'lodash-es';
 import { toast } from 'sonner';
@@ -15,6 +16,8 @@ import { PluginLoader } from '../services/PluginLoader';
 import { safeParsePluginManifest } from '../services/pluginManifest';
 import {
   getRegistryEntry,
+  listRegistryEntries,
+  setRegistryEnabled,
   setRegistryWarnings,
   upsertRegistryEntry,
 } from '../services/pluginRegistry';
@@ -37,6 +40,7 @@ export type PluginState = {
 type PluginStore = {
   plugins: Record<string, PluginState>;
   loadPluginFromPath: (path: string) => Promise<void>;
+  hydrateFromRegistry: () => Promise<void>;
   unloadPlugin: (id: string) => Promise<void>;
   enablePlugin: (id: string) => Promise<void>;
   disablePlugin: (id: string) => Promise<void>;
@@ -49,6 +53,44 @@ const requireInstance = (id: string) => {
   if (!plugin) throw new Error(`Plugin ${id} not found`);
   if (!plugin.instance) throw new Error(`Plugin ${id} has no instance`);
   return plugin;
+};
+
+const applyLoadedPlugin = async (
+  pluginPath: string,
+  id: string,
+  baseWarnings: string[] = [],
+): Promise<void> => {
+  const loader = new PluginLoader(pluginPath);
+  const loaded: LoadedPlugin = await loader.load();
+  const permissions = loaded.metadata.permissions || [];
+  const unknown = permissions.filter((p) => {
+    return !allowedPermissions.includes(p);
+  });
+  const combinedWarnings = [
+    ...baseWarnings,
+    ...(unknown.length > 0
+      ? [`Unknown permissions: ${unknown.join(', ')}`]
+      : []),
+  ];
+  if (combinedWarnings.length > 0) {
+    await setRegistryWarnings(id, combinedWarnings);
+    Logger.warn(
+      `Plugin ${id} loaded with warnings: ${combinedWarnings.join(', ')}`,
+    );
+  }
+  usePluginStore.setState((state) => ({
+    plugins: {
+      ...state.plugins,
+      [loaded.metadata.id]: {
+        metadata: loaded.metadata,
+        path: pluginPath,
+        enabled: false,
+        warning: combinedWarnings.length > 0,
+        warnings: combinedWarnings,
+        instance: loaded.instance,
+      },
+    },
+  }));
 };
 
 export const usePluginStore = create<PluginStore>((set, get) => ({
@@ -86,40 +128,8 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         warnings: undefined,
       });
 
-      // 4) Load plugin from managed path
-      const loader = new PluginLoader(managedPath);
-      const loaded: LoadedPlugin = await loader.load();
-      const permissions = loaded.metadata.permissions || [];
-      const unknown = permissions.filter((p) => {
-        return !allowedPermissions.includes(p);
-      });
-      const combinedWarnings: string[] = [];
-      if (manifestResult.warnings.length > 0) {
-        combinedWarnings.push(...manifestResult.warnings);
-      }
-      if (unknown.length > 0) {
-        combinedWarnings.push(`Unknown permissions: ${unknown.join(', ')}`);
-      }
-      if (combinedWarnings.length > 0) {
-        await setRegistryWarnings(id, combinedWarnings);
-        Logger.warn(
-          `Plugin ${id} loaded with warnings: ${combinedWarnings.join(', ')}`,
-        );
-      }
-
-      set((state) => ({
-        plugins: {
-          ...state.plugins,
-          [loaded.metadata.id]: {
-            metadata: loaded.metadata,
-            path: managedPath,
-            enabled: false,
-            warning: combinedWarnings.length > 0,
-            warnings: combinedWarnings,
-            instance: loaded.instance,
-          },
-        },
-      }));
+      // 4) Load and stage plugin from managed path
+      await applyLoadedPlugin(managedPath, id, manifestResult.warnings);
 
       // 5) Enable the plugin if it was previously enabled
       if (enabled) {
@@ -131,6 +141,38 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       });
       Logger.error(`Failed to load plugin: ${(error as Error).message}`);
     }
+  },
+
+  hydrateFromRegistry: async () => {
+    const entries = await listRegistryEntries();
+    await Promise.all(
+      entries
+        .filter((e) => e.location === 'user')
+        .map(async (e) => {
+          try {
+            if (usePluginStore.getState().plugins[e.id]) {
+              return;
+            }
+            const present = await exists(e.path);
+            if (!present) {
+              await setRegistryWarnings(e.id, [
+                'Plugin directory missing on disk. It will be disabled.',
+              ]);
+              return;
+            }
+            await applyLoadedPlugin(e.path, e.id, []);
+            if (e.enabled) {
+              await usePluginStore.getState().enablePlugin(e.id);
+            }
+          } catch (err) {
+            Logger.error(
+              `Failed to hydrate plugin ${e.id}: ${
+                (err as Error)?.message ?? String(err)
+              }`,
+            );
+          }
+        }),
+    );
   },
 
   enablePlugin: async (id: string) => {
@@ -152,6 +194,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         [id]: { ...state.plugins[id], enabled: true },
       },
     }));
+    await setRegistryEnabled(id, true);
   },
 
   disablePlugin: async (id: string) => {
@@ -169,6 +212,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         [id]: { ...state.plugins[id], enabled: false },
       },
     }));
+    await setRegistryEnabled(id, false);
   },
 
   unloadPlugin: async (id: string) => {

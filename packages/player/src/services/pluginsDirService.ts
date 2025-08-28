@@ -1,5 +1,6 @@
 import { appDataDir, join } from '@tauri-apps/api/path';
-import { exists, mkdir, remove } from '@tauri-apps/plugin-fs';
+import { BaseDirectory, exists, mkdir, remove } from '@tauri-apps/plugin-fs';
+import { info } from '@tauri-apps/plugin-log';
 
 import { logFsError } from '../utils/logging';
 import { copyDirRecursive } from './rustFs';
@@ -12,10 +13,13 @@ export const getPluginsDir = async (): Promise<string> => {
 export const ensurePluginsDir = async (): Promise<string> => {
   const dir = await getPluginsDir();
   try {
-    const present = await exists(dir);
+    const present = await exists('plugins', { baseDir: BaseDirectory.AppData });
     if (!present) {
       try {
-        await mkdir(dir, { recursive: true });
+        await mkdir('plugins', {
+          recursive: true,
+          baseDir: BaseDirectory.AppData,
+        });
       } catch (e) {
         await logFsError('plugins', 'fs.mkdir', dir, e);
       }
@@ -42,11 +46,16 @@ export const installPluginToManagedDir = async (
   fromPath: string,
 ): Promise<string> => {
   const dest = await getManagedPluginPath(id, version);
+  const relDest = await join('plugins', id, version);
   try {
-    const present = await exists(dest);
+    info(`Checking if plugin exists at ${relDest}`);
+    const present = await exists(relDest, { baseDir: BaseDirectory.AppData });
     if (present) {
       try {
-        await remove(dest, { recursive: true });
+        await remove(relDest, {
+          recursive: true,
+          baseDir: BaseDirectory.AppData,
+        });
       } catch (e) {
         await logFsError('plugins', 'fs.remove', dest, e);
         throw e;
@@ -57,7 +66,7 @@ export const installPluginToManagedDir = async (
     throw e;
   }
   try {
-    await mkdir(dest, { recursive: true });
+    await mkdir(relDest, { recursive: true, baseDir: BaseDirectory.AppData });
   } catch (e) {
     await logFsError('plugins', 'fs.mkdir', dest, e);
   }

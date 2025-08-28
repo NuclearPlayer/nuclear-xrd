@@ -13,10 +13,10 @@
       "identifier": "fs:allow-exists",
       "allow": [
         {
-          "path": "$APPDATA/themes"
+          "path": "$APPDATA/themes/**/*"
         },
         {
-          "path": "$APPDATA/plugins"
+          "path": "$APPDATA/plugins/**/*"
         }
       ]
     },
@@ -24,10 +24,10 @@
       "identifier": "fs:allow-read-dir",
       "allow": [
         {
-          "path": "$APPDATA/themes"
+          "path": "$APPDATA/themes/**/*"
         },
         {
-          "path": "$APPDATA/plugins"
+          "path": "$APPDATA/plugins/**/*"
         }
       ]
     },
@@ -35,10 +35,26 @@
       "identifier": "fs:allow-mkdir",
       "allow": [
         {
-          "path": "$APPDATA/themes"
+          "path": "$APPDATA/themes/**/*"
         },
         {
-          "path": "$APPDATA/plugins"
+          "path": "$APPDATA/plugins/**/*"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-appdata-write",
+      "allow": [
+        {
+          "path": "$APPDATA/plugins/**/*"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-remove",
+      "allow": [
+        {
+          "path": "$APPDATA/plugins/**/*"
         }
       ]
     },
@@ -49,7 +65,7 @@
           "path": "$APPDATA/themes"
         },
         {
-          "path": "$APPDATA/plugins"
+          "path": "$APPDATA/plugins/**/*"
         }
       ]
     },
@@ -60,7 +76,7 @@
           "path": "$APPDATA/themes/*"
         },
         {
-          "path": "$APPDATA/plugins/*"
+          "path": "$APPDATA/plugins/**/*"
         }
       ]
     },
@@ -71,7 +87,7 @@
           "path": "$APPDATA/themes/*"
         },
         {
-          "path": "$APPDATA/plugins/*"
+          "path": "$APPDATA/plugins/**/*"
         }
       ]
     },
