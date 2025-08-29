@@ -9,7 +9,7 @@ import type {
   PluginMetadata,
 } from '@nuclearplayer/plugin-sdk';
 
-import { createPluginSettingsHost } from '../stores/settingsStore';
+import { createPluginSettingsHost } from '../../stores/settingsStore';
 import { compilePlugin } from './pluginCompiler';
 import { safeParsePluginManifest } from './pluginManifest';
 

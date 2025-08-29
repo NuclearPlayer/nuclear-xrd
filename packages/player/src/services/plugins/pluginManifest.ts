@@ -77,9 +77,7 @@ const normalizeNuclear = (
   if (!nuclear) return undefined;
   const unknown = collectUnknownNuclearKeys(nuclear as Record<string, unknown>);
   if (unknown.length > 0)
-    warnings.push(
-      `nuclear contains unknown keys: ${unknown.join(', ')} (kept via passthrough)`,
-    );
+    warnings.push(`nuclear contains unknown keys: ${unknown.join(', ')}`);
   const permissions = normalizePermissions(nuclear.permissions, warnings);
   return {
     displayName: nuclear.displayName?.trim(),

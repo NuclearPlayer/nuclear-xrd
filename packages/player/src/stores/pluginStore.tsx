@@ -8,7 +8,7 @@ import type {
 } from '@nuclearplayer/plugin-sdk';
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
-import { PluginLoader } from '../services/PluginLoader';
+import { PluginLoader } from '../services/plugins/PluginLoader';
 import { providersServiceHost } from '../services/providersService';
 import { createPluginSettingsHost } from './settingsStore';
 
