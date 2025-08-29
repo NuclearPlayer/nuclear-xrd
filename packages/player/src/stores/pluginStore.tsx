@@ -1,4 +1,6 @@
 import * as Logger from '@tauri-apps/plugin-log';
+import { isError, isString } from 'lodash-es';
+import { toast } from 'sonner';
 import { create } from 'zustand';
 
 import type {
@@ -80,8 +82,9 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         },
       }));
     } catch (error) {
-      // No toast system yet
-      // TODO: Show a toast here
+      toast.error('Failed to load plugin', {
+        description: `${isError(error) ? (error as Error).message : isString(error) ? (error as string) : 'Unknown error'}`,
+      });
 
       Logger.error(`Failed to load plugin: ${(error as Error).message}`);
     }

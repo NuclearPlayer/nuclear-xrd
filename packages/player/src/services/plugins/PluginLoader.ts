@@ -30,6 +30,18 @@ export class PluginLoader {
     return JSON.parse(packageJsonContent);
   }
 
+  private async readManifest(): Promise<PluginManifest> {
+    const raw = await this.readRawPackageJson();
+    const res = safeParsePluginManifest(raw);
+    if (!res.success) {
+      const msg = res.errors.join('; ');
+      throw new Error(`Invalid package.json: ${msg}`);
+    }
+    this.warnings = res.warnings;
+    this.manifest = res.data;
+    return this.manifest;
+  }
+
   private buildMetadata(manifest: PluginManifest): PluginMetadata {
     return {
       id: manifest.name,
@@ -68,18 +80,6 @@ export class PluginLoader {
     throw new Error(
       'Could not resolve plugin entry file (main, index.js, index.ts, index.tsx, dist/index.js, dist/index.ts, dist/index.tsx)',
     );
-  }
-
-  private async readManifest(): Promise<PluginManifest> {
-    const raw = await this.readRawPackageJson();
-    const res = safeParsePluginManifest(raw);
-    if (!res.success) {
-      const msg = res.errors.join('; ');
-      throw new Error(`Invalid package.json: ${msg}`);
-    }
-    this.warnings = res.warnings;
-    this.manifest = res.data;
-    return this.manifest;
   }
 
   private async readPluginCode(entryPath: string): Promise<string> {

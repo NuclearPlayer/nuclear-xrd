@@ -1,5 +1,5 @@
 import * as fs from '@tauri-apps/plugin-fs';
-import { Mock } from 'vitest';
+import { type Mock } from 'vitest';
 
 vi.mock('@tauri-apps/plugin-fs', () => ({
   exists: vi.fn(),
@@ -17,18 +17,23 @@ export let watchCb: ((evt: { paths: string[] }) => void) | null = null;
 export const PluginFsMock = {
   setReadTextFile: (value: string) => {
     (fs.readTextFile as Mock).mockResolvedValue(value);
+    return fs.readTextFile as Mock;
   },
   setExists: (value: boolean) => {
     (fs.exists as Mock).mockResolvedValue(value);
+    return fs.exists as Mock;
   },
   setMkdir: (value: boolean | undefined) => {
     (fs.mkdir as Mock).mockResolvedValue(value);
+    return fs.mkdir as Mock;
   },
   setReadDir: (value: Array<{ name: string; isDirectory: boolean }>) => {
     (fs.readDir as Mock).mockResolvedValue(value);
+    return fs.readDir as Mock;
   },
   setReadDirError: (error: Error) => {
     (fs.readDir as Mock).mockRejectedValue(error);
+    return fs.readDir as Mock;
   },
   setReadTextFileByMap: (value: Record<string, string>) => {
     (fs.readTextFile as Mock).mockImplementation(async (path: string) => {

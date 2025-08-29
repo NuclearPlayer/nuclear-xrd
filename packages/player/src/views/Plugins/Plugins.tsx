@@ -1,4 +1,5 @@
 import { open } from '@tauri-apps/plugin-dialog';
+import { FC } from 'react';
 
 import {
   Button,
@@ -8,10 +9,10 @@ import {
   ViewShell,
 } from '@nuclearplayer/ui';
 
-import { PluginIconComponent } from '../components/PluginIcon';
-import { usePluginStore } from '../stores/pluginStore';
+import { PluginIconComponent } from '../../components/PluginIcon';
+import { usePluginStore } from '../../stores/pluginStore';
 
-export const Plugins = () => {
+export const Plugins: FC = () => {
   const store = usePluginStore();
   const plugins = store.getAllPlugins();
 
@@ -44,6 +45,8 @@ export const Plugins = () => {
                 warningText={p.warnings.length > 0 ? p.warnings[0] : undefined}
                 rightAccessory={
                   <Toggle
+                    data-testid={`toggle-enable-plugin`}
+                    data-enabled={p.enabled}
                     checked={p.enabled}
                     onChange={(checked) =>
                       checked

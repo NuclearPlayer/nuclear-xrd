@@ -32,6 +32,7 @@ export const PluginItem: FC<PluginItemProps> = ({
 }) => {
   return (
     <Box
+      data-testid="plugin-item"
       variant="secondary"
       className={cn(
         {
@@ -54,7 +55,10 @@ export const PluginItem: FC<PluginItemProps> = ({
         )}
 
         <div className="min-w-0 flex-1">
-          <h3 className="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold">
+          <h3
+            data-testid="plugin-name"
+            className="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
+          >
             {name}
             {onViewDetails && (
               <Button size="icon" onClick={onViewDetails} disabled={disabled}>
@@ -62,8 +66,16 @@ export const PluginItem: FC<PluginItemProps> = ({
               </Button>
             )}
           </h3>
-          <p className="text-foreground-secondary mt-1 text-sm">by {author}</p>
-          <p className="text-foreground-secondary mt-2 text-sm leading-relaxed">
+          <p
+            data-testid="plugin-author"
+            className="text-foreground-secondary mt-1 text-sm"
+          >
+            by {author}
+          </p>
+          <p
+            data-testid="plugin-description"
+            className="text-foreground-secondary mt-2 text-sm leading-relaxed"
+          >
             {description}
           </p>
         </div>
