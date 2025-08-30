@@ -1,6 +1,5 @@
 import { join } from '@tauri-apps/api/path';
 import { readDir, readTextFile, watch } from '@tauri-apps/plugin-fs';
-import { error as logError } from '@tauri-apps/plugin-log';
 import { toast } from 'sonner';
 
 import { parseAdvancedTheme } from '@nuclearplayer/themes';
@@ -8,23 +7,16 @@ import { parseAdvancedTheme } from '@nuclearplayer/themes';
 import type { AdvancedThemeFile } from '../stores/advancedThemeStore';
 import { useAdvancedThemeStore } from '../stores/advancedThemeStore';
 import { useSettingsStore } from '../stores/settingsStore';
-import { ensureDirInAppData } from '../utils/path';
+import { logFsError } from '../utils/logging';
+import { ensureDir } from '../utils/path';
 import { loadAndApplyAdvancedThemeFromFile } from './advancedThemeService';
 
 let unwatch: (() => void) | null = null;
 
-const reportFsError = async (
-  cmd: string,
-  targetPath: string,
-  err: unknown,
-): Promise<void> => {
-  const msg = err instanceof Error ? err.message : String(err);
-  toast.error(cmd, { description: msg });
-  await logError(`[themes/fs] ${cmd} failed for ${targetPath}: ${msg}`);
-};
+export const THEMES_DIR_NAME = 'themes';
 
 export const ensureThemesDir = async (): Promise<string> => {
-  return ensureDirInAppData('themes');
+  return ensureDir(THEMES_DIR_NAME);
 };
 
 export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
@@ -33,7 +25,7 @@ export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
   try {
     entries = await readDir(dir);
   } catch (e) {
-    await reportFsError('fs.readDir', dir, e);
+    await logFsError('themes', 'fs.readDir', dir, e);
     return [];
   }
   const themes: AdvancedThemeFile[] = [];
@@ -48,7 +40,7 @@ export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
       const parsed = parseAdvancedTheme(json);
       themes.push({ path, name: parsed.name });
     } catch (e) {
-      await reportFsError('fs.readTextFile', path, e);
+      await logFsError('themes', 'fs.readTextFile', path, e);
     }
   }
   themes.sort((a, b) => a.name.localeCompare(b.name));
@@ -89,13 +81,11 @@ export const startAdvancedThemeWatcher = async (): Promise<void> => {
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         toast.error('Theme reload failed', { description: msg });
-        await logError(
-          `[themes/watch] reload failed for ${currentPath}: ${msg}`,
-        );
+        await logFsError('themes', 'fs.watch', currentPath, e);
       }
     });
   } catch (e) {
-    await reportFsError('fs.watch', dir, e);
+    await logFsError('themes', 'fs.watch', dir, e);
   }
 };
 
