@@ -3,6 +3,7 @@ import { mkdir, remove } from '@tauri-apps/plugin-fs';
 
 import { logFsError } from '../../utils/logging';
 import { ensureDir } from '../../utils/path';
+import { copyDirRecursive } from '../tauri/fs-extended';
 
 export const PLUGINS_DIR_NAME = 'plugins';
 
