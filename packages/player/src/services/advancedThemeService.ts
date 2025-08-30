@@ -1,4 +1,4 @@
-import { readTextFile } from '@tauri-apps/plugin-fs';
+import { BaseDirectory, readTextFile } from '@tauri-apps/plugin-fs';
 
 import {
   applyAdvancedTheme,
@@ -11,7 +11,7 @@ import { setSetting, useSettingsStore } from '../stores/settingsStore';
 export const loadAndApplyAdvancedThemeFromFile = async (
   path: string,
 ): Promise<void> => {
-  const contents = await readTextFile(path);
+  const contents = await readTextFile(path, { baseDir: BaseDirectory.AppData });
   const json = JSON.parse(contents);
   const theme = parseAdvancedTheme(json);
   setThemeId('');

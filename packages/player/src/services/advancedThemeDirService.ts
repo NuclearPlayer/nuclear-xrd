@@ -1,4 +1,4 @@
-import { join } from '@tauri-apps/api/path';
+import { BaseDirectory, join } from '@tauri-apps/api/path';
 import { readDir, readTextFile, watch } from '@tauri-apps/plugin-fs';
 import { toast } from 'sonner';
 
@@ -23,7 +23,7 @@ export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
   const dir = await ensureThemesDir();
   let entries: Array<{ name?: string; isDirectory?: boolean }> = [];
   try {
-    entries = await readDir(dir);
+    entries = await readDir(dir, { baseDir: BaseDirectory.AppData });
   } catch (e) {
     await logFsError('themes', 'fs.readDir', dir, e);
     return [];
@@ -35,7 +35,7 @@ export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
     if (!name.toLowerCase().endsWith('.json')) continue;
     const path = await join(dir, name);
     try {
-      const text = await readTextFile(path);
+      const text = await readTextFile(path, { baseDir: BaseDirectory.AppData });
       const json = JSON.parse(text);
       const parsed = parseAdvancedTheme(json);
       themes.push({ path, name: parsed.name });
@@ -57,33 +57,37 @@ export const startAdvancedThemeWatcher = async (): Promise<void> => {
   await refreshAdvancedThemeList();
   if (unwatch) return;
   try {
-    unwatch = await watch(dir, async (event) => {
-      await refreshAdvancedThemeList();
+    unwatch = await watch(
+      dir,
+      async (event) => {
+        await refreshAdvancedThemeList();
 
-      const state = useSettingsStore.getState();
-      const mode = state.getValue('core.theme.mode');
-      const currentPath = state.getValue('core.theme.advanced.path');
+        const state = useSettingsStore.getState();
+        const mode = state.getValue('core.theme.mode');
+        const currentPath = state.getValue('core.theme.advanced.path');
 
-      if (
-        mode !== 'advanced' ||
-        typeof currentPath !== 'string' ||
-        !currentPath
-      ) {
-        return;
-      }
+        if (
+          mode !== 'advanced' ||
+          typeof currentPath !== 'string' ||
+          !currentPath
+        ) {
+          return;
+        }
 
-      if (!event.paths.some((p) => p === currentPath)) {
-        return;
-      }
+        if (!event.paths.some((p) => p === currentPath)) {
+          return;
+        }
 
-      try {
-        await loadAndApplyAdvancedThemeFromFile(currentPath);
-      } catch (e) {
-        const msg = e instanceof Error ? e.message : String(e);
-        toast.error('Theme reload failed', { description: msg });
-        await logFsError('themes', 'fs.watch', currentPath, e);
-      }
-    });
+        try {
+          await loadAndApplyAdvancedThemeFromFile(currentPath);
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          toast.error('Theme reload failed', { description: msg });
+          await logFsError('themes', 'fs.watch', currentPath, e);
+        }
+      },
+      { baseDir: BaseDirectory.AppData },
+    );
   } catch (e) {
     await logFsError('themes', 'fs.watch', dir, e);
   }

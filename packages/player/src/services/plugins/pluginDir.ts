@@ -3,7 +3,7 @@ import { mkdir, remove } from '@tauri-apps/plugin-fs';
 
 import { logFsError } from '../../utils/logging';
 import { ensureDir } from '../../utils/path';
-import { copyDirRecursive } from '../tauri/fs-extended';
+import { copyDirRecursive } from '../tauri/fs-expanded';
 
 export const PLUGINS_DIR_NAME = 'plugins';
 
@@ -57,4 +57,5 @@ export const installPluginToManagedDir = async (
   }
 
   await copyDirRecursive(fromPath, destination);
+  return destination;
 };

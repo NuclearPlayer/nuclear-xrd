@@ -10,7 +10,12 @@ import type {
 } from '@nuclearplayer/plugin-sdk';
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
+import { installPluginToManagedDir } from '../services/plugins/pluginDir';
 import { PluginLoader } from '../services/plugins/PluginLoader';
+import {
+  getRegistryEntry,
+  upsertRegistryEntry,
+} from '../services/plugins/pluginRegistry';
 import { providersServiceHost } from '../services/providersService';
 import { createPluginSettingsHost } from './settingsStore';
 
@@ -68,6 +73,26 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         );
       }
 
+      const managedPath = await installPluginToManagedDir(
+        id,
+        loaded.metadata.version,
+        path,
+      );
+
+      const existing = await getRegistryEntry(id);
+      const now = new Date().toISOString();
+      const enabled = existing ? existing.enabled : false;
+      await upsertRegistryEntry({
+        id,
+        version: loaded.metadata.version,
+        path: managedPath,
+        location: 'user',
+        enabled,
+        installedAt: existing ? existing.installedAt : now,
+        lastUpdatedAt: now,
+        warnings,
+      });
+
       set((state) => ({
         plugins: {
           ...state.plugins,
@@ -81,12 +106,22 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
           },
         },
       }));
+
+      if (enabled) {
+        await get().enablePlugin(id);
+      }
     } catch (error) {
+      const message = isError(error)
+        ? (error as Error).message
+        : isString(error)
+          ? (error as string)
+          : 'Unknown error';
+
       toast.error('Failed to load plugin', {
-        description: `${isError(error) ? (error as Error).message : isString(error) ? (error as string) : 'Unknown error'}`,
+        description: message,
       });
 
-      Logger.error(`Failed to load plugin: ${(error as Error).message}`);
+      Logger.error(`Failed to load plugin: ${message}`);
     }
   },
 
