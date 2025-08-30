@@ -1,11 +1,5 @@
-import { appDataDir, join } from '@tauri-apps/api/path';
-import {
-  exists,
-  mkdir,
-  readDir,
-  readTextFile,
-  watch,
-} from '@tauri-apps/plugin-fs';
+import { join } from '@tauri-apps/api/path';
+import { readDir, readTextFile, watch } from '@tauri-apps/plugin-fs';
 import { error as logError } from '@tauri-apps/plugin-log';
 import { toast } from 'sonner';
 
@@ -14,6 +8,7 @@ import { parseAdvancedTheme } from '@nuclearplayer/themes';
 import type { AdvancedThemeFile } from '../stores/advancedThemeStore';
 import { useAdvancedThemeStore } from '../stores/advancedThemeStore';
 import { useSettingsStore } from '../stores/settingsStore';
+import { ensureDirInAppData } from '../utils/path';
 import { loadAndApplyAdvancedThemeFromFile } from './advancedThemeService';
 
 let unwatch: (() => void) | null = null;
@@ -28,26 +23,8 @@ const reportFsError = async (
   await logError(`[themes/fs] ${cmd} failed for ${targetPath}: ${msg}`);
 };
 
-export const getThemesDir = async (): Promise<string> => {
-  const base = await appDataDir();
-  return join(base, 'themes');
-};
-
 export const ensureThemesDir = async (): Promise<string> => {
-  const dir = await getThemesDir();
-  try {
-    const present = await exists(dir);
-    if (!present) {
-      try {
-        await mkdir(dir, { recursive: true });
-      } catch (e) {
-        await reportFsError('fs.mkdir', dir, e);
-      }
-    }
-  } catch (e) {
-    await reportFsError('fs.exists', dir, e);
-  }
-  return dir;
+  return ensureDirInAppData('themes');
 };
 
 export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
