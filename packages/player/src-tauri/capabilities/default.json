@@ -44,6 +44,9 @@
           "path": "$APPDATA/themes"
         },
         {
+          "path": "$APPDATA/plugins"
+        },
+        {
           "path": "$APPDATA/plugins/**/*"
         }
       ]

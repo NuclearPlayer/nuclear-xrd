@@ -2,30 +2,11 @@ import { z } from 'zod';
 
 import type { PluginManifest } from '@nuclearplayer/plugin-sdk';
 
-const PluginIconNamedSchema = z
-  .object({
-    type: z.literal('named'),
-    name: z.string().min(1),
-    background: z
-      .enum([
-        'primary',
-        'accent-green',
-        'accent-yellow',
-        'accent-purple',
-        'accent-blue',
-        'accent-orange',
-        'accent-cyan',
-        'accent-red',
-      ])
-      .optional(),
-  })
-  .strict();
-
 const PluginIconLinkSchema = z
   .object({ type: z.literal('link'), link: z.string().min(1) })
   .strict();
 
-const PluginIconSchema = z.union([PluginIconNamedSchema, PluginIconLinkSchema]);
+const PluginIconSchema = PluginIconLinkSchema;
 
 const NuclearSchema = z
   .object({

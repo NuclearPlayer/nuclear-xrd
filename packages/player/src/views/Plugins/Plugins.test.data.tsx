@@ -10,8 +10,8 @@ export const fakePluginManifest = JSON.stringify({
     displayName: 'Fake plugin',
     category: 'Robbing ships on the high seas',
     icon: {
-      type: 'named',
-      name: 'disc-3',
+      type: 'link',
+      link: 'https://example.com/icon.png',
     },
     permissions: [],
   },

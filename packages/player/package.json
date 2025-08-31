@@ -19,8 +19,8 @@
   "dependencies": {
     "@nuclearplayer/eslint-config": "workspace:*",
     "@nuclearplayer/hifi": "workspace:*",
-    "@nuclearplayer/plugin-sdk": "workspace:*",
     "@nuclearplayer/model": "workspace:*",
+    "@nuclearplayer/plugin-sdk": "workspace:*",
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@nuclearplayer/themes": "workspace:*",
     "@nuclearplayer/ui": "workspace:*",
@@ -39,7 +39,7 @@
     "esbuild-wasm": "^0.21.5",
     "framer-motion": "^12.23.12",
     "lodash-es": "^4.17.21",
-    "lucide-react": "^0.460.0",
+    "lucide-react": "^0.542.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sonner": "^2.0.7",

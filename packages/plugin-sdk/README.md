@@ -58,7 +58,7 @@ Example:
   "nuclear": {
     "displayName": "Last.fm Scrobbler",
     "category": "integration",
-    "icon": { "type": "named", "name": "Heart", "background": "red" },
+    "icon": { "type": "link", "link": "https://example.com/icon.png" },
     "permissions": ["scrobble", "network"]
   }
 }
@@ -66,11 +66,9 @@ Example:
 
 ## 4. Icon Specification
 ```ts
-type PluginIcon =
-  | { type: 'named'; name: string; background?: 'primary' | 'green' | 'yellow' | 'purple' | 'blue' | 'orange' | 'cyan' | 'red' }
-  | { type: 'link'; link: string };
+type PluginIcon = { type: 'link'; link: string };
 ```
-Named icons reference a Lucide icon component by its exported name (e.g. `Music`, `Heart`). The background is a semantic color token the app can map to a themed background. Link icons should point to a local file path or remote URL; keep them small (<= 64x64, optimized).
+Link icons should point to a local file path or remote URL; keep them small (<= 64x64, optimized).
 
 ## 5. Lifecycle Hooks
 All hooks are optional. Export a default object containing any of:
@@ -139,7 +137,6 @@ Ensure the final bundle sets `module.exports = { ... }` or `exports.default = { 
 |-------|-------|
 | Loader cannot resolve entry | Is `main` correct or is there a built `index.js` / `dist/index.js`? |
 | Missing fields error | Confirm all required manifest fields: name, version, description, author. |
-| Icon not showing | Named icon must exist in lucide-react export map; link must be reachable. |
 | Hooks not firing | Ensure default export is an object, not a function or class. |
 
 ## 12. Type Exports
