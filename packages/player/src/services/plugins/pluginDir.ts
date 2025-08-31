@@ -3,7 +3,7 @@ import { mkdir, remove } from '@tauri-apps/plugin-fs';
 
 import { logFsError } from '../../utils/logging';
 import { ensureDir } from '../../utils/path';
-import { copyDirRecursive } from '../tauri/fs-expanded';
+import { copyDirRecursive } from '../tauri/commands';
 
 export const PLUGINS_DIR_NAME = 'plugins';
 
@@ -23,6 +23,7 @@ export const getManagedPluginPath = async (
   const base = await ensurePluginsDir();
   const idDir = await join(base, id);
   const versionDir = await join(idDir, version);
+
   return versionDir;
 };
 
@@ -31,31 +32,31 @@ export const installPluginToManagedDir = async (
   version: string,
   fromPath: string,
 ): Promise<string> => {
-  // Absolute path
+  // Destination path is relative to the app data directory
   const destination = await getManagedPluginPath(id, version);
-  // Relative path - needed for Tauri methods
-  const relativeDestination = await join(PLUGINS_DIR_NAME, id, version);
 
   // Remove existing plugin version if present
   try {
-    await remove(relativeDestination, {
+    await remove(destination, {
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
   } catch (error) {
-    logFsError('plugins', 'fs.remove', relativeDestination, error);
+    logFsError('plugins', 'fs.remove', destination, error);
   }
 
   // Create plugin directory
   try {
-    await mkdir(relativeDestination, {
+    await mkdir(destination, {
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
   } catch (e) {
-    await logFsError('plugins', 'fs.mkdir', relativeDestination, e);
+    await logFsError('plugins', 'fs.mkdir', destination, e);
   }
 
-  await copyDirRecursive(fromPath, destination);
-  return destination;
+  const appData = await appDataDir();
+  const absoluteDestination = await join(appData, destination);
+  await copyDirRecursive(fromPath, absoluteDestination);
+  return absoluteDestination;
 };

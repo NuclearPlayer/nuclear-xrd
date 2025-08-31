@@ -16,12 +16,6 @@
  * - Only compile TS/TSX. For plain JS we skip compilation and just read the file.
  * - Externalize bare module imports (e.g., @nuclearplayer/plugin-sdk) so plugins don't
  *   accidentally try to bundle our runtime dependencies.
- *
- * Problems solved here:
- * - "Cannot call initialize more than once": HMR re-evaluates modules; local flags reset
- *   but esbuild stays initialized. We use a globalThis-backed singleton to coordinate.
- * - "Cannot read directory '.' not implemented on js": esbuild's default fs behavior
- *   isn't available in WASM/web. We redirect all resolution/loading to Tauri fs.
  */
 import { readTextFile } from '@tauri-apps/plugin-fs';
 import type * as EsbuildTypes from 'esbuild-wasm';
@@ -97,7 +91,9 @@ const resolvePath = (baseDir: string, rel: string) => {
  *   concurrent callers share the same in-flight initialization.
  */
 async function ensureInit() {
-  if (es.initialized) return;
+  if (es.initialized) {
+    return;
+  }
   if (!es.initPromise) {
     es.initPromise = (async () => {
       if (!es.mod) {
@@ -128,10 +124,15 @@ const simpleHash = (str: string) => {
 export async function compilePlugin(
   entryPath: string,
 ): Promise<string | undefined> {
-  if (!isTs(entryPath)) return undefined;
+  if (!isTs(entryPath)) {
+    return undefined;
+  }
   const entrySource = await readTextFile(entryPath);
   const key = entryPath + ':' + simpleHash(entrySource);
-  if (cache.has(key)) return cache.get(key);
+  if (cache.has(key)) {
+    return cache.get(key);
+  }
+
   const mod = await getEsbuild();
   const entryDir = entryPath.slice(0, entryPath.lastIndexOf('/')) || '/';
   const entryLoader: EsbuildTypes.Loader = entryPath.endsWith('.tsx')

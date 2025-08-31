@@ -3,11 +3,7 @@ import { isError, isString } from 'lodash-es';
 import { toast } from 'sonner';
 import { create } from 'zustand';
 
-import type {
-  LoadedPlugin,
-  NuclearPlugin,
-  PluginMetadata,
-} from '@nuclearplayer/plugin-sdk';
+import type { NuclearPlugin, PluginMetadata } from '@nuclearplayer/plugin-sdk';
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
 import { installPluginToManagedDir } from '../services/plugins/pluginDir';
@@ -53,13 +49,13 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
   loadPluginFromPath: async (path: string) => {
     try {
       const loader = new PluginLoader(path);
-      const loaded: LoadedPlugin = await loader.load();
-      const id = loaded.metadata.id;
+      const metadata = await loader.loadMetadata();
+      const id = metadata.id;
       if (get().plugins[id]) {
         Logger.debug(`Plugin ${id} already loaded.`);
         return;
       }
-      const permissions = loaded.metadata.permissions || [];
+      const permissions = metadata.permissions || [];
       const unknown = permissions.filter(
         (p) => !allowedPermissions.includes(p),
       );
@@ -75,7 +71,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
 
       const managedPath = await installPluginToManagedDir(
         id,
-        loaded.metadata.version,
+        metadata.version,
         path,
       );
 
@@ -84,7 +80,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       const enabled = existing ? existing.enabled : false;
       await upsertRegistryEntry({
         id,
-        version: loaded.metadata.version,
+        version: metadata.version,
         path: managedPath,
         location: 'user',
         enabled,
@@ -93,16 +89,19 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         warnings,
       });
 
+      const managedPluginLoader = new PluginLoader(managedPath);
+      const { instance } = await managedPluginLoader.load();
+
       set((state) => ({
         plugins: {
           ...state.plugins,
-          [loaded.metadata.id]: {
-            metadata: loaded.metadata,
-            path: loaded.path,
+          [metadata.id]: {
+            metadata,
+            path: managedPath,
             enabled: false,
             warning: warnings.length > 0,
             warnings,
-            instance: loaded.instance,
+            instance,
           },
         },
       }));

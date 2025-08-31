@@ -117,6 +117,11 @@ export class PluginLoader {
     return plugin as NuclearPlugin;
   }
 
+  async loadMetadata(): Promise<PluginMetadata> {
+    const manifest = await this.readManifest();
+    return this.buildMetadata(manifest);
+  }
+
   async load(): Promise<LoadedPlugin> {
     const manifest = await this.readManifest();
     const metadata = this.buildMetadata(manifest);
