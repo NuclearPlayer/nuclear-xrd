@@ -1,4 +1,4 @@
-pub mod plugins;
+pub mod commands;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -7,7 +7,7 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::new().build())
-        .plugin(plugins::fs_expanded::init())
+        .invoke_handler(tauri::generate_handler![commands::copy_dir_recursive])
         .setup(|app| {
             if cfg!(debug_assertions) {
                 app.handle().plugin(
