@@ -100,6 +100,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         style="opacity: 0.5;"
                       >
                         <svg
+                          aria-hidden="true"
                           class="lucide lucide-cassette-tape animate-pulse opacity-70"
                           fill="none"
                           height="96"
@@ -172,6 +173,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         style="opacity: 0.5;"
                       >
                         <svg
+                          aria-hidden="true"
                           class="lucide lucide-cassette-tape animate-pulse opacity-70"
                           fill="none"
                           height="96"
@@ -244,6 +246,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         style="opacity: 0.5;"
                       >
                         <svg
+                          aria-hidden="true"
                           class="lucide lucide-cassette-tape animate-pulse opacity-70"
                           fill="none"
                           height="96"
@@ -316,6 +319,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         style="opacity: 0.5;"
                       >
                         <svg
+                          aria-hidden="true"
                           class="lucide lucide-cassette-tape animate-pulse opacity-70"
                           fill="none"
                           height="96"
@@ -388,6 +392,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         style="opacity: 0.5;"
                       >
                         <svg
+                          aria-hidden="true"
                           class="lucide lucide-cassette-tape animate-pulse opacity-70"
                           fill="none"
                           height="96"

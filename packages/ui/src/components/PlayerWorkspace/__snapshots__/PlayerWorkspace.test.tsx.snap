@@ -18,6 +18,7 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
           type="submit"
         >
           <svg
+            aria-hidden="true"
             class="lucide lucide-panel-left"
             fill="none"
             height="24"
@@ -60,6 +61,7 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars collapsed 1`] = `
           type="submit"
         >
           <svg
+            aria-hidden="true"
             class="lucide lucide-panel-right"
             fill="none"
             height="24"
@@ -107,6 +109,7 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
           type="submit"
         >
           <svg
+            aria-hidden="true"
             class="lucide lucide-panel-left"
             fill="none"
             height="24"
@@ -156,6 +159,7 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
           type="submit"
         >
           <svg
+            aria-hidden="true"
             class="lucide lucide-panel-right"
             fill="none"
             height="24"

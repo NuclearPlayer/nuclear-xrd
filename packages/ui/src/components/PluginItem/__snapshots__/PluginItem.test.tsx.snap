@@ -4,6 +4,7 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 <DocumentFragment>
   <div
     class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow opacity-30 relative transition-opacity duration-250"
+    data-testid="plugin-item"
   >
     <div
       class="flex w-full flex-wrap items-start gap-4"
@@ -12,6 +13,7 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
         class="border-border text-foreground flex rounded border-2 bg-background-secondary shadow-none h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden p-0"
       >
         <svg
+          aria-hidden="true"
           class="lucide lucide-music"
           fill="none"
           height="24"
@@ -43,16 +45,19 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
       >
         <h3
           class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
+          data-testid="plugin-name"
         >
           Disabled Plugin
         </h3>
         <p
           class="text-foreground-secondary mt-1 text-sm"
+          data-testid="plugin-author"
         >
           by Nuclear Team
         </p>
         <p
           class="text-foreground-secondary mt-2 text-sm leading-relaxed"
+          data-testid="plugin-description"
         >
           This plugin is currently disabled.
         </p>
@@ -69,6 +74,7 @@ exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 <DocumentFragment>
   <div
     class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow relative transition-opacity duration-250"
+    data-testid="plugin-item"
   >
     <div
       class="flex w-full flex-wrap items-start gap-4"
@@ -78,16 +84,19 @@ exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
       >
         <h3
           class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
+          data-testid="plugin-name"
         >
           Accessory Plugin
         </h3>
         <p
           class="text-foreground-secondary mt-1 text-sm"
+          data-testid="plugin-author"
         >
           by Nuclear Team
         </p>
         <p
           class="text-foreground-secondary mt-2 text-sm leading-relaxed"
+          data-testid="plugin-description"
         >
           Has accessory on the right.
         </p>
@@ -108,6 +117,7 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
 <DocumentFragment>
   <div
     class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow relative transition-opacity duration-250"
+    data-testid="plugin-item"
   >
     <div
       class="flex w-full flex-wrap items-start gap-4"
@@ -116,6 +126,7 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
         class="border-border text-foreground flex rounded border-2 bg-background-secondary shadow-none h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden p-0"
       >
         <svg
+          aria-hidden="true"
           class="lucide lucide-music"
           fill="none"
           height="24"
@@ -147,6 +158,7 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
       >
         <h3
           class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
+          data-testid="plugin-name"
         >
           YouTube Music
           <button
@@ -155,6 +167,7 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
             type="submit"
           >
             <svg
+              aria-hidden="true"
               class="lucide lucide-settings"
               fill="none"
               height="20"
@@ -167,7 +180,7 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+                d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"
               />
               <circle
                 cx="12"
@@ -179,11 +192,13 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
         </h3>
         <p
           class="text-foreground-secondary mt-1 text-sm"
+          data-testid="plugin-author"
         >
           by Nuclear Team
         </p>
         <p
           class="text-foreground-secondary mt-2 text-sm leading-relaxed"
+          data-testid="plugin-description"
         >
           Stream music directly from YouTube Music with full search and playlist support.
         </p>
