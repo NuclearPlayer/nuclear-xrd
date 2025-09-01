@@ -17,6 +17,14 @@ export class LazyStore {
     return Array.from(map.entries());
   }
 
+  async get<T>(key: string): Promise<T | null> {
+    const map = stores.get(this.#path);
+    if (!map) {
+      return null;
+    }
+    return map.get(key) as T | null;
+  }
+
   async set(key: string, value: unknown) {
     let map = stores.get(this.#path);
     if (!map) {

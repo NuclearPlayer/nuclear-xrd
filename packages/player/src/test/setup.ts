@@ -25,6 +25,7 @@ vi.mock('@tauri-apps/plugin-fs', () => ({
 }));
 
 vi.mock('@tauri-apps/api/path', () => ({
+  appDataDir: async () => '/home/user/.local/share/com.nuclearplayer',
   join: async (...parts: string[]) => joinPath(...parts),
 }));
 

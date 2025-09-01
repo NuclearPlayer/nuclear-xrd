@@ -1,5 +1,5 @@
 export const fakePluginManifest = JSON.stringify({
-  name: 'nuclear-fake=plugin',
+  name: 'nuclear-fake-plugin',
   version: '0.1.0',
   description: 'Fake plugin for testing',
   main: 'index.ts',

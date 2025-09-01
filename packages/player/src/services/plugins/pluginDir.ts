@@ -1,5 +1,5 @@
-import { appDataDir, BaseDirectory, join } from '@tauri-apps/api/path';
-import { mkdir, remove } from '@tauri-apps/plugin-fs';
+import { appDataDir, join } from '@tauri-apps/api/path';
+import { BaseDirectory, mkdir, remove } from '@tauri-apps/plugin-fs';
 
 import { logFsError } from '../../utils/logging';
 import { ensureDir } from '../../utils/path';

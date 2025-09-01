@@ -6,10 +6,14 @@ vi.mock('@tauri-apps/plugin-fs', () => ({
   mkdir: vi.fn(),
   readDir: vi.fn(),
   readTextFile: vi.fn(),
+  remove: vi.fn(),
   watch: vi.fn(async (_dir: string, cb: (evt: { paths: string[] }) => void) => {
     watchCb = cb;
     return () => {};
   }),
+  BaseDirectory: {
+    AppData: '/home/user/.local/share/com.nuclearplayer',
+  },
 }));
 
 export let watchCb: ((evt: { paths: string[] }) => void) | null = null;
@@ -21,6 +25,20 @@ export const PluginFsMock = {
   },
   setExists: (value: boolean) => {
     (fs.exists as Mock).mockResolvedValue(value);
+    return fs.exists as Mock;
+  },
+  setExistsFor: (path: string, baseDir: string, value: boolean) => {
+    (fs.exists as Mock).mockImplementation(
+      async (
+        checkedPath: string,
+        { baseDir: checkedBaseDir }: { baseDir: string },
+      ) => {
+        if (checkedPath === path && checkedBaseDir === baseDir) {
+          return value;
+        }
+        throw new Error('fs.exists called for unknown path');
+      },
+    );
     return fs.exists as Mock;
   },
   setMkdir: (value: boolean | undefined) => {
@@ -45,5 +63,19 @@ export const PluginFsMock = {
 
       return keyToReturn ? value[keyToReturn] : '';
     });
+  },
+  setRemoveFor: (path: string, baseDir: string, value: boolean | undefined) => {
+    (fs.remove as Mock).mockImplementation(
+      async (
+        checkedPath: string,
+        { baseDir: checkedBaseDir }: { baseDir: string },
+      ) => {
+        if (checkedPath === path && checkedBaseDir === baseDir) {
+          return value;
+        }
+        throw new Error('fs.remove called for unknown path');
+      },
+    );
+    return fs.remove as Mock;
   },
 };

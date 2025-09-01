@@ -1,4 +1,5 @@
 import { open } from '@tauri-apps/plugin-dialog';
+import isString from 'lodash-es/isString';
 import { FC } from 'react';
 
 import {
@@ -18,7 +19,7 @@ export const Plugins: FC = () => {
 
   const handleAdd = async () => {
     const path = await open({ directory: true, multiple: false });
-    if (typeof path === 'string') {
+    if (isString(path)) {
       await store.loadPluginFromPath(path);
     }
   };

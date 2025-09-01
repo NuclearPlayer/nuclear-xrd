@@ -1,5 +1,10 @@
-import { BaseDirectory, join } from '@tauri-apps/api/path';
-import { readDir, readTextFile, watch } from '@tauri-apps/plugin-fs';
+import { join } from '@tauri-apps/api/path';
+import {
+  BaseDirectory,
+  readDir,
+  readTextFile,
+  watch,
+} from '@tauri-apps/plugin-fs';
 import { toast } from 'sonner';
 
 import { parseAdvancedTheme } from '@nuclearplayer/themes';
