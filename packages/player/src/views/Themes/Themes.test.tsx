@@ -19,13 +19,6 @@ vi.mock('@tauri-apps/plugin-store', async () => {
   return { LazyStore: mod.LazyStore };
 });
 
-vi.mock('@tauri-apps/api/path', () => ({
-  appDataDir: vi.fn(async () => '/appdata'),
-  join: vi.fn(async (...parts: string[]) =>
-    parts.join('/').replace(/\/+/g, '/').replace(/\/+/g, '/'),
-  ),
-}));
-
 const logError = vi.fn();
 const toastError = vi.fn();
 vi.mock('@tauri-apps/plugin-log', () => ({
@@ -82,7 +75,9 @@ describe('Themes view', async () => {
 
     await ThemesWrapper.selectAdvancedTheme('My Theme');
 
-    expect(fs.readTextFile).toHaveBeenCalledWith('/themes/my.json');
+    expect(fs.readTextFile).toHaveBeenCalledWith('/themes/my.json', {
+      baseDir: '/home/user/.local/share/com.nuclearplayer',
+    });
     expect(themes.setThemeId).toHaveBeenCalledWith('');
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
     expect(useSettingsStore.getState().getValue('core.theme.mode')).toBe(
@@ -146,7 +141,8 @@ describe('Themes view', async () => {
       await ThemesWrapper.getAdvancedTheme('My Theme'),
     ).toBeInTheDocument();
 
-    expect(fs.mkdir).toHaveBeenCalledWith('/appdata/themes', {
+    expect(fs.mkdir).toHaveBeenCalledWith('themes', {
+      baseDir: '/home/user/.local/share/com.nuclearplayer',
       recursive: true,
     });
   });
@@ -164,12 +160,14 @@ describe('Themes view', async () => {
     await ThemesWrapper.selectAdvancedTheme('My Theme');
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
 
-    watchCb?.({ paths: ['/appdata/themes/my.json'] });
+    watchCb?.({ paths: ['/themes/my.json'] });
 
     await waitFor(() =>
       expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(2),
     );
-    expect(fs.readTextFile).toHaveBeenCalledWith('/appdata/themes/my.json');
+    expect(fs.readTextFile).toHaveBeenCalledWith('/themes/my.json', {
+      baseDir: '/home/user/.local/share/com.nuclearplayer',
+    });
   });
 
   it("doesn't reload when a different file changes or when not in advanced mode", async () => {
@@ -179,12 +177,12 @@ describe('Themes view', async () => {
       { name: 'other.json', isDirectory: false },
     ]);
     PluginFsMock.setReadTextFileByMap({
-      '/appdata/themes/my.json': JSON.stringify({
+      '/themes/my.json': JSON.stringify({
         version: 1,
         name: 'My Theme',
         vars: { p: '#111' },
       }),
-      '/appdata/themes/other.json': JSON.stringify({
+      '/themes/other.json': JSON.stringify({
         version: 1,
         name: 'Other',
         vars: { p: '#222' },
@@ -217,11 +215,11 @@ describe('Themes view', async () => {
     await startAdvancedThemeWatcher();
 
     await ThemesWrapper.mount();
-    expect(toastError).toHaveBeenCalledWith('fs.readDir', {
+    expect(toastError).toHaveBeenCalledWith('Failed to read themes directory', {
       description: 'boom',
     });
     expect(logError).toHaveBeenCalledWith(
-      '[themes/fs] fs.readDir failed for /appdata/themes: boom',
+      '[themes/fs] fs.readDir failed for themes: boom',
     );
   });
 });

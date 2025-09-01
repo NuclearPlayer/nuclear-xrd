@@ -14,12 +14,24 @@ export const ensureDir = async (
           recursive: true,
           baseDir,
         });
-      } catch (e) {
-        await logFsError('ensureDir', 'fs.mkdir', dir, e);
+      } catch (error) {
+        await logFsError({
+          scope: 'ensureDir',
+          command: 'fs.mkdir',
+          targetPath: dir,
+          error,
+          withToast: true,
+          toastMessage: `Failed to create directory ${dir}`,
+        });
       }
     }
-  } catch (e) {
-    await logFsError('ensureDir', 'fs.exists', dir, e);
+  } catch (error) {
+    await logFsError({
+      scope: 'ensureDir',
+      command: 'fs.exists',
+      targetPath: dir,
+      error,
+    });
   }
   return dir;
 };

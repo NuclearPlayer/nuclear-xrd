@@ -42,7 +42,12 @@ export const installPluginToManagedDir = async (
       baseDir: BaseDirectory.AppData,
     });
   } catch (error) {
-    logFsError('plugins', 'fs.remove', destination, error);
+    logFsError({
+      scope: 'plugins',
+      command: 'fs.remove',
+      targetPath: destination,
+      error,
+    });
   }
 
   // Create plugin directory
@@ -51,8 +56,15 @@ export const installPluginToManagedDir = async (
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
-  } catch (e) {
-    await logFsError('plugins', 'fs.mkdir', destination, e);
+  } catch (error) {
+    await logFsError({
+      scope: 'plugins',
+      command: 'fs.mkdir',
+      targetPath: destination,
+      error,
+      withToast: true,
+      toastMessage: 'Failed to create managed plugin directory',
+    });
   }
 
   const appData = await appDataDir();

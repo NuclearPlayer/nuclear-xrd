@@ -5,7 +5,6 @@ import {
   readTextFile,
   watch,
 } from '@tauri-apps/plugin-fs';
-import { toast } from 'sonner';
 
 import { parseAdvancedTheme } from '@nuclearplayer/themes';
 
@@ -29,23 +28,41 @@ export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
   let entries: Array<{ name?: string; isDirectory?: boolean }> = [];
   try {
     entries = await readDir(dir, { baseDir: BaseDirectory.AppData });
-  } catch (e) {
-    await logFsError('themes', 'fs.readDir', dir, e);
+  } catch (error) {
+    await logFsError({
+      scope: 'themes',
+      command: 'fs.readDir',
+      targetPath: dir,
+      error,
+      withToast: true,
+      toastMessage: 'Failed to read themes directory',
+    });
     return [];
   }
   const themes: AdvancedThemeFile[] = [];
   for (const e of entries) {
-    if (e.isDirectory) continue;
+    if (e.isDirectory) {
+      continue;
+    }
     const name = e.name ?? '';
-    if (!name.toLowerCase().endsWith('.json')) continue;
+    if (!name.toLowerCase().endsWith('.json')) {
+      continue;
+    }
     const path = await join(dir, name);
     try {
       const text = await readTextFile(path, { baseDir: BaseDirectory.AppData });
       const json = JSON.parse(text);
       const parsed = parseAdvancedTheme(json);
       themes.push({ path, name: parsed.name });
-    } catch (e) {
-      await logFsError('themes', 'fs.readTextFile', path, e);
+    } catch (error) {
+      await logFsError({
+        scope: 'themes',
+        command: 'fs.readTextFile',
+        targetPath: path,
+        error,
+        withToast: true,
+        toastMessage: 'Failed to read theme file',
+      });
     }
   }
   themes.sort((a, b) => a.name.localeCompare(b.name));
@@ -60,7 +77,9 @@ export const refreshAdvancedThemeList = async (): Promise<void> => {
 export const startAdvancedThemeWatcher = async (): Promise<void> => {
   const dir = await ensureThemesDir();
   await refreshAdvancedThemeList();
-  if (unwatch) return;
+  if (unwatch) {
+    return;
+  }
   try {
     unwatch = await watch(
       dir,
@@ -85,16 +104,28 @@ export const startAdvancedThemeWatcher = async (): Promise<void> => {
 
         try {
           await loadAndApplyAdvancedThemeFromFile(currentPath);
-        } catch (e) {
-          const msg = e instanceof Error ? e.message : String(e);
-          toast.error('Theme reload failed', { description: msg });
-          await logFsError('themes', 'fs.watch', currentPath, e);
+        } catch (error) {
+          await logFsError({
+            scope: 'themes',
+            command: 'fs.watch',
+            targetPath: currentPath,
+            error,
+            withToast: true,
+            toastMessage: 'Theme reload failed',
+          });
         }
       },
       { baseDir: BaseDirectory.AppData },
     );
-  } catch (e) {
-    await logFsError('themes', 'fs.watch', dir, e);
+  } catch (error) {
+    await logFsError({
+      scope: 'themes',
+      command: 'fs.watch',
+      targetPath: dir,
+      error,
+      withToast: true,
+      toastMessage: "Couldn't watch themes directory",
+    });
   }
 };
 
