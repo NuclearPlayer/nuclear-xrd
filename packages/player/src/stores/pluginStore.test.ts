@@ -1,16 +1,32 @@
 import '../test/setup';
 
+import { mockIPC } from '@tauri-apps/api/mocks';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { NuclearPluginBuilder } from '../test/builders/NuclearPluginBuilder';
 import { PluginStateBuilder } from '../test/builders/PluginStateBuilder';
-import { createPluginFolder, resetVfs } from '../test/utils/testPluginFolder';
+import { PluginFsMock } from '../test/mocks/plugin-fs';
+import {
+  createPluginFolder,
+  resetVfs,
+  vfs,
+} from '../test/utils/testPluginFolder';
 import { usePluginStore } from './pluginStore';
+
+vi.mock('@tauri-apps/plugin-store', async () => {
+  const mod = await import('../test/utils/inMemoryTauriStore');
+  return { LazyStore: mod.LazyStore };
+});
 
 describe('usePluginStore', () => {
   beforeEach(() => {
     resetVfs();
     usePluginStore.setState({ plugins: {} });
+    mockIPC((cmd) => {
+      if (cmd === 'copy_dir_recursive') {
+        return true;
+      }
+    });
   });
 
   describe('initial state', () => {
@@ -38,7 +54,22 @@ describe('usePluginStore', () => {
 
   describe('loadPluginFromPath', () => {
     it('loads plugin without unknown permissions (no warnings)', async () => {
-      createPluginFolder('/plugins/plain', { id: 'plain' });
+      const manifest = createPluginFolder('/plugins/plain', {
+        id: 'plain',
+      });
+      PluginFsMock.setReadTextFileByMap({
+        '/plain/package.json': JSON.stringify(manifest),
+        '/home/user/.local/share/com.nuclearplayer/plugins/plain/1.0.0/package.json':
+          JSON.stringify(manifest),
+        '/home/user/.local/share/com.nuclearplayer/plugins/plain/1.0.0/index.js':
+          vfs.get('/plugins/plain/index.ts')!,
+      });
+      PluginFsMock.setExistsFor(
+        'plugins',
+        '/home/user/.local/share/com.nuclearplayer',
+        true,
+      );
+
       await usePluginStore.getState().loadPluginFromPath('/plugins/plain');
       const plugin = usePluginStore.getState().getPlugin('plain');
       expect(plugin?.enabled).toBe(false);
@@ -47,10 +78,18 @@ describe('usePluginStore', () => {
     });
 
     it('loads plugin with unknown permissions (warnings)', async () => {
-      createPluginFolder('/plugins/perm-plugin', {
+      const manifest = createPluginFolder('/plugins/perm-plugin', {
         id: 'perm-plugin',
         permissions: ['alpha', 'beta'],
       });
+      PluginFsMock.setReadTextFileByMap({
+        '/plugins/perm-plugin/package.json': JSON.stringify(manifest),
+        '/home/user/.local/share/com.nuclearplayer/plugins/perm-plugin/1.0.0/package.json':
+          JSON.stringify(manifest),
+        '/home/user/.local/share/com.nuclearplayer/plugins/perm-plugin/1.0.0/index.js':
+          vfs.get('/plugins/perm-plugin/index.ts')!,
+      });
+
       await usePluginStore
         .getState()
         .loadPluginFromPath('/plugins/perm-plugin');

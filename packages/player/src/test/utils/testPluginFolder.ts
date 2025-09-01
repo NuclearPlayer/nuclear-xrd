@@ -1,3 +1,5 @@
+import { PluginManifest } from '@nuclearplayer/plugin-sdk';
+
 type FileMap = Map<string, string>;
 
 const normalize = (p: string) => {
@@ -18,12 +20,6 @@ export const resetVfs = () => vfs.clear();
 
 export const writeFile = (path: string, contents: string) => {
   vfs.set(normalize(path), contents);
-};
-
-export const readFile = (path: string) => {
-  const key = normalize(path);
-  if (!vfs.has(key)) throw new Error(`File not found: ${key}`);
-  return vfs.get(key)!;
 };
 
 export const joinPath = (...parts: string[]) => normalize(parts.join('/'));
@@ -56,7 +52,7 @@ export const createPluginFolder = (
     files = {},
   } = opts;
 
-  const pkg = {
+  const pkg: PluginManifest = {
     name: id,
     version,
     description,
@@ -70,11 +66,13 @@ export const createPluginFolder = (
 
   writeFile(joinPath(basePath, 'package.json'), JSON.stringify(pkg));
 
-  const entry = main ?? 'index.js';
+  const entry = main ?? 'index.ts';
   if (!files[entry]) {
     writeFile(joinPath(basePath, entry), 'module.exports = { default: {} };\n');
   }
   for (const [rel, content] of Object.entries(files)) {
     writeFile(joinPath(basePath, rel), content);
   }
+
+  return pkg;
 };

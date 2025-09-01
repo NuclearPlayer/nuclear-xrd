@@ -10,14 +10,6 @@ vi.mock('./pluginCompiler', () => ({
   }),
 }));
 
-vi.mock('@tauri-apps/api/path', () => ({
-  join: vi.fn((...parts: string[]) => Promise.resolve(parts.join('/'))),
-}));
-
-vi.mock('@tauri-apps/plugin-fs', () => ({
-  readTextFile: vi.fn(),
-}));
-
 const mockNuclearPluginAPI = vi.fn();
 vi.mock('@nuclearplayer/plugin-sdk', () => ({
   NuclearPluginAPI: class MockNuclearPluginAPI {
