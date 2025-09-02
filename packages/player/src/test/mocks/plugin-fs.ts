@@ -61,7 +61,11 @@ export const PluginFsMock = {
         }
       });
 
-      return keyToReturn ? value[keyToReturn] : '';
+      if (keyToReturn) {
+        return value[keyToReturn];
+      } else {
+        throw new Error(`fs.readTextFile called for unknown path: ${path}`);
+      }
     });
   },
   setRemoveFor: (path: string, baseDir: string, value: boolean | undefined) => {
@@ -77,5 +81,8 @@ export const PluginFsMock = {
       },
     );
     return fs.remove as Mock;
+  },
+  reset: () => {
+    vi.resetAllMocks();
   },
 };
