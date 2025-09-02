@@ -1,28 +1,8 @@
+import path from 'node:path';
+
 import { PluginManifest } from '@nuclearplayer/plugin-sdk';
 
-type FileMap = Map<string, string>;
-
-const normalize = (p: string) => {
-  if (!p) return '/';
-  const parts = p.replace(/\\/g, '/').split('/');
-  const out: string[] = [];
-  for (const part of parts) {
-    if (!part || part === '.') continue;
-    if (part === '..') out.pop();
-    else out.push(part);
-  }
-  return '/' + out.join('/');
-};
-
-export const vfs: FileMap = new Map();
-
-export const resetVfs = () => vfs.clear();
-
-export const writeFile = (path: string, contents: string) => {
-  vfs.set(normalize(path), contents);
-};
-
-export const joinPath = (...parts: string[]) => normalize(parts.join('/'));
+import { PluginFsMock } from '../mocks/plugin-fs';
 
 export type PluginFolderOptions = {
   id: string;
@@ -33,8 +13,9 @@ export type PluginFolderOptions = {
   author?: string;
   permissions?: string[];
   main?: string;
-  files?: Record<string, string>;
 };
+
+const AppData = '/home/user/.local/share/com.nuclearplayer';
 
 export const createPluginFolder = (
   basePath: string,
@@ -49,10 +30,9 @@ export const createPluginFolder = (
     author = 'Test Author',
     permissions = [],
     main,
-    files = {},
   } = opts;
 
-  const pkg: PluginManifest = {
+  const manifest: PluginManifest = {
     name: id,
     version,
     description,
@@ -64,15 +44,14 @@ export const createPluginFolder = (
     },
   };
 
-  writeFile(joinPath(basePath, 'package.json'), JSON.stringify(pkg));
-
-  const entry = main ?? 'index.ts';
-  if (!files[entry]) {
-    writeFile(joinPath(basePath, entry), 'module.exports = { default: {} };\n');
-  }
-  for (const [rel, content] of Object.entries(files)) {
-    writeFile(joinPath(basePath, rel), content);
-  }
-
-  return pkg;
+  PluginFsMock.setReadTextFileByMap({
+    [path.join(basePath, 'package.json')]: JSON.stringify(manifest),
+    [path.join(basePath, main ?? 'index.ts')]:
+      'module.exports = { default: {} };',
+    [path.join(AppData, 'plugins', id, version, 'package.json')]:
+      JSON.stringify(manifest),
+    [path.join(AppData, 'plugins', id, version, main ?? 'index.ts')]:
+      'module.exports = { default: {} };',
+  });
+  return manifest;
 };

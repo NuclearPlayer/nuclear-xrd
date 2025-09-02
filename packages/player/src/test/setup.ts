@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom';
 
+import path from 'node:path';
 import { vi } from 'vitest';
 
 import { setupResizeObserverMock } from '@nuclearplayer/ui';
-
-import { joinPath } from './utils/testPluginFolder';
 
 process.env.NODE_ENV = 'test';
 
@@ -22,7 +21,7 @@ console.error = (...args) => {
 
 vi.mock('@tauri-apps/api/path', () => ({
   appDataDir: async () => '/home/user/.local/share/com.nuclearplayer',
-  join: async (...parts: string[]) => joinPath(...parts),
+  join: async (...parts: string[]) => path.join(...parts),
 }));
 
 vi.mock('esbuild-wasm', () => ({
