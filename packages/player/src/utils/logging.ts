@@ -1,4 +1,6 @@
 import * as Logger from '@tauri-apps/plugin-log';
+import isError from 'lodash-es/isError';
+import isString from 'lodash-es/isString';
 import { toast } from 'sonner';
 
 export const logFsError = async ({
@@ -25,4 +27,14 @@ export const logFsError = async ({
   await Logger.error(
     `[${scope}/fs] ${command} failed for ${targetPath}: ${message}`,
   );
+};
+
+export const resolveErrorMessage = (error: unknown): string => {
+  if (isError(error)) {
+    return error.message;
+  }
+  if (isString(error)) {
+    return error;
+  }
+  return 'Unknown error';
 };

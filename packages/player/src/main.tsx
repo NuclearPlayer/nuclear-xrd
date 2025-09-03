@@ -10,13 +10,18 @@ import '@nuclearplayer/themes';
 
 import { startAdvancedThemeWatcher } from './services/advancedThemeDirService';
 import { applyAdvancedThemeFromSettingsIfAny } from './services/advancedThemeService';
+import { hydratePluginsFromRegistry } from './services/plugins/pluginBootstrap';
 import { applyThemeFromSettings } from './services/themeBootstrap';
 
 initializeSettingsStore()
   .then(() => registerBuiltInCoreSettings())
   .then(() => startAdvancedThemeWatcher())
   .then(() => applyThemeFromSettings())
-  .then(() => applyAdvancedThemeFromSettingsIfAny());
+  .then(() => applyAdvancedThemeFromSettingsIfAny())
+  .then(() => {
+    // Run plugin hydration in the background
+    void hydratePluginsFromRegistry();
+  });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

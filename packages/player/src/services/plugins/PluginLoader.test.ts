@@ -26,10 +26,6 @@ vi.mock('@nuclearplayer/plugin-sdk', () => ({
   },
 }));
 
-const mockReadTextFile = vi.mocked(
-  await import('@tauri-apps/plugin-fs'),
-).readTextFile;
-
 describe('PluginLoader', () => {
   let loader: PluginLoader;
 
@@ -312,7 +308,13 @@ describe('PluginLoader', () => {
   describe('typescript plugin compilation', () => {
     it('compiles and loads a .ts plugin', async () => {
       const manifest = makeManifest({ main: 'index.ts' });
-      mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.ts': 'module.exports = { onLoad(){} };',
+      });
+      (compilePlugin as Mock).mockResolvedValueOnce(
+        'module.exports = { onLoad(){} };',
+      );
       const result = await loader.load();
       expect(result.instance).toHaveProperty('onLoad');
     });

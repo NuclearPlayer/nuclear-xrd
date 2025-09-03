@@ -1,5 +1,4 @@
 import * as Logger from '@tauri-apps/plugin-log';
-import { isError, isString } from 'lodash-es';
 import { toast } from 'sonner';
 import { create } from 'zustand';
 
@@ -10,9 +9,11 @@ import { installPluginToManagedDir } from '../services/plugins/pluginDir';
 import { PluginLoader } from '../services/plugins/PluginLoader';
 import {
   getRegistryEntry,
+  setRegistryEntryEnabled,
   upsertRegistryEntry,
 } from '../services/plugins/pluginRegistry';
 import { providersServiceHost } from '../services/providersService';
+import { resolveErrorMessage } from '../utils/logging';
 import { createPluginSettingsHost } from './settingsStore';
 
 const allowedPermissions: string[] = [];
@@ -110,11 +111,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         await get().enablePlugin(id);
       }
     } catch (error) {
-      const message = isError(error)
-        ? (error as Error).message
-        : isString(error)
-          ? (error as string)
-          : 'Unknown error';
+      const message = resolveErrorMessage(error);
 
       toast.error('Failed to load plugin', {
         description: message,
@@ -143,6 +140,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         [id]: { ...state.plugins[id], enabled: true },
       },
     }));
+    await setRegistryEntryEnabled(id, true);
   },
 
   disablePlugin: async (id: string) => {
@@ -160,6 +158,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         [id]: { ...state.plugins[id], enabled: false },
       },
     }));
+    await setRegistryEntryEnabled(id, false);
   },
 
   unloadPlugin: async (id: string) => {
