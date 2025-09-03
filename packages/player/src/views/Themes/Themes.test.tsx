@@ -160,12 +160,12 @@ describe('Themes view', async () => {
     await ThemesWrapper.selectAdvancedTheme('My Theme');
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
 
-    watchCb?.({ paths: ['/themes/my.json'] });
+    watchCb?.({ paths: ['themes/my.json'] });
 
     await waitFor(() =>
       expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(2),
     );
-    expect(fs.readTextFile).toHaveBeenCalledWith('/themes/my.json', {
+    expect(fs.readTextFile).toHaveBeenCalledWith('themes/my.json', {
       baseDir: '/home/user/.local/share/com.nuclearplayer',
     });
   });
@@ -177,12 +177,12 @@ describe('Themes view', async () => {
       { name: 'other.json', isDirectory: false },
     ]);
     PluginFsMock.setReadTextFileByMap({
-      '/themes/my.json': JSON.stringify({
+      'themes/my.json': JSON.stringify({
         version: 1,
         name: 'My Theme',
         vars: { p: '#111' },
       }),
-      '/themes/other.json': JSON.stringify({
+      'themes/other.json': JSON.stringify({
         version: 1,
         name: 'Other',
         vars: { p: '#222' },
