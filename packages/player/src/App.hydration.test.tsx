@@ -1,3 +1,5 @@
+import './test/mocks/plugin-fs';
+
 import { hydratePluginsFromRegistry } from './services/plugins/pluginBootstrap';
 import { upsertRegistryEntry } from './services/plugins/pluginRegistry';
 import { resetInMemoryTauriStore } from './test/utils/inMemoryTauriStore';
@@ -8,8 +10,6 @@ vi.mock('@tauri-apps/plugin-store', async () => {
   const mod = await import('./test/utils/inMemoryTauriStore');
   return { LazyStore: mod.LazyStore };
 });
-
-vi.mock('@tauri-apps/plugin-fs');
 
 describe('App plugin hydration', () => {
   beforeEach(() => {

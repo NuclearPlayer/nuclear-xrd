@@ -1,5 +1,3 @@
-import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
-
 import { PluginManifest } from '@nuclearplayer/plugin-sdk';
 
 import { PluginFsMock } from '../../test/mocks/plugin-fs';

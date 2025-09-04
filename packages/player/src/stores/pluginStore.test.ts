@@ -1,7 +1,4 @@
-import '../test/setup';
-
 import { mockIPC } from '@tauri-apps/api/mocks';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { NuclearPluginBuilder } from '../test/builders/NuclearPluginBuilder';
 import { PluginStateBuilder } from '../test/builders/PluginStateBuilder';
