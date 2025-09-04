@@ -33,7 +33,7 @@ export const Plugins: FC = () => {
           </Button>
         </div>
         <ScrollableArea className="flex-1 overflow-hidden">
-          <div className="flex flex-col gap-4 pr-1 pb-2">
+          <div className="flex flex-col gap-4 overflow-visible px-2 pb-2">
             {plugins.map((p) => (
               <PluginItem
                 key={p.metadata.id}
