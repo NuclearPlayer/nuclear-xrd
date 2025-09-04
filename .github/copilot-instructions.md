@@ -17,7 +17,7 @@ This particular repo is a rewrite project, with the original Nuclear codebase in
 
 - Typescript - primary language.
 - Tauri - creates a native desktop application shell.
-- Tailwind - for styling. Don't use built-in colors though, we have a custom stylesheet in packages/tailwind-config/global.css.
+- Tailwind v4 - CSS-first setup. Configured via CSS using @theme and @layer (see `packages/tailwind-config/global.css`). No tailwind.config.js. Don't use built-in colors, prefer the palette defined in `global.css`.
 - Turbo repo - tool for managing the monorepo.
 - pnpm - the preferred package manager. Used for workspaces.
 - eslint + prettier - formatting and linting.
@@ -26,6 +26,8 @@ This particular repo is a rewrite project, with the original Nuclear codebase in
 - Vitest - for all tests
 - Lucide React - icon library
 - framer-motion and tw-animate-css - for animations
+- TanStack Router - chosen solution for routing.
+- TanStack Query v5 - chosen solution for HTTP requests.
 
 ### Packages
 - `@nuclearplayer/player` – Main Tauri app (React + Rust).  
@@ -46,6 +48,10 @@ pnpm dev        # run the project in dev mode
 pnpm build      # build all packages
 pnpm lint       # lint all packages
 pnpm test       # test all packages
+pnpm test:coverage  # run tests with coverage
+pnpm type-check     # run TypeScript checks across packages
+pnpm tauri          # run Tauri CLI for the player
+pnpm storybook      # run Storybook
 ```
 
 ## Coding principles
@@ -72,7 +78,9 @@ pnpm test       # test all packages
 - State management:
   - **Zustand** for persistent UI state.  
   - **React state** for local, temporary state.
-  - **react-query** for server state.
+  - **TanStack Query v5 (aka react-query)** for HTTP requests.
+- Routing:
+  - **TanStack Router** for client-side routing.
 - Lift complex or performance-critical logic to Tauri (Rust).
 
 ### Testing
@@ -81,6 +89,7 @@ pnpm test       # test all packages
 - Only mock external dependencies (HTTP, FS, Tauri).
 - Snapshot tests: **basic rendering only**. Start names with `(Snapshot)`.
 - Extract DOM querying into wrappers; assertions stay in tests.
+- Coverage: enabled across packages with V8-based coverage and CI reporting.
 
 ### Design & UX Philosophy
 
@@ -89,6 +98,11 @@ pnpm test       # test all packages
 - Disable animations during high-friction moments (e.g., resize).
 - Use **framer-motion** + **tw-animate-css** for smooth springy physics.
 - Feel: professional yet approachable, Discord-like.
+
+#### Typography
+
+- Fonts are standardized at the design system level. Prefer utilities `font-sans` and `font-heading` when needed.
+- Defaults are applied for common HTML tags (e.g., body, headings), so you rarely need to set fonts manually.
 
 ## Final Notes
 
