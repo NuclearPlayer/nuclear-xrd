@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom';
 
+import path from 'node:path';
 import { vi } from 'vitest';
 
 import { setupResizeObserverMock } from '@nuclearplayer/ui';
-
-import { joinPath, readFile } from './utils/testPluginFolder';
 
 process.env.NODE_ENV = 'test';
 
@@ -20,12 +19,9 @@ console.error = (...args) => {
   originalError(...args);
 };
 
-vi.mock('@tauri-apps/plugin-fs', () => ({
-  readTextFile: (path: string) => Promise.resolve(readFile(path)),
-}));
-
 vi.mock('@tauri-apps/api/path', () => ({
-  join: async (...parts: string[]) => joinPath(...parts),
+  appDataDir: async () => '/home/user/.local/share/com.nuclearplayer',
+  join: async (...parts: string[]) => path.join(...parts),
 }));
 
 vi.mock('esbuild-wasm', () => ({

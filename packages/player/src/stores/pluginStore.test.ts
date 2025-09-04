@@ -1,16 +1,23 @@
-import '../test/setup';
-
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { mockIPC } from '@tauri-apps/api/mocks';
 
 import { NuclearPluginBuilder } from '../test/builders/NuclearPluginBuilder';
 import { PluginStateBuilder } from '../test/builders/PluginStateBuilder';
-import { createPluginFolder, resetVfs } from '../test/utils/testPluginFolder';
+import { createPluginFolder } from '../test/utils/testPluginFolder';
 import { usePluginStore } from './pluginStore';
+
+vi.mock('@tauri-apps/plugin-store', async () => {
+  const mod = await import('../test/utils/inMemoryTauriStore');
+  return { LazyStore: mod.LazyStore };
+});
 
 describe('usePluginStore', () => {
   beforeEach(() => {
-    resetVfs();
     usePluginStore.setState({ plugins: {} });
+    mockIPC((cmd) => {
+      if (cmd === 'copy_dir_recursive') {
+        return true;
+      }
+    });
   });
 
   describe('initial state', () => {
@@ -37,8 +44,11 @@ describe('usePluginStore', () => {
   });
 
   describe('loadPluginFromPath', () => {
-    it('loads plugin without unknown permissions (no warnings)', async () => {
-      createPluginFolder('/plugins/plain', { id: 'plain' });
+    it('loads a plugin', async () => {
+      createPluginFolder('/plugins/plain', {
+        id: 'plain',
+      });
+
       await usePluginStore.getState().loadPluginFromPath('/plugins/plain');
       const plugin = usePluginStore.getState().getPlugin('plain');
       expect(plugin?.enabled).toBe(false);
@@ -46,11 +56,12 @@ describe('usePluginStore', () => {
       expect(plugin?.warnings).toEqual([]);
     });
 
-    it('loads plugin with unknown permissions (warnings)', async () => {
+    it('loads a plugin with warnings', async () => {
       createPluginFolder('/plugins/perm-plugin', {
         id: 'perm-plugin',
         permissions: ['alpha', 'beta'],
       });
+
       await usePluginStore
         .getState()
         .loadPluginFromPath('/plugins/perm-plugin');

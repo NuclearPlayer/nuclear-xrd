@@ -1,5 +1,9 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { type Mock } from 'vitest';
 
+import { PluginManifest } from '@nuclearplayer/plugin-sdk';
+
+import { PluginFsMock } from '../../test/mocks/plugin-fs';
+import { compilePlugin } from './pluginCompiler';
 import { PluginLoader } from './PluginLoader';
 
 vi.mock('./pluginCompiler', () => ({
@@ -8,14 +12,6 @@ vi.mock('./pluginCompiler', () => ({
       return 'module.exports = { onLoad(){} };';
     return undefined;
   }),
-}));
-
-vi.mock('@tauri-apps/api/path', () => ({
-  join: vi.fn((...parts: string[]) => Promise.resolve(parts.join('/'))),
-}));
-
-vi.mock('@tauri-apps/plugin-fs', () => ({
-  readTextFile: vi.fn(),
 }));
 
 const mockNuclearPluginAPI = vi.fn();
@@ -30,19 +26,15 @@ vi.mock('@nuclearplayer/plugin-sdk', () => ({
   },
 }));
 
-const mockReadTextFile = vi.mocked(
-  await import('@tauri-apps/plugin-fs'),
-).readTextFile;
-
 describe('PluginLoader', () => {
   let loader: PluginLoader;
 
-  const baseManifest = {
+  const baseManifest: PluginManifest = {
     name: 'test-plugin',
     version: '1.0.0',
     description: 'Test description',
     author: 'Tester',
-  } as const;
+  };
 
   const makeManifest = (
     overrides: Partial<
@@ -55,13 +47,18 @@ describe('PluginLoader', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    PluginFsMock.reset();
     loader = new PluginLoader('/test/plugin/path');
   });
 
   describe('manifest validation via load()', () => {
     it('parses manifest with required fields', async () => {
       const manifest = makeManifest();
-      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.ts': 'module.exports = { onLoad(){} };',
+      });
+
       const result = await loader.load();
       expect(result.metadata).toMatchObject({
         id: manifest.name,
@@ -75,7 +72,10 @@ describe('PluginLoader', () => {
     it('throws if name missing', async () => {
       const manifest = { ...baseManifest } as Record<string, unknown>;
       delete manifest.name;
-      mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+      });
+
       await expect(loader.load()).rejects.toThrow(
         /Invalid package.json: name: Required/,
       );
@@ -84,7 +84,9 @@ describe('PluginLoader', () => {
     it('throws if version missing', async () => {
       const manifest = { ...baseManifest } as Record<string, unknown>;
       delete manifest.version;
-      mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+      });
       await expect(loader.load()).rejects.toThrow(
         /Invalid package.json: version: Required/,
       );
@@ -93,7 +95,9 @@ describe('PluginLoader', () => {
     it('throws if description missing', async () => {
       const manifest = { ...baseManifest } as Record<string, unknown>;
       delete manifest.description;
-      mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+      });
       await expect(loader.load()).rejects.toThrow(
         /Invalid package.json: description: Required/,
       );
@@ -102,7 +106,9 @@ describe('PluginLoader', () => {
     it('throws if author missing', async () => {
       const manifest = { ...baseManifest } as Record<string, unknown>;
       delete manifest.author;
-      mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+      });
       await expect(loader.load()).rejects.toThrow(
         /Invalid package.json: author: Required/,
       );
@@ -111,9 +117,10 @@ describe('PluginLoader', () => {
 
   describe('entry resolution', () => {
     it('uses main field path', async () => {
-      const manifest = makeManifest({ main: 'custom/entry.js' });
-      setFsMock(manifest, {
-        'custom/entry.js': 'module.exports = { onLoad(){} };',
+      const manifest = makeManifest({ main: 'custom/entry.ts' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/custom/entry.ts': 'module.exports = { onLoad(){} };',
       });
       const result = await loader.load();
       expect(result.instance).toBeDefined();
@@ -121,15 +128,19 @@ describe('PluginLoader', () => {
 
     it('falls back to index.ts when index.js missing', async () => {
       const manifest = makeManifest();
-      setFsMock(manifest, { 'index.ts': 'module.exports = { onEnable(){} };' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.ts': 'module.exports = { onEnable(){} };',
+      });
       const result = await loader.load();
       expect(result.instance).toBeDefined();
     });
 
     it('falls back to dist/index.js after index.js/.ts/.tsx missing', async () => {
       const manifest = makeManifest();
-      setFsMock(manifest, {
-        'dist/index.js': 'module.exports = { onEnable(){} };',
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/dist/index.js': 'module.exports = { onEnable(){} };',
       });
       const result = await loader.load();
       expect(result.instance).toBeDefined();
@@ -137,8 +148,9 @@ describe('PluginLoader', () => {
 
     it('falls back to dist/index.ts after other candidates missing', async () => {
       const manifest = makeManifest();
-      setFsMock(manifest, {
-        'dist/index.ts': 'module.exports = { onEnable(){} };',
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/dist/index.ts': 'module.exports = { onEnable(){} };',
       });
       const result = await loader.load();
       expect(result.instance).toBeDefined();
@@ -146,7 +158,9 @@ describe('PluginLoader', () => {
 
     it('throws if no entry file found', async () => {
       const manifest = makeManifest();
-      setFsMock(manifest, {});
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+      });
       await expect(loader.load()).rejects.toThrow(
         'Could not resolve plugin entry file (main, index.js, index.ts, index.tsx, dist/index.js, dist/index.ts, dist/index.tsx)',
       );
@@ -156,15 +170,20 @@ describe('PluginLoader', () => {
   describe('plugin code evaluation via load()', () => {
     it('returns hooks object', async () => {
       const manifest = makeManifest({ main: 'index.js' });
-      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.js': 'module.exports = { onLoad(){} };',
+      });
       const result = await loader.load();
       expect(result.instance).toHaveProperty('onLoad');
     });
 
     it('supports default export', async () => {
       const manifest = makeManifest({ main: 'index.js' });
-      setFsMock(manifest, {
-        'index.js': 'module.exports.default = { onEnable(){} };',
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.js':
+          'module.exports.default = { onEnable(){} };',
       });
       const result = await loader.load();
       expect(result.instance).toHaveProperty('onEnable');
@@ -172,26 +191,34 @@ describe('PluginLoader', () => {
 
     it('throws on non-object export', async () => {
       const manifest = makeManifest({ main: 'index.js' });
-      setFsMock(manifest, { 'index.js': 'module.exports = 42;' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.js': 'module.exports = 42;',
+      });
       await expect(loader.load()).rejects.toThrow(
         'Plugin must export a default object.',
       );
     });
 
     it('provides limited require for plugin-sdk', async () => {
-      const manifest = makeManifest({ main: 'index.js' });
-      setFsMock(manifest, {
-        'index.js':
-          "const { NuclearPluginAPI } = require('@nuclearplayer/plugin-sdk'); module.exports = { testAdd: NuclearPluginAPI.add() };",
+      const pluginContents =
+        "const { NuclearPluginAPI } = require('@nuclearplayer/plugin-sdk'); module.exports = { testAdd: NuclearPluginAPI.add() }";
+      const manifest = makeManifest({ main: 'index.ts' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.ts': pluginContents,
       });
+      (compilePlugin as Mock).mockResolvedValueOnce(pluginContents);
       const result = await loader.load();
       expect(result.instance).toHaveProperty('testAdd', 4);
     });
 
     it('throws for unknown required modules', async () => {
       const manifest = makeManifest({ main: 'index.js' });
-      setFsMock(manifest, {
-        'index.js': "require('unknown-module'); module.exports = {};",
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.js':
+          "require('unknown-module'); module.exports = {};",
       });
       await expect(loader.load()).rejects.toThrow(
         'Module unknown-module not found',
@@ -209,7 +236,10 @@ describe('PluginLoader', () => {
           permissions: ['net'],
         },
       });
-      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.js': 'module.exports = { onLoad(){} };',
+      });
       const result = await loader.load();
       expect(result.metadata).toMatchObject({
         id: 'test-plugin',
@@ -223,7 +253,10 @@ describe('PluginLoader', () => {
       const manifest = makeManifest({
         nuclear: { permissions: [] },
       });
-      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.js': 'module.exports = { onLoad(){} };',
+      });
       const result = await loader.load();
       expect(result.instance).toBeDefined();
       expect(loader.getWarnings()).toEqual(
@@ -238,7 +271,10 @@ describe('PluginLoader', () => {
         main: 'index.js',
         nuclear: { permissions: ['net', ' net ', 'fs', 'net'] },
       });
-      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.js': 'module.exports = { onLoad(){} };',
+      });
       const result = await loader.load();
       expect(result.metadata.permissions).toEqual(['fs', 'net']);
       expect(loader.getWarnings()).toEqual(
@@ -256,7 +292,10 @@ describe('PluginLoader', () => {
           unknown
         >,
       });
-      setFsMock(manifest, { 'index.js': 'module.exports = { onLoad(){} };' });
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.js': 'module.exports = { onLoad(){} };',
+      });
       await loader.load();
       expect(loader.getWarnings()).toEqual(
         expect.arrayContaining([
@@ -269,22 +308,15 @@ describe('PluginLoader', () => {
   describe('typescript plugin compilation', () => {
     it('compiles and loads a .ts plugin', async () => {
       const manifest = makeManifest({ main: 'index.ts' });
-      mockReadTextFile.mockResolvedValueOnce(JSON.stringify(manifest));
+      PluginFsMock.setReadTextFileByMap({
+        '/test/plugin/path/package.json': JSON.stringify(manifest),
+        '/test/plugin/path/index.ts': 'module.exports = { onLoad(){} };',
+      });
+      (compilePlugin as Mock).mockResolvedValueOnce(
+        'module.exports = { onLoad(){} };',
+      );
       const result = await loader.load();
       expect(result.instance).toHaveProperty('onLoad');
     });
   });
 });
-
-const setFsMock = (
-  manifest: Record<string, unknown>,
-  files: Record<string, string>,
-) => {
-  mockReadTextFile.mockImplementation(async (p: string | URL) => {
-    const pathStr = p.toString();
-    if (pathStr.includes('package.json')) return JSON.stringify(manifest);
-    const rel = pathStr.replace('/test/plugin/path/', '');
-    if (rel in files) return files[rel];
-    throw new Error('not found');
-  });
-};

@@ -1,20 +1,6 @@
 import type { NuclearPluginAPI } from './api';
 
-export type PluginIcon =
-  | {
-      type: 'named';
-      name: string;
-      background?:
-        | 'primary'
-        | 'green'
-        | 'yellow'
-        | 'purple'
-        | 'blue'
-        | 'orange'
-        | 'cyan'
-        | 'red';
-    }
-  | { type: 'link'; link: string };
+export type PluginIcon = { type: 'link'; link: string };
 
 export type PluginManifest = {
   name: string;

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Search view > (Snapshot) renders the search view 1`] = `
+exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
 <DocumentFragment>
   <div
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
@@ -39,7 +39,7 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
           class="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
           data-testid="search-box"
           placeholder="Search"
-          value="te"
+          value=""
         />
       </div>
       <div
@@ -220,7 +220,7 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="submit"
               >
@@ -274,6 +274,139 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
                   </svg>
                 </div>
               </button>
+              <div
+                animate="[object Object]"
+                class="border-l-foreground ml-4 flex flex-col gap-4 overflow-hidden border-l-2 pt-2"
+                exit="[object Object]"
+                initial="[object Object]"
+                transition="[object Object]"
+              >
+                <a
+                  href="/settings"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-settings2 lucide-settings-2"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M14 17H5"
+                      />
+                      <path
+                        d="M19 7h-9"
+                      />
+                      <circle
+                        cx="17"
+                        cy="17"
+                        r="3"
+                      />
+                      <circle
+                        cx="7"
+                        cy="7"
+                        r="3"
+                      />
+                    </svg>
+                    Settings
+                  </div>
+                </a>
+                <a
+                  aria-current="page"
+                  class="active"
+                  data-status="active"
+                  href="/plugins"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-blocks"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"
+                      />
+                      <rect
+                        height="8"
+                        rx="1"
+                        width="8"
+                        x="14"
+                        y="2"
+                      />
+                    </svg>
+                    Plugins
+                  </div>
+                </a>
+                <a
+                  href="/themes"
+                >
+                  <div
+                    class="flex flex-row items-center justify-start gap-2 px-2"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-palette"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"
+                      />
+                      <circle
+                        cx="13.5"
+                        cy="6.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="17.5"
+                        cy="10.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="6.5"
+                        cy="12.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                      <circle
+                        cx="8.5"
+                        cy="7.5"
+                        fill="currentColor"
+                        r=".5"
+                      />
+                    </svg>
+                    Themes
+                  </div>
+                </a>
+              </div>
             </div>
             <div
               class="mb-4 flex w-full flex-col text-sm"
@@ -360,29 +493,42 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
           >
             <div
               class="relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
-              data-testid="search-view"
             >
               <h1
                 class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
               >
-                Search
+                Plugins
               </h1>
-              <h2
-                class="mb-4 flex w-full flex-0 flex-row text-center text-xl font-semibold"
-              >
-                Query: "t"
-              </h2>
               <div
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
-                <button
-                  aria-hidden="true"
-                  style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
-                  type="button"
-                />
                 <div
-                  class="flex max-h-full w-full flex-col gap-2 flex-1"
-                />
+                  class="relative flex w-full flex-col gap-4 overflow-hidden"
+                >
+                  <div
+                    class="flex items-center"
+                  >
+                    <button
+                      class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-9 px-3"
+                      data-headlessui-state=""
+                      type="submit"
+                    >
+                      Add Plugin
+                    </button>
+                  </div>
+                  <div
+                    class="relative h-full w-full flex-1 overflow-hidden"
+                  >
+                    <div
+                      class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                      style="scrollbar-width: none;"
+                    >
+                      <div
+                        class="flex flex-col gap-4 overflow-visible px-2 pb-2"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

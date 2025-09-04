@@ -9,7 +9,7 @@ import type {
   PluginMetadata,
 } from '@nuclearplayer/plugin-sdk';
 
-import { createPluginSettingsHost } from '../stores/settingsStore';
+import { createPluginSettingsHost } from '../../stores/settingsStore';
 import { compilePlugin } from './pluginCompiler';
 import { safeParsePluginManifest } from './pluginManifest';
 
@@ -28,6 +28,18 @@ export class PluginLoader {
     const packageJsonPath = await join(this.path, 'package.json');
     const packageJsonContent = await readTextFile(packageJsonPath);
     return JSON.parse(packageJsonContent);
+  }
+
+  private async readManifest(): Promise<PluginManifest> {
+    const raw = await this.readRawPackageJson();
+    const res = safeParsePluginManifest(raw);
+    if (!res.success) {
+      const msg = res.errors.join('; ');
+      throw new Error(`Invalid package.json: ${msg}`);
+    }
+    this.warnings = res.warnings;
+    this.manifest = res.data;
+    return this.manifest;
   }
 
   private buildMetadata(manifest: PluginManifest): PluginMetadata {
@@ -70,18 +82,6 @@ export class PluginLoader {
     );
   }
 
-  private async readManifest(): Promise<PluginManifest> {
-    const raw = await this.readRawPackageJson();
-    const res = safeParsePluginManifest(raw);
-    if (!res.success) {
-      const msg = res.errors.join('; ');
-      throw new Error(`Invalid package.json: ${msg}`);
-    }
-    this.warnings = res.warnings;
-    this.manifest = res.data;
-    return this.manifest;
-  }
-
   private async readPluginCode(entryPath: string): Promise<string> {
     const compiled = await compilePlugin(entryPath);
     if (compiled != null) {
@@ -115,6 +115,11 @@ export class PluginLoader {
       throw new Error('Plugin must export a default object.');
     }
     return plugin as NuclearPlugin;
+  }
+
+  async loadMetadata(): Promise<PluginMetadata> {
+    const manifest = await this.readManifest();
+    return this.buildMetadata(manifest);
   }
 
   async load(): Promise<LoadedPlugin> {

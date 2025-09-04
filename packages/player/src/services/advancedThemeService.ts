@@ -1,4 +1,5 @@
-import { readTextFile } from '@tauri-apps/plugin-fs';
+import { BaseDirectory, readTextFile } from '@tauri-apps/plugin-fs';
+import { toast } from 'sonner';
 
 import {
   applyAdvancedTheme,
@@ -11,7 +12,7 @@ import { setSetting, useSettingsStore } from '../stores/settingsStore';
 export const loadAndApplyAdvancedThemeFromFile = async (
   path: string,
 ): Promise<void> => {
-  const contents = await readTextFile(path);
+  const contents = await readTextFile(path, { baseDir: BaseDirectory.AppData });
   const json = JSON.parse(contents);
   const theme = parseAdvancedTheme(json);
   setThemeId('');
@@ -27,8 +28,10 @@ export const applyAdvancedThemeFromSettingsIfAny = async (): Promise<void> => {
     try {
       setThemeId('');
       await loadAndApplyAdvancedThemeFromFile(path);
-    } catch {
-      // ignore failures; user can re-pick a file in the UI
+    } catch (error) {
+      toast.error("Couldn't load advanced theme", {
+        description: error instanceof Error ? error.message : String(error),
+      });
     }
   }
 };
