@@ -3,6 +3,7 @@
 ## Plugins
 
 * [Getting started](README.md)
+* [Plugin system](plugin-system.md)
 * [Settings](settings.md)
 
 ## Theming
