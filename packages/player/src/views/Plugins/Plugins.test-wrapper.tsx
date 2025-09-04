@@ -20,7 +20,7 @@ export const PluginsWrapper = {
   },
   getPlugins: () => {
     return screen
-      .getAllByTestId('plugin-item')
+      .queryAllByTestId('plugin-item')
       .map((item) => new PluginItemWrapper(item));
   },
 };

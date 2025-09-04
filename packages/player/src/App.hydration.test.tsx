@@ -2,6 +2,7 @@ import './test/mocks/plugin-fs';
 
 import { hydratePluginsFromRegistry } from './services/plugins/pluginBootstrap';
 import { usePluginStore } from './stores/pluginStore';
+import { useStartupStore } from './stores/startupStore';
 import { resetInMemoryTauriStore } from './test/utils/inMemoryTauriStore';
 import { seedRegistryEntry } from './test/utils/seedPluginRegistry';
 import { createPluginFolder } from './test/utils/testPluginFolder';
@@ -120,21 +121,76 @@ describe('App plugin hydration', () => {
     await PluginsWrapper.mount();
 
     const plugins = PluginsWrapper.getPlugins();
-    expect(plugins).toHaveLength(1);
-    expect(plugins[0].name).toBe('managed');
+    expect(
+      plugins.map((plugin) => ({
+        name: plugin.name,
+        enabled: plugin.enabled,
+      })),
+    ).toMatchInlineSnapshot(`
+      [
+        {
+          "enabled": false,
+          "name": "managed",
+        },
+      ]
+    `);
   });
 
-  it.todo(
-    '(Hydration) logs and persists warnings for failed plugin load but keeps the registry entry',
-  );
+  it('(Hydration) logs and persists warnings for failed plugin load but keeps the registry entry', async () => {
+    // Seed a broken plugin (no files created under managed dir)
+    await seedRegistryEntry({ id: 'broken', version: '1.0.0', enabled: false });
 
-  it.todo(
-    '(Hydration) runs in background: UI renders before hydration completes and updates when done',
-  );
+    await hydratePluginsFromRegistry();
 
-  it.todo(
-    '(Hydration) exposes status flags and timings (total duration and per-plugin durations)',
-  );
+    // Should not appear in UI
+    await PluginsWrapper.mount();
+    expect(PluginsWrapper.getPlugins()).toHaveLength(0);
+
+    // But the registry entry remains and contains warnings
+    const { getRegistryEntry } = await import(
+      './services/plugins/pluginRegistry'
+    );
+    const entry = await getRegistryEntry('broken');
+    expect(entry).toBeDefined();
+    expect(entry?.warnings && entry.warnings.length).toBeGreaterThan(0);
+    expect(entry?.warnings?.[0]).toBe('"undefined" is not valid JSON');
+  });
+
+  it('(Hydration) exposes status flags and timings (total duration and per-plugin durations)', async () => {
+    createPluginFolder(
+      '/home/user/.local/share/com.nuclearplayer/plugins/first/1.0.0',
+      { id: 'first', version: '1.0.0' },
+    );
+    createPluginFolder(
+      '/home/user/.local/share/com.nuclearplayer/plugins/second/1.0.0',
+      { id: 'second', version: '1.0.0' },
+    );
+    await seedRegistryEntry({ id: 'first', version: '1.0.0' });
+    await seedRegistryEntry({ id: 'second', version: '1.0.0' });
+
+    const seq = [1000, 1000, 1200, 1200, 1500, 1500];
+    const spy = vi
+      .spyOn(Date, 'now')
+      .mockImplementation(() => (seq.length ? (seq.shift() as number) : 1500));
+
+    useStartupStore.setState({
+      isStartingUp: false,
+      startupFinishedAt: undefined,
+      totalStartupTimeMs: undefined,
+      pluginDurations: {},
+    });
+
+    await hydratePluginsFromRegistry();
+
+    const startupStoreState = useStartupStore.getState();
+    expect(startupStoreState.isStartingUp).toBe(false);
+    expect(startupStoreState.totalStartupTimeMs).toBe(500); // 1500 - 1000
+    expect(startupStoreState.pluginDurations.first).toBe(200); // 1200 - 1000
+    expect(startupStoreState.pluginDurations.second).toBe(300); // 1500 - 1200
+    expect(typeof startupStoreState.startupFinishedAt).toBe('string');
+
+    spy.mockRestore();
+  });
 
   it.todo(
     '(Hydration) toggling enable/disable persists to registry and is respected on next startup',
