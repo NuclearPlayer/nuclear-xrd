@@ -18,6 +18,8 @@ vi.mock('@tauri-apps/plugin-fs', () => ({
 
 export let watchCb: ((evt: { paths: string[] }) => void) | null = null;
 
+const readTextFileMap: Record<string, string> = {};
+
 export const PluginFsMock = {
   setReadTextFile: (value: string) => {
     (fs.readTextFile as Mock).mockResolvedValue(value);
@@ -54,18 +56,19 @@ export const PluginFsMock = {
     return fs.readDir as Mock;
   },
   setReadTextFileByMap: (value: Record<string, string>) => {
+    Object.assign(readTextFileMap, value);
     (fs.readTextFile as Mock).mockImplementation(async (path: string) => {
-      const keyToReturn = Object.keys(value).find((key) => {
+      const keys = Object.keys(readTextFileMap);
+      const keyToReturn = keys.find((key) => {
         if (path.endsWith(key)) {
           return true;
         }
       });
 
       if (keyToReturn) {
-        return value[keyToReturn];
-      } else {
-        throw new Error(`fs.readTextFile called for unknown path: ${path}`);
+        return readTextFileMap[keyToReturn];
       }
+      throw new Error(`fs.readTextFile called for unknown path: ${path}`);
     });
   },
   setRemoveFor: (path: string, baseDir: string, value: boolean | undefined) => {
@@ -84,5 +87,8 @@ export const PluginFsMock = {
   },
   reset: () => {
     vi.resetAllMocks();
+    for (const k of Object.keys(readTextFileMap)) {
+      delete readTextFileMap[k];
+    }
   },
 };

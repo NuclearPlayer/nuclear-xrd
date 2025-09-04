@@ -93,7 +93,7 @@ describe('App plugin hydration', () => {
         {
           "enabled": false,
           "name": "second",
-        }
+        },
       ]
     `);
     // Should be in installedAt ascending order: 'first' then 'second'
