@@ -1,3 +1,5 @@
+import { type Mock } from 'vitest';
+
 import { PluginManifest } from '@nuclearplayer/plugin-sdk';
 
 import { PluginFsMock } from '../../test/mocks/plugin-fs';
