@@ -2,12 +2,12 @@
 
 ## Plugins
 
-* [Getting started](README.md)
-* [Plugin system](plugin-system.md)
-* [Settings](settings.md)
+* [Getting started](plugins/getting-started.md.md)
+* [Plugin system](plugins/plugin-system.md)
+* [Settings](plugins/settings.md)
 
 ## Theming
 
-* [Themes](themes.md)
-* [Basic themes](themes-basic.md)
-* [Advanced themes](themes-advanced.md)
+* [Themes](themes/themes.md)
+* [Basic themes](themes/themes-basic.md)
+* [Advanced themes](themes/themes-advanced.md)
