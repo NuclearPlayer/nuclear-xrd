@@ -3,6 +3,7 @@ import './test/mocks/plugin-fs';
 import { hydratePluginsFromRegistry } from './services/plugins/pluginBootstrap';
 import { usePluginStore } from './stores/pluginStore';
 import { useStartupStore } from './stores/startupStore';
+import { PluginFsMock } from './test/mocks/plugin-fs';
 import { resetInMemoryTauriStore } from './test/utils/inMemoryTauriStore';
 import { seedRegistryEntry } from './test/utils/seedPluginRegistry';
 import { createPluginFolder } from './test/utils/testPluginFolder';
@@ -18,6 +19,7 @@ describe('App plugin hydration', () => {
   beforeEach(() => {
     resetInMemoryTauriStore();
     usePluginStore.setState({ plugins: {} });
+    PluginFsMock.reset();
   });
 
   it('(Hydration) loads a disabled plugin from registry and shows it disabled', async () => {
