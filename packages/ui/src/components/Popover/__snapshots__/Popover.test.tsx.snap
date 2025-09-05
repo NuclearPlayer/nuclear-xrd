@@ -1,0 +1,145 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Popover > (Snapshot) renders with all props 1`] = `
+<body>
+  <div>
+    <div
+      class="absolute border-accent-red"
+      data-headlessui-state="open"
+      data-open=""
+    >
+      <button
+        aria-controls="headlessui-popover-panel-:r4:"
+        aria-expanded="true"
+        class="cursor-pointer"
+        data-active=""
+        data-headlessui-state="open active hover"
+        data-hover=""
+        data-open=""
+        id="headlessui-popover-button-:r2:"
+        type="button"
+      >
+        <button
+          class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
+          data-headlessui-state="hover"
+          data-hover=""
+          type="submit"
+        >
+          Open Popover
+        </button>
+      </button>
+      <button
+        aria-hidden="true"
+        data-headlessui-focus-guard="true"
+        id="headlessui-focus-sentinel-:r3:"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        type="button"
+      />
+    </div>
+  </div>
+  <div
+    id="headlessui-portal-root"
+  >
+    <div
+      data-headlessui-portal=""
+    >
+      <button
+        aria-hidden="true"
+        data-headlessui-focus-guard="true"
+        id="headlessui-focus-sentinel-before-:r4:"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        type="button"
+      />
+      <div
+        animate="[object Object]"
+        class="text-foreground bg-primary border-border rounded border-2 px-4 py-2 leading-5 select-none translate-x-2 -translate-y-2"
+        exit="[object Object]"
+        initial="[object Object]"
+        style="overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
+      >
+        Popover Content
+      </div>
+      <button
+        aria-hidden="true"
+        data-headlessui-focus-guard="true"
+        id="headlessui-focus-sentinel-after-:r4:"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        type="button"
+      />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Popover > (Snapshot) renders with backdrop 1`] = `
+<body>
+  <div>
+    <div
+      class="absolute"
+      data-headlessui-state="open"
+      data-open=""
+    >
+      <button
+        aria-controls="headlessui-popover-panel-:rb:"
+        aria-expanded="true"
+        class="cursor-pointer"
+        data-active=""
+        data-headlessui-state="open active hover"
+        data-hover=""
+        data-open=""
+        id="headlessui-popover-button-:r8:"
+        type="button"
+      >
+        <button
+          class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
+          data-headlessui-state="hover"
+          data-hover=""
+          type="submit"
+        >
+          Open Popover
+        </button>
+      </button>
+      <button
+        aria-hidden="true"
+        data-headlessui-focus-guard="true"
+        id="headlessui-focus-sentinel-:r9:"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        type="button"
+      />
+      <div
+        aria-hidden="true"
+        class="fixed inset-0 bg-black/20 transition duration-150 ease-out data-closed:opacity-0"
+        data-closed=""
+        data-enter=""
+        data-headlessui-state="open"
+        data-open=""
+        data-transition=""
+        id="headlessui-popover-backdrop-:ra:"
+        style=""
+      />
+      <button
+        aria-hidden="true"
+        data-headlessui-focus-guard="true"
+        id="headlessui-focus-sentinel-before-:rb:"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        type="button"
+      />
+      <div
+        animate="[object Object]"
+        class="text-foreground bg-primary border-border rounded border-2 px-4 py-2 leading-5 select-none"
+        exit="[object Object]"
+        initial="[object Object]"
+      >
+        Popover Content
+      </div>
+      <button
+        aria-hidden="true"
+        data-headlessui-focus-guard="true"
+        id="headlessui-focus-sentinel-after-:rb:"
+        style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+        type="button"
+      />
+    </div>
+  </div>
+</body>
+`;

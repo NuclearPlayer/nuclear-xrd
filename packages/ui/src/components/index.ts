@@ -9,6 +9,7 @@ export * from './PlayerBar';
 export * from './PlayerShell';
 export * from './PlayerWorkspace';
 export * from './PluginItem';
+export * from './Popover';
 export * from './RouteTransition';
 export * from './ImageReveal';
 export * from './ScrollableArea';

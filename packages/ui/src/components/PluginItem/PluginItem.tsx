@@ -4,6 +4,7 @@ import { FC, ReactNode } from 'react';
 import { cn } from '../../utils';
 import { Box } from '../Box';
 import { Button } from '../Button';
+import { Popover } from '../Popover';
 
 type PluginItemProps = {
   name: string;
@@ -16,6 +17,7 @@ type PluginItemProps = {
   warning?: boolean;
   warningText?: string;
   rightAccessory?: ReactNode;
+  loadTimeMs?: number;
 };
 
 export const PluginItem: FC<PluginItemProps> = ({
@@ -29,13 +31,15 @@ export const PluginItem: FC<PluginItemProps> = ({
   warning = false,
   warningText,
   rightAccessory,
+  loadTimeMs,
 }) => (
   <Box
     data-testid="plugin-item"
     variant="secondary"
     className={cn(
       {
-        'ring-accent-orange ring-2 ring-inset': warning,
+        'ring-accent-orange cursor-default ring-2 select-none ring-inset':
+          warning,
         'opacity-30': disabled,
       },
       'relative transition-opacity duration-250',
@@ -79,20 +83,30 @@ export const PluginItem: FC<PluginItemProps> = ({
         </p>
       </div>
 
-      {/* TODO: Add a tooltip for the warning text */}
       {(warning || warningText) && (
-        <div className="absolute -top-4 -left-2 flex h-12 w-12 items-center">
-          {warning && (
-            <span className="bg-accent-orange border-border inline-flex items-center justify-center rounded border-2 p-1 text-xs font-semibold text-black">
-              <TriangleAlertIcon className="fill-accent-yellow" />
-            </span>
-          )}
-        </div>
+        <Popover
+          className="-top-4 -left-2"
+          anchor="right"
+          trigger={
+            <div className="relative flex h-12 w-12 items-center">
+              {warning && (
+                <span className="bg-accent-orange border-border inline-flex items-center justify-center rounded border-2 p-1 text-xs font-semibold text-black">
+                  <TriangleAlertIcon className="fill-accent-yellow" />
+                </span>
+              )}
+            </div>
+          }
+        >
+          {warningText}
+        </Popover>
       )}
 
       <div className="flex h-full shrink-0 flex-col items-start justify-center sm:w-auto sm:items-end">
         {rightAccessory}
       </div>
+      <span className="text-foreground-secondary absolute right-4 bottom-2 mt-2 text-sm">
+        Loaded in {loadTimeMs}ms
+      </span>
     </div>
   </Box>
 );

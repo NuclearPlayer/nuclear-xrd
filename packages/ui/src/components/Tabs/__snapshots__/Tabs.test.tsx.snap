@@ -25,7 +25,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
         Artists
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:re:"
+        aria-controls="headlessui-tabs-panel-:r9:"
         aria-selected="false"
         class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
@@ -37,7 +37,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
         Tracks
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:rg:"
+        aria-controls="headlessui-tabs-panel-:rb:"
         aria-selected="false"
         class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
@@ -93,11 +93,9 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         decoding="async"
                         loading="lazy"
                         src="https://picsum.photos/seed/Frank Zappa/300"
-                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
                       />
                       <div
                         class="pointer-events-none absolute inset-0 flex items-center justify-center"
-                        style="opacity: 0.5;"
                       >
                         <svg
                           aria-hidden="true"
@@ -166,11 +164,9 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         decoding="async"
                         loading="lazy"
                         src="https://picsum.photos/seed/Ozzy Osbourne/300"
-                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
                       />
                       <div
                         class="pointer-events-none absolute inset-0 flex items-center justify-center"
-                        style="opacity: 0.5;"
                       >
                         <svg
                           aria-hidden="true"
@@ -239,11 +235,9 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         decoding="async"
                         loading="lazy"
                         src="https://picsum.photos/seed/David Bowie/300"
-                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
                       />
                       <div
                         class="pointer-events-none absolute inset-0 flex items-center justify-center"
-                        style="opacity: 0.5;"
                       >
                         <svg
                           aria-hidden="true"
@@ -312,11 +306,9 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         decoding="async"
                         loading="lazy"
                         src="https://picsum.photos/seed/Kurt Cobain/300"
-                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
                       />
                       <div
                         class="pointer-events-none absolute inset-0 flex items-center justify-center"
-                        style="opacity: 0.5;"
                       >
                         <svg
                           aria-hidden="true"
@@ -385,11 +377,9 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                         decoding="async"
                         loading="lazy"
                         src="https://picsum.photos/seed/John Lennon/300"
-                        style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
                       />
                       <div
                         class="pointer-events-none absolute inset-0 flex items-center justify-center"
-                        style="opacity: 0.5;"
                       >
                         <svg
                           aria-hidden="true"
@@ -449,7 +439,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
       <span
         aria-hidden="true"
         aria-labelledby="headlessui-tabs-tab-:r3:"
-        id="headlessui-tabs-panel-:re:"
+        id="headlessui-tabs-panel-:r9:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
@@ -457,7 +447,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
       <span
         aria-hidden="true"
         aria-labelledby="headlessui-tabs-tab-:r5:"
-        id="headlessui-tabs-panel-:rg:"
+        id="headlessui-tabs-panel-:rb:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
@@ -475,16 +465,16 @@ exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
     <div
       aria-orientation="horizontal"
       class="flex w-full items-center gap-2"
-      id="tabs-:r14:-list"
+      id="tabs-:rq:-list"
       role="tablist"
     >
       <button
-        aria-controls="headlessui-tabs-panel-:r19:"
+        aria-controls="headlessui-tabs-panel-:rv:"
         aria-selected="true"
         class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
         data-headlessui-state=""
         data-selected=""
-        id="headlessui-tabs-tab-:r15:"
+        id="headlessui-tabs-tab-:rr:"
         role="tab"
         tabindex="0"
         type="button"
@@ -492,11 +482,11 @@ exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
         First
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:r1b:"
+        aria-controls="headlessui-tabs-panel-:r11:"
         aria-selected="false"
         class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
-        id="headlessui-tabs-tab-:r17:"
+        id="headlessui-tabs-tab-:rt:"
         role="tab"
         tabindex="-1"
         type="button"
@@ -506,14 +496,14 @@ exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
     </div>
     <div
       class="mt-2 flex flex-1 flex-col overflow-hidden"
-      id="tabs-:r14:-panels"
+      id="tabs-:rq:-panels"
     >
       <div
-        aria-labelledby="headlessui-tabs-tab-:r15:"
+        aria-labelledby="headlessui-tabs-tab-:rr:"
         class="relative flex-1 overflow-hidden outline-none"
         data-headlessui-state="selected"
         data-selected=""
-        id="headlessui-tabs-panel-:r19:"
+        id="headlessui-tabs-panel-:rv:"
         role="tabpanel"
         tabindex="0"
       >
@@ -532,8 +522,8 @@ exports[`Tabs > (Snapshot) renders in composition mode 1`] = `
       </div>
       <span
         aria-hidden="true"
-        aria-labelledby="headlessui-tabs-tab-:r17:"
-        id="headlessui-tabs-panel-:r1b:"
+        aria-labelledby="headlessui-tabs-tab-:rt:"
+        id="headlessui-tabs-panel-:r11:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
@@ -551,15 +541,15 @@ exports[`Tabs > (Snapshot) switches tabs 1`] = `
     <div
       aria-orientation="horizontal"
       class="flex w-full items-center gap-2"
-      id="tabs-:ri:-list"
+      id="tabs-:rd:-list"
       role="tablist"
     >
       <button
-        aria-controls="headlessui-tabs-panel-:rp:"
+        aria-controls="headlessui-tabs-panel-:rk:"
         aria-selected="false"
         class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
-        id="headlessui-tabs-tab-:rj:"
+        id="headlessui-tabs-tab-:re:"
         role="tab"
         tabindex="-1"
         type="button"
@@ -567,11 +557,11 @@ exports[`Tabs > (Snapshot) switches tabs 1`] = `
         Artists
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:r10:"
+        aria-controls="headlessui-tabs-panel-:rm:"
         aria-selected="false"
         class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
         data-headlessui-state=""
-        id="headlessui-tabs-tab-:rl:"
+        id="headlessui-tabs-tab-:rg:"
         role="tab"
         tabindex="-1"
         type="button"
@@ -579,13 +569,13 @@ exports[`Tabs > (Snapshot) switches tabs 1`] = `
         Tracks
       </button>
       <button
-        aria-controls="headlessui-tabs-panel-:r12:"
+        aria-controls="headlessui-tabs-panel-:ro:"
         aria-selected="true"
         class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
         data-headlessui-state="hover"
         data-hover=""
         data-selected=""
-        id="headlessui-tabs-tab-:rn:"
+        id="headlessui-tabs-tab-:ri:"
         role="tab"
         tabindex="0"
         type="button"
@@ -595,30 +585,30 @@ exports[`Tabs > (Snapshot) switches tabs 1`] = `
     </div>
     <div
       class="mt-2 flex flex-1 flex-col overflow-hidden"
-      id="tabs-:ri:-panels"
+      id="tabs-:rd:-panels"
     >
       <span
         aria-hidden="true"
-        aria-labelledby="headlessui-tabs-tab-:rj:"
-        id="headlessui-tabs-panel-:rp:"
+        aria-labelledby="headlessui-tabs-tab-:re:"
+        id="headlessui-tabs-panel-:rk:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
       />
       <span
         aria-hidden="true"
-        aria-labelledby="headlessui-tabs-tab-:rl:"
-        id="headlessui-tabs-panel-:r10:"
+        aria-labelledby="headlessui-tabs-tab-:rg:"
+        id="headlessui-tabs-panel-:rm:"
         role="tabpanel"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         tabindex="-1"
       />
       <div
-        aria-labelledby="headlessui-tabs-tab-:rn:"
+        aria-labelledby="headlessui-tabs-tab-:ri:"
         class="relative flex-1 overflow-hidden outline-none"
         data-headlessui-state="selected"
         data-selected=""
-        id="headlessui-tabs-panel-:r12:"
+        id="headlessui-tabs-panel-:ro:"
         role="tabpanel"
         tabindex="0"
       >
