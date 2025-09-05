@@ -4,6 +4,7 @@ import { FC, ReactNode } from 'react';
 import { cn } from '../../utils';
 import { Box } from '../Box';
 import { Button } from '../Button';
+import { Popover } from '../Popover';
 
 type PluginItemProps = {
   name: string;
@@ -79,15 +80,20 @@ export const PluginItem: FC<PluginItemProps> = ({
         </p>
       </div>
 
-      {/* TODO: Add a tooltip for the warning text */}
       {(warning || warningText) && (
-        <div className="absolute -top-4 -left-2 flex h-12 w-12 items-center">
-          {warning && (
-            <span className="bg-accent-orange border-border inline-flex items-center justify-center rounded border-2 p-1 text-xs font-semibold text-black">
-              <TriangleAlertIcon className="fill-accent-yellow" />
-            </span>
-          )}
-        </div>
+        <Popover
+          trigger={
+            <div className="absolute -top-4 -left-2 flex h-12 w-12 items-center">
+              {warning && (
+                <span className="bg-accent-orange border-border inline-flex items-center justify-center rounded border-2 p-1 text-xs font-semibold text-black">
+                  <TriangleAlertIcon className="fill-accent-yellow" />
+                </span>
+              )}
+            </div>
+          }
+        >
+          {warningText}
+        </Popover>
       )}
 
       <div className="flex h-full shrink-0 flex-col items-start justify-center sm:w-auto sm:items-end">
