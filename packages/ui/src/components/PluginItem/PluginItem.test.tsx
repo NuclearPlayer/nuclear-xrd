@@ -7,11 +7,15 @@ describe('PluginItem', () => {
   it('(Snapshot) renders with all props', () => {
     const { asFragment } = render(
       <PluginItem
+        className="border-accent-red"
         name="YouTube Music"
         author="Nuclear Team"
         description="Stream music directly from YouTube Music with full search and playlist support."
         icon={<Music size={24} />}
         onViewDetails={() => {}}
+        loadTimeMs={200}
+        warning
+        warningText="Loaded with errors"
       />,
     );
 
