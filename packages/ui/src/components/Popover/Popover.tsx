@@ -12,6 +12,7 @@ import { cn } from '../../utils';
 export type PopoverProps = {
   trigger: React.ReactNode;
   children: React.ReactNode;
+  className?: string;
   anchor?: PopoverPanelProps['anchor'];
   backdrop?: boolean;
 };
@@ -19,11 +20,12 @@ export type PopoverProps = {
 export const Popover = ({
   trigger,
   children,
+  className,
   anchor,
-  backdrop = true,
+  backdrop,
 }: PopoverProps) => {
   return (
-    <HeadlessPopover className="relative">
+    <HeadlessPopover className={cn('absolute', className)}>
       {({ open }) => (
         <>
           <PopoverButton className="cursor-pointer">{trigger}</PopoverButton>

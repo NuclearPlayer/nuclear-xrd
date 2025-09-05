@@ -1,6 +1,5 @@
 import { open } from '@tauri-apps/plugin-dialog';
 import isString from 'lodash-es/isString';
-import map from 'lodash-es/map';
 import { FC } from 'react';
 
 import {
@@ -29,17 +28,6 @@ export const Plugins: FC = () => {
 
   return (
     <ViewShell title="Plugins">
-      <div className="flex flex-col">
-        <span>Startup time: {startupStore.totalStartupTimeMs}ms</span>
-        <span>Plugin count: {plugins.length}</span>
-        <span className="flex flex-col">
-          {map(startupStore.pluginDurations, (value, key) => (
-            <span key={key}>
-              {key}: {value}ms
-            </span>
-          ))}
-        </span>
-      </div>
       <div className="relative flex w-full flex-col gap-4 overflow-hidden">
         <div className="flex items-center">
           <Button onClick={handleAdd} size="sm">
@@ -71,6 +59,7 @@ export const Plugins: FC = () => {
                     aria-label={`Toggle ${p.metadata.displayName}`}
                   />
                 }
+                loadTimeMs={startupStore.pluginDurations[p.metadata.id]}
               />
             ))}
           </div>
