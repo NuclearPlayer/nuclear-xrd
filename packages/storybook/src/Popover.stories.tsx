@@ -18,3 +18,30 @@ export const Default: Story = {
     anchor: 'bottom',
   },
 };
+
+export const AllAnchors: Story = {
+  render: () => (
+    <div className="relative grid h-full w-full grid-cols-2 gap-4 p-20">
+      <Popover
+        trigger={<Button>Opens top</Button>}
+        children="Popover content"
+        anchor="top"
+      />
+      <Popover
+        trigger={<Button>Opens below</Button>}
+        children="Popover content"
+        anchor="bottom"
+      />
+      <Popover
+        trigger={<Button>Opens right</Button>}
+        children="Popover content"
+        anchor="right"
+      />
+      <Popover
+        trigger={<Button>Opens left</Button>}
+        children="Popover content"
+        anchor="left"
+      />
+    </div>
+  ),
+};
