@@ -9,7 +9,7 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
       data-open=""
     >
       <button
-        aria-controls="headlessui-popover-panel-:r5:"
+        aria-controls="headlessui-popover-panel-:r4:"
         aria-expanded="true"
         class="cursor-pointer"
         data-active=""
@@ -46,26 +46,23 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
       <button
         aria-hidden="true"
         data-headlessui-focus-guard="true"
-        id="headlessui-focus-sentinel-before-:r5:"
+        id="headlessui-focus-sentinel-before-:r4:"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         type="button"
       />
       <div
+        animate="[object Object]"
         class="text-foreground bg-primary border-border rounded border-2 px-4 py-2 leading-5 select-none translate-x-2 -translate-y-2"
-        data-anchor="right center"
-        data-floating-ui-focusable=""
-        data-headlessui-state="open"
-        data-open=""
-        id="headlessui-popover-panel-:r5:"
-        style="position: absolute; left: 0px; top: 0px; --button-width: 0px; opacity: 0.04425333682011115; transform: translateY(4.305548302569873px) scale(0.9816302699651076); overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
-        tabindex="-1"
+        exit="[object Object]"
+        initial="[object Object]"
+        style="overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
       >
         Popover Content
       </div>
       <button
         aria-hidden="true"
         data-headlessui-focus-guard="true"
-        id="headlessui-focus-sentinel-after-:r5:"
+        id="headlessui-focus-sentinel-after-:r4:"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         type="button"
       />
@@ -83,14 +80,14 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
       data-open=""
     >
       <button
-        aria-controls="headlessui-popover-panel-:r6:"
+        aria-controls="headlessui-popover-panel-:rb:"
         aria-expanded="true"
         class="cursor-pointer"
         data-active=""
         data-headlessui-state="open active hover"
         data-hover=""
         data-open=""
-        id="headlessui-popover-button-:r2:"
+        id="headlessui-popover-button-:r8:"
         type="button"
       >
         <button
@@ -105,7 +102,7 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
       <button
         aria-hidden="true"
         data-headlessui-focus-guard="true"
-        id="headlessui-focus-sentinel-:r3:"
+        id="headlessui-focus-sentinel-:r9:"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         type="button"
       />
@@ -117,30 +114,28 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
         data-headlessui-state="open"
         data-open=""
         data-transition=""
-        id="headlessui-popover-backdrop-:r5:"
+        id="headlessui-popover-backdrop-:ra:"
         style=""
       />
       <button
         aria-hidden="true"
         data-headlessui-focus-guard="true"
-        id="headlessui-focus-sentinel-before-:r6:"
+        id="headlessui-focus-sentinel-before-:rb:"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         type="button"
       />
       <div
+        animate="[object Object]"
         class="text-foreground bg-primary border-border rounded border-2 px-4 py-2 leading-5 select-none"
-        data-headlessui-state="open"
-        data-open=""
-        id="headlessui-popover-panel-:r6:"
-        style="--button-width: 0px; opacity: 0; transform: translateY(4px) scale(0.98);"
-        tabindex="-1"
+        exit="[object Object]"
+        initial="[object Object]"
       >
         Popover Content
       </div>
       <button
         aria-hidden="true"
         data-headlessui-focus-guard="true"
-        id="headlessui-focus-sentinel-after-:r6:"
+        id="headlessui-focus-sentinel-after-:rb:"
         style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
         type="button"
       />

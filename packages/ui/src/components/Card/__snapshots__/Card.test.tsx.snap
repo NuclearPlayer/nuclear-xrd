@@ -19,11 +19,9 @@ exports[`Card > (Snapshot) renders correctly 1`] = `
           decoding="async"
           loading="lazy"
           src="https://picsum.photos/300"
-          style="opacity: 0; filter: blur(8px); transform: scale(0.98);"
         />
         <div
           class="pointer-events-none absolute inset-0 flex items-center justify-center"
-          style="opacity: 0.5;"
         >
           <svg
             aria-hidden="true"
