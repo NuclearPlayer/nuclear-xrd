@@ -14,6 +14,7 @@
     "@fontsource/bricolage-grotesque": "^5.2.8",
     "@fontsource/dm-sans": "^5.2.6",
     "@nuclearplayer/tailwind-config": "workspace:*",
+    "@nuclearplayer/model": "workspace:*",
     "@nuclearplayer/ui": "workspace:*",
     "lucide-react": "^0.542.0",
     "react": "^18.3.1",

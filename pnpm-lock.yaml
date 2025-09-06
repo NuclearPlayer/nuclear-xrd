@@ -404,6 +404,9 @@ importers:
       '@fontsource/dm-sans':
         specifier: ^5.2.6
         version: 5.2.6
+      '@nuclearplayer/model':
+        specifier: workspace:*
+        version: link:../model
       '@nuclearplayer/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config
