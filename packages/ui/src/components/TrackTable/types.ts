@@ -1,6 +1,14 @@
 import { Track } from '@nuclearplayer/model';
 
 export interface TrackTableLabels {
+  headers: {
+    positionHeader: React.ReactNode;
+    thumbnailHeader: React.ReactNode;
+    artistHeader: string;
+    titleHeader: string;
+    albumHeader: string;
+    durationHeader: string;
+  };
   playNow: string;
   addToQueue: string;
   playNext: string;
@@ -14,7 +22,11 @@ export interface TrackTableLabels {
   dragHandleLabel: string;
 }
 
-export interface TrackTableProps<T extends Track = Track> {
+export type TrackTableClasses = {
+  root?: string;
+};
+
+export type TrackTableProps<T extends Track = Track> = {
   tracks: T[];
   customColumns?: unknown[];
   features?: {
@@ -53,7 +65,7 @@ export interface TrackTableProps<T extends Track = Track> {
   };
   rowHeight?: number;
   overscan?: number;
-  className?: string;
+  classes?: TrackTableClasses;
   labels?: Partial<TrackTableLabels>;
   'aria-label'?: string;
-}
+};

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import '../../styles.css';
 
 import { cn } from '../../utils';
-import { formatTime } from '../../utils/time';
+import { formatTimeSeconds } from '../../utils/time';
 import { useSeekBar } from './useSeekBar';
 
 export type PlayerSeekBarProps = {
@@ -33,10 +33,10 @@ export const PlayerBarSeekBar: FC<PlayerSeekBarProps> = ({
     <div className={cn('w-full px-4 select-none', className)}>
       <div className="mb-1 flex items-center justify-between text-xs leading-none">
         <span className="text-foreground-secondary tabular-nums">
-          {formatTime(elapsedSeconds)}
+          {formatTimeSeconds(elapsedSeconds)}
         </span>
         <span className="text-foreground-secondary tabular-nums">
-          {formatTime(-Math.abs(remainingSeconds))}
+          {formatTimeSeconds(-Math.abs(remainingSeconds))}
         </span>
       </div>
       <div

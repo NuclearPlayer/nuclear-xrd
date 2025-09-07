@@ -1,6 +1,18 @@
 import { Duration } from 'luxon';
 
-export const formatTime = (totalSeconds: number) => {
+export const formatTimeMillis = (totalMillis: number | undefined) => {
+  if (totalMillis === undefined) {
+    return '';
+  }
+  const totalSeconds = Math.floor(totalMillis / 1000);
+  return formatTimeSeconds(totalSeconds);
+};
+
+export const formatTimeSeconds = (totalSeconds: number | undefined) => {
+  if (totalSeconds === undefined) {
+    return '';
+  }
+
   const sign = totalSeconds < 0 ? '-' : '';
   const secs = Math.abs(Math.trunc(totalSeconds));
   const dur = Duration.fromObject({ seconds: secs }).shiftTo(

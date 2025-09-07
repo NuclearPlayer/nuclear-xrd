@@ -1,6 +1,14 @@
 import { TrackTableLabels } from './types';
 
 export const defaultTrackTableLabels: TrackTableLabels = {
+  headers: {
+    positionHeader: 'Position',
+    thumbnailHeader: 'Thumbnail',
+    artistHeader: 'Artist',
+    titleHeader: 'Title',
+    albumHeader: 'Album',
+    durationHeader: 'Duration',
+  },
   playNow: 'Play now',
   addToQueue: 'Add to queue',
   playNext: 'Play next',
