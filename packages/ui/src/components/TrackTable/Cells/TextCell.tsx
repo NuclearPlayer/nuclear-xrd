@@ -5,5 +5,7 @@ import { Track } from '@nuclearplayer/model';
 export const TextCell = <T extends Track>({
   getValue,
 }: CellContext<T, string | number | undefined>) => (
-  <div className="truncate p-2">{getValue()}</div>
+  <td className="px-2">
+    <div className="truncate">{getValue()}</div>
+  </td>
 );

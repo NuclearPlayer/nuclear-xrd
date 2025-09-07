@@ -1,9 +1,11 @@
+import { HashIcon, ImageIcon } from 'lucide-react';
+
 import { TrackTableLabels } from './types';
 
 export const defaultTrackTableLabels: TrackTableLabels = {
   headers: {
-    positionHeader: 'Position',
-    thumbnailHeader: 'Thumbnail',
+    positionHeader: <HashIcon />,
+    thumbnailHeader: <ImageIcon />,
     artistHeader: 'Artist',
     titleHeader: 'Title',
     albumHeader: 'Album',

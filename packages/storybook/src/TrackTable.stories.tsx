@@ -1,13 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import { Track } from '@nuclearplayer/model';
-import { TrackTable } from '@nuclearplayer/ui';
+import { TrackTable, TrackTableProps } from '@nuclearplayer/ui';
 
 const meta: Meta<typeof TrackTable> = {
   title: 'Components/TrackTable',
   component: TrackTable,
   parameters: {
     layout: 'fullscreen',
+    actions: { argTypesRegex: '^on.*' },
   },
 };
 
@@ -64,5 +66,59 @@ const tracks: Track[] = [
 ];
 
 export const Basic: Story = {
-  render: () => <TrackTable tracks={tracks} />,
+  args: {
+    tracks,
+    display: {
+      displayPosition: true,
+      displayThumbnail: true,
+      displayArtist: true,
+      displayAlbum: true,
+      displayDuration: true,
+    },
+  },
+  render: (args) => (
+    <div className="flex w-full">
+      <TrackTable {...(args as TrackTableProps)} />
+    </div>
+  ),
+};
+
+export const DragAndDrop: Story = {
+  args: {
+    tracks,
+    features: {
+      reorderable: true,
+    },
+    display: {
+      displayPosition: true,
+      displayThumbnail: true,
+      displayArtist: true,
+      displayAlbum: true,
+      displayDuration: true,
+    },
+  },
+  render: (args) => {
+    const [tracksState, setTracksState] = useState(args.tracks);
+    return (
+      <div className="flex w-full">
+        <TrackTable
+          {...args}
+          tracks={tracksState}
+          onReorder={(ids) => {
+            const map = new Map(
+              tracksState.map((track: Track) => [track.source.id, track]),
+            );
+            const reordered = ids
+              .map((id) => map.get(id)!)
+              .filter(Boolean) as Track[];
+            const withUpdatedPositions = reordered.map((t, idx) => ({
+              ...t,
+              trackNumber: idx + 1,
+            }));
+            setTracksState(withUpdatedPositions);
+          }}
+        />
+      </div>
+    );
+  },
 };

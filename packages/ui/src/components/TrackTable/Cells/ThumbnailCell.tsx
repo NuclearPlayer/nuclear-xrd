@@ -6,8 +6,10 @@ export const ThumbnailCell = <T extends Track>({
   getValue,
 }: CellContext<T, Artwork>) => {
   return (
-    <div className="h-10 w-10">
-      <img className="object-cover" src={getValue()?.url} />
-    </div>
+    <td className="text-center">
+      <div className="flex w-full justify-center">
+        <img className="w-10 min-w-10" src={getValue()?.url} />
+      </div>
+    </td>
   );
 };
