@@ -8,10 +8,12 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 import { HashIcon, ImageIcon } from 'lucide-react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { pickArtwork, Track } from '@nuclearplayer/model';
 
@@ -35,6 +37,7 @@ export function TrackTable<T extends Track = Track>({
   onReorder,
 }: TrackTableProps<T>) {
   const columnHelper = createColumnHelper<T>();
+  const [sorting, setSorting] = useState<SortingState>([]);
   const mergedLabels = useMemo(() => mergeLabels(labels), [labels]);
 
   const handleDragStart = () => {
@@ -67,7 +70,8 @@ export function TrackTable<T extends Track = Track>({
       display?.displayPosition &&
         columnHelper.accessor((track) => track.trackNumber, {
           id: 'position',
-          header: () => <IconHeader Icon={HashIcon} />,
+          enableSorting: true,
+          header: (context) => <IconHeader Icon={HashIcon} context={context} />,
           cell: PositionCell,
         }),
       display?.displayThumbnail &&
@@ -75,37 +79,52 @@ export function TrackTable<T extends Track = Track>({
           (track) => pickArtwork(track.artwork, 'thumbnail', 40),
           {
             id: 'thumbnail',
-            header: () => <IconHeader Icon={ImageIcon} />,
+            header: (context) => (
+              <IconHeader Icon={ImageIcon} context={context} />
+            ),
             cell: ThumbnailCell,
+            enableSorting: false,
           },
         ),
       columnHelper.accessor((track) => track.artists[0].name, {
         id: 'artist',
-        header: () => (
-          <TextHeader>{mergedLabels.headers.artistHeader}</TextHeader>
+        enableSorting: true,
+        header: (context) => (
+          <TextHeader context={context}>
+            {mergedLabels.headers.artistHeader}
+          </TextHeader>
         ),
         cell: TextCell,
       }),
       columnHelper.accessor((track) => track.title, {
         id: 'title',
-        header: () => (
-          <TextHeader>{mergedLabels.headers.titleHeader}</TextHeader>
+        enableSorting: true,
+        header: (context) => (
+          <TextHeader context={context}>
+            {mergedLabels.headers.titleHeader}
+          </TextHeader>
         ),
         cell: TextCell,
       }),
       display?.displayAlbum &&
         columnHelper.accessor((track) => track.album?.title, {
           id: 'album',
-          header: () => (
-            <TextHeader>{mergedLabels.headers.albumHeader}</TextHeader>
+          enableSorting: true,
+          header: (context) => (
+            <TextHeader context={context}>
+              {mergedLabels.headers.albumHeader}
+            </TextHeader>
           ),
           cell: TextCell,
         }),
       display?.displayDuration &&
         columnHelper.accessor((track) => formatTimeMillis(track.durationMs), {
           id: 'duration',
-          header: () => (
-            <TextHeader>{mergedLabels.headers.durationHeader}</TextHeader>
+          enableSorting: true,
+          header: (context) => (
+            <TextHeader context={context}>
+              {mergedLabels.headers.durationHeader}
+            </TextHeader>
           ),
           cell: TextCell,
         }),
@@ -116,8 +135,14 @@ export function TrackTable<T extends Track = Track>({
   const table = useReactTable({
     columns,
     data: tracks,
+    state: { sorting },
+    enableSortingRemoval: true,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
+
+  const isSorted = sorting.length > 0;
 
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
@@ -153,7 +178,7 @@ export function TrackTable<T extends Track = Track>({
               <SortableRow
                 key={row.original.source.id}
                 row={row}
-                isReorderable={features?.reorderable}
+                isReorderable={features?.reorderable && !isSorted}
               />
             ))}
           </tbody>

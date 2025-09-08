@@ -38,9 +38,10 @@ export function SortableRow<T extends Track = Track>({
     <tr
       ref={setNodeRef}
       style={style}
-      className={cn('cursor-pointer border-b-2 bg-white select-none', {
+      className={cn('border-b-2 bg-white select-none', {
         '': !isDragging,
         'z-50': isDragging,
+        'cursor-grab': isReorderable,
       })}
       {...attributes}
       {...listeners}

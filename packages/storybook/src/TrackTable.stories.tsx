@@ -31,7 +31,7 @@ const tracks: Track[] = [
       source: { provider: 'local', id: '1' },
     },
     source: { provider: 'local', id: '1' },
-    durationMs: 60 * 1000,
+    durationMs: 78 * 1000,
   },
   {
     trackNumber: 2,
@@ -46,7 +46,7 @@ const tracks: Track[] = [
       source: { provider: 'local', id: '1' },
     },
     source: { provider: 'local', id: '2' },
-    durationMs: 60 * 1000,
+    durationMs: 45 * 1000,
   },
   {
     trackNumber: 3,
@@ -61,7 +61,7 @@ const tracks: Track[] = [
       source: { provider: 'local', id: '1' },
     },
     source: { provider: 'local', id: '3' },
-    durationMs: 60 * 1000,
+    durationMs: 217 * 1000,
   },
 ];
 
