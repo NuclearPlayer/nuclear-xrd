@@ -12,8 +12,9 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { HashIcon, ImageIcon } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { pickArtwork, Track } from '@nuclearplayer/model';
 
@@ -27,6 +28,8 @@ import { TextHeader } from './Headers/TextHeader';
 import { mergeLabels } from './labels';
 import { SortableRow } from './SortableRow';
 import { TrackTableProps } from './types';
+
+const ROW_HEIGHT = 42;
 
 export function TrackTable<T extends Track = Track>({
   tracks,
@@ -144,46 +147,80 @@ export function TrackTable<T extends Track = Track>({
 
   const isSorted = sorting.length > 0;
 
+  const { rows } = table.getRowModel();
+  const colCount = table.getVisibleFlatColumns().length;
+
+  const scrollParentRef = useRef<HTMLDivElement | null>(null);
+  const rowVirtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
+    count: tracks.length,
+    estimateSize: () => ROW_HEIGHT,
+    getScrollElement: () => scrollParentRef.current,
+    overscan: 8,
+  });
+  const virtualItems = rowVirtualizer.getVirtualItems();
+  const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
+  const paddingBottom =
+    virtualItems.length > 0
+      ? rowVirtualizer.getTotalSize() -
+        virtualItems[virtualItems.length - 1].end
+      : 0;
+
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <SortableContext
-        items={tracks.map((track) => track.source.id)}
-        strategy={verticalListSortingStrategy}
-      >
-        <table
-          role="table"
-          className={cn(
-            'border-border relative m-2 w-full border-2 select-none',
-            classes?.root,
-          )}
+    <div ref={scrollParentRef} className="flex h-auto overflow-auto">
+      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+        <SortableContext
+          items={tracks.map((track) => track.source.id)}
+          strategy={verticalListSortingStrategy}
         >
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr
-                key={headerGroup.id}
-                role="row"
-                className="border-border bg-primary border-b-2"
-              >
-                {headerGroup.headers.map((header) =>
-                  flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  ),
-                )}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <SortableRow
-                key={row.original.source.id}
-                row={row}
-                isReorderable={features?.reorderable && !isSorted}
-              />
-            ))}
-          </tbody>
-        </table>
-      </SortableContext>
-    </DndContext>
+          <table
+            role="table"
+            className={cn(
+              'border-border relative m-2 w-full border-2 select-none',
+              classes?.root,
+            )}
+          >
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr
+                  key={headerGroup.id}
+                  role="row"
+                  className="border-border bg-primary border-b-2"
+                >
+                  {headerGroup.headers.map((header) =>
+                    flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    ),
+                  )}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {paddingTop > 0 && (
+                <tr style={{ height: paddingTop }} className="border-none">
+                  <td colSpan={colCount} />
+                </tr>
+              )}
+              {virtualItems.map((virtualRow) => {
+                const row = rows[virtualRow.index];
+                return (
+                  <SortableRow
+                    key={row.id}
+                    row={row}
+                    style={{ height: ROW_HEIGHT }}
+                    isReorderable={features?.reorderable && !isSorted}
+                  />
+                );
+              })}
+              {paddingBottom > 0 && (
+                <tr style={{ height: paddingBottom }} className="border-none">
+                  <td colSpan={colCount} />
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </SortableContext>
+      </DndContext>
+    </div>
   );
 }

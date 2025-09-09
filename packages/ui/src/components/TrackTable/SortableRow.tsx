@@ -9,11 +9,13 @@ import { cn } from '../../utils';
 type SortableRowProps<T extends Track = Track> = {
   row: Row<T>;
   isReorderable?: boolean;
+  style?: React.CSSProperties;
 };
 
 export function SortableRow<T extends Track = Track>({
   row,
   isReorderable = false,
+  style: externalStyle,
 }: SortableRowProps<T>) {
   const trackId = row.original.source.id;
 
@@ -32,6 +34,7 @@ export function SortableRow<T extends Track = Track>({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    ...externalStyle,
   };
 
   return (
