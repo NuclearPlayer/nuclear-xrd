@@ -1,0 +1,2750 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TrackTable > (Snapshot) Basic 1`] = `
+<DocumentFragment>
+  <div
+    class="relative flex max-h-full overflow-auto"
+  >
+    <table
+      class="border-border relative m-2 w-full border-2 select-none"
+      role="table"
+    >
+      <thead>
+        <tr
+          class="border-border bg-primary border-b-2"
+          role="row"
+        >
+          <th
+            class="text-center cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex w-full items-center justify-center"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-hash h-4 w-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="4"
+                  x2="20"
+                  y1="9"
+                  y2="9"
+                />
+                <line
+                  x1="4"
+                  x2="20"
+                  y1="15"
+                  y2="15"
+                />
+                <line
+                  x1="10"
+                  x2="8"
+                  y1="3"
+                  y2="21"
+                />
+                <line
+                  x1="16"
+                  x2="14"
+                  y1="3"
+                  y2="21"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="text-center"
+            role="columnheader"
+          >
+            <span
+              class="flex w-full items-center justify-center"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-image h-4 w-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  ry="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <circle
+                  cx="9"
+                  cy="9"
+                  r="2"
+                />
+                <path
+                  d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Artist
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Title
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Album
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Duration
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          aria-describedby=""
+          aria-disabled="true"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            1
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 1
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:30
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby=""
+          aria-disabled="true"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            2
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 2
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:31
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby=""
+          aria-disabled="true"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            3
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 3
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:32
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`TrackTable > (Snapshot) DragAndDrop 1`] = `
+<DocumentFragment>
+  <div
+    class="relative flex max-h-full overflow-auto"
+  >
+    <table
+      class="border-border relative m-2 w-full border-2 select-none"
+      role="table"
+    >
+      <thead>
+        <tr
+          class="border-border bg-primary border-b-2"
+          role="row"
+        >
+          <th
+            class="text-center cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex w-full items-center justify-center"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-hash h-4 w-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="4"
+                  x2="20"
+                  y1="9"
+                  y2="9"
+                />
+                <line
+                  x1="4"
+                  x2="20"
+                  y1="15"
+                  y2="15"
+                />
+                <line
+                  x1="10"
+                  x2="8"
+                  y1="3"
+                  y2="21"
+                />
+                <line
+                  x1="16"
+                  x2="14"
+                  y1="3"
+                  y2="21"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="text-center"
+            role="columnheader"
+          >
+            <span
+              class="flex w-full items-center justify-center"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-image h-4 w-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  ry="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <circle
+                  cx="9"
+                  cy="9"
+                  r="2"
+                />
+                <path
+                  d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Artist
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Title
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Album
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Duration
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          aria-describedby="DndDescribedBy-0"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none cursor-grab"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            1
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 1
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:30
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby="DndDescribedBy-0"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none cursor-grab"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            2
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 2
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:31
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby="DndDescribedBy-0"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none cursor-grab"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            3
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 3
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:32
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby="DndDescribedBy-0"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none cursor-grab"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            4
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 4
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:33
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby="DndDescribedBy-0"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none cursor-grab"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            5
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 5
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:34
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      id="DndDescribedBy-0"
+      style="display: none;"
+    >
+      
+    To pick up a draggable item, press the space bar.
+    While dragging, use the arrow keys to move the item.
+    Press space again to drop the item in its new position, or press escape to cancel.
+  
+    </div>
+    <div
+      aria-atomic="true"
+      aria-live="assertive"
+      id="DndLiveRegion-0"
+      role="status"
+      style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`TrackTable > (Snapshot) Filtering 1`] = `
+<DocumentFragment>
+  <div
+    class="flex justify-end m-2"
+  >
+    <div
+      class="inline-flex w-full max-w-sm items-stretch"
+    >
+      <div
+        class="flex w-full flex-col gap-2"
+      >
+        <div
+          class="inline-flex w-full items-stretch"
+        >
+          <input
+            class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-l border-t-2 border-r-0 border-b-2 border-l-2"
+            data-headlessui-state=""
+            id="input-:r0:"
+            placeholder="Filter tracks"
+            type="text"
+            value=""
+          />
+          <div
+            class="bg-primary border-border flex items-center gap-2 rounded-r border-2 border-l-0 px-3 text-sm"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-funnel h-4 w-4"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="relative flex max-h-full overflow-auto"
+  >
+    <table
+      class="border-border relative m-2 w-full border-2 select-none"
+      role="table"
+    >
+      <thead>
+        <tr
+          class="border-border bg-primary border-b-2"
+          role="row"
+        >
+          <th
+            class="text-center cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex w-full items-center justify-center"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-hash h-4 w-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="4"
+                  x2="20"
+                  y1="9"
+                  y2="9"
+                />
+                <line
+                  x1="4"
+                  x2="20"
+                  y1="15"
+                  y2="15"
+                />
+                <line
+                  x1="10"
+                  x2="8"
+                  y1="3"
+                  y2="21"
+                />
+                <line
+                  x1="16"
+                  x2="14"
+                  y1="3"
+                  y2="21"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="text-center"
+            role="columnheader"
+          >
+            <span
+              class="flex w-full items-center justify-center"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-image h-4 w-4"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  ry="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <circle
+                  cx="9"
+                  cy="9"
+                  r="2"
+                />
+                <path
+                  d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"
+                />
+              </svg>
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Artist
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Title
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Album
+            </span>
+          </th>
+          <th
+            class="px-2 text-left cursor-pointer"
+            role="columnheader"
+          >
+            <span
+              class="flex items-center"
+            >
+              Duration
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          aria-describedby=""
+          aria-disabled="true"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            1
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 1
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:30
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby=""
+          aria-disabled="true"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            2
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 2
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:31
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby=""
+          aria-disabled="true"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            3
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 3
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:32
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby=""
+          aria-disabled="true"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            4
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 4
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:33
+            </div>
+          </td>
+        </tr>
+        <tr
+          aria-describedby=""
+          aria-disabled="true"
+          aria-roledescription="sortable"
+          class="border-b-2 bg-white select-none"
+          role="button"
+          style="height: 42px;"
+          tabindex="0"
+        >
+          <td
+            class="min-w-10 text-center"
+          >
+            5
+          </td>
+          <td
+            class="text-center"
+          >
+            <div
+              class="flex w-full justify-center"
+            >
+              <img
+                class="w-10 min-w-10"
+                src="https://i.imgur.com/4euOws2.jpg"
+              />
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Frank Zappa
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Track 5
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              Album
+            </div>
+          </td>
+          <td
+            class="px-2"
+          >
+            <div
+              class="truncate"
+            >
+              0:34
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`TrackTable > (Snapshot) LargeDataset 1`] = `
+<DocumentFragment>
+  <div
+    style="height: 400px;"
+  >
+    <div
+      class="relative flex max-h-full overflow-auto"
+    >
+      <table
+        class="border-border relative m-2 w-full border-2 select-none"
+        role="table"
+      >
+        <thead>
+          <tr
+            class="border-border bg-primary border-b-2"
+            role="row"
+          >
+            <th
+              class="text-center cursor-pointer"
+              role="columnheader"
+            >
+              <span
+                class="flex w-full items-center justify-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-hash h-4 w-4"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line
+                    x1="4"
+                    x2="20"
+                    y1="9"
+                    y2="9"
+                  />
+                  <line
+                    x1="4"
+                    x2="20"
+                    y1="15"
+                    y2="15"
+                  />
+                  <line
+                    x1="10"
+                    x2="8"
+                    y1="3"
+                    y2="21"
+                  />
+                  <line
+                    x1="16"
+                    x2="14"
+                    y1="3"
+                    y2="21"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th
+              class="text-center"
+              role="columnheader"
+            >
+              <span
+                class="flex w-full items-center justify-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-image h-4 w-4"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    height="18"
+                    rx="2"
+                    ry="2"
+                    width="18"
+                    x="3"
+                    y="3"
+                  />
+                  <circle
+                    cx="9"
+                    cy="9"
+                    r="2"
+                  />
+                  <path
+                    d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"
+                  />
+                </svg>
+              </span>
+            </th>
+            <th
+              class="px-2 text-left cursor-pointer"
+              role="columnheader"
+            >
+              <span
+                class="flex items-center"
+              >
+                Artist
+              </span>
+            </th>
+            <th
+              class="px-2 text-left cursor-pointer"
+              role="columnheader"
+            >
+              <span
+                class="flex items-center"
+              >
+                Title
+              </span>
+            </th>
+            <th
+              class="px-2 text-left cursor-pointer"
+              role="columnheader"
+            >
+              <span
+                class="flex items-center"
+              >
+                Album
+              </span>
+            </th>
+            <th
+              class="px-2 text-left cursor-pointer"
+              role="columnheader"
+            >
+              <span
+                class="flex items-center"
+              >
+                Duration
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              1
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 1
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:30
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              2
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 2
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:31
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              3
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 3
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:32
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              4
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 4
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:33
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              5
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 5
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:34
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              6
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 6
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:35
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              7
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 7
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:36
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              8
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 8
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:37
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              9
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 9
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:38
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              10
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 10
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:39
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              11
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 11
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:40
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              12
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 12
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:41
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              13
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 13
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:42
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              14
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 14
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:43
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              15
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 15
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:44
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              16
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 16
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:45
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              17
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 17
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:46
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              18
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 18
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:47
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              19
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 19
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:48
+              </div>
+            </td>
+          </tr>
+          <tr
+            aria-describedby=""
+            aria-disabled="true"
+            aria-roledescription="sortable"
+            class="border-b-2 bg-white select-none"
+            role="button"
+            style="height: 42px;"
+            tabindex="0"
+          >
+            <td
+              class="min-w-10 text-center"
+            >
+              20
+            </td>
+            <td
+              class="text-center"
+            >
+              <div
+                class="flex w-full justify-center"
+              >
+                <img
+                  class="w-10 min-w-10"
+                  src="https://i.imgur.com/4euOws2.jpg"
+                />
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Frank Zappa
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Track 20
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                Album
+              </div>
+            </td>
+            <td
+              class="px-2"
+            >
+              <div
+                class="truncate"
+              >
+                0:49
+              </div>
+            </td>
+          </tr>
+          <tr
+            class="border-none"
+            style="height: 20160px;"
+          >
+            <td
+              colspan="6"
+            />
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</DocumentFragment>
+`;
