@@ -93,7 +93,9 @@ export function applyAdvancedTheme(theme: AdvancedTheme): void {
 
 export function clearAdvancedTheme(): void {
   const style = document.getElementById(ADV_STYLE_ID);
-  if (style?.parentNode) style.parentNode.removeChild(style);
+  if (style?.parentNode) {
+    style.parentNode.removeChild(style);
+  }
 }
 
 export type { AdvancedTheme };

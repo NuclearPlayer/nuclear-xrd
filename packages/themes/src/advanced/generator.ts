@@ -13,8 +13,12 @@ export function generateAdvancedThemeCSS(theme: AdvancedTheme): string {
   const dark = toDecls(theme.dark);
 
   const parts: string[] = [];
-  if (light) parts.push(`:root{${light}}`);
-  if (dark) parts.push(`[data-theme='dark']{${dark}}`);
+  if (light) {
+    parts.push(`:root{${light}}`);
+  }
+  if (dark) {
+    parts.push(`[data-theme='dark']{${dark}}`);
+  }
   return parts.join('\n');
 }
 
