@@ -34,8 +34,9 @@ export const useSettingsStore = create<State>((set, get) => ({
   loadFromDisk: async () => {
     const storeEntries = await store.entries();
     const loadedValues: Values = {};
-    for (const [key, entryValue] of storeEntries)
+    for (const [key, entryValue] of storeEntries) {
       loadedValues[String(key)] = entryValue as SettingValue;
+    }
     set({ values: loadedValues, loaded: true });
   },
   register: (definitions, source) => {
@@ -57,7 +58,9 @@ export const useSettingsStore = create<State>((set, get) => ({
   getValue: (fullyQualifiedId) => {
     const { values, definitions } = get();
     const currentValue = values[fullyQualifiedId];
-    if (currentValue !== undefined) return currentValue;
+    if (currentValue !== undefined) {
+      return currentValue;
+    }
     return definitions[fullyQualifiedId]?.default;
   },
   setValue: async (fullyQualifiedId, value) => {
@@ -69,7 +72,9 @@ export const useSettingsStore = create<State>((set, get) => ({
 }));
 
 const normalizeId = (source: SettingSource, id: string): string => {
-  if (source.type === 'plugin') return `plugin.${source.pluginId}.${id}`;
+  if (source.type === 'plugin') {
+    return `plugin.${source.pluginId}.${id}`;
+  }
   return `core.${id}`;
 };
 

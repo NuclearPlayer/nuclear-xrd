@@ -6,7 +6,9 @@ export const SelectLabel: FC<{ label?: string }> = ({ label }) => {
   const {
     ids: { labelId, selectId },
   } = useSelectContext();
-  if (!label) return null;
+  if (!label) {
+    return null;
+  }
   return (
     <label
       htmlFor={selectId}

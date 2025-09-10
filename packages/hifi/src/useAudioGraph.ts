@@ -28,10 +28,14 @@ export const useAudioGraph = (
   }, [context]);
 
   useEffect(() => {
-    if (!context) return;
+    if (!context) {
+      return;
+    }
     const audioA = refA.current;
     const audioB = refB.current;
-    if (!audioA || !audioB) return;
+    if (!audioA || !audioB) {
+      return;
+    }
 
     const srcA = context.createMediaElementSource(audioA);
     const srcB = context.createMediaElementSource(audioB);

@@ -5,6 +5,7 @@ import markdown from '@eslint/markdown';
 import type { TSESLint } from '@typescript-eslint/utils';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
 import pluginReact from 'eslint-plugin-react';
+import storybook from 'eslint-plugin-storybook';
 import { globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import { tailwind4 } from 'tailwind-csstree';
@@ -32,6 +33,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config([
   },
   tseslint.configs.recommended,
   pluginReact.configs.flat['jsx-runtime'],
+  storybook.configs['flat/recommended'],
   {
     files: ['**/*.json'],
     plugins: { json },
@@ -62,6 +64,12 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config([
     },
   },
   { ...prettierPlugin, ignores: ['**/*.md'] },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    rules: {
+      curly: ['error', 'all'],
+    },
+  },
 ]);
 
 export default config;

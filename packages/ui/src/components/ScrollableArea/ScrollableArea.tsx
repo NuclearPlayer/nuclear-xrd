@@ -44,7 +44,9 @@ function useScrollMetrics(fadeScrollbars: boolean, autoHideDelay: number) {
 
   const update = useCallback(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el) {
+      return;
+    }
     setMetrics({
       scrollTop: el.scrollTop,
       scrollLeft: el.scrollLeft,
@@ -56,12 +58,16 @@ function useScrollMetrics(fadeScrollbars: boolean, autoHideDelay: number) {
   }, []);
 
   const handleScroll = useCallback(() => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+    }
     rafRef.current = requestAnimationFrame(() => {
       update();
       if (fadeScrollbars) {
         setIsScrolling(true);
-        if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+        if (hideTimeoutRef.current) {
+          clearTimeout(hideTimeoutRef.current);
+        }
         hideTimeoutRef.current = setTimeout(
           () => setIsScrolling(false),
           autoHideDelay,
@@ -72,15 +78,21 @@ function useScrollMetrics(fadeScrollbars: boolean, autoHideDelay: number) {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el) {
+      return;
+    }
     // initial
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => {
       ro.disconnect();
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+      }
     };
   }, [update]);
 
@@ -135,22 +147,29 @@ const Scrollbar: FC<BarProps> = ({
 
   const onTrackClick = useCallback(
     (e: React.MouseEvent) => {
-      if (!needs || !containerRef.current) return;
+      if (!needs || !containerRef.current) {
+        return;
+      }
       const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
       const clickPos = vertical ? e.clientY - rect.top : e.clientX - rect.left;
       const trackSize = vertical ? rect.height : rect.width;
       const maxScroll = contentExtent - viewportExtent;
       const ratio = trackSize - thumbSize <= 0 ? 0 : clickPos / trackSize;
       const target = ratio * maxScroll;
-      if (vertical) containerRef.current.scrollTop = target;
-      else containerRef.current.scrollLeft = target;
+      if (vertical) {
+        containerRef.current.scrollTop = target;
+      } else {
+        containerRef.current.scrollLeft = target;
+      }
     },
     [needs, containerRef, vertical, contentExtent, viewportExtent, thumbSize],
   );
 
   const onThumbMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      if (!containerRef.current) return;
+      if (!containerRef.current) {
+        return;
+      }
       e.preventDefault();
       setIsDragging(true);
       const startClient = vertical ? e.clientY : e.clientX;
@@ -160,7 +179,9 @@ const Scrollbar: FC<BarProps> = ({
       const maxScroll = contentExtent - viewportExtent;
       const trackSize = viewportExtent; // track matches viewport
       const move = (ev: MouseEvent) => {
-        if (!containerRef.current) return;
+        if (!containerRef.current) {
+          return;
+        }
         const currentClient = vertical ? ev.clientY : ev.clientX;
         const deltaClient = currentClient - startClient;
         const scrollDelta =
@@ -171,8 +192,11 @@ const Scrollbar: FC<BarProps> = ({
           0,
           Math.min(maxScroll, startScroll + scrollDelta),
         );
-        if (vertical) containerRef.current.scrollTop = next;
-        else containerRef.current.scrollLeft = next;
+        if (vertical) {
+          containerRef.current.scrollTop = next;
+        } else {
+          containerRef.current.scrollLeft = next;
+        }
       };
       const up = () => {
         setIsDragging(false);
@@ -185,7 +209,9 @@ const Scrollbar: FC<BarProps> = ({
     [containerRef, vertical, contentExtent, viewportExtent, thumbSize],
   );
 
-  if (!needs) return null;
+  if (!needs) {
+    return null;
+  }
 
   return (
     <div

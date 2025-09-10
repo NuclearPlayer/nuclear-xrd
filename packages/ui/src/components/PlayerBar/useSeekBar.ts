@@ -20,9 +20,13 @@ export const useSeekBar = ({
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
-      if (!isInteractive) return;
+      if (!isInteractive) {
+        return;
+      }
       const target = containerRef.current;
-      if (!target) return;
+      if (!target) {
+        return;
+      }
       const rect = target.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const percent = (x / rect.width) * 100;

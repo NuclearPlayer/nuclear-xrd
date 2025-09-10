@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   Play,
   Repeat,
@@ -33,7 +33,7 @@ export const WithText: Story = {
 export const PlayerControls: Story = {
   args: {
     children: (
-      <div className="flex items-center justify-between w-full">
+      <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <Button size="icon" variant="text">
@@ -54,15 +54,15 @@ export const PlayerControls: Story = {
           </div>
         </div>
 
-        <div className="flex-1 mx-8">
+        <div className="mx-8 flex-1">
           <div className="text-center">
-            <div className="text-sm font-medium text-foreground">
+            <div className="text-foreground text-sm font-medium">
               Song Title
             </div>
-            <div className="text-xs text-foreground-secondary">Artist Name</div>
+            <div className="text-foreground-secondary text-xs">Artist Name</div>
           </div>
-          <div className="mt-2 bg-background-secondary rounded-full h-1">
-            <div className="bg-primary h-1 rounded-full w-1/3"></div>
+          <div className="bg-background-secondary mt-2 h-1 rounded-full">
+            <div className="bg-primary h-1 w-1/3 rounded-full"></div>
           </div>
         </div>
 
@@ -70,8 +70,8 @@ export const PlayerControls: Story = {
           <Button size="icon" variant="text">
             <Volume2 size={16} />
           </Button>
-          <div className="w-20 bg-background-secondary rounded-full h-1">
-            <div className="bg-primary h-1 rounded-full w-3/4"></div>
+          <div className="bg-background-secondary h-1 w-20 rounded-full">
+            <div className="bg-primary h-1 w-3/4 rounded-full"></div>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export const PlayerControls: Story = {
 export const StatusBar: Story = {
   args: {
     children: (
-      <div className="flex items-center justify-between w-full text-sm">
+      <div className="flex w-full items-center justify-between text-sm">
         <div className="flex items-center gap-4">
           <span className="text-foreground">♪ 1,247 tracks</span>
           <span className="text-foreground-secondary">•</span>
@@ -90,8 +90,8 @@ export const StatusBar: Story = {
         </div>
         <div className="flex items-center gap-4">
           <span className="text-foreground-secondary">Scanning library...</span>
-          <div className="w-32 bg-background-secondary rounded-full h-1">
-            <div className="bg-accent-green h-1 rounded-full w-2/3"></div>
+          <div className="bg-background-secondary h-1 w-32 rounded-full">
+            <div className="bg-accent-green h-1 w-2/3 rounded-full"></div>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ export const CustomStyling: Story = {
   args: {
     className: 'bg-accent-purple border-accent-purple',
     children: (
-      <div className="text-white font-bold">
+      <div className="font-bold text-white">
         Custom styled bottom bar with purple theme
       </div>
     ),

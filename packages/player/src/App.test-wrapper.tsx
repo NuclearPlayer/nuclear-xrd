@@ -6,13 +6,17 @@ import { useLayoutStore } from './stores/layoutStore';
 export const AppWrapper = {
   async toggleLeftSidebar() {
     const leftToggle = screen.getByTestId('sidebar-toggle-left');
-    if (!leftToggle) throw new Error('Left toggle not found');
+    if (!leftToggle) {
+      throw new Error('Left toggle not found');
+    }
     await userEvent.click(leftToggle);
   },
 
   async toggleRightSidebar() {
     const rightToggle = screen.getByTestId('sidebar-toggle-right');
-    if (!rightToggle) throw new Error('Right toggle not found');
+    if (!rightToggle) {
+      throw new Error('Right toggle not found');
+    }
     if (rightToggle) {
       await userEvent.click(rightToggle);
     }

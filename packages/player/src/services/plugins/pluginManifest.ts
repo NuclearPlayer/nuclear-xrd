@@ -34,13 +34,17 @@ const normalizePermissions = (
   perms: unknown,
   warnings: string[],
 ): string[] | undefined => {
-  if (!Array.isArray(perms)) return undefined;
+  if (!Array.isArray(perms)) {
+    return undefined;
+  }
   const trimmed = perms
     .map((p) => (typeof p === 'string' ? p.trim() : ''))
     .filter((p) => p.length > 0);
   const before = trimmed.length;
   const deduped = Array.from(new Set(trimmed));
-  if (deduped.length < before) warnings.push('Duplicate permissions removed.');
+  if (deduped.length < before) {
+    warnings.push('Duplicate permissions removed.');
+  }
   return deduped.sort((a, b) => a.localeCompare(b));
 };
 
@@ -55,10 +59,13 @@ const normalizeNuclear = (
   nuclear: z.infer<typeof NuclearSchema> | undefined,
   warnings: string[],
 ): NuclearType | undefined => {
-  if (!nuclear) return undefined;
+  if (!nuclear) {
+    return undefined;
+  }
   const unknown = collectUnknownNuclearKeys(nuclear as Record<string, unknown>);
-  if (unknown.length > 0)
+  if (unknown.length > 0) {
     warnings.push(`nuclear contains unknown keys: ${unknown.join(', ')}`);
+  }
   const permissions = normalizePermissions(nuclear.permissions, warnings);
   return {
     displayName: nuclear.displayName?.trim(),
@@ -114,7 +121,9 @@ export const safeParsePluginManifest = (raw: unknown): SafeParseResult => {
 
 export const parsePluginManifest = (raw: unknown): PluginManifest => {
   const res = safeParsePluginManifest(raw);
-  if (res.success) return res.data;
+  if (res.success) {
+    return res.data;
+  }
   const msg = res.errors.join('; ');
   throw new Error(`Invalid package.json: ${msg}`);
 };

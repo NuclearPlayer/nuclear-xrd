@@ -5,7 +5,9 @@ export class LazyStore {
 
   constructor(path: string) {
     this.#path = path;
-    if (!stores.has(path)) stores.set(path, new Map());
+    if (!stores.has(path)) {
+      stores.set(path, new Map());
+    }
   }
 
   async entries() {
@@ -38,5 +40,7 @@ export class LazyStore {
 }
 
 export const resetInMemoryTauriStore = () => {
-  for (const map of stores.values()) map.clear();
+  for (const map of stores.values()) {
+    map.clear();
+  }
 };

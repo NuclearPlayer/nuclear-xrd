@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/700.css';

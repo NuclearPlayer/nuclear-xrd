@@ -13,7 +13,9 @@ export const useSidebarResize = (
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      if (isCollapsed) return;
+      if (isCollapsed) {
+        return;
+      }
 
       isResizing.current = true;
       setIsResizingState(true);
@@ -23,7 +25,9 @@ export const useSidebarResize = (
       const startWidth = width;
 
       const handleMouseMove = (e: MouseEvent) => {
-        if (!isResizing.current) return;
+        if (!isResizing.current) {
+          return;
+        }
 
         const deltaX =
           side === 'left' ? e.clientX - startX : startX - e.clientX;

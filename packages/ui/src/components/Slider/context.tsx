@@ -20,7 +20,9 @@ const SliderContext = createContext<SliderContextValue | null>(null);
 
 export const useSliderContext = () => {
   const ctx = useContext(SliderContext);
-  if (!ctx) throw new Error('Slider.* must be used within <Slider>');
+  if (!ctx) {
+    throw new Error('Slider.* must be used within <Slider>');
+  }
   return ctx;
 };
 

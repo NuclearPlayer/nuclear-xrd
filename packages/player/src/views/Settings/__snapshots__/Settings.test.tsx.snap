@@ -603,7 +603,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               settings.playback.skipSeconds.title
                             </label>
                             <input
-                              class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
+                              class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded border-2"
                               data-headlessui-state=""
                               id="input-:r6:"
                               inputmode="numeric"
@@ -628,7 +628,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               settings.playback.crossfadeMs.title
                             </label>
                             <input
-                              class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full rounded border-2 px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-11"
+                              class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded border-2"
                               data-headlessui-state=""
                               id="input-:r8:"
                               inputmode="numeric"

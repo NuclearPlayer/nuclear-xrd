@@ -8,7 +8,9 @@ export const SelectDescription: FC<{ description?: string }> = ({
   const {
     ids: { descriptionId },
   } = useSelectContext();
-  if (!description) return null;
+  if (!description) {
+    return null;
+  }
   return (
     <p
       id={descriptionId}

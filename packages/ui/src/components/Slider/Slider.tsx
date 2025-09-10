@@ -44,12 +44,16 @@ const SliderRoot: FC<
   const clamp = (n: number) => Math.min(Math.max(n, min), max);
   const emit = (next: number) => {
     const v = clamp(next);
-    if (!isControlled) setInternal(v);
+    if (!isControlled) {
+      setInternal(v);
+    }
     onValueChange?.(v);
   };
 
   const percentage = useMemo(() => {
-    if (max === min) return 0;
+    if (max === min) {
+      return 0;
+    }
     return ((value - min) / (max - min)) * 100;
   }, [value, min, max]);
 
@@ -61,7 +65,9 @@ const SliderRoot: FC<
   });
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (disabled) return;
+    if (disabled) {
+      return;
+    }
     const deltas: Record<string, number> = {
       ArrowRight: step,
       ArrowUp: step,

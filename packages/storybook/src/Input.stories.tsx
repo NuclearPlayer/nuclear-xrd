@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FilterIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import { Input } from '@nuclearplayer/ui';
@@ -63,5 +64,19 @@ export const ErrorNoDescription: Story = {
     label: 'Username',
     placeholder: 'your-username',
     error: 'Username is already taken',
+  },
+};
+
+export const WithEndAddon: Story = {
+  args: {
+    label: 'Search',
+    placeholder: 'Filter tracks',
+    endAddon: (
+      <FilterIcon
+        className="h-4 w-4 opacity-70"
+        aria-hidden="true"
+        strokeWidth={3}
+      />
+    ),
   },
 };

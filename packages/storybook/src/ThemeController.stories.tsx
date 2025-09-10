@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { ThemeController } from '@nuclearplayer/ui';
@@ -28,9 +28,9 @@ export const Interactive: Story = {
     const [isDark, setIsDark] = useState(false);
 
     return (
-      <div className="flex flex-col gap-4 items-center">
+      <div className="flex flex-col items-center gap-4">
         <ThemeController isDark={isDark} onThemeChange={setIsDark} />
-        <p className="text-sm text-foreground">
+        <p className="text-foreground text-sm">
           Current theme: {isDark ? 'Dark' : 'Light'}
         </p>
       </div>

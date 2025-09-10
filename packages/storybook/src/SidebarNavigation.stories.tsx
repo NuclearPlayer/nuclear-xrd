@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import {
   Clock,
   Disc3,
@@ -34,7 +34,7 @@ const meta = {
 export default meta;
 
 export const BasicNavigation = () => (
-  <div className="w-64 h-96 bg-background-secondary border-2 border-border p-4">
+  <div className="bg-background-secondary border-border h-96 w-64 border-2 p-4">
     <SidebarNavigation>
       <SidebarNavigationItem isSelected>
         <Home size={16} />
@@ -53,7 +53,7 @@ export const BasicNavigation = () => (
 );
 
 export const WithCollapsibleSections = () => (
-  <div className="w-64 h-96 bg-background-secondary border-2 border-border p-4">
+  <div className="bg-background-secondary border-border h-96 w-64 border-2 p-4">
     <SidebarNavigation>
       <SidebarNavigationItem isSelected>
         <Home size={16} />
@@ -104,7 +104,7 @@ export const WithCollapsibleSections = () => (
 );
 
 export const FullNavigationExample = () => (
-  <div className="w-64 h-[600px] bg-background-secondary border-2 border-border p-4 overflow-auto">
+  <div className="bg-background-secondary border-border h-[600px] w-64 overflow-auto border-2 p-4">
     <SidebarNavigation>
       <SidebarNavigationItem isSelected>
         <Home size={16} />

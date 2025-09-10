@@ -99,7 +99,9 @@ export class PluginLoader {
       '@nuclearplayer/plugin-sdk': { NuclearPluginAPI },
     };
     const require = (id: string) => {
-      if (id in ALLOWED_MODULES) return ALLOWED_MODULES[id];
+      if (id in ALLOWED_MODULES) {
+        return ALLOWED_MODULES[id];
+      }
       throw new Error(`Module ${id} not found`);
     };
     new Function('exports', 'module', 'require', code)(
