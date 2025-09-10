@@ -8,10 +8,11 @@ const TrackTableContext = createContext<TrackTableContextValue | null>(null);
 
 export function useTrackTableContext() {
   const ctx = useContext(TrackTableContext);
-  if (!ctx)
+  if (!ctx) {
     throw new Error(
       'useTrackTableContext must be used within <TrackTableProvider>',
     );
+  }
   return ctx;
 }
 

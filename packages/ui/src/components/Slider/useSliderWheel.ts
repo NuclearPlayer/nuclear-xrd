@@ -18,7 +18,9 @@ export const useSliderWheel = (
 
   const onWheel = useCallback(
     (event: WheelEvent) => {
-      if (opts.disabled) return;
+      if (opts.disabled) {
+        return;
+      }
       event.preventDefault();
       event.stopPropagation();
       const { value, step, min, max } = getRef.current();
@@ -32,7 +34,9 @@ export const useSliderWheel = (
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el) {
+      return;
+    }
     el.addEventListener('wheel', onWheel, { passive: false, capture: true });
     return () => {
       el.removeEventListener('wheel', onWheel as EventListener, true);

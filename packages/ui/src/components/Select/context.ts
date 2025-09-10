@@ -28,6 +28,8 @@ export const SelectContext = createContext<SelectContextValue | null>(null);
 
 export const useSelectContext = () => {
   const ctx = useContext(SelectContext);
-  if (!ctx) throw new Error('Select.* must be used within <Select.Root>');
+  if (!ctx) {
+    throw new Error('Select.* must be used within <Select.Root>');
+  }
   return ctx;
 };
