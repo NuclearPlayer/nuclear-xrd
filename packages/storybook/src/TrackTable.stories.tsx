@@ -145,5 +145,9 @@ export const LargeDataset: Story = {
       displayDuration: true,
     },
   },
-  render: (args) => <TrackTable {...(args as TrackTableProps)} />,
+  render: (args) => (
+    <div className="h-100">
+      <TrackTable {...(args as TrackTableProps)} />
+    </div>
+  ),
 };

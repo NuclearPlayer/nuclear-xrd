@@ -10,7 +10,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useVirtualizer } from '@tanstack/react-virtual';
 import { useRef } from 'react';
 
 import { Track } from '@nuclearplayer/model';
@@ -18,9 +17,12 @@ import { Track } from '@nuclearplayer/model';
 import { cn } from '../../utils';
 import { useColumns } from './hooks/useColumns';
 import { useSorting } from './hooks/useSorting';
+import { useVirtualRows } from './hooks/useVirtualRows';
 import { SortableRow } from './SortableRow';
+import { TrackTableProvider } from './TrackTableContext';
 import { TrackTableProps } from './types';
 import { DEFAULT_OVERSCAN, DEFAULT_ROW_HEIGHT } from './utils/constants';
+import { VirtualizedBody } from './VirtualizedBody';
 
 export function TrackTable<T extends Track = Track>({
   tracks,
@@ -75,76 +77,67 @@ export function TrackTable<T extends Track = Track>({
   const colCount = table.getVisibleFlatColumns().length;
 
   const scrollParentRef = useRef<HTMLDivElement | null>(null);
-  const rowVirtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
-    count: tracks.length,
-    estimateSize: () => rowHeight,
-    getScrollElement: () => scrollParentRef.current,
+  const { virtualItems, paddingTop, paddingBottom } = useVirtualRows({
+    count: rows.length,
+    rowHeight,
     overscan,
+    scrollParentRef,
   });
-  const virtualItems = rowVirtualizer.getVirtualItems();
-  const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
-  const paddingBottom =
-    virtualItems.length > 0
-      ? rowVirtualizer.getTotalSize() -
-        virtualItems[virtualItems.length - 1].end
-      : 0;
+
+  const isReorderable = Boolean(features?.reorderable && !isSorted);
 
   return (
-    <div ref={scrollParentRef} className="flex h-auto overflow-auto">
-      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <SortableContext
-          items={tracks.map((track) => track.source.id)}
-          strategy={verticalListSortingStrategy}
-        >
-          <table
-            role="table"
-            className={cn(
-              'border-border relative m-2 w-full border-2 select-none',
-              classes?.root,
-            )}
+    <TrackTableProvider value={{ isReorderable }}>
+      <div ref={scrollParentRef} className="relative flex h-full overflow-auto">
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+          <SortableContext
+            items={virtualItems.map((v) => rows[v.index].original.source.id)}
+            strategy={verticalListSortingStrategy}
           >
-            <thead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr
-                  key={headerGroup.id}
-                  role="row"
-                  className="border-border bg-primary border-b-2"
-                >
-                  {headerGroup.headers.map((header) =>
-                    flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    ),
-                  )}
-                </tr>
-              ))}
-            </thead>
-            <tbody>
-              {paddingTop > 0 && (
-                <tr style={{ height: paddingTop }} className="border-none">
-                  <td colSpan={colCount} />
-                </tr>
+            <table
+              role="table"
+              className={cn(
+                'border-border relative m-2 w-full border-2 select-none',
+                classes?.root,
               )}
-              {virtualItems.map((virtualRow) => {
-                const row = rows[virtualRow.index];
-                return (
+            >
+              <thead>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr
+                    key={headerGroup.id}
+                    role="row"
+                    className="border-border bg-primary border-b-2"
+                  >
+                    {headerGroup.headers.map((header) =>
+                      flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      ),
+                    )}
+                  </tr>
+                ))}
+              </thead>
+              <VirtualizedBody
+                rows={rows}
+                virtualItems={virtualItems}
+                paddingTop={paddingTop}
+                paddingBottom={paddingBottom}
+                colSpan={colCount}
+                rowHeight={rowHeight}
+                renderRow={({ row, virtual }) => (
                   <SortableRow
-                    key={row.id}
+                    key={row.original.source.id}
                     row={row}
                     style={{ height: rowHeight }}
-                    isReorderable={features?.reorderable && !isSorted}
+                    isReorderable={isReorderable}
+                    data-index={virtual.index}
                   />
-                );
-              })}
-              {paddingBottom > 0 && (
-                <tr style={{ height: paddingBottom }} className="border-none">
-                  <td colSpan={colCount} />
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </SortableContext>
-      </DndContext>
-    </div>
+                )}
+              />
+            </table>
+          </SortableContext>
+        </DndContext>
+      </div>
+    </TrackTableProvider>
   );
 }
