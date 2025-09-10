@@ -39,8 +39,12 @@ type PluginStore = {
 
 const requireInstance = (id: string) => {
   const plugin = usePluginStore.getState().plugins[id];
-  if (!plugin) throw new Error(`Plugin ${id} not found`);
-  if (!plugin.instance) throw new Error(`Plugin ${id} has no instance`);
+  if (!plugin) {
+    throw new Error(`Plugin ${id} not found`);
+  }
+  if (!plugin.instance) {
+    throw new Error(`Plugin ${id} has no instance`);
+  }
   return plugin;
 };
 

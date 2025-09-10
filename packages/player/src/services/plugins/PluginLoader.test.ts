@@ -8,8 +8,9 @@ import { PluginLoader } from './PluginLoader';
 
 vi.mock('./pluginCompiler', () => ({
   compilePlugin: vi.fn(async (path: string) => {
-    if (path.endsWith('.ts') || path.endsWith('.tsx'))
+    if (path.endsWith('.ts') || path.endsWith('.tsx')) {
       return 'module.exports = { onLoad(){} };';
+    }
     return undefined;
   }),
 }));

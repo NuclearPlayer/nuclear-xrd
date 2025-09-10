@@ -62,6 +62,12 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config([
     },
   },
   { ...prettierPlugin, ignores: ['**/*.md'] },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    rules: {
+      curly: ['error', 'all'],
+    },
+  },
 ]);
 
 export default config;

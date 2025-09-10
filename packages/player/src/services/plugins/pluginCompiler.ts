@@ -68,15 +68,22 @@ const isTs = (p: string) => p.endsWith('.ts') || p.endsWith('.tsx');
 const normalize = (parts: string[]) => {
   const out: string[] = [];
   for (const part of parts) {
-    if (!part || part === '.') continue;
-    if (part === '..') out.pop();
-    else out.push(part);
+    if (!part || part === '.') {
+      continue;
+    }
+    if (part === '..') {
+      out.pop();
+    } else {
+      out.push(part);
+    }
   }
   return '/' + out.join('/');
 };
 
 const resolvePath = (baseDir: string, rel: string) => {
-  if (rel.startsWith('/')) return rel;
+  if (rel.startsWith('/')) {
+    return rel;
+  }
   return normalize((baseDir + '/' + rel).split('/'));
 };
 
@@ -117,7 +124,9 @@ async function getEsbuild(): Promise<EsbuildModule> {
 
 const simpleHash = (str: string) => {
   let h = 0;
-  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h * 31 + str.charCodeAt(i)) | 0;
+  }
   return h.toString(16);
 };
 
