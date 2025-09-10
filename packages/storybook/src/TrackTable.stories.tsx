@@ -151,3 +151,24 @@ export const LargeDataset: Story = {
     </div>
   ),
 };
+
+export const Filtering: Story = {
+  args: {
+    tracks,
+    features: {
+      filterable: true,
+    },
+    display: {
+      displayPosition: true,
+      displayThumbnail: true,
+      displayArtist: true,
+      displayAlbum: true,
+      displayDuration: true,
+    },
+  },
+  render: (args) => (
+    <div className="h-100 p-4">
+      <TrackTable {...(args as TrackTableProps)} />
+    </div>
+  ),
+};

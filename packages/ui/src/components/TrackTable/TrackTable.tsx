@@ -3,6 +3,7 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
@@ -11,7 +12,9 @@ import { useRef } from 'react';
 import { Track } from '@nuclearplayer/model';
 
 import { cn } from '../../utils';
+import { FilterBar } from './FilterBar';
 import { useColumns } from './hooks/useColumns';
+import { useGlobalFilter } from './hooks/useGlobalFilter';
 import { useReorder } from './hooks/useReorder';
 import { useSorting } from './hooks/useSorting';
 import { useVirtualRows } from './hooks/useVirtualRows';
@@ -34,16 +37,21 @@ export function TrackTable<T extends Track = Track>({
 }: TrackTableProps<T>) {
   const { sorting, setSorting, isSorted } = useSorting();
   const { onDragStart, onDragEnd } = useReorder<T>({ tracks, onReorder });
+  const { globalFilter, setGlobalFilter, globalFilterFn, hasFilter } =
+    useGlobalFilter<T>();
 
   const columns: ColumnDef<T>[] = useColumns<T>({ display, labels });
 
   const table = useReactTable({
     columns,
     data: tracks,
-    state: { sorting },
+    state: { sorting, globalFilter },
     enableSortingRemoval: true,
     onSortingChange: setSorting,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
 
@@ -58,13 +66,26 @@ export function TrackTable<T extends Track = Track>({
     scrollParentRef,
   });
 
-  const isReorderable = Boolean(features?.reorderable && !isSorted);
+  const isReorderable = Boolean(
+    features?.reorderable && !isSorted && !hasFilter,
+  );
 
   const dndItems = virtualItems.map((v) => rows[v.index].original.source.id);
 
   return (
     <TrackTableProvider value={{ isReorderable }}>
-      <div ref={scrollParentRef} className="relative flex h-full overflow-auto">
+      {features?.filterable && (
+        <FilterBar
+          value={globalFilter}
+          onChange={setGlobalFilter}
+          className="m-2"
+          placeholder="Filter tracks"
+        />
+      )}
+      <div
+        ref={scrollParentRef}
+        className="relative flex max-h-full overflow-auto"
+      >
         <ReorderLayer
           enabled={isReorderable}
           items={dndItems}
