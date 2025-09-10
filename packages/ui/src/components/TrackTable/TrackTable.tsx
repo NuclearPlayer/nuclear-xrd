@@ -5,31 +5,22 @@ import {
 } from '@dnd-kit/sortable';
 import {
   ColumnDef,
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { HashIcon, ImageIcon } from 'lucide-react';
-import { useMemo, useRef, useState } from 'react';
+import { useRef } from 'react';
 
-import { pickArtwork, Track } from '@nuclearplayer/model';
+import { Track } from '@nuclearplayer/model';
 
 import { cn } from '../../utils';
-import { formatTimeMillis } from '../../utils/time';
-import { PositionCell } from './Cells/PositionCell';
-import { TextCell } from './Cells/TextCell';
-import { ThumbnailCell } from './Cells/ThumbnailCell';
-import { IconHeader } from './Headers/IconHeader';
-import { TextHeader } from './Headers/TextHeader';
-import { mergeLabels } from './labels';
+import { useColumns } from './hooks/useColumns';
+import { useSorting } from './hooks/useSorting';
 import { SortableRow } from './SortableRow';
 import { TrackTableProps } from './types';
-
-const ROW_HEIGHT = 42;
+import { DEFAULT_OVERSCAN, DEFAULT_ROW_HEIGHT } from './utils/constants';
 
 export function TrackTable<T extends Track = Track>({
   tracks,
@@ -38,10 +29,10 @@ export function TrackTable<T extends Track = Track>({
   display,
   features,
   onReorder,
+  rowHeight = DEFAULT_ROW_HEIGHT,
+  overscan = DEFAULT_OVERSCAN,
 }: TrackTableProps<T>) {
-  const columnHelper = createColumnHelper<T>();
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const mergedLabels = useMemo(() => mergeLabels(labels), [labels]);
+  const { sorting, setSorting, isSorted } = useSorting();
 
   const handleDragStart = () => {
     // TODO: use this for drag overlay
@@ -68,72 +59,7 @@ export function TrackTable<T extends Track = Track>({
     }
   };
 
-  const columns: ColumnDef<T>[] = useMemo(
-    () => [
-      display?.displayPosition &&
-        columnHelper.accessor((track) => track.trackNumber, {
-          id: 'position',
-          enableSorting: true,
-          header: (context) => <IconHeader Icon={HashIcon} context={context} />,
-          cell: PositionCell,
-        }),
-      display?.displayThumbnail &&
-        columnHelper.accessor(
-          (track) => pickArtwork(track.artwork, 'thumbnail', 40),
-          {
-            id: 'thumbnail',
-            header: (context) => (
-              <IconHeader Icon={ImageIcon} context={context} />
-            ),
-            cell: ThumbnailCell,
-            enableSorting: false,
-          },
-        ),
-      columnHelper.accessor((track) => track.artists[0].name, {
-        id: 'artist',
-        enableSorting: true,
-        header: (context) => (
-          <TextHeader context={context}>
-            {mergedLabels.headers.artistHeader}
-          </TextHeader>
-        ),
-        cell: TextCell,
-      }),
-      columnHelper.accessor((track) => track.title, {
-        id: 'title',
-        enableSorting: true,
-        header: (context) => (
-          <TextHeader context={context}>
-            {mergedLabels.headers.titleHeader}
-          </TextHeader>
-        ),
-        cell: TextCell,
-      }),
-      display?.displayAlbum &&
-        columnHelper.accessor((track) => track.album?.title, {
-          id: 'album',
-          enableSorting: true,
-          header: (context) => (
-            <TextHeader context={context}>
-              {mergedLabels.headers.albumHeader}
-            </TextHeader>
-          ),
-          cell: TextCell,
-        }),
-      display?.displayDuration &&
-        columnHelper.accessor((track) => formatTimeMillis(track.durationMs), {
-          id: 'duration',
-          enableSorting: true,
-          header: (context) => (
-            <TextHeader context={context}>
-              {mergedLabels.headers.durationHeader}
-            </TextHeader>
-          ),
-          cell: TextCell,
-        }),
-    ],
-    [mergedLabels],
-  ).filter(Boolean) as ColumnDef<T>[];
+  const columns: ColumnDef<T>[] = useColumns<T>({ display, labels });
 
   const table = useReactTable({
     columns,
@@ -145,17 +71,15 @@ export function TrackTable<T extends Track = Track>({
     getSortedRowModel: getSortedRowModel(),
   });
 
-  const isSorted = sorting.length > 0;
-
   const { rows } = table.getRowModel();
   const colCount = table.getVisibleFlatColumns().length;
 
   const scrollParentRef = useRef<HTMLDivElement | null>(null);
   const rowVirtualizer = useVirtualizer<HTMLDivElement, HTMLTableRowElement>({
     count: tracks.length,
-    estimateSize: () => ROW_HEIGHT,
+    estimateSize: () => rowHeight,
     getScrollElement: () => scrollParentRef.current,
-    overscan: 8,
+    overscan,
   });
   const virtualItems = rowVirtualizer.getVirtualItems();
   const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
@@ -207,7 +131,7 @@ export function TrackTable<T extends Track = Track>({
                   <SortableRow
                     key={row.id}
                     row={row}
-                    style={{ height: ROW_HEIGHT }}
+                    style={{ height: rowHeight }}
                     isReorderable={features?.reorderable && !isSorted}
                   />
                 );
