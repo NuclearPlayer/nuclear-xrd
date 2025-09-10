@@ -12,7 +12,9 @@ describe('Oscilloscope', () => {
         connect: () => undefined,
         disconnect: () => undefined,
         getByteTimeDomainData: (arr: Uint8Array) => {
-          for (let i = 0; i < arr.length; i++) arr[i] = 128;
+          for (let i = 0; i < arr.length; i++) {
+            arr[i] = 128;
+          }
         },
       } as unknown as AnalyserNode & {
         frequencyBinCount: number;
