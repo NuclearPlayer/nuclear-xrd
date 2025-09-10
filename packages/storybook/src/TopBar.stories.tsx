@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { TopBar } from '@nuclearplayer/ui';
 
@@ -20,17 +20,17 @@ export const WithContent: Story = {
   args: {
     children: (
       <div className="ml-4 flex items-center gap-4">
-        <span className="text-sm text-muted-foreground">
+        <span className="text-muted-foreground text-sm">
           Nuclear Music Player
         </span>
         <div className="flex gap-2">
-          <button className="text-xs px-2 py-1 bg-secondary rounded">
+          <button className="bg-secondary rounded px-2 py-1 text-xs">
             File
           </button>
-          <button className="text-xs px-2 py-1 bg-secondary rounded">
+          <button className="bg-secondary rounded px-2 py-1 text-xs">
             Edit
           </button>
-          <button className="text-xs px-2 py-1 bg-secondary rounded">
+          <button className="bg-secondary rounded px-2 py-1 text-xs">
             View
           </button>
         </div>

@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const Welcome = () => (
-  <div className="p-8 max-w-2xl">
-    <h1 className="text-4xl font-bold mb-6 text-foreground">
+  <div className="max-w-2xl p-8">
+    <h1 className="text-foreground mb-6 text-4xl font-bold">
       Welcome to Nuclear Storybook! 🎵
     </h1>
-    <p className="text-lg mb-6 text-foreground-secondary">
+    <p className="text-foreground-secondary mb-6 text-lg">
       This is the component development environment for the Nuclear music
       player. Here you can develop and test UI components in isolation.
     </p>

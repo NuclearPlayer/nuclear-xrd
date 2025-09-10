@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import {
   Clock,
   Disc3,
@@ -49,8 +49,8 @@ export default meta;
 
 const MockTrackList = () => (
   <div className="p-6">
-    <div className="flex items-center justify-between mb-6">
-      <h1 className="text-2xl font-bold text-foreground">Your Library</h1>
+    <div className="mb-6 flex items-center justify-between">
+      <h1 className="text-foreground text-2xl font-bold">Your Library</h1>
       <div className="flex gap-2">
         <Button size="sm" variant="text">
           <Filter size={16} />
@@ -117,7 +117,7 @@ const MockTrackList = () => (
       ].map((track, index) => (
         <div
           key={index}
-          className="flex items-center justify-between p-3 hover:bg-background rounded border border-transparent hover:border-border transition-all"
+          className="hover:bg-background hover:border-border flex items-center justify-between rounded border border-transparent p-3 transition-all"
         >
           <div className="flex items-center gap-4">
             <Button
@@ -128,14 +128,14 @@ const MockTrackList = () => (
               <Play size={14} />
             </Button>
             <div>
-              <div className="font-medium text-foreground">{track.title}</div>
-              <div className="text-sm text-foreground-secondary">
+              <div className="text-foreground font-medium">{track.title}</div>
+              <div className="text-foreground-secondary text-sm">
                 {track.artist} • {track.album}
               </div>
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-foreground-secondary">
+            <span className="text-foreground-secondary text-sm">
               {track.duration}
             </span>
             <Button size="icon" variant="text">
@@ -150,16 +150,16 @@ const MockTrackList = () => (
 
 const MockQueueSidebar = () => (
   <div className="p-4">
-    <h3 className="font-bold text-foreground mb-4">Queue</h3>
+    <h3 className="text-foreground mb-4 font-bold">Queue</h3>
     <div className="space-y-3">
       <div className="text-sm">
-        <div className="font-medium text-foreground">Now Playing</div>
+        <div className="text-foreground font-medium">Now Playing</div>
         <div className="text-foreground-secondary">
           Bohemian Rhapsody - Queen
         </div>
       </div>
-      <div className="border-t border-border pt-3">
-        <div className="text-sm font-medium text-foreground mb-2">Up Next</div>
+      <div className="border-border border-t pt-3">
+        <div className="text-foreground mb-2 text-sm font-medium">Up Next</div>
         {[
           'Stairway to Heaven - Led Zeppelin',
           'Hotel California - Eagles',
@@ -167,7 +167,7 @@ const MockQueueSidebar = () => (
         ].map((track, index) => (
           <div
             key={index}
-            className="text-sm text-foreground-secondary py-1 hover:text-foreground cursor-pointer"
+            className="text-foreground-secondary hover:text-foreground cursor-pointer py-1 text-sm"
           >
             {track}
           </div>
@@ -184,10 +184,10 @@ export const BasicLayout = () => {
   const [rightWidth, setRightWidth] = useState(320);
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex h-screen flex-col">
       <TopBar>
         <div className="ml-4 flex items-center gap-4">
-          <span className="text-sm text-foreground">Nuclear Music Player</span>
+          <span className="text-foreground text-sm">Nuclear Music Player</span>
         </div>
       </TopBar>
 
@@ -229,7 +229,7 @@ export const BasicLayout = () => {
       </PlayerWorkspace>
 
       <BottomBar>
-        <div className="flex items-center justify-between w-full">
+        <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <Button size="icon" variant="text">
@@ -250,15 +250,15 @@ export const BasicLayout = () => {
             </div>
           </div>
 
-          <div className="flex-1 mx-8">
+          <div className="mx-8 flex-1">
             <div className="text-center">
-              <div className="text-sm font-medium text-foreground">
+              <div className="text-foreground text-sm font-medium">
                 Bohemian Rhapsody
               </div>
-              <div className="text-xs text-foreground-secondary">Queen</div>
+              <div className="text-foreground-secondary text-xs">Queen</div>
             </div>
-            <div className="mt-2 bg-background-secondary rounded-full h-1">
-              <div className="bg-primary h-1 rounded-full w-1/3"></div>
+            <div className="bg-background-secondary mt-2 h-1 rounded-full">
+              <div className="bg-primary h-1 w-1/3 rounded-full"></div>
             </div>
           </div>
 
@@ -266,8 +266,8 @@ export const BasicLayout = () => {
             <Button size="icon" variant="text">
               <Volume2 size={16} />
             </Button>
-            <div className="w-20 bg-background-secondary rounded-full h-1">
-              <div className="bg-primary h-1 rounded-full w-3/4"></div>
+            <div className="bg-background-secondary h-1 w-20 rounded-full">
+              <div className="bg-primary h-1 w-3/4 rounded-full"></div>
             </div>
           </div>
         </div>
@@ -283,13 +283,13 @@ export const FullNavigationLayout = () => {
   const [rightWidth, setRightWidth] = useState(280);
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex h-screen flex-col">
       <TopBar>
         <div className="ml-4 flex items-center gap-4">
-          <span className="text-sm text-foreground font-medium">
+          <span className="text-foreground text-sm font-medium">
             Nuclear Music Player
           </span>
-          <div className="flex gap-2 ml-8">
+          <div className="ml-8 flex gap-2">
             <Button size="sm" variant="text">
               File
             </Button>
@@ -389,7 +389,7 @@ export const FullNavigationLayout = () => {
       </PlayerWorkspace>
 
       <BottomBar>
-        <div className="flex items-center justify-between w-full text-sm">
+        <div className="flex w-full items-center justify-between text-sm">
           <div className="flex items-center gap-4">
             <span className="text-foreground">♪ 1,247 tracks</span>
             <span className="text-foreground-secondary">•</span>

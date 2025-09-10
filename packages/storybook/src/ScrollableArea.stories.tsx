@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { ScrollableArea } from '@nuclearplayer/ui';
 
@@ -19,7 +19,7 @@ const VerticalContent = () => (
     {Array.from({ length: 20 }, (_, i) => (
       <div
         key={i}
-        className="h-16 bg-primary border-2 border-border rounded p-4 flex items-center justify-center text-foreground"
+        className="bg-primary border-border text-foreground flex h-16 items-center justify-center rounded border-2 p-4"
       >
         Item {i + 1}
       </div>
@@ -28,11 +28,11 @@ const VerticalContent = () => (
 );
 
 const HorizontalContent = () => (
-  <div className="h-64 flex space-x-4">
+  <div className="flex h-64 space-x-4">
     {Array.from({ length: 20 }, (_, i) => (
       <div
         key={i}
-        className="w-32 flex-shrink-0 bg-primary border-2 border-border rounded p-4 flex items-center justify-center text-foreground"
+        className="bg-primary border-border text-foreground flex w-32 flex-shrink-0 items-center justify-center rounded border-2 p-4"
       >
         Item {i + 1}
       </div>
@@ -47,7 +47,7 @@ const BothScrollContent = () => (
         {Array.from({ length: 10 }, (_, j) => (
           <div
             key={j}
-            className="w-32 h-16 flex-shrink-0 bg-primary border-2 border-border rounded p-2 flex items-center justify-center text-foreground text-sm"
+            className="bg-primary border-border text-foreground flex h-16 w-32 flex-shrink-0 items-center justify-center rounded border-2 p-2 text-sm"
           >
             {i + 1}-{j + 1}
           </div>
@@ -59,7 +59,7 @@ const BothScrollContent = () => (
 
 export const VerticalScroll: Story = {
   render: () => (
-    <div className="w-80 h-96 border-2 border-border">
+    <div className="border-border h-96 w-80 border-2">
       <ScrollableArea>
         <VerticalContent />
       </ScrollableArea>
@@ -69,7 +69,7 @@ export const VerticalScroll: Story = {
 
 export const HorizontalScroll: Story = {
   render: () => (
-    <div className="w-80 h-80 border-2 border-border">
+    <div className="border-border h-80 w-80 border-2">
       <ScrollableArea>
         <HorizontalContent />
       </ScrollableArea>
@@ -79,7 +79,7 @@ export const HorizontalScroll: Story = {
 
 export const BothScrolls: Story = {
   render: () => (
-    <div className="w-96 h-96 border-2 border-border">
+    <div className="border-border h-96 w-96 border-2">
       <ScrollableArea>
         <BothScrollContent />
       </ScrollableArea>
