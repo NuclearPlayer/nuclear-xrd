@@ -1,4 +1,9 @@
-import type { Album, Artist, Playlist, Track } from '@nuclearplayer/model';
+import type {
+  AlbumRef,
+  ArtistRef,
+  PlaylistRef,
+  TrackRef,
+} from '@nuclearplayer/model';
 
 export type SearchCategory = 'artists' | 'albums' | 'tracks' | 'playlists';
 
@@ -11,10 +16,10 @@ export type SearchParams = {
 };
 
 export type SearchResults = {
-  artists?: Artist[];
-  albums?: Album[];
-  tracks?: Track[];
-  playlists?: Playlist[];
+  artists?: ArtistRef[];
+  albums?: AlbumRef[];
+  tracks?: TrackRef[];
+  playlists?: PlaylistRef[];
 };
 
 export type ProviderKind = 'metadata' | 'streaming' | 'lyrics' | (string & {});
@@ -29,10 +34,10 @@ export type ProviderDescriptor<K extends ProviderKind = ProviderKind> = {
 export type MetadataProvider = ProviderDescriptor<'metadata'> & {
   capabilities?: SearchCapability[];
   search?: (params: SearchParams) => Promise<SearchResults>;
-  searchArtists?: (params: Omit<SearchParams, 'types'>) => Promise<Artist[]>;
-  searchAlbums?: (params: Omit<SearchParams, 'types'>) => Promise<Album[]>;
-  searchTracks?: (params: Omit<SearchParams, 'types'>) => Promise<Track[]>;
+  searchArtists?: (params: Omit<SearchParams, 'types'>) => Promise<ArtistRef[]>;
+  searchAlbums?: (params: Omit<SearchParams, 'types'>) => Promise<AlbumRef[]>;
+  searchTracks?: (params: Omit<SearchParams, 'types'>) => Promise<TrackRef[]>;
   searchPlaylists?: (
     params: Omit<SearchParams, 'types'>,
-  ) => Promise<Playlist[]>;
+  ) => Promise<PlaylistRef[]>;
 };

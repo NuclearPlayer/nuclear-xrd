@@ -15,6 +15,7 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as PluginsRouteImport } from './routes/plugins'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArtistProviderIdArtistIdRouteImport } from './routes/artist/$providerId/$artistId'
 
 const ThemesRoute = ThemesRouteImport.update({
   id: '/themes',
@@ -46,6 +47,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArtistProviderIdArtistIdRoute =
+  ArtistProviderIdArtistIdRouteImport.update({
+    id: '/artist/$providerId/$artistId',
+    path: '/artist/$providerId/$artistId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
+  '/artist/$providerId/$artistId': typeof ArtistProviderIdArtistIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +70,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
+  '/artist/$providerId/$artistId': typeof ArtistProviderIdArtistIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +80,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
+  '/artist/$providerId/$artistId': typeof ArtistProviderIdArtistIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,8 +91,16 @@ export interface FileRouteTypes {
     | '/search'
     | '/settings'
     | '/themes'
+    | '/artist/$providerId/$artistId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/plugins' | '/search' | '/settings' | '/themes'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/plugins'
+    | '/search'
+    | '/settings'
+    | '/themes'
+    | '/artist/$providerId/$artistId'
   id:
     | '__root__'
     | '/'
@@ -91,6 +109,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/settings'
     | '/themes'
+    | '/artist/$providerId/$artistId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -100,6 +119,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   SettingsRoute: typeof SettingsRoute
   ThemesRoute: typeof ThemesRoute
+  ArtistProviderIdArtistIdRoute: typeof ArtistProviderIdArtistIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -146,6 +166,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/artist/$providerId/$artistId': {
+      id: '/artist/$providerId/$artistId'
+      path: '/artist/$providerId/$artistId'
+      fullPath: '/artist/$providerId/$artistId'
+      preLoaderRoute: typeof ArtistProviderIdArtistIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -156,6 +183,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   SettingsRoute: SettingsRoute,
   ThemesRoute: ThemesRoute,
+  ArtistProviderIdArtistIdRoute: ArtistProviderIdArtistIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -6,6 +6,9 @@ const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
   component: Popover,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 };
 
 export default meta;
@@ -21,23 +24,27 @@ export const Default: Story = {
 
 export const AllAnchors: Story = {
   render: () => (
-    <div className="relative grid h-full w-full grid-cols-2 gap-4 p-20">
+    <div className="h-full w-full">
       <Popover
-        trigger={<Button>Opens top</Button>}
+        className="relative"
+        trigger={<Button className="relative flex">Opens top</Button>}
         children="Popover content"
         anchor="top"
       />
       <Popover
+        className="relative"
         trigger={<Button>Opens below</Button>}
         children="Popover content"
         anchor="bottom"
       />
       <Popover
+        className="relative"
         trigger={<Button>Opens right</Button>}
         children="Popover content"
         anchor="right"
       />
       <Popover
+        className="relative"
         trigger={<Button>Opens left</Button>}
         children="Popover content"
         anchor="left"
