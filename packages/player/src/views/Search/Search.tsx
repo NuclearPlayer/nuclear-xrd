@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useSearch } from '@tanstack/react-router';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useMemo, type FC } from 'react';
 
 import { pickArtwork } from '@nuclearplayer/model';
@@ -22,6 +22,7 @@ import { executeMetadataSearch } from '../../services/search/executeMetadataSear
 
 export const Search: FC = () => {
   const { q } = useSearch({ from: '/search' });
+  const navigate = useNavigate();
 
   // @todo: this selects the first metadata provider, when we support switching it should use the selected one
   const provider = useMemo(() => {
@@ -51,6 +52,7 @@ export const Search: FC = () => {
         <CardGrid>
           {results.albums.map((item) => (
             <Card
+              key={item.source.id}
               title={item.title}
               src={pickArtwork(item.artwork, 'cover', 300)?.url}
             />
@@ -65,8 +67,12 @@ export const Search: FC = () => {
         <CardGrid>
           {results.artists.map((item) => (
             <Card
+              key={item.source.id}
               title={item.name}
               src={pickArtwork(item.artwork, 'cover', 300)?.url}
+              onClick={() =>
+                navigate({ to: `/artist/${provider.id}/${item.source.id}` })
+              }
             />
           ))}
         </CardGrid>
@@ -78,7 +84,7 @@ export const Search: FC = () => {
       content: (
         <div className="flex flex-col">
           {results.tracks.map((item) => (
-            <span>
+            <span key={item.source.id}>
               {item.artists[0].name} - {item.title}
             </span>
           ))}
