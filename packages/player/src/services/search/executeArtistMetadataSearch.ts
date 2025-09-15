@@ -1,4 +1,4 @@
-import { AlbumRef, Artist } from '@nuclearplayer/model';
+import { AlbumRef, Artist, ArtistRef, TrackRef } from '@nuclearplayer/model';
 import {
   MetadataProvider,
   MissingCapabilityError,
@@ -24,4 +24,26 @@ export const executeArtistAlbumsSearch = async (
   }
 
   return provider.fetchArtistAlbums!(artistId)!;
+};
+
+export const executeArtistTopTracksSearch = async (
+  provider: MetadataProvider,
+  artistId: string,
+): Promise<TrackRef[]> => {
+  if (!provider.artistMetadataCapabilities?.includes('artistTopTracks')) {
+    throw new MissingCapabilityError('artistTopTracks');
+  }
+
+  return provider.fetchArtistTopTracks!(artistId)!;
+};
+
+export const executeArtistRelatedArtistsSearch = async (
+  provider: MetadataProvider,
+  artistId: string,
+): Promise<ArtistRef[]> => {
+  if (!provider.artistMetadataCapabilities?.includes('artistRelatedArtists')) {
+    throw new MissingCapabilityError('artistRelatedArtists');
+  }
+
+  return provider.fetchArtistRelatedArtists!(artistId)!;
 };
