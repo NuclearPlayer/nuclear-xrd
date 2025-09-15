@@ -1,22 +1,24 @@
 import { FC } from 'react';
 
-import type { AlbumRef } from '@nuclearplayer/model';
 import { pickArtwork } from '@nuclearplayer/model';
-import { Button, Card, CardGrid, Loader } from '@nuclearplayer/ui';
+import { Card, CardGrid, Loader } from '@nuclearplayer/ui';
+
+import { useArtistAlbums } from '../hooks/useArtistAlbums';
 
 type ArtistAlbumsGridProps = {
-  albums?: AlbumRef[];
-  isLoading: boolean;
-  isError: boolean;
-  onRetry: () => void;
+  providerId: string;
+  artistId: string;
 };
 
 export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
-  albums,
-  isLoading,
-  isError,
-  onRetry,
+  providerId,
+  artistId,
 }) => {
+  const {
+    data: albums,
+    isLoading,
+    isError,
+  } = useArtistAlbums(providerId, artistId);
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-8">
@@ -29,7 +31,6 @@ export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
     return (
       <div className="flex flex-col items-start gap-3 p-8">
         <div className="text-accent-red">Failed to load albums.</div>
-        <Button onClick={onRetry}>Retry</Button>
       </div>
     );
   }

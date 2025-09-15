@@ -1,22 +1,25 @@
 import { FC } from 'react';
 
-import type { Artist as ArtistModel } from '@nuclearplayer/model';
 import { pickArtwork } from '@nuclearplayer/model';
-import { Button, Loader } from '@nuclearplayer/ui';
+import { Loader } from '@nuclearplayer/ui';
+
+import { useArtistDetails } from '../hooks/useArtistDetails';
 
 type ArtistHeaderProps = {
-  artist?: ArtistModel;
-  isLoading: boolean;
-  isError: boolean;
-  onRetry: () => void;
+  providerId: string;
+  artistId: string;
 };
 
 export const ArtistHeader: FC<ArtistHeaderProps> = ({
-  artist,
-  isLoading,
-  isError,
-  onRetry,
+  providerId,
+  artistId,
 }) => {
+  const {
+    data: artist,
+    isLoading,
+    isError,
+  } = useArtistDetails(providerId, artistId);
+
   const cover = artist ? pickArtwork(artist.artwork, 'cover', 1200) : undefined;
   const avatar = artist
     ? pickArtwork(artist.artwork, 'avatar', 300)
@@ -32,7 +35,6 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
       ) : isError ? (
         <div className="flex h-100 w-full flex-col items-center justify-center gap-3 p-6">
           <div className="text-accent-red">Failed to load artist details.</div>
-          <Button onClick={onRetry}>Retry</Button>
         </div>
       ) : (
         <>
@@ -55,6 +57,7 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
                 {artist.name}
               </h1>
               <div>{artist.tags}</div>
+              {artist.onTour ? <div>On Tour</div> : null}
             </div>
           )}
         </>
