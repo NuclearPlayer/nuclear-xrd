@@ -110,11 +110,6 @@ export type Artist = {
   onTour?: boolean;
   artwork?: ArtworkSet;
   tags?: string[];
-
-  albums?: AlbumRef[];
-  topTracks?: TrackRef[];
-  relatedArtists?: ArtistRef[];
-
   source: ProviderRef;
 };
 

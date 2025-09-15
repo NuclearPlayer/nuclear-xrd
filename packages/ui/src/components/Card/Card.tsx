@@ -22,51 +22,49 @@ export const Card: FC<CardProps> = ({
   className,
   onClick,
   imageReveal = true,
-}) => {
-  return (
-    <Button
-      size="flexible"
-      className={cn(
-        'flex w-42 flex-col items-stretch gap-2 p-2 text-left',
-        className,
-      )}
-      onClick={onClick}
+}) => (
+  <Button
+    size="flexible"
+    className={cn(
+      'flex w-42 flex-col items-stretch gap-2 p-2 text-left',
+      className,
+    )}
+    onClick={onClick}
+  >
+    <Box
+      variant="primary"
+      shadow="none"
+      className="relative aspect-square w-full items-center justify-center overflow-hidden p-0"
     >
-      <Box
-        variant="primary"
-        shadow="none"
-        className="relative aspect-square w-full items-center justify-center overflow-hidden p-0"
-      >
-        <ImageReveal
-          enabled={imageReveal}
-          src={src}
-          alt={title}
-          className="absolute inset-0"
-          imgClassName="h-full w-full object-cover"
-          placeholder={
-            <CassetteTape
-              size={96}
-              absoluteStrokeWidth
-              className="animate-pulse opacity-70"
-            />
-          }
-        />
-      </Box>
+      <ImageReveal
+        enabled={imageReveal}
+        src={src}
+        alt={title}
+        className="absolute inset-0"
+        imgClassName="h-full w-full object-cover"
+        placeholder={
+          <CassetteTape
+            size={96}
+            absoluteStrokeWidth
+            className="animate-pulse opacity-70"
+          />
+        }
+      />
+    </Box>
 
-      {(title || subtitle) && (
-        <div className="min-w-0">
-          {title && (
-            <div className="text-foreground truncate text-sm font-bold">
-              {title}
-            </div>
-          )}
-          {subtitle && (
-            <div className="text-foreground-secondary truncate text-xs">
-              {subtitle}
-            </div>
-          )}
-        </div>
-      )}
-    </Button>
-  );
-};
+    {(title || subtitle) && (
+      <div className="min-w-0">
+        {title && (
+          <div className="text-foreground truncate text-sm font-bold">
+            {title}
+          </div>
+        )}
+        {subtitle && (
+          <div className="text-foreground-secondary truncate text-xs">
+            {subtitle}
+          </div>
+        )}
+      </div>
+    )}
+  </Button>
+);

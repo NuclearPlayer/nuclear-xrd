@@ -1,13 +1,20 @@
 import type {
+  Album,
   AlbumRef,
+  Artist,
   ArtistRef,
   PlaylistRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 
 export type SearchCategory = 'artists' | 'albums' | 'tracks' | 'playlists';
-
 export type SearchCapability = SearchCategory | 'unified';
+
+export type ArtistMetadataCapability =
+  | 'artistDetails'
+  | 'artistAlbums'
+  | 'artistTopTracks'
+  | 'artistRelatedArtists';
 
 export type SearchParams = {
   query: string;
@@ -18,7 +25,7 @@ export type SearchParams = {
 export type SearchResults = {
   artists?: ArtistRef[];
   albums?: AlbumRef[];
-  tracks?: TrackRef[];
+  tracks?: Track[];
   playlists?: PlaylistRef[];
 };
 
@@ -32,12 +39,26 @@ export type ProviderDescriptor<K extends ProviderKind = ProviderKind> = {
 };
 
 export type MetadataProvider = ProviderDescriptor<'metadata'> & {
-  capabilities?: SearchCapability[];
+  searchCapabilities?: SearchCapability[];
+  artistMetadataCapabilities?: ArtistMetadataCapability[];
   search?: (params: SearchParams) => Promise<SearchResults>;
   searchArtists?: (params: Omit<SearchParams, 'types'>) => Promise<ArtistRef[]>;
   searchAlbums?: (params: Omit<SearchParams, 'types'>) => Promise<AlbumRef[]>;
-  searchTracks?: (params: Omit<SearchParams, 'types'>) => Promise<TrackRef[]>;
+  searchTracks?: (params: Omit<SearchParams, 'types'>) => Promise<Track[]>;
   searchPlaylists?: (
     params: Omit<SearchParams, 'types'>,
   ) => Promise<PlaylistRef[]>;
+
+  fetchArtistDetails?: (query: string) => Promise<Artist>;
+  fetchAlbumDetails?: (query: string) => Promise<Album>;
+  fetchArtistAlbums?: (artistId: string) => Promise<AlbumRef[]>;
+  fetchArtistTopTracks?: (artistId: string) => Promise<Track[]>;
+  fetchArtistRelatedArtists?: (artistId: string) => Promise<ArtistRef[]>;
 };
+
+export class MissingCapabilityError extends Error {
+  constructor(capability: string) {
+    super(`Missing capability: ${capability}`);
+    this.name = 'MissingCapabilityError';
+  }
+}

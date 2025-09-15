@@ -1,14 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { MetadataProvider } from '@nuclearplayer/plugin-sdk';
-
+import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
 import { executeMetadataSearch } from './executeMetadataSearch';
-
-const baseProvider = (): MetadataProvider => ({
-  id: 'prov-1',
-  kind: 'metadata',
-  name: 'Test Provider',
-});
 
 describe('executeMetadataSearch', () => {
   it('calls unified search when capability present', async () => {
@@ -19,11 +12,10 @@ describe('executeMetadataSearch', () => {
       playlists: ['playlist 1'],
     });
 
-    const provider: MetadataProvider = {
-      ...baseProvider(),
-      capabilities: ['unified'],
-      search,
-    };
+    const provider = new MetadataProviderBuilder()
+      .withSearchCapabilities(['unified'])
+      .withSearch(search)
+      .build();
 
     const res = await executeMetadataSearch(provider, { query: 'radiohead' });
     expect(search).toHaveBeenCalledTimes(1);
@@ -42,14 +34,13 @@ describe('executeMetadataSearch', () => {
     const searchTracks = vi.fn().mockResolvedValue(['t1']);
     const searchPlaylists = vi.fn().mockResolvedValue(['p1']);
 
-    const provider: MetadataProvider = {
-      ...baseProvider(),
-      capabilities: ['artists', 'albums', 'tracks', 'playlists'],
-      searchArtists,
-      searchAlbums,
-      searchTracks,
-      searchPlaylists,
-    };
+    const provider = new MetadataProviderBuilder()
+      .withSearchCapabilities(['artists', 'albums', 'tracks', 'playlists'])
+      .withSearchArtists(searchArtists)
+      .withSearchAlbums(searchAlbums)
+      .withSearchTracks(searchTracks)
+      .withSearchPlaylists(searchPlaylists)
+      .build();
 
     const res = await executeMetadataSearch(provider, { query: 'daft punk' });
 
@@ -84,14 +75,13 @@ describe('executeMetadataSearch', () => {
     const searchTracks = vi.fn();
     const searchPlaylists = vi.fn();
 
-    const provider: MetadataProvider = {
-      ...baseProvider(),
-      capabilities: ['artists', 'albums', 'tracks', 'playlists'],
-      searchArtists,
-      searchAlbums,
-      searchTracks,
-      searchPlaylists,
-    };
+    const provider = new MetadataProviderBuilder()
+      .withSearchCapabilities(['artists', 'albums', 'tracks', 'playlists'])
+      .withSearchArtists(searchArtists)
+      .withSearchAlbums(searchAlbums)
+      .withSearchTracks(searchTracks)
+      .withSearchPlaylists(searchPlaylists)
+      .build();
 
     await executeMetadataSearch(provider, {
       query: 'foo',
@@ -110,14 +100,13 @@ describe('executeMetadataSearch', () => {
     const searchTracks = vi.fn();
     const searchPlaylists = vi.fn();
 
-    const provider: MetadataProvider = {
-      ...baseProvider(),
-      capabilities: ['artists', 'albums', 'tracks', 'playlists'],
-      searchArtists,
-      searchAlbums,
-      searchTracks,
-      searchPlaylists,
-    };
+    const provider = new MetadataProviderBuilder()
+      .withSearchCapabilities(['artists', 'albums', 'tracks', 'playlists'])
+      .withSearchArtists(searchArtists)
+      .withSearchAlbums(searchAlbums)
+      .withSearchTracks(searchTracks)
+      .withSearchPlaylists(searchPlaylists)
+      .build();
 
     const res = await executeMetadataSearch(provider, {
       query: 'bar',

@@ -1,18 +1,14 @@
-import { MetadataProvider } from '@nuclearplayer/plugin-sdk';
-
 import { providersServiceHost } from '../../services/providersService';
+import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
 import { ArtistWrapper } from './Artist.test-wrapper';
 
 describe('Artist view', () => {
   beforeEach(() => {
     providersServiceHost.clear();
-    providersServiceHost.register({
-      id: 'test-metadata-provider',
-      kind: 'metadata',
-      name: 'Test Metadata Provider',
-      capabilities: ['unified', 'artists'],
-      search: async () => {
-        return {
+    providersServiceHost.register(
+      new MetadataProviderBuilder()
+        .withSearchCapabilities(['unified', 'artists'])
+        .withSearch(async () => ({
           artists: [
             {
               name: 'Test Artist',
@@ -22,9 +18,9 @@ describe('Artist view', () => {
               },
             },
           ],
-        };
-      },
-    } as MetadataProvider);
+        }))
+        .build(),
+    );
   });
 
   it('(Snapshot) renders the artist view', async () => {

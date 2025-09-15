@@ -42,7 +42,7 @@ export const PluginItem: FC<PluginItemProps> = ({
           warning,
         'opacity-30': disabled,
       },
-      'relative transition-opacity duration-250',
+      'relative cursor-default transition-opacity duration-250',
       className,
     )}
   >
@@ -60,7 +60,7 @@ export const PluginItem: FC<PluginItemProps> = ({
       <div className="min-w-0 flex-1">
         <h3
           data-testid="plugin-name"
-          className="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
+          className="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold select-none"
         >
           {name}
           {onViewDetails && (
@@ -71,13 +71,13 @@ export const PluginItem: FC<PluginItemProps> = ({
         </h3>
         <p
           data-testid="plugin-author"
-          className="text-foreground-secondary mt-1 text-sm"
+          className="text-foreground-secondary mt-1 text-sm select-none"
         >
           by {author}
         </p>
         <p
           data-testid="plugin-description"
-          className="text-foreground-secondary mt-2 text-sm leading-relaxed"
+          className="text-foreground-secondary mt-2 text-sm leading-relaxed select-none"
         >
           {description}
         </p>
