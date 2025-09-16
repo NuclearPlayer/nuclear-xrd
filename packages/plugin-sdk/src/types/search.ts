@@ -5,6 +5,7 @@ import type {
   ArtistRef,
   PlaylistRef,
   Track,
+  TrackRef,
 } from '@nuclearplayer/model';
 
 export type SearchCategory = 'artists' | 'albums' | 'tracks' | 'playlists';
@@ -52,7 +53,7 @@ export type MetadataProvider = ProviderDescriptor<'metadata'> & {
   fetchArtistDetails?: (query: string) => Promise<Artist>;
   fetchAlbumDetails?: (query: string) => Promise<Album>;
   fetchArtistAlbums?: (artistId: string) => Promise<AlbumRef[]>;
-  fetchArtistTopTracks?: (artistId: string) => Promise<Track[]>;
+  fetchArtistTopTracks?: (artistId: string) => Promise<TrackRef[]>;
   fetchArtistRelatedArtists?: (artistId: string) => Promise<ArtistRef[]>;
 };
 

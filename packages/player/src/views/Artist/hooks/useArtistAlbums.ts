@@ -7,9 +7,7 @@ import { providersServiceHost } from '../../../services/providersService';
 import { executeArtistAlbumsSearch } from '../../../services/search/executeArtistMetadataSearch';
 
 export const useArtistAlbums = (providerId: string, artistId: string) => {
-  const provider = providersServiceHost.get(providerId) as
-    | MetadataProvider
-    | undefined;
+  const provider = providersServiceHost.get(providerId);
 
   return useQuery<AlbumRef[]>({
     queryKey: ['artist-albums', provider?.id, artistId],

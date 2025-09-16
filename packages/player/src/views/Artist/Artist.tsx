@@ -5,6 +5,8 @@ import { ScrollableArea } from '@nuclearplayer/ui';
 
 import { ArtistAlbumsGrid } from './components/ArtistAlbumsGrid';
 import { ArtistHeader } from './components/ArtistHeader';
+import { ArtistPopularTracks } from './components/ArtistPopularTracks';
+import { ArtistSimilarArtists } from './components/ArtistSimilarArtists';
 
 type ArtistProps = Record<string, never>;
 
@@ -16,18 +18,14 @@ export const Artist: FC<ArtistProps> = () => {
     <ScrollableArea>
       <ArtistHeader providerId={providerId} artistId={artistId} />
 
-      {/* <div className="flex flex-row gap-4">
-        <div className="flex flex-col">
-          <h2>Popular tracks</h2>
-          <TrackTable tracks={artist.topTracks ?? []} />
+      <div className="flex flex-col gap-6 p-6 md:flex-row">
+        <div className="md:w-2/3">
+          <ArtistPopularTracks providerId={providerId} artistId={artistId} />
         </div>
-        <div className="flex flex-col">
-          <h2>Similar artists</h2>
-          {artist.relatedArtists?.map((relatedArtist) => (
-            <div key={relatedArtist.source.id}>{relatedArtist.name}</div>
-          ))}
+        <div className="md:w-1/3">
+          <ArtistSimilarArtists providerId={providerId} artistId={artistId} />
         </div>
-      </div> */}
+      </div>
 
       <ScrollableArea>
         <ArtistAlbumsGrid providerId={providerId} artistId={artistId} />
