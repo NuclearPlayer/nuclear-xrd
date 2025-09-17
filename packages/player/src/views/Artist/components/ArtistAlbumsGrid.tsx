@@ -8,11 +8,13 @@ import { useArtistAlbums } from '../hooks/useArtistAlbums';
 type ArtistAlbumsGridProps = {
   providerId: string;
   artistId: string;
+  'data-testid'?: string;
 };
 
 export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
   providerId,
   artistId,
+  'data-testid': dataTestId,
 }) => {
   const {
     data: albums,
@@ -21,7 +23,10 @@ export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
   } = useArtistAlbums(providerId, artistId);
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center p-8">
+      <div
+        className="flex items-center justify-center p-8"
+        data-testid={dataTestId}
+      >
         <Loader />
       </div>
     );
@@ -29,14 +34,17 @@ export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
 
   if (isError) {
     return (
-      <div className="flex flex-col items-start gap-3 p-8">
+      <div
+        className="flex flex-col items-start gap-3 p-8"
+        data-testid={dataTestId}
+      >
         <div className="text-accent-red">Failed to load albums.</div>
       </div>
     );
   }
 
   return (
-    <CardGrid>
+    <CardGrid data-testid={dataTestId}>
       {albums?.map((album) => (
         <Card
           key={album.source.id}

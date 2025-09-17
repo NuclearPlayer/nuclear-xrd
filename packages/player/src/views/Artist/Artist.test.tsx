@@ -112,13 +112,26 @@ describe('Artist view', () => {
   });
 
   it('(Snapshot) renders the artist view', async () => {
-    const component = await ArtistWrapper.mount();
+    const component = await ArtistWrapper.mount('The Beatles');
     expect(component).toMatchSnapshot();
   });
 
-  it.todo(
-    '(Snapshot) renders artist view with details, popular tracks, similar artists, and albums',
-  );
+  it('(Snapshot) renders artist view with details, popular tracks, similar artists, and albums', async () => {
+    const component = await ArtistWrapper.mount('The Beatles');
+    const header = ArtistWrapper.getHeader('The Beatles');
+    expect(header).toBeTruthy();
+
+    const tracksTable = ArtistWrapper.getTracksTable();
+    expect(tracksTable).toBeTruthy();
+
+    const similar = ArtistWrapper.getSimilarArtistItems();
+    expect(similar.length).toBeGreaterThan(0);
+
+    const albums = ArtistWrapper.getAlbums();
+    expect(albums.length).toBeGreaterThan(0);
+
+    expect(component).toMatchSnapshot();
+  });
   it.todo(
     '(Snapshot) shows loading states for details, top tracks, related artists, and albums',
   );

@@ -5,9 +5,14 @@ import { cn } from '../../utils';
 type CardGridProps = {
   children?: ReactNode;
   className?: string;
+  'data-testid'?: string;
 };
 
-export const CardGrid: FC<CardGridProps> = ({ children, className }) => {
+export const CardGrid: FC<CardGridProps> = ({
+  children,
+  className,
+  'data-testid': dataTestId,
+}) => {
   return (
     <div
       className={cn(
@@ -15,6 +20,7 @@ export const CardGrid: FC<CardGridProps> = ({ children, className }) => {
         className,
       )}
       role="grid"
+      data-testid={dataTestId}
     >
       {children}
     </div>

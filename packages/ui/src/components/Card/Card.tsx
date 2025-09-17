@@ -24,6 +24,7 @@ export const Card: FC<CardProps> = ({
   imageReveal = true,
 }) => (
   <Button
+    data-testid="card"
     size="flexible"
     className={cn(
       'flex w-42 flex-col items-stretch gap-2 p-2 text-left',

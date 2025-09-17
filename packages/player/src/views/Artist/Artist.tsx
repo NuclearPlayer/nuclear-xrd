@@ -28,7 +28,11 @@ export const Artist: FC<ArtistProps> = () => {
       </div>
 
       <ScrollableArea>
-        <ArtistAlbumsGrid providerId={providerId} artistId={artistId} />
+        <ArtistAlbumsGrid
+          providerId={providerId}
+          artistId={artistId}
+          data-testid="artist-albums-grid"
+        />
       </ScrollableArea>
     </ScrollableArea>
   );

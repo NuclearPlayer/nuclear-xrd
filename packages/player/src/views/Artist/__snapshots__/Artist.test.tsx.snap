@@ -1,5 +1,1908 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Artist view > (Snapshot) renders artist view with details, popular tracks, similar artists, and albums 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
+      >
+        <header
+          class="bg-background border-border flex h-12 items-center border-b-2 px-4"
+        >
+          <svg
+            class="inline-flex h-6 w-6"
+            height="100"
+            viewBox="0 0 100 100"
+            width="100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-width="8"
+              transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+            >
+              <rect
+                height="96"
+                rx="19.2"
+                ry="19.2"
+                width="96"
+                x="2"
+                y="2"
+              />
+              <path
+                d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
+              />
+            </g>
+          </svg>
+          <div>
+            <input
+              class="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+              data-testid="search-box"
+              placeholder="Search"
+              value="test"
+            />
+          </div>
+          <div
+            class="flex-1"
+          />
+          <button
+            aria-checked="false"
+            aria-label="Toggle theme"
+            class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+            data-headlessui-state=""
+            id="headlessui-switch-:r0:"
+            role="switch"
+            tabindex="0"
+            type="button"
+          >
+            <span
+              class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1 group-data-checked:translate-x-5"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-sun text-foreground"
+                fill="none"
+                height="12"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                />
+                <path
+                  d="M12 2v2"
+                />
+                <path
+                  d="M12 20v2"
+                />
+                <path
+                  d="m4.93 4.93 1.41 1.41"
+                />
+                <path
+                  d="m17.66 17.66 1.41 1.41"
+                />
+                <path
+                  d="M2 12h2"
+                />
+                <path
+                  d="M20 12h2"
+                />
+                <path
+                  d="m6.34 17.66-1.41 1.41"
+                />
+                <path
+                  d="m19.07 4.93-1.41 1.41"
+                />
+              </svg>
+            </span>
+          </button>
+        </header>
+        <div
+          class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
+        >
+          <div
+            animate="[object Object]"
+            class="bg-background-secondary border-border relative flex flex-col p-2 border-r-2"
+            transition="[object Object]"
+          >
+            <span
+              class="mb-4 flex flex-row items-center justify-end"
+            >
+              <button
+                class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+                data-headlessui-state=""
+                data-testid="sidebar-toggle-left"
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-panel-left"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    height="18"
+                    rx="2"
+                    width="18"
+                    x="3"
+                    y="3"
+                  />
+                  <path
+                    d="M9 3v18"
+                  />
+                </svg>
+              </button>
+            </span>
+            <div
+              animate="[object Object]"
+              class="flex-1 overflow-hidden"
+              exit="[object Object]"
+              initial="[object Object]"
+              transition="[object Object]"
+            >
+              <div
+                class="flex flex-1 flex-col items-start justify-start"
+              >
+                <div
+                  class="mb-4 flex w-full flex-col text-sm"
+                >
+                  <button
+                    class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                    data-headlessui-state=""
+                    type="submit"
+                  >
+                    <span
+                      class="inline-flex flex-row items-center gap-2"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="lucide lucide-compass"
+                        fill="none"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+                        />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="10"
+                        />
+                      </svg>
+                      Explore
+                    </span>
+                    <div
+                      animate="[object Object]"
+                      transition="[object Object]"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="lucide lucide-chevron-right"
+                        fill="none"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="m9 18 6-6-6-6"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+                <div
+                  class="mb-4 flex w-full flex-col text-sm"
+                >
+                  <button
+                    class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                    data-headlessui-state=""
+                    type="submit"
+                  >
+                    <span
+                      class="inline-flex flex-row items-center gap-2"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="lucide lucide-settings"
+                        fill="none"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"
+                        />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="3"
+                        />
+                      </svg>
+                      Preferences
+                    </span>
+                    <div
+                      animate="[object Object]"
+                      transition="[object Object]"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="lucide lucide-chevron-right"
+                        fill="none"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="m9 18 6-6-6-6"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+                <div
+                  class="mb-4 flex w-full flex-col text-sm"
+                >
+                  <button
+                    class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                    data-headlessui-state=""
+                    type="submit"
+                  >
+                    <span
+                      class="inline-flex flex-row items-center gap-2"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="lucide lucide-library"
+                        fill="none"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="m16 6 4 14"
+                        />
+                        <path
+                          d="M12 6v14"
+                        />
+                        <path
+                          d="M8 8v12"
+                        />
+                        <path
+                          d="M4 4v16"
+                        />
+                      </svg>
+                      Collection
+                    </span>
+                    <div
+                      animate="[object Object]"
+                      transition="[object Object]"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="lucide lucide-chevron-right"
+                        fill="none"
+                        height="24"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="m9 18 6-6-6-6"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors right-0"
+            />
+          </div>
+          <main
+            class="bg-background-secondary overflow-auto"
+            data-testid="player-workspace-main"
+          >
+            <div
+              class="relative h-full w-full overflow-hidden"
+            >
+              <div
+                animate="center"
+                class="absolute inset-0 h-full w-full"
+                exit="exit"
+                initial="enter"
+                transition="[object Object]"
+              >
+                <div
+                  class="relative h-full w-full"
+                >
+                  <div
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                    style="scrollbar-width: none;"
+                  >
+                    <div
+                      class="relative"
+                    >
+                      <div
+                        class="absolute h-100 w-full bg-gradient-to-b from-transparent to-black"
+                      />
+                      <div
+                        class="h-100 w-full bg-cover bg-center"
+                        style="background-image: url("https://img/cover.jpg");"
+                      />
+                      <div
+                        class="absolute bottom-0 left-0 flex flex-row items-center gap-8 p-8"
+                      >
+                        <img
+                          alt="The Beatles avatar"
+                          class="border-border bottom-0 h-30 w-30 rounded-full border-2 select-none"
+                          src="https://img/avatar.jpg"
+                        />
+                        <h1
+                          class="cursor-default text-6xl text-white select-none"
+                        >
+                          The Beatles
+                        </h1>
+                        <div>
+                          rock
+                          indie
+                          brit-pop
+                        </div>
+                        <div>
+                          On Tour
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="flex flex-col gap-6 p-6 md:flex-row"
+                    >
+                      <div
+                        class="md:w-2/3"
+                      >
+                        <div
+                          class="flex flex-col"
+                        >
+                          <h2
+                            class="mb-2 text-lg font-semibold"
+                          >
+                            Popular tracks
+                          </h2>
+                          <div
+                            class="relative flex max-h-full overflow-auto"
+                          >
+                            <table
+                              class="border-border relative m-2 w-full border-2 select-none"
+                              role="table"
+                            >
+                              <thead>
+                                <tr
+                                  class="border-border bg-primary border-b-2"
+                                  role="row"
+                                >
+                                  <th
+                                    class="px-2 text-left cursor-pointer"
+                                    role="columnheader"
+                                  >
+                                    <span
+                                      class="flex items-center"
+                                    >
+                                      Artist
+                                    </span>
+                                  </th>
+                                  <th
+                                    class="px-2 text-left cursor-pointer"
+                                    role="columnheader"
+                                  >
+                                    <span
+                                      class="flex items-center"
+                                    >
+                                      Title
+                                    </span>
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody />
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="md:w-1/3"
+                      >
+                        <div
+                          class="flex flex-col"
+                        >
+                          <h2
+                            class="mb-2 text-lg font-semibold"
+                          >
+                            Similar artists
+                          </h2>
+                          <ul
+                            class="divide-border divide-y"
+                          >
+                            <li
+                              class="flex items-center gap-3 py-2"
+                            >
+                              <img
+                                alt="John Lennon"
+                                class="h-10 w-10 rounded object-cover"
+                                src="https://img/similar1.jpg"
+                              />
+                              <span
+                                class="truncate"
+                              >
+                                John Lennon
+                              </span>
+                            </li>
+                            <li
+                              class="flex items-center gap-3 py-2"
+                            >
+                              <img
+                                alt="Kurt Cobain"
+                                class="h-10 w-10 rounded object-cover"
+                                src="https://img/similar2.jpg"
+                              />
+                              <span
+                                class="truncate"
+                              >
+                                Kurt Cobain
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="relative h-full w-full"
+                    >
+                      <div
+                        class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                        style="scrollbar-width: none;"
+                      >
+                        <div
+                          class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4"
+                          data-testid="artist-albums-grid"
+                          role="grid"
+                        >
+                          <button
+                            class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                            data-headlessui-state=""
+                            data-testid="card"
+                            type="submit"
+                          >
+                            <div
+                              class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                            >
+                              <div
+                                class="overflow-hidden absolute inset-0"
+                              >
+                                <img
+                                  alt="Hello World LP"
+                                  class="h-full w-full object-cover"
+                                  decoding="async"
+                                  loading="lazy"
+                                  src="https://img/debut.jpg"
+                                />
+                                <div
+                                  class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                                >
+                                  <svg
+                                    aria-hidden="true"
+                                    class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                                    fill="none"
+                                    height="96"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="0.5"
+                                    viewBox="0 0 24 24"
+                                    width="96"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <rect
+                                      height="16"
+                                      rx="2"
+                                      width="20"
+                                      x="2"
+                                      y="4"
+                                    />
+                                    <circle
+                                      cx="8"
+                                      cy="10"
+                                      r="2"
+                                    />
+                                    <path
+                                      d="M8 12h8"
+                                    />
+                                    <circle
+                                      cx="16"
+                                      cy="10"
+                                      r="2"
+                                    />
+                                    <path
+                                      d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                                    />
+                                  </svg>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="min-w-0"
+                            >
+                              <div
+                                class="text-foreground truncate text-sm font-bold"
+                              >
+                                Hello World LP
+                              </div>
+                              <div
+                                class="text-foreground-secondary truncate text-xs"
+                              >
+                                Test Artist
+                              </div>
+                            </div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+          <div
+            animate="[object Object]"
+            class="bg-background-secondary border-border relative flex flex-col p-2 border-l-2"
+            transition="[object Object]"
+          >
+            <span
+              class="mb-4 flex flex-row items-center justify-start"
+            >
+              <button
+                class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+                data-headlessui-state=""
+                data-testid="sidebar-toggle-right"
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-panel-right"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    height="18"
+                    rx="2"
+                    width="18"
+                    x="3"
+                    y="3"
+                  />
+                  <path
+                    d="M15 3v18"
+                  />
+                </svg>
+              </button>
+            </span>
+            <div
+              animate="[object Object]"
+              class="flex-1 overflow-hidden"
+              exit="[object Object]"
+              initial="[object Object]"
+              transition="[object Object]"
+            />
+            <div
+              class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors left-0"
+            />
+          </div>
+        </div>
+        <footer
+          class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+        >
+          <div
+            class="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4"
+          >
+            <div
+              class="min-w-0"
+            >
+              <div
+                class="flex min-w-0 items-center gap-3"
+              >
+                <div
+                  class="border-border bg-background-secondary size-12 shrink-0 overflow-hidden rounded border-2"
+                >
+                  <img
+                    alt=""
+                    class="size-full object-cover select-none"
+                    src="https://picsum.photos/64"
+                  />
+                </div>
+                <div
+                  class="min-w-0"
+                >
+                  <div
+                    class="text-foreground truncate text-sm font-bold"
+                  >
+                    Song Title
+                  </div>
+                  <div
+                    class="text-foreground-secondary truncate text-xs"
+                  >
+                    Artist Name
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="justify-self-center"
+            >
+              <div
+                class="flex items-center justify-center gap-2"
+              >
+                <button
+                  class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-shuffle"
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m18 14 4 4-4 4"
+                    />
+                    <path
+                      d="m18 2 4 4-4 4"
+                    />
+                    <path
+                      d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"
+                    />
+                    <path
+                      d="M2 6h1.972a4 4 0 0 1 3.6 2.2"
+                    />
+                    <path
+                      d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-skip-back"
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z"
+                    />
+                    <path
+                      d="M3 20V4"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-play"
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-skip-forward"
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M21 4v16"
+                    />
+                    <path
+                      d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-repeat"
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m17 2 4 4-4 4"
+                    />
+                    <path
+                      d="M3 11v-1a4 4 0 0 1 4-4h14"
+                    />
+                    <path
+                      d="m7 22-4-4 4-4"
+                    />
+                    <path
+                      d="M21 13v1a4 4 0 0 1-4 4H3"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div
+              class="justify-self-end"
+            >
+              <div
+                class="flex items-center gap-2"
+              >
+                <button
+                  class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-volume2 lucide-volume-2"
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"
+                    />
+                    <path
+                      d="M16 9a5 5 0 0 1 0 6"
+                    />
+                    <path
+                      d="M19.364 18.364a9 9 0 0 0 0-12.728"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="w-24"
+                >
+                  <div
+                    class="flex w-full flex-col gap-2"
+                  >
+                    <div
+                      class="relative h-6 w-full overscroll-contain"
+                    >
+                      <div
+                        class="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2"
+                      >
+                        <div
+                          class="border-border bg-background-input relative h-3 w-full rounded border-2"
+                        >
+                          <div
+                            class="bg-primary absolute top-0 left-0 h-full rounded-l"
+                            style="width: 75%;"
+                          />
+                          <div
+                            class="border-border absolute top-1/2 -ml-2 h-5 w-5 -translate-y-1/2 rounded-full border-2 bg-white"
+                            style="left: 75%;"
+                          />
+                        </div>
+                      </div>
+                      <input
+                        aria-labelledby=":r1:-label"
+                        aria-valuemax="100"
+                        aria-valuemin="0"
+                        aria-valuenow="75"
+                        aria-valuetext="75"
+                        class="absolute inset-0 z-[1] h-6 w-full appearance-none opacity-0 cursor-pointer"
+                        id=":r1:"
+                        max="100"
+                        min="0"
+                        step="1"
+                        type="range"
+                        value="75"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <section
+          aria-atomic="false"
+          aria-label="Notifications alt+T"
+          aria-live="polite"
+          aria-relevant="additions text"
+          tabindex="-1"
+        />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
+    >
+      <header
+        class="bg-background border-border flex h-12 items-center border-b-2 px-4"
+      >
+        <svg
+          class="inline-flex h-6 w-6"
+          height="100"
+          viewBox="0 0 100 100"
+          width="100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="8"
+            transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+          >
+            <rect
+              height="96"
+              rx="19.2"
+              ry="19.2"
+              width="96"
+              x="2"
+              y="2"
+            />
+            <path
+              d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
+            />
+          </g>
+        </svg>
+        <div>
+          <input
+            class="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+            data-testid="search-box"
+            placeholder="Search"
+            value="test"
+          />
+        </div>
+        <div
+          class="flex-1"
+        />
+        <button
+          aria-checked="false"
+          aria-label="Toggle theme"
+          class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+          data-headlessui-state=""
+          id="headlessui-switch-:r0:"
+          role="switch"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1 group-data-checked:translate-x-5"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-sun text-foreground"
+              fill="none"
+              height="12"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="4"
+              />
+              <path
+                d="M12 2v2"
+              />
+              <path
+                d="M12 20v2"
+              />
+              <path
+                d="m4.93 4.93 1.41 1.41"
+              />
+              <path
+                d="m17.66 17.66 1.41 1.41"
+              />
+              <path
+                d="M2 12h2"
+              />
+              <path
+                d="M20 12h2"
+              />
+              <path
+                d="m6.34 17.66-1.41 1.41"
+              />
+              <path
+                d="m19.07 4.93-1.41 1.41"
+              />
+            </svg>
+          </span>
+        </button>
+      </header>
+      <div
+        class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
+      >
+        <div
+          animate="[object Object]"
+          class="bg-background-secondary border-border relative flex flex-col p-2 border-r-2"
+          transition="[object Object]"
+        >
+          <span
+            class="mb-4 flex flex-row items-center justify-end"
+          >
+            <button
+              class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+              data-headlessui-state=""
+              data-testid="sidebar-toggle-left"
+              type="submit"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-panel-left"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <path
+                  d="M9 3v18"
+                />
+              </svg>
+            </button>
+          </span>
+          <div
+            animate="[object Object]"
+            class="flex-1 overflow-hidden"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            <div
+              class="flex flex-1 flex-col items-start justify-start"
+            >
+              <div
+                class="mb-4 flex w-full flex-col text-sm"
+              >
+                <button
+                  class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <span
+                    class="inline-flex flex-row items-center gap-2"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-compass"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"
+                      />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                      />
+                    </svg>
+                    Explore
+                  </span>
+                  <div
+                    animate="[object Object]"
+                    transition="[object Object]"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-chevron-right"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m9 18 6-6-6-6"
+                      />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+              <div
+                class="mb-4 flex w-full flex-col text-sm"
+              >
+                <button
+                  class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <span
+                    class="inline-flex flex-row items-center gap-2"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-settings"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"
+                      />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="3"
+                      />
+                    </svg>
+                    Preferences
+                  </span>
+                  <div
+                    animate="[object Object]"
+                    transition="[object Object]"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-chevron-right"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m9 18 6-6-6-6"
+                      />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+              <div
+                class="mb-4 flex w-full flex-col text-sm"
+              >
+                <button
+                  class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                  data-headlessui-state=""
+                  type="submit"
+                >
+                  <span
+                    class="inline-flex flex-row items-center gap-2"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-library"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m16 6 4 14"
+                      />
+                      <path
+                        d="M12 6v14"
+                      />
+                      <path
+                        d="M8 8v12"
+                      />
+                      <path
+                        d="M4 4v16"
+                      />
+                    </svg>
+                    Collection
+                  </span>
+                  <div
+                    animate="[object Object]"
+                    transition="[object Object]"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-chevron-right"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m9 18 6-6-6-6"
+                      />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors right-0"
+          />
+        </div>
+        <main
+          class="bg-background-secondary overflow-auto"
+          data-testid="player-workspace-main"
+        >
+          <div
+            class="relative h-full w-full overflow-hidden"
+          >
+            <div
+              animate="center"
+              class="absolute inset-0 h-full w-full"
+              exit="exit"
+              initial="enter"
+              transition="[object Object]"
+            >
+              <div
+                class="relative h-full w-full"
+              >
+                <div
+                  class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                  style="scrollbar-width: none;"
+                >
+                  <div
+                    class="relative"
+                  >
+                    <div
+                      class="absolute h-100 w-full bg-gradient-to-b from-transparent to-black"
+                    />
+                    <div
+                      class="h-100 w-full bg-cover bg-center"
+                      style="background-image: url("https://img/cover.jpg");"
+                    />
+                    <div
+                      class="absolute bottom-0 left-0 flex flex-row items-center gap-8 p-8"
+                    >
+                      <img
+                        alt="The Beatles avatar"
+                        class="border-border bottom-0 h-30 w-30 rounded-full border-2 select-none"
+                        src="https://img/avatar.jpg"
+                      />
+                      <h1
+                        class="cursor-default text-6xl text-white select-none"
+                      >
+                        The Beatles
+                      </h1>
+                      <div>
+                        rock
+                        indie
+                        brit-pop
+                      </div>
+                      <div>
+                        On Tour
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex flex-col gap-6 p-6 md:flex-row"
+                  >
+                    <div
+                      class="md:w-2/3"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <h2
+                          class="mb-2 text-lg font-semibold"
+                        >
+                          Popular tracks
+                        </h2>
+                        <div
+                          class="relative flex max-h-full overflow-auto"
+                        >
+                          <table
+                            class="border-border relative m-2 w-full border-2 select-none"
+                            role="table"
+                          >
+                            <thead>
+                              <tr
+                                class="border-border bg-primary border-b-2"
+                                role="row"
+                              >
+                                <th
+                                  class="px-2 text-left cursor-pointer"
+                                  role="columnheader"
+                                >
+                                  <span
+                                    class="flex items-center"
+                                  >
+                                    Artist
+                                  </span>
+                                </th>
+                                <th
+                                  class="px-2 text-left cursor-pointer"
+                                  role="columnheader"
+                                >
+                                  <span
+                                    class="flex items-center"
+                                  >
+                                    Title
+                                  </span>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody />
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="md:w-1/3"
+                    >
+                      <div
+                        class="flex flex-col"
+                      >
+                        <h2
+                          class="mb-2 text-lg font-semibold"
+                        >
+                          Similar artists
+                        </h2>
+                        <ul
+                          class="divide-border divide-y"
+                        >
+                          <li
+                            class="flex items-center gap-3 py-2"
+                          >
+                            <img
+                              alt="John Lennon"
+                              class="h-10 w-10 rounded object-cover"
+                              src="https://img/similar1.jpg"
+                            />
+                            <span
+                              class="truncate"
+                            >
+                              John Lennon
+                            </span>
+                          </li>
+                          <li
+                            class="flex items-center gap-3 py-2"
+                          >
+                            <img
+                              alt="Kurt Cobain"
+                              class="h-10 w-10 rounded object-cover"
+                              src="https://img/similar2.jpg"
+                            />
+                            <span
+                              class="truncate"
+                            >
+                              Kurt Cobain
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="relative h-full w-full"
+                  >
+                    <div
+                      class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                      style="scrollbar-width: none;"
+                    >
+                      <div
+                        class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4"
+                        data-testid="artist-albums-grid"
+                        role="grid"
+                      >
+                        <button
+                          class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                          data-headlessui-state=""
+                          data-testid="card"
+                          type="submit"
+                        >
+                          <div
+                            class="border-border text-foreground flex h-full rounded border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                          >
+                            <div
+                              class="overflow-hidden absolute inset-0"
+                            >
+                              <img
+                                alt="Hello World LP"
+                                class="h-full w-full object-cover"
+                                decoding="async"
+                                loading="lazy"
+                                src="https://img/debut.jpg"
+                              />
+                              <div
+                                class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                                  fill="none"
+                                  height="96"
+                                  stroke="currentColor"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="0.5"
+                                  viewBox="0 0 24 24"
+                                  width="96"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <rect
+                                    height="16"
+                                    rx="2"
+                                    width="20"
+                                    x="2"
+                                    y="4"
+                                  />
+                                  <circle
+                                    cx="8"
+                                    cy="10"
+                                    r="2"
+                                  />
+                                  <path
+                                    d="M8 12h8"
+                                  />
+                                  <circle
+                                    cx="16"
+                                    cy="10"
+                                    r="2"
+                                  />
+                                  <path
+                                    d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="min-w-0"
+                          >
+                            <div
+                              class="text-foreground truncate text-sm font-bold"
+                            >
+                              Hello World LP
+                            </div>
+                            <div
+                              class="text-foreground-secondary truncate text-xs"
+                            >
+                              Test Artist
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <div
+          animate="[object Object]"
+          class="bg-background-secondary border-border relative flex flex-col p-2 border-l-2"
+          transition="[object Object]"
+        >
+          <span
+            class="mb-4 flex flex-row items-center justify-start"
+          >
+            <button
+              class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+              data-headlessui-state=""
+              data-testid="sidebar-toggle-right"
+              type="submit"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-panel-right"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="18"
+                  rx="2"
+                  width="18"
+                  x="3"
+                  y="3"
+                />
+                <path
+                  d="M15 3v18"
+                />
+              </svg>
+            </button>
+          </span>
+          <div
+            animate="[object Object]"
+            class="flex-1 overflow-hidden"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+          />
+          <div
+            class="absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors left-0"
+          />
+        </div>
+      </div>
+      <footer
+        class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+      >
+        <div
+          class="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4"
+        >
+          <div
+            class="min-w-0"
+          >
+            <div
+              class="flex min-w-0 items-center gap-3"
+            >
+              <div
+                class="border-border bg-background-secondary size-12 shrink-0 overflow-hidden rounded border-2"
+              >
+                <img
+                  alt=""
+                  class="size-full object-cover select-none"
+                  src="https://picsum.photos/64"
+                />
+              </div>
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-foreground truncate text-sm font-bold"
+                >
+                  Song Title
+                </div>
+                <div
+                  class="text-foreground-secondary truncate text-xs"
+                >
+                  Artist Name
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="justify-self-center"
+          >
+            <div
+              class="flex items-center justify-center gap-2"
+            >
+              <button
+                class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-shuffle"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m18 14 4 4-4 4"
+                  />
+                  <path
+                    d="m18 2 4 4-4 4"
+                  />
+                  <path
+                    d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"
+                  />
+                  <path
+                    d="M2 6h1.972a4 4 0 0 1 3.6 2.2"
+                  />
+                  <path
+                    d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"
+                  />
+                </svg>
+              </button>
+              <button
+                class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-skip-back"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z"
+                  />
+                  <path
+                    d="M3 20V4"
+                  />
+                </svg>
+              </button>
+              <button
+                class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-play"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"
+                  />
+                </svg>
+              </button>
+              <button
+                class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-skip-forward"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21 4v16"
+                  />
+                  <path
+                    d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z"
+                  />
+                </svg>
+              </button>
+              <button
+                class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-repeat"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m17 2 4 4-4 4"
+                  />
+                  <path
+                    d="M3 11v-1a4 4 0 0 1 4-4h14"
+                  />
+                  <path
+                    d="m7 22-4-4 4-4"
+                  />
+                  <path
+                    d="M21 13v1a4 4 0 0 1-4 4H3"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            class="justify-self-end"
+          >
+            <div
+              class="flex items-center gap-2"
+            >
+              <button
+                class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+                data-headlessui-state=""
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-volume2 lucide-volume-2"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"
+                  />
+                  <path
+                    d="M16 9a5 5 0 0 1 0 6"
+                  />
+                  <path
+                    d="M19.364 18.364a9 9 0 0 0 0-12.728"
+                  />
+                </svg>
+              </button>
+              <div
+                class="w-24"
+              >
+                <div
+                  class="flex w-full flex-col gap-2"
+                >
+                  <div
+                    class="relative h-6 w-full overscroll-contain"
+                  >
+                    <div
+                      class="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2"
+                    >
+                      <div
+                        class="border-border bg-background-input relative h-3 w-full rounded border-2"
+                      >
+                        <div
+                          class="bg-primary absolute top-0 left-0 h-full rounded-l"
+                          style="width: 75%;"
+                        />
+                        <div
+                          class="border-border absolute top-1/2 -ml-2 h-5 w-5 -translate-y-1/2 rounded-full border-2 bg-white"
+                          style="left: 75%;"
+                        />
+                      </div>
+                    </div>
+                    <input
+                      aria-labelledby=":r1:-label"
+                      aria-valuemax="100"
+                      aria-valuemin="0"
+                      aria-valuenow="75"
+                      aria-valuetext="75"
+                      class="absolute inset-0 z-[1] h-6 w-full appearance-none opacity-0 cursor-pointer"
+                      id=":r1:"
+                      max="100"
+                      min="0"
+                      step="1"
+                      type="range"
+                      value="75"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <section
+        aria-atomic="false"
+        aria-label="Notifications alt+T"
+        aria-live="polite"
+        aria-relevant="additions text"
+        tabindex="-1"
+      />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
 exports[`Artist view > (Snapshot) renders the artist view 1`] = `
 {
   "asFragment": [Function],
