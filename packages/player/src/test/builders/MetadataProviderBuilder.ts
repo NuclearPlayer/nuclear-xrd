@@ -81,6 +81,20 @@ export class MetadataProviderBuilder {
     return this;
   }
 
+  withFetchArtistTopTracks(
+    fetchArtistTopTracks: MetadataProvider['fetchArtistTopTracks'],
+  ): this {
+    this.provider.fetchArtistTopTracks = fetchArtistTopTracks;
+    return this;
+  }
+
+  withFetchArtistRelatedArtists(
+    fetchArtistRelatedArtists: MetadataProvider['fetchArtistRelatedArtists'],
+  ): this {
+    this.provider.fetchArtistRelatedArtists = fetchArtistRelatedArtists;
+    return this;
+  }
+
   build(): MetadataProvider {
     return this.provider;
   }
