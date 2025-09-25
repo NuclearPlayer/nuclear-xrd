@@ -23,7 +23,7 @@ export const ArtistSimilarArtists: FC<ArtistSimilarArtistsProps> = ({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-4">
-        <Loader />
+        <Loader data-testid="similar-artists-loader" />
       </div>
     );
   }

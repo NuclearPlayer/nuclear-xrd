@@ -16,12 +16,17 @@ const loaderVariants = cva('', {
   },
 });
 
-type LoaderProps = VariantProps<typeof loaderVariants>;
+type LoaderProps = {
+  'data-testid'?: string;
+} & VariantProps<typeof loaderVariants>;
 
-export const Loader: FC<LoaderProps> = ({ size }) => (
+export const Loader: FC<LoaderProps> = ({
+  size,
+  'data-testid': dataTestId = 'loader',
+}) => (
   <LoaderPinwheel
     size={loaderVariants({ size })}
-    //   Spinning animation
     className="animate-spin"
+    data-testid={dataTestId}
   />
 );

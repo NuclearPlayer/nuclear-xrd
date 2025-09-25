@@ -107,10 +107,10 @@ export function TrackTable<T extends Track = Track>({
                   className="border-border bg-primary border-b-2"
                 >
                   {headerGroup.headers.map((header) =>
-                    flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    ),
+                    flexRender(header.column.columnDef.header, {
+                      ...header.getContext(),
+                      key: header.id,
+                    }),
                   )}
                 </tr>
               ))}

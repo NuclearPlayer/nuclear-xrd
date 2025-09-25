@@ -28,15 +28,18 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
   return (
     <div className="relative">
       <div className="absolute h-100 w-full bg-gradient-to-b from-transparent to-black"></div>
-      {isLoading ? (
+      {isLoading && (
         <div className="flex h-100 w-full items-center justify-center">
-          <Loader size="xl" />
+          <Loader size="xl" data-testid="artist-header-loader" />
         </div>
-      ) : isError ? (
+      )}
+      {isError && (
         <div className="flex h-100 w-full flex-col items-center justify-center gap-3 p-6">
           <div className="text-accent-red">Failed to load artist details.</div>
         </div>
-      ) : (
+      )}
+
+      {!isLoading && !isError && (
         <>
           {cover && (
             <div

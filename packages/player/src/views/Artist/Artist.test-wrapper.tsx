@@ -6,9 +6,14 @@ import { SearchWrapper } from '../Search/Search.test-wrapper';
 export const ArtistWrapper = {
   async mount(header: string): Promise<RenderResult> {
     const component = await SearchWrapper.mount('test artist');
-    await userEvent.click(component.getByText('Artists'));
     await userEvent.click(component.getByText('Test Artist'));
     await screen.findByText(header);
+    return component;
+  },
+  async mountNoWait(): Promise<RenderResult> {
+    const component = await SearchWrapper.mount('test artist');
+    await userEvent.click(component.getByText('Test Artist'));
+    await new Promise((r) => setTimeout(r, 0));
     return component;
   },
   getHeader: (name: string) => screen.getByRole('heading', { name }),

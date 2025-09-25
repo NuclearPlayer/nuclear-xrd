@@ -22,7 +22,7 @@ export const ArtistPopularTracks: FC<ArtistPopularTracksProps> = ({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-4">
-        <Loader />
+        <Loader data-testid="popular-tracks-loader" />
       </div>
     );
   }

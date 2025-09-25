@@ -27,7 +27,7 @@ export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
         className="flex items-center justify-center p-8"
         data-testid={dataTestId}
       >
-        <Loader />
+        <Loader data-testid="artist-albums-loader" />
       </div>
     );
   }
