@@ -36,7 +36,7 @@ export const ArtistPopularTracks: FC<ArtistPopularTracksProps> = ({
   return (
     <div className="flex flex-col">
       <h2 className="mb-2 text-lg font-semibold">Popular tracks</h2>
-      <TrackTable tracks={tracks ?? []} />
+      <TrackTable tracks={tracks ?? []} features={{ header: false }} />
     </div>
   );
 };
