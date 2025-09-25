@@ -79,6 +79,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                 <button
                   class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                   data-headlessui-state=""
+                  data-testid="card"
                   type="submit"
                 >
                   <div
@@ -150,6 +151,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                 <button
                   class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                   data-headlessui-state=""
+                  data-testid="card"
                   type="submit"
                 >
                   <div
@@ -221,6 +223,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                 <button
                   class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                   data-headlessui-state=""
+                  data-testid="card"
                   type="submit"
                 >
                   <div
@@ -292,6 +295,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                 <button
                   class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                   data-headlessui-state=""
+                  data-testid="card"
                   type="submit"
                 >
                   <div
@@ -363,6 +367,7 @@ exports[`Tabs > (Snapshot) renders correctly 1`] = `
                 <button
                   class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                   data-headlessui-state=""
+                  data-testid="card"
                   type="submit"
                 >
                   <div

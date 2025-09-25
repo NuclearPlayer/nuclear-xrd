@@ -3,7 +3,7 @@
 exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 <DocumentFragment>
   <div
-    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow opacity-30 relative transition-opacity duration-250"
+    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow opacity-30 relative cursor-default transition-opacity duration-250"
     data-testid="plugin-item"
   >
     <div
@@ -44,19 +44,19 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
         class="min-w-0 flex-1"
       >
         <h3
-          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
+          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold select-none"
           data-testid="plugin-name"
         >
           Disabled Plugin
         </h3>
         <p
-          class="text-foreground-secondary mt-1 text-sm"
+          class="text-foreground-secondary mt-1 text-sm select-none"
           data-testid="plugin-author"
         >
           by Nuclear Team
         </p>
         <p
-          class="text-foreground-secondary mt-2 text-sm leading-relaxed"
+          class="text-foreground-secondary mt-2 text-sm leading-relaxed select-none"
           data-testid="plugin-description"
         >
           This plugin is currently disabled.
@@ -78,7 +78,7 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 <DocumentFragment>
   <div
-    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow relative transition-opacity duration-250"
+    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow relative cursor-default transition-opacity duration-250"
     data-testid="plugin-item"
   >
     <div
@@ -88,19 +88,19 @@ exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
         class="min-w-0 flex-1"
       >
         <h3
-          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
+          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold select-none"
           data-testid="plugin-name"
         >
           Accessory Plugin
         </h3>
         <p
-          class="text-foreground-secondary mt-1 text-sm"
+          class="text-foreground-secondary mt-1 text-sm select-none"
           data-testid="plugin-author"
         >
           by Nuclear Team
         </p>
         <p
-          class="text-foreground-secondary mt-2 text-sm leading-relaxed"
+          class="text-foreground-secondary mt-2 text-sm leading-relaxed select-none"
           data-testid="plugin-description"
         >
           Has accessory on the right.
@@ -126,7 +126,7 @@ exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 exports[`PluginItem > (Snapshot) renders with all props 1`] = `
 <DocumentFragment>
   <div
-    class="text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow ring-accent-orange cursor-default ring-2 select-none ring-inset relative transition-opacity duration-250 border-accent-red"
+    class="text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow ring-accent-orange ring-2 select-none ring-inset relative cursor-default transition-opacity duration-250 border-accent-red"
     data-testid="plugin-item"
   >
     <div
@@ -167,7 +167,7 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
         class="min-w-0 flex-1"
       >
         <h3
-          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold"
+          class="text-foreground inline-flex items-center gap-4 text-lg leading-tight font-bold select-none"
           data-testid="plugin-name"
         >
           YouTube Music
@@ -201,13 +201,13 @@ exports[`PluginItem > (Snapshot) renders with all props 1`] = `
           </button>
         </h3>
         <p
-          class="text-foreground-secondary mt-1 text-sm"
+          class="text-foreground-secondary mt-1 text-sm select-none"
           data-testid="plugin-author"
         >
           by Nuclear Team
         </p>
         <p
-          class="text-foreground-secondary mt-2 text-sm leading-relaxed"
+          class="text-foreground-secondary mt-2 text-sm leading-relaxed select-none"
           data-testid="plugin-description"
         >
           Stream music directly from YouTube Music with full search and playlist support.
