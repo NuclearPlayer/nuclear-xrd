@@ -457,7 +457,7 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
             >
               <img
                 alt=""
-                class="size-full object-cover"
+                class="size-full object-cover select-none"
                 src="https://picsum.photos/64"
               />
             </div>

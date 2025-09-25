@@ -721,7 +721,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
             >
               <img
                 alt=""
-                class="size-full object-cover"
+                class="size-full object-cover select-none"
                 src="https://picsum.photos/64"
               />
             </div>

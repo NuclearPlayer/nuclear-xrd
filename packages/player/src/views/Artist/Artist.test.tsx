@@ -115,7 +115,7 @@ describe('Artist view', () => {
 
   it('(Snapshot) renders the artist view', async () => {
     const component = await ArtistWrapper.mount('The Beatles');
-    expect(component).toMatchSnapshot();
+    expect(component.asFragment()).toMatchSnapshot();
   });
 
   it.skip('(Snapshot) renders artist view with details, popular tracks, similar artists, and albums', async () => {
@@ -133,7 +133,7 @@ describe('Artist view', () => {
     expect(albums).toMatchSnapshot();
   });
 
-  it('(Snapshot) shows loading states for details, top tracks, related artists, and albums', async () => {
+  it('shows loading states for details, top tracks, related artists, and albums', async () => {
     providersServiceHost.clear();
     const delay = () => {
       return new Promise<never>(() => {});
