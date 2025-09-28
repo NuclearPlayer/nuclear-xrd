@@ -98,7 +98,7 @@ export const startAdvancedThemeWatcher = async (): Promise<void> => {
           return;
         }
 
-        if (!event.paths.some((p) => p === currentPath)) {
+        if (!event.paths.some((p) => p.endsWith(currentPath))) {
           return;
         }
 

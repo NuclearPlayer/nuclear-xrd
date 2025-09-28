@@ -157,7 +157,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
   >
     <header
-      class="bg-background border-border flex h-12 items-center border-b-2 px-4"
+      class="bg-background-secondary border-border flex h-12 items-center border-b-2 px-4"
     >
       <svg
         class="inline-flex h-6 w-6"
@@ -510,7 +510,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             transition="[object Object]"
           >
             <div
-              class="relative h-full w-full"
+              class="relative h-full w-full bg-background"
             >
               <div
                 class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
@@ -535,13 +535,29 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                       src="https://img/avatar.jpg"
                     />
                     <h1
-                      class="cursor-default text-6xl text-white select-none"
+                      class="flex cursor-default flex-col gap-2 text-6xl text-white select-none"
                     >
                       The Beatles
+                      <div
+                        class="flex flex-wrap gap-2"
+                      >
+                        <span
+                          class="bg-primary rounded px-2 py-1 font-sans text-sm"
+                        >
+                          rock
+                        </span>
+                        <span
+                          class="bg-primary rounded px-2 py-1 font-sans text-sm"
+                        >
+                          indie
+                        </span>
+                        <span
+                          class="bg-primary rounded px-2 py-1 font-sans text-sm"
+                        >
+                          brit-pop
+                        </span>
+                      </div>
                     </h1>
-                    <div>
-                      rockindiebrit-pop
-                    </div>
                     <div>
                       On Tour
                     </div>
@@ -565,7 +581,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                         class="relative flex max-h-full overflow-auto"
                       >
                         <table
-                          class="border-border relative m-2 w-full border-2 select-none"
+                          class="border-border relative w-full border-2"
                           role="table"
                         >
                           <thead>
@@ -573,6 +589,45 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                               class="border-border bg-primary border-b-2"
                               role="row"
                             >
+                              <th
+                                class="text-center"
+                                role="columnheader"
+                              >
+                                <span
+                                  class="flex w-full items-center justify-center"
+                                >
+                                  <svg
+                                    aria-hidden="true"
+                                    class="lucide lucide-image h-4 w-4"
+                                    fill="none"
+                                    height="24"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <rect
+                                      height="18"
+                                      rx="2"
+                                      ry="2"
+                                      width="18"
+                                      x="3"
+                                      y="3"
+                                    />
+                                    <circle
+                                      cx="9"
+                                      cy="9"
+                                      r="2"
+                                    />
+                                    <path
+                                      d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"
+                                    />
+                                  </svg>
+                                </span>
+                              </th>
                               <th
                                 class="px-2 text-left cursor-pointer"
                                 role="columnheader"
@@ -612,14 +667,14 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                         Similar artists
                       </h2>
                       <ul
-                        class="divide-border divide-y"
+                        class="divide-border bg-primary border-border divide-y-2 border border-2"
                       >
                         <li
-                          class="flex items-center gap-3 py-2"
+                          class="flex cursor-default items-center gap-3 select-none"
                         >
                           <img
                             alt="John Lennon"
-                            class="h-10 w-10 rounded object-cover"
+                            class="h-10 w-10 object-cover"
                             src="https://img/similar1.jpg"
                           />
                           <span
@@ -629,11 +684,11 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                           </span>
                         </li>
                         <li
-                          class="flex items-center gap-3 py-2"
+                          class="flex cursor-default items-center gap-3 select-none"
                         >
                           <img
                             alt="Kurt Cobain"
-                            class="h-10 w-10 rounded object-cover"
+                            class="h-10 w-10 object-cover"
                             src="https://img/similar2.jpg"
                           />
                           <span
@@ -654,7 +709,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                     style="scrollbar-width: none;"
                   >
                     <div
-                      class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4"
+                      class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4 px-4"
                       data-testid="artist-albums-grid"
                       role="grid"
                     >
@@ -796,7 +851,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
       </div>
     </div>
     <footer
-      class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+      class="bg-background-secondary border-border flex h-16 items-center border-t-2 px-4"
     >
       <div
         class="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4"

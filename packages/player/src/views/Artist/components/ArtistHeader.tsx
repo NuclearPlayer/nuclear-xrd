@@ -1,3 +1,4 @@
+import isEmpty from 'lodash-es/isEmpty';
 import { FC } from 'react';
 
 import { pickArtwork } from '@nuclearplayer/model';
@@ -19,7 +20,6 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
     isLoading,
     isError,
   } = useArtistDetails(providerId, artistId);
-
   const cover = artist ? pickArtwork(artist.artwork, 'cover', 1200) : undefined;
   const avatar = artist
     ? pickArtwork(artist.artwork, 'avatar', 300)
@@ -56,11 +56,28 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
                   alt={`${artist.name} avatar`}
                 />
               )}
-              <h1 className="cursor-default text-6xl text-white select-none">
+              <h1 className="flex cursor-default flex-col gap-2 text-6xl text-white select-none">
                 {artist.name}
+                {!isEmpty(artist.tags) && (
+                  <div className="flex flex-wrap gap-2">
+                    {artist.tags?.map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-primary rounded px-2 py-1 font-sans text-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </h1>
-              <div>{artist.tags}</div>
-              {artist.onTour ? <div>On Tour</div> : null}
+              {artist.onTour ? (
+                <div>On Tour</div>
+              ) : (
+                <div className="bg-primary py-1d absolute top-0 right-0 flex items-center justify-center rounded px-2 text-white">
+                  Not on Tour
+                </div>
+              )}
             </div>
           )}
         </>

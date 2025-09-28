@@ -35,7 +35,7 @@ export const PluginItem: FC<PluginItemProps> = ({
 }) => (
   <Box
     data-testid="plugin-item"
-    variant="secondary"
+    variant="tertiary"
     className={cn(
       {
         'ring-accent-orange cursor-default ring-2 select-none ring-inset':

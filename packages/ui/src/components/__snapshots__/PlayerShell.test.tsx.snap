@@ -6,7 +6,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
   >
     <header
-      class="bg-background border-border flex h-12 items-center border-b-2 px-4"
+      class="bg-background-secondary border-border flex h-12 items-center border-b-2 px-4"
     >
       <svg
         class="inline-flex h-6 w-6"
@@ -207,7 +207,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
       </div>
     </div>
     <footer
-      class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+      class="bg-background-secondary border-border flex h-16 items-center border-t-2 px-4"
     />
   </div>
 </DocumentFragment>

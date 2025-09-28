@@ -15,7 +15,7 @@ export const Artist: FC<ArtistProps> = () => {
     from: '/artist/$providerId/$artistId',
   });
   return (
-    <ScrollableArea>
+    <ScrollableArea className="bg-background">
       <ArtistHeader providerId={providerId} artistId={artistId} />
 
       <div className="flex flex-col gap-6 p-6 md:flex-row">

@@ -100,7 +100,7 @@
 
 @layer base {
   body {
-    @apply text-foreground bg-background font-normal;
+    @apply text-foreground bg-background cursor-default font-normal select-none;
   }
 
   h1 {

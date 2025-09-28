@@ -13,7 +13,7 @@ export const TopBar: FC<TopBarProps> = ({ children, className = '' }) => {
   return (
     <header
       className={cn(
-        'bg-background border-border flex h-12 items-center border-b-2 px-4',
+        'bg-background-secondary border-border flex h-12 items-center border-b-2 px-4',
         className,
       )}
     >

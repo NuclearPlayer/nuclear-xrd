@@ -3,7 +3,7 @@
 exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 <DocumentFragment>
   <div
-    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow opacity-30 relative cursor-default transition-opacity duration-250"
+    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background-secondary shadow-shadow opacity-30 relative cursor-default transition-opacity duration-250"
     data-testid="plugin-item"
   >
     <div
@@ -78,7 +78,7 @@ exports[`PluginItem > (Snapshot) renders disabled state 1`] = `
 exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 <DocumentFragment>
   <div
-    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow relative cursor-default transition-opacity duration-250"
+    class="border-border text-foreground flex h-full w-full rounded border-2 p-4 bg-background-secondary shadow-shadow relative cursor-default transition-opacity duration-250"
     data-testid="plugin-item"
   >
     <div
@@ -126,7 +126,7 @@ exports[`PluginItem > (Snapshot) renders rightAccessory content 1`] = `
 exports[`PluginItem > (Snapshot) renders with all props 1`] = `
 <DocumentFragment>
   <div
-    class="text-foreground flex h-full w-full rounded border-2 p-4 bg-background shadow-shadow ring-accent-orange ring-2 select-none ring-inset relative cursor-default transition-opacity duration-250 border-accent-red"
+    class="text-foreground flex h-full w-full rounded border-2 p-4 bg-background-secondary shadow-shadow ring-accent-orange ring-2 select-none ring-inset relative cursor-default transition-opacity duration-250 border-accent-red"
     data-testid="plugin-item"
   >
     <div

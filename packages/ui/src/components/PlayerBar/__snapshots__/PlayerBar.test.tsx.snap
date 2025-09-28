@@ -3,7 +3,7 @@
 exports[`PlayerBar > (Snapshot) active states render 1`] = `
 <DocumentFragment>
   <footer
-    class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+    class="bg-background-secondary border-border flex h-16 items-center border-t-2 px-4"
   >
     <div
       class="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4"
@@ -287,7 +287,7 @@ exports[`PlayerBar > (Snapshot) active states render 1`] = `
 exports[`PlayerBar > (Snapshot) default render 1`] = `
 <DocumentFragment>
   <footer
-    class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+    class="bg-background-secondary border-border flex h-16 items-center border-t-2 px-4"
   >
     <div
       class="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4"
@@ -563,7 +563,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
     style="width: 420px;"
   >
     <footer
-      class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+      class="bg-background-secondary border-border flex h-16 items-center border-t-2 px-4"
     >
       <div
         class="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4"
@@ -837,7 +837,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
 exports[`PlayerBar > (Snapshot) no artwork fallback 1`] = `
 <DocumentFragment>
   <footer
-    class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+    class="bg-background-secondary border-border flex h-16 items-center border-t-2 px-4"
   >
     <div
       class="grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4"
