@@ -55,7 +55,7 @@ const SearchBox = () => {
           }
         }}
         placeholder="Search"
-        className="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+        className="bg-background border-border ml-4 w-80 rounded-md border-2 px-3 py-1 outline-none"
       />
     </div>
   );

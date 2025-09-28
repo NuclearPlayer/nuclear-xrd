@@ -4,7 +4,7 @@ import { ComponentProps, FC, ReactNode } from 'react';
 import { cn } from '../../utils';
 
 const boxVariants = cva(
-  'border-border text-foreground flex h-full w-full rounded border-2 p-4',
+  'border-border text-foreground flex h-full w-full rounded-md border-2 p-4',
   {
     variants: {
       variant: {

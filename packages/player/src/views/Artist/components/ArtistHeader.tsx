@@ -63,7 +63,7 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
                     {artist.tags?.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-primary rounded px-2 py-1 font-sans text-sm"
+                        className="bg-primary rounded-md px-2 py-1 font-sans text-sm"
                       >
                         {tag}
                       </span>
@@ -74,7 +74,7 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
               {artist.onTour ? (
                 <div>On Tour</div>
               ) : (
-                <div className="bg-primary py-1d absolute top-0 right-0 flex items-center justify-center rounded px-2 text-white">
+                <div className="bg-primary py-1d absolute top-0 right-0 flex items-center justify-center rounded-md px-2 text-white">
                   Not on Tour
                 </div>
               )}

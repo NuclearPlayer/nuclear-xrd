@@ -36,7 +36,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
       </svg>
       <div>
         <input
-          class="bg-background border-border ml-4 w-80 rounded border-2 px-3 py-1 outline-none"
+          class="bg-background border-border ml-4 w-80 rounded-md border-2 px-3 py-1 outline-none"
           data-testid="search-box"
           placeholder="Search"
           value=""
@@ -116,7 +116,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
           class="mb-4 flex flex-row items-center justify-end"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-left"
             type="submit"
@@ -161,7 +161,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="submit"
               >
@@ -220,7 +220,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="submit"
               >
@@ -412,7 +412,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="submit"
               >
@@ -509,7 +509,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
                     class="flex items-center"
                   >
                     <button
-                      class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-9 px-3"
+                      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-9 px-3"
                       data-headlessui-state=""
                       type="submit"
                     >
@@ -543,7 +543,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
           class="mb-4 flex flex-row items-center justify-start"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-right"
             type="submit"
@@ -599,7 +599,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
             class="flex min-w-0 items-center gap-3"
           >
             <div
-              class="border-border bg-background-secondary size-12 shrink-0 overflow-hidden rounded border-2"
+              class="border-border bg-background-secondary size-12 shrink-0 overflow-hidden rounded-md border-2"
             >
               <img
                 alt=""
@@ -630,7 +630,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
             class="flex items-center justify-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="submit"
             >
@@ -665,7 +665,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="submit"
             >
@@ -691,7 +691,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
               data-headlessui-state=""
               type="submit"
             >
@@ -714,7 +714,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="submit"
             >
@@ -740,7 +740,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="submit"
             >
@@ -780,7 +780,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
             class="flex items-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="submit"
             >
@@ -821,7 +821,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
                     class="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2"
                   >
                     <div
-                      class="border-border bg-background-input relative h-3 w-full rounded border-2"
+                      class="border-border bg-background-input relative h-3 w-full rounded-md border-2"
                     >
                       <div
                         class="bg-primary absolute top-0 left-0 h-full rounded-l"

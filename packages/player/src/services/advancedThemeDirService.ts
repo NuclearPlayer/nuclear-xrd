@@ -3,7 +3,7 @@ import {
   BaseDirectory,
   readDir,
   readTextFile,
-  watch,
+  watchImmediate,
 } from '@tauri-apps/plugin-fs';
 
 import { parseAdvancedTheme } from '@nuclearplayer/themes';
@@ -81,7 +81,7 @@ export const startAdvancedThemeWatcher = async (): Promise<void> => {
     return;
   }
   try {
-    unwatch = await watch(
+    unwatch = await watchImmediate(
       dir,
       async (event) => {
         await refreshAdvancedThemeList();
