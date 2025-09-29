@@ -24,13 +24,13 @@ export const WithContent: Story = {
           Nuclear Music Player
         </span>
         <div className="flex gap-2">
-          <button className="bg-secondary rounded px-2 py-1 text-xs">
+          <button className="bg-secondary rounded-md px-2 py-1 text-xs">
             File
           </button>
-          <button className="bg-secondary rounded px-2 py-1 text-xs">
+          <button className="bg-secondary rounded-md px-2 py-1 text-xs">
             Edit
           </button>
-          <button className="bg-secondary rounded px-2 py-1 text-xs">
+          <button className="bg-secondary rounded-md px-2 py-1 text-xs">
             View
           </button>
         </div>

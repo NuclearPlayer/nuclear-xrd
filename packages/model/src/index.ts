@@ -26,18 +26,29 @@ export type ArtworkSet = {
 
 export type ArtistRef = {
   name: string;
+  disambiguation?: string;
+  artwork?: ArtworkSet;
   source: ProviderRef;
 };
 
 export type AlbumRef = {
   title: string;
   artists?: ArtistRef[];
+  artwork?: ArtworkSet;
   source: ProviderRef;
 };
 
 export type TrackRef = {
   title: string;
   artists: ArtistRef[];
+  artwork?: ArtworkSet;
+  source: ProviderRef;
+};
+
+export type PlaylistRef = {
+  id: string;
+  name: string;
+  artwork?: ArtworkSet;
   source: ProviderRef;
 };
 
@@ -95,6 +106,8 @@ export type Album = {
 export type Artist = {
   name: string;
   disambiguation?: string;
+  bio?: string;
+  onTour?: boolean;
   artwork?: ArtworkSet;
   tags?: string[];
   source: ProviderRef;

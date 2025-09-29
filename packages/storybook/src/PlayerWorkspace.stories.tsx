@@ -117,7 +117,7 @@ const MockTrackList = () => (
       ].map((track, index) => (
         <div
           key={index}
-          className="hover:bg-background hover:border-border flex items-center justify-between rounded border border-transparent p-3 transition-all"
+          className="hover:bg-background hover:border-border flex items-center justify-between rounded-md border border-transparent p-3 transition-all"
         >
           <div className="flex items-center gap-4">
             <Button

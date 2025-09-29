@@ -20,7 +20,7 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
         type="button"
       >
         <button
-          class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
+          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
           data-headlessui-state="hover"
           data-hover=""
           type="submit"
@@ -52,7 +52,7 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
       />
       <div
         animate="[object Object]"
-        class="text-foreground bg-primary border-border rounded border-2 px-4 py-2 leading-5 select-none translate-x-2 -translate-y-2"
+        class="text-foreground bg-primary border-border rounded-md border-2 px-4 py-2 leading-5 select-none translate-x-2 -translate-y-2"
         exit="[object Object]"
         initial="[object Object]"
         style="overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
@@ -91,7 +91,7 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
         type="button"
       >
         <button
-          class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
+          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
           data-headlessui-state="hover"
           data-hover=""
           type="submit"
@@ -126,7 +126,7 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
       />
       <div
         animate="[object Object]"
-        class="text-foreground bg-primary border-border rounded border-2 px-4 py-2 leading-5 select-none"
+        class="text-foreground bg-primary border-border rounded-md border-2 px-4 py-2 leading-5 select-none"
         exit="[object Object]"
         initial="[object Object]"
       >

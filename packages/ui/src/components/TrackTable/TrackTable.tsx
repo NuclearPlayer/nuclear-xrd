@@ -12,6 +12,7 @@ import { useRef } from 'react';
 import { Track } from '@nuclearplayer/model';
 
 import { cn } from '../../utils';
+import { defaultDisplay, defaultFeatures } from './defaults';
 import { FilterBar } from './FilterBar';
 import { useColumns } from './hooks/useColumns';
 import { useGlobalFilter } from './hooks/useGlobalFilter';
@@ -35,12 +36,25 @@ export function TrackTable<T extends Track = Track>({
   rowHeight = DEFAULT_ROW_HEIGHT,
   overscan = DEFAULT_OVERSCAN,
 }: TrackTableProps<T>) {
+  const resolvedFeatures = {
+    ...defaultFeatures,
+    ...features,
+  };
+
+  const resolvedDisplay = {
+    ...defaultDisplay,
+    ...display,
+  };
+
   const { sorting, setSorting, isSorted } = useSorting();
   const { onDragStart, onDragEnd } = useReorder<T>({ tracks, onReorder });
   const { globalFilter, setGlobalFilter, globalFilterFn, hasFilter } =
     useGlobalFilter<T>();
 
-  const columns: ColumnDef<T>[] = useColumns<T>({ display, labels });
+  const columns: ColumnDef<T>[] = useColumns<T>({
+    display: resolvedDisplay,
+    labels,
+  });
 
   const table = useReactTable({
     columns,
@@ -67,14 +81,14 @@ export function TrackTable<T extends Track = Track>({
   });
 
   const isReorderable = Boolean(
-    features?.reorderable && !isSorted && !hasFilter,
+    resolvedFeatures?.reorderable && !isSorted && !hasFilter,
   );
 
   const dndItems = virtualItems.map((v) => rows[v.index].original.source.id);
 
   return (
     <TrackTableProvider value={{ isReorderable }}>
-      {features?.filterable && (
+      {resolvedFeatures?.filterable && (
         <FilterBar
           value={globalFilter}
           onChange={setGlobalFilter}
@@ -95,26 +109,28 @@ export function TrackTable<T extends Track = Track>({
           <table
             role="table"
             className={cn(
-              'border-border relative m-2 w-full border-2 select-none',
+              'border-border relative w-full border-2',
               classes?.root,
             )}
           >
-            <thead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr
-                  key={headerGroup.id}
-                  role="row"
-                  className="border-border bg-primary border-b-2"
-                >
-                  {headerGroup.headers.map((header) =>
-                    flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    ),
-                  )}
-                </tr>
-              ))}
-            </thead>
+            {resolvedFeatures?.header && (
+              <thead>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr
+                    key={headerGroup.id}
+                    role="row"
+                    className="border-border bg-primary border-b-2"
+                  >
+                    {headerGroup.headers.map((header) =>
+                      flexRender(header.column.columnDef.header, {
+                        ...header.getContext(),
+                        key: header.id,
+                      }),
+                    )}
+                  </tr>
+                ))}
+              </thead>
+            )}
             <VirtualizedBody
               rows={rows}
               virtualItems={virtualItems}

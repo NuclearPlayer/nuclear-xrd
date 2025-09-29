@@ -146,7 +146,7 @@ export const SliderTrack: FC = () => {
   const { percentage } = useSliderContext();
   return (
     <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2">
-      <div className="border-border bg-background-input relative h-3 w-full rounded border-2">
+      <div className="border-border bg-background-input relative h-3 w-full rounded-md border-2">
         <div
           className="bg-primary absolute top-0 left-0 h-full rounded-l"
           style={{ width: `${percentage}%` }}

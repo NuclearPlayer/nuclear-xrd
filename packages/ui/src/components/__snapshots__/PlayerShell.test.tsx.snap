@@ -6,7 +6,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
   >
     <header
-      class="bg-background border-border flex h-12 items-center border-b-2 px-4"
+      class="bg-background-secondary border-border flex h-12 items-center border-b-2 px-4"
     >
       <svg
         class="inline-flex h-6 w-6"
@@ -108,7 +108,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
           class="mb-4 flex flex-row items-center justify-end"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-left"
             type="submit"
@@ -163,7 +163,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
           class="mb-4 flex flex-row items-center justify-start"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-right"
             type="submit"
@@ -207,7 +207,7 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
       </div>
     </div>
     <footer
-      class="bg-background border-border flex h-16 items-center border-t-2 px-4"
+      class="bg-background-secondary border-border flex h-16 items-center border-t-2 px-4"
     />
   </div>
 </DocumentFragment>

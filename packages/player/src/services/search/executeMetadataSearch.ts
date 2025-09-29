@@ -28,14 +28,15 @@ const resolveTypes = (
   provider: MetadataProvider,
   requested: SearchCategory[] | undefined,
 ): SearchCategory[] => {
-  return requested ?? onlyCategories(provider.capabilities);
+  return requested ?? onlyCategories(provider.searchCapabilities);
 };
 
 export const executeMetadataSearch = async (
   provider: MetadataProvider,
   params: SearchParams,
 ): Promise<SearchResults> => {
-  const unified = provider.capabilities?.includes('unified') && provider.search;
+  const unified =
+    provider.searchCapabilities?.includes('unified') && provider.search;
   if (unified) {
     return provider.search!(params);
   }

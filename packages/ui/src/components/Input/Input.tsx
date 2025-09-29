@@ -28,7 +28,7 @@ const inputVariants = cva(
         error: 'border-accent-red',
       },
       withAddon: {
-        false: 'rounded border-2',
+        false: 'rounded-md border-2',
         true: 'rounded-l border-t-2 border-r-0 border-b-2 border-l-2',
       },
     },

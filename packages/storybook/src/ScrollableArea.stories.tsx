@@ -19,7 +19,7 @@ const VerticalContent = () => (
     {Array.from({ length: 20 }, (_, i) => (
       <div
         key={i}
-        className="bg-primary border-border text-foreground flex h-16 items-center justify-center rounded border-2 p-4"
+        className="bg-primary border-border text-foreground flex h-16 items-center justify-center rounded-md border-2 p-4"
       >
         Item {i + 1}
       </div>
@@ -32,7 +32,7 @@ const HorizontalContent = () => (
     {Array.from({ length: 20 }, (_, i) => (
       <div
         key={i}
-        className="bg-primary border-border text-foreground flex w-32 flex-shrink-0 items-center justify-center rounded border-2 p-4"
+        className="bg-primary border-border text-foreground flex w-32 flex-shrink-0 items-center justify-center rounded-md border-2 p-4"
       >
         Item {i + 1}
       </div>
@@ -47,7 +47,7 @@ const BothScrollContent = () => (
         {Array.from({ length: 10 }, (_, j) => (
           <div
             key={j}
-            className="bg-primary border-border text-foreground flex h-16 w-32 flex-shrink-0 items-center justify-center rounded border-2 p-2 text-sm"
+            className="bg-primary border-border text-foreground flex h-16 w-32 flex-shrink-0 items-center justify-center rounded-md border-2 p-2 text-sm"
           >
             {i + 1}-{j + 1}
           </div>

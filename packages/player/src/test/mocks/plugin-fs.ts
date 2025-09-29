@@ -1,4 +1,5 @@
 import * as fs from '@tauri-apps/plugin-fs';
+import { WatchEvent } from '@tauri-apps/plugin-fs';
 import { type Mock } from 'vitest';
 
 vi.mock('@tauri-apps/plugin-fs', () => ({
@@ -7,16 +8,21 @@ vi.mock('@tauri-apps/plugin-fs', () => ({
   readDir: vi.fn(),
   readTextFile: vi.fn(),
   remove: vi.fn(),
-  watch: vi.fn(async (_dir: string, cb: (evt: { paths: string[] }) => void) => {
-    watchCb = cb;
-    return () => {};
-  }),
+  watchImmediate: vi.fn(
+    async (
+      _paths: string | string[] | URL | URL[],
+      cb: (event: WatchEvent) => void,
+    ) => {
+      watchImmediateCb = cb;
+      return () => {};
+    },
+  ),
   BaseDirectory: {
     AppData: '/home/user/.local/share/com.nuclearplayer',
   },
 }));
 
-export let watchCb: ((evt: { paths: string[] }) => void) | null = null;
+export let watchImmediateCb: ((event: WatchEvent) => void) | null = null;
 
 const readTextFileMap: Record<string, string> = {};
 

@@ -36,7 +36,7 @@ export const Themes = () => {
                   variant="text"
                   size="flexible"
                   className={cn(
-                    'bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded border-2 px-4 py-2 transition hover:shadow-none',
+                    'bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded-md border-2 px-4 py-2 transition hover:shadow-none',
                     {
                       'bg-primary': isActive,
                     },

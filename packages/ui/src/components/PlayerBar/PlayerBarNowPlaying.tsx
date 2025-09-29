@@ -17,9 +17,13 @@ export const PlayerBarNowPlaying: FC<PlayerBarNowPlayingProps> = ({
   className = '',
 }) => (
   <div className={cn('flex min-w-0 items-center gap-3', className)}>
-    <div className="border-border bg-background-secondary size-12 shrink-0 overflow-hidden rounded border-2">
+    <div className="border-border bg-background-secondary size-12 shrink-0 overflow-hidden rounded-md border-2">
       {coverUrl ? (
-        <img src={coverUrl} alt="" className="size-full object-cover" />
+        <img
+          src={coverUrl}
+          alt=""
+          className="size-full object-cover select-none"
+        />
       ) : (
         <div className="text-foreground-secondary flex size-full items-center justify-center">
           <Music2 size={20} />

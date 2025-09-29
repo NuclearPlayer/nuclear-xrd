@@ -12,7 +12,7 @@ exports[`Input > (Snapshot) renders text input with description 1`] = `
     Username
   </label>
   <input
-    class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded border-2"
+    class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
     data-headlessui-state=""
     id="input-username"
     placeholder="your-username"
@@ -41,7 +41,7 @@ exports[`Input > (Snapshot) renders with error and no description 1`] = `
   <input
     aria-errormessage="input-username-error-error"
     aria-invalid="true"
-    class="bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 border-accent-red rounded border-2"
+    class="bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 border-accent-red rounded-md border-2"
     data-headlessui-state="invalid"
     data-invalid=""
     id="input-username-error"
