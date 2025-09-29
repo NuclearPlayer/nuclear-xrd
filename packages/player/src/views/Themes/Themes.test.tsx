@@ -11,7 +11,7 @@ import {
   stopAdvancedThemeWatcher,
 } from '../../services/advancedThemeDirService';
 import { useSettingsStore } from '../../stores/settingsStore';
-import { PluginFsMock, watchCb } from '../../test/mocks/plugin-fs';
+import { PluginFsMock, watchImmediateCb } from '../../test/mocks/plugin-fs';
 import { ThemesWrapper } from './Themes.test-wrapper';
 
 vi.mock('@tauri-apps/plugin-store', async () => {
@@ -160,7 +160,7 @@ describe('Themes view', async () => {
     await ThemesWrapper.selectAdvancedTheme('My Theme');
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
 
-    watchCb?.({ paths: ['themes/my.json'] });
+    watchImmediateCb?.({ paths: ['themes/my.json'], type: 'any', attrs: {} });
 
     await waitFor(() =>
       expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(2),
@@ -196,7 +196,7 @@ describe('Themes view', async () => {
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
 
     // Change unrelated file -> no reload
-    watchCb?.({ paths: ['/appdata/themes/other.json'] });
+    watchImmediateCb?.({ paths: ['/appdata/themes/other.json'] });
     await new Promise((r) => setTimeout(r, 0));
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
 
@@ -204,7 +204,7 @@ describe('Themes view', async () => {
     await ThemesWrapper.selectDefaultTheme();
 
     // Now even if the same file changes, no reload should occur
-    watchCb?.({ paths: ['/appdata/themes/my.json'] });
+    watchImmediateCb?.({ paths: ['/appdata/themes/my.json'] });
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
   });
 
