@@ -196,7 +196,11 @@ describe('Themes view', async () => {
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
 
     // Change unrelated file -> no reload
-    watchImmediateCb?.({ paths: ['/appdata/themes/other.json'] });
+    watchImmediateCb?.({
+      paths: ['/appdata/themes/other.json'],
+      type: 'any',
+      attrs: {},
+    });
     await new Promise((r) => setTimeout(r, 0));
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
 
@@ -204,7 +208,11 @@ describe('Themes view', async () => {
     await ThemesWrapper.selectDefaultTheme();
 
     // Now even if the same file changes, no reload should occur
-    watchImmediateCb?.({ paths: ['/appdata/themes/my.json'] });
+    watchImmediateCb?.({
+      paths: ['/appdata/themes/my.json'],
+      type: 'any',
+      attrs: {},
+    });
     expect(themes.applyAdvancedTheme).toHaveBeenCalledTimes(1);
   });
 
