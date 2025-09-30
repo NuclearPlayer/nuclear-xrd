@@ -63,6 +63,7 @@ jobs:
             pkg.exports['.'].import = './dist/index.js';
             
             delete pkg.dependencies['@nuclearplayer/ui'];
+            delete pkg.dependencies['@nuclearplayer/model'];
             
             require('fs').writeFileSync('./package.json', JSON.stringify(pkg, null, 2));
           "
