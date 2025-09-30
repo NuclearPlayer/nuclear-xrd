@@ -1,6 +1,6 @@
 {
   "name": "@nuclearplayer/storybook",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Storybook for Nuclear UI components",
   "type": "module",
   "private": true,

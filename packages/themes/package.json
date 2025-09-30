@@ -1,6 +1,6 @@
 {
   "name": "@nuclearplayer/themes",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Theme engine and utilities for Nuclear",
   "type": "module",
   "main": "./src/index.ts",

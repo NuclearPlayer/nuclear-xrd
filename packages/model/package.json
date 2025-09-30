@@ -1,6 +1,6 @@
 {
   "name": "@nuclearplayer/model",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "main": "./src/index.ts",
   "module": "./src/index.ts",
