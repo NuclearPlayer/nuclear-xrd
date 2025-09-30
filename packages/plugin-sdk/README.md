@@ -1,53 +1,59 @@
 # Nuclear Plugin SDK
 
-Official toolkit for building Nuclear plugins.
+Build plugins for Nuclear music player.
 
-## 1. What Is A Nuclear Plugin?
-A small JavaScript/TypeScript bundle that exports lifecycle hooks and ships with a `package.json` describing metadata (display name, icon, permissions, etc.). The app reads the manifest for metadata, then loads and executes your exported hooks in-process.
+Plugins are JavaScript/TypeScript modules that extend Nuclear's functionality. Write lifecycle hooks, register providers, and ship it as an npm package or local bundle.
 
-## 2. Quick Start
+## Quick Start
+
 ```bash
 mkdir my-plugin && cd my-plugin
 pnpm init -y
 pnpm add @nuclearplayer/plugin-sdk
-# add dev tooling of your choice (vite, tsup, esbuild, rollup)
 ```
 
 Create `src/index.ts`:
+
 ```ts
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
 export default {
   async onLoad(api: NuclearPluginAPI) {
+    console.log('Plugin loaded');
   },
   async onEnable(api: NuclearPluginAPI) {
+    console.log('Plugin enabled');
   },
   async onDisable() {
+    console.log('Plugin disabled');
   },
   async onUnload() {
+    console.log('Plugin unloaded');
   },
 };
 ```
 
-Bundle to `dist/index.js` (or set a custom `main`). Ensure the output is a CommonJS style bundle (assigns to `module.exports` or `exports.default`).
+Build it to `dist/index.js` as a CommonJS bundle.
 
-## 3. Manifest (package.json) Specification
-Required top-level fields:
-- `name`: Unique plugin id (used internally). Scoped names allowed.
-- `version`: Semver string.
-- `description`: One line summary shown to users.
-- `author`: Plain string.
+## Manifest (package.json)
 
-Optional standard fields:
-- `main`: Entry file path relative to package root. If omitted the loader tries `index.js` then `dist/index.js`.
+### Required fields
+- `name` - Unique plugin ID (scoped names allowed)
+- `version` - Semver version
+- `description` - One-line summary
+- `author` - Your name
 
-Optional Nuclear namespace (`nuclear`):
-- `displayName`: Friendly name (falls back to `name`).
-- `category`: Arbitrary grouping (examples: `source`, `integration`, `lyrics`, `utility`).
-- `icon`: See Icon spec below.
-- `permissions`: String array of declared capabilities (informational only right now).
+### Optional fields
+- `main` - Entry file path (defaults to `index.js` or `dist/index.js`)
 
-Example:
+### Nuclear-specific config
+Add a `nuclear` object for extra metadata:
+
+- `displayName` - Friendly name (defaults to `name`)
+- `category` - Arbitrary grouping (e.g., `source`, `integration`, `lyrics`)
+- `icon` - See below
+- `permissions` - Capabilities your plugin uses (informational only for now)
+
 ```json
 {
   "name": "@nuclear-plugin/lastfm",
@@ -64,20 +70,23 @@ Example:
 }
 ```
 
-## 4. Icon Specification
+## Icons
+
 ```ts
 type PluginIcon = { type: 'link'; link: string };
 ```
+
 Link icons should point to a local file path or remote URL; keep them small (<= 64x64, optimized).
 
-## 5. Lifecycle Hooks
-All hooks are optional. Export a default object containing any of:
-- `onLoad(api)`: Runs after the plugin code is first evaluated and manifest metadata processed.
-- `onEnable(api)`: Runs when user enables the plugin (may happen multiple times across sessions).
-- `onDisable()`: Runs when disabled.
-- `onUnload()`: Runs before the plugin is fully removed from memory.
+## Lifecycle Hooks
 
-Typical pattern:
+All hooks are optional. Export a default object with any of:
+
+- `onLoad(api)` - Runs after plugin code loads and manifest is parsed
+- `onEnable(api)` - Runs when user enables the plugin
+- `onDisable()` - Runs when user disables it
+- `onUnload()` - Runs before plugin is removed from memory
+
 ```ts
 export default {
   async onLoad(api) {
@@ -91,74 +100,74 @@ export default {
 };
 ```
 
-## 6. Permissions
-`permissions` is currently informational. Declare high-level capabilities your plugin intends to use (network, scrobble, playback-control, lyrics, search, storage, etc.). Future versions may expose UI around this.
+## Permissions
 
-## 7. File Structure Example
+Declare what your plugin does in the `permissions` array. Permissions are currently informational. Future versions might show UI for this.
+
+Examples: `network`, `scrobble`, `playback-control`, `lyrics`, `search`, `storage`
+
+## File Structure
+
 ```text
 my-plugin/
   package.json
-  README.md
   src/
     index.ts
   dist/
-    index.js        (built output)
-  node_modules/
+    index.js
 ```
 
-## 8. Building Your Plugin
-You can use any bundler that outputs a single JS file that the loader can evaluate in a CommonJS style environment.
+## Building
 
-Example minimal `tsup` config (optional):
-```jsonc
-// package.json excerpt
-"devDependencies": { "tsup": "^8" },
-"scripts": { "build": "tsup src/index.ts --dts --format cjs --minify --out-dir dist" }
+You can use any bundler that outputs a single JS file. Your bundle needs to work in a CommonJS environment (`module.exports` or `exports.default`).
+
+Example with tsup:
+
+```json
+{
+  "devDependencies": { "tsup": "^8" },
+  "scripts": { "build": "tsup src/index.ts --dts --format cjs --minify --out-dir dist" }
+}
 ```
-Run `pnpm build` to produce `dist/index.js`.
 
-Ensure the final bundle sets `module.exports = { ... }` or `exports.default = { ... }`. Default ESM output alone will not be picked up unless your bundler transpiles it to a CommonJS wrapper.
+Run `pnpm build` and you'll get `dist/index.js`.
 
-## 9. Local Development Workflow
-1. Create your plugin folder somewhere accessible.
-2. Build to produce entry file.
-3. (Future) Place or symlink the folder into the Nuclear plugins directory once auto-discovery is implemented. For now loading is manual (loader API expects a path).
-4. Rebuild after changes; the app will need a reload or unload+load cycle when hot-reload support is added.
+## Development
 
-## 10. Best Practices
-- Keep startup fast; defer heavy work until `onEnable`.
-- Avoid global state leakage; store state on a module-local object.
-- Validate network responses defensively.
-- Use permissions array to communicate scope clearly.
-- Keep dependencies minimal; smaller bundles load faster.
+1. Create your plugin folder
+2. Build to produce the entry file
+3. Load it in Nuclear
+4. Rebuild after changes; you'll need to reload the plugin
 
-## 11. Troubleshooting
-| Issue | Check |
-|-------|-------|
-| Loader cannot resolve entry | Is `main` correct or is there a built `index.js` / `dist/index.js`? |
-| Missing fields error | Confirm all required manifest fields: name, version, description, author. |
-| Hooks not firing | Ensure default export is an object, not a function or class. |
+## Tips
 
-## 12. Type Exports
+- Keep startup fast, defer heavy work to `onEnable`
+- Validate network responses
+- Minimize dependencies, smaller = faster
+
+## Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| Can't find entry file | Check `main` in package.json or make sure `index.js` or `dist/index.js` exists |
+| Missing fields error | Add all required fields: name, version, description, author |
+| Hooks don't fire | Export a default object, not a function or class |
+
+## Types
+
 ```ts
-import type { NuclearPlugin, PluginManifest, PluginIcon } from '@nuclearplayer/plugin-sdk';
+import type {
+  NuclearPlugin,
+  PluginManifest,
+  PluginIcon,
+  // Model types (re-exported from @nuclearplayer/model)
+  Artist,
+  Album,
+  Track,
+  // ... and many more
+} from '@nuclearplayer/plugin-sdk';
 ```
 
-## 13. Example Complete Minimal Plugin (TypeScript)
-```ts
-import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
+## License
 
-export default {
-  async onLoad(api: NuclearPluginAPI) {
-  },
-  async onEnable(api: NuclearPluginAPI) {
-  },
-  async onDisable() {
-  },
-  async onUnload() {
-  },
-};
-```
-
-## 14. License
 AGPL-3.0-only

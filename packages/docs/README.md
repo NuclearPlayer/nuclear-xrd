@@ -25,15 +25,15 @@ Nuclear is a free, open‑source music player that acts as a hub for many servic
 
 This is a pnpm/turbo monorepo with these major packages:
 
-- @nuclearplayer/player – Main Tauri app (React + Rust)
-- @nuclearplayer/ui – Shared UI components
-- @nuclearplayer/themes – Theming system and utilities
-- @nuclearplayer/plugin-sdk – Plugin framework and helpers
-- @nuclearplayer/model – Shared data model
-- @nuclearplayer/hifi – Advanced HTML5 audio engine
-- @nuclearplayer/storybook – Component demos
-- @nuclearplayer/tailwind-config – Shared Tailwind v4 CSS config
-- @nuclearplayer/docs – This documentation
+- @nuclearplayer/player - Main Tauri app (React + Rust)
+- @nuclearplayer/ui - Shared UI components
+- @nuclearplayer/themes - Theming system and utilities
+- @nuclearplayer/plugin-sdk - Plugin framework and helpers
+- @nuclearplayer/model - Shared data model
+- @nuclearplayer/hifi - Advanced HTML5 audio engine
+- @nuclearplayer/storybook - Component demos
+- @nuclearplayer/tailwind-config - Shared Tailwind v4 CSS config
+- @nuclearplayer/docs - This documentation
 
 ## For developers
 
