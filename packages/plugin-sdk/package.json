@@ -18,8 +18,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:npm": "vite build --mode npm",
+    "build": "tsc && vite build && api-extractor run --local && pnpm clean:dts",
+    "build:npm": "tsc && vite build --mode npm && api-extractor run --local && pnpm clean:dts",
+    "clean:dts": "rm -rf dist/api dist/react dist/test dist/types dist/types.d.ts dist/*.d.ts.map dist/tsdoc-metadata.json",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:coverage": "vitest --run --coverage",
@@ -38,6 +39,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.52.13",
     "@nuclearplayer/eslint-config": "workspace:*",
     "@nuclearplayer/tailwind-config": "workspace:*",
     "@tailwindcss/vite": "^4.1.11",
