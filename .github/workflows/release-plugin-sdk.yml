@@ -49,6 +49,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build model package
+        run: pnpm --filter @nuclearplayer/model build
+
       - name: Build package for npm
         run: pnpm --filter @nuclearplayer/plugin-sdk build:npm
 
