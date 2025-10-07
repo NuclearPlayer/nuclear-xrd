@@ -1,5 +1,6 @@
 import { mockIPC } from '@tauri-apps/api/mocks';
 
+import { getRegistryEntry } from '../services/plugins/pluginRegistry';
 import { NuclearPluginBuilder } from '../test/builders/NuclearPluginBuilder';
 import { PluginStateBuilder } from '../test/builders/PluginStateBuilder';
 import { createPluginFolder } from '../test/utils/testPluginFolder';
@@ -86,6 +87,20 @@ describe('usePluginStore', () => {
       await usePluginStore.getState().loadPluginFromPath('/plugins/plain');
       const sizeAfter = usePluginStore.getState().getAllPlugins().length;
       expect(sizeAfter).toBe(sizeBefore);
+    });
+
+    it('tracks dev installation metadata', async () => {
+      createPluginFolder('/plugins/meta', { id: 'meta' });
+
+      await usePluginStore.getState().loadPluginFromPath('/plugins/meta');
+
+      const plugin = usePluginStore.getState().getPlugin('meta');
+      expect(plugin?.installationMethod).toBe('dev');
+      expect(plugin?.originalPath).toBe('/plugins/meta');
+
+      const entry = await getRegistryEntry('meta');
+      expect(entry?.installationMethod).toBe('dev');
+      expect(entry?.originalPath).toBe('/plugins/meta');
     });
   });
 

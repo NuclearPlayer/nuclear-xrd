@@ -9,6 +9,7 @@ import { installPluginToManagedDir } from '../services/plugins/pluginDir';
 import { PluginLoader } from '../services/plugins/PluginLoader';
 import {
   getRegistryEntry,
+  PluginInstallationMethod,
   setRegistryEntryEnabled,
   upsertRegistryEntry,
 } from '../services/plugins/pluginRegistry';
@@ -24,6 +25,8 @@ export type PluginState = {
   enabled: boolean;
   warning: boolean;
   warnings: string[];
+  installationMethod: PluginInstallationMethod;
+  originalPath?: string;
   instance?: NuclearPlugin;
 };
 
@@ -83,11 +86,16 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       const existing = await getRegistryEntry(id);
       const now = new Date().toISOString();
       const enabled = existing ? existing.enabled : false;
+      const installationMethod: PluginInstallationMethod =
+        existing?.installationMethod ?? 'dev';
+      const originalPath =
+        installationMethod === 'dev' ? path : existing?.originalPath;
       await upsertRegistryEntry({
         id,
         version: metadata.version,
         path: managedPath,
-        location: 'user',
+        installationMethod,
+        originalPath,
         enabled,
         installedAt: existing ? existing.installedAt : now,
         lastUpdatedAt: now,
@@ -106,6 +114,8 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
             enabled: false,
             warning: warnings.length > 0,
             warnings,
+            installationMethod,
+            originalPath,
             instance,
           },
         },

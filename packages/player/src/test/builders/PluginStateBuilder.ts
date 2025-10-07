@@ -19,6 +19,7 @@ export class PluginStateBuilder {
     enabled: false,
     warning: false,
     warnings: [],
+    installationMethod: 'dev',
   };
 
   withId(id: string): PluginStateBuilder {
@@ -64,6 +65,18 @@ export class PluginStateBuilder {
 
   withInstance(instance: NuclearPlugin): PluginStateBuilder {
     this.state.instance = instance;
+    return this;
+  }
+
+  withInstallationMethod(
+    method: PluginState['installationMethod'],
+  ): PluginStateBuilder {
+    this.state.installationMethod = method;
+    return this;
+  }
+
+  withOriginalPath(originalPath: string | undefined): PluginStateBuilder {
+    this.state.originalPath = originalPath;
     return this;
   }
 
