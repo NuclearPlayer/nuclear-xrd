@@ -3,6 +3,7 @@ import { mockIPC } from '@tauri-apps/api/mocks';
 import { getRegistryEntry } from '../services/plugins/pluginRegistry';
 import { NuclearPluginBuilder } from '../test/builders/NuclearPluginBuilder';
 import { PluginStateBuilder } from '../test/builders/PluginStateBuilder';
+import { PluginFsMock } from '../test/mocks/plugin-fs';
 import { createPluginFolder } from '../test/utils/testPluginFolder';
 import { usePluginStore } from './pluginStore';
 
@@ -24,6 +25,120 @@ describe('usePluginStore', () => {
   describe('initial state', () => {
     it('starts empty', () => {
       expect(usePluginStore.getState().plugins).toEqual({});
+    });
+  });
+
+  describe('reloadPlugin', () => {
+    it('reloads a dev plugin and restores enabled state', async () => {
+      createPluginFolder('/plugins/reloadable', {
+        id: 'reloadable',
+        version: '1.0.0',
+      });
+
+      await usePluginStore.getState().loadPluginFromPath('/plugins/reloadable');
+      await usePluginStore.getState().enablePlugin('reloadable');
+
+      createPluginFolder('/plugins/reloadable', {
+        id: 'reloadable',
+        version: '1.1.0',
+      });
+
+      const loadSpy = vi.spyOn(usePluginStore.getState(), 'loadPluginFromPath');
+
+      await usePluginStore.getState().reloadPlugin('reloadable');
+
+      const plugin = usePluginStore.getState().getPlugin('reloadable');
+      expect(plugin?.metadata.version).toBe('1.1.0');
+      expect(plugin?.path).toContain('1.1.0');
+      expect(plugin?.enabled).toBe(true);
+
+      const entry = await getRegistryEntry('reloadable');
+      expect(entry?.version).toBe('1.1.0');
+      expect(entry?.installationMethod).toBe('dev');
+      expect(loadSpy).toHaveBeenCalledWith('/plugins/reloadable');
+    });
+
+    it('rejects when reloading a non-dev plugin', async () => {
+      usePluginStore.setState({
+        plugins: {
+          'from-store': new PluginStateBuilder()
+            .withId('from-store')
+            .withInstallationMethod('store')
+            .withOriginalPath(undefined)
+            .withInstance(new NuclearPluginBuilder().build())
+            .build(),
+        },
+      });
+
+      await expect(
+        usePluginStore.getState().reloadPlugin('from-store'),
+      ).rejects.toThrow(
+        'Plugin from-store cannot be reloaded. Reinstall it from the store.',
+      );
+    });
+  });
+
+  describe('removePlugin', () => {
+    it('removes plugin files and registry entry', async () => {
+      createPluginFolder('/plugins/removable', { id: 'removable' });
+
+      await usePluginStore.getState().loadPluginFromPath('/plugins/removable');
+
+      const removeMock = PluginFsMock.setRemoveFor(
+        '/plugins/removable/1.0.0',
+        '/home/user/.local/share/com.nuclearplayer',
+        true,
+      );
+
+      const callsBefore = removeMock.mock.calls.length;
+
+      await usePluginStore.getState().removePlugin('removable');
+
+      const newCalls = removeMock.mock.calls.slice(callsBefore);
+      expect(newCalls).toEqual([
+        [
+          'plugins/removable/1.0.0',
+          {
+            baseDir: '/home/user/.local/share/com.nuclearplayer',
+            recursive: true,
+          },
+        ],
+      ]);
+
+      const plugin = usePluginStore.getState().getPlugin('removable');
+      expect(plugin).toBeUndefined();
+      const entry = await getRegistryEntry('removable');
+      expect(entry).toBeUndefined();
+    });
+
+    it('removes registry entry for plugin not currently loaded', async () => {
+      createPluginFolder('/plugins/orphan', { id: 'orphan' });
+
+      await usePluginStore.getState().loadPluginFromPath('/plugins/orphan');
+      await usePluginStore.getState().unloadPlugin('orphan');
+
+      const removeMock = PluginFsMock.setRemoveFor(
+        '/plugins/orphan/1.0.0',
+        '/home/user/.local/share/com.nuclearplayer',
+        true,
+      );
+      const callsBefore = removeMock.mock.calls.length;
+
+      await usePluginStore.getState().removePlugin('orphan');
+
+      const newCalls = removeMock.mock.calls.slice(callsBefore);
+      expect(newCalls).toEqual([
+        [
+          'plugins/orphan/1.0.0',
+          {
+            baseDir: '/home/user/.local/share/com.nuclearplayer',
+            recursive: true,
+          },
+        ],
+      ]);
+
+      const entry = await getRegistryEntry('orphan');
+      expect(entry).toBeUndefined();
     });
   });
 
