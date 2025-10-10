@@ -7,7 +7,8 @@ type SeedParams = {
   installedAt?: string;
   lastUpdatedAt?: string;
   path?: string;
-  location?: 'user' | 'bundled' | 'dev';
+  installationMethod?: 'dev' | 'store';
+  originalPath?: string;
   warnings?: string[];
 };
 
@@ -21,14 +22,16 @@ export const seedRegistryEntry = async ({
   installedAt = '2025-01-01T00:00:00.000Z',
   lastUpdatedAt = installedAt,
   path,
-  location = 'user',
+  installationMethod = 'store',
+  originalPath,
   warnings = [],
 }: SeedParams) => {
   await upsertRegistryEntry({
     id,
     version,
     path: path ?? managedPathFor(id, version),
-    location,
+    installationMethod,
+    originalPath,
     enabled,
     installedAt,
     lastUpdatedAt,

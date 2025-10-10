@@ -17,12 +17,10 @@ const isManagedPath = async (absPath: string): Promise<boolean> => {
 export const hydratePluginsFromRegistry = async (): Promise<void> => {
   useStartupStore.getState().startStartup();
   const now = Date.now();
-  const entries = (await listRegistryEntries())
-    .filter((entry) => entry.location === 'user')
-    .sort(
-      (a, b) =>
-        new Date(a.installedAt).getTime() - new Date(b.installedAt).getTime(),
-    );
+  const entries = (await listRegistryEntries()).sort(
+    (a, b) =>
+      new Date(a.installedAt).getTime() - new Date(b.installedAt).getTime(),
+  );
 
   for (const entry of entries) {
     // TODO: Support non-managed paths (dev plugins)
@@ -43,6 +41,8 @@ export const hydratePluginsFromRegistry = async (): Promise<void> => {
             enabled: false,
             warning: warnings.length > 0,
             warnings,
+            installationMethod: entry.installationMethod,
+            originalPath: entry.originalPath,
             instance,
           },
         },

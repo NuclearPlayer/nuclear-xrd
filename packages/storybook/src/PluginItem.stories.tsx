@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Music, Palette } from 'lucide-react';
+import { fn } from 'storybook/test';
 
 import { PluginItem, Toggle } from '@nuclearplayer/ui';
 
@@ -80,9 +81,21 @@ export const WithRightAccessory: Story = {
       <Toggle
         defaultChecked={false}
         aria-label="Enable plugin"
-        onChange={(checked) => console.log('Toggle changed:', checked)}
+        onChange={fn()}
       />
     ),
+  },
+};
+
+export const WithActions: Story = {
+  args: {
+    name: 'Dev Plugin',
+    author: 'Nuclear Team',
+    description:
+      'Reload and remove controls are available for development plugins.',
+    icon: <Music size={24} />,
+    onReload: fn(),
+    onRemove: fn(),
   },
 };
 

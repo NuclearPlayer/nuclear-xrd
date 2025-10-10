@@ -21,6 +21,9 @@ const buttonVariants = cva(
         icon: 'size-10 justify-center',
         flexible: 'h-auto',
       },
+      intent: {
+        danger: 'bg-accent-red',
+      },
     },
     defaultVariants: {
       variant: 'default',
@@ -33,14 +36,14 @@ type ButtonProps = ComponentPropsWithoutRef<'button'> &
   VariantProps<typeof buttonVariants>;
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(function Button(
-  { variant, size, className, children, type, ...rest },
+  { variant, size, intent, className, children, type, ...rest },
   ref,
 ) {
   return (
     <HeadlessButton
       as="button"
       ref={ref}
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, intent, className }))}
       type={type ?? 'submit'}
       {...rest}
     >

@@ -103,7 +103,7 @@ describe('App plugin hydration', () => {
     expect(plugins.map((p) => p.name)).toEqual(['first', 'second']);
   });
 
-  it('(Hydration) ignores non-managed plugin locations', async () => {
+  it('(Hydration) ignores plugins outside the managed directory', async () => {
     createPluginFolder(
       '/home/user/.local/share/com.nuclearplayer/plugins/managed/1.0.0',
       { id: 'managed', version: '1.0.0' },
@@ -113,10 +113,9 @@ describe('App plugin hydration', () => {
       enabled: false,
     });
 
-    // Create plugin with bundled location (should be ignored)
     await seedRegistryEntry({
       id: 'bundled',
-      location: 'bundled',
+      path: '/opt/nuclear/plugins/bundled/1.0.0',
     });
 
     await hydratePluginsFromRegistry();
