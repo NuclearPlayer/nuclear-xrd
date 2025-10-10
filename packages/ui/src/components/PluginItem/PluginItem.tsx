@@ -1,4 +1,9 @@
-import { SettingsIcon, TriangleAlertIcon } from 'lucide-react';
+import {
+  RotateCw as RotateCwIcon,
+  Settings as SettingsIcon,
+  Trash as TrashIcon,
+  TriangleAlert as TriangleAlertIcon,
+} from 'lucide-react';
 import { FC, ReactNode } from 'react';
 
 import { cn } from '../../utils';
@@ -18,6 +23,10 @@ type PluginItemProps = {
   warningText?: string;
   rightAccessory?: ReactNode;
   loadTimeMs?: number;
+  onReload?: () => void;
+  onRemove?: () => void;
+  reloadDisabled?: boolean;
+  removeDisabled?: boolean;
 };
 
 export const PluginItem: FC<PluginItemProps> = ({
@@ -32,6 +41,10 @@ export const PluginItem: FC<PluginItemProps> = ({
   warningText,
   rightAccessory,
   loadTimeMs,
+  onReload,
+  onRemove,
+  reloadDisabled = false,
+  removeDisabled = false,
 }) => (
   <Box
     data-testid="plugin-item"
@@ -64,8 +77,34 @@ export const PluginItem: FC<PluginItemProps> = ({
         >
           {name}
           {onViewDetails && (
-            <Button size="icon" onClick={onViewDetails} disabled={disabled}>
+            <Button
+              data-testid="plugin-action-view-details"
+              size="icon"
+              onClick={onViewDetails}
+              disabled={disabled}
+            >
               <SettingsIcon size={20} />
+            </Button>
+          )}
+          {onReload && (
+            <Button
+              data-testid="plugin-action-reload"
+              size="icon"
+              onClick={onReload}
+              disabled={reloadDisabled || disabled}
+            >
+              <RotateCwIcon size={20} />
+            </Button>
+          )}
+          {onRemove && (
+            <Button
+              data-testid="plugin-action-remove"
+              size="icon"
+              intent="danger"
+              onClick={onRemove}
+              disabled={removeDisabled}
+            >
+              <TrashIcon size={20} />
             </Button>
           )}
         </h3>
