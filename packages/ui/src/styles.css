@@ -8,11 +8,12 @@
       transparent 8px 16px
     );
     animation: seekbar-stripes 1s linear infinite;
+    background-size: 22.6px 22.6px;
   }
 
   @keyframes seekbar-stripes {
     to {
-      background-position: 16px 0;
+      background-position: 22.6px 0;
     }
   }
 }

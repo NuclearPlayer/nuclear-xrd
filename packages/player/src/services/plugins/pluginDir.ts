@@ -72,3 +72,40 @@ export const installPluginToManagedDir = async (
   await copyDirRecursive(fromPath, absoluteDestination);
   return absoluteDestination;
 };
+
+const resolveRelativeManagedPath = async (
+  absolutePath: string,
+): Promise<string | undefined> => {
+  const base = await appDataDir();
+  if (!absolutePath.startsWith(base)) {
+    return undefined;
+  }
+  const trimmed = absolutePath.slice(base.length).replace(/^[/\\]/, '');
+  return trimmed;
+};
+
+export const removeManagedPluginInstall = async (
+  absolutePath: string,
+): Promise<void> => {
+  const relative = await resolveRelativeManagedPath(absolutePath);
+  if (!relative) {
+    throw new Error(
+      'Path is not within the managed plugins directory. For safety, refusing to delete.',
+    );
+  }
+  try {
+    await remove(relative, {
+      recursive: true,
+      baseDir: BaseDirectory.AppData,
+    });
+  } catch (error) {
+    await logFsError({
+      scope: 'plugins',
+      command: 'fs.remove',
+      targetPath: absolutePath,
+      error,
+      withToast: true,
+      toastMessage: 'Failed to remove managed plugin directory',
+    });
+  }
+};

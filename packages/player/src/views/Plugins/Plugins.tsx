@@ -46,6 +46,14 @@ export const Plugins: FC = () => {
                 disabled={!p.enabled}
                 warning={p.warning}
                 warningText={p.warnings.length > 0 ? p.warnings[0] : undefined}
+                onReload={async () => {
+                  if (p.installationMethod === 'dev') {
+                    await store.reloadPlugin(p.metadata.id);
+                  }
+                }}
+                onRemove={async () => {
+                  await store.removePlugin(p.metadata.id);
+                }}
                 rightAccessory={
                   <Toggle
                     data-testid={`toggle-enable-plugin`}

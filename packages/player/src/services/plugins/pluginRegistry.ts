@@ -1,16 +1,17 @@
 import { LazyStore } from '@tauri-apps/plugin-store';
 
-export type PluginLocation = 'user' | 'bundled' | 'dev';
-
 const REGISTRY_FILE = 'plugins.json';
 const PREFIX = 'plugins.';
 const store = new LazyStore(REGISTRY_FILE);
+
+export type PluginInstallationMethod = 'dev' | 'store';
 
 export type PluginRegistryEntry = {
   id: string;
   version: string;
   path: string;
-  location: PluginLocation;
+  installationMethod: PluginInstallationMethod;
+  originalPath?: string;
   enabled: boolean;
   installedAt: string;
   lastUpdatedAt: string;

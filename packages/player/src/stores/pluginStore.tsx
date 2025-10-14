@@ -5,10 +5,15 @@ import { create } from 'zustand';
 import type { NuclearPlugin, PluginMetadata } from '@nuclearplayer/plugin-sdk';
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
-import { installPluginToManagedDir } from '../services/plugins/pluginDir';
+import {
+  installPluginToManagedDir,
+  removeManagedPluginInstall,
+} from '../services/plugins/pluginDir';
 import { PluginLoader } from '../services/plugins/PluginLoader';
 import {
   getRegistryEntry,
+  PluginInstallationMethod,
+  removeRegistryEntry,
   setRegistryEntryEnabled,
   upsertRegistryEntry,
 } from '../services/plugins/pluginRegistry';
@@ -24,6 +29,8 @@ export type PluginState = {
   enabled: boolean;
   warning: boolean;
   warnings: string[];
+  installationMethod: PluginInstallationMethod;
+  originalPath?: string;
   instance?: NuclearPlugin;
 };
 
@@ -33,6 +40,8 @@ type PluginStore = {
   unloadPlugin: (id: string) => Promise<void>;
   enablePlugin: (id: string) => Promise<void>;
   disablePlugin: (id: string) => Promise<void>;
+  reloadPlugin: (id: string) => Promise<void>;
+  removePlugin: (id: string) => Promise<void>;
   getPlugin: (id: string) => PluginState | undefined;
   getAllPlugins: () => PluginState[];
 };
@@ -83,11 +92,16 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       const existing = await getRegistryEntry(id);
       const now = new Date().toISOString();
       const enabled = existing ? existing.enabled : false;
+      const installationMethod: PluginInstallationMethod =
+        existing?.installationMethod ?? 'dev';
+      const originalPath =
+        installationMethod === 'dev' ? path : existing?.originalPath;
       await upsertRegistryEntry({
         id,
         version: metadata.version,
         path: managedPath,
-        location: 'user',
+        installationMethod,
+        originalPath,
         enabled,
         installedAt: existing ? existing.installedAt : now,
         lastUpdatedAt: now,
@@ -106,6 +120,8 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
             enabled: false,
             warning: warnings.length > 0,
             warnings,
+            installationMethod,
+            originalPath,
             instance,
           },
         },
@@ -197,6 +213,60 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         unloadError,
       );
       throw unloadError;
+    }
+  },
+
+  reloadPlugin: async (id: string) => {
+    const plugin = get().plugins[id];
+    if (!plugin) {
+      throw new Error(`Plugin ${id} not found`);
+    }
+    if (plugin.installationMethod !== 'dev') {
+      throw new Error(
+        `Plugin ${id} cannot be reloaded. Reinstall it from the store.`,
+      );
+    }
+    if (!plugin.originalPath) {
+      throw new Error(`Plugin ${id} has no original path`);
+    }
+    const wasEnabled = plugin.enabled;
+    const originalPath = plugin.originalPath;
+    try {
+      await get().unloadPlugin(id);
+      await get().loadPluginFromPath(originalPath);
+      if (wasEnabled) {
+        await get().enablePlugin(id);
+      }
+    } catch (error) {
+      const message = resolveErrorMessage(error);
+      toast.error('Failed to reload plugin', {
+        description: message,
+      });
+      Logger.error(`Failed to reload plugin ${id}: ${message}`);
+      throw error;
+    }
+  },
+
+  removePlugin: async (id: string) => {
+    const plugin = get().plugins[id];
+    const fallbackEntry = plugin ? undefined : await getRegistryEntry(id);
+    if (!plugin && !fallbackEntry) {
+      throw new Error(`Plugin ${id} not found`);
+    }
+    const managedPath = plugin ? plugin.path : fallbackEntry!.path;
+    try {
+      if (plugin) {
+        await get().unloadPlugin(id);
+      }
+      await removeManagedPluginInstall(managedPath);
+      await removeRegistryEntry(id);
+    } catch (error) {
+      const message = resolveErrorMessage(error);
+      toast.error('Failed to remove plugin', {
+        description: message,
+      });
+      Logger.error(`Failed to remove plugin ${id}: ${message}`);
+      throw error;
     }
   },
 

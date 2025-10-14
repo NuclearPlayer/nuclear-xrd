@@ -15,7 +15,7 @@ export type PluginFolderOptions = {
   main?: string;
 };
 
-const AppData = '/home/user/.local/share/com.nuclearplayer';
+export const AppData = '/home/user/.local/share/com.nuclearplayer';
 
 export const createPluginFolder = (
   basePath: string,
