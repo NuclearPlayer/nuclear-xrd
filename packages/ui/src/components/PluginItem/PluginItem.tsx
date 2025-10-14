@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import { FC, ReactNode } from 'react';
 
+import '../../styles.css';
+
 import { cn } from '../../utils';
 import { Box } from '../Box';
 import { Button } from '../Button';
@@ -27,6 +29,7 @@ type PluginItemProps = {
   onRemove?: () => void;
   reloadDisabled?: boolean;
   removeDisabled?: boolean;
+  loading?: boolean;
 };
 
 export const PluginItem: FC<PluginItemProps> = ({
@@ -45,6 +48,7 @@ export const PluginItem: FC<PluginItemProps> = ({
   onRemove,
   reloadDisabled = false,
   removeDisabled = false,
+  loading = false,
 }) => (
   <Box
     data-testid="plugin-item"
@@ -55,9 +59,10 @@ export const PluginItem: FC<PluginItemProps> = ({
           warning,
         'opacity-30': disabled,
       },
-      'relative cursor-default transition-opacity duration-250',
+      'relative cursor-default overflow-hidden transition-opacity duration-250',
       className,
     )}
+    aria-busy={loading}
   >
     <div className={'flex w-full flex-wrap items-start gap-4'}>
       {icon && (
@@ -81,7 +86,7 @@ export const PluginItem: FC<PluginItemProps> = ({
               data-testid="plugin-action-view-details"
               size="icon"
               onClick={onViewDetails}
-              disabled={disabled}
+              disabled={disabled || loading}
             >
               <SettingsIcon size={20} />
             </Button>
@@ -91,7 +96,7 @@ export const PluginItem: FC<PluginItemProps> = ({
               data-testid="plugin-action-reload"
               size="icon"
               onClick={onReload}
-              disabled={reloadDisabled || disabled}
+              disabled={reloadDisabled || disabled || loading}
             >
               <RotateCwIcon size={20} />
             </Button>
@@ -102,7 +107,7 @@ export const PluginItem: FC<PluginItemProps> = ({
               size="icon"
               intent="danger"
               onClick={onRemove}
-              disabled={removeDisabled}
+              disabled={removeDisabled || loading}
             >
               <TrashIcon size={20} />
             </Button>
@@ -141,11 +146,18 @@ export const PluginItem: FC<PluginItemProps> = ({
       )}
 
       <div className="flex h-full shrink-0 flex-col items-start justify-center sm:w-auto sm:items-end">
-        {rightAccessory}
+        {rightAccessory && (
+          <div className={cn({ 'pointer-events-none opacity-50': loading })}>
+            {rightAccessory}
+          </div>
+        )}
       </div>
       <span className="text-foreground-secondary absolute right-4 bottom-2 mt-2 text-sm">
         Loaded in {loadTimeMs}ms
       </span>
     </div>
+    {loading && (
+      <div className="bg-stripes-diagonal absolute right-0 bottom-0 left-0 h-1" />
+    )}
   </Box>
 );

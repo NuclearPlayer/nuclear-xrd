@@ -135,3 +135,13 @@ export const DisabledWarningWithRightAccessory: Story = {
     ),
   },
 };
+
+export const Loading: Story = {
+  args: {
+    name: 'Updating Plugin',
+    author: 'Nuclear Team',
+    description: 'An operation is running in the background.',
+    icon: <Music size={24} />,
+    loading: true,
+  },
+};
