@@ -142,6 +142,6 @@ export const Loading: Story = {
     author: 'Nuclear Team',
     description: 'An operation is running in the background.',
     icon: <Music size={24} />,
-    loading: true,
+    isLoading: true,
   },
 };
