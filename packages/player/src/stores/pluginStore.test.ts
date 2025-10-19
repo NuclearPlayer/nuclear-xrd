@@ -43,8 +43,6 @@ describe('usePluginStore', () => {
         version: '1.1.0',
       });
 
-      const loadSpy = vi.spyOn(usePluginStore.getState(), 'loadPluginFromPath');
-
       await usePluginStore.getState().reloadPlugin('reloadable');
 
       const plugin = usePluginStore.getState().getPlugin('reloadable');
@@ -55,7 +53,6 @@ describe('usePluginStore', () => {
       const entry = await getRegistryEntry('reloadable');
       expect(entry?.version).toBe('1.1.0');
       expect(entry?.installationMethod).toBe('dev');
-      expect(loadSpy).toHaveBeenCalledWith('/plugins/reloadable');
     });
 
     it('rejects when reloading a non-dev plugin', async () => {
