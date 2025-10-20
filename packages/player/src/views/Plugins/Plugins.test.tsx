@@ -45,13 +45,13 @@ describe('Plugins view', () => {
 
     // After copying the plugin to managed folder, its manifest has been read
     expect(readTextFileMock).nthCalledWith(
-      2,
+      3,
       `${AppData}/plugins/nuclear-fake-plugin/0.1.0/package.json`,
     );
 
     // Code has been read (in the managed location)
     expect(readTextFileMock).nthCalledWith(
-      3,
+      4,
       `${AppData}/plugins/nuclear-fake-plugin/0.1.0/index.ts`,
     );
 
