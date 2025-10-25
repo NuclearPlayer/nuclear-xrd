@@ -5,6 +5,7 @@ import { FC } from 'react';
 import { routeTree } from './routeTree.gen';
 
 const router = createRouter({ routeTree });
+const defaultQueryClient = new QueryClient();
 
 declare module '@tanstack/react-router' {
   interface Register {
@@ -12,15 +13,14 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const queryClient = new QueryClient();
-
 type AppProps = {
   routerProp?: typeof router;
+  queryClientProp?: QueryClient;
 };
 
-const App: FC<AppProps> = ({ routerProp }) => {
+const App: FC<AppProps> = ({ routerProp, queryClientProp }) => {
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClientProp ?? defaultQueryClient}>
       <RouterProvider router={routerProp ?? router} />
     </QueryClientProvider>
   );
