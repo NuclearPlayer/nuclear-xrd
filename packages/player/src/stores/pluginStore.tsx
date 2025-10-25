@@ -1,14 +1,20 @@
 import * as Logger from '@tauri-apps/plugin-log';
+import { produce } from 'immer';
 import { toast } from 'sonner';
 import { create } from 'zustand';
 
 import type { NuclearPlugin, PluginMetadata } from '@nuclearplayer/plugin-sdk';
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
-import { installPluginToManagedDir } from '../services/plugins/pluginDir';
+import {
+  installPluginToManagedDir,
+  removeManagedPluginInstall,
+} from '../services/plugins/pluginDir';
 import { PluginLoader } from '../services/plugins/PluginLoader';
 import {
   getRegistryEntry,
+  PluginInstallationMethod,
+  removeRegistryEntry,
   setRegistryEntryEnabled,
   upsertRegistryEntry,
 } from '../services/plugins/pluginRegistry';
@@ -24,7 +30,10 @@ export type PluginState = {
   enabled: boolean;
   warning: boolean;
   warnings: string[];
+  installationMethod: PluginInstallationMethod;
+  originalPath?: string;
   instance?: NuclearPlugin;
+  isLoading?: boolean;
 };
 
 type PluginStore = {
@@ -33,6 +42,9 @@ type PluginStore = {
   unloadPlugin: (id: string) => Promise<void>;
   enablePlugin: (id: string) => Promise<void>;
   disablePlugin: (id: string) => Promise<void>;
+  cleanupPluginInstance: (id: string) => Promise<void>;
+  reloadPlugin: (id: string) => Promise<void>;
+  removePlugin: (id: string) => Promise<void>;
   getPlugin: (id: string) => PluginState | undefined;
   getAllPlugins: () => PluginState[];
 };
@@ -48,6 +60,40 @@ const requireInstance = (id: string) => {
   return plugin;
 };
 
+type LoadedPluginData = {
+  metadata: PluginMetadata;
+  managedPath: string;
+  instance: NuclearPlugin;
+  warnings: string[];
+};
+
+const loadPluginData = async (
+  sourcePath: string,
+  id: string,
+  version: string,
+): Promise<LoadedPluginData> => {
+  const loader = new PluginLoader(sourcePath);
+  const metadata = await loader.loadMetadata();
+
+  const permissions = metadata.permissions || [];
+  const unknownPermissions = permissions.filter(
+    (p) => !allowedPermissions.includes(p),
+  );
+  const warnings: string[] = unknownPermissions.length
+    ? [`Unknown permissions: ${unknownPermissions.join(', ')}`]
+    : [];
+
+  if (warnings.length > 0) {
+    Logger.warn(`Plugin ${id} loaded with warnings: ${warnings.join(', ')}`);
+  }
+
+  const managedPath = await installPluginToManagedDir(id, version, sourcePath);
+  const managedPluginLoader = new PluginLoader(managedPath);
+  const { instance } = await managedPluginLoader.load();
+
+  return { metadata, managedPath, instance, warnings };
+};
+
 export const usePluginStore = create<PluginStore>((set, get) => ({
   plugins: {},
 
@@ -56,60 +102,54 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       const loader = new PluginLoader(path);
       const metadata = await loader.loadMetadata();
       const id = metadata.id;
+
       if (get().plugins[id]) {
         Logger.debug(`Plugin ${id} already loaded.`);
         return;
       }
-      const permissions = metadata.permissions || [];
-      const unknown = permissions.filter(
-        (p) => !allowedPermissions.includes(p),
-      );
-      const warnings: string[] = unknown.length
-        ? [`Unknown permissions: ${unknown.join(', ')}`]
-        : [];
-
-      if (warnings.length > 0) {
-        Logger.warn(
-          `Plugin ${id} loaded with warnings: ${warnings.join(', ')}`,
-        );
-      }
-
-      const managedPath = await installPluginToManagedDir(
-        id,
-        metadata.version,
-        path,
-      );
 
       const existing = await getRegistryEntry(id);
+      const installationMethod: PluginInstallationMethod =
+        existing?.installationMethod ?? 'dev';
+      const originalPath =
+        installationMethod === 'dev' ? path : existing?.originalPath;
+
+      const {
+        metadata: loadedMetadata,
+        managedPath,
+        instance,
+        warnings,
+      } = await loadPluginData(path, id, metadata.version);
+
       const now = new Date().toISOString();
       const enabled = existing ? existing.enabled : false;
+
       await upsertRegistryEntry({
         id,
-        version: metadata.version,
+        version: loadedMetadata.version,
         path: managedPath,
-        location: 'user',
+        installationMethod,
+        originalPath,
         enabled,
         installedAt: existing ? existing.installedAt : now,
         lastUpdatedAt: now,
         warnings,
       });
 
-      const managedPluginLoader = new PluginLoader(managedPath);
-      const { instance } = await managedPluginLoader.load();
-
-      set((state) => ({
-        plugins: {
-          ...state.plugins,
-          [metadata.id]: {
-            metadata,
+      set(
+        produce((state: PluginStore) => {
+          state.plugins[id] = {
+            metadata: loadedMetadata,
             path: managedPath,
             enabled: false,
             warning: warnings.length > 0,
             warnings,
+            installationMethod,
+            originalPath,
             instance,
-          },
-        },
-      }));
+          };
+        }),
+      );
 
       if (enabled) {
         await get().enablePlugin(id);
@@ -138,12 +178,11 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       });
       await plugin.instance!.onEnable(api);
     }
-    set((state) => ({
-      plugins: {
-        ...state.plugins,
-        [id]: { ...state.plugins[id], enabled: true },
-      },
-    }));
+    set(
+      produce((state: PluginStore) => {
+        state.plugins[id].enabled = true;
+      }),
+    );
     await setRegistryEntryEnabled(id, true);
   },
 
@@ -156,12 +195,11 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
     if (plugin.instance!.onDisable) {
       await plugin.instance!.onDisable();
     }
-    set((state) => ({
-      plugins: {
-        ...state.plugins,
-        [id]: { ...state.plugins[id], enabled: false },
-      },
-    }));
+    set(
+      produce((state: PluginStore) => {
+        state.plugins[id].enabled = false;
+      }),
+    );
     await setRegistryEntryEnabled(id, false);
   },
 
@@ -197,6 +235,135 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         unloadError,
       );
       throw unloadError;
+    }
+  },
+
+  cleanupPluginInstance: async (id: string) => {
+    const plugin = get().plugins[id];
+    if (!plugin) {
+      throw new Error(`Plugin ${id} not found`);
+    }
+    if (plugin.enabled) {
+      await get().disablePlugin(id);
+    }
+    if (plugin.instance?.onUnload) {
+      await plugin.instance.onUnload();
+    }
+  },
+
+  reloadPlugin: async (id: string) => {
+    const plugin = get().plugins[id];
+    if (!plugin) {
+      throw new Error(`Plugin ${id} not found`);
+    }
+    if (plugin.installationMethod !== 'dev') {
+      // Should never happen - we don't show the reload button for non-dev plugins
+      throw new Error(
+        `Plugin ${id} cannot be reloaded. Reinstall it from the store.`,
+      );
+    }
+    if (!plugin.originalPath) {
+      throw new Error(`Plugin ${id} has no original path`);
+    }
+
+    const wasEnabled = plugin.enabled;
+    const originalPath = plugin.originalPath;
+    const currentVersion = plugin.metadata.version;
+
+    try {
+      set(
+        produce((state: PluginStore) => {
+          state.plugins[id].isLoading = true;
+        }),
+      );
+
+      await get().cleanupPluginInstance(id);
+
+      const loader = new PluginLoader(originalPath);
+      const metadata = await loader.loadMetadata();
+      const newVersion = metadata.version;
+
+      const {
+        metadata: loadedMetadata,
+        managedPath,
+        instance,
+        warnings,
+      } = await loadPluginData(originalPath, id, newVersion);
+
+      const now = new Date().toISOString();
+      const existingEntry = await getRegistryEntry(id);
+      const installedAt =
+        currentVersion === newVersion && existingEntry
+          ? existingEntry.installedAt
+          : now;
+
+      await upsertRegistryEntry({
+        id,
+        version: loadedMetadata.version,
+        path: managedPath,
+        installationMethod: 'dev',
+        originalPath,
+        enabled: wasEnabled,
+        installedAt,
+        lastUpdatedAt: now,
+        warnings,
+      });
+
+      set(
+        produce((state: PluginStore) => {
+          state.plugins[id] = {
+            ...state.plugins[id],
+            metadata: loadedMetadata,
+            path: managedPath,
+            enabled: false,
+            warning: warnings.length > 0,
+            warnings,
+            instance,
+            isLoading: false,
+          };
+        }),
+      );
+
+      if (wasEnabled) {
+        await get().enablePlugin(id);
+      }
+    } catch (error) {
+      set(
+        produce((state: PluginStore) => {
+          if (state.plugins[id]) {
+            state.plugins[id].isLoading = false;
+          }
+        }),
+      );
+      const message = resolveErrorMessage(error);
+      toast.error('Failed to reload plugin', {
+        description: message,
+      });
+      Logger.error(`Failed to reload plugin ${id}: ${message}`);
+      throw error;
+    }
+  },
+
+  removePlugin: async (id: string) => {
+    const plugin = get().plugins[id];
+    const fallbackEntry = plugin ? undefined : await getRegistryEntry(id);
+    if (!plugin && !fallbackEntry) {
+      throw new Error(`Plugin ${id} not found`);
+    }
+    const managedPath = plugin ? plugin.path : fallbackEntry!.path;
+    try {
+      if (plugin) {
+        await get().unloadPlugin(id);
+      }
+      await removeManagedPluginInstall(managedPath);
+      await removeRegistryEntry(id);
+    } catch (error) {
+      const message = resolveErrorMessage(error);
+      toast.error('Failed to remove plugin', {
+        description: message,
+      });
+      Logger.error(`Failed to remove plugin ${id}: ${message}`);
+      throw error;
     }
   },
 

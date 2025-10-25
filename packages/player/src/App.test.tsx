@@ -1,3 +1,4 @@
+import { QueryClient } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 
 import App from './App';
@@ -9,13 +10,13 @@ describe('App', () => {
   });
 
   it('should render snapshot', async () => {
-    const component = render(<App />);
+    const component = render(<App queryClientProp={new QueryClient()} />);
     await screen.findByTestId('player-workspace-main');
     expect(component.asFragment()).toMatchSnapshot();
   });
 
   it('should handle sidebar collapse/expand user flow', async () => {
-    render(<App />);
+    render(<App queryClientProp={new QueryClient()} />);
 
     expect(AppWrapper.getLayoutState().leftSidebar.isCollapsed).toBe(false);
     expect(AppWrapper.getLayoutState().rightSidebar.isCollapsed).toBe(false);

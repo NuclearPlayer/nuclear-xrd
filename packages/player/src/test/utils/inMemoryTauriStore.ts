@@ -37,6 +37,14 @@ export class LazyStore {
   }
 
   async save() {}
+
+  async delete(key: string) {
+    const map = stores.get(this.#path);
+    if (!map) {
+      return;
+    }
+    map.delete(key);
+  }
 }
 
 export const resetInMemoryTauriStore = () => {

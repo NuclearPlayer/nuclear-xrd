@@ -17,7 +17,7 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       control: { type: 'select' },
-      options: ['default', 'sm', 'lg', 'icon'],
+      options: ['default', 'sm', 'lg', 'icon', 'icon-sm'],
     },
     disabled: {
       control: { type: 'boolean' },
@@ -69,6 +69,13 @@ export const Icon: Story = {
   },
 };
 
+export const IconSmall: Story = {
+  args: {
+    size: 'icon-sm',
+    children: <MusicIcon />,
+  },
+};
+
 export const Disabled: Story = {
   args: {
     disabled: true,
@@ -89,6 +96,9 @@ export const AllVariants: Story = {
         <Button size="default">Default</Button>
         <Button size="lg">Large</Button>
         <Button size="icon">
+          <MusicIcon />
+        </Button>
+        <Button size="icon-sm">
           <MusicIcon />
         </Button>
       </div>
