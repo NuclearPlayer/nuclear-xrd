@@ -1,119 +1,119 @@
 {
-    "common": {
-        "app": {
-            "name": "Nuclear",
-            "description": "Aplicativo de streaming de música gratuito"
-        },
-        "actions": {
-            "save": "Salvar",
-            "cancel": "Cancelar",
-            "delete": "Excluir",
-            "edit": "Editar",
-            "close": "Fechar",
-            "back": "Voltar",
-            "next": "Próximo",
-            "confirm": "Confirmar",
-            "apply": "Aplicar",
-            "reset": "Redefinir",
-            "clear": "Limpar",
-            "search": "Buscar",
-            "loading": "Carregando...",
-            "retry": "Tentar novamente"
-        },
-        "errors": {
-            "network": "Erro de rede. Verifique sua conexão.",
-            "notFound": "Não encontrado"
-        }
+  "common": {
+    "app": {
+      "name": "Nuclear",
+      "description": "Free music streaming app"
     },
-    "navigation": {
-        "explore": "Explorar",
-        "dashboard": "Painel",
-        "preferences": "Preferências",
-        "settings": "Configurações",
-        "plugins": "Plugins",
-        "themes": "Temas",
-        "collection": "Coleção",
-        "favoriteAlbums": "Albums favoritos",
-        "favoriteTracks": "Tracks favoritos",
-        "favoriteArtists": "Artistas favoritos"
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "close": "Close",
+      "back": "Back",
+      "next": "Next",
+      "confirm": "Confirm",
+      "apply": "Apply",
+      "reset": "Reset",
+      "clear": "Clear",
+      "search": "Search",
+      "loading": "Loading...",
+      "retry": "Retry"
     },
-    "search": {
-        "title": "Buscar",
-        "query": "Busca",
-        "placeholder": "Buscar",
-        "noResults": "Nenhum resultado encontrado",
-        "searching": "Buscando...",
-        "failedToLoad": "Falha ao carregar resultados.",
-        "results": {
-            "tracks": "Tracks",
-            "albums": "Albums",
-            "artists": "Artistas",
-            "playlists": "Playlists"
-        },
-        "filters": {
-            "all": "Tudo",
-            "tracks": "Tracks",
-            "albums": "Albums",
-            "artists": "Artistas",
-            "playlists": "Playlists"
-        }
-    },
-    "artist": {
-        "title": "Artista",
-        "albums": "Albums",
-        "tracks": "Tracks",
-        "similar": "Artistas similares",
-        "popularTracks": "Tracks populares",
-        "biography": "Biografia",
-        "discography": "Discografia",
-        "topTracks": "Top tracks",
-        "onTour": "Em turnê",
-        "notOnTour": "Não está em turnê",
-        "errors": {
-            "failedToLoadDetails": "Falha ao carregar detalhes do artista.",
-            "failedToLoadAlbums": "Falha ao carregar albums.",
-            "failedToLoadPopularTracks": "Falha ao carregar tracks populares.",
-            "failedToLoadSimilarArtists": "Falha ao carregar artistas similares."
-        }
-    },
-    "themes": {
-        "title": "Temas",
-        "basic": "Temas básicos",
-        "advanced": "Temas avançados",
-        "default": "Padrão",
-        "description": "Temas encontrados no diretório de dados do app"
-    },
-    "dashboard": {
-        "title": "Painel",
-        "content": "Visualização do painel"
-    },
-    "plugins": {
-        "title": "Plugins",
-        "addPlugin": "Adicionar plugin"
-    },
-    "settings": {
-        "title": "Configurações",
-        "categories": {
-            "general": "Geral",
-            "appearance": "Aparência",
-            "playback": "Reprodução",
-            "layout": "Layout"
-        },
-        "general": {
-            "language": {
-                "title": "Idioma",
-                "description": "Selecione seu idioma preferido"
-            }
-        },
-        "playback": {
-            "skipSeconds": {
-                "title": "Duração do pulo",
-                "description": "Número de segundos para avançar/voltar"
-            },
-            "crossfadeMs": {
-                "title": "Crossfade",
-                "description": "Duração do crossfade entre tracks em milissegundos"
-            }
-        }
+    "errors": {
+      "network": "Network error. Please check your connection.",
+      "notFound": "Not found"
     }
+  },
+  "navigation": {
+    "explore": "Explore",
+    "dashboard": "Dashboard",
+    "preferences": "Preferences",
+    "settings": "Settings",
+    "plugins": "Plugins",
+    "themes": "Themes",
+    "collection": "Collection",
+    "favoriteAlbums": "Favorite albums",
+    "favoriteTracks": "Favorite tracks",
+    "favoriteArtists": "Favorite artists"
+  },
+  "search": {
+    "title": "Search",
+    "query": "Query",
+    "placeholder": "Search",
+    "noResults": "No results found",
+    "searching": "Searching...",
+    "failedToLoad": "Failed to load results.",
+    "results": {
+      "tracks": "Tracks",
+      "albums": "Albums",
+      "artists": "Artists",
+      "playlists": "Playlists"
+    },
+    "filters": {
+      "all": "All",
+      "tracks": "Tracks",
+      "albums": "Albums",
+      "artists": "Artists",
+      "playlists": "Playlists"
+    }
+  },
+  "artist": {
+    "title": "Artist",
+    "albums": "Albums",
+    "tracks": "Tracks",
+    "similar": "Similar artists",
+    "popularTracks": "Popular tracks",
+    "biography": "Biography",
+    "discography": "Discography",
+    "topTracks": "Top tracks",
+    "onTour": "On Tour",
+    "notOnTour": "Not on Tour",
+    "errors": {
+      "failedToLoadDetails": "Failed to load artist details.",
+      "failedToLoadAlbums": "Failed to load albums.",
+      "failedToLoadPopularTracks": "Failed to load popular tracks.",
+      "failedToLoadSimilarArtists": "Failed to load similar artists."
+    }
+  },
+  "themes": {
+    "title": "Themes",
+    "basic": "Basic themes",
+    "advanced": "Advanced themes",
+    "default": "Default",
+    "description": "Themes found in your app data themes directory"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "content": "Dashboard view"
+  },
+  "plugins": {
+    "title": "Plugins",
+    "addPlugin": "Add Plugin"
+  },
+  "settings": {
+    "title": "Settings",
+    "categories": {
+      "general": "General",
+      "appearance": "Appearance",
+      "playback": "Playback",
+      "layout": "Layout"
+    },
+    "general": {
+      "language": {
+        "title": "Language",
+        "description": "Select your preferred language"
+      }
+    },
+    "playback": {
+      "skipSeconds": {
+        "title": "Skip duration",
+        "description": "Number of seconds to skip forward/backward"
+      },
+      "crossfadeMs": {
+        "title": "Crossfade",
+        "description": "Crossfade duration between tracks in milliseconds"
+      }
+    }
+  }
 }
