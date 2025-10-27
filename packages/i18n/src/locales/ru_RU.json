@@ -2,117 +2,117 @@
   "common": {
     "app": {
       "name": "Nuclear",
-      "description": "Free music streaming app"
+      "description": "Бесплатное приложение для стриминга музыки"
     },
     "actions": {
-      "save": "Save",
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "close": "Close",
-      "back": "Back",
-      "next": "Next",
-      "confirm": "Confirm",
-      "apply": "Apply",
-      "reset": "Reset",
-      "clear": "Clear",
-      "search": "Search",
-      "loading": "Loading...",
-      "retry": "Retry"
+      "save": "Сохранить",
+      "cancel": "Отмена",
+      "delete": "Удалить",
+      "edit": "Редактировать",
+      "close": "Закрыть",
+      "back": "Назад",
+      "next": "Далее",
+      "confirm": "Подтвердить",
+      "apply": "Применить",
+      "reset": "Сбросить",
+      "clear": "Очистить",
+      "search": "Поиск",
+      "loading": "Загрузка...",
+      "retry": "Повторить"
     },
     "errors": {
-      "network": "Network error. Please check your connection.",
-      "notFound": "Not found"
+      "network": "Ошибка сети. Проверьте подключение.",
+      "notFound": "Не найдено"
     }
   },
   "navigation": {
-    "explore": "Explore",
-    "dashboard": "Dashboard",
-    "preferences": "Preferences",
-    "settings": "Settings",
-    "plugins": "Plugins",
-    "themes": "Themes",
-    "collection": "Collection",
-    "favoriteAlbums": "Favorite albums",
-    "favoriteTracks": "Favorite tracks",
-    "favoriteArtists": "Favorite artists"
+    "explore": "Обзор",
+    "dashboard": "Панель",
+    "preferences": "Настройки",
+    "settings": "Параметры",
+    "plugins": "Плагины",
+    "themes": "Темы",
+    "collection": "Коллекция",
+    "favoriteAlbums": "Избранные альбомы",
+    "favoriteTracks": "Избранные треки",
+    "favoriteArtists": "Избранные артисты"
   },
   "search": {
-    "title": "Search",
-    "query": "Query",
-    "placeholder": "Search",
-    "noResults": "No results found",
-    "searching": "Searching...",
-    "failedToLoad": "Failed to load results.",
+    "title": "Поиск",
+    "query": "Запрос",
+    "placeholder": "Поиск",
+    "noResults": "Ничего не найдено",
+    "searching": "Поиск...",
+    "failedToLoad": "Не удалось загрузить результаты.",
     "results": {
-      "tracks": "Tracks",
-      "albums": "Albums",
-      "artists": "Artists",
-      "playlists": "Playlists"
+      "tracks": "Треки",
+      "albums": "Альбомы",
+      "artists": "Артисты",
+      "playlists": "Плейлисты"
     },
     "filters": {
-      "all": "All",
-      "tracks": "Tracks",
-      "albums": "Albums",
-      "artists": "Artists",
-      "playlists": "Playlists"
+      "all": "Всё",
+      "tracks": "Треки",
+      "albums": "Альбомы",
+      "artists": "Артисты",
+      "playlists": "Плейлисты"
     }
   },
   "artist": {
-    "title": "Artist",
-    "albums": "Albums",
-    "tracks": "Tracks",
-    "similar": "Similar artists",
-    "popularTracks": "Popular tracks",
-    "biography": "Biography",
-    "discography": "Discography",
-    "topTracks": "Top tracks",
-    "onTour": "On Tour",
-    "notOnTour": "Not on Tour",
+    "title": "Артист",
+    "albums": "Альбомы",
+    "tracks": "Треки",
+    "similar": "Похожие артисты",
+    "popularTracks": "Популярные треки",
+    "biography": "Биография",
+    "discography": "Дискография",
+    "topTracks": "Топ треки",
+    "onTour": "В туре",
+    "notOnTour": "Не в туре",
     "errors": {
-      "failedToLoadDetails": "Failed to load artist details.",
-      "failedToLoadAlbums": "Failed to load albums.",
-      "failedToLoadPopularTracks": "Failed to load popular tracks.",
-      "failedToLoadSimilarArtists": "Failed to load similar artists."
+      "failedToLoadDetails": "Не удалось загрузить информацию об артисте.",
+      "failedToLoadAlbums": "Не удалось загрузить альбомы.",
+      "failedToLoadPopularTracks": "Не удалось загрузить популярные треки.",
+      "failedToLoadSimilarArtists": "Не удалось загрузить похожих артистов."
     }
   },
   "themes": {
-    "title": "Themes",
-    "basic": "Basic themes",
-    "advanced": "Advanced themes",
-    "default": "Default",
-    "description": "Themes found in your app data themes directory"
+    "title": "Темы",
+    "basic": "Базовые темы",
+    "advanced": "Продвинутые темы",
+    "default": "По умолчанию",
+    "description": "Темы из директории данных приложения"
   },
   "dashboard": {
-    "title": "Dashboard",
-    "content": "Dashboard view"
+    "title": "Панель",
+    "content": "Вид панели"
   },
   "plugins": {
-    "title": "Plugins",
-    "addPlugin": "Add Plugin"
+    "title": "Плагины",
+    "addPlugin": "Добавить плагин"
   },
   "settings": {
-    "title": "Settings",
+    "title": "Параметры",
     "categories": {
-      "general": "General",
-      "appearance": "Appearance",
-      "playback": "Playback",
-      "layout": "Layout"
+      "general": "Общие",
+      "appearance": "Внешний вид",
+      "playback": "Воспроизведение",
+      "layout": "Макет"
     },
     "general": {
       "language": {
-        "title": "Language",
-        "description": "Select your preferred language"
+        "title": "Язык",
+        "description": "Выберите предпочитаемый язык"
       }
     },
     "playback": {
       "skipSeconds": {
-        "title": "Skip duration",
-        "description": "Number of seconds to skip forward/backward"
+        "title": "Длительность перемотки",
+        "description": "Количество секунд для перемотки вперёд/назад"
       },
       "crossfadeMs": {
-        "title": "Crossfade",
-        "description": "Crossfade duration between tracks in milliseconds"
+        "title": "Кроссфейд",
+        "description": "Длительность кроссфейда между треками в миллисекундах"
       }
     }
   }
