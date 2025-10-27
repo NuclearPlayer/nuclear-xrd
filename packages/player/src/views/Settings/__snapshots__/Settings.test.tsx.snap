@@ -531,7 +531,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               for="select-:r2:"
                               id="select-:r2:-label"
                             >
-                              settings.general.language.title
+                              Language
                             </label>
                             <button
                               aria-expanded="false"
@@ -572,7 +572,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               class="text-foreground-secondary text-sm select-none"
                               id="select-:r2:-description"
                             >
-                              settings.general.language.description
+                              Select your preferred language
                             </p>
                           </div>
                         </div>
@@ -600,7 +600,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               for="input-:r6:"
                               id="input-:r6:-label"
                             >
-                              settings.playback.skipSeconds.title
+                              Skip duration
                             </label>
                             <input
                               class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
@@ -614,7 +614,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               class="text-foreground-secondary text-sm select-none"
                               id="input-:r6:-description"
                             >
-                              settings.playback.skipSeconds.description
+                              Number of seconds to skip forward/backward
                             </p>
                           </div>
                           <div
@@ -625,7 +625,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               for="input-:r8:"
                               id="input-:r8:-label"
                             >
-                              settings.playback.crossfadeMs.title
+                              Crossfade
                             </label>
                             <input
                               class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
@@ -639,7 +639,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               class="text-foreground-secondary text-sm select-none"
                               id="input-:r8:-description"
                             >
-                              settings.playback.crossfadeMs.description
+                              Crossfade duration between tracks in milliseconds
                             </p>
                           </div>
                         </div>
