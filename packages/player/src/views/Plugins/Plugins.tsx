@@ -2,6 +2,7 @@ import { open } from '@tauri-apps/plugin-dialog';
 import isString from 'lodash-es/isString';
 import { FC } from 'react';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import {
   Button,
   PluginItem,
@@ -15,6 +16,7 @@ import { usePluginStore } from '../../stores/pluginStore';
 import { useStartupStore } from '../../stores/startupStore';
 
 export const Plugins: FC = () => {
+  const { t } = useTranslation('plugins');
   const startupStore = useStartupStore();
   const store = usePluginStore();
   const plugins = store.getAllPlugins();
@@ -27,11 +29,11 @@ export const Plugins: FC = () => {
   };
 
   return (
-    <ViewShell title="Plugins">
+    <ViewShell title={t('title')}>
       <div className="relative flex w-full flex-col gap-4 overflow-hidden">
         <div className="flex items-center">
           <Button onClick={handleAdd} size="sm">
-            Add Plugin
+            {t('addPlugin')}
           </Button>
         </div>
         <ScrollableArea className="flex-1 overflow-hidden">

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useMemo, type FC } from 'react';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
 import type {
   MetadataProvider,
@@ -21,6 +22,7 @@ import { providersServiceHost } from '../../services/providersService';
 import { executeMetadataSearch } from '../../services/search/executeMetadataSearch';
 
 export const Search: FC = () => {
+  const { t } = useTranslation(['search', 'common']);
   const { q } = useSearch({ from: '/search' });
   const navigate = useNavigate();
 
@@ -43,11 +45,10 @@ export const Search: FC = () => {
       executeMetadataSearch(provider as MetadataProvider, { query: q }),
     enabled: Boolean(provider && q),
   });
-
   const tabsItems = [
     results?.albums && {
       id: 'albums',
-      label: 'Albums',
+      label: t('search:results.albums'),
       content: (
         <CardGrid>
           {results.albums.map((item) => (
@@ -62,7 +63,7 @@ export const Search: FC = () => {
     },
     results?.artists && {
       id: 'artists',
-      label: 'Artists',
+      label: t('search:results.artists'),
       content: (
         <CardGrid>
           {results.artists.map((item) => (
@@ -80,7 +81,7 @@ export const Search: FC = () => {
     },
     results?.tracks && {
       id: 'tracks',
-      label: 'Tracks',
+      label: t('search:results.tracks'),
       content: (
         <div className="flex flex-col">
           {results.tracks.map((item) => (
@@ -96,8 +97,8 @@ export const Search: FC = () => {
   return (
     <ViewShell
       data-testid="search-view"
-      title="Search"
-      subtitle={`Query: "${q}"`}
+      title={t('search:title')}
+      subtitle={`${t('search:query')}: "${q}"`}
     >
       {isLoading ? (
         <div className="flex flex-1 items-center justify-center">
@@ -105,13 +106,13 @@ export const Search: FC = () => {
         </div>
       ) : isError ? (
         <div className="space-y-3">
-          <div className="text-accent-red">Failed to load results.</div>
+          <div className="text-accent-red">{t('search:failedToLoad')}</div>
           <Button
             onClick={() => {
               void refetch();
             }}
           >
-            Retry
+            {t('common:actions.retry')}
           </Button>
         </div>
       ) : (

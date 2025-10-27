@@ -19,6 +19,7 @@
   "dependencies": {
     "@nuclearplayer/eslint-config": "workspace:*",
     "@nuclearplayer/hifi": "workspace:*",
+    "@nuclearplayer/i18n": "workspace:*",
     "@nuclearplayer/model": "workspace:*",
     "@nuclearplayer/plugin-sdk": "workspace:*",
     "@nuclearplayer/tailwind-config": "workspace:*",
@@ -43,6 +44,7 @@
     "lucide-react": "^0.542.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-i18next": "^15.7.4",
     "sonner": "^2.0.7",
     "zod": "^3.25.76",
     "zustand": "^5.0.7"

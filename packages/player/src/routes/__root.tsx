@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import {
   PlayerBar,
   PlayerShell,
@@ -32,6 +33,7 @@ import { useLayoutStore } from '../stores/layoutStore';
 const cover = 'https://picsum.photos/64';
 
 const SearchBox = () => {
+  const { t } = useTranslation('search');
   const [query, setQuery] = useState('');
   const router = useRouter();
   const submit = () => {
@@ -54,14 +56,14 @@ const SearchBox = () => {
             submit();
           }
         }}
-        placeholder="Search"
+        placeholder={t('placeholder')}
         className="bg-background border-border ml-4 w-80 rounded-md border-2 px-3 py-1 outline-none"
       />
     </div>
   );
 };
-
 const RootComponent = () => {
+  const { t } = useTranslation('navigation');
   const {
     leftSidebar,
     rightSidebar,
@@ -87,54 +89,54 @@ const RootComponent = () => {
           >
             <SidebarNavigation>
               <SidebarNavigationCollapsible
-                title="Explore"
+                title={t('explore')}
                 icon={<CompassIcon />}
               >
                 <Link to="/dashboard">
                   <SidebarNavigationItem>
                     <GaugeIcon />
-                    Dashboard
+                    {t('dashboard')}
                   </SidebarNavigationItem>
                 </Link>
               </SidebarNavigationCollapsible>
               <SidebarNavigationCollapsible
-                title="Preferences"
+                title={t('preferences')}
                 icon={<SettingsIcon />}
               >
                 <Link to="/settings">
                   <SidebarNavigationItem>
                     <Settings2Icon />
-                    Settings
+                    {t('settings')}
                   </SidebarNavigationItem>
                 </Link>
                 <Link to="/plugins">
                   <SidebarNavigationItem>
                     <BlocksIcon />
-                    Plugins
+                    {t('plugins')}
                   </SidebarNavigationItem>
                 </Link>
                 <Link to="/themes">
                   <SidebarNavigationItem>
                     <PaletteIcon />
-                    Themes
+                    {t('themes')}
                   </SidebarNavigationItem>
                 </Link>
               </SidebarNavigationCollapsible>
               <SidebarNavigationCollapsible
-                title="Collection"
+                title={t('collection')}
                 icon={<LibraryIcon />}
               >
                 <SidebarNavigationItem>
                   <DiscIcon />
-                  Favorite albums
+                  {t('favoriteAlbums')}
                 </SidebarNavigationItem>
                 <SidebarNavigationItem>
                   <MusicIcon />
-                  Favorite tracks
+                  {t('favoriteTracks')}
                 </SidebarNavigationItem>
                 <SidebarNavigationItem>
                   <UserIcon />
-                  Favorite artists
+                  {t('favoriteArtists')}
                 </SidebarNavigationItem>
               </SidebarNavigationCollapsible>
             </SidebarNavigation>

@@ -7,6 +7,7 @@ import { initializeSettingsStore } from './stores/settingsStore';
 
 import '@nuclearplayer/tailwind-config';
 import '@nuclearplayer/themes';
+import '@nuclearplayer/i18n';
 
 import { startAdvancedThemeWatcher } from './services/advancedThemeDirService';
 import { applyAdvancedThemeFromSettingsIfAny } from './services/advancedThemeService';

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import { listBasicThemes } from '@nuclearplayer/themes';
 import {
   Button,
@@ -19,14 +20,15 @@ import {
 import { useAdvancedThemeStore } from '../../stores/advancedThemeStore';
 
 export const Themes = () => {
+  const { t } = useTranslation('themes');
   const basicThemes = useMemo(() => listBasicThemes(), []);
   const [selected] = useCoreSetting<string>('theme.id');
   const { themes } = useAdvancedThemeStore();
 
   return (
-    <ViewShell title="Themes">
+    <ViewShell title={t('title')}>
       <ScrollableArea className="overflow-hidden">
-        <SectionShell data-testid="basic-themes" title="Basic themes">
+        <SectionShell data-testid="basic-themes" title={t('basic')}>
           <div className="flex flex-wrap gap-4 p-1">
             {basicThemes.map((t) => {
               const isActive = selected === t.id;
@@ -61,12 +63,12 @@ export const Themes = () => {
             })}
           </div>
         </SectionShell>
-        <SectionShell data-testid="advanced-themes" title="Advanced themes">
+        <SectionShell data-testid="advanced-themes" title={t('advanced')}>
           <div className="max-w-80 p-1">
             <Select
-              description="Themes found in your app data themes directory"
+              description={t('description')}
               options={[
-                { id: '', label: 'Default' },
+                { id: '', label: t('default') },
                 ...themes.map((t) => ({ id: t.path, label: t.name })),
               ]}
               onValueChange={async (val) => {

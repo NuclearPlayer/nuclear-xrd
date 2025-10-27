@@ -30,16 +30,16 @@ This particular repo is a rewrite project, with the original Nuclear codebase in
 - TanStack Query v5 - chosen solution for HTTP requests.
 
 ### Packages
-- `@nuclearplayer/player` – Main Tauri app (React + Rust).  
-- `@nuclearplayer/plugin-sdk` – Plugin system (TS/React).  
-- `@nuclearplayer/ui` – Shared UI components.  
+- `@nuclearplayer/player` - Main Tauri app (React + Rust).  
+- `@nuclearplayer/plugin-sdk` - Plugin system (TS/React).  
+- `@nuclearplayer/ui` - Shared UI components.  
 - `@nuclearplayer/model` - Data model.
-- `@nuclearplayer/docs` – Gitbook documentation.
-- `@nuclearplayer/tailwind-config` – Shared Tailwind config.  
-- `@nuclearplayer/eslint-config` – Shared linting & formatting rules.  
-- `@nuclearplayer/hifi` – Advanced HTML5 audio component for playback.
-- `@nuclearplayer/themes` – Theming system.
-- `@nuclearplayer/storybook` – Storybook stories.
+- `@nuclearplayer/docs` - Gitbook documentation.
+- `@nuclearplayer/tailwind-config` - Shared Tailwind config.  
+- `@nuclearplayer/eslint-config` - Shared linting & formatting rules.  
+- `@nuclearplayer/hifi` - Advanced HTML5 audio component for playback.
+- `@nuclearplayer/themes` - Theming system.
+- `@nuclearplayer/storybook` - Storybook stories.
 
 ### Workflow Commands
 
