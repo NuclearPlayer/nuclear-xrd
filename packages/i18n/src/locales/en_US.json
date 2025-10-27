@@ -73,5 +73,30 @@
         "advanced": "Advanced themes",
         "default": "Default",
         "description": "Themes found in your app data themes directory"
+    },
+    "settings": {
+        "title": "Settings",
+        "categories": {
+            "general": "General",
+            "appearance": "Appearance",
+            "playback": "Playback",
+            "layout": "Layout"
+        },
+        "general": {
+            "language": {
+                "title": "Language",
+                "description": "Select your preferred language"
+            }
+        },
+        "playback": {
+            "skipSeconds": {
+                "title": "Skip duration",
+                "description": "Number of seconds to skip forward/backward"
+            },
+            "crossfadeMs": {
+                "title": "Crossfade",
+                "description": "Crossfade duration between tracks in milliseconds"
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ import { SelectField } from './SelectField';
 import { SliderField } from './SliderField';
 import { TextField } from './TextField';
 import { ToggleField } from './ToggleField';
+import { useSettingTranslation } from './useSettingTranslation';
 
 type SettingFieldProps = {
   definition: SettingDefinition;
@@ -24,7 +25,7 @@ export const SettingField: FC<SettingFieldProps> = ({
   value,
   setValue,
 }) => {
-  const { title: label, description } = definition;
+  const { title: label, description } = useSettingTranslation(definition);
   const widgetType = definition.widget?.type;
 
   const renderers: Record<string, () => JSX.Element> = {
