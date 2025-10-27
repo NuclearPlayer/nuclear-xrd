@@ -1,6 +1,7 @@
 import isEmpty from 'lodash-es/isEmpty';
 import { FC } from 'react';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
 import { Loader } from '@nuclearplayer/ui';
 
@@ -15,6 +16,7 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
   providerId,
   artistId,
 }) => {
+  const { t } = useTranslation('artist');
   const {
     data: artist,
     isLoading,
@@ -35,7 +37,9 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
       )}
       {isError && (
         <div className="flex h-100 w-full flex-col items-center justify-center gap-3 p-6">
-          <div className="text-accent-red">Failed to load artist details.</div>
+          <div className="text-accent-red">
+            {t('errors.failedToLoadDetails')}
+          </div>
         </div>
       )}
 
@@ -72,10 +76,10 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
                 )}
               </h1>
               {artist.onTour ? (
-                <div>On Tour</div>
+                <div>{t('onTour')}</div>
               ) : (
                 <div className="bg-primary py-1d absolute top-0 right-0 flex items-center justify-center rounded-md px-2 text-white">
-                  Not on Tour
+                  {t('notOnTour')}
                 </div>
               )}
             </div>

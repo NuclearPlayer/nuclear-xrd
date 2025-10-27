@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import { Loader, TrackTable } from '@nuclearplayer/ui';
 
 import { useArtistTopTracks } from '../hooks/useArtistTopTracks';
@@ -13,6 +14,7 @@ export const ArtistPopularTracks: FC<ArtistPopularTracksProps> = ({
   providerId,
   artistId,
 }) => {
+  const { t } = useTranslation('artist');
   const {
     data: tracks,
     isLoading,
@@ -29,13 +31,15 @@ export const ArtistPopularTracks: FC<ArtistPopularTracksProps> = ({
 
   if (isError) {
     return (
-      <div className="text-accent-red p-4">Failed to load popular tracks.</div>
+      <div className="text-accent-red p-4">
+        {t('errors.failedToLoadPopularTracks')}
+      </div>
     );
   }
 
   return (
     <div className="flex flex-col">
-      <h2 className="mb-2 text-lg font-semibold">Popular tracks</h2>
+      <h2 className="mb-2 text-lg font-semibold">{t('popularTracks')}</h2>
       <TrackTable
         tracks={tracks ?? []}
         features={{ filterable: false }}

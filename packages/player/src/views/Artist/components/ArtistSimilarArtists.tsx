@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
 import { Loader } from '@nuclearplayer/ui';
 
@@ -14,6 +15,7 @@ export const ArtistSimilarArtists: FC<ArtistSimilarArtistsProps> = ({
   providerId,
   artistId,
 }) => {
+  const { t } = useTranslation('artist');
   const {
     data: artists,
     isLoading,
@@ -30,13 +32,15 @@ export const ArtistSimilarArtists: FC<ArtistSimilarArtistsProps> = ({
 
   if (isError) {
     return (
-      <div className="text-accent-red p-4">Failed to load similar artists.</div>
+      <div className="text-accent-red p-4">
+        {t('errors.failedToLoadSimilarArtists')}
+      </div>
     );
   }
 
   return (
     <div className="flex flex-col">
-      <h2 className="mb-2 text-lg font-semibold">Similar artists</h2>
+      <h2 className="mb-2 text-lg font-semibold">{t('similar')}</h2>
       <ul className="divide-border bg-primary border-border divide-y-2 border border-2">
         {(artists ?? []).slice(0, 5).map((a) => {
           const thumb = pickArtwork(a.artwork, 'thumbnail', 64);

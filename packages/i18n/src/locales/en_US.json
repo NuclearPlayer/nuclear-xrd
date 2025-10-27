@@ -63,9 +63,18 @@
         "albums": "Albums",
         "tracks": "Tracks",
         "similar": "Similar artists",
+        "popularTracks": "Popular tracks",
         "biography": "Biography",
         "discography": "Discography",
-        "topTracks": "Top tracks"
+        "topTracks": "Top tracks",
+        "onTour": "On Tour",
+        "notOnTour": "Not on Tour",
+        "errors": {
+            "failedToLoadDetails": "Failed to load artist details.",
+            "failedToLoadAlbums": "Failed to load albums.",
+            "failedToLoadPopularTracks": "Failed to load popular tracks.",
+            "failedToLoadSimilarArtists": "Failed to load similar artists."
+        }
     },
     "themes": {
         "title": "Themes",
@@ -73,6 +82,14 @@
         "advanced": "Advanced themes",
         "default": "Default",
         "description": "Themes found in your app data themes directory"
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "content": "Dashboard view"
+    },
+    "plugins": {
+        "title": "Plugins",
+        "addPlugin": "Add Plugin"
     },
     "settings": {
         "title": "Settings",

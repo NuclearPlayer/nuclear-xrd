@@ -12,7 +12,16 @@ i18n.use(initReactI18next).init({
   lng: 'en',
   fallbackLng: 'en',
   defaultNS: 'common',
-  ns: ['common', 'navigation', 'search', 'artist', 'themes', 'settings'],
+  ns: [
+    'common',
+    'navigation',
+    'search',
+    'artist',
+    'themes',
+    'settings',
+    'dashboard',
+    'plugins',
+  ],
   interpolation: {
     escapeValue: false,
   },
