@@ -46,7 +46,6 @@ export const useSettingsStore = create<State>((set, get) => ({
       const fullyQualifiedId = normalizeId(source, definition.id);
       const fullDefinition: SettingDefinition = {
         ...definition,
-        id: fullyQualifiedId,
         source,
       };
       definitionsMap[fullyQualifiedId] = fullDefinition;
