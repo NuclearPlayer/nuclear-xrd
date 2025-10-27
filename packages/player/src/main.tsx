@@ -11,11 +11,17 @@ import '@nuclearplayer/i18n';
 
 import { startAdvancedThemeWatcher } from './services/advancedThemeDirService';
 import { applyAdvancedThemeFromSettingsIfAny } from './services/advancedThemeService';
+import {
+  applyLanguageFromSettings,
+  initLanguageWatcher,
+} from './services/languageService';
 import { hydratePluginsFromRegistry } from './services/plugins/pluginBootstrap';
 import { applyThemeFromSettings } from './services/themeBootstrap';
 
 initializeSettingsStore()
   .then(() => registerBuiltInCoreSettings())
+  .then(() => applyLanguageFromSettings())
+  .then(() => initLanguageWatcher())
   .then(() => startAdvancedThemeWatcher())
   .then(() => applyThemeFromSettings())
   .then(() => applyAdvancedThemeFromSettingsIfAny())

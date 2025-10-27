@@ -5,114 +5,114 @@
       "description": "App di streaming musicale gratuita"
     },
     "actions": {
-      "save": "Save",
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "close": "Close",
-      "back": "Back",
-      "next": "Next",
-      "confirm": "Confirm",
-      "apply": "Apply",
-      "reset": "Reset",
-      "clear": "Clear",
-      "search": "Search",
-      "loading": "Loading...",
-      "retry": "Retry"
+      "save": "Salva",
+      "cancel": "Annulla",
+      "delete": "Elimina",
+      "edit": "Modifica",
+      "close": "Chiudi",
+      "back": "Indietro",
+      "next": "Avanti",
+      "confirm": "Conferma",
+      "apply": "Applica",
+      "reset": "Ripristina",
+      "clear": "Cancella",
+      "search": "Cerca",
+      "loading": "Caricamento...",
+      "retry": "Riprova"
     },
     "errors": {
-      "network": "Network error. Please check your connection.",
-      "notFound": "Not found"
+      "network": "Errore di rete. Controlla la tua connessione.",
+      "notFound": "Non trovato"
     }
   },
   "navigation": {
-    "explore": "Explore",
+    "explore": "Esplora",
     "dashboard": "Dashboard",
-    "preferences": "Preferences",
-    "settings": "Settings",
-    "plugins": "Plugins",
-    "themes": "Themes",
-    "collection": "Collection",
-    "favoriteAlbums": "Favorite albums",
-    "favoriteTracks": "Favorite tracks",
-    "favoriteArtists": "Favorite artists"
+    "preferences": "Preferenze",
+    "settings": "Impostazioni",
+    "plugins": "Plugin",
+    "themes": "Temi",
+    "collection": "Raccolta",
+    "favoriteAlbums": "Albums preferiti",
+    "favoriteTracks": "Tracks preferiti",
+    "favoriteArtists": "Artisti preferiti"
   },
   "search": {
-    "title": "Search",
-    "query": "Query",
-    "placeholder": "Search",
-    "noResults": "No results found",
-    "searching": "Searching...",
-    "failedToLoad": "Failed to load results.",
+    "title": "Cerca",
+    "query": "Ricerca",
+    "placeholder": "Cerca",
+    "noResults": "Nessun risultato trovato",
+    "searching": "Ricerca in corso...",
+    "failedToLoad": "Impossibile caricare i risultati.",
     "results": {
       "tracks": "Tracks",
       "albums": "Albums",
-      "artists": "Artists",
+      "artists": "Artisti",
       "playlists": "Playlists"
     },
     "filters": {
-      "all": "All",
+      "all": "Tutto",
       "tracks": "Tracks",
       "albums": "Albums",
-      "artists": "Artists",
+      "artists": "Artisti",
       "playlists": "Playlists"
     }
   },
   "artist": {
-    "title": "Artist",
+    "title": "Artista",
     "albums": "Albums",
     "tracks": "Tracks",
-    "similar": "Similar artists",
-    "popularTracks": "Popular tracks",
-    "biography": "Biography",
-    "discography": "Discography",
+    "similar": "Artisti simili",
+    "popularTracks": "Tracks popolari",
+    "biography": "Biografia",
+    "discography": "Discografia",
     "topTracks": "Top tracks",
-    "onTour": "On Tour",
-    "notOnTour": "Not on Tour",
+    "onTour": "In tour",
+    "notOnTour": "Non in tour",
     "errors": {
-      "failedToLoadDetails": "Failed to load artist details.",
-      "failedToLoadAlbums": "Failed to load albums.",
-      "failedToLoadPopularTracks": "Failed to load popular tracks.",
-      "failedToLoadSimilarArtists": "Failed to load similar artists."
+      "failedToLoadDetails": "Impossibile caricare i dettagli dell'artista.",
+      "failedToLoadAlbums": "Impossibile caricare gli albums.",
+      "failedToLoadPopularTracks": "Impossibile caricare i tracks popolari.",
+      "failedToLoadSimilarArtists": "Impossibile caricare gli artisti simili."
     }
   },
   "themes": {
-    "title": "Themes",
-    "basic": "Basic themes",
-    "advanced": "Advanced themes",
-    "default": "Default",
-    "description": "Themes found in your app data themes directory"
+    "title": "Temi",
+    "basic": "Temi base",
+    "advanced": "Temi avanzati",
+    "default": "Predefinito",
+    "description": "Temi trovati nella directory dei dati dell'app"
   },
   "dashboard": {
     "title": "Dashboard",
-    "content": "Dashboard view"
+    "content": "Vista dashboard"
   },
   "plugins": {
-    "title": "Plugins",
-    "addPlugin": "Add Plugin"
+    "title": "Plugin",
+    "addPlugin": "Aggiungi plugin"
   },
   "settings": {
-    "title": "Settings",
+    "title": "Impostazioni",
     "categories": {
-      "general": "General",
-      "appearance": "Appearance",
-      "playback": "Playback",
+      "general": "Generale",
+      "appearance": "Aspetto",
+      "playback": "Riproduzione",
       "layout": "Layout"
     },
     "general": {
       "language": {
-        "title": "Language",
-        "description": "Select your preferred language"
+        "title": "Lingua",
+        "description": "Seleziona la tua lingua preferita"
       }
     },
     "playback": {
       "skipSeconds": {
-        "title": "Skip duration",
-        "description": "Number of seconds to skip forward/backward"
+        "title": "Durata salto",
+        "description": "Numero di secondi per avanzare/indietreggiare"
       },
       "crossfadeMs": {
         "title": "Crossfade",
-        "description": "Crossfade duration between tracks in milliseconds"
+        "description": "Durata del crossfade tra i tracks in millisecondi"
       }
     }
   }

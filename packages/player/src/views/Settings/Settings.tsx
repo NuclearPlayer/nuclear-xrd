@@ -10,15 +10,19 @@ export const Settings = () => {
 
   return (
     <ViewShell title={t('title')}>
-      <ScrollableArea className="max-w-100 flex-1 overflow-hidden">
-        {groups.map((group) => (
-          <SettingsSection
-            key={group.name}
-            title={t(`categories.${group.name}`, group.name)}
-            settings={group.settings}
-          />
-        ))}
-      </ScrollableArea>
+      <div className="flex w-full flex-col items-center justify-center overflow-hidden">
+        <ScrollableArea className="max-w-100 flex-1 overflow-hidden">
+          <div className="px-2">
+            {groups.map((group) => (
+              <SettingsSection
+                key={group.name}
+                title={t(`categories.${group.name}`, group.name)}
+                settings={group.settings}
+              />
+            ))}
+          </div>
+        </ScrollableArea>
+      </div>
     </ViewShell>
   );
 };

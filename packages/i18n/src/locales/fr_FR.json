@@ -5,114 +5,114 @@
       "description": "Application de streaming de musique gratuite"
     },
     "actions": {
-      "save": "Save",
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "close": "Close",
-      "back": "Back",
-      "next": "Next",
-      "confirm": "Confirm",
-      "apply": "Apply",
-      "reset": "Reset",
-      "clear": "Clear",
-      "search": "Search",
-      "loading": "Loading...",
-      "retry": "Retry"
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "delete": "Supprimer",
+      "edit": "Modifier",
+      "close": "Fermer",
+      "back": "Retour",
+      "next": "Suivant",
+      "confirm": "Confirmer",
+      "apply": "Appliquer",
+      "reset": "Réinitialiser",
+      "clear": "Effacer",
+      "search": "Rechercher",
+      "loading": "Chargement...",
+      "retry": "Réessayer"
     },
     "errors": {
-      "network": "Network error. Please check your connection.",
-      "notFound": "Not found"
+      "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+      "notFound": "Introuvable"
     }
   },
   "navigation": {
-    "explore": "Explore",
-    "dashboard": "Dashboard",
-    "preferences": "Preferences",
-    "settings": "Settings",
+    "explore": "Explorer",
+    "dashboard": "Tableau de bord",
+    "preferences": "Préférences",
+    "settings": "Paramètres",
     "plugins": "Plugins",
-    "themes": "Themes",
+    "themes": "Thèmes",
     "collection": "Collection",
-    "favoriteAlbums": "Favorite albums",
-    "favoriteTracks": "Favorite tracks",
-    "favoriteArtists": "Favorite artists"
+    "favoriteAlbums": "Albums favoris",
+    "favoriteTracks": "Morceaux favoris",
+    "favoriteArtists": "Artistes favoris"
   },
   "search": {
-    "title": "Search",
-    "query": "Query",
-    "placeholder": "Search",
-    "noResults": "No results found",
-    "searching": "Searching...",
-    "failedToLoad": "Failed to load results.",
+    "title": "Rechercher",
+    "query": "Requête",
+    "placeholder": "Rechercher",
+    "noResults": "Aucun résultat trouvé",
+    "searching": "Recherche en cours...",
+    "failedToLoad": "Échec du chargement des résultats.",
     "results": {
       "tracks": "Tracks",
       "albums": "Albums",
-      "artists": "Artists",
+      "artists": "Artistes",
       "playlists": "Playlists"
     },
     "filters": {
-      "all": "All",
+      "all": "Tout",
       "tracks": "Tracks",
       "albums": "Albums",
-      "artists": "Artists",
+      "artists": "Artistes",
       "playlists": "Playlists"
     }
   },
   "artist": {
-    "title": "Artist",
+    "title": "Artiste",
     "albums": "Albums",
     "tracks": "Tracks",
-    "similar": "Similar artists",
-    "popularTracks": "Popular tracks",
-    "biography": "Biography",
-    "discography": "Discography",
+    "similar": "Artistes similaires",
+    "popularTracks": "Tracks populaires",
+    "biography": "Biographie",
+    "discography": "Discographie",
     "topTracks": "Top tracks",
-    "onTour": "On Tour",
-    "notOnTour": "Not on Tour",
+    "onTour": "En tournée",
+    "notOnTour": "Pas en tournée",
     "errors": {
-      "failedToLoadDetails": "Failed to load artist details.",
-      "failedToLoadAlbums": "Failed to load albums.",
-      "failedToLoadPopularTracks": "Failed to load popular tracks.",
-      "failedToLoadSimilarArtists": "Failed to load similar artists."
+      "failedToLoadDetails": "Échec du chargement des détails de l'artiste.",
+      "failedToLoadAlbums": "Échec du chargement des albums.",
+      "failedToLoadPopularTracks": "Échec du chargement des tracks populaires.",
+      "failedToLoadSimilarArtists": "Échec du chargement des artistes similaires."
     }
   },
   "themes": {
-    "title": "Themes",
-    "basic": "Basic themes",
-    "advanced": "Advanced themes",
-    "default": "Default",
-    "description": "Themes found in your app data themes directory"
+    "title": "Thèmes",
+    "basic": "Thèmes basiques",
+    "advanced": "Thèmes avancés",
+    "default": "Par défaut",
+    "description": "Thèmes trouvés dans le répertoire de données de l'application"
   },
   "dashboard": {
-    "title": "Dashboard",
-    "content": "Dashboard view"
+    "title": "Tableau de bord",
+    "content": "Vue du tableau de bord"
   },
   "plugins": {
     "title": "Plugins",
-    "addPlugin": "Add Plugin"
+    "addPlugin": "Ajouter un plugin"
   },
   "settings": {
-    "title": "Settings",
+    "title": "Paramètres",
     "categories": {
-      "general": "General",
-      "appearance": "Appearance",
-      "playback": "Playback",
-      "layout": "Layout"
+      "general": "Général",
+      "appearance": "Apparence",
+      "playback": "Lecture",
+      "layout": "Mise en page"
     },
     "general": {
       "language": {
-        "title": "Language",
-        "description": "Select your preferred language"
+        "title": "Langue",
+        "description": "Sélectionnez votre langue préférée"
       }
     },
     "playback": {
       "skipSeconds": {
-        "title": "Skip duration",
-        "description": "Number of seconds to skip forward/backward"
+        "title": "Durée de saut",
+        "description": "Nombre de secondes pour avancer/reculer"
       },
       "crossfadeMs": {
         "title": "Crossfade",
-        "description": "Crossfade duration between tracks in milliseconds"
+        "description": "Durée du crossfade entre les tracks en millisecondes"
       }
     }
   }

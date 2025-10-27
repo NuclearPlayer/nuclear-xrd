@@ -4,7 +4,12 @@ import { registerCoreSettings } from '../stores/settingsStore';
 
 const LANGUAGE_OPTIONS = [
   { value: 'en_US', label: 'English' },
+  { value: 'de_DE', label: 'Deutsch' },
+  { value: 'es_ES', label: 'Español' },
   { value: 'fr_FR', label: 'Français' },
+  { value: 'it_IT', label: 'Italiano' },
+  { value: 'pt_BR', label: 'Português (Brasil)' },
+  { value: 'ru_RU', label: 'Русский' },
 ];
 
 export const CORE_SETTINGS: SettingDefinition[] = [

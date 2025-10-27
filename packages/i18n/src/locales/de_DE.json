@@ -2,117 +2,117 @@
   "common": {
     "app": {
       "name": "Nuclear",
-      "description": "Kostenlose Musik Streaming App"
+      "description": "Kostenlose Musik-Streaming-App"
     },
     "actions": {
-      "save": "Save",
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "close": "Close",
-      "back": "Back",
-      "next": "Next",
-      "confirm": "Confirm",
-      "apply": "Apply",
-      "reset": "Reset",
-      "clear": "Clear",
-      "search": "Search",
-      "loading": "Loading...",
-      "retry": "Retry"
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "edit": "Bearbeiten",
+      "close": "Schließen",
+      "back": "Zurück",
+      "next": "Weiter",
+      "confirm": "Bestätigen",
+      "apply": "Anwenden",
+      "reset": "Zurücksetzen",
+      "clear": "Leeren",
+      "search": "Suchen",
+      "loading": "Lädt...",
+      "retry": "Erneut versuchen"
     },
     "errors": {
-      "network": "Network error. Please check your connection.",
-      "notFound": "Not found"
+      "network": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.",
+      "notFound": "Nicht gefunden"
     }
   },
   "navigation": {
-    "explore": "Explore",
+    "explore": "Entdecken",
     "dashboard": "Dashboard",
-    "preferences": "Preferences",
-    "settings": "Settings",
+    "preferences": "Einstellungen",
+    "settings": "Einstellungen",
     "plugins": "Plugins",
     "themes": "Themes",
-    "collection": "Collection",
-    "favoriteAlbums": "Favorite albums",
-    "favoriteTracks": "Favorite tracks",
-    "favoriteArtists": "Favorite artists"
+    "collection": "Sammlung",
+    "favoriteAlbums": "Lieblingsalben",
+    "favoriteTracks": "Lieblingstitel",
+    "favoriteArtists": "Lieblingskünstler"
   },
   "search": {
-    "title": "Search",
-    "query": "Query",
-    "placeholder": "Search",
-    "noResults": "No results found",
-    "searching": "Searching...",
-    "failedToLoad": "Failed to load results.",
+    "title": "Suche",
+    "query": "Suche",
+    "placeholder": "Suchen",
+    "noResults": "Keine Ergebnisse gefunden",
+    "searching": "Suche läuft...",
+    "failedToLoad": "Ergebnisse konnten nicht geladen werden.",
     "results": {
-      "tracks": "Tracks",
-      "albums": "Albums",
-      "artists": "Artists",
+      "tracks": "Titel",
+      "albums": "Alben",
+      "artists": "Künstler",
       "playlists": "Playlists"
     },
     "filters": {
-      "all": "All",
-      "tracks": "Tracks",
-      "albums": "Albums",
-      "artists": "Artists",
+      "all": "Alle",
+      "tracks": "Titel",
+      "albums": "Alben",
+      "artists": "Künstler",
       "playlists": "Playlists"
     }
   },
   "artist": {
-    "title": "Artist",
-    "albums": "Albums",
-    "tracks": "Tracks",
-    "similar": "Similar artists",
-    "popularTracks": "Popular tracks",
-    "biography": "Biography",
-    "discography": "Discography",
-    "topTracks": "Top tracks",
-    "onTour": "On Tour",
-    "notOnTour": "Not on Tour",
+    "title": "Künstler",
+    "albums": "Alben",
+    "tracks": "Titel",
+    "similar": "Ähnliche Künstler",
+    "popularTracks": "Beliebte Titel",
+    "biography": "Biografie",
+    "discography": "Diskografie",
+    "topTracks": "Top-Titel",
+    "onTour": "Auf Tour",
+    "notOnTour": "Nicht auf Tour",
     "errors": {
-      "failedToLoadDetails": "Failed to load artist details.",
-      "failedToLoadAlbums": "Failed to load albums.",
-      "failedToLoadPopularTracks": "Failed to load popular tracks.",
-      "failedToLoadSimilarArtists": "Failed to load similar artists."
+      "failedToLoadDetails": "Künstlerdetails konnten nicht geladen werden.",
+      "failedToLoadAlbums": "Alben konnten nicht geladen werden.",
+      "failedToLoadPopularTracks": "Beliebte Titel konnten nicht geladen werden.",
+      "failedToLoadSimilarArtists": "Ähnliche Künstler konnten nicht geladen werden."
     }
   },
   "themes": {
     "title": "Themes",
-    "basic": "Basic themes",
-    "advanced": "Advanced themes",
-    "default": "Default",
-    "description": "Themes found in your app data themes directory"
+    "basic": "Basis-Themes",
+    "advanced": "Erweiterte Themes",
+    "default": "Standard",
+    "description": "Themes aus Ihrem App-Daten-Verzeichnis"
   },
   "dashboard": {
     "title": "Dashboard",
-    "content": "Dashboard view"
+    "content": "Dashboard-Ansicht"
   },
   "plugins": {
     "title": "Plugins",
-    "addPlugin": "Add Plugin"
+    "addPlugin": "Plugin hinzufügen"
   },
   "settings": {
-    "title": "Settings",
+    "title": "Einstellungen",
     "categories": {
-      "general": "General",
-      "appearance": "Appearance",
-      "playback": "Playback",
+      "general": "Allgemein",
+      "appearance": "Erscheinungsbild",
+      "playback": "Wiedergabe",
       "layout": "Layout"
     },
     "general": {
       "language": {
-        "title": "Language",
-        "description": "Select your preferred language"
+        "title": "Sprache",
+        "description": "Wählen Sie Ihre bevorzugte Sprache"
       }
     },
     "playback": {
       "skipSeconds": {
-        "title": "Skip duration",
-        "description": "Number of seconds to skip forward/backward"
+        "title": "Sprungdauer",
+        "description": "Anzahl der Sekunden zum Vor-/Zurückspringen"
       },
       "crossfadeMs": {
-        "title": "Crossfade",
-        "description": "Crossfade duration between tracks in milliseconds"
+        "title": "Überblendung",
+        "description": "Überblendungsdauer zwischen Titeln in Millisekunden"
       }
     }
   }
