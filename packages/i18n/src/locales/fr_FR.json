@@ -1,0 +1,119 @@
+{
+  "common": {
+    "app": {
+      "name": "Nuclear",
+      "description": "Application de streaming de musique gratuite"
+    },
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "close": "Close",
+      "back": "Back",
+      "next": "Next",
+      "confirm": "Confirm",
+      "apply": "Apply",
+      "reset": "Reset",
+      "clear": "Clear",
+      "search": "Search",
+      "loading": "Loading...",
+      "retry": "Retry"
+    },
+    "errors": {
+      "network": "Network error. Please check your connection.",
+      "notFound": "Not found"
+    }
+  },
+  "navigation": {
+    "explore": "Explore",
+    "dashboard": "Dashboard",
+    "preferences": "Preferences",
+    "settings": "Settings",
+    "plugins": "Plugins",
+    "themes": "Themes",
+    "collection": "Collection",
+    "favoriteAlbums": "Favorite albums",
+    "favoriteTracks": "Favorite tracks",
+    "favoriteArtists": "Favorite artists"
+  },
+  "search": {
+    "title": "Search",
+    "query": "Query",
+    "placeholder": "Search",
+    "noResults": "No results found",
+    "searching": "Searching...",
+    "failedToLoad": "Failed to load results.",
+    "results": {
+      "tracks": "Tracks",
+      "albums": "Albums",
+      "artists": "Artists",
+      "playlists": "Playlists"
+    },
+    "filters": {
+      "all": "All",
+      "tracks": "Tracks",
+      "albums": "Albums",
+      "artists": "Artists",
+      "playlists": "Playlists"
+    }
+  },
+  "artist": {
+    "title": "Artist",
+    "albums": "Albums",
+    "tracks": "Tracks",
+    "similar": "Similar artists",
+    "popularTracks": "Popular tracks",
+    "biography": "Biography",
+    "discography": "Discography",
+    "topTracks": "Top tracks",
+    "onTour": "On Tour",
+    "notOnTour": "Not on Tour",
+    "errors": {
+      "failedToLoadDetails": "Failed to load artist details.",
+      "failedToLoadAlbums": "Failed to load albums.",
+      "failedToLoadPopularTracks": "Failed to load popular tracks.",
+      "failedToLoadSimilarArtists": "Failed to load similar artists."
+    }
+  },
+  "themes": {
+    "title": "Themes",
+    "basic": "Basic themes",
+    "advanced": "Advanced themes",
+    "default": "Default",
+    "description": "Themes found in your app data themes directory"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "content": "Dashboard view"
+  },
+  "plugins": {
+    "title": "Plugins",
+    "addPlugin": "Add Plugin"
+  },
+  "settings": {
+    "title": "Settings",
+    "categories": {
+      "general": "General",
+      "appearance": "Appearance",
+      "playback": "Playback",
+      "layout": "Layout"
+    },
+    "general": {
+      "language": {
+        "title": "Language",
+        "description": "Select your preferred language"
+      }
+    },
+    "playback": {
+      "skipSeconds": {
+        "title": "Skip duration",
+        "description": "Number of seconds to skip forward/backward"
+      },
+      "crossfadeMs": {
+        "title": "Crossfade",
+        "description": "Crossfade duration between tracks in milliseconds"
+      }
+    }
+  }
+}
