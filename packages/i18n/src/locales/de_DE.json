@@ -2,7 +2,7 @@
   "common": {
     "app": {
       "name": "Nuclear",
-      "description": "Free music streaming app"
+      "description": "Kostenlose Musik Streaming App"
     },
     "actions": {
       "save": "Save",
