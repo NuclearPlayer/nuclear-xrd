@@ -16,6 +16,7 @@ import { Route as PluginsRouteImport } from './routes/plugins'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ArtistProviderIdArtistIdRouteImport } from './routes/artist/$providerId/$artistId'
+import { Route as AlbumProviderIdAlbumIdRouteImport } from './routes/album/$providerId/$albumId'
 
 const ThemesRoute = ThemesRouteImport.update({
   id: '/themes',
@@ -53,6 +54,11 @@ const ArtistProviderIdArtistIdRoute =
     path: '/artist/$providerId/$artistId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AlbumProviderIdAlbumIdRoute = AlbumProviderIdAlbumIdRouteImport.update({
+  id: '/album/$providerId/$albumId',
+  path: '/album/$providerId/$albumId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
+  '/album/$providerId/$albumId': typeof AlbumProviderIdAlbumIdRoute
   '/artist/$providerId/$artistId': typeof ArtistProviderIdArtistIdRoute
 }
 export interface FileRoutesByTo {
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
+  '/album/$providerId/$albumId': typeof AlbumProviderIdAlbumIdRoute
   '/artist/$providerId/$artistId': typeof ArtistProviderIdArtistIdRoute
 }
 export interface FileRoutesById {
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/settings': typeof SettingsRoute
   '/themes': typeof ThemesRoute
+  '/album/$providerId/$albumId': typeof AlbumProviderIdAlbumIdRoute
   '/artist/$providerId/$artistId': typeof ArtistProviderIdArtistIdRoute
 }
 export interface FileRouteTypes {
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/settings'
     | '/themes'
+    | '/album/$providerId/$albumId'
     | '/artist/$providerId/$artistId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/settings'
     | '/themes'
+    | '/album/$providerId/$albumId'
     | '/artist/$providerId/$artistId'
   id:
     | '__root__'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/settings'
     | '/themes'
+    | '/album/$providerId/$albumId'
     | '/artist/$providerId/$artistId'
   fileRoutesById: FileRoutesById
 }
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   SettingsRoute: typeof SettingsRoute
   ThemesRoute: typeof ThemesRoute
+  AlbumProviderIdAlbumIdRoute: typeof AlbumProviderIdAlbumIdRoute
   ArtistProviderIdArtistIdRoute: typeof ArtistProviderIdArtistIdRoute
 }
 
@@ -173,6 +186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArtistProviderIdArtistIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/album/$providerId/$albumId': {
+      id: '/album/$providerId/$albumId'
+      path: '/album/$providerId/$albumId'
+      fullPath: '/album/$providerId/$albumId'
+      preLoaderRoute: typeof AlbumProviderIdAlbumIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   SettingsRoute: SettingsRoute,
   ThemesRoute: ThemesRoute,
+  AlbumProviderIdAlbumIdRoute: AlbumProviderIdAlbumIdRoute,
   ArtistProviderIdArtistIdRoute: ArtistProviderIdArtistIdRoute,
 }
 export const routeTree = rootRouteImport
