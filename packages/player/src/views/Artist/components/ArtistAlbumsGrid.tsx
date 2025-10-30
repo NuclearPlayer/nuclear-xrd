@@ -1,9 +1,12 @@
-import { FC } from 'react';
+import { useNavigate } from '@tanstack/react-router';
+import { FC, useMemo } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
+import { MetadataProvider } from '@nuclearplayer/plugin-sdk';
 import { Card, CardGrid, Loader } from '@nuclearplayer/ui';
 
+import { providersServiceHost } from '../../../services/providersService';
 import { useArtistAlbums } from '../hooks/useArtistAlbums';
 
 type ArtistAlbumsGridProps = {
@@ -17,12 +20,21 @@ export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
   artistId,
   'data-testid': dataTestId,
 }) => {
+  const navigate = useNavigate();
   const { t } = useTranslation('artist');
   const {
     data: albums,
     isLoading,
     isError,
   } = useArtistAlbums(providerId, artistId);
+
+  const provider = useMemo(() => {
+    const providers = providersServiceHost.list(
+      'metadata',
+    ) as MetadataProvider[];
+    return providers[0];
+  }, []);
+
   if (isLoading) {
     return (
       <div
@@ -53,6 +65,9 @@ export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
           title={album.title}
           subtitle={album.artists?.map((a) => a.name).join(', ')}
           src={pickArtwork(album.artwork, 'cover', 300)?.url}
+          onClick={() =>
+            navigate({ to: `/album/${provider.id}/${album.source.id}` })
+          }
         />
       ))}
     </CardGrid>
