@@ -63,7 +63,7 @@ export const AlbumHeader: FC<AlbumHeaderProps> = ({ providerId, albumId }) => {
           </div>
         </div>
 
-        <div className="text-text-secondary flex flex-wrap gap-2 text-sm">
+        <div className="text-text-secondary flex flex-col flex-wrap gap-2 text-sm">
           {album.genres && album.genres.length > 0 && (
             <div>
               <span className="text-text-primary font-semibold">

@@ -76,6 +76,16 @@
       "failedToLoadSimilarArtists": "Failed to load similar artists."
     }
   },
+  "album": {
+    "title": "Album",
+    "genre": "Genre",
+    "year": "Year",
+    "tracks": "Tracks",
+    "errors": {
+      "failedToLoadDetails": "Failed to load album details.",
+      "failedToLoadTracks": "Failed to load tracks."
+    }
+  },
   "themes": {
     "title": "Themes",
     "basic": "Basic themes",

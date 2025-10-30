@@ -54,11 +54,15 @@ export const AlbumTrackList: FC<AlbumTrackListProps> = ({
     return null;
   }
 
+  const albumHasDuration = tracks.some(
+    (track) => track.durationMs != undefined,
+  );
+
   return (
     <TrackTable
       tracks={tracks}
       features={{ filterable: false }}
-      display={{ displayDuration: true }}
+      display={{ displayDuration: albumHasDuration, displayThumbnail: false }}
     />
   );
 };
