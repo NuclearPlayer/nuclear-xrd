@@ -76,6 +76,16 @@
       "failedToLoadSimilarArtists": "Échec du chargement des artistes similaires."
     }
   },
+  "album": {
+    "title": "Album",
+    "genre": "Genre",
+    "year": "Year",
+    "tracks": "Tracks",
+    "errors": {
+      "failedToLoadDetails": "Failed to load album details.",
+      "failedToLoadTracks": "Failed to load tracks."
+    }
+  },
   "themes": {
     "title": "Thèmes",
     "basic": "Thèmes basiques",
