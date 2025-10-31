@@ -503,148 +503,156 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
                 <div
-                  class="relative h-full w-full max-w-100 flex-1 overflow-hidden"
+                  class="flex w-full flex-col items-center justify-center overflow-hidden"
                 >
                   <div
-                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
-                    style="scrollbar-width: none;"
+                    class="relative h-full w-full max-w-100 flex-1 overflow-hidden"
                   >
-                    <section
-                      class="mb-6 flex w-full flex-col items-start justify-start"
+                    <div
+                      class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                      style="scrollbar-width: none;"
                     >
-                      <h2
-                        class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
-                      >
-                        General
-                      </h2>
                       <div
-                        class="flex w-full flex-1 flex-col"
+                        class="px-2"
                       >
-                        <div
-                          class="flex flex-col gap-6"
+                        <section
+                          class="mb-6 flex w-full flex-col items-start justify-start"
                         >
-                          <div
-                            class="relative flex w-full flex-col gap-2"
+                          <h2
+                            class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
                           >
-                            <label
-                              class="text-foreground text-sm font-semibold"
-                              for="select-:r2:"
-                              id="select-:r2:-label"
+                            General
+                          </h2>
+                          <div
+                            class="flex w-full flex-1 flex-col"
+                          >
+                            <div
+                              class="flex flex-col gap-6"
                             >
-                              Language
-                            </label>
-                            <button
-                              aria-expanded="false"
-                              aria-haspopup="listbox"
-                              class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded-md border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
-                              data-headlessui-state=""
-                              id="select-:r2:"
-                              type="button"
-                            >
-                              <span
-                                class="block truncate"
+                              <div
+                                class="relative flex w-full flex-col gap-2"
                               >
-                                English
-                              </span>
-                              <span
-                                class="flex items-center"
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  class="lucide lucide-chevron-down text-foreground transition-transform"
-                                  fill="none"
-                                  height="16"
-                                  stroke="currentColor"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  viewBox="0 0 24 24"
-                                  width="16"
-                                  xmlns="http://www.w3.org/2000/svg"
+                                <label
+                                  class="text-foreground text-sm font-semibold"
+                                  for="select-:r2:"
+                                  id="select-:r2:-label"
                                 >
-                                  <path
-                                    d="m6 9 6 6 6-6"
-                                  />
-                                </svg>
-                              </span>
-                            </button>
-                            <p
-                              class="text-foreground-secondary text-sm select-none"
-                              id="select-:r2:-description"
-                            >
-                              Select your preferred language
-                            </p>
+                                  Language
+                                </label>
+                                <button
+                                  aria-expanded="false"
+                                  aria-haspopup="listbox"
+                                  class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded-md border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
+                                  data-headlessui-state=""
+                                  id="select-:r2:"
+                                  type="button"
+                                >
+                                  <span
+                                    class="block truncate"
+                                  >
+                                    English
+                                  </span>
+                                  <span
+                                    class="flex items-center"
+                                  >
+                                    <svg
+                                      aria-hidden="true"
+                                      class="lucide lucide-chevron-down text-foreground transition-transform"
+                                      fill="none"
+                                      height="16"
+                                      stroke="currentColor"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      viewBox="0 0 24 24"
+                                      width="16"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="m6 9 6 6 6-6"
+                                      />
+                                    </svg>
+                                  </span>
+                                </button>
+                                <p
+                                  class="text-foreground-secondary text-sm select-none"
+                                  id="select-:r2:-description"
+                                >
+                                  Select your preferred language
+                                </p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </section>
-                    <section
-                      class="mb-6 flex w-full flex-col items-start justify-start"
-                    >
-                      <h2
-                        class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
-                      >
-                        Playback
-                      </h2>
-                      <div
-                        class="flex w-full flex-1 flex-col"
-                      >
-                        <div
-                          class="flex flex-col gap-6"
+                        </section>
+                        <section
+                          class="mb-6 flex w-full flex-col items-start justify-start"
                         >
-                          <div
-                            class="flex w-full flex-col gap-2"
+                          <h2
+                            class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
                           >
-                            <label
-                              class="text-foreground text-sm font-semibold"
-                              for="input-:r6:"
-                              id="input-:r6:-label"
-                            >
-                              Skip duration
-                            </label>
-                            <input
-                              class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
-                              data-headlessui-state=""
-                              id="input-:r6:"
-                              inputmode="numeric"
-                              type="number"
-                              value=""
-                            />
-                            <p
-                              class="text-foreground-secondary text-sm select-none"
-                              id="input-:r6:-description"
-                            >
-                              Number of seconds to skip forward/backward
-                            </p>
-                          </div>
+                            Playback
+                          </h2>
                           <div
-                            class="flex w-full flex-col gap-2"
+                            class="flex w-full flex-1 flex-col"
                           >
-                            <label
-                              class="text-foreground text-sm font-semibold"
-                              for="input-:r8:"
-                              id="input-:r8:-label"
+                            <div
+                              class="flex flex-col gap-6"
                             >
-                              Crossfade
-                            </label>
-                            <input
-                              class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
-                              data-headlessui-state=""
-                              id="input-:r8:"
-                              inputmode="numeric"
-                              type="number"
-                              value=""
-                            />
-                            <p
-                              class="text-foreground-secondary text-sm select-none"
-                              id="input-:r8:-description"
-                            >
-                              Crossfade duration between tracks in milliseconds
-                            </p>
+                              <div
+                                class="flex w-full flex-col gap-2"
+                              >
+                                <label
+                                  class="text-foreground text-sm font-semibold"
+                                  for="input-:r6:"
+                                  id="input-:r6:-label"
+                                >
+                                  Skip duration
+                                </label>
+                                <input
+                                  class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
+                                  data-headlessui-state=""
+                                  id="input-:r6:"
+                                  inputmode="numeric"
+                                  type="number"
+                                  value="10"
+                                />
+                                <p
+                                  class="text-foreground-secondary text-sm select-none"
+                                  id="input-:r6:-description"
+                                >
+                                  Number of seconds to skip forward/backward
+                                </p>
+                              </div>
+                              <div
+                                class="flex w-full flex-col gap-2"
+                              >
+                                <label
+                                  class="text-foreground text-sm font-semibold"
+                                  for="input-:r8:"
+                                  id="input-:r8:-label"
+                                >
+                                  Crossfade
+                                </label>
+                                <input
+                                  class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
+                                  data-headlessui-state=""
+                                  id="input-:r8:"
+                                  inputmode="numeric"
+                                  type="number"
+                                  value="0"
+                                />
+                                <p
+                                  class="text-foreground-secondary text-sm select-none"
+                                  id="input-:r8:-description"
+                                >
+                                  Crossfade duration between tracks in milliseconds
+                                </p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        </section>
                       </div>
-                    </section>
+                    </div>
                   </div>
                 </div>
               </div>
