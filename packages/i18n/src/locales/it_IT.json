@@ -76,6 +76,16 @@
       "failedToLoadSimilarArtists": "Impossibile caricare gli artisti simili."
     }
   },
+  "album": {
+    "title": "Album",
+    "genre": "Genre",
+    "year": "Year",
+    "tracks": "Tracks",
+    "errors": {
+      "failedToLoadDetails": "Failed to load album details.",
+      "failedToLoadTracks": "Failed to load tracks."
+    }
+  },
   "themes": {
     "title": "Temi",
     "basic": "Temi base",
