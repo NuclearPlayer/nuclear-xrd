@@ -15,6 +15,7 @@ describe('Artist view', () => {
         'artistTopTracks',
         'artistRelatedArtists',
       ])
+      .withAlbumMetadataCapabilities(['albumDetails'])
       .withSearch(async () => ({
         artists: [
           {
