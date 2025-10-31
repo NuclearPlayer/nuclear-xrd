@@ -56,6 +56,9 @@ export const Search: FC = () => {
               key={item.source.id}
               title={item.title}
               src={pickArtwork(item.artwork, 'cover', 300)?.url}
+              onClick={() =>
+                navigate({ to: `/album/${provider.id}/${item.source.id}` })
+              }
             />
           ))}
         </CardGrid>

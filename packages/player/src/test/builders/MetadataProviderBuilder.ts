@@ -40,6 +40,13 @@ export class MetadataProviderBuilder {
     return this;
   }
 
+  withAlbumMetadataCapabilities(
+    albumMetadataCapabilities: MetadataProvider['albumMetadataCapabilities'],
+  ): this {
+    this.provider.albumMetadataCapabilities = albumMetadataCapabilities;
+    return this;
+  }
+
   withSearch(search: MetadataProvider['search']): this {
     this.provider.search = search;
     return this;
@@ -92,6 +99,13 @@ export class MetadataProviderBuilder {
     fetchArtistRelatedArtists: MetadataProvider['fetchArtistRelatedArtists'],
   ): this {
     this.provider.fetchArtistRelatedArtists = fetchArtistRelatedArtists;
+    return this;
+  }
+
+  withFetchAlbumDetails(
+    fetchAlbumDetails: MetadataProvider['fetchAlbumDetails'],
+  ): this {
+    this.provider.fetchAlbumDetails = fetchAlbumDetails;
     return this;
   }
 

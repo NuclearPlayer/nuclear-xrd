@@ -17,6 +17,8 @@ export type ArtistMetadataCapability =
   | 'artistTopTracks'
   | 'artistRelatedArtists';
 
+export type AlbumMetadataCapability = 'albumDetails';
+
 export type SearchParams = {
   query: string;
   types?: SearchCategory[];
@@ -42,6 +44,7 @@ export type ProviderDescriptor<K extends ProviderKind = ProviderKind> = {
 export type MetadataProvider = ProviderDescriptor<'metadata'> & {
   searchCapabilities?: SearchCapability[];
   artistMetadataCapabilities?: ArtistMetadataCapability[];
+  albumMetadataCapabilities?: AlbumMetadataCapability[];
   search?: (params: SearchParams) => Promise<SearchResults>;
   searchArtists?: (params: Omit<SearchParams, 'types'>) => Promise<ArtistRef[]>;
   searchAlbums?: (params: Omit<SearchParams, 'types'>) => Promise<AlbumRef[]>;
