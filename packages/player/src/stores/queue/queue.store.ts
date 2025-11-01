@@ -40,6 +40,24 @@ const createQueueItem = (track: Track): QueueItem => ({
   addedAtIso: new Date().toISOString(),
 });
 
+const saveToDisk = async (): Promise<void> => {
+  const state = useQueueStore.getState();
+  await store.set('queue.items', state.items);
+  await store.set('queue.currentIndex', state.currentIndex);
+  await store.set('queue.repeatMode', state.repeatMode);
+  await store.set('queue.shuffleEnabled', state.shuffleEnabled);
+  await store.save();
+};
+
+const withPersistence = <T extends unknown[]>(
+  fn: (...args: T) => void,
+): ((...args: T) => void) => {
+  return (...args: T) => {
+    fn(...args);
+    void saveToDisk();
+  };
+};
+
 export const useQueueStore = create<QueueStore>((set, get) => ({
   items: [],
   currentIndex: 0,
@@ -70,28 +88,21 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
     });
   },
 
-  addToQueue: (tracks: Track[]) => {
+  addToQueue: withPersistence((tracks: Track[]) => {
     set(
       produce((state: QueueStore) => {
         const newItems = tracks.map(createQueueItem);
         state.items.push(...newItems);
       }),
     );
-    void saveToDisk();
-  },
+  }),
 
   addNext: (tracks: Track[]) => {
-    set(
-      produce((state: QueueStore) => {
-        const newItems = tracks.map(createQueueItem);
-        const insertIndex = state.currentIndex + 1;
-        state.items.splice(insertIndex, 0, ...newItems);
-      }),
-    );
-    void saveToDisk();
+    const { currentIndex } = get();
+    get().addAt(tracks, currentIndex + 1);
   },
 
-  addAt: (tracks: Track[], index: number) => {
+  addAt: withPersistence((tracks: Track[], index: number) => {
     set(
       produce((state: QueueStore) => {
         const newItems = tracks.map(createQueueItem);
@@ -101,10 +112,9 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
         }
       }),
     );
-    void saveToDisk();
-  },
+  }),
 
-  removeByIds: (ids: string[]) => {
+  removeByIds: withPersistence((ids: string[]) => {
     set(
       produce((state: QueueStore) => {
         const idsSet = new Set(ids);
@@ -123,10 +133,9 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
         }
       }),
     );
-    void saveToDisk();
-  },
+  }),
 
-  removeByIndices: (indices: number[]) => {
+  removeByIndices: withPersistence((indices: number[]) => {
     set(
       produce((state: QueueStore) => {
         const indicesSet = new Set(indices);
@@ -145,15 +154,13 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
         }
       }),
     );
-    void saveToDisk();
-  },
+  }),
 
-  clearQueue: () => {
+  clearQueue: withPersistence(() => {
     set({ items: [], currentIndex: 0 });
-    void saveToDisk();
-  },
+  }),
 
-  reorder: (fromIndex: number, toIndex: number) => {
+  reorder: withPersistence((fromIndex: number, toIndex: number) => {
     set(
       produce((state: QueueStore) => {
         const [movedItem] = state.items.splice(fromIndex, 1);
@@ -174,78 +181,63 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
         }
       }),
     );
-    void saveToDisk();
-  },
+  }),
 
-  updateItemState: (id: string, updates: Partial<QueueItem>) => {
-    set(
-      produce((state: QueueStore) => {
-        const item = state.items.find((item) => item.id === id);
-        if (item) {
-          Object.assign(item, updates);
-        }
-      }),
-    );
-    void saveToDisk();
-  },
+  updateItemState: withPersistence(
+    (id: string, updates: Partial<QueueItem>) => {
+      set(
+        produce((state: QueueStore) => {
+          const item = state.items.find((item) => item.id === id);
+          if (item) {
+            Object.assign(item, updates);
+          }
+        }),
+      );
+    },
+  ),
 
-  goToNext: () => {
+  goToNext: withPersistence(() => {
     const { currentIndex, items } = get();
     if (currentIndex < items.length - 1) {
       set({ currentIndex: currentIndex + 1 });
-      void saveToDisk();
     }
-  },
+  }),
 
-  goToPrevious: () => {
+  goToPrevious: withPersistence(() => {
     const { currentIndex } = get();
     if (currentIndex > 0) {
       set({ currentIndex: currentIndex - 1 });
-      void saveToDisk();
     }
-  },
+  }),
 
-  goToIndex: (index: number) => {
+  goToIndex: withPersistence((index: number) => {
     const { items } = get();
     if (index >= 0 && index < items.length) {
       set({ currentIndex: index });
-      void saveToDisk();
     }
-  },
+  }),
 
-  goToId: (id: string) => {
+  goToId: withPersistence((id: string) => {
     const { items } = get();
     const index = items.findIndex((item) => item.id === id);
     if (index !== -1) {
       set({ currentIndex: index });
-      void saveToDisk();
     }
-  },
+  }),
 
-  setRepeatMode: (mode: RepeatMode) => {
+  setRepeatMode: withPersistence((mode: RepeatMode) => {
     set({ repeatMode: mode });
-    void saveToDisk();
-  },
+  }),
 
-  setShuffleEnabled: (enabled: boolean) => {
+  setShuffleEnabled: withPersistence((enabled: boolean) => {
     set({ shuffleEnabled: enabled });
-    void saveToDisk();
-  },
+  }),
 
   getCurrentItem: () => {
     const { items, currentIndex } = get();
     return items[currentIndex];
   },
 }));
-
-const saveToDisk = async (): Promise<void> => {
-  const state = useQueueStore.getState();
-  await store.set('queue.items', state.items);
-  await store.set('queue.currentIndex', state.currentIndex);
-  await store.set('queue.repeatMode', state.repeatMode);
-  await store.set('queue.shuffleEnabled', state.shuffleEnabled);
-  await store.save();
-};
 
 export const initializeQueueStore = async (): Promise<void> => {
   await useQueueStore.getState().loadFromDisk();
