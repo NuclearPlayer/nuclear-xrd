@@ -134,14 +134,12 @@ export type PlaylistItem = {
 
 export type QueueItem = {
   id: string;
-  title: string;
-  artists: ArtistCredit[];
-  album?: string;
-  durationMs?: number;
-  artwork?: ArtworkSet;
-  note?: string;
-  addedAtIso?: string;
-  source: ProviderRef;
+  track: Track;
+  status: 'idle' | 'loading' | 'success' | 'error';
+  error?: string;
+  activeStreamIndex: number;
+  failedStreamIndices: number[];
+  addedAtIso: string;
 };
 
 export { pickArtwork } from './artwork';

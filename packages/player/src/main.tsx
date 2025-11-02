@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App';
 import { registerBuiltInCoreSettings } from './services/coreSettings';
+import { initializeQueueStore } from './stores/queue/queue.store';
 import { initializeSettingsStore } from './stores/settingsStore';
 
 import '@nuclearplayer/tailwind-config';
@@ -19,6 +20,7 @@ import { hydratePluginsFromRegistry } from './services/plugins/pluginBootstrap';
 import { applyThemeFromSettings } from './services/themeBootstrap';
 
 initializeSettingsStore()
+  .then(() => initializeQueueStore())
   .then(() => registerBuiltInCoreSettings())
   .then(() => applyLanguageFromSettings())
   .then(() => initLanguageWatcher())
