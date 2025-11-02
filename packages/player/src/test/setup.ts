@@ -6,6 +6,7 @@ import { vi } from 'vitest';
 import { setupResizeObserverMock } from '@nuclearplayer/ui';
 
 process.env.NODE_ENV = 'test';
+process.env.TZ = 'UTC';
 
 setupResizeObserverMock();
 
