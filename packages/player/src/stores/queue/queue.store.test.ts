@@ -294,6 +294,48 @@ describe('useQueueStore', () => {
       const current = useQueueStore.getState().getCurrentItem();
       expect(current?.track.title).toBe('Track 2');
     });
+
+    it('goToNext wraps to start when repeat mode is all', () => {
+      useQueueStore.setState({ currentIndex: 2 });
+      useQueueStore.getState().setRepeatMode('all');
+      useQueueStore.getState().goToNext();
+      expect(useQueueStore.getState().currentIndex).toBe(0);
+    });
+
+    it('goToPrevious wraps to end when repeat mode is all', () => {
+      useQueueStore.getState().setRepeatMode('all');
+      useQueueStore.getState().goToPrevious();
+      expect(useQueueStore.getState().currentIndex).toBe(2);
+    });
+
+    it('goToNext picks a different random index when shuffle is enabled', () => {
+      const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.9);
+      useQueueStore.getState().setShuffleEnabled(true);
+      useQueueStore.getState().goToNext();
+      expect(useQueueStore.getState().currentIndex).toBe(2);
+      randomSpy.mockRestore();
+    });
+
+    it('goToNext retries random selection until index changes', () => {
+      const randomSpy = vi
+        .spyOn(Math, 'random')
+        .mockReturnValueOnce(0.1)
+        .mockReturnValueOnce(0.8);
+      useQueueStore.getState().setShuffleEnabled(true);
+      useQueueStore.getState().goToNext();
+      expect(useQueueStore.getState().currentIndex).toBe(2);
+      expect(randomSpy).toHaveBeenCalledTimes(2);
+      randomSpy.mockRestore();
+    });
+
+    it('goToPrevious picks a different random index when shuffle is enabled', () => {
+      const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.4);
+      useQueueStore.getState().setShuffleEnabled(true);
+      useQueueStore.setState({ currentIndex: 2 });
+      useQueueStore.getState().goToPrevious();
+      expect(useQueueStore.getState().currentIndex).toBe(1);
+      randomSpy.mockRestore();
+    });
   });
 
   describe('mode controls', () => {

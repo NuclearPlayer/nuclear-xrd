@@ -40,6 +40,50 @@ const createQueueItem = (track: Track): QueueItem => ({
   addedAtIso: new Date().toISOString(),
 });
 
+const getDirectionalIndex = (
+  state: Pick<
+    QueueStore,
+    'items' | 'currentIndex' | 'repeatMode' | 'shuffleEnabled'
+  >,
+  direction: 'forward' | 'backward',
+): number => {
+  const { items, currentIndex, repeatMode, shuffleEnabled } = state;
+
+  if (items.length === 0) {
+    return currentIndex;
+  }
+
+  if (shuffleEnabled) {
+    return getShuffledIndex(items.length, currentIndex);
+  }
+
+  if (direction === 'forward') {
+    if (currentIndex < items.length - 1) {
+      return currentIndex + 1;
+    }
+    return repeatMode === 'all' ? 0 : currentIndex;
+  }
+
+  if (currentIndex > 0) {
+    return currentIndex - 1;
+  }
+
+  return repeatMode === 'all' ? items.length - 1 : currentIndex;
+};
+
+const getShuffledIndex = (length: number, currentIndex: number): number => {
+  if (length <= 1) {
+    return currentIndex;
+  }
+
+  let nextIndex = currentIndex;
+  while (nextIndex === currentIndex) {
+    nextIndex = Math.floor(Math.random() * length);
+  }
+
+  return nextIndex;
+};
+
 const saveToDisk = async (): Promise<void> => {
   const state = useQueueStore.getState();
   await store.set('queue.items', state.items);
@@ -197,16 +241,18 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
   ),
 
   goToNext: withPersistence(() => {
-    const { currentIndex, items } = get();
-    if (currentIndex < items.length - 1) {
-      set({ currentIndex: currentIndex + 1 });
+    const state = get();
+    const nextIndex = getDirectionalIndex(state, 'forward');
+    if (nextIndex !== state.currentIndex) {
+      set({ currentIndex: nextIndex });
     }
   }),
 
   goToPrevious: withPersistence(() => {
-    const { currentIndex } = get();
-    if (currentIndex > 0) {
-      set({ currentIndex: currentIndex - 1 });
+    const state = get();
+    const previousIndex = getDirectionalIndex(state, 'backward');
+    if (previousIndex !== state.currentIndex) {
+      set({ currentIndex: previousIndex });
     }
   }),
 
