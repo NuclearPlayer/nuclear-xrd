@@ -18,9 +18,9 @@ import {
   setRegistryEntryEnabled,
   upsertRegistryEntry,
 } from '../services/plugins/pluginRegistry';
-import { providersServiceHost } from '../services/providersService';
+import { providersHost } from '../services/providersHost';
+import { createPluginSettingsHost } from '../services/settingsHost';
 import { resolveErrorMessage } from '../utils/logging';
-import { createPluginSettingsHost } from './settingsStore';
 
 const allowedPermissions: string[] = [];
 
@@ -174,7 +174,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
     if (plugin.instance!.onEnable) {
       const api = new NuclearPluginAPI({
         settingsHost: createPluginSettingsHost(id, plugin.metadata.displayName),
-        providersHost: providersServiceHost,
+        providersHost: providersHost,
       });
       await plugin.instance!.onEnable(api);
     }

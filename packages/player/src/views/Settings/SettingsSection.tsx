@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useSetting, type SettingDefinition } from '@nuclearplayer/plugin-sdk';
 import { SectionShell } from '@nuclearplayer/ui';
 
-import { coreSettingsHost } from '../../stores/settingsStore';
+import { coreSettingsHost } from '../../services/settingsHost';
 import { SettingField } from './SettingField';
 
 type SettingsSectionProps = {

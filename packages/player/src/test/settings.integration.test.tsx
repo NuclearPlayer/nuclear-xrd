@@ -12,6 +12,8 @@ import { registerBuiltInCoreSettings } from '../services/coreSettings';
 import {
   coreSettingsHost,
   createPluginSettingsHost,
+} from '../services/settingsHost';
+import {
   initializeSettingsStore,
   useSettingsStore,
 } from '../stores/settingsStore';

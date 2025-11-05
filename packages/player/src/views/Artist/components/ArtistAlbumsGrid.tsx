@@ -6,7 +6,7 @@ import { pickArtwork } from '@nuclearplayer/model';
 import { MetadataProvider } from '@nuclearplayer/plugin-sdk';
 import { Card, CardGrid, Loader } from '@nuclearplayer/ui';
 
-import { providersServiceHost } from '../../../services/providersService';
+import { providersHost } from '../../../services/providersHost';
 import { useArtistAlbums } from '../hooks/useArtistAlbums';
 
 type ArtistAlbumsGridProps = {
@@ -29,9 +29,7 @@ export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
   } = useArtistAlbums(providerId, artistId);
 
   const provider = useMemo(() => {
-    const providers = providersServiceHost.list(
-      'metadata',
-    ) as MetadataProvider[];
+    const providers = providersHost.list('metadata') as MetadataProvider[];
     return providers[0];
   }, []);
 

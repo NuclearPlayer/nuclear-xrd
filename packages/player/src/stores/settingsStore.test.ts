@@ -4,10 +4,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { SettingDefinition } from '@nuclearplayer/plugin-sdk';
 
-import { resetInMemoryTauriStore } from '../test/utils/inMemoryTauriStore';
 import {
   createCoreSettingsHost,
   createPluginSettingsHost,
+} from '../services/settingsHost';
+import { resetInMemoryTauriStore } from '../test/utils/inMemoryTauriStore';
+import {
   getSetting,
   initializeSettingsStore,
   registerCoreSettings,

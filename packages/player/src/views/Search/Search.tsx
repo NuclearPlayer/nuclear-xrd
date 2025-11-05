@@ -18,7 +18,7 @@ import {
   ViewShell,
 } from '@nuclearplayer/ui';
 
-import { providersServiceHost } from '../../services/providersService';
+import { providersHost } from '../../services/providersHost';
 import { executeMetadataSearch } from '../../services/search/executeMetadataSearch';
 
 export const Search: FC = () => {
@@ -28,9 +28,7 @@ export const Search: FC = () => {
 
   // @todo: this selects the first metadata provider, when we support switching it should use the selected one
   const provider = useMemo(() => {
-    const providers = providersServiceHost.list(
-      'metadata',
-    ) as MetadataProvider[];
+    const providers = providersHost.list('metadata') as MetadataProvider[];
     return providers[0];
   }, []);
 

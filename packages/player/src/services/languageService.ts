@@ -1,6 +1,6 @@
 import { i18n } from '@nuclearplayer/i18n';
 
-import { coreSettingsHost } from '../stores/settingsStore';
+import { coreSettingsHost } from './settingsHost';
 
 export const changeLanguage = async (locale: string) => {
   await i18n.changeLanguage(locale);
