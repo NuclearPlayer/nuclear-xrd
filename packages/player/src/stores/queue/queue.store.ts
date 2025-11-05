@@ -3,9 +3,7 @@ import { produce } from 'immer';
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
-import type { QueueItem, Track } from '@nuclearplayer/model';
-
-import type { Queue, RepeatMode } from './queue.types';
+import type { Queue, QueueItem, RepeatMode, Track } from '@nuclearplayer/model';
 
 const QUEUE_FILE = 'queue.json';
 const store = new LazyStore(QUEUE_FILE);

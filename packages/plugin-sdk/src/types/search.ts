@@ -4,11 +4,13 @@ import type {
   Artist,
   ArtistRef,
   PlaylistRef,
+  SearchCategory,
+  SearchParams,
+  SearchResults,
   Track,
   TrackRef,
 } from '@nuclearplayer/model';
 
-export type SearchCategory = 'artists' | 'albums' | 'tracks' | 'playlists';
 export type SearchCapability = SearchCategory | 'unified';
 
 export type ArtistMetadataCapability =
@@ -18,19 +20,6 @@ export type ArtistMetadataCapability =
   | 'artistRelatedArtists';
 
 export type AlbumMetadataCapability = 'albumDetails';
-
-export type SearchParams = {
-  query: string;
-  types?: SearchCategory[];
-  limit?: number;
-};
-
-export type SearchResults = {
-  artists?: ArtistRef[];
-  albums?: AlbumRef[];
-  tracks?: Track[];
-  playlists?: PlaylistRef[];
-};
 
 export type ProviderKind = 'metadata' | 'streaming' | 'lyrics' | (string & {});
 

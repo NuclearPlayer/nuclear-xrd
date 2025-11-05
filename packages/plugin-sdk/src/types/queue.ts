@@ -1,13 +1,4 @@
-import type { QueueItem, Track } from '@nuclearplayer/model';
-
-export type RepeatMode = 'off' | 'all' | 'one';
-
-export type Queue = {
-  items: QueueItem[];
-  currentIndex: number;
-  repeatMode: RepeatMode;
-  shuffleEnabled: boolean;
-};
+import type { Queue, QueueItem, RepeatMode, Track } from '@nuclearplayer/model';
 
 export type QueueItemStateUpdate = Partial<{
   status: QueueItem['status'];
