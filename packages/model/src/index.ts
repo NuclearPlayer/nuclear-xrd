@@ -132,14 +132,6 @@ export type PlaylistItem = {
   source: ProviderRef;
 };
 
-export type QueueItem = {
-  id: string;
-  track: Track;
-  status: 'idle' | 'loading' | 'success' | 'error';
-  error?: string;
-  activeStreamIndex: number;
-  failedStreamIndices: number[];
-  addedAtIso: string;
-};
-
 export { pickArtwork } from './artwork';
+export type { QueueItem, RepeatMode, Queue } from './queue';
+export type { SearchCategory, SearchParams, SearchResults } from './search';
