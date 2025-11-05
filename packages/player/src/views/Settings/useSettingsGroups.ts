@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash-es';
+import groupBy from 'lodash-es/groupBy';
 import { useMemo } from 'react';
 
 import type { SettingDefinition } from '@nuclearplayer/plugin-sdk';
