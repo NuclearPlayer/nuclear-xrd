@@ -26,6 +26,7 @@ import {
   TopBar,
 } from '@nuclearplayer/ui';
 
+import { ConnectedQueuePanel } from '../components/ConnectedQueuePanel';
 import { DevTools } from '../components/DevTools';
 import { SoundProvider } from '../components/SoundProvider';
 import { useLayoutStore } from '../stores/layoutStore';
@@ -151,7 +152,9 @@ const RootComponent = () => {
             isCollapsed={rightSidebar.isCollapsed}
             onWidthChange={setRightSidebarWidth}
             onToggle={toggleRightSidebar}
-          />
+          >
+            <ConnectedQueuePanel isCollapsed={rightSidebar.isCollapsed} />
+          </PlayerWorkspace.RightSidebar>
         </PlayerWorkspace>
       </SoundProvider>
 

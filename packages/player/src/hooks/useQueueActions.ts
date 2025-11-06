@@ -1,24 +1,38 @@
-import pick from 'lodash-es/pick';
-
 import { useQueueStore } from '../stores/queue/queue.store';
 
+// You can't replace this with lodash pick because it causes infinite re-renders
 export const useQueueActions = () => {
-  return useQueueStore((state) =>
-    pick(state, [
-      'addToQueue',
-      'addNext',
-      'addAt',
-      'removeByIds',
-      'removeByIndices',
-      'clearQueue',
-      'reorder',
-      'updateItemState',
-      'goToNext',
-      'goToPrevious',
-      'goToIndex',
-      'goToId',
-      'setRepeatMode',
-      'setShuffleEnabled',
-    ]),
-  );
+  const {
+    addToQueue,
+    addNext,
+    addAt,
+    removeByIds,
+    removeByIndices,
+    clearQueue,
+    reorder,
+    updateItemState,
+    goToNext,
+    goToPrevious,
+    goToIndex,
+    goToId,
+    setRepeatMode,
+    setShuffleEnabled,
+  } = useQueueStore();
+
+  return {
+    addToQueue,
+    addNext,
+    addAt,
+    removeByIds,
+    removeByIndices,
+    clearQueue,
+    reorder,
+    updateItemState,
+    goToNext,
+    goToPrevious,
+    goToIndex,
+    goToId,
+    setRepeatMode,
+    setShuffleEnabled,
+  };
 };

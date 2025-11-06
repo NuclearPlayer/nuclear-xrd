@@ -36,7 +36,7 @@ export const ConnectedQueuePanel: FC<ConnectedQueuePanelProps> = ({
       items={queue.items}
       currentItemId={currentItem?.id}
       isCollapsed={isCollapsed}
-      reorderable
+      reorderable={!isCollapsed}
       onReorder={handleReorder}
       onSelectItem={handleSelectItem}
       onRemoveItem={handleRemoveItem}
