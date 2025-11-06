@@ -8,6 +8,7 @@ import { formatTimeMillis } from '../../../utils/time';
 import { PositionCell } from '../Cells/PositionCell';
 import { TextCell } from '../Cells/TextCell';
 import { ThumbnailCell } from '../Cells/ThumbnailCell';
+import { TitleCell } from '../Cells/TitleCell';
 import { IconHeader } from '../Headers/IconHeader';
 import { TextHeader } from '../Headers/TextHeader';
 import { mergeLabels } from '../labels';
@@ -59,7 +60,7 @@ export function useColumns<T extends Track = Track>(
             {mergedLabels.headers.titleHeader}
           </TextHeader>
         ),
-        cell: TextCell,
+        cell: TitleCell,
       }),
       display?.displayAlbum &&
         columnHelper.accessor((track) => track.album?.title, {
