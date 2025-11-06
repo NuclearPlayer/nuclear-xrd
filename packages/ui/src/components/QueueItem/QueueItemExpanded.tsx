@@ -29,10 +29,12 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
       variant="tertiary"
       shadow="none"
       className={cn(
+        'group',
         queueItemVariants({ status, isCurrent, isCollapsed: false }),
         classes?.root,
       )}
       onClick={onSelect}
+      onDoubleClick={onSelect}
       role={onSelect ? 'button' : undefined}
     >
       <div
@@ -103,11 +105,13 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
             variant="noShadow"
             onClick={(e) => {
               e.stopPropagation();
+              e.preventDefault();
               onRemove();
             }}
+            onPointerDown={(e) => e.stopPropagation()}
             aria-label={labels?.removeButton}
             className={cn(
-              'absolute right-0 opacity-0 transition-opacity group-hover:opacity-100',
+              'absolute right-0 opacity-0 group-hover:opacity-100',
               classes?.removeButton,
             )}
           >
