@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
-import { Loader, TrackTable } from '@nuclearplayer/ui';
+import { Loader } from '@nuclearplayer/ui';
 
+import { ConnectedTrackTable } from '../../../components/ConnectedTrackTable';
 import { useArtistTopTracks } from '../hooks/useArtistTopTracks';
 
 type ArtistPopularTracksProps = {
@@ -40,7 +41,7 @@ export const ArtistPopularTracks: FC<ArtistPopularTracksProps> = ({
   return (
     <div className="flex flex-col">
       <h2 className="mb-2 text-lg font-semibold">{t('popularTracks')}</h2>
-      <TrackTable
+      <ConnectedTrackTable
         tracks={tracks ?? []}
         features={{ filterable: false }}
         display={{ displayDuration: false }}
