@@ -14,7 +14,7 @@ type QueuePanelProps = {
   currentItemId?: string;
   isCollapsed?: boolean;
   reorderable?: boolean;
-  onReorder?: (itemIds: string[]) => void;
+  onReorder?: (fromIndex: number, toIndex: number) => void;
   onSelectItem?: (itemId: string) => void;
   onRemoveItem?: (itemId: string) => void;
   labels?: {
@@ -47,17 +47,13 @@ export const QueuePanel: FC<QueuePanelProps> = ({
       return;
     }
 
-    const oldIndex = items.findIndex((item) => item.id === active.id);
-    const newIndex = items.findIndex((item) => item.id === over.id);
-    if (oldIndex === -1 || newIndex === -1) {
+    const fromIndex = items.findIndex((item) => item.id === active.id);
+    const toIndex = items.findIndex((item) => item.id === over.id);
+    if (fromIndex === -1 || toIndex === -1) {
       return;
     }
 
-    const next = [...items];
-    const [moved] = next.splice(oldIndex, 1);
-    next.splice(newIndex, 0, moved);
-
-    onReorder(next.map((item) => item.id));
+    onReorder(fromIndex, toIndex);
   };
 
   if (items.length === 0) {
