@@ -8,6 +8,7 @@ export const queueItemVariants = cva(
         idle: '',
         loading: 'opacity-70',
         error: 'ring-accent-red ring-2 ring-inset',
+        success: '',
       },
       isCurrent: {
         true: '',

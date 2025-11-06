@@ -11,6 +11,7 @@ export * from './PlayerWorkspace';
 export * from './PluginItem';
 export * from './Popover';
 export * from './QueueItem';
+export * from './QueuePanel';
 export * from './RouteTransition';
 export * from './ImageReveal';
 export * from './ScrollableArea';

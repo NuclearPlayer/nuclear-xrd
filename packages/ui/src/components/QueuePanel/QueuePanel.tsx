@@ -1,0 +1,127 @@
+import { DragEndEvent } from '@dnd-kit/core';
+import { Music } from 'lucide-react';
+import { FC } from 'react';
+
+import type { QueueItem as QueueItemType } from '@nuclearplayer/model';
+
+import { cn } from '../../utils';
+import { ScrollableArea } from '../ScrollableArea';
+import { QueueReorderLayer } from './QueueReorderLayer';
+import { ReorderableQueueItem } from './ReorderableQueueItem';
+
+type QueuePanelProps = {
+  items: QueueItemType[];
+  currentItemId?: string;
+  isCollapsed?: boolean;
+  reorderable?: boolean;
+  onReorder?: (itemIds: string[]) => void;
+  onSelectItem?: (itemId: string) => void;
+  onRemoveItem?: (itemId: string) => void;
+  labels?: {
+    emptyTitle?: string;
+    emptySubtitle?: string;
+    removeButton?: string;
+    errorPrefix?: string;
+  };
+  classes?: {
+    root?: string;
+    list?: string;
+    empty?: string;
+  };
+};
+
+export const QueuePanel: FC<QueuePanelProps> = ({
+  items,
+  currentItemId,
+  isCollapsed = false,
+  reorderable = true,
+  onReorder,
+  onSelectItem,
+  onRemoveItem,
+  labels,
+  classes,
+}) => {
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id || !onReorder) {
+      return;
+    }
+
+    const oldIndex = items.findIndex((item) => item.id === active.id);
+    const newIndex = items.findIndex((item) => item.id === over.id);
+    if (oldIndex === -1 || newIndex === -1) {
+      return;
+    }
+
+    const next = [...items];
+    const [moved] = next.splice(oldIndex, 1);
+    next.splice(newIndex, 0, moved);
+
+    onReorder(next.map((item) => item.id));
+  };
+
+  if (items.length === 0) {
+    return (
+      <div
+        className={cn(
+          'flex h-full flex-col items-center justify-center gap-4 p-8 text-center',
+          classes?.empty,
+        )}
+      >
+        <Music size={64} className="text-foreground-secondary opacity-50" />
+        {(labels?.emptyTitle || labels?.emptySubtitle) && (
+          <div>
+            {labels?.emptyTitle && (
+              <div className="text-foreground text-lg font-bold">
+                {labels.emptyTitle}
+              </div>
+            )}
+            {labels?.emptySubtitle && (
+              <div className="text-foreground-secondary mt-2 text-sm">
+                {labels.emptySubtitle}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  const itemIds = items.map((item) => item.id);
+
+  return (
+    <div className={cn('flex h-full flex-col', classes?.root)}>
+      <ScrollableArea>
+        <QueueReorderLayer
+          enabled={reorderable}
+          items={itemIds}
+          onDragEnd={handleDragEnd}
+        >
+          <div
+            className={cn(
+              'flex flex-col',
+              isCollapsed ? 'gap-2 p-2' : 'gap-1 p-2',
+              classes?.list,
+            )}
+          >
+            {items.map((item) => (
+              <ReorderableQueueItem
+                key={item.id}
+                item={item}
+                isCurrent={item.id === currentItemId}
+                isCollapsed={isCollapsed}
+                isReorderable={reorderable}
+                onSelect={onSelectItem}
+                onRemove={onRemoveItem}
+                labels={{
+                  removeButton: labels?.removeButton,
+                  errorPrefix: labels?.errorPrefix,
+                }}
+              />
+            ))}
+          </div>
+        </QueueReorderLayer>
+      </ScrollableArea>
+    </div>
+  );
+};

@@ -22,7 +22,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
 }) => {
   const thumbnail = pickArtwork(track.artwork, 'thumbnail', 64);
   const duration = formatTimeMillis(track.durationMs);
-  const primaryArtist = track.artists[0]?.name || 'Unknown Artist';
+  const primaryArtist = track.artists[0]?.name;
 
   return (
     <Box
@@ -105,7 +105,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
               e.stopPropagation();
               onRemove();
             }}
-            aria-label={labels?.removeButton || 'Remove'}
+            aria-label={labels?.removeButton}
             className={cn(
               'absolute right-0 opacity-0 transition-opacity group-hover:opacity-100',
               classes?.removeButton,
