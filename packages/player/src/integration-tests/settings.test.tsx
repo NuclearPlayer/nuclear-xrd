@@ -1,5 +1,3 @@
-import './setup';
-
 import { render, screen, waitFor } from '@testing-library/react';
 import { FC } from 'react';
 import { beforeEach, describe, expect, it } from 'vitest';
@@ -17,7 +15,7 @@ import {
   initializeSettingsStore,
   useSettingsStore,
 } from '../stores/settingsStore';
-import { resetInMemoryTauriStore } from './utils/inMemoryTauriStore';
+import { resetInMemoryTauriStore } from '../test/utils/inMemoryTauriStore';
 
 const TestCoreSettingText: FC<{ id: string; testId: string }> = ({
   id,

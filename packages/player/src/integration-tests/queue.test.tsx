@@ -2,8 +2,8 @@ import { screen } from '@testing-library/react';
 
 import { providersHost } from '../services/providersHost';
 import { useQueueStore } from '../stores/queue/queue.store';
+import { MetadataProviderBuilder } from '../test/builders/MetadataProviderBuilder';
 import { AlbumWrapper } from '../views/Album/Album.test-wrapper';
-import { MetadataProviderBuilder } from './builders/MetadataProviderBuilder';
 import { QueueWrapper } from './Queue.test-wrapper';
 
 describe('Queue', () => {

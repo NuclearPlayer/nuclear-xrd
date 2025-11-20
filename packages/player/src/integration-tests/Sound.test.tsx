@@ -1,5 +1,3 @@
-import './setup';
-
 import { act, waitFor } from '@testing-library/react';
 
 import { SoundWrapper } from './Sound.test-wrapper';

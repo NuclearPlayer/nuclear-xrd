@@ -1,5 +1,3 @@
-import '../../test/setup';
-
 import { vi } from 'vitest';
 
 import { registerBuiltInCoreSettings } from '../../services/coreSettings';

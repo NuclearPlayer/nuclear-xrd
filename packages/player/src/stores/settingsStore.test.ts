@@ -1,5 +1,3 @@
-import '../test/setup';
-
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import type { SettingDefinition } from '@nuclearplayer/plugin-sdk';
