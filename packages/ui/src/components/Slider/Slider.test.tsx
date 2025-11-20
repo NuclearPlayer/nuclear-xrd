@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -74,7 +74,9 @@ describe('Slider (composed)', () => {
     });
     const preventSpy = vi.spyOn(wheelEvent, 'preventDefault');
     const stopSpy = vi.spyOn(wheelEvent, 'stopPropagation');
-    input.dispatchEvent(wheelEvent);
+    act(() => {
+      input.dispatchEvent(wheelEvent);
+    });
 
     expect(onChange).toHaveBeenCalledWith(6);
     expect(preventSpy).toHaveBeenCalled();

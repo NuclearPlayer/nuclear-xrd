@@ -66,7 +66,7 @@ describe('executeDetailsSearch', () => {
       .withArtistMetadataCapabilities([])
       .build();
 
-    expect(method(provider, 'artist-id')).rejects.toThrowError(
+    await expect(method(provider, 'artist-id')).rejects.toThrowError(
       `Missing capability: ${capability}`,
     );
   });
