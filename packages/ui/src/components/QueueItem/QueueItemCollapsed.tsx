@@ -18,7 +18,7 @@ export const QueueItemCollapsed: FC<QueueItemProps> = ({
   const thumbnail = pickArtwork(track.artwork, 'thumbnail', 64);
 
   return (
-    <div className="relative">
+    <div className="relative" data-testid="queue-item">
       <div
         className={cn(
           'pointer-events-none absolute -top-0.75 -left-0.75 h-17.5 w-17.5 rounded-md transition-all',

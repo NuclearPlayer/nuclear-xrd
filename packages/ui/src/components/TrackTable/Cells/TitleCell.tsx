@@ -24,6 +24,7 @@ export const TitleCell = <T extends Track>({
         <div className="min-w-0 flex-1 truncate">{getValue()}</div>
         {showControls && meta?.onAddToQueue && (
           <Button
+            data-testid="add-to-queue-button"
             size="icon-sm"
             variant="text"
             className="opacity-0 transition-none group-hover:opacity-100"

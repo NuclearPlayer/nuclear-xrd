@@ -15,6 +15,7 @@ export type ScrollableAreaProps = {
   className?: string;
   fadeScrollbars?: boolean;
   autoHideDelay?: number; // ms, default 1000
+  'data-testid'?: string;
 };
 
 type ScrollMetrics = {
@@ -246,6 +247,7 @@ export const ScrollableArea: FC<ScrollableAreaProps> = ({
   className,
   fadeScrollbars = true,
   autoHideDelay = 1000,
+  'data-testid': testId,
 }) => {
   const { ref, metrics, isScrolling, handleScroll } = useScrollMetrics(
     fadeScrollbars,
@@ -257,7 +259,10 @@ export const ScrollableArea: FC<ScrollableAreaProps> = ({
   const needsCorner = needsVertical && needsHorizontal;
 
   return (
-    <div className={cn('relative h-full w-full', className)}>
+    <div
+      className={cn('relative h-full w-full', className)}
+      data-testid={testId}
+    >
       <div
         ref={ref}
         //The padding is needed here to make room for scrollbars

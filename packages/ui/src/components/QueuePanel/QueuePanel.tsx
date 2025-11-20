@@ -59,6 +59,7 @@ export const QueuePanel: FC<QueuePanelProps> = ({
   if (items.length === 0) {
     return (
       <div
+        data-testid="queue-empty-state"
         className={cn(
           'flex h-full flex-col items-center justify-center gap-4 p-8 text-center',
           classes?.empty,
@@ -86,7 +87,10 @@ export const QueuePanel: FC<QueuePanelProps> = ({
   const itemIds = items.map((item) => item.id);
 
   return (
-    <div className={cn('flex h-full flex-col', classes?.root)}>
+    <div
+      data-testid="queue-panel"
+      className={cn('flex h-full flex-col', classes?.root)}
+    >
       <ScrollableArea>
         <QueueReorderLayer
           enabled={reorderable}

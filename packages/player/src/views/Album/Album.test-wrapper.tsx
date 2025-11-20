@@ -1,6 +1,7 @@
-import { RenderResult, screen } from '@testing-library/react';
+import { render, RenderResult, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import App from '../../App';
 import { SearchWrapper } from '../Search/Search.test-wrapper';
 
 export const AlbumWrapper = {
@@ -24,6 +25,21 @@ export const AlbumWrapper = {
     await new Promise((r) => setTimeout(r, 0));
     return component;
   },
+  async mountDirectly(
+    url: string = '/album/test-metadata-provider/album-1',
+  ): Promise<RenderResult> {
+    const component = render(<App />);
+    history.pushState({}, '', url);
+    await screen.findByTestId('album-view');
+
+    return component;
+  },
   getHeader: (name: string) => screen.getByRole('heading', { name }),
   getTracksTable: () => screen.queryByRole('table'),
+  getTracks: () => screen.queryAllByTestId('track-row'),
+  addTrackToQueueByTitle: async (title: string) => {
+    const allTracks = screen.getAllByTestId('track-row');
+    const trackRow = allTracks.find((row) => row.textContent?.includes(title));
+    await userEvent.click(within(trackRow!).getByTestId('add-to-queue-button'));
+  },
 };

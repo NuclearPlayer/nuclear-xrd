@@ -39,6 +39,7 @@ export function SortableRow<T extends Track = Track>({
 
   return (
     <tr
+      data-testid="track-row"
       ref={setNodeRef}
       style={style}
       className={cn(

@@ -26,6 +26,8 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
 
   return (
     <Box
+      data-testid="queue-item"
+      data-is-current={isCurrent}
       variant="tertiary"
       shadow="none"
       className={cn(
@@ -38,6 +40,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
       role={onSelect ? 'button' : undefined}
     >
       <div
+        data-testid="queue-item-thumbnail"
         className={cn(
           'border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2',
           classes?.thumbnail,
@@ -56,6 +59,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
 
       <div className={cn('min-w-0 flex-1', classes?.content)}>
         <div
+          data-testid="queue-item-title"
           className={cn(
             'text-foreground truncate text-sm font-bold',
             classes?.title,
@@ -64,6 +68,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
           {track.title}
         </div>
         <div
+          data-testid="queue-item-artist"
           className={cn(
             'text-foreground-secondary truncate text-xs',
             classes?.artist,
@@ -73,6 +78,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
         </div>
         {status === 'error' && errorMessage && (
           <div
+            data-testid="queue-item-error"
             className={cn(
               'text-accent-red mt-1 flex items-center gap-1 text-xs font-semibold',
               classes?.error,
@@ -90,6 +96,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
       <div className="relative flex flex-shrink-0 items-center">
         {duration && (
           <div
+            data-testid="queue-item-duration"
             className={cn(
               'text-foreground-secondary text-sm tabular-nums',
               classes?.duration,
@@ -101,6 +108,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
 
         {onRemove && (
           <Button
+            data-testid="queue-item-remove-button"
             size="icon-sm"
             variant="noShadow"
             onClick={(e) => {
