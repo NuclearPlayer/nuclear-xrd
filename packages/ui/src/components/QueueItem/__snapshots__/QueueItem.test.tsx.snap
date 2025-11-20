@@ -1,0 +1,423 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`QueueItem > (Snapshot) renders collapsed state 1`] = `
+<div
+  class="relative"
+  data-testid="queue-item"
+>
+  <div
+    class="pointer-events-none absolute -top-0.75 -left-0.75 h-17.5 w-17.5 rounded-md transition-all"
+  />
+  <div
+    class="border-border text-foreground rounded-md border-2 bg-background-secondary shadow-none group relative flex items-center gap-3 overflow-hidden transition-all h-16 w-16 justify-center p-0"
+    role="button"
+  >
+    <img
+      alt="Bohemian Rhapsody"
+      class="h-full w-full object-cover"
+      src="https://picsum.photos/seed/queen/300"
+    />
+  </div>
+</div>
+`;
+
+exports[`QueueItem > (Snapshot) renders collapsed state without onSelect 1`] = `
+<div
+  class="relative"
+  data-testid="queue-item"
+>
+  <div
+    class="pointer-events-none absolute -top-0.75 -left-0.75 h-17.5 w-17.5 rounded-md transition-all"
+  />
+  <div
+    class="border-border text-foreground rounded-md border-2 bg-background-secondary shadow-none group relative flex items-center gap-3 overflow-hidden transition-all h-16 w-16 justify-center p-0"
+  >
+    <img
+      alt="Bohemian Rhapsody"
+      class="h-full w-full object-cover"
+      src="https://picsum.photos/seed/queen/300"
+    />
+  </div>
+</div>
+`;
+
+exports[`QueueItem > (Snapshot) renders current state 1`] = `
+<div
+  class="border-border text-foreground h-full rounded-md border-2 shadow-none group group relative flex items-center gap-3 overflow-hidden transition-all w-full p-3 bg-primary ring-0"
+  data-is-current="true"
+  data-testid="queue-item"
+  role="button"
+>
+  <div
+    class="border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2"
+    data-testid="queue-item-thumbnail"
+  >
+    <img
+      alt="Bohemian Rhapsody"
+      class="h-full w-full object-cover"
+      src="https://picsum.photos/seed/queen/300"
+    />
+  </div>
+  <div
+    class="min-w-0 flex-1"
+  >
+    <div
+      class="text-foreground truncate text-sm font-bold"
+      data-testid="queue-item-title"
+    >
+      Bohemian Rhapsody
+    </div>
+    <div
+      class="text-foreground-secondary truncate text-xs"
+      data-testid="queue-item-artist"
+    >
+      Queen
+    </div>
+  </div>
+  <div
+    class="relative flex flex-shrink-0 items-center"
+  >
+    <div
+      class="text-foreground-secondary text-sm tabular-nums"
+      data-testid="queue-item-duration"
+    >
+      5:54
+    </div>
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-8 justify-center absolute right-0 opacity-0 group-hover:opacity-100"
+      data-headlessui-state=""
+      data-testid="queue-item-remove-button"
+      type="submit"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-x"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18 6 6 18"
+        />
+        <path
+          d="m6 6 12 12"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`QueueItem > (Snapshot) renders default state 1`] = `
+<div
+  class="border-border text-foreground h-full rounded-md border-2 bg-background-secondary shadow-none group group relative flex items-center gap-3 overflow-hidden transition-all w-full p-3"
+  data-is-current="false"
+  data-testid="queue-item"
+  role="button"
+>
+  <div
+    class="border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2"
+    data-testid="queue-item-thumbnail"
+  >
+    <img
+      alt="Bohemian Rhapsody"
+      class="h-full w-full object-cover"
+      src="https://picsum.photos/seed/queen/300"
+    />
+  </div>
+  <div
+    class="min-w-0 flex-1"
+  >
+    <div
+      class="text-foreground truncate text-sm font-bold"
+      data-testid="queue-item-title"
+    >
+      Bohemian Rhapsody
+    </div>
+    <div
+      class="text-foreground-secondary truncate text-xs"
+      data-testid="queue-item-artist"
+    >
+      Queen
+    </div>
+  </div>
+  <div
+    class="relative flex flex-shrink-0 items-center"
+  >
+    <div
+      class="text-foreground-secondary text-sm tabular-nums"
+      data-testid="queue-item-duration"
+    >
+      5:54
+    </div>
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-8 justify-center absolute right-0 opacity-0 group-hover:opacity-100"
+      data-headlessui-state=""
+      data-testid="queue-item-remove-button"
+      type="submit"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-x"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18 6 6 18"
+        />
+        <path
+          d="m6 6 12 12"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`QueueItem > (Snapshot) renders error state 1`] = `
+<div
+  class="border-border text-foreground h-full rounded-md border-2 bg-background-secondary shadow-none group group relative flex items-center gap-3 overflow-hidden transition-all ring-accent-red ring-2 ring-inset w-full p-3"
+  data-is-current="false"
+  data-testid="queue-item"
+  role="button"
+>
+  <div
+    class="border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2"
+    data-testid="queue-item-thumbnail"
+  >
+    <img
+      alt="Bohemian Rhapsody"
+      class="h-full w-full object-cover"
+      src="https://picsum.photos/seed/queen/300"
+    />
+  </div>
+  <div
+    class="min-w-0 flex-1"
+  >
+    <div
+      class="text-foreground truncate text-sm font-bold"
+      data-testid="queue-item-title"
+    >
+      Bohemian Rhapsody
+    </div>
+    <div
+      class="text-foreground-secondary truncate text-xs"
+      data-testid="queue-item-artist"
+    >
+      Queen
+    </div>
+    <div
+      class="text-accent-red mt-1 flex items-center gap-1 text-xs font-semibold"
+      data-testid="queue-item-error"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-circle-alert"
+        fill="none"
+        height="12"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="12"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+        />
+        <line
+          x1="12"
+          x2="12"
+          y1="8"
+          y2="12"
+        />
+        <line
+          x1="12"
+          x2="12.01"
+          y1="16"
+          y2="16"
+        />
+      </svg>
+      <span
+        class="truncate"
+      >
+        Failed to load stream
+      </span>
+    </div>
+  </div>
+  <div
+    class="relative flex flex-shrink-0 items-center"
+  >
+    <div
+      class="text-foreground-secondary text-sm tabular-nums"
+      data-testid="queue-item-duration"
+    >
+      5:54
+    </div>
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-8 justify-center absolute right-0 opacity-0 group-hover:opacity-100"
+      data-headlessui-state=""
+      data-testid="queue-item-remove-button"
+      type="submit"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-x"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18 6 6 18"
+        />
+        <path
+          d="m6 6 12 12"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`QueueItem > (Snapshot) renders loading state 1`] = `
+<div
+  class="border-border text-foreground h-full rounded-md border-2 bg-background-secondary shadow-none group group relative flex items-center gap-3 overflow-hidden transition-all opacity-70 w-full p-3"
+  data-is-current="false"
+  data-testid="queue-item"
+  role="button"
+>
+  <div
+    class="border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2"
+    data-testid="queue-item-thumbnail"
+  >
+    <img
+      alt="Bohemian Rhapsody"
+      class="h-full w-full object-cover"
+      src="https://picsum.photos/seed/queen/300"
+    />
+  </div>
+  <div
+    class="min-w-0 flex-1"
+  >
+    <div
+      class="text-foreground truncate text-sm font-bold"
+      data-testid="queue-item-title"
+    >
+      Bohemian Rhapsody
+    </div>
+    <div
+      class="text-foreground-secondary truncate text-xs"
+      data-testid="queue-item-artist"
+    >
+      Queen
+    </div>
+  </div>
+  <div
+    class="relative flex flex-shrink-0 items-center"
+  >
+    <div
+      class="text-foreground-secondary text-sm tabular-nums"
+      data-testid="queue-item-duration"
+    >
+      5:54
+    </div>
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-8 justify-center absolute right-0 opacity-0 group-hover:opacity-100"
+      data-headlessui-state=""
+      data-testid="queue-item-remove-button"
+      type="submit"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-x"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18 6 6 18"
+        />
+        <path
+          d="m6 6 12 12"
+        />
+      </svg>
+    </button>
+  </div>
+  <div
+    class="bg-stripes-diagonal absolute inset-x-0 bottom-0 h-1"
+  />
+</div>
+`;
+
+exports[`QueueItem > renders without callbacks 1`] = `
+<div
+  class="border-border text-foreground h-full rounded-md border-2 bg-background-secondary shadow-none group group relative flex items-center gap-3 overflow-hidden transition-all w-full p-3"
+  data-is-current="false"
+  data-testid="queue-item"
+>
+  <div
+    class="border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2"
+    data-testid="queue-item-thumbnail"
+  >
+    <img
+      alt="Bohemian Rhapsody"
+      class="h-full w-full object-cover"
+      src="https://picsum.photos/seed/queen/300"
+    />
+  </div>
+  <div
+    class="min-w-0 flex-1"
+  >
+    <div
+      class="text-foreground truncate text-sm font-bold"
+      data-testid="queue-item-title"
+    >
+      Bohemian Rhapsody
+    </div>
+    <div
+      class="text-foreground-secondary truncate text-xs"
+      data-testid="queue-item-artist"
+    >
+      Queen
+    </div>
+  </div>
+  <div
+    class="relative flex flex-shrink-0 items-center"
+  >
+    <div
+      class="text-foreground-secondary text-sm tabular-nums"
+      data-testid="queue-item-duration"
+    >
+      5:54
+    </div>
+  </div>
+</div>
+`;
