@@ -2,28 +2,9 @@ import '../../test/setup';
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { Track } from '@nuclearplayer/model';
-
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
+import { createMockTrack } from '../../test/utils/mockTrack';
 import { initializeQueueStore, useQueueStore } from './queue.store';
-
-vi.mock('@tauri-apps/plugin-store', async () => {
-  const mod = await import('../../test/utils/inMemoryTauriStore');
-  return { LazyStore: mod.LazyStore };
-});
-
-let uuidCounter = 0;
-vi.mock('uuid', async () => {
-  return {
-    v4: () => `mock-uuid-${uuidCounter++}`,
-  };
-});
-
-const createMockTrack = (title: string): Track => ({
-  title,
-  artists: [{ name: 'Test Artist', roles: ['primary'] }],
-  source: { provider: 'test', id: title.toLowerCase() },
-});
 
 describe('useQueueStore', () => {
   beforeEach(() => {

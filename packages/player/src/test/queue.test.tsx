@@ -6,11 +6,6 @@ import { AlbumWrapper } from '../views/Album/Album.test-wrapper';
 import { MetadataProviderBuilder } from './builders/MetadataProviderBuilder';
 import { QueueWrapper } from './Queue.test-wrapper';
 
-vi.mock('@tauri-apps/plugin-store', async () => {
-  const mod = await import('./utils/inMemoryTauriStore');
-  return { LazyStore: mod.LazyStore };
-});
-
 describe('Queue', () => {
   beforeEach(() => {
     useQueueStore.setState({

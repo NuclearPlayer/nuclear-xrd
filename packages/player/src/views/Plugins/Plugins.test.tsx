@@ -9,11 +9,6 @@ import { AppData } from '../../test/utils/testPluginFolder';
 import { PluginsWrapper } from './Plugins.test-wrapper';
 import { fakePluginManifest } from './Plugins.test.data';
 
-vi.mock('@tauri-apps/plugin-store', async () => {
-  const mod = await import('../../test/utils/inMemoryTauriStore');
-  return { LazyStore: mod.LazyStore };
-});
-
 const mockCopyDirRecursive = () =>
   mockIPC((cmd) => {
     if (cmd === 'copy_dir_recursive') {

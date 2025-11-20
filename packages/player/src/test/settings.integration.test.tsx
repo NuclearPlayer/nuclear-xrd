@@ -2,7 +2,7 @@ import './setup';
 
 import { render, screen, waitFor } from '@testing-library/react';
 import { FC } from 'react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { NuclearAPI } from '@nuclearplayer/plugin-sdk';
 
@@ -18,11 +18,6 @@ import {
   useSettingsStore,
 } from '../stores/settingsStore';
 import { resetInMemoryTauriStore } from './utils/inMemoryTauriStore';
-
-vi.mock('@tauri-apps/plugin-store', async () => {
-  const mod = await import('./utils/inMemoryTauriStore');
-  return { LazyStore: mod.LazyStore };
-});
 
 const TestCoreSettingText: FC<{ id: string; testId: string }> = ({
   id,

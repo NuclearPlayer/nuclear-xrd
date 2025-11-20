@@ -1,6 +1,6 @@
 import '../test/setup';
 
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import type { SettingDefinition } from '@nuclearplayer/plugin-sdk';
 
@@ -16,11 +16,6 @@ import {
   setSetting,
   useSettingsStore,
 } from './settingsStore';
-
-vi.mock('@tauri-apps/plugin-store', async () => {
-  const mod = await import('../test/utils/inMemoryTauriStore');
-  return { LazyStore: mod.LazyStore };
-});
 
 describe('useSettingsStore', () => {
   beforeEach(() => {
