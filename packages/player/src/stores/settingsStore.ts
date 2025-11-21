@@ -3,7 +3,6 @@ import { create } from 'zustand';
 
 import type {
   SettingDefinition,
-  SettingsHost,
   SettingSource,
   SettingValue,
 } from '@nuclearplayer/plugin-sdk';
@@ -81,53 +80,6 @@ export const initializeSettingsStore = async (): Promise<void> => {
   await useSettingsStore.getState().loadFromDisk();
 };
 
-export const createPluginSettingsHost = (
-  pluginId: string,
-  pluginName?: string,
-): SettingsHost => {
-  const pluginSource: SettingSource = { type: 'plugin', pluginId, pluginName };
-  return {
-    register: async (
-      definitions: SettingDefinition[],
-      _source: SettingSource,
-    ) => {
-      void _source;
-      const registeredIds = useSettingsStore
-        .getState()
-        .register(definitions, pluginSource);
-      return { registered: registeredIds };
-    },
-    get: async <T extends SettingValue = SettingValue>(id: string) => {
-      const fullyQualifiedId = normalizeId(pluginSource, id);
-      const currentValue = useSettingsStore
-        .getState()
-        .getValue(fullyQualifiedId);
-      return currentValue as T | undefined;
-    },
-    set: async (id: string, value: SettingValue) => {
-      const fullyQualifiedId = normalizeId(pluginSource, id);
-      await useSettingsStore.getState().setValue(fullyQualifiedId, value);
-    },
-    subscribe: <T extends SettingValue = SettingValue>(
-      id: string,
-      listener: (value: T | undefined) => void,
-    ) => {
-      const fullyQualifiedId = normalizeId(pluginSource, id);
-      let previousValue = useSettingsStore
-        .getState()
-        .getValue(fullyQualifiedId) as T | undefined;
-      const unsubscribe = useSettingsStore.subscribe((state) => {
-        const nextValue = state.getValue(fullyQualifiedId) as T | undefined;
-        if (nextValue !== previousValue) {
-          previousValue = nextValue;
-          listener(nextValue);
-        }
-      });
-      return unsubscribe;
-    },
-  };
-};
-
 export const registerCoreSettings = (
   definitions: SettingDefinition[],
 ): string[] => {
@@ -142,45 +94,3 @@ export const setSetting = async (
   value: SettingValue,
 ): Promise<void> =>
   useSettingsStore.getState().setValue(fullyQualifiedId, value);
-
-export const createCoreSettingsHost = (): SettingsHost => {
-  const coreSource: SettingSource = { type: 'core' };
-  return {
-    register: async (definitions) => {
-      const registeredIds = useSettingsStore
-        .getState()
-        .register(definitions, coreSource);
-      return { registered: registeredIds };
-    },
-    get: async <T extends SettingValue = SettingValue>(id: string) => {
-      const fullyQualifiedId = normalizeId(coreSource, id);
-      const currentValue = useSettingsStore
-        .getState()
-        .getValue(fullyQualifiedId);
-      return currentValue as T | undefined;
-    },
-    set: async (id: string, value: SettingValue) => {
-      const fullyQualifiedId = normalizeId(coreSource, id);
-      await useSettingsStore.getState().setValue(fullyQualifiedId, value);
-    },
-    subscribe: <T extends SettingValue = SettingValue>(
-      id: string,
-      listener: (value: T | undefined) => void,
-    ) => {
-      const fullyQualifiedId = normalizeId(coreSource, id);
-      let previousValue = useSettingsStore
-        .getState()
-        .getValue(fullyQualifiedId) as T | undefined;
-      const unsubscribe = useSettingsStore.subscribe((state) => {
-        const nextValue = state.getValue(fullyQualifiedId) as T | undefined;
-        if (nextValue !== previousValue) {
-          previousValue = nextValue;
-          listener(nextValue);
-        }
-      });
-      return unsubscribe;
-    },
-  };
-};
-
-export const coreSettingsHost: SettingsHost = createCoreSettingsHost();

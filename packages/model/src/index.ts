@@ -132,16 +132,6 @@ export type PlaylistItem = {
   source: ProviderRef;
 };
 
-export type QueueItem = {
-  id: string;
-  title: string;
-  artists: ArtistCredit[];
-  album?: string;
-  durationMs?: number;
-  artwork?: ArtworkSet;
-  note?: string;
-  addedAtIso?: string;
-  source: ProviderRef;
-};
-
 export { pickArtwork } from './artwork';
+export type { QueueItem, RepeatMode, Queue } from './queue';
+export type { SearchCategory, SearchParams, SearchResults } from './search';

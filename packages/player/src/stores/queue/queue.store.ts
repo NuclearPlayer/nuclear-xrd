@@ -1,0 +1,288 @@
+import { LazyStore } from '@tauri-apps/plugin-store';
+import { produce } from 'immer';
+import { v4 as uuidv4 } from 'uuid';
+import { create } from 'zustand';
+
+import type { Queue, QueueItem, RepeatMode, Track } from '@nuclearplayer/model';
+
+const QUEUE_FILE = 'queue.json';
+const store = new LazyStore(QUEUE_FILE);
+
+type QueueStore = Queue & {
+  isLoading: boolean;
+  isReady: boolean;
+  loadFromDisk: () => Promise<void>;
+  addToQueue: (tracks: Track[]) => void;
+  addNext: (tracks: Track[]) => void;
+  addAt: (tracks: Track[], index: number) => void;
+  removeByIds: (ids: string[]) => void;
+  removeByIndices: (indices: number[]) => void;
+  clearQueue: () => void;
+  reorder: (fromIndex: number, toIndex: number) => void;
+  updateItemState: (id: string, updates: Partial<QueueItem>) => void;
+  goToNext: () => void;
+  goToPrevious: () => void;
+  goToIndex: (index: number) => void;
+  goToId: (id: string) => void;
+  setRepeatMode: (mode: RepeatMode) => void;
+  setShuffleEnabled: (enabled: boolean) => void;
+  getCurrentItem: () => QueueItem | undefined;
+};
+
+const createQueueItem = (track: Track): QueueItem => ({
+  id: uuidv4(),
+  track,
+  status: 'idle',
+  activeStreamIndex: 0,
+  failedStreamIndices: [],
+  addedAtIso: new Date().toISOString(),
+});
+
+const getDirectionalIndex = (
+  state: Pick<
+    QueueStore,
+    'items' | 'currentIndex' | 'repeatMode' | 'shuffleEnabled'
+  >,
+  direction: 'forward' | 'backward',
+): number => {
+  const { items, currentIndex, repeatMode, shuffleEnabled } = state;
+
+  if (items.length === 0) {
+    return currentIndex;
+  }
+
+  if (shuffleEnabled) {
+    return getShuffledIndex(items.length, currentIndex);
+  }
+
+  if (direction === 'forward') {
+    if (currentIndex < items.length - 1) {
+      return currentIndex + 1;
+    }
+    return repeatMode === 'all' ? 0 : currentIndex;
+  }
+
+  if (currentIndex > 0) {
+    return currentIndex - 1;
+  }
+
+  return repeatMode === 'all' ? items.length - 1 : currentIndex;
+};
+
+const getShuffledIndex = (length: number, currentIndex: number): number => {
+  if (length <= 1) {
+    return currentIndex;
+  }
+
+  let nextIndex = currentIndex;
+  while (nextIndex === currentIndex) {
+    nextIndex = Math.floor(Math.random() * length);
+  }
+
+  return nextIndex;
+};
+
+const saveToDisk = async (): Promise<void> => {
+  const state = useQueueStore.getState();
+  await store.set('queue.items', state.items);
+  await store.set('queue.currentIndex', state.currentIndex);
+  await store.set('queue.repeatMode', state.repeatMode);
+  await store.set('queue.shuffleEnabled', state.shuffleEnabled);
+  await store.save();
+};
+
+const withPersistence = <T extends unknown[]>(
+  fn: (...args: T) => void,
+): ((...args: T) => void) => {
+  return (...args: T) => {
+    fn(...args);
+    void saveToDisk();
+  };
+};
+
+export const useQueueStore = create<QueueStore>((set, get) => ({
+  items: [],
+  currentIndex: 0,
+  repeatMode: 'off',
+  shuffleEnabled: false,
+  isReady: false,
+  isLoading: false,
+
+  loadFromDisk: async () => {
+    set({ isLoading: true });
+    const items = (await store.get<QueueItem[]>('queue.items')) ?? [];
+    const currentIndex = (await store.get<number>('queue.currentIndex')) ?? 0;
+    const repeatMode =
+      (await store.get<RepeatMode>('queue.repeatMode')) ?? 'off';
+    const shuffleEnabled =
+      (await store.get<boolean>('queue.shuffleEnabled')) ?? false;
+
+    const sanitizedIndex =
+      currentIndex >= 0 && currentIndex < items.length ? currentIndex : 0;
+
+    set({
+      items,
+      currentIndex: sanitizedIndex,
+      repeatMode,
+      shuffleEnabled,
+      isReady: true,
+      isLoading: false,
+    });
+  },
+
+  addToQueue: withPersistence((tracks: Track[]) => {
+    set(
+      produce((state: QueueStore) => {
+        const newItems = tracks.map(createQueueItem);
+        state.items.push(...newItems);
+      }),
+    );
+  }),
+
+  addNext: (tracks: Track[]) => {
+    const { currentIndex } = get();
+    get().addAt(tracks, currentIndex + 1);
+  },
+
+  addAt: withPersistence((tracks: Track[], index: number) => {
+    set(
+      produce((state: QueueStore) => {
+        const newItems = tracks.map(createQueueItem);
+        state.items.splice(index, 0, ...newItems);
+        if (index <= state.currentIndex) {
+          state.currentIndex += newItems.length;
+        }
+      }),
+    );
+  }),
+
+  removeByIds: withPersistence((ids: string[]) => {
+    set(
+      produce((state: QueueStore) => {
+        const idsSet = new Set(ids);
+        const removedBeforeCurrent = state.items
+          .slice(0, state.currentIndex)
+          .filter((item) => idsSet.has(item.id)).length;
+
+        state.items = state.items.filter((item) => !idsSet.has(item.id));
+        state.currentIndex = Math.max(
+          0,
+          state.currentIndex - removedBeforeCurrent,
+        );
+
+        if (state.currentIndex >= state.items.length) {
+          state.currentIndex = Math.max(0, state.items.length - 1);
+        }
+      }),
+    );
+  }),
+
+  removeByIndices: withPersistence((indices: number[]) => {
+    set(
+      produce((state: QueueStore) => {
+        const indicesSet = new Set(indices);
+        const removedBeforeCurrent = indices.filter(
+          (idx) => idx < state.currentIndex,
+        ).length;
+
+        state.items = state.items.filter((_, idx) => !indicesSet.has(idx));
+        state.currentIndex = Math.max(
+          0,
+          state.currentIndex - removedBeforeCurrent,
+        );
+
+        if (state.currentIndex >= state.items.length) {
+          state.currentIndex = Math.max(0, state.items.length - 1);
+        }
+      }),
+    );
+  }),
+
+  clearQueue: withPersistence(() => {
+    set({ items: [], currentIndex: 0 });
+  }),
+
+  reorder: withPersistence((fromIndex: number, toIndex: number) => {
+    set(
+      produce((state: QueueStore) => {
+        const [movedItem] = state.items.splice(fromIndex, 1);
+        state.items.splice(toIndex, 0, movedItem);
+
+        if (state.currentIndex === fromIndex) {
+          state.currentIndex = toIndex;
+        } else if (
+          fromIndex < state.currentIndex &&
+          toIndex >= state.currentIndex
+        ) {
+          state.currentIndex -= 1;
+        } else if (
+          fromIndex > state.currentIndex &&
+          toIndex <= state.currentIndex
+        ) {
+          state.currentIndex += 1;
+        }
+      }),
+    );
+  }),
+
+  updateItemState: withPersistence(
+    (id: string, updates: Partial<QueueItem>) => {
+      set(
+        produce((state: QueueStore) => {
+          const item = state.items.find((item) => item.id === id);
+          if (item) {
+            Object.assign(item, updates);
+          }
+        }),
+      );
+    },
+  ),
+
+  goToNext: withPersistence(() => {
+    const state = get();
+    const nextIndex = getDirectionalIndex(state, 'forward');
+    if (nextIndex !== state.currentIndex) {
+      set({ currentIndex: nextIndex });
+    }
+  }),
+
+  goToPrevious: withPersistence(() => {
+    const state = get();
+    const previousIndex = getDirectionalIndex(state, 'backward');
+    if (previousIndex !== state.currentIndex) {
+      set({ currentIndex: previousIndex });
+    }
+  }),
+
+  goToIndex: withPersistence((index: number) => {
+    const { items } = get();
+    if (index >= 0 && index < items.length) {
+      set({ currentIndex: index });
+    }
+  }),
+
+  goToId: withPersistence((id: string) => {
+    const { items } = get();
+    const index = items.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      set({ currentIndex: index });
+    }
+  }),
+
+  setRepeatMode: withPersistence((mode: RepeatMode) => {
+    set({ repeatMode: mode });
+  }),
+
+  setShuffleEnabled: withPersistence((enabled: boolean) => {
+    set({ shuffleEnabled: enabled });
+  }),
+
+  getCurrentItem: () => {
+    const { items, currentIndex } = get();
+    return items[currentIndex];
+  },
+}));
+
+export const initializeQueueStore = async (): Promise<void> => {
+  await useQueueStore.getState().loadFromDisk();
+};

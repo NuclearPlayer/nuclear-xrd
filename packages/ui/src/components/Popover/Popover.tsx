@@ -28,7 +28,9 @@ export const Popover = ({
     <HeadlessPopover className={cn('absolute', className)}>
       {({ open }) => (
         <>
-          <PopoverButton className="cursor-pointer">{trigger}</PopoverButton>
+          <PopoverButton as="div" className="cursor-pointer">
+            {trigger}
+          </PopoverButton>
           <AnimatePresence>
             {open && (
               <>

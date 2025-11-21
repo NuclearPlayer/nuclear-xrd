@@ -26,6 +26,13 @@ export type TrackTableClasses = {
   root?: string;
 };
 
+export type TrackTableActions<T extends Track = Track> = {
+  onReorder?: (ids: string[]) => void;
+  onPlayNow?: (track: T) => void;
+  onPlayNext?: (track: T) => void;
+  onAddToQueue?: (track: T) => void;
+};
+
 export type TrackTableProps<T extends Track = Track> = {
   tracks: T[];
   customColumns?: unknown[];
@@ -46,23 +53,9 @@ export type TrackTableProps<T extends Track = Track> = {
     displayArtist?: boolean;
     displayAlbum?: boolean;
     displayDuration?: boolean;
+    displayQueueControls?: boolean;
   };
-  onReorder?: (ids: string[]) => void;
-  onPlayNow?: (track: T) => void;
-  onPlayNext?: (track: T) => void;
-  onAddToQueue?: (track: T) => void;
-  onToggleFavorite?: (track: T, next: boolean) => void;
-  onDelete?: (track: T) => void;
-  onOpenAlbum?: (track: T) => void;
-  onOpenArtist?: (track: T) => void;
-  onContextMenuAction?: (actionId: string, track: T | T[]) => void;
-  onVisibleRangeChange?: (range: { start: number; end: number }) => void;
-  onRowDoubleClick?: (track: T) => void;
-  bulkActions?: {
-    onPlaySelected?: (tracks: T[]) => void;
-    onAddSelectedToQueue?: (tracks: T[]) => void;
-    onToggleFavoriteSelected?: (tracks: T[], next: boolean) => void;
-  };
+  actions?: TrackTableActions<T>;
   rowHeight?: number;
   overscan?: number;
   classes?: TrackTableClasses;

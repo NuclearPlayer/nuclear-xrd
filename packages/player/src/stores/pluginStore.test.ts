@@ -7,11 +7,6 @@ import { PluginFsMock } from '../test/mocks/plugin-fs';
 import { createPluginFolder } from '../test/utils/testPluginFolder';
 import { usePluginStore } from './pluginStore';
 
-vi.mock('@tauri-apps/plugin-store', async () => {
-  const mod = await import('../test/utils/inMemoryTauriStore');
-  return { LazyStore: mod.LazyStore };
-});
-
 describe('usePluginStore', () => {
   beforeEach(() => {
     usePluginStore.setState({ plugins: {} });

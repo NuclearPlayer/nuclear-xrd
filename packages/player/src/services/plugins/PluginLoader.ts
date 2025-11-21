@@ -9,7 +9,8 @@ import type {
   PluginMetadata,
 } from '@nuclearplayer/plugin-sdk';
 
-import { createPluginSettingsHost } from '../../stores/settingsStore';
+import { queueHost } from '../queueHost';
+import { createPluginSettingsHost } from '../settingsHost';
 import { compilePlugin } from './pluginCompiler';
 import { safeParsePluginManifest } from './pluginManifest';
 
@@ -136,6 +137,7 @@ export class PluginLoader {
           metadata.id,
           metadata.displayName,
         ),
+        queueHost,
       });
       await instance.onLoad(api);
     }

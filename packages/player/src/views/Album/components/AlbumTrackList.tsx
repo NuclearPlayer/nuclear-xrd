@@ -2,8 +2,9 @@ import { FC, useMemo } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import { Track, TrackRef } from '@nuclearplayer/model';
-import { Loader, TrackTable } from '@nuclearplayer/ui';
+import { Loader } from '@nuclearplayer/ui';
 
+import { ConnectedTrackTable } from '../../../components/ConnectedTrackTable';
 import { useAlbumDetails } from '../hooks/useAlbumDetails';
 
 const mapTrackRefs = (refs: TrackRef[]): Track[] => {
@@ -59,7 +60,7 @@ export const AlbumTrackList: FC<AlbumTrackListProps> = ({
   );
 
   return (
-    <TrackTable
+    <ConnectedTrackTable
       tracks={tracks}
       features={{ filterable: false }}
       display={{ displayDuration: albumHasDuration, displayThumbnail: false }}

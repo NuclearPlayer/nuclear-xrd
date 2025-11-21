@@ -6,6 +6,7 @@ import { vi } from 'vitest';
 import { setupResizeObserverMock } from '@nuclearplayer/ui';
 
 process.env.NODE_ENV = 'test';
+process.env.TZ = 'UTC';
 
 setupResizeObserverMock();
 
@@ -51,6 +52,18 @@ vi.mock('@tauri-apps/plugin-log', () => ({
   info: () => Promise.resolve(),
   error: () => Promise.resolve(),
 }));
+
+vi.mock('@tauri-apps/plugin-store', async () => {
+  const mod = await import('./utils/inMemoryTauriStore');
+  return { LazyStore: mod.LazyStore };
+});
+
+let uuidCounter = 0;
+vi.mock('uuid', async () => {
+  return {
+    v4: () => `mock-uuid-${uuidCounter++}`,
+  };
+});
 
 vi.mock('framer-motion', async (importOriginal) => {
   const mod = await importOriginal<typeof import('framer-motion')>();

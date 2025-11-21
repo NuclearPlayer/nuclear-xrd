@@ -125,5 +125,18 @@
         "description": "Crossfade duration between tracks in milliseconds"
       }
     }
+  },
+  "queue": {
+    "title": "Queue",
+    "empty": {
+      "title": "Queue is empty",
+      "subtitle": "Add tracks to start playing"
+    },
+    "actions": {
+      "remove": "Remove from queue"
+    },
+    "error": {
+      "prefix": "Error:"
+    }
   }
 }

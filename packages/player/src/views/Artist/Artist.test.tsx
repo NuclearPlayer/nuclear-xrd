@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
 
-import { providersServiceHost } from '../../services/providersService';
+import { providersHost } from '../../services/providersHost';
 import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
 import { ArtistWrapper } from './Artist.test-wrapper';
 
 describe('Artist view', () => {
   beforeEach(() => {
-    providersServiceHost.clear();
+    providersHost.clear();
     const provider = new MetadataProviderBuilder()
       .withSearchCapabilities(['unified', 'artists'])
       .withArtistMetadataCapabilities([
@@ -111,7 +111,7 @@ describe('Artist view', () => {
       ])
       .build();
 
-    providersServiceHost.register(provider);
+    providersHost.register(provider);
   });
 
   it('(Snapshot) renders the artist view', async () => {
@@ -135,7 +135,7 @@ describe('Artist view', () => {
   });
 
   it('shows loading states for details, top tracks, related artists, and albums', async () => {
-    providersServiceHost.clear();
+    providersHost.clear();
     const delay = () => {
       return new Promise<never>(() => {});
     };
@@ -165,7 +165,7 @@ describe('Artist view', () => {
       .withFetchArtistTopTracks(delay)
       .withFetchArtistRelatedArtists(delay)
       .build();
-    providersServiceHost.register(provider);
+    providersHost.register(provider);
 
     await ArtistWrapper.mountNoWait();
 

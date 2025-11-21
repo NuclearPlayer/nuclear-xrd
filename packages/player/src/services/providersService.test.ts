@@ -5,7 +5,7 @@ import type {
   ProviderKind,
 } from '@nuclearplayer/plugin-sdk';
 
-import { providersServiceHost } from './providersService';
+import { providersHost } from './providersHost';
 
 const createProvider = <K extends ProviderKind>(
   id: string,
@@ -14,24 +14,23 @@ const createProvider = <K extends ProviderKind>(
 ) => ({ id, kind, name }) as ProviderDescriptor<K>;
 
 beforeEach(() => {
-  providersServiceHost.clear();
+  providersHost.clear();
 });
 
 afterEach(() => {
-  providersServiceHost.clear();
+  providersHost.clear();
 });
-
 describe('Providers service', () => {
   it('register returns id and re-register replaces implementation', () => {
     const p1 = createProvider('test-prov-1', 'metadata', 'One');
-    expect(providersServiceHost.register(p1)).toBe('test-prov-1');
-    expect(providersServiceHost.get('test-prov-1')?.name).toBe('One');
+    expect(providersHost.register(p1)).toBe('test-prov-1');
+    expect(providersHost.get('test-prov-1')?.name).toBe('One');
 
     const p1b = createProvider('test-prov-1', 'metadata', 'Two');
-    expect(providersServiceHost.register(p1b)).toBe('test-prov-1');
-    expect(providersServiceHost.get('test-prov-1')?.name).toBe('Two');
+    expect(providersHost.register(p1b)).toBe('test-prov-1');
+    expect(providersHost.get('test-prov-1')?.name).toBe('Two');
 
-    const listMeta = providersServiceHost.list('metadata');
+    const listMeta = providersHost.list('metadata');
     expect(listMeta).toMatchInlineSnapshot(`
       [
         {
@@ -47,12 +46,12 @@ describe('Providers service', () => {
     const pMeta = createProvider('test-prov-2', 'metadata', 'Meta');
     const pLyrics = createProvider('test-prov-3', 'lyrics', 'Lyrics');
 
-    providersServiceHost.register(pMeta);
-    providersServiceHost.register(pLyrics);
+    providersHost.register(pMeta);
+    providersHost.register(pLyrics);
 
-    const listMeta = providersServiceHost.list('metadata');
-    const listLyrics = providersServiceHost.list('lyrics');
-    const listAll = providersServiceHost.list();
+    const listMeta = providersHost.list('metadata');
+    const listLyrics = providersHost.list('lyrics');
+    const listAll = providersHost.list();
 
     expect(listMeta).toMatchInlineSnapshot(`
       [
@@ -90,8 +89,8 @@ describe('Providers service', () => {
 
   it('get by id returns descriptor', () => {
     const p = createProvider('test-prov-4', 'metadata', 'Getter');
-    providersServiceHost.register(p);
-    expect(providersServiceHost.get('test-prov-4')).toMatchInlineSnapshot(`
+    providersHost.register(p);
+    expect(providersHost.get('test-prov-4')).toMatchInlineSnapshot(`
       {
         "id": "test-prov-4",
         "kind": "metadata",
@@ -102,15 +101,15 @@ describe('Providers service', () => {
 
   it('unregister removes from byId and byKind', () => {
     const p = createProvider('test-prov-5', 'metadata', 'ToRemove');
-    providersServiceHost.register(p);
+    providersHost.register(p);
 
-    expect(providersServiceHost.unregister('test-prov-5')).toBe(true);
-    expect(providersServiceHost.get('test-prov-5')).toBeUndefined();
+    expect(providersHost.unregister('test-prov-5')).toBe(true);
+    expect(providersHost.get('test-prov-5')).toBeUndefined();
 
-    expect(providersServiceHost.list('metadata').length).toBe(0);
+    expect(providersHost.list('metadata').length).toBe(0);
   });
 
   it('unregister returns false for non-existent id', () => {
-    expect(providersServiceHost.unregister('missing-id')).toBe(false);
+    expect(providersHost.unregister('missing-id')).toBe(false);
   });
 });

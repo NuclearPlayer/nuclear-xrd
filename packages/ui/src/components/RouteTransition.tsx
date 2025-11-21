@@ -1,6 +1,6 @@
 import { getRouterContext, Outlet, useMatches } from '@tanstack/react-router';
 import { AnimatePresence, motion, useIsPresent } from 'framer-motion';
-import { cloneDeep } from 'lodash-es';
+import cloneDeep from 'lodash-es/cloneDeep';
 import { forwardRef, useContext, useRef } from 'react';
 
 const SLIDE_DISTANCE = 24;

@@ -1,0 +1,483 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`QueuePanel > (Snapshot) renders collapsed state 1`] = `
+<div
+  class="flex h-full flex-col"
+  data-testid="queue-panel"
+>
+  <div
+    class="relative h-full w-full"
+  >
+    <div
+      class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+      style="scrollbar-width: none;"
+    >
+      <div
+        class="flex flex-col gap-2 p-2"
+      >
+        <div
+          aria-describedby="DndDescribedBy-1"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="cursor-grab"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="relative"
+            data-testid="queue-item"
+          >
+            <div
+              class="pointer-events-none absolute -top-0.75 -left-0.75 h-17.5 w-17.5 rounded-md transition-all bg-primary"
+            />
+            <div
+              class="border-border text-foreground rounded-md border-2 bg-background-secondary shadow-none group relative flex items-center gap-3 overflow-hidden transition-all h-16 w-16 justify-center p-0"
+              role="button"
+            >
+              <img
+                alt="Bohemian Rhapsody"
+                class="h-full w-full object-cover"
+                src="https://picsum.photos/seed/1/300"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          aria-describedby="DndDescribedBy-1"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="cursor-grab"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="relative"
+            data-testid="queue-item"
+          >
+            <div
+              class="pointer-events-none absolute -top-0.75 -left-0.75 h-17.5 w-17.5 rounded-md transition-all"
+            />
+            <div
+              class="border-border text-foreground rounded-md border-2 bg-background-secondary shadow-none group relative flex items-center gap-3 overflow-hidden transition-all h-16 w-16 justify-center p-0"
+              role="button"
+            >
+              <img
+                alt="Stairway to Heaven"
+                class="h-full w-full object-cover"
+                src="https://picsum.photos/seed/2/300"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          aria-describedby="DndDescribedBy-1"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="cursor-grab"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="relative"
+            data-testid="queue-item"
+          >
+            <div
+              class="pointer-events-none absolute -top-0.75 -left-0.75 h-17.5 w-17.5 rounded-md transition-all"
+            />
+            <div
+              class="border-border text-foreground rounded-md border-2 bg-background-secondary shadow-none group relative flex items-center gap-3 overflow-hidden transition-all opacity-70 h-16 w-16 justify-center p-0"
+              role="button"
+            >
+              <img
+                alt="Hotel California"
+                class="h-full w-full object-cover"
+                src="https://picsum.photos/seed/3/300"
+              />
+              <div
+                class="bg-stripes-diagonal absolute inset-x-0 bottom-0 h-1"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="DndDescribedBy-1"
+        style="display: none;"
+      >
+        
+    To pick up a draggable item, press the space bar.
+    While dragging, use the arrow keys to move the item.
+    Press space again to drop the item in its new position, or press escape to cancel.
+  
+      </div>
+      <div
+        aria-atomic="true"
+        aria-live="assertive"
+        id="DndLiveRegion-1"
+        role="status"
+        style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`QueuePanel > (Snapshot) renders default state 1`] = `
+<div
+  class="flex h-full flex-col"
+  data-testid="queue-panel"
+>
+  <div
+    class="relative h-full w-full"
+  >
+    <div
+      class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+      style="scrollbar-width: none;"
+    >
+      <div
+        class="flex flex-col gap-1 p-2"
+      >
+        <div
+          aria-describedby="DndDescribedBy-0"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="cursor-grab"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="border-border text-foreground h-full rounded-md border-2 shadow-none group group relative flex items-center gap-3 overflow-hidden transition-all w-full p-3 bg-primary ring-0"
+            data-is-current="true"
+            data-testid="queue-item"
+            role="button"
+          >
+            <div
+              class="border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2"
+              data-testid="queue-item-thumbnail"
+            >
+              <img
+                alt="Bohemian Rhapsody"
+                class="h-full w-full object-cover"
+                src="https://picsum.photos/seed/1/300"
+              />
+            </div>
+            <div
+              class="min-w-0 flex-1"
+            >
+              <div
+                class="text-foreground truncate text-sm font-bold"
+                data-testid="queue-item-title"
+              >
+                Bohemian Rhapsody
+              </div>
+              <div
+                class="text-foreground-secondary truncate text-xs"
+                data-testid="queue-item-artist"
+              >
+                Queen
+              </div>
+            </div>
+            <div
+              class="relative flex flex-shrink-0 items-center"
+            >
+              <div
+                class="text-foreground-secondary text-sm tabular-nums"
+                data-testid="queue-item-duration"
+              >
+                5:54
+              </div>
+              <button
+                class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-8 justify-center absolute right-0 opacity-0 group-hover:opacity-100"
+                data-headlessui-state=""
+                data-testid="queue-item-remove-button"
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-x"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 6 6 18"
+                  />
+                  <path
+                    d="m6 6 12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-describedby="DndDescribedBy-0"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="cursor-grab"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="border-border text-foreground h-full rounded-md border-2 bg-background-secondary shadow-none group group relative flex items-center gap-3 overflow-hidden transition-all w-full p-3"
+            data-is-current="false"
+            data-testid="queue-item"
+            role="button"
+          >
+            <div
+              class="border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2"
+              data-testid="queue-item-thumbnail"
+            >
+              <img
+                alt="Stairway to Heaven"
+                class="h-full w-full object-cover"
+                src="https://picsum.photos/seed/2/300"
+              />
+            </div>
+            <div
+              class="min-w-0 flex-1"
+            >
+              <div
+                class="text-foreground truncate text-sm font-bold"
+                data-testid="queue-item-title"
+              >
+                Stairway to Heaven
+              </div>
+              <div
+                class="text-foreground-secondary truncate text-xs"
+                data-testid="queue-item-artist"
+              >
+                Led Zeppelin
+              </div>
+            </div>
+            <div
+              class="relative flex flex-shrink-0 items-center"
+            >
+              <div
+                class="text-foreground-secondary text-sm tabular-nums"
+                data-testid="queue-item-duration"
+              >
+                8:02
+              </div>
+              <button
+                class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-8 justify-center absolute right-0 opacity-0 group-hover:opacity-100"
+                data-headlessui-state=""
+                data-testid="queue-item-remove-button"
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-x"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 6 6 18"
+                  />
+                  <path
+                    d="m6 6 12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-describedby="DndDescribedBy-0"
+          aria-disabled="false"
+          aria-roledescription="sortable"
+          class="cursor-grab"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="border-border text-foreground h-full rounded-md border-2 bg-background-secondary shadow-none group group relative flex items-center gap-3 overflow-hidden transition-all opacity-70 w-full p-3"
+            data-is-current="false"
+            data-testid="queue-item"
+            role="button"
+          >
+            <div
+              class="border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2"
+              data-testid="queue-item-thumbnail"
+            >
+              <img
+                alt="Hotel California"
+                class="h-full w-full object-cover"
+                src="https://picsum.photos/seed/3/300"
+              />
+            </div>
+            <div
+              class="min-w-0 flex-1"
+            >
+              <div
+                class="text-foreground truncate text-sm font-bold"
+                data-testid="queue-item-title"
+              >
+                Hotel California
+              </div>
+              <div
+                class="text-foreground-secondary truncate text-xs"
+                data-testid="queue-item-artist"
+              >
+                Eagles
+              </div>
+            </div>
+            <div
+              class="relative flex flex-shrink-0 items-center"
+            >
+              <div
+                class="text-foreground-secondary text-sm tabular-nums"
+                data-testid="queue-item-duration"
+              >
+                6:31
+              </div>
+              <button
+                class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-8 justify-center absolute right-0 opacity-0 group-hover:opacity-100"
+                data-headlessui-state=""
+                data-testid="queue-item-remove-button"
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-x"
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 6 6 18"
+                  />
+                  <path
+                    d="m6 6 12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              class="bg-stripes-diagonal absolute inset-x-0 bottom-0 h-1"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        id="DndDescribedBy-0"
+        style="display: none;"
+      >
+        
+    To pick up a draggable item, press the space bar.
+    While dragging, use the arrow keys to move the item.
+    Press space again to drop the item in its new position, or press escape to cancel.
+  
+      </div>
+      <div
+        aria-atomic="true"
+        aria-live="assertive"
+        id="DndLiveRegion-0"
+        role="status"
+        style="position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%); white-space: nowrap;"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`QueuePanel > (Snapshot) renders empty state 1`] = `
+<div
+  class="flex h-full flex-col items-center justify-center gap-4 p-8 text-center"
+  data-testid="queue-empty-state"
+>
+  <svg
+    aria-hidden="true"
+    class="lucide lucide-music text-foreground-secondary opacity-50"
+    fill="none"
+    height="64"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    width="64"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M9 18V5l12-2v13"
+    />
+    <circle
+      cx="6"
+      cy="18"
+      r="3"
+    />
+    <circle
+      cx="18"
+      cy="16"
+      r="3"
+    />
+  </svg>
+</div>
+`;
+
+exports[`QueuePanel > (Snapshot) renders empty state with labels 1`] = `
+<div
+  class="flex h-full flex-col items-center justify-center gap-4 p-8 text-center"
+  data-testid="queue-empty-state"
+>
+  <svg
+    aria-hidden="true"
+    class="lucide lucide-music text-foreground-secondary opacity-50"
+    fill="none"
+    height="64"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    width="64"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M9 18V5l12-2v13"
+    />
+    <circle
+      cx="6"
+      cy="18"
+      r="3"
+    />
+    <circle
+      cx="18"
+      cy="16"
+      r="3"
+    />
+  </svg>
+  <div>
+    <div
+      class="text-foreground text-lg font-bold"
+    >
+      Nothing to play
+    </div>
+    <div
+      class="text-foreground-secondary mt-2 text-sm"
+    >
+      Add some tracks
+    </div>
+  </div>
+</div>
+`;

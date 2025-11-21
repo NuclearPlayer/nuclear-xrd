@@ -9,11 +9,6 @@ import { seedRegistryEntry } from './test/utils/seedPluginRegistry';
 import { createPluginFolder } from './test/utils/testPluginFolder';
 import { PluginsWrapper } from './views/Plugins/Plugins.test-wrapper';
 
-vi.mock('@tauri-apps/plugin-store', async () => {
-  const mod = await import('./test/utils/inMemoryTauriStore');
-  return { LazyStore: mod.LazyStore };
-});
-
 // These tests check what happens on program startup, when we're loading plugins from the managed dir
 describe('App plugin hydration', () => {
   beforeEach(() => {

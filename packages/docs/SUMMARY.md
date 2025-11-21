@@ -5,6 +5,7 @@
 * [Getting started](plugins/getting-started.md)
 * [Plugin system](plugins/plugin-system.md)
 * [Settings](plugins/settings.md)
+* [Queue](plugins/queue.md)
 
 ## Theming
 

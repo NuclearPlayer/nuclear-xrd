@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { Track, TrackRef } from '@nuclearplayer/model';
 import type { MetadataProvider } from '@nuclearplayer/plugin-sdk';
 
-import { providersServiceHost } from '../../../services/providersService';
+import { providersHost } from '../../../services/providersHost';
 import { executeArtistTopTracksSearch } from '../../../services/search/executeArtistMetadataSearch';
 
 const mapTrackRefs = (refs: TrackRef[]): Track[] => {
@@ -14,7 +14,7 @@ const mapTrackRefs = (refs: TrackRef[]): Track[] => {
 };
 
 export const useArtistTopTracks = (providerId: string, artistId: string) => {
-  const provider = providersServiceHost.get(providerId);
+  const provider = providersHost.get(providerId);
 
   return useQuery<Track[]>({
     queryKey: ['artist-top-tracks', provider?.id, artistId],

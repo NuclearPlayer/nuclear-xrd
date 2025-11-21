@@ -3,12 +3,12 @@ import { render, screen } from '@testing-library/react';
 
 import App from '../../App';
 import { routeTree } from '../../routeTree.gen';
-import { providersServiceHost } from '../../services/providersService';
+import { providersHost } from '../../services/providersHost';
 import { SearchWrapper } from './Search.test-wrapper';
 
 describe('Search view', () => {
   beforeEach(() => {
-    providersServiceHost.clear();
+    providersHost.clear();
   });
 
   it('(Snapshot) renders the search view', async () => {

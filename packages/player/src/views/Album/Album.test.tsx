@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
 
-import { providersServiceHost } from '../../services/providersService';
+import { providersHost } from '../../services/providersHost';
 import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
 import { AlbumWrapper } from './Album.test-wrapper';
 
 describe('Album view', () => {
   beforeEach(() => {
-    providersServiceHost.clear();
+    providersHost.clear();
     const provider = new MetadataProviderBuilder()
       .withSearchCapabilities(['unified', 'albums'])
       .withAlbumMetadataCapabilities(['albumDetails'])
@@ -102,7 +102,7 @@ describe('Album view', () => {
       }))
       .build();
 
-    providersServiceHost.register(provider);
+    providersHost.register(provider);
   });
 
   it('(Snapshot) renders the album view', async () => {
@@ -111,7 +111,7 @@ describe('Album view', () => {
   });
 
   it('shows loading states for album details and tracks', async () => {
-    providersServiceHost.clear();
+    providersHost.clear();
     const delay = () => {
       return new Promise<never>(() => {});
     };
@@ -142,7 +142,7 @@ describe('Album view', () => {
       }))
       .withFetchAlbumDetails(delay)
       .build();
-    providersServiceHost.register(provider);
+    providersHost.register(provider);
 
     await AlbumWrapper.mountNoWait();
 

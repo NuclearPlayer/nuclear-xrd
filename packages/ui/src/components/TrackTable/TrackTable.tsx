@@ -32,7 +32,7 @@ export function TrackTable<T extends Track = Track>({
   classes,
   display,
   features,
-  onReorder,
+  actions,
   rowHeight = DEFAULT_ROW_HEIGHT,
   overscan = DEFAULT_OVERSCAN,
 }: TrackTableProps<T>) {
@@ -47,7 +47,10 @@ export function TrackTable<T extends Track = Track>({
   };
 
   const { sorting, setSorting, isSorted } = useSorting();
-  const { onDragStart, onDragEnd } = useReorder<T>({ tracks, onReorder });
+  const { onDragStart, onDragEnd } = useReorder<T>({
+    tracks,
+    onReorder: actions?.onReorder,
+  });
   const { globalFilter, setGlobalFilter, globalFilterFn, hasFilter } =
     useGlobalFilter<T>();
 
@@ -67,6 +70,10 @@ export function TrackTable<T extends Track = Track>({
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    meta: {
+      displayQueueControls: resolvedDisplay.displayQueueControls,
+      onAddToQueue: actions?.onAddToQueue,
+    },
   });
 
   const { rows } = table.getRowModel();
@@ -86,6 +93,8 @@ export function TrackTable<T extends Track = Track>({
 
   const dndItems = virtualItems.map((v) => rows[v.index].original.source.id);
 
+  const mockViewportHeight = rowHeight * 12;
+
   return (
     <TrackTableProvider value={{ isReorderable }}>
       {resolvedFeatures?.filterable && (
@@ -99,6 +108,8 @@ export function TrackTable<T extends Track = Track>({
       <div
         ref={scrollParentRef}
         className="relative flex max-h-full overflow-auto"
+        data-test-resize-observer-inline-size="1024"
+        data-test-resize-observer-block-size={String(mockViewportHeight)}
       >
         <ReorderLayer
           enabled={isReorderable}

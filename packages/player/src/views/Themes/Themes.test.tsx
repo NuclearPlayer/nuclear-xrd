@@ -14,11 +14,6 @@ import { useSettingsStore } from '../../stores/settingsStore';
 import { PluginFsMock, watchImmediateCb } from '../../test/mocks/plugin-fs';
 import { ThemesWrapper } from './Themes.test-wrapper';
 
-vi.mock('@tauri-apps/plugin-store', async () => {
-  const mod = await import('../../test/utils/inMemoryTauriStore');
-  return { LazyStore: mod.LazyStore };
-});
-
 const logError = vi.fn();
 const toastError = vi.fn();
 vi.mock('@tauri-apps/plugin-log', () => ({

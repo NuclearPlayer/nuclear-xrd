@@ -8,7 +8,7 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
       data-headlessui-state="open"
       data-open=""
     >
-      <button
+      <div
         aria-controls="headlessui-popover-panel-:r4:"
         aria-expanded="true"
         class="cursor-pointer"
@@ -17,7 +17,6 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
         data-hover=""
         data-open=""
         id="headlessui-popover-button-:r2:"
-        type="button"
       >
         <button
           class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
@@ -27,7 +26,7 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
         >
           Open Popover
         </button>
-      </button>
+      </div>
       <button
         aria-hidden="true"
         data-headlessui-focus-guard="true"
@@ -79,7 +78,7 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
       data-headlessui-state="open"
       data-open=""
     >
-      <button
+      <div
         aria-controls="headlessui-popover-panel-:rb:"
         aria-expanded="true"
         class="cursor-pointer"
@@ -88,7 +87,6 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
         data-hover=""
         data-open=""
         id="headlessui-popover-button-:r8:"
-        type="button"
       >
         <button
           class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
@@ -98,7 +96,7 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
         >
           Open Popover
         </button>
-      </button>
+      </div>
       <button
         aria-hidden="true"
         data-headlessui-focus-guard="true"
