@@ -125,5 +125,18 @@
         "description": "Duração do crossfade entre tracks em milissegundos"
       }
     }
+  },
+  "queue": {
+    "title": "Queue",
+    "empty": {
+      "title": "Queue is empty",
+      "subtitle": "Add tracks to start playing"
+    },
+    "actions": {
+      "remove": "Remove from queue"
+    },
+    "error": {
+      "prefix": "Error:"
+    }
   }
 }
