@@ -25,8 +25,7 @@ export class InMemorySettingsHost implements SettingsHost {
     return `core.${id}`;
   }
 
-  async register(definitions: SettingDefinition[], _source: SettingSource) {
-    void _source;
+  async register(definitions: SettingDefinition[]) {
     const registered: string[] = [];
     for (const definition of definitions) {
       const fullyQualifiedId = this.fullyQualified(definition.id);

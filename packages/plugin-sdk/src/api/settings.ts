@@ -1,7 +1,6 @@
 import type {
   SettingDefinition,
   SettingsHost,
-  SettingSource,
   SettingValue,
 } from '../types/settings';
 
@@ -20,8 +19,8 @@ export class Settings {
     return fn(host);
   }
 
-  register(defs: SettingDefinition[], source: SettingSource) {
-    return this.#withHost((h) => h.register(defs, source));
+  register(defs: SettingDefinition[]) {
+    return this.#withHost((h) => h.register(defs));
   }
 
   get<T extends SettingValue = SettingValue>(id: string) {

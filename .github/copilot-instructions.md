@@ -90,6 +90,7 @@ pnpm storybook      # run Storybook
 - Snapshot tests: **basic rendering only**. Start names with `(Snapshot)`.
 - Extract DOM querying into wrappers; assertions stay in tests.
 - Coverage: enabled across packages with V8-based coverage and CI reporting.
+- Use the test runner tool instead of running tests in the terminal manually.
 
 ### Design & UX Philosophy
 
@@ -110,3 +111,4 @@ pnpm storybook      # run Storybook
 - Prioritize long-term maintainability.
 - Work with me iteratively: pause, summarize, ask.
 - Above all: **be reliable, disciplined, and clear.**
+- Use Serena tools wherever possible for searches, lookups, replacements, and file operations.

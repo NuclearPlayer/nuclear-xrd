@@ -98,10 +98,7 @@ export type SettingsRegistrationResult = {
 };
 
 export type SettingsHost = {
-  register(
-    defs: SettingDefinition[],
-    source: SettingSource,
-  ): Promise<SettingsRegistrationResult>;
+  register(defs: SettingDefinition[]): Promise<SettingsRegistrationResult>;
   get<T extends SettingValue = SettingValue>(
     id: string,
   ): Promise<T | undefined>;

@@ -43,22 +43,15 @@ describe('Settings integration', () => {
     );
     const api = new NuclearAPI({ settingsHost: pluginHost });
 
-    await api.Settings.register(
-      [
-        {
-          id: 'example.enabled',
-          category: 'Example',
-          title: 'Enabled',
-          kind: 'boolean',
-          default: true,
-        },
-      ],
+    await api.Settings.register([
       {
-        type: 'plugin',
-        pluginId: 'itest',
-        pluginName: 'Integration Test Plugin',
+        id: 'example.enabled',
+        category: 'Example',
+        title: 'Enabled',
+        kind: 'boolean',
+        default: true,
       },
-    );
+    ]);
 
     const definitions = useSettingsStore.getState().definitions;
     expect(definitions['plugin.itest.example.enabled']).toBeTruthy();
@@ -74,18 +67,15 @@ describe('Settings integration', () => {
     );
     const api = new NuclearAPI({ settingsHost: pluginHost });
 
-    await api.Settings.register(
-      [
-        {
-          id: 'example.enabled',
-          category: 'Example',
-          title: 'Enabled',
-          kind: 'boolean',
-          default: false,
-        },
-      ],
-      { type: 'plugin', pluginId: 'itest' },
-    );
+    await api.Settings.register([
+      {
+        id: 'example.enabled',
+        category: 'Example',
+        title: 'Enabled',
+        kind: 'boolean',
+        default: false,
+      },
+    ]);
 
     const initial = await api.Settings.get<boolean>('example.enabled');
     expect(initial).toBe(false);

@@ -19,10 +19,7 @@ describe('Settings (SDK)', () => {
       },
     ];
 
-    const res = await api.Settings.register(definitions, {
-      type: 'plugin',
-      pluginId: 'p1',
-    });
+    const res = await api.Settings.register(definitions);
     expect(res.registered).toContain('plugin.p1.feature.enabled');
 
     const initial = await api.Settings.get<boolean>('feature.enabled');
@@ -50,7 +47,7 @@ describe('Settings (SDK)', () => {
     expect(() => api.Settings.set('x', 'y')).toThrow(
       'Settings host not available',
     );
-    expect(() => api.Settings.register([], { type: 'core' })).toThrow(
+    expect(() => api.Settings.register([])).toThrow(
       'Settings host not available',
     );
     expect(() => api.Settings.subscribe('x', () => {})).toThrow(

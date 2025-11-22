@@ -20,11 +20,7 @@ export const createPluginSettingsHost = (
 ): SettingsHost => {
   const pluginSource: SettingSource = { type: 'plugin', pluginId, pluginName };
   return {
-    register: async (
-      definitions: SettingDefinition[],
-      _source: SettingSource,
-    ) => {
-      void _source;
+    register: async (definitions: SettingDefinition[]) => {
       const registeredIds = useSettingsStore
         .getState()
         .register(definitions, pluginSource);
@@ -64,7 +60,7 @@ export const createPluginSettingsHost = (
 export const createCoreSettingsHost = (): SettingsHost => {
   const coreSource: SettingSource = { type: 'core' };
   return {
-    register: async (definitions) => {
+    register: async (definitions: SettingDefinition[]) => {
       const registeredIds = useSettingsStore
         .getState()
         .register(definitions, coreSource);

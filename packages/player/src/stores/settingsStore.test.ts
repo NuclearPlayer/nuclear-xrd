@@ -78,31 +78,25 @@ describe('useSettingsStore', () => {
       const hostA = createPluginSettingsHost('p1', 'Plugin One');
       const hostB = createPluginSettingsHost('p2', 'Plugin Two');
 
-      await hostA.register(
-        [
-          {
-            id: 'feature.enabled',
-            title: 'Enabled',
-            category: 'Example',
-            kind: 'boolean',
-            default: false,
-          },
-        ],
-        { type: 'plugin', pluginId: 'p1' },
-      );
+      await hostA.register([
+        {
+          id: 'feature.enabled',
+          title: 'Enabled',
+          category: 'Example',
+          kind: 'boolean',
+          default: false,
+        },
+      ]);
 
-      await hostB.register(
-        [
-          {
-            id: 'feature.enabled',
-            title: 'Enabled',
-            category: 'Example',
-            kind: 'boolean',
-            default: true,
-          },
-        ],
-        { type: 'plugin', pluginId: 'p2' },
-      );
+      await hostB.register([
+        {
+          id: 'feature.enabled',
+          title: 'Enabled',
+          category: 'Example',
+          kind: 'boolean',
+          default: true,
+        },
+      ]);
 
       expect(
         useSettingsStore.getState().definitions['plugin.p1.feature.enabled'],

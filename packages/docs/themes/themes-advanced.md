@@ -41,10 +41,11 @@ Here's the basic structure to get you started:
 
 **Typography**
 - font-family (example: "'Inter', system-ui, -apple-system, sans-serif")
-- font-weight-normal, font-weight-bold
+- font-family-heading
+- font-weight-normal, font-weight-bold, font-weight-extra-bold
 
 **Shape & visual effects**
-- radius, radius-sm, radius-lg
+- radius-sm, radius-md, radius-lg
 - shadow-color, shadow-x, shadow-y, shadow-blur
 
 ## A few helpful notes
@@ -90,11 +91,13 @@ Here's a complete template with Nuclear's default values that you can copy and c
     "shadow-blur": "0px",
     
     "font-family": "'DM Sans', system-ui, -apple-system, sans-serif",
+    "font-family-heading": "'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif",
     "font-weight-normal": "400",
     "font-weight-bold": "700",
+    "font-weight-extra-bold": "800",
     
-    "radius": "8px",
     "radius-sm": "4px",
+    "radius-md": "8px",
     "radius-lg": "12px"
   },
   "dark": {
