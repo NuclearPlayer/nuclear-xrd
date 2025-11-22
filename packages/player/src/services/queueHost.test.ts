@@ -27,8 +27,6 @@ describe('queueHost', () => {
           id: '1',
           track: createMockTrack('Track 1'),
           status: 'idle',
-          activeStreamIndex: 0,
-          failedStreamIndices: [],
           addedAtIso: new Date().toISOString(),
         },
       ],

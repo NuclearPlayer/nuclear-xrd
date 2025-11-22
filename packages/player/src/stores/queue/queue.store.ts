@@ -33,8 +33,6 @@ const createQueueItem = (track: Track): QueueItem => ({
   id: uuidv4(),
   track,
   status: 'idle',
-  activeStreamIndex: 0,
-  failedStreamIndices: [],
   addedAtIso: new Date().toISOString(),
 });
 

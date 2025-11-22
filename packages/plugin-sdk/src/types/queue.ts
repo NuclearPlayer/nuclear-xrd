@@ -5,8 +5,6 @@ export type { Queue, QueueItem, RepeatMode };
 export type QueueItemStateUpdate = Partial<{
   status: QueueItem['status'];
   error: QueueItem['error'];
-  activeStreamIndex: number;
-  failedStreamIndices: number[];
 }>;
 
 export type QueueListener = (queue: Queue) => void;
