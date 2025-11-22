@@ -1,3 +1,5 @@
+import type { LocalFileInfo, StreamCandidate } from './streaming';
+
 export type ProviderRef = {
   provider: string;
   id: string;
@@ -52,30 +54,6 @@ export type PlaylistRef = {
   source: ProviderRef;
 };
 
-export type Stream = {
-  url: string;
-  protocol: 'file' | 'http' | 'https' | 'hls';
-  mimeType?: string;
-  bitrateKbps?: number;
-  codec?: string;
-  container?: string;
-  qualityLabel?: string;
-  durationMs?: number;
-  contentLengthBytes?: number;
-  source: ProviderRef;
-};
-
-export type LocalFileInfo = {
-  fileUri: string;
-  fileSize?: number;
-  format?: string;
-  bitrateKbps?: number;
-  sampleRateHz?: number;
-  channels?: number;
-  fingerprint?: string;
-  scannedAtIso?: string;
-};
-
 export type Track = {
   title: string;
   artists: ArtistCredit[];
@@ -87,7 +65,7 @@ export type Track = {
   tags?: string[];
   source: ProviderRef;
   localFile?: LocalFileInfo;
-  streams?: Stream[];
+  streamCandidates?: StreamCandidate[];
 };
 
 export type Album = {
@@ -135,3 +113,4 @@ export type PlaylistItem = {
 export { pickArtwork } from './artwork';
 export type { QueueItem, RepeatMode, Queue } from './queue';
 export type { SearchCategory, SearchParams, SearchResults } from './search';
+export type { LocalFileInfo, Stream, StreamCandidate } from './streaming';
