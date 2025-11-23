@@ -11,6 +11,8 @@ import type {
   TrackRef,
 } from '@nuclearplayer/model';
 
+import type { ProviderDescriptor } from './providers';
+
 export type SearchCapability = SearchCategory | 'unified';
 
 export type ArtistMetadataCapability =
@@ -20,15 +22,6 @@ export type ArtistMetadataCapability =
   | 'artistRelatedArtists';
 
 export type AlbumMetadataCapability = 'albumDetails';
-
-export type ProviderKind = 'metadata' | 'streaming' | 'lyrics' | (string & {});
-
-export type ProviderDescriptor<K extends ProviderKind = ProviderKind> = {
-  id: string;
-  kind: K;
-  name: string;
-  pluginId?: string;
-};
 
 export type MetadataProvider = ProviderDescriptor<'metadata'> & {
   searchCapabilities?: SearchCapability[];
