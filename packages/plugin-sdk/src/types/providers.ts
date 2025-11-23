@@ -1,4 +1,11 @@
-import type { ProviderDescriptor, ProviderKind } from './search';
+export type ProviderKind = 'metadata' | 'streaming' | 'lyrics' | (string & {});
+
+export type ProviderDescriptor<K extends ProviderKind = ProviderKind> = {
+  id: string;
+  kind: K;
+  name: string;
+  pluginId?: string;
+};
 
 export type ProvidersHost = {
   register<T extends ProviderDescriptor>(provider: T): string;
