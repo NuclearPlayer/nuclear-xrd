@@ -1,5 +1,8 @@
-import type { ProvidersHost } from '../types/providers';
-import type { ProviderDescriptor, ProviderKind } from '../types/search';
+import type {
+  ProviderDescriptor,
+  ProviderKind,
+  ProvidersHost,
+} from '../types/providers';
 
 export class Providers {
   #host?: ProvidersHost;

@@ -1,10 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import type { Track, TrackRef } from '@nuclearplayer/model';
-import type { MetadataProvider } from '@nuclearplayer/plugin-sdk';
 
-import { providersHost } from '../../../services/providersHost';
-import { executeArtistTopTracksSearch } from '../../../services/search/executeArtistMetadataSearch';
+import { metadataHost } from '../../../services/metadataHost';
 
 const mapTrackRefs = (refs: TrackRef[]): Track[] => {
   return refs.map((ref) => ({
@@ -14,17 +12,15 @@ const mapTrackRefs = (refs: TrackRef[]): Track[] => {
 };
 
 export const useArtistTopTracks = (providerId: string, artistId: string) => {
-  const provider = providersHost.get(providerId);
-
   return useQuery<Track[]>({
-    queryKey: ['artist-top-tracks', provider?.id, artistId],
+    queryKey: ['artist-top-tracks', providerId, artistId],
     queryFn: async () => {
-      const refs = await executeArtistTopTracksSearch(
-        provider as MetadataProvider,
+      const refs = await metadataHost.fetchArtistTopTracks(
         artistId,
+        providerId,
       );
       return mapTrackRefs(refs);
     },
-    enabled: Boolean(provider && artistId),
+    enabled: Boolean(providerId && artistId),
   });
 };

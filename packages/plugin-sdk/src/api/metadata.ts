@@ -17,27 +17,29 @@ export class MetadataAPI {
     return fn(host);
   }
 
-  search(params: SearchParams) {
-    return this.#withHost((h) => h.search(params));
+  search(params: SearchParams, providerId?: string) {
+    return this.#withHost((h) => h.search(params, providerId));
   }
 
-  fetchArtistDetails(artistId: string) {
-    return this.#withHost((h) => h.fetchArtistDetails(artistId));
+  fetchArtistDetails(artistId: string, providerId?: string) {
+    return this.#withHost((h) => h.fetchArtistDetails(artistId, providerId));
   }
 
-  fetchArtistAlbums(artistId: string) {
-    return this.#withHost((h) => h.fetchArtistAlbums(artistId));
+  fetchArtistAlbums(artistId: string, providerId?: string) {
+    return this.#withHost((h) => h.fetchArtistAlbums(artistId, providerId));
   }
 
-  fetchArtistTopTracks(artistId: string) {
-    return this.#withHost((h) => h.fetchArtistTopTracks(artistId));
+  fetchArtistTopTracks(artistId: string, providerId?: string) {
+    return this.#withHost((h) => h.fetchArtistTopTracks(artistId, providerId));
   }
 
-  fetchArtistRelatedArtists(artistId: string) {
-    return this.#withHost((h) => h.fetchArtistRelatedArtists(artistId));
+  fetchArtistRelatedArtists(artistId: string, providerId?: string) {
+    return this.#withHost((h) =>
+      h.fetchArtistRelatedArtists(artistId, providerId),
+    );
   }
 
-  fetchAlbumDetails(albumId: string) {
-    return this.#withHost((h) => h.fetchAlbumDetails(albumId));
+  fetchAlbumDetails(albumId: string, providerId?: string) {
+    return this.#withHost((h) => h.fetchAlbumDetails(albumId, providerId));
   }
 }
