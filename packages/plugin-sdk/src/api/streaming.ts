@@ -1,9 +1,6 @@
-import type { Track } from '@nuclearplayer/model';
+import type { StreamCandidate, Track } from '@nuclearplayer/model';
 
-import type {
-  StreamingHost,
-  StreamResolutionListener,
-} from '../types/streaming';
+import type { StreamingHost } from '../types/streaming';
 
 export class StreamingAPI {
   #host?: StreamingHost;
@@ -24,13 +21,7 @@ export class StreamingAPI {
     return this.#withHost((h) => h.resolveCandidatesForTrack(track));
   }
 
-  resolveStreamForCandidate(track: Track, candidateId: string) {
-    return this.#withHost((h) =>
-      h.resolveStreamForCandidate(track, candidateId),
-    );
-  }
-
-  subscribe(listener: StreamResolutionListener) {
-    return this.#withHost((h) => h.subscribe(listener));
+  resolveStreamForCandidate(candidate: StreamCandidate) {
+    return this.#withHost((h) => h.resolveStreamForCandidate(candidate));
   }
 }
