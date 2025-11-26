@@ -42,10 +42,6 @@ type QueueItem = {
   status: 'idle' | 'loading' | 'success' | 'error';
   error?: string;            // Error message if status is 'error'
   
-  // Stream resolution tracking
-  activeStreamIndex: number;       // Which stream from track.streams[] is active
-  failedStreamIndices: number[];   // Streams that have been tried and failed
-  
   // Metadata
   addedAtIso: string;        // ISO timestamp of when added
 };
