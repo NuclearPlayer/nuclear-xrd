@@ -3,9 +3,7 @@
 exports[`useQueueStore > addToQueue > appends tracks to the end 1`] = `
 [
   {
-    "activeStreamIndex": 0,
     "addedAtIso": "2025-02-01T00:00:00.000Z",
-    "failedStreamIndices": [],
     "id": "mock-uuid-0",
     "status": "idle",
     "track": {
@@ -25,9 +23,7 @@ exports[`useQueueStore > addToQueue > appends tracks to the end 1`] = `
     },
   },
   {
-    "activeStreamIndex": 0,
     "addedAtIso": "2025-02-01T00:00:00.000Z",
-    "failedStreamIndices": [],
     "id": "mock-uuid-1",
     "status": "idle",
     "track": {
@@ -52,9 +48,7 @@ exports[`useQueueStore > addToQueue > appends tracks to the end 1`] = `
 exports[`useQueueStore > addToQueue > creates items with default status and metadata 1`] = `
 [
   {
-    "activeStreamIndex": 0,
     "addedAtIso": "2025-02-01T00:00:00.000Z",
-    "failedStreamIndices": [],
     "id": "mock-uuid-2",
     "status": "idle",
     "track": {

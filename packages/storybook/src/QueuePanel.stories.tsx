@@ -47,8 +47,6 @@ const createMockItem = (
     },
   },
   status,
-  activeStreamIndex: 0,
-  failedStreamIndices: [],
   addedAtIso: new Date().toISOString(),
 });
 

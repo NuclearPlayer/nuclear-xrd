@@ -3,6 +3,7 @@ import {
   cloneElement,
   isValidElement,
   ReactNode,
+  ScriptHTMLAttributes,
   useCallback,
   useEffect,
   useMemo,
@@ -21,8 +22,8 @@ export type SoundProps = {
   status: SoundStatus;
   seek?: number;
   crossfadeMs?: number;
-  preload?: 'none' | 'metadata' | 'auto';
-  crossOrigin?: '' | 'anonymous' | 'use-credentials';
+  preload?: HTMLAudioElement['preload'];
+  crossOrigin?: ScriptHTMLAttributes<HTMLAudioElement>['crossOrigin'];
   onTimeUpdate?: (args: { position: number; duration: number }) => void;
   onEnd?: () => void;
   onLoadStart?: () => void;

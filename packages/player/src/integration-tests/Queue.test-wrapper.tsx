@@ -1,4 +1,4 @@
-import { screen, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 export const QueueWrapper = {
@@ -11,6 +11,12 @@ export const QueueWrapper = {
         ?.textContent,
       error: within(itemElement).queryByTestId('queue-item-error')?.textContent,
     }));
+  },
+  waitForItems: async (count: number) => {
+    await waitFor(() => {
+      const items = screen.queryAllByTestId('queue-item');
+      expect(items).toHaveLength(count);
+    });
   },
   getCurrentItemIndex: () => {
     const allTracks = screen.queryAllByTestId('queue-item');

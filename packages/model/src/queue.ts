@@ -5,8 +5,6 @@ export type QueueItem = {
   track: Track;
   status: 'idle' | 'loading' | 'success' | 'error';
   error?: string;
-  activeStreamIndex: number;
-  failedStreamIndices: number[];
   addedAtIso: string;
 };
 

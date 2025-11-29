@@ -18,8 +18,8 @@ import {
   ViewShell,
 } from '@nuclearplayer/ui';
 
+import { metadataHost } from '../../services/metadataHost';
 import { providersHost } from '../../services/providersHost';
-import { executeMetadataSearch } from '../../services/search/executeMetadataSearch';
 
 export const Search: FC = () => {
   const { t } = useTranslation(['search', 'common']);
@@ -40,7 +40,9 @@ export const Search: FC = () => {
   } = useQuery<SearchResults>({
     queryKey: ['metadata-search', provider?.id, q],
     queryFn: () =>
-      executeMetadataSearch(provider as MetadataProvider, { query: q }),
+      metadataHost.search({
+        query: q,
+      }),
     enabled: Boolean(provider && q),
   });
   const tabsItems = [

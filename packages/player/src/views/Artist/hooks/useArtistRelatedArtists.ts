@@ -1,21 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 
 import type { ArtistRef } from '@nuclearplayer/model';
-import type { MetadataProvider } from '@nuclearplayer/plugin-sdk';
 
-import { providersHost } from '../../../services/providersHost';
-import { executeArtistRelatedArtistsSearch } from '../../../services/search/executeArtistMetadataSearch';
+import { metadataHost } from '../../../services/metadataHost';
 
 export const useArtistRelatedArtists = (
   providerId: string,
   artistId: string,
 ) => {
-  const provider = providersHost.get(providerId);
-
   return useQuery<ArtistRef[]>({
-    queryKey: ['artist-related-artists', provider?.id, artistId],
-    queryFn: () =>
-      executeArtistRelatedArtistsSearch(provider as MetadataProvider, artistId),
-    enabled: Boolean(provider && artistId),
+    queryKey: ['artist-related-artists', providerId, artistId],
+    queryFn: () => metadataHost.fetchArtistRelatedArtists(artistId, providerId),
+    enabled: Boolean(providerId && artistId),
   });
 };

@@ -210,12 +210,10 @@ describe('useQueueStore', () => {
 
       useQueueStore.getState().updateItemState(itemId, {
         status: 'loading',
-        activeStreamIndex: 1,
       });
 
       const item = useQueueStore.getState().items[0];
       expect(item.status).toBe('loading');
-      expect(item.activeStreamIndex).toBe(1);
     });
   });
 

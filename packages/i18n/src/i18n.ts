@@ -33,6 +33,7 @@ i18n.use(initReactI18next).init({
     'settings',
     'dashboard',
     'plugins',
+    'streaming',
   ],
   interpolation: {
     escapeValue: false,

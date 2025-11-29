@@ -1,18 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
 import type { AlbumRef } from '@nuclearplayer/model';
-import type { MetadataProvider } from '@nuclearplayer/plugin-sdk';
 
-import { providersHost } from '../../../services/providersHost';
-import { executeArtistAlbumsSearch } from '../../../services/search/executeArtistMetadataSearch';
+import { metadataHost } from '../../../services/metadataHost';
 
 export const useArtistAlbums = (providerId: string, artistId: string) => {
-  const provider = providersHost.get(providerId);
-
   return useQuery<AlbumRef[]>({
-    queryKey: ['artist-albums', provider?.id, artistId],
-    queryFn: () =>
-      executeArtistAlbumsSearch(provider as MetadataProvider, artistId),
-    enabled: Boolean(provider && artistId),
+    queryKey: ['artist-albums', providerId, artistId],
+    queryFn: () => metadataHost.fetchArtistAlbums(artistId, providerId),
+    enabled: Boolean(providerId && artistId),
   });
 };
