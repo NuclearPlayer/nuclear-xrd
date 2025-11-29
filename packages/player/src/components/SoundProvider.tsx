@@ -13,7 +13,7 @@ export const SoundProvider: FC<PropsWithChildren> = ({ children }) => {
   const getValue = useSettingsStore((s) => s.getValue);
   const crossfadeMs = getValue('core.playback.crossfadeMs') as number;
   const preload: HTMLAudioElement['preload'] = 'auto';
-  const crossOrigin: HTMLAudioElement['crossOrigin'] = '';
+  const crossOrigin = '' as const;
   const volume01 = (getValue('core.playback.volume') as number) ?? 1;
   const muted = (getValue('core.playback.muted') as boolean) ?? false;
   const volumePercent = muted ? 0 : Math.round(volume01 * 100);

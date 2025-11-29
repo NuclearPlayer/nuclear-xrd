@@ -33,7 +33,9 @@ describe('streamingHost', () => {
       const result = await streamingHost.resolveCandidatesForTrack(track);
 
       expect(result.success).toBe(false);
-      expect(result.error).toBe('No streaming provider available');
+      if (!result.success) {
+        expect(result.error).toBe('No streaming provider available');
+      }
     });
 
     it('searches for track and returns candidates', async () => {
@@ -77,7 +79,9 @@ describe('streamingHost', () => {
       const result = await streamingHost.resolveCandidatesForTrack(track);
 
       expect(result.success).toBe(true);
-      expect(result.candidates).toEqual(mockCandidates);
+      if (result.success) {
+        expect(result.candidates).toEqual(mockCandidates);
+      }
       expect(searchForTrack).toHaveBeenCalledWith(
         'Test Artist',
         'Test Track',
@@ -109,7 +113,11 @@ describe('streamingHost', () => {
       const result = await streamingHost.resolveCandidatesForTrack(track);
 
       expect(result.success).toBe(false);
-      expect(result.error).toBe('Failed to resolve candidates: Network error');
+      if (!result.success) {
+        expect(result.error).toBe(
+          'Failed to resolve candidates: Network error',
+        );
+      }
     });
   });
 
