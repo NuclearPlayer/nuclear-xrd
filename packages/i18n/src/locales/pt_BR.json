@@ -123,6 +123,14 @@
       "crossfadeMs": {
         "title": "Crossfade",
         "description": "Duração do crossfade entre tracks em milissegundos"
+      },
+      "streamExpiryMs": {
+        "title": "Stream expiry time",
+        "description": "How long before a resolved stream URL is considered expired and needs re-resolution"
+      },
+      "streamResolutionRetries": {
+        "title": "Stream resolution retries",
+        "description": "Number of times to retry resolving a stream URL before moving to the next candidate"
       }
     }
   },
@@ -137,6 +145,12 @@
     },
     "error": {
       "prefix": "Error:"
+    }
+  },
+  "streaming": {
+    "errors": {
+      "noCandidatesFound": "Failed to find stream candidates",
+      "allCandidatesFailed": "All stream candidates failed"
     }
   }
 }
