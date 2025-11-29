@@ -1,147 +1,146 @@
 import { useEffect, useRef } from 'react';
 
+import type { TFunction } from '@nuclearplayer/i18n';
+import { useTranslation } from '@nuclearplayer/i18n';
 import type { QueueItem, StreamCandidate, Track } from '@nuclearplayer/model';
 
 import { streamingHost } from '../services/streamingHost';
 import { useQueueStore } from '../stores/queue/queue.store';
 import { useSoundStore } from '../stores/soundStore';
 
-const getFirstNonFailedCandidate = (
-  candidates: StreamCandidate[],
-): StreamCandidate | undefined => {
-  return candidates.find((candidate) => !candidate.failed);
-};
+type AudioSource = string | { src: string; type?: string }[];
 
-const buildAudioSource = (
-  candidate: StreamCandidate,
-): string | { src: string; type?: string }[] => {
-  const stream = candidate.stream;
+const buildAudioSource = (candidate: StreamCandidate): AudioSource => {
+  const { stream } = candidate;
   if (!stream) {
     return candidate.id;
   }
-
-  if (stream.mimeType) {
-    return [{ src: stream.url, type: stream.mimeType }];
-  }
-
-  return stream.url;
+  return stream.mimeType
+    ? [{ src: stream.url, type: stream.mimeType }]
+    : stream.url;
 };
 
-export const useStreamResolution = (): void => {
-  const currentItemIdRef = useRef<string | null>(null);
-
-  useEffect(() => {
-    const unsubscribe = useQueueStore.subscribe((state) => {
-      const currentItem = state.getCurrentItem();
-      if (!currentItem || currentItem.id === currentItemIdRef.current) {
-        return;
-      }
-
-      currentItemIdRef.current = currentItem.id;
-      void resolveAndPlay(currentItem);
-    });
-
-    const initialItem = useQueueStore.getState().getCurrentItem();
-    if (initialItem) {
-      currentItemIdRef.current = initialItem.id;
-      void resolveAndPlay(initialItem);
-    }
-
-    return unsubscribe;
-  }, []);
-};
-
-const resolveAndPlay = async (item: QueueItem): Promise<void> => {
-  const { updateItemState } = useQueueStore.getState();
-  const { setSrc, play } = useSoundStore.getState();
-  const { track } = item;
-
-  updateItemState(item.id, { status: 'loading', error: undefined });
-
-  const candidates = await resolveCandidates(track);
-  if (!candidates) {
-    updateItemState(item.id, {
-      status: 'error',
-      error: 'Failed to find stream candidates',
-    });
-    return;
-  }
-
-  updateItemState(item.id, {
-    track: { ...track, streamCandidates: candidates },
+const setItemError = (itemId: string, errorKey: string, t: TFunction): void => {
+  useQueueStore.getState().updateItemState(itemId, {
+    status: 'error',
+    error: t(errorKey),
   });
+};
 
-  const resolvedCandidate = await resolveStreamWithFallback(
-    candidates,
-    item.id,
-  );
-  if (!resolvedCandidate?.stream) {
-    updateItemState(item.id, {
-      status: 'error',
-      error: 'All stream candidates failed',
+const updateItemCandidates = (
+  itemId: string,
+  candidates: StreamCandidate[],
+): void => {
+  const { items, updateItemState } = useQueueStore.getState();
+  const currentTrack = items.find((item) => item.id === itemId)?.track;
+  if (currentTrack) {
+    updateItemState(itemId, {
+      track: { ...currentTrack, streamCandidates: candidates },
     });
-    return;
   }
-
-  updateItemState(item.id, { status: 'success' });
-
-  const audioSource = buildAudioSource(resolvedCandidate);
-  setSrc(audioSource);
-  play();
 };
 
 const resolveCandidates = async (
   track: Track,
 ): Promise<StreamCandidate[] | undefined> => {
-  if (track.streamCandidates && track.streamCandidates.length > 0) {
+  if (track.streamCandidates?.length) {
     return track.streamCandidates;
   }
 
   const result = await streamingHost.resolveCandidatesForTrack(track);
-  if (!result.success || !result.candidates) {
+  return result.success ? result.candidates : undefined;
+};
+
+const tryResolveNextCandidate = async (
+  candidates: StreamCandidate[],
+): Promise<
+  { resolved: StreamCandidate; updated: StreamCandidate[] } | undefined
+> => {
+  const candidate = candidates.find((c) => !c.failed);
+  if (!candidate) {
     return undefined;
   }
 
-  return result.candidates;
+  const resolved = await streamingHost.resolveStreamForCandidate(candidate);
+  if (!resolved) {
+    return undefined;
+  }
+
+  const updated = candidates.map((c) => (c.id === resolved.id ? resolved : c));
+  return { resolved, updated };
 };
 
 const resolveStreamWithFallback = async (
   candidates: StreamCandidate[],
   itemId: string,
 ): Promise<StreamCandidate | undefined> => {
+  const tryNext = async (
+    remaining: StreamCandidate[],
+  ): Promise<StreamCandidate | undefined> => {
+    const result = await tryResolveNextCandidate(remaining);
+    if (!result) {
+      return undefined;
+    }
+
+    updateItemCandidates(itemId, result.updated);
+
+    if (result.resolved.stream && !result.resolved.failed) {
+      return result.resolved;
+    }
+
+    return tryNext(result.updated);
+  };
+
+  return tryNext(candidates);
+};
+
+const resolveAndPlay = async (item: QueueItem, t: TFunction): Promise<void> => {
   const { updateItemState } = useQueueStore.getState();
-  let workingCandidates = [...candidates];
+  const { setSrc, play } = useSoundStore.getState();
 
-  while (true) {
-    const candidate = getFirstNonFailedCandidate(workingCandidates);
-    if (!candidate) {
-      return undefined;
-    }
+  updateItemState(item.id, { status: 'loading', error: undefined });
 
-    const resolved = await streamingHost.resolveStreamForCandidate(candidate);
-    if (!resolved) {
-      return undefined;
-    }
-
-    workingCandidates = workingCandidates.map((candidate) =>
-      candidate.id === resolved.id ? resolved : candidate,
-    );
-
-    const currentTrack = useQueueStore
-      .getState()
-      .items.find((item) => item.id === itemId)?.track;
-
-    if (currentTrack) {
-      updateItemState(itemId, {
-        track: {
-          ...currentTrack,
-          streamCandidates: workingCandidates,
-        },
-      });
-    }
-
-    if (resolved.stream && !resolved.failed) {
-      return resolved;
-    }
+  const candidates = await resolveCandidates(item.track);
+  if (!candidates) {
+    setItemError(item.id, 'errors.noCandidatesFound', t);
+    return;
   }
+
+  updateItemCandidates(item.id, candidates);
+
+  const resolvedCandidate = await resolveStreamWithFallback(
+    candidates,
+    item.id,
+  );
+  if (!resolvedCandidate?.stream) {
+    setItemError(item.id, 'errors.allCandidatesFailed', t);
+    return;
+  }
+
+  updateItemState(item.id, { status: 'success' });
+  setSrc(buildAudioSource(resolvedCandidate));
+  play();
+};
+
+export const useStreamResolution = (): void => {
+  const { t } = useTranslation('streaming');
+  const currentItemIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const handleItemChange = (currentItem: QueueItem | undefined): void => {
+      if (!currentItem || currentItem.id === currentItemIdRef.current) {
+        return;
+      }
+      currentItemIdRef.current = currentItem.id;
+      void resolveAndPlay(currentItem, t);
+    };
+
+    const unsubscribe = useQueueStore.subscribe((state) => {
+      handleItemChange(state.getCurrentItem());
+    });
+
+    handleItemChange(useQueueStore.getState().getCurrentItem());
+
+    return unsubscribe;
+  }, [t]);
 };

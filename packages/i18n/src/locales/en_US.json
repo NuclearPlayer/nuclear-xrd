@@ -146,5 +146,11 @@
     "error": {
       "prefix": "Error:"
     }
+  },
+  "streaming": {
+    "errors": {
+      "noCandidatesFound": "Failed to find stream candidates",
+      "allCandidatesFailed": "All stream candidates failed"
+    }
   }
 }
