@@ -16,11 +16,9 @@ export type StreamingProvider = ProviderDescriptor<'streaming'> & {
   supportsLocalFiles?: boolean;
 };
 
-export type StreamResolutionResult = {
-  success: boolean;
-  candidates?: StreamCandidate[];
-  error?: string;
-};
+export type StreamResolutionResult =
+  | { success: true; candidates: StreamCandidate[] }
+  | { success: false; error: string };
 
 export type StreamingHost = {
   resolveCandidatesForTrack: (track: Track) => Promise<StreamResolutionResult>;

@@ -28,16 +28,12 @@ const setItemError = (itemId: string, errorKey: string, t: TFunction): void => {
 };
 
 const updateItemCandidates = (
-  itemId: string,
+  item: QueueItem,
   candidates: StreamCandidate[],
 ): void => {
-  const { items, updateItemState } = useQueueStore.getState();
-  const currentTrack = items.find((item) => item.id === itemId)?.track;
-  if (currentTrack) {
-    updateItemState(itemId, {
-      track: { ...currentTrack, streamCandidates: candidates },
-    });
-  }
+  useQueueStore.getState().updateItemState(item.id, {
+    track: { ...item.track, streamCandidates: candidates },
+  });
 };
 
 const resolveCandidates = async (
@@ -72,7 +68,7 @@ const tryResolveNextCandidate = async (
 
 const resolveStreamWithFallback = async (
   candidates: StreamCandidate[],
-  itemId: string,
+  item: QueueItem,
 ): Promise<StreamCandidate | undefined> => {
   const tryNext = async (
     remaining: StreamCandidate[],
@@ -82,7 +78,7 @@ const resolveStreamWithFallback = async (
       return undefined;
     }
 
-    updateItemCandidates(itemId, result.updated);
+    updateItemCandidates(item, result.updated);
 
     if (result.resolved.stream && !result.resolved.failed) {
       return result.resolved;
@@ -106,12 +102,9 @@ const resolveAndPlay = async (item: QueueItem, t: TFunction): Promise<void> => {
     return;
   }
 
-  updateItemCandidates(item.id, candidates);
+  updateItemCandidates(item, candidates);
 
-  const resolvedCandidate = await resolveStreamWithFallback(
-    candidates,
-    item.id,
-  );
+  const resolvedCandidate = await resolveStreamWithFallback(candidates, item);
   if (!resolvedCandidate?.stream) {
     setItemError(item.id, 'errors.allCandidatesFailed', t);
     return;

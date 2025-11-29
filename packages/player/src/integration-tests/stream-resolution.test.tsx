@@ -34,7 +34,7 @@ describe('Stream Resolution Integration', () => {
     });
 
     useSettingsStore.getState().setValue('playback.streamExpiryMs', 3600000);
-    useSettingsStore.getState().setValue('playback.streamResolutionRetries', 3);
+    useSettingsStore.getState().setValue('playback.streamResolutionRetries', 1);
 
     providersHost.clear();
   });
@@ -189,7 +189,7 @@ describe('Stream Resolution Integration', () => {
       expect(currentItem?.track.streamCandidates?.[0].failed).toBe(true);
       expect(currentItem?.track.streamCandidates?.[1].failed).toBe(false);
 
-      expect(callCount).toEqual(4);
+      expect(callCount).toEqual(2);
     });
   });
 

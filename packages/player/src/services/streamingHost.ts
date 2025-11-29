@@ -25,21 +25,25 @@ const isStreamExpired = (candidate: StreamCandidate): boolean => {
   return Date.now() - resolvedAt > expiryMs;
 };
 
+const sleep = (ms: number): Promise<void> =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
 const withRetry = async <T>(
   fn: () => Promise<T>,
   maxAttempts: number,
+  baseDelayMs = 500,
 ): Promise<T> => {
-  let lastError: unknown;
-
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
     try {
       return await fn();
     } catch (error) {
-      lastError = error;
+      if (attempt === maxAttempts - 1) {
+        throw error;
+      }
+      await sleep(baseDelayMs * 2 ** attempt);
     }
   }
-
-  throw lastError;
+  throw new Error('Unreachable');
 };
 
 export const createStreamingHost = (): StreamingHost => ({
