@@ -2,7 +2,14 @@ import { screen } from '@testing-library/react';
 
 import { providersHost } from '../services/providersHost';
 import { useQueueStore } from '../stores/queue/queue.store';
+import { useSettingsStore } from '../stores/settingsStore';
 import { MetadataProviderBuilder } from '../test/builders/MetadataProviderBuilder';
+import {
+  createMockCandidate,
+  createMockStream,
+  StreamingProviderBuilder,
+} from '../test/builders/StreamingProviderBuilder';
+import { GIANT_STEPS } from '../test/fixtures/albums';
 import { AlbumWrapper } from '../views/Album/Album.test-wrapper';
 import { QueueWrapper } from './Queue.test-wrapper';
 
@@ -17,47 +24,25 @@ describe('Queue', () => {
       isLoading: false,
     });
 
+    useSettingsStore.getState().setValue('playback.streamExpiryMs', 3600000);
+    useSettingsStore.getState().setValue('playback.streamResolutionRetries', 3);
+
     providersHost.clear();
-    const provider = new MetadataProviderBuilder()
+
+    const metadataProvider = new MetadataProviderBuilder()
       .withSearchCapabilities(['unified', 'albums'])
       .withAlbumMetadataCapabilities(['albumDetails'])
-      .withFetchAlbumDetails(async () => ({
-        title: 'Giant Steps',
-        artists: [
-          {
-            name: 'John Coltrane',
-            roles: [],
-          },
-        ],
-        tracks: [
-          {
-            title: 'Countdown',
-            artists: [
-              {
-                name: 'John Coltrane',
-                roles: [],
-                source: { provider: 'test-metadata-provider', id: 'artist-1' },
-              },
-            ],
-            source: { provider: 'test-metadata-provider', id: 'track-1' },
-          },
-          {
-            title: 'Giant Steps',
-            artists: [
-              {
-                name: 'John Coltrane',
-                roles: [],
-                source: { provider: 'test-metadata-provider', id: 'artist-1' },
-              },
-            ],
-            source: { provider: 'test-metadata-provider', id: 'track-2' },
-          },
-        ],
-        source: { provider: 'test-metadata-provider', id: 'album-1' },
-      }))
+      .withFetchAlbumDetails(async () => GIANT_STEPS)
       .build();
+    providersHost.register(metadataProvider);
 
-    providersHost.register(provider);
+    const streamingProvider = new StreamingProviderBuilder()
+      .withSearchForTrack(async (artist, title) => [
+        createMockCandidate(`yt-${title}`, `${artist} - ${title}`),
+      ])
+      .withGetStreamUrl(async (candidateId) => createMockStream(candidateId))
+      .build();
+    providersHost.register(streamingProvider);
   });
 
   it('should display an empty queue', async () => {
@@ -73,6 +58,7 @@ describe('Queue', () => {
   it('should add album tracks to the queue', async () => {
     await AlbumWrapper.mountDirectly();
     await AlbumWrapper.addTrackToQueueByTitle('Countdown');
+    await QueueWrapper.waitForItems(1);
     expect(QueueWrapper.getItems()).toMatchInlineSnapshot(`
       [
         {
@@ -98,8 +84,10 @@ describe('Queue', () => {
   it('should remove track when clicking X button', async () => {
     await AlbumWrapper.mountDirectly();
     await AlbumWrapper.addTrackToQueueByTitle('Countdown');
+    await QueueWrapper.waitForItems(1);
     expect(QueueWrapper.getItems()).toHaveLength(1);
     await QueueWrapper.removeItemByTitle('Countdown');
+    await QueueWrapper.waitForItems(0);
     expect(QueueWrapper.getItems()).toHaveLength(0);
   });
 });

@@ -3,15 +3,17 @@ import { useEffect } from 'react';
 
 import { Sound, Volume } from '@nuclearplayer/hifi';
 
+import { useStreamResolution } from '../hooks/useStreamResolution';
 import { useSettingsStore } from '../stores/settingsStore';
 import { useSoundStore } from '../stores/soundStore';
 
 export const SoundProvider: FC<PropsWithChildren> = ({ children }) => {
+  useStreamResolution();
   const { src, status, seek } = useSoundStore();
   const getValue = useSettingsStore((s) => s.getValue);
   const crossfadeMs = getValue('core.playback.crossfadeMs') as number;
-  const preload: 'none' | 'metadata' | 'auto' = 'auto';
-  const crossOrigin: '' | 'anonymous' | 'use-credentials' = '';
+  const preload: HTMLAudioElement['preload'] = 'auto';
+  const crossOrigin: HTMLAudioElement['crossOrigin'] = '';
   const volume01 = (getValue('core.playback.volume') as number) ?? 1;
   const muted = (getValue('core.playback.muted') as boolean) ?? false;
   const volumePercent = muted ? 0 : Math.round(volume01 * 100);

@@ -1,0 +1,229 @@
+import { waitFor } from '@testing-library/react';
+
+import { providersHost } from '../services/providersHost';
+import { useQueueStore } from '../stores/queue/queue.store';
+import { useSettingsStore } from '../stores/settingsStore';
+import { useSoundStore } from '../stores/soundStore';
+import { MetadataProviderBuilder } from '../test/builders/MetadataProviderBuilder';
+import {
+  createMockCandidate,
+  createMockStream,
+  StreamingProviderBuilder,
+} from '../test/builders/StreamingProviderBuilder';
+import { GIANT_STEPS } from '../test/fixtures/albums';
+import { AlbumWrapper } from '../views/Album/Album.test-wrapper';
+import { StreamResolutionWrapper } from './StreamResolution.test-wrapper';
+
+describe('Stream Resolution Integration', () => {
+  beforeEach(() => {
+    useQueueStore.setState({
+      items: [],
+      currentIndex: 0,
+      repeatMode: 'off',
+      shuffleEnabled: false,
+      isReady: true,
+      isLoading: false,
+    });
+
+    useSoundStore.setState({
+      src: null,
+      status: 'stopped',
+      crossfadeMs: 0,
+      preload: 'auto',
+      crossOrigin: '',
+    });
+
+    useSettingsStore.getState().setValue('playback.streamExpiryMs', 3600000);
+    useSettingsStore.getState().setValue('playback.streamResolutionRetries', 3);
+
+    providersHost.clear();
+  });
+
+  const setupMetadataProvider = () => {
+    const metadataProvider = new MetadataProviderBuilder()
+      .withSearchCapabilities(['unified', 'albums'])
+      .withAlbumMetadataCapabilities(['albumDetails'])
+      .withFetchAlbumDetails(async () => GIANT_STEPS)
+      .build();
+
+    providersHost.register(metadataProvider);
+  };
+
+  describe('when adding tracks to queue', () => {
+    it('resolves stream and starts playback for the first track', async () => {
+      setupMetadataProvider();
+
+      const streamingProvider = new StreamingProviderBuilder()
+        .withSearchForTrack(async (artist, title) => [
+          createMockCandidate('yt-1', `${artist} - ${title}`),
+        ])
+        .withGetStreamUrl(async (candidateId) =>
+          createMockStream(candidateId, { mimeType: 'audio/mpeg' }),
+        )
+        .build();
+
+      providersHost.register(streamingProvider);
+
+      await AlbumWrapper.mountDirectly();
+      await AlbumWrapper.addTrackToQueueByTitle('Countdown');
+
+      await StreamResolutionWrapper.waitForPlayback();
+
+      const src = StreamResolutionWrapper.getSoundState().src;
+      expect(src).toEqual([
+        { src: 'https://example.com/yt-1.mp3', type: 'audio/mpeg' },
+      ]);
+
+      const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
+      expect(currentItem?.status).toBe('success');
+      expect(currentItem?.track.streamCandidates).toHaveLength(1);
+    });
+
+    it('shows loading state while resolving stream', async () => {
+      setupMetadataProvider();
+
+      let resolveStream: (stream: ReturnType<typeof createMockStream>) => void;
+      const streamPromise = new Promise<ReturnType<typeof createMockStream>>(
+        (resolve) => {
+          resolveStream = resolve;
+        },
+      );
+
+      const streamingProvider = new StreamingProviderBuilder()
+        .withSearchForTrack(async () => [createMockCandidate('yt-1', 'Track')])
+        .withGetStreamUrl(async () => streamPromise)
+        .build();
+
+      providersHost.register(streamingProvider);
+
+      await AlbumWrapper.mountDirectly();
+      await AlbumWrapper.addTrackToQueueByTitle('Countdown');
+
+      await waitFor(() => {
+        const item = StreamResolutionWrapper.getCurrentQueueItem();
+        expect(item?.status).toBe('loading');
+      });
+
+      resolveStream!(createMockStream('yt-1'));
+
+      await waitFor(() => {
+        const item = StreamResolutionWrapper.getCurrentQueueItem();
+        expect(item?.status).toBe('success');
+      });
+    });
+  });
+
+  describe('when stream resolution fails', () => {
+    it('shows error state when no streaming provider is available', async () => {
+      setupMetadataProvider();
+
+      await AlbumWrapper.mountDirectly();
+      await AlbumWrapper.addTrackToQueueByTitle('Countdown');
+
+      await StreamResolutionWrapper.waitForError();
+
+      const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
+      expect(currentItem?.status).toBe('error');
+      expect(currentItem?.error).toBe('Failed to find stream candidates');
+    });
+
+    it('shows error state when all candidates fail', async () => {
+      setupMetadataProvider();
+
+      const streamingProvider = new StreamingProviderBuilder()
+        .withSearchForTrack(async () => [
+          createMockCandidate('yt-1', 'Candidate 1'),
+          createMockCandidate('yt-2', 'Candidate 2'),
+        ])
+        .withGetStreamUrl(async () => {
+          throw new Error('Stream unavailable');
+        })
+        .build();
+
+      providersHost.register(streamingProvider);
+
+      await AlbumWrapper.mountDirectly();
+      await AlbumWrapper.addTrackToQueueByTitle('Countdown');
+
+      await StreamResolutionWrapper.waitForError();
+
+      const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
+      expect(
+        currentItem?.track.streamCandidates?.every((c) => c.failed),
+      ).toBeTruthy();
+      expect(currentItem?.status).toBe('error');
+      expect(currentItem?.error).toBe('All stream candidates failed');
+    });
+
+    it('falls back to next candidate when first one fails', async () => {
+      setupMetadataProvider();
+
+      let callCount = 0;
+      const streamingProvider = new StreamingProviderBuilder()
+        .withSearchForTrack(async () => [
+          createMockCandidate('yt-bad', 'Bad Stream'),
+          createMockCandidate('yt-good', 'Good Stream'),
+        ])
+        .withGetStreamUrl(async (candidateId) => {
+          callCount++;
+          if (candidateId === 'yt-bad') {
+            throw new Error('Stream unavailable');
+          }
+          return createMockStream(candidateId);
+        })
+        .build();
+
+      providersHost.register(streamingProvider);
+
+      await AlbumWrapper.mountDirectly();
+      await AlbumWrapper.addTrackToQueueByTitle('Countdown');
+
+      await StreamResolutionWrapper.waitForPlayback();
+
+      expect(StreamResolutionWrapper.getSoundState().src).toBe(
+        'https://example.com/yt-good.mp3',
+      );
+
+      const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
+      expect(currentItem?.status).toBe('success');
+      expect(currentItem?.track.streamCandidates?.[0].failed).toBe(true);
+      expect(currentItem?.track.streamCandidates?.[1].failed).toBe(false);
+
+      expect(callCount).toEqual(4);
+    });
+  });
+
+  describe('when navigating the queue', () => {
+    it('resolves stream for each track when navigating', async () => {
+      setupMetadataProvider();
+
+      const resolvedTracks: string[] = [];
+      const streamingProvider = new StreamingProviderBuilder()
+        .withSearchForTrack(async (artist, title) => {
+          resolvedTracks.push(title);
+          return [createMockCandidate(`yt-${title}`, `${artist} - ${title}`)];
+        })
+        .withGetStreamUrl(async (candidateId) => createMockStream(candidateId))
+        .build();
+
+      providersHost.register(streamingProvider);
+
+      await AlbumWrapper.mountDirectly();
+      await AlbumWrapper.addTrackToQueueByTitle('Countdown');
+      await AlbumWrapper.addTrackToQueueByTitle('Giant Steps');
+
+      await StreamResolutionWrapper.waitForPlayback();
+      expect(resolvedTracks).toContain('Countdown');
+
+      await StreamResolutionWrapper.selectQueueItem('Giant Steps');
+
+      await waitFor(() => {
+        expect(resolvedTracks).toContain('Giant Steps');
+      });
+
+      expect(StreamResolutionWrapper.getSoundState().src).toBe(
+        'https://example.com/yt-Giant Steps.mp3',
+      );
+    });
+  });
+});
