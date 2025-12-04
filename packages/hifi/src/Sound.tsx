@@ -105,14 +105,23 @@ export const Sound: React.FC<SoundProps> = ({
     }
   }, [status, isReady, activeIndex, context]);
 
+  const lastSeekRef = useRef<number | undefined>(undefined);
   useEffect(() => {
-    if (!isReady || seek == null) {
+    if (!isReady) {
       return;
     }
     const audio = current.ref.current;
-    if (audio) {
+    if (!audio || seek == null) {
+      return;
+    }
+
+    const currentTime = audio.currentTime;
+    const seekDelta = Math.abs(seek - currentTime);
+
+    if (lastSeekRef.current !== seek && seekDelta > 0.5) {
       audio.currentTime = seek;
     }
+    lastSeekRef.current = seek;
   }, [seek, isReady, activeIndex]);
 
   useEffect(() => {

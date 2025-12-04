@@ -9,8 +9,11 @@ import type {
   PluginMetadata,
 } from '@nuclearplayer/plugin-sdk';
 
+import { httpHost } from '../httpHost';
+import { providersHost } from '../providersHost';
 import { queueHost } from '../queueHost';
 import { createPluginSettingsHost } from '../settingsHost';
+import { ytdlpHost } from '../ytdlpHost';
 import { compilePlugin } from './pluginCompiler';
 import { safeParsePluginManifest } from './pluginManifest';
 
@@ -138,6 +141,9 @@ export class PluginLoader {
           metadata.displayName,
         ),
         queueHost,
+        providersHost,
+        httpHost,
+        ytdlpHost,
       });
       await instance.onLoad(api);
     }

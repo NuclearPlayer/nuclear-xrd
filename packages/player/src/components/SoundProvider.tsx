@@ -1,9 +1,10 @@
 import type { FC, PropsWithChildren } from 'react';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { Sound, Volume } from '@nuclearplayer/hifi';
 
 import { useStreamResolution } from '../hooks/useStreamResolution';
+import { useQueueStore } from '../stores/queue/queue.store';
 import { useSettingsStore } from '../stores/settingsStore';
 import { useSoundStore } from '../stores/soundStore';
 
@@ -23,6 +24,17 @@ export const SoundProvider: FC<PropsWithChildren> = ({ children }) => {
     setCrossfadeMs(crossfadeMs);
   }, [crossfadeMs]);
 
+  const handleTimeUpdate = useCallback(
+    ({ position, duration }: { position: number; duration: number }) => {
+      useSoundStore.getState().updatePlayback(position, duration);
+    },
+    [],
+  );
+
+  const handleEnd = useCallback(() => {
+    useQueueStore.getState().goToNext();
+  }, []);
+
   return (
     <>
       {src && (
@@ -33,6 +45,8 @@ export const SoundProvider: FC<PropsWithChildren> = ({ children }) => {
           crossfadeMs={crossfadeMs}
           preload={preload}
           crossOrigin={crossOrigin}
+          onTimeUpdate={handleTimeUpdate}
+          onEnd={handleEnd}
         >
           <Volume value={volumePercent} />
         </Sound>
