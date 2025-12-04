@@ -10,14 +10,27 @@ import { useSoundStore } from '../stores/soundStore';
 
 type AudioSource = string | { src: string; type?: string }[];
 
+// Encode the URL in base64 and use our custom protocol to bypass CORS
+// Check packages/player/src-tauri/src/stream_proxy.rs to see how this works
+const proxyStreamUrl = (url: string): string => {
+  const encoded = btoa(url)
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+  return `nuclear-stream://localhost/${encoded}`;
+};
+
 const buildAudioSource = (candidate: StreamCandidate): AudioSource => {
   const { stream } = candidate;
   if (!stream) {
     return candidate.id;
   }
+
+  const proxiedUrl = proxyStreamUrl(stream.url);
+
   return stream.mimeType
-    ? [{ src: stream.url, type: stream.mimeType }]
-    : stream.url;
+    ? [{ src: proxiedUrl, type: stream.mimeType }]
+    : proxiedUrl;
 };
 
 const setItemError = (itemId: string, errorKey: string, t: TFunction): void => {
