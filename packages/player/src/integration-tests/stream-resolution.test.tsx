@@ -71,7 +71,10 @@ describe('Stream Resolution Integration', () => {
 
       const src = StreamResolutionWrapper.getSoundState().src;
       expect(src).toEqual([
-        { src: 'https://example.com/yt-1.mp3', type: 'audio/mpeg' },
+        {
+          src: 'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC0xLm1wMw',
+          type: 'audio/mpeg',
+        },
       ]);
 
       const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
@@ -181,7 +184,7 @@ describe('Stream Resolution Integration', () => {
       await StreamResolutionWrapper.waitForPlayback();
 
       expect(StreamResolutionWrapper.getSoundState().src).toBe(
-        'https://example.com/yt-good.mp3',
+        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC1nb29kLm1wMw',
       );
 
       const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
@@ -222,7 +225,7 @@ describe('Stream Resolution Integration', () => {
       });
 
       expect(StreamResolutionWrapper.getSoundState().src).toBe(
-        'https://example.com/yt-Giant Steps.mp3',
+        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC1HaWFudCBTdGVwcy5tcDM',
       );
     });
   });
