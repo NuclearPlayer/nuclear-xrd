@@ -1,7 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { flexRender, Row } from '@tanstack/react-table';
-import React from 'react';
 
 import { Track } from '@nuclearplayer/model';
 
@@ -55,10 +54,16 @@ export function SortableRow<T extends Track = Track>({
       {...listeners}
     >
       {row.getVisibleCells().map((cell) => (
-        <React.Fragment key={cell.id}>
-          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-        </React.Fragment>
+        <Cell key={cell.id} cell={cell} />
       ))}
     </tr>
   );
 }
+
+type CellProps<T extends Track> = {
+  cell: ReturnType<Row<T>['getVisibleCells']>[number];
+};
+
+const Cell = <T extends Track>({ cell }: CellProps<T>) => {
+  return flexRender(cell.column.columnDef.cell, cell.getContext());
+};
