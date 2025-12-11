@@ -92,7 +92,7 @@ export const ConnectedPlayerBar: FC = () => {
         }
         center={
           <PlayerBar.Controls
-            isPlaying={status === 'playing'}
+            isPlaying={soundStore.status === 'playing'}
             isShuffleActive={queueStore.shuffleEnabled}
             isRepeatActive={queueStore.repeatMode !== 'off'}
             onPlayPause={soundStore.toggle}
