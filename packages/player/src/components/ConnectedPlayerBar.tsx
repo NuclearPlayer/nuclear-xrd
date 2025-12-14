@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { useCallback, useMemo } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
@@ -11,12 +12,33 @@ import { useSoundStore } from '../stores/soundStore';
 
 export const ConnectedPlayerBar: FC = () => {
   const { t } = useTranslation('playerBar');
-  const queueStore = useQueueStore();
-  const soundStore = useSoundStore();
-  const settingsStore = useSettingsStore();
-  const currentItem = queueStore.getCurrentItem();
-  const volume =
-    (settingsStore.getValue('core.playback.volume') as number) ?? 1;
+  const { getCurrentItem, shuffleEnabled, repeatMode, goToNext, goToPrevious } =
+    useQueueStore(
+      useShallow((s) => ({
+        getCurrentItem: s.getCurrentItem,
+        shuffleEnabled: s.shuffleEnabled,
+        repeatMode: s.repeatMode,
+        goToNext: s.goToNext,
+        goToPrevious: s.goToPrevious,
+      })),
+    );
+  const { status, seek, duration, toggle, seekTo } = useSoundStore(
+    useShallow((s) => ({
+      status: s.status,
+      seek: s.seek,
+      duration: s.duration,
+      toggle: s.toggle,
+      seekTo: s.seekTo,
+    })),
+  );
+  const { getValue, setValue } = useSettingsStore(
+    useShallow((s) => ({
+      getValue: s.getValue,
+      setValue: s.setValue,
+    })),
+  );
+  const currentItem = getCurrentItem();
+  const volume = (getValue('core.playback.volume') as number) ?? 1;
 
   const track = currentItem?.track;
 
@@ -27,13 +49,11 @@ export const ConnectedPlayerBar: FC = () => {
       artist: track?.artists[0]?.name ?? '',
       coverUrl: artwork?.url,
     };
-  }, [track]);
+  }, [track, t]);
 
   const seekBarInfo = useMemo(() => {
-    const safePosition = Number.isFinite(soundStore.seek) ? soundStore.seek : 0;
-    const safeDuration = Number.isFinite(soundStore.duration)
-      ? soundStore.duration
-      : 0;
+    const safePosition = Number.isFinite(seek) ? seek : 0;
+    const safeDuration = Number.isFinite(duration) ? duration : 0;
     const progress = safeDuration > 0 ? (safePosition / safeDuration) * 100 : 0;
     const remaining = safeDuration - safePosition;
 
@@ -43,35 +63,35 @@ export const ConnectedPlayerBar: FC = () => {
       remainingSeconds: remaining,
       isLoading: currentItem?.status === 'loading',
     };
-  }, [soundStore.seek, soundStore.duration, currentItem?.status]);
+  }, [seek, duration, currentItem?.status]);
 
   const handleSeek = useCallback(
     (percent: number) => {
-      if (soundStore.duration > 0) {
-        const seekTime = (percent / 100) * soundStore.duration;
-        soundStore.seekTo(seekTime);
+      if (duration > 0) {
+        const seekTime = (percent / 100) * duration;
+        seekTo(seekTime);
       }
     },
-    [soundStore.duration, soundStore.seekTo],
+    [duration, seekTo],
   );
 
   const handleVolumeChange = useCallback(
     (value: number) => {
-      settingsStore.setValue('core.playback.volume', value / 100);
+      setValue('core.playback.volume', value / 100);
     },
-    [settingsStore.setValue],
+    [setValue],
   );
 
   const handleToggleShuffle = useCallback(() => {
-    settingsStore.setValue('core.playback.shuffle', !queueStore.shuffleEnabled);
-  }, [queueStore.shuffleEnabled, settingsStore.setValue]);
+    setValue('core.playback.shuffle', !shuffleEnabled);
+  }, [shuffleEnabled, setValue]);
 
   const handleToggleRepeat = useCallback(() => {
     const modes: Array<'off' | 'all' | 'one'> = ['off', 'all', 'one'];
-    const currentIndex = modes.indexOf(queueStore.repeatMode);
+    const currentIndex = modes.indexOf(repeatMode);
     const nextIndex = (currentIndex + 1) % modes.length;
-    settingsStore.setValue('core.playback.repeat', modes[nextIndex]);
-  }, [queueStore.repeatMode, settingsStore.setValue]);
+    setValue('core.playback.repeat', modes[nextIndex]);
+  }, [repeatMode, setValue]);
 
   return (
     <>
@@ -92,12 +112,12 @@ export const ConnectedPlayerBar: FC = () => {
         }
         center={
           <PlayerBar.Controls
-            isPlaying={soundStore.status === 'playing'}
-            isShuffleActive={queueStore.shuffleEnabled}
-            isRepeatActive={queueStore.repeatMode !== 'off'}
-            onPlayPause={soundStore.toggle}
-            onNext={queueStore.goToNext}
-            onPrevious={queueStore.goToPrevious}
+            isPlaying={status === 'playing'}
+            isShuffleActive={shuffleEnabled}
+            isRepeatActive={repeatMode !== 'off'}
+            onPlayPause={toggle}
+            onNext={goToNext}
+            onPrevious={goToPrevious}
             onShuffleToggle={handleToggleShuffle}
             onRepeatToggle={handleToggleRepeat}
           />

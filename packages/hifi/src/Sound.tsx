@@ -84,6 +84,7 @@ export const Sound: React.FC<SoundProps> = ({
       return;
     }
     const audio = current.ref.current;
+    const inactiveAudio = next.ref.current;
     if (!audio) {
       return;
     }
@@ -95,15 +96,20 @@ export const Sound: React.FC<SoundProps> = ({
       }
       case 'paused': {
         audio.pause();
+        inactiveAudio?.pause();
         break;
       }
       case 'stopped': {
         audio.pause();
         audio.currentTime = 0;
+        inactiveAudio?.pause();
+        if (inactiveAudio) {
+          inactiveAudio.currentTime = 0;
+        }
         break;
       }
     }
-  }, [status, isReady, activeIndex, context]);
+  }, [status, isReady, activeIndex, context, next.ref]);
 
   const lastSeekRef = useRef<number | undefined>(undefined);
   useEffect(() => {
