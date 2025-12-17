@@ -3,10 +3,10 @@ import {
   cloneElement,
   isValidElement,
   useCallback,
-  useEffect,
   useRef,
 } from 'react';
 
+import { useAudioLoader } from './hooks/useAudioLoader';
 import { useAudioSeek } from './hooks/useAudioSeek';
 import { usePlaybackStatus } from './hooks/usePlaybackStatus';
 import { AudioSource, SoundProps } from './types';
@@ -28,25 +28,10 @@ export const Sound: React.FC<SoundProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const dummyRef = useRef<HTMLAudioElement | null>(null);
   const { context, sourceA, isReady } = useAudioGraph(audioRef, dummyRef);
-  const prevSrc = useRef<AudioSource | null>(null);
 
   usePlaybackStatus(audioRef, status, context, isReady);
   useAudioSeek(audioRef, seek, isReady);
-
-  useEffect(() => {
-    if (!isReady) {
-      return;
-    }
-    const audio = audioRef.current;
-    if (!audio) {
-      return;
-    }
-
-    if (src !== prevSrc.current) {
-      audio.load();
-      prevSrc.current = src;
-    }
-  }, [src, isReady]);
+  useAudioLoader(audioRef, src, isReady);
 
   const handleTimeUpdate = useCallback(
     (e: React.SyntheticEvent<HTMLAudioElement>) => {
