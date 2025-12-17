@@ -1,4 +1,5 @@
 export { Sound } from './Sound';
+export { CrossfadeSound } from './CrossfadeSound';
 export { pluginFactory } from './pluginFactory';
 export { Oscilloscope } from './Oscilloscope';
 export { Volume } from './plugins/Volume';

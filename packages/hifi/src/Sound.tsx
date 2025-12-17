@@ -2,43 +2,19 @@ import {
   Children,
   cloneElement,
   isValidElement,
-  ReactNode,
-  ScriptHTMLAttributes,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
-  useState,
 } from 'react';
 
+import { usePlaybackStatus } from './hooks/usePlaybackStatus';
+import { AudioSource, SoundProps } from './types';
 import { useAudioGraph } from './useAudioGraph';
-
-type AudioSource = string | Array<{ src: string; type?: string }>;
-
-export type SoundStatus = 'playing' | 'paused' | 'stopped';
-
-export type SoundProps = {
-  src: AudioSource;
-  status: SoundStatus;
-  seek?: number;
-  crossfadeMs?: number;
-  preload?: HTMLAudioElement['preload'];
-  crossOrigin?: ScriptHTMLAttributes<HTMLAudioElement>['crossOrigin'];
-  onTimeUpdate?: (args: { position: number; duration: number }) => void;
-  onEnd?: () => void;
-  onLoadStart?: () => void;
-  onCanPlay?: () => void;
-  onError?: (error: Error) => void;
-  children?: ReactNode;
-};
-
-const DEFAULT_CROSSFADE_MS = 0;
 
 export const Sound: React.FC<SoundProps> = ({
   src,
   status,
   seek,
-  crossfadeMs = DEFAULT_CROSSFADE_MS,
   preload = 'auto',
   crossOrigin = '',
   onTimeUpdate,
@@ -48,75 +24,34 @@ export const Sound: React.FC<SoundProps> = ({
   onError,
   children,
 }) => {
-  const audioRefA = useRef<HTMLAudioElement | null>(null);
-  const audioRefB = useRef<HTMLAudioElement | null>(null);
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-  const { context, sourceA, sourceB, gainA, gainB, isReady } = useAudioGraph(
-    audioRefA,
-    audioRefB,
-  );
-  const prevSrc = useRef<AudioSource>(src);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const dummyRef = useRef<HTMLAudioElement | null>(null);
+  const { context, sourceA, isReady } = useAudioGraph(audioRef, dummyRef);
+  const prevSrc = useRef<AudioSource | null>(null);
 
-  const adapters = useMemo(
-    () =>
-      [
-        {
-          id: 0,
-          ref: audioRefA,
-          source: sourceA,
-          gain: gainA,
-        },
-        {
-          id: 1,
-          ref: audioRefB,
-          source: sourceB,
-          gain: gainB,
-        },
-      ] as const,
-    [sourceA, sourceB, gainA, gainB],
-  );
-
-  const current = adapters[activeIndex];
-  const next = adapters[1 - activeIndex];
+  usePlaybackStatus(audioRef, status, context, isReady);
 
   useEffect(() => {
     if (!isReady) {
       return;
     }
-    const audio = current.ref.current;
-    const inactiveAudio = next.ref.current;
+    const audio = audioRef.current;
     if (!audio) {
       return;
     }
-    switch (status) {
-      case 'playing': {
-        context?.resume();
-        audio.play();
-        break;
-      }
-      case 'paused': {
-        audio.pause();
-        inactiveAudio?.pause();
-        break;
-      }
-      case 'stopped': {
-        audio.pause();
-        audio.currentTime = 0;
-        inactiveAudio?.pause();
-        if (inactiveAudio) {
-          inactiveAudio.currentTime = 0;
-        }
-        break;
-      }
+
+    if (src !== prevSrc.current) {
+      audio.load();
+      prevSrc.current = src;
     }
-  }, [status, isReady, activeIndex, context, next.ref]);
+  }, [src, isReady]);
 
   const lastSeekRef = useRef<number | undefined>(undefined);
   useEffect(() => {
     if (!isReady) {
       return;
     }
-    const audio = current.ref.current;
+    const audio = audioRef.current;
     if (!audio || seek == null) {
       return;
     }
@@ -128,55 +63,7 @@ export const Sound: React.FC<SoundProps> = ({
       audio.currentTime = seek;
     }
     lastSeekRef.current = seek;
-  }, [seek, isReady, activeIndex]);
-
-  useEffect(() => {
-    if (!isReady) {
-      return;
-    }
-    if (src === prevSrc.current) {
-      return;
-    }
-    const nextIndex = 1 - activeIndex;
-    if (crossfadeMs === 0) {
-      setActiveIndex(nextIndex);
-      prevSrc.current = src;
-      return;
-    }
-    const currentGain = current.gain;
-    const nextGain = next.gain;
-    const currentAudio = current.ref.current;
-    const nextAudio = next.ref.current;
-    if (!currentGain || !nextGain || !nextAudio || !context) {
-      return;
-    }
-    nextGain.gain.setValueAtTime(0, context.currentTime);
-    nextAudio.load();
-    nextAudio.play();
-    nextGain.gain.linearRampToValueAtTime(
-      1,
-      context.currentTime + crossfadeMs / 1000,
-    );
-    currentGain.gain.linearRampToValueAtTime(
-      0,
-      context.currentTime + crossfadeMs / 1000,
-    );
-    setTimeout(() => {
-      setActiveIndex(nextIndex);
-      if (currentAudio) {
-        currentAudio.pause();
-      }
-      prevSrc.current = src;
-    }, crossfadeMs);
-  }, [
-    src,
-    crossfadeMs,
-    isReady,
-    activeIndex,
-    current.gain,
-    next.gain,
-    context,
-  ]);
+  }, [seek, isReady]);
 
   const handleTimeUpdate = useCallback(
     (e: React.SyntheticEvent<HTMLAudioElement>) => {
@@ -209,23 +96,19 @@ export const Sound: React.FC<SoundProps> = ({
 
   return (
     <>
-      {[adapters[0], adapters[1]].map((adapter) => (
-        <audio
-          key={adapter.id}
-          ref={adapter.ref}
-          hidden
-          preload={preload}
-          crossOrigin={crossOrigin}
-          data-is-active={activeIndex === adapter.id}
-          onTimeUpdate={handleTimeUpdate}
-          onEnded={onEnd}
-          onLoadStart={onLoadStart}
-          onCanPlay={onCanPlay}
-          onError={handleError}
-        >
-          {renderSources(activeIndex === adapter.id ? prevSrc.current : src)}
-        </audio>
-      ))}
+      <audio
+        ref={audioRef}
+        hidden
+        preload={preload}
+        crossOrigin={crossOrigin}
+        onTimeUpdate={handleTimeUpdate}
+        onEnded={onEnd}
+        onLoadStart={onLoadStart}
+        onCanPlay={onCanPlay}
+        onError={handleError}
+      >
+        {renderSources(src)}
+      </audio>
       {isReady &&
         context &&
         children &&
@@ -235,8 +118,7 @@ export const Sound: React.FC<SoundProps> = ({
                 child as React.ReactElement<Record<string, unknown>>,
                 {
                   audioContext: context,
-                  previousNode:
-                    idx === 0 ? (current.source ?? undefined) : undefined,
+                  previousNode: idx === 0 ? (sourceA ?? undefined) : undefined,
                 },
               )
             : child,
