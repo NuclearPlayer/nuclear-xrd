@@ -6,7 +6,7 @@ import { useTranslation } from '@nuclearplayer/i18n';
 import type { QueueItem, StreamCandidate, Track } from '@nuclearplayer/model';
 
 import { streamingHost } from '../services/streamingHost';
-import { useQueueStore } from '../stores/queue/queue.store';
+import { useQueueStore } from '../stores/queueStore';
 import { useSoundStore } from '../stores/soundStore';
 
 // Encode the URL in base64 and use our custom protocol to bypass CORS

@@ -5,7 +5,7 @@ import { create } from 'zustand';
 
 import type { Queue, QueueItem, RepeatMode, Track } from '@nuclearplayer/model';
 
-import { useSoundStore } from '../soundStore';
+import { useSoundStore } from './soundStore';
 
 const QUEUE_FILE = 'queue.json';
 const store = new LazyStore(QUEUE_FILE);

@@ -1,7 +1,7 @@
 import { waitFor } from '@testing-library/react';
 
 import { providersHost } from '../services/providersHost';
-import { useQueueStore } from '../stores/queue/queue.store';
+import { useQueueStore } from '../stores/queueStore';
 import { useSettingsStore } from '../stores/settingsStore';
 import { useSoundStore } from '../stores/soundStore';
 import { MetadataProviderBuilder } from '../test/builders/MetadataProviderBuilder';

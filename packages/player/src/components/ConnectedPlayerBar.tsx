@@ -6,7 +6,7 @@ import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
 import { PlayerBar } from '@nuclearplayer/ui';
 
-import { useQueueStore } from '../stores/queue/queue.store';
+import { useQueueStore } from '../stores/queueStore';
 import { useSettingsStore } from '../stores/settingsStore';
 import { useSoundStore } from '../stores/soundStore';
 

@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 import { Sound, Volume } from '@nuclearplayer/hifi';
 
 import { useStreamResolution } from '../hooks/useStreamResolution';
-import { useQueueStore } from '../stores/queue/queue.store';
+import { useQueueStore } from '../stores/queueStore';
 import { useSettingsStore } from '../stores/settingsStore';
 import { useSoundStore } from '../stores/soundStore';
 
