@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 
+import { AudioSource } from '@nuclearplayer/hifi';
 import type { TFunction } from '@nuclearplayer/i18n';
 import { useTranslation } from '@nuclearplayer/i18n';
 import type { QueueItem, StreamCandidate, Track } from '@nuclearplayer/model';
@@ -7,8 +8,6 @@ import type { QueueItem, StreamCandidate, Track } from '@nuclearplayer/model';
 import { streamingHost } from '../services/streamingHost';
 import { useQueueStore } from '../stores/queue/queue.store';
 import { useSoundStore } from '../stores/soundStore';
-
-type AudioSource = string | { src: string; type?: string }[];
 
 // Encode the URL in base64 and use our custom protocol to bypass CORS
 // Check packages/player/src-tauri/src/stream_proxy.rs to see how this works
@@ -26,11 +25,7 @@ const buildAudioSource = (candidate: StreamCandidate): AudioSource => {
     return candidate.id;
   }
 
-  const proxiedUrl = proxyStreamUrl(stream.url);
-
-  return stream.mimeType
-    ? [{ src: proxiedUrl, type: stream.mimeType }]
-    : proxiedUrl;
+  return proxyStreamUrl(stream.url);
 };
 
 const setItemError = (itemId: string, errorKey: string, t: TFunction): void => {

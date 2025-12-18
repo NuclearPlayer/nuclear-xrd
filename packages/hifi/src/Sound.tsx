@@ -1,11 +1,12 @@
 import { Children, cloneElement, isValidElement, useRef } from 'react';
 
+import { useAudioContext } from './hooks/useAudioContext';
+import { useAudioElementSource } from './hooks/useAudioElementSource';
 import { useAudioEvents } from './hooks/useAudioEvents';
 import { useAudioLoader } from './hooks/useAudioLoader';
 import { useAudioSeek } from './hooks/useAudioSeek';
 import { usePlaybackStatus } from './hooks/usePlaybackStatus';
-import { AudioSource, SoundProps } from './types';
-import { useAudioGraph } from './useAudioGraph';
+import { SoundProps } from './types';
 
 export const Sound: React.FC<SoundProps> = ({
   src,
@@ -16,13 +17,13 @@ export const Sound: React.FC<SoundProps> = ({
   onTimeUpdate,
   onEnd,
   onLoadStart,
-  onCanPlay,
   onError,
   children,
 }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const dummyRef = useRef<HTMLAudioElement | null>(null);
-  const { context, sourceA, isReady } = useAudioGraph(audioRef, dummyRef);
+  const context = useAudioContext();
+  const { source, gain } = useAudioElementSource(audioRef, context);
+  const isReady = !!source && !!gain;
 
   usePlaybackStatus(audioRef, status, context, isReady);
   useAudioSeek(audioRef, seek, isReady);
@@ -32,13 +33,6 @@ export const Sound: React.FC<SoundProps> = ({
     onTimeUpdate,
     onError,
   });
-
-  const renderSources = (src: AudioSource) => {
-    if (typeof src === 'string') {
-      return <source src={src} />;
-    }
-    return src.map((s, i) => <source key={i} src={s.src} type={s.type} />);
-  };
 
   return (
     <>
@@ -50,10 +44,9 @@ export const Sound: React.FC<SoundProps> = ({
         onTimeUpdate={handleTimeUpdate}
         onEnded={onEnd}
         onLoadStart={onLoadStart}
-        onCanPlay={onCanPlay}
         onError={handleError}
       >
-        {renderSources(src)}
+        <source src={src} />
       </audio>
       {isReady &&
         context &&
@@ -64,7 +57,7 @@ export const Sound: React.FC<SoundProps> = ({
                 child as React.ReactElement<Record<string, unknown>>,
                 {
                   audioContext: context,
-                  previousNode: idx === 0 ? (sourceA ?? undefined) : undefined,
+                  previousNode: idx === 0 ? (source ?? undefined) : undefined,
                 },
               )
             : child,

@@ -9,8 +9,9 @@ import {
   useState,
 } from 'react';
 
+import { useAudioContext } from './hooks/useAudioContext';
+import { useAudioElementSource } from './hooks/useAudioElementSource';
 import { AudioSource, SoundProps } from './types';
-import { useAudioGraph } from './useAudioGraph';
 
 const DEFAULT_CROSSFADE_MS = 0;
 
@@ -28,17 +29,24 @@ export const CrossfadeSound: React.FC<
   onTimeUpdate,
   onEnd,
   onLoadStart,
-  onCanPlay,
   onError,
   children,
 }) => {
   const audioRefA = useRef<HTMLAudioElement | null>(null);
   const audioRefB = useRef<HTMLAudioElement | null>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const { context, sourceA, sourceB, gainA, gainB, isReady } = useAudioGraph(
+
+  const context = useAudioContext();
+  const { source: sourceA, gain: gainA } = useAudioElementSource(
     audioRefA,
-    audioRefB,
+    context,
   );
+  const { source: sourceB, gain: gainB } = useAudioElementSource(
+    audioRefB,
+    context,
+  );
+  const isReady = !!sourceA && !!gainA && !!sourceB && !!gainB;
+
   const prevSrc = useRef<AudioSource>(src);
 
   const adapters = useMemo(
@@ -184,13 +192,6 @@ export const CrossfadeSound: React.FC<
     [onError],
   );
 
-  const renderSources = (src: AudioSource) => {
-    if (typeof src === 'string') {
-      return <source src={src} />;
-    }
-    return src.map((s, i) => <source key={i} src={s.src} type={s.type} />);
-  };
-
   return (
     <>
       {[adapters[0], adapters[1]].map((adapter) => (
@@ -204,10 +205,9 @@ export const CrossfadeSound: React.FC<
           onTimeUpdate={handleTimeUpdate}
           onEnded={onEnd}
           onLoadStart={onLoadStart}
-          onCanPlay={onCanPlay}
           onError={handleError}
         >
-          {renderSources(activeIndex === adapter.id ? prevSrc.current : src)}
+          <source src={activeIndex === adapter.id ? prevSrc.current : src} />
         </audio>
       ))}
       {isReady &&

@@ -1,8 +1,6 @@
 import { create } from 'zustand';
 
-export type AudioSource = string | Array<{ src: string; type?: string }>;
-
-export type SoundStatus = 'playing' | 'paused' | 'stopped';
+import { AudioSource, SoundStatus } from '@nuclearplayer/hifi';
 
 type SoundState = {
   src: AudioSource | null;
