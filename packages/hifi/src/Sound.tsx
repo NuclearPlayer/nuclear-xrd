@@ -1,11 +1,6 @@
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  useCallback,
-  useRef,
-} from 'react';
+import { Children, cloneElement, isValidElement, useRef } from 'react';
 
+import { useAudioEvents } from './hooks/useAudioEvents';
 import { useAudioLoader } from './hooks/useAudioLoader';
 import { useAudioSeek } from './hooks/useAudioSeek';
 import { usePlaybackStatus } from './hooks/usePlaybackStatus';
@@ -33,27 +28,10 @@ export const Sound: React.FC<SoundProps> = ({
   useAudioSeek(audioRef, seek, isReady);
   useAudioLoader(audioRef, src, isReady);
 
-  const handleTimeUpdate = useCallback(
-    (e: React.SyntheticEvent<HTMLAudioElement>) => {
-      if (onTimeUpdate) {
-        const el = e.currentTarget;
-        onTimeUpdate({ position: el.currentTime, duration: el.duration });
-      }
-    },
-    [onTimeUpdate],
-  );
-
-  const handleError = useCallback(
-    (e: React.SyntheticEvent<HTMLAudioElement>) => {
-      if (onError) {
-        const el = e.currentTarget as HTMLAudioElement & {
-          error: MediaError | null;
-        };
-        onError(new Error(el.error?.message || 'Unknown audio error'));
-      }
-    },
-    [onError],
-  );
+  const { handleTimeUpdate, handleError } = useAudioEvents({
+    onTimeUpdate,
+    onError,
+  });
 
   const renderSources = (src: AudioSource) => {
     if (typeof src === 'string') {
