@@ -8,7 +8,7 @@ import {
 import userEvent from '@testing-library/user-event';
 
 import App from '../App';
-import { useQueueStore } from '../stores/queue/queue.store';
+import { useQueueStore } from '../stores/queueStore';
 import { useSoundStore } from '../stores/soundStore';
 
 export const StreamResolutionWrapper = {

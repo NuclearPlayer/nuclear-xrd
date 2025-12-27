@@ -30,28 +30,30 @@ export const PlayerBarSeekBar: FC<PlayerSeekBarProps> = ({
   });
 
   return (
-    <div className={cn('w-full px-4 select-none', className)}>
-      <div className="mb-1 flex items-center justify-between text-xs leading-none">
-        <span className="text-foreground-secondary tabular-nums">
-          {formatTimeSeconds(elapsedSeconds)}
-        </span>
-        <span className="text-foreground-secondary tabular-nums">
-          {formatTimeSeconds(-Math.abs(remainingSeconds))}
-        </span>
-      </div>
+    <div className={cn('w-full select-none', className)}>
       <div
         ref={containerRef}
-        className={cn('relative h-2 w-full', {
+        className={cn('relative h-4 w-full', {
           'pointer-events-none cursor-not-allowed': isLoading,
           'cursor-pointer': isInteractive,
         })}
         onClick={handleClick}
         aria-disabled={isLoading}
       >
+        <div className="absolute right-0 left-0 z-10 flex h-full flex-row items-center justify-between px-2 pt-0.5 text-xs leading-none">
+          <span className="text-foreground-secondary tabular-nums">
+            {formatTimeSeconds(elapsedSeconds)}
+          </span>
+          <span className="text-foreground-secondary tabular-nums">
+            {formatTimeSeconds(-Math.abs(remainingSeconds))}
+          </span>
+        </div>
         <div
           className={cn(
-            'border-border bg-background-secondary shadow-shadow absolute inset-0 border',
-            { 'overflow-hidden': isLoading },
+            'border-border bg-background-secondary absolute inset-0 border-t-2',
+            {
+              'overflow-hidden': isLoading,
+            },
           )}
         >
           {isLoading && (

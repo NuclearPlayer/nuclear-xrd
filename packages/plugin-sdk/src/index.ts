@@ -1,4 +1,17 @@
 export { NuclearPluginAPI, NuclearAPI } from './api';
+export { HttpAPI } from './api/http';
+export { YtdlpAPI } from './api/ytdlp';
+export type {
+  FetchFunction,
+  HttpHost,
+  HttpRequestInit,
+  HttpResponseData,
+} from './types/http';
+export type {
+  YtdlpHost,
+  YtdlpSearchResult,
+  YtdlpStreamInfo,
+} from './types/ytdlp';
 export * from './types';
 export * from './types/settings';
 export * from './types/search';

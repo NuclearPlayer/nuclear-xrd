@@ -1,0 +1,71 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useQueueStore > addToQueue > appends tracks to the end 1`] = `
+[
+  {
+    "addedAtIso": "2025-02-01T00:00:00.000Z",
+    "id": "mock-uuid-0",
+    "status": "idle",
+    "track": {
+      "artists": [
+        {
+          "name": "Test Artist",
+          "roles": [
+            "primary",
+          ],
+        },
+      ],
+      "source": {
+        "id": "track 1",
+        "provider": "test",
+      },
+      "title": "Track 1",
+    },
+  },
+  {
+    "addedAtIso": "2025-02-01T00:00:00.000Z",
+    "id": "mock-uuid-1",
+    "status": "idle",
+    "track": {
+      "artists": [
+        {
+          "name": "Test Artist",
+          "roles": [
+            "primary",
+          ],
+        },
+      ],
+      "source": {
+        "id": "track 2",
+        "provider": "test",
+      },
+      "title": "Track 2",
+    },
+  },
+]
+`;
+
+exports[`useQueueStore > addToQueue > creates items with default status and metadata 1`] = `
+[
+  {
+    "addedAtIso": "2025-02-01T00:00:00.000Z",
+    "id": "mock-uuid-2",
+    "status": "idle",
+    "track": {
+      "artists": [
+        {
+          "name": "Test Artist",
+          "roles": [
+            "primary",
+          ],
+        },
+      ],
+      "source": {
+        "id": "test",
+        "provider": "test",
+      },
+      "title": "Test",
+    },
+  },
+]
+`;

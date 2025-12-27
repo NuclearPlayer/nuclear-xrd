@@ -1,3 +1,5 @@
+import * as Logger from '@tauri-apps/plugin-log';
+
 import type { StreamCandidate, Track } from '@nuclearplayer/model';
 import type {
   StreamingHost,
@@ -5,6 +7,7 @@ import type {
 } from '@nuclearplayer/plugin-sdk';
 
 import { useSettingsStore } from '../stores/settingsStore';
+import { resolveErrorMessage } from '../utils/logging';
 import { providersHost } from './providersHost';
 
 const getActiveStreamingProvider = (): StreamingProvider | undefined => {
@@ -51,6 +54,7 @@ export const createStreamingHost = (): StreamingHost => ({
     const provider = getActiveStreamingProvider();
 
     if (!provider) {
+      Logger.warn('[StreamingHost] No streaming provider available');
       return {
         success: false,
         error: 'No streaming provider available',
@@ -72,6 +76,9 @@ export const createStreamingHost = (): StreamingHost => ({
         candidates,
       };
     } catch (error) {
+      Logger.error(
+        `[StreamingHost] resolveCandidatesForTrack error: ${resolveErrorMessage(error)}`,
+      );
       const message = error instanceof Error ? error.message : 'Unknown error';
       return {
         success: false,
@@ -84,10 +91,12 @@ export const createStreamingHost = (): StreamingHost => ({
     const provider = getActiveStreamingProvider();
 
     if (!provider) {
+      Logger.warn('[StreamingHost] No provider for stream resolution');
       return undefined;
     }
 
     if (candidate.failed) {
+      Logger.warn('[StreamingHost] Candidate already marked as failed');
       return candidate;
     }
 
@@ -95,9 +104,10 @@ export const createStreamingHost = (): StreamingHost => ({
       return candidate;
     }
 
-    const retries = useSettingsStore
-      .getState()
-      .getValue('playback.streamResolutionRetries') as number;
+    const retries =
+      (useSettingsStore
+        .getState()
+        .getValue('playback.streamResolutionRetries') as number) ?? 3;
 
     try {
       const stream = await withRetry(
@@ -111,7 +121,10 @@ export const createStreamingHost = (): StreamingHost => ({
         lastResolvedAtIso: new Date().toISOString(),
         failed: false,
       };
-    } catch {
+    } catch (error) {
+      Logger.error(
+        `[StreamingHost] getStreamUrl failed: ${resolveErrorMessage(error)}`,
+      );
       return {
         ...candidate,
         failed: true,

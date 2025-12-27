@@ -3,28 +3,28 @@
 exports[`PlayerBarSeekBar > (Snapshot) default render 1`] = `
 <DocumentFragment>
   <div
-    class="w-full px-4 select-none"
+    class="w-full select-none"
   >
     <div
-      class="mb-1 flex items-center justify-between text-xs leading-none"
-    >
-      <span
-        class="text-foreground-secondary tabular-nums"
-      >
-        1:37
-      </span>
-      <span
-        class="text-foreground-secondary tabular-nums"
-      >
-        -21:37
-      </span>
-    </div>
-    <div
       aria-disabled="false"
-      class="relative h-2 w-full"
+      class="relative h-4 w-full"
     >
       <div
-        class="border-border bg-background-secondary shadow-shadow absolute inset-0 border"
+        class="absolute right-0 left-0 z-10 flex h-full flex-row items-center justify-between px-2 pt-0.5 text-xs leading-none"
+      >
+        <span
+          class="text-foreground-secondary tabular-nums"
+        >
+          1:37
+        </span>
+        <span
+          class="text-foreground-secondary tabular-nums"
+        >
+          -21:37
+        </span>
+      </div>
+      <div
+        class="border-border bg-background-secondary absolute inset-0 border-t-2"
       >
         <div
           class="bg-primary h-full transition-none"

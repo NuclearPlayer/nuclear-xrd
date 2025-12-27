@@ -91,7 +91,7 @@ export const QueuePanel: FC<QueuePanelProps> = ({
       data-testid="queue-panel"
       className={cn('flex h-full flex-col', classes?.root)}
     >
-      <ScrollableArea>
+      <ScrollableArea noPadding>
         <QueueReorderLayer
           enabled={reorderable}
           items={itemIds}

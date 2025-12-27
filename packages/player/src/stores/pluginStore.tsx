@@ -19,6 +19,7 @@ import {
   upsertRegistryEntry,
 } from '../services/plugins/pluginRegistry';
 import { providersHost } from '../services/providersHost';
+import { queueHost } from '../services/queueHost';
 import { createPluginSettingsHost } from '../services/settingsHost';
 import { resolveErrorMessage } from '../utils/logging';
 
@@ -174,7 +175,8 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
     if (plugin.instance!.onEnable) {
       const api = new NuclearPluginAPI({
         settingsHost: createPluginSettingsHost(id, plugin.metadata.displayName),
-        providersHost: providersHost,
+        queueHost,
+        providersHost,
       });
       await plugin.instance!.onEnable(api);
     }

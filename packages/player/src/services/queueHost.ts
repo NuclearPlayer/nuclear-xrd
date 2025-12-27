@@ -6,7 +6,7 @@ import type {
   RepeatMode,
 } from '@nuclearplayer/plugin-sdk';
 
-import { useQueueStore } from '../stores/queue/queue.store';
+import { useQueueStore } from '../stores/queueStore';
 
 export const createQueueHost = (): QueueHost => {
   return {

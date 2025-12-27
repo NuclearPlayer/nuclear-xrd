@@ -5,6 +5,8 @@ import { create } from 'zustand';
 
 import type { Queue, QueueItem, RepeatMode, Track } from '@nuclearplayer/model';
 
+import { useSoundStore } from './soundStore';
+
 const QUEUE_FILE = 'queue.json';
 const store = new LazyStore(QUEUE_FILE);
 
@@ -155,6 +157,9 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
   }),
 
   removeByIds: withPersistence((ids: string[]) => {
+    const currentItem = get().getCurrentItem();
+    const currentItemRemoved = currentItem && ids.includes(currentItem.id);
+
     set(
       produce((state: QueueStore) => {
         const idsSet = new Set(ids);
@@ -173,9 +178,16 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
         }
       }),
     );
+
+    if (currentItemRemoved || get().items.length === 0) {
+      useSoundStore.getState().stop();
+    }
   }),
 
   removeByIndices: withPersistence((indices: number[]) => {
+    const currentIndex = get().currentIndex;
+    const currentIndexRemoved = indices.includes(currentIndex);
+
     set(
       produce((state: QueueStore) => {
         const indicesSet = new Set(indices);
@@ -194,10 +206,15 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
         }
       }),
     );
+
+    if (currentIndexRemoved || get().items.length === 0) {
+      useSoundStore.getState().stop();
+    }
   }),
 
   clearQueue: withPersistence(() => {
     set({ items: [], currentIndex: 0 });
+    useSoundStore.getState().stop();
   }),
 
   reorder: withPersistence((fromIndex: number, toIndex: number) => {

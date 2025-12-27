@@ -5,7 +5,7 @@
     background-image: repeating-linear-gradient(
       135deg,
       var(--primary) 0 8px,
-      transparent 8px 16px
+      var(--background) 8px 16px
     );
     animation: seekbar-stripes 1s linear infinite;
     background-size: 22.6px 22.6px;

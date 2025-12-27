@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
-import { createMockTrack } from '../../test/utils/mockTrack';
-import { initializeQueueStore, useQueueStore } from './queue.store';
+import { resetInMemoryTauriStore } from '../test/utils/inMemoryTauriStore';
+import { createMockTrack } from '../test/utils/mockTrack';
+import { initializeQueueStore, useQueueStore } from './queueStore';
 
 describe('useQueueStore', () => {
   beforeEach(() => {
