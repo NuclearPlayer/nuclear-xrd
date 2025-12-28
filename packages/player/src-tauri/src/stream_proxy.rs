@@ -127,6 +127,11 @@ pub fn handle_stream_request<R: Runtime>(
 
                 if !status.is_success() && status != StatusCode::PARTIAL_CONTENT {
                     warn!("[StreamProxy] Upstream returned: {}", status);
+                    return respond_error(
+                        responder,
+                        StatusCode::BAD_GATEWAY,
+                        format!("Upstream returned error: {}", status),
+                    );
                 }
 
                 match response.bytes().await {

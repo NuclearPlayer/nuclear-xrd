@@ -1,13 +1,13 @@
 import { cva } from 'class-variance-authority';
 
 export const queueItemVariants = cva(
-  'group relative flex items-center gap-3 overflow-hidden transition-all',
+  'group relative flex items-center gap-3 overflow-hidden ring-offset-white transition-all',
   {
     variants: {
       status: {
         idle: '',
         loading: 'opacity-70',
-        error: 'ring-accent-red ring-2 ring-inset',
+        error: 'ring-accent-red ring-2 ring-offset-2',
         success: '',
       },
       isCurrent: {
@@ -29,7 +29,7 @@ export const queueItemVariants = cva(
         status: 'error',
         isCurrent: true,
         isCollapsed: false,
-        className: 'bg-primary ring-accent-red ring-2 ring-inset',
+        className: 'bg-primary ring-accent-red ring-2 ring-offset-2',
       },
     ],
     defaultVariants: {
