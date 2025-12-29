@@ -1,0 +1,16 @@
+{
+    "name": "nuclear-youtube-streaming",
+    "version": "0.1.0",
+    "description": "YouTube streaming provider plugin for Nuclear Music Player",
+    "author": "Nuclear Team",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "nuclear": {
+        "displayName": "YouTube Streaming",
+        "category": "Streaming"
+    },
+    "scripts": {
+        "build": "esbuild src/index.ts --bundle --platform=browser --format=cjs --outfile=dist/index.js --external:@nuclearplayer/plugin-sdk"
+    },
+    "devDependencies": {}
+}

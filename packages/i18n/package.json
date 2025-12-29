@@ -1,6 +1,6 @@
 {
   "name": "@nuclearplayer/i18n",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "main": "./src/index.ts",
   "module": "./src/index.ts",

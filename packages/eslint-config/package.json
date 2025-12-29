@@ -1,6 +1,6 @@
 {
   "name": "@nuclearplayer/eslint-config",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Shared ESLint and Prettier configuration for Nuclear",
   "type": "module",
   "main": "eslint.config.ts",
