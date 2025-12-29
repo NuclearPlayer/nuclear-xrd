@@ -22,9 +22,9 @@ const FORWARD_HEADERS: &[HeaderName] = &[
     header::ACCEPT_RANGES,
 ];
 
-// User agent matching yt-dlp's Android client.
+// User agent matching yt-dlp's client.
 // Required for YouTube URLs - they validate the UA matches what generated the signed URL.
-const USER_AGENT: &str = "com.google.android.youtube/19.35.36 (Linux; U; Android 13; en_US; SM-S908E Build/TP1A.220624.014) gzip";
+const USER_AGENT: &str = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36";
 
 static HTTP_CLIENT: Lazy<Arc<Client>> = Lazy::new(|| {
     Arc::new(
