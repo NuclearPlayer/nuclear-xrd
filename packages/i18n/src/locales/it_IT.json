@@ -152,5 +152,8 @@
       "noCandidatesFound": "Failed to find stream candidates",
       "allCandidatesFailed": "All stream candidates failed"
     }
+  },
+  "playerBar": {
+    "noTrackPlaying": "No track playing"
   }
 }
