@@ -42,7 +42,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
       <div
         data-testid="queue-item-thumbnail"
         className={cn(
-          'border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border-2',
+          'border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border',
           classes?.thumbnail,
         )}
       >
@@ -80,7 +80,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
           <div
             data-testid="queue-item-error"
             className={cn(
-              'text-accent-red mt-1 flex items-center gap-1 text-xs font-semibold',
+              'bg-accent-red text-foreground border-border mt-1 inline-flex max-w-full items-center gap-1 rounded-sm border px-1 py-0.5 text-xs font-semibold',
               classes?.error,
             )}
           >

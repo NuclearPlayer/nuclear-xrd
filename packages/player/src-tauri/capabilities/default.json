@@ -64,6 +64,9 @@
       "allow": [
         {
           "path": "$APPDATA/themes/*"
+        },
+        {
+          "path": "$APPDATA/plugins/**/*"
         }
       ]
     },

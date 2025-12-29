@@ -9,7 +9,7 @@ describe('Sound component', () => {
 
     SoundWrapper.setSrc('/track.mp3');
     await waitFor(() =>
-      expect(document.querySelectorAll('audio').length).toBe(2),
+      expect(document.querySelectorAll('audio').length).toBe(1),
     );
   });
 
@@ -35,9 +35,9 @@ describe('Sound component', () => {
 
     SoundWrapper.seekTo(37);
     await waitFor(() => {
-      const activeAudio = SoundWrapper.getActiveAudio();
-      expect(activeAudio).toBeDefined();
-      expect(activeAudio?.currentTime).toBe(37);
+      const audio = SoundWrapper.getAudios()[0];
+      expect(audio).toBeDefined();
+      expect(audio?.currentTime).toBe(37);
     });
   });
 

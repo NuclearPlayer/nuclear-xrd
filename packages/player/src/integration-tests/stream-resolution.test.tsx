@@ -1,7 +1,7 @@
 import { waitFor } from '@testing-library/react';
 
 import { providersHost } from '../services/providersHost';
-import { useQueueStore } from '../stores/queue/queue.store';
+import { useQueueStore } from '../stores/queueStore';
 import { useSettingsStore } from '../stores/settingsStore';
 import { useSoundStore } from '../stores/soundStore';
 import { MetadataProviderBuilder } from '../test/builders/MetadataProviderBuilder';
@@ -70,9 +70,9 @@ describe('Stream Resolution Integration', () => {
       await StreamResolutionWrapper.waitForPlayback();
 
       const src = StreamResolutionWrapper.getSoundState().src;
-      expect(src).toEqual([
-        { src: 'https://example.com/yt-1.mp3', type: 'audio/mpeg' },
-      ]);
+      expect(src).toEqual(
+        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC0xLm1wMw',
+      );
 
       const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
       expect(currentItem?.status).toBe('success');
@@ -181,7 +181,7 @@ describe('Stream Resolution Integration', () => {
       await StreamResolutionWrapper.waitForPlayback();
 
       expect(StreamResolutionWrapper.getSoundState().src).toBe(
-        'https://example.com/yt-good.mp3',
+        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC1nb29kLm1wMw',
       );
 
       const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
@@ -222,7 +222,7 @@ describe('Stream Resolution Integration', () => {
       });
 
       expect(StreamResolutionWrapper.getSoundState().src).toBe(
-        'https://example.com/yt-Giant Steps.mp3',
+        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC1HaWFudCBTdGVwcy5tcDM',
       );
     });
   });

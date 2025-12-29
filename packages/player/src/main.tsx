@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App';
 import { registerBuiltInCoreSettings } from './services/coreSettings';
-import { initializeQueueStore } from './stores/queue/queue.store';
+import { initializeQueueStore } from './stores/queueStore';
 import { initializeSettingsStore } from './stores/settingsStore';
 
 import '@nuclearplayer/tailwind-config';

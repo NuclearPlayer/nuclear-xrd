@@ -15,7 +15,6 @@ import { useState } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import {
-  PlayerBar,
   PlayerShell,
   PlayerWorkspace,
   RouteTransition,
@@ -26,12 +25,11 @@ import {
   TopBar,
 } from '@nuclearplayer/ui';
 
+import { ConnectedPlayerBar } from '../components/ConnectedPlayerBar';
 import { ConnectedQueuePanel } from '../components/ConnectedQueuePanel';
 import { DevTools } from '../components/DevTools';
 import { SoundProvider } from '../components/SoundProvider';
 import { useLayoutStore } from '../stores/layoutStore';
-
-const cover = 'https://picsum.photos/64';
 
 const SearchBox = () => {
   const { t } = useTranslation('search');
@@ -158,17 +156,7 @@ const RootComponent = () => {
         </PlayerWorkspace>
       </SoundProvider>
 
-      <PlayerBar
-        left={
-          <PlayerBar.NowPlaying
-            title="Song Title"
-            artist="Artist Name"
-            coverUrl={cover}
-          />
-        }
-        center={<PlayerBar.Controls />}
-        right={<PlayerBar.Volume defaultValue={75} />}
-      />
+      <ConnectedPlayerBar />
       <Toaster />
       <DevTools />
     </PlayerShell>

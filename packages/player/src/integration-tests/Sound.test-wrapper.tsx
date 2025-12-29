@@ -7,7 +7,7 @@ export const SoundWrapper = {
   async mount(): Promise<RenderResult> {
     return render(<App />);
   },
-  setSrc(src: string | Array<{ src: string; type?: string }>) {
+  setSrc(src: string) {
     useSoundStore.getState().setSrc(src);
   },
   play() {

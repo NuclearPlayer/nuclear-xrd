@@ -267,7 +267,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
           class="mb-4 flex flex-row items-center justify-end"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-left"
             type="submit"
@@ -790,13 +790,13 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                       role="grid"
                     >
                       <button
-                        class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                        class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                         data-headlessui-state=""
                         data-testid="card"
                         type="submit"
                       >
                         <div
-                          class="border-border text-foreground flex h-full rounded-md border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                          class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
                         >
                           <div
                             class="overflow-hidden absolute inset-0"
@@ -883,7 +883,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
           class="mb-4 flex flex-row items-center justify-start"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-right"
             type="submit"
@@ -971,6 +971,37 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
         />
       </div>
     </div>
+    <div
+      class="w-full select-none"
+    >
+      <div
+        aria-disabled="false"
+        class="relative h-4 w-full cursor-pointer"
+      >
+        <div
+          class="absolute right-0 left-0 z-10 flex h-full flex-row items-center justify-between px-2 pt-0.5 text-xs leading-none"
+        >
+          <span
+            class="text-foreground-secondary tabular-nums"
+          >
+            0:00
+          </span>
+          <span
+            class="text-foreground-secondary tabular-nums"
+          >
+            0:00
+          </span>
+        </div>
+        <div
+          class="border-border bg-background-secondary absolute inset-0 border-t-2"
+        >
+          <div
+            class="bg-primary h-full transition-none"
+            style="width: 0%;"
+          />
+        </div>
+      </div>
+    </div>
     <footer
       class="bg-background-secondary border-border flex h-16 items-center border-t-2 px-4"
     >
@@ -986,11 +1017,32 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             <div
               class="border-border bg-background-secondary size-12 shrink-0 overflow-hidden rounded-md border-2"
             >
-              <img
-                alt=""
-                class="size-full object-cover select-none"
-                src="https://picsum.photos/64"
-              />
+              <div
+                class="text-foreground-secondary flex size-full items-center justify-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="lucide lucide-music2 lucide-music-2"
+                  fill="none"
+                  height="20"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="8"
+                    cy="18"
+                    r="4"
+                  />
+                  <path
+                    d="M12 18V2l7 4"
+                  />
+                </svg>
+              </div>
             </div>
             <div
               class="min-w-0"
@@ -998,13 +1050,11 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
               <div
                 class="text-foreground truncate text-sm font-bold"
               >
-                Song Title
+                No track playing
               </div>
               <div
                 class="text-foreground-secondary truncate text-xs"
-              >
-                Artist Name
-              </div>
+              />
             </div>
           </div>
         </div>
@@ -1076,7 +1126,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
               data-headlessui-state=""
               type="submit"
             >
@@ -1210,11 +1260,11 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                     >
                       <div
                         class="bg-primary absolute top-0 left-0 h-full rounded-l"
-                        style="width: 75%;"
+                        style="width: 100%;"
                       />
                       <div
                         class="border-border absolute top-1/2 -ml-2 h-5 w-5 -translate-y-1/2 rounded-full border-2 bg-white"
-                        style="left: 75%;"
+                        style="left: 100%;"
                       />
                     </div>
                   </div>
@@ -1222,15 +1272,15 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                     aria-labelledby=":r1:-label"
                     aria-valuemax="100"
                     aria-valuemin="0"
-                    aria-valuenow="75"
-                    aria-valuetext="75"
+                    aria-valuenow="100"
+                    aria-valuetext="100"
                     class="absolute inset-0 z-[1] h-6 w-full appearance-none opacity-0 cursor-pointer"
                     id=":r1:"
                     max="100"
                     min="0"
                     step="1"
                     type="range"
-                    value="75"
+                    value="100"
                   />
                 </div>
               </div>
