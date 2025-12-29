@@ -70,12 +70,9 @@ describe('Stream Resolution Integration', () => {
       await StreamResolutionWrapper.waitForPlayback();
 
       const src = StreamResolutionWrapper.getSoundState().src;
-      expect(src).toEqual([
-        {
-          src: 'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC0xLm1wMw',
-          type: 'audio/mpeg',
-        },
-      ]);
+      expect(src).toEqual(
+        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC0xLm1wMw',
+      );
 
       const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
       expect(currentItem?.status).toBe('success');
