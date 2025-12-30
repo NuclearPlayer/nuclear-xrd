@@ -90,7 +90,7 @@ describe('useUpdaterStore', () => {
     });
 
     it('clears error on successful check', async () => {
-      useUpdaterStore.setState({ error: new Error('Previous error') });
+      useUpdaterStore.setState({ error: 'Previous error' });
 
       vi.mocked(check).mockResolvedValue(null);
 
