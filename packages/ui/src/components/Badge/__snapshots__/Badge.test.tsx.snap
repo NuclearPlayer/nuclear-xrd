@@ -1,0 +1,89 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Badge > (Snapshot) renders all variants 1`] = `
+<div>
+  <div
+    class="flex flex-col gap-4"
+  >
+    <div
+      class="flex gap-2"
+    >
+      <span
+        class="border-border inline-flex items-center justify-center border-2 size-2.5 rounded-full bg-accent-green"
+      />
+      <span
+        class="border-border inline-flex items-center justify-center border-2 size-2.5 rounded-full bg-accent-cyan"
+      />
+      <span
+        class="border-border inline-flex items-center justify-center border-2 size-2.5 rounded-full bg-accent-orange"
+      />
+      <span
+        class="border-border inline-flex items-center justify-center border-2 size-2.5 rounded-full bg-accent-red"
+      />
+      <span
+        class="border-border inline-flex items-center justify-center border-2 size-2.5 rounded-full bg-accent-yellow"
+      />
+    </div>
+    <div
+      class="flex gap-2"
+    >
+      <span
+        class="border-border inline-flex items-center justify-center border-2 size-2.5 rounded-full animate-pulse bg-accent-green"
+      />
+      <span
+        class="border-border inline-flex items-center justify-center border-2 size-2.5 rounded-full animate-pulse bg-accent-cyan"
+      />
+    </div>
+    <div
+      class="flex gap-2"
+    >
+      <span
+        class="border-border inline-flex items-center justify-center border-2 rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-green text-foreground"
+      >
+        NEW
+      </span>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-cyan text-foreground"
+      >
+        Update
+      </span>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-orange text-foreground"
+      >
+        Beta
+      </span>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-red text-foreground"
+      >
+        Error
+      </span>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-yellow text-foreground"
+      >
+        Warning
+      </span>
+    </div>
+    <div
+      class="flex gap-2"
+    >
+      <span
+        class="border-border inline-flex items-center justify-center border-2 rounded-full px-2 py-0.5 text-xs font-semibold animate-pulse bg-accent-green text-foreground"
+      >
+        Live
+      </span>
+    </div>
+    <div
+      class="flex gap-2"
+    >
+      <span
+        class="border-border inline-flex items-center justify-center border-2 size-2.5 rounded-full bg-accent-green"
+      />
+      <span
+        class="border-border inline-flex items-center justify-center border-2 rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-cyan text-foreground custom-class"
+      >
+        Custom
+      </span>
+    </div>
+  </div>
+</div>
+`;
