@@ -1,3 +1,4 @@
+export * from './Badge';
 export * from './BottomBar';
 export * from './Box';
 export * from './Button';
