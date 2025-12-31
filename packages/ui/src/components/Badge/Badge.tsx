@@ -4,7 +4,7 @@ import { ComponentProps, FC, ReactNode } from 'react';
 import { cn } from '../../utils';
 
 const badgeVariants = cva(
-  'border-border inline-flex items-center justify-center border-2',
+  'border-border inline-flex items-center justify-center border-2 whitespace-nowrap',
   {
     variants: {
       variant: {
