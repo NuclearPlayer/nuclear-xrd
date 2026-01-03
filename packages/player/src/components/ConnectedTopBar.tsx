@@ -13,13 +13,8 @@ export const ConnectedTopBar: FC = () => {
       <div className="flex flex-row items-center gap-4">
         <TopBarLogo />
         {isUpdateAvailable && (
-          <Badge variant="pill" color="green" animated className="ml-2">
+          <Badge variant="pill" color="green" className="ml-2">
             Update available
-          </Badge>
-        )}
-        {!isUpdateAvailable && (
-          <Badge variant="pill" color="red" className="ml-2">
-            Up to date
           </Badge>
         )}
       </div>

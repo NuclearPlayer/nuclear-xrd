@@ -44,7 +44,7 @@ export const ConnectedQueuePanel: FC<ConnectedQueuePanelProps> = ({
         emptyTitle: t('empty.title'),
         emptySubtitle: t('empty.subtitle'),
         removeButton: t('actions.remove'),
-        errorPrefix: t('error.prefix'),
+        playbackError: t('errors.playback'),
       }}
     />
   );
