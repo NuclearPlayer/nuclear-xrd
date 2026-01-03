@@ -10,13 +10,17 @@ import {
 import { cn } from '../../utils';
 
 const inputVariants = cva(
-  'border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none',
+  'border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none',
   {
     variants: {
       variant: {
         text: '',
         number: '',
         password: '',
+      },
+      tone: {
+        primary: 'bg-background-input',
+        secondary: 'bg-background',
       },
       size: {
         sm: 'h-9 text-sm',
@@ -34,6 +38,7 @@ const inputVariants = cva(
     },
     defaultVariants: {
       variant: 'text',
+      tone: 'primary',
       size: 'default',
       state: 'normal',
       withAddon: false,
@@ -56,6 +61,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     description,
     error,
     variant = 'text',
+    tone = 'primary',
     size,
     className,
     endAddon,
@@ -110,6 +116,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
               inputVariants({
                 variant,
                 size,
+                tone,
                 state,
                 withAddon: true,
                 className,
@@ -133,7 +140,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           aria-errormessage={error ? errorId : undefined}
           inputMode={variant === 'number' ? 'numeric' : undefined}
           invalid={!!error}
-          className={cn(inputVariants({ variant, size, state, className }))}
+          className={cn(
+            inputVariants({ variant, size, tone, state, className }),
+          )}
           {...rest}
         />
       )}

@@ -2,6 +2,7 @@ import { type VariantProps } from 'class-variance-authority';
 
 import type { Track } from '@nuclearplayer/model';
 
+import { QueuePanelProps } from '../QueuePanel/QueuePanel';
 import { queueItemVariants } from './variants';
 
 export type QueueItemProps = VariantProps<typeof queueItemVariants> & {
@@ -9,10 +10,7 @@ export type QueueItemProps = VariantProps<typeof queueItemVariants> & {
   onSelect?: () => void;
   onRemove?: () => void;
   errorMessage?: string;
-  labels?: {
-    removeButton?: string;
-    errorPrefix?: string;
-  };
+  labels: Pick<QueuePanelProps['labels'], 'removeButton' | 'playbackError'>;
   classes?: {
     root?: string;
     thumbnail?: string;

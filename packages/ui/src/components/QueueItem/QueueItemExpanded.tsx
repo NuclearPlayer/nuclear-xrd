@@ -16,7 +16,6 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
   isCurrent = false,
   onSelect,
   onRemove,
-  errorMessage,
   labels,
   classes,
 }) => {
@@ -39,10 +38,13 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
       onDoubleClick={onSelect}
       role={onSelect ? 'button' : undefined}
     >
+      {status === 'error' && (
+        <div className="bg-accent-red absolute top-0 right-0 bottom-0 left-0 w-2 border-0" />
+      )}
       <div
         data-testid="queue-item-thumbnail"
         className={cn(
-          'border-border bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm border',
+          'bg-background flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-sm',
           classes?.thumbnail,
         )}
       >
@@ -76,19 +78,16 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
         >
           {primaryArtist}
         </div>
-        {status === 'error' && errorMessage && (
+        {status === 'error' && (
           <div
             data-testid="queue-item-error"
             className={cn(
-              'bg-accent-red text-foreground border-border mt-1 inline-flex max-w-full items-center gap-1 rounded-sm border px-1 py-0.5 text-xs font-semibold',
+              'bg-accent-red text-foreground border-border mt-1 inline-flex max-w-full items-center gap-1 rounded-sm border px-1 py-0.5 text-xs',
               classes?.error,
             )}
           >
             <AlertCircle size={12} />
-            <span className="truncate">
-              {labels?.errorPrefix && `${labels.errorPrefix}: `}
-              {errorMessage}
-            </span>
+            <span className="truncate">{labels.playbackError}</span>
           </div>
         )}
       </div>
@@ -119,7 +118,7 @@ export const QueueItemExpanded: FC<QueueItemProps> = ({
             onPointerDown={(e) => e.stopPropagation()}
             aria-label={labels?.removeButton}
             className={cn(
-              'absolute right-0 opacity-0 group-hover:opacity-100',
+              'absolute right-4 opacity-0 group-hover:opacity-100',
               classes?.removeButton,
             )}
           >

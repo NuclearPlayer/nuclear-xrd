@@ -18,6 +18,7 @@ import {
 } from './services/languageService';
 import { hydratePluginsFromRegistry } from './services/plugins/pluginBootstrap';
 import { applyThemeFromSettings } from './services/themeBootstrap';
+import { useUpdaterStore } from './stores/updaterStore';
 
 initializeSettingsStore()
   .then(() => initializeQueueStore())
@@ -30,6 +31,8 @@ initializeSettingsStore()
   .then(() => {
     // Run plugin hydration in the background
     void hydratePluginsFromRegistry();
+    // Check for updates in the background
+    void useUpdaterStore.getState().checkForUpdate();
   });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
