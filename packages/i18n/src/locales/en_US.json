@@ -143,8 +143,8 @@
     "actions": {
       "remove": "Remove from queue"
     },
-    "error": {
-      "prefix": "Error:"
+    "errors": {
+      "playback": "Playback error"
     }
   },
   "streaming": {
