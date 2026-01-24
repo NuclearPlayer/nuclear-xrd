@@ -101,18 +101,32 @@
     "title": "Плагины",
     "addPlugin": "Добавить плагин"
   },
+  "updater": {
+    "updateAvailable": "Update available"
+  },
   "settings": {
     "title": "Параметры",
     "categories": {
       "general": "Общие",
       "appearance": "Внешний вид",
       "playback": "Воспроизведение",
-      "layout": "Макет"
+      "layout": "Макет",
+      "updates": "Updates"
     },
     "general": {
       "language": {
         "title": "Язык",
         "description": "Выберите предпочитаемый язык"
+      }
+    },
+    "updates": {
+      "checkForUpdates": {
+        "title": "Check for updates",
+        "description": "Automatically check for new versions on startup"
+      },
+      "autoInstall": {
+        "title": "Auto-install updates",
+        "description": "Download and install updates automatically when available"
       }
     },
     "playback": {
@@ -143,8 +157,8 @@
     "actions": {
       "remove": "Remove from queue"
     },
-    "error": {
-      "prefix": "Error:"
+    "errors": {
+      "playback": "Playback error"
     }
   },
   "streaming": {
