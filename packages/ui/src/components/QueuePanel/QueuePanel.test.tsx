@@ -39,6 +39,13 @@ const mockItems: QueueItemType[] = [
   createMockItem('3', 'Hotel California', 'Eagles', 391000, 'loading'),
 ];
 
+const mockLabels = {
+  emptyTitle: 'Your queue is empty',
+  emptySubtitle: 'Add some tracks to get started',
+  removeButton: 'Remove from queue',
+  playbackError: 'Playback error',
+};
+
 describe('QueuePanel', () => {
   it('(Snapshot) renders default state', () => {
     const { container } = render(
@@ -48,13 +55,14 @@ describe('QueuePanel', () => {
         onReorder={vi.fn()}
         onSelectItem={vi.fn()}
         onRemoveItem={vi.fn()}
+        labels={mockLabels}
       />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('(Snapshot) renders empty state', () => {
-    const { container } = render(<QueuePanel items={[]} />);
+    const { container } = render(<QueuePanel items={[]} labels={mockLabels} />);
     expect(container.firstChild).toMatchSnapshot();
   });
 
@@ -80,6 +88,7 @@ describe('QueuePanel', () => {
         onReorder={vi.fn()}
         onSelectItem={vi.fn()}
         onRemoveItem={vi.fn()}
+        labels={mockLabels}
       />,
     );
     expect(container.firstChild).toMatchSnapshot();

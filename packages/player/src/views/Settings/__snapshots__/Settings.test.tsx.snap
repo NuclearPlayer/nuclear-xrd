@@ -6,51 +6,57 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
   >
     <header
-      class="bg-background-secondary border-border flex h-12 items-center border-b-2 px-4"
+      class="bg-background-secondary border-border grid h-12 grid-cols-[1fr_4fr_1fr] items-center gap-2 border-b-2 px-4"
     >
-      <svg
-        class="inline-flex h-6 w-6"
-        height="100"
-        viewBox="0 0 100 100"
-        width="100"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="flex flex-row items-center gap-4"
       >
-        <g
-          fill="none"
-          stroke="currentColor"
-          stroke-width="8"
-          transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+        <svg
+          class="inline-flex h-6 w-6"
+          height="100"
+          viewBox="0 0 100 100"
+          width="100"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <rect
-            height="96"
-            rx="19.2"
-            ry="19.2"
-            width="96"
-            x="2"
-            y="2"
-          />
-          <path
-            d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
-          />
-        </g>
-      </svg>
-      <div>
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="8"
+            transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+          >
+            <rect
+              height="96"
+              rx="19.2"
+              ry="19.2"
+              width="96"
+              x="2"
+              y="2"
+            />
+            <path
+              d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
+            />
+          </g>
+        </svg>
+      </div>
+      <div
+        class="flex w-full flex-col gap-2"
+      >
         <input
-          class="bg-background border-border ml-4 w-80 rounded-md border-2 px-3 py-1 outline-none"
+          class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background rounded-md border-2 h-8"
+          data-headlessui-state=""
           data-testid="search-box"
+          id="input-:r0:"
           placeholder="Search"
+          type="text"
           value=""
         />
       </div>
-      <div
-        class="flex-1"
-      />
       <button
         aria-checked="false"
         aria-label="Toggle theme"
-        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group justify-self-end"
         data-headlessui-state=""
-        id="headlessui-switch-:r0:"
+        id="headlessui-switch-:r2:"
         role="switch"
         tabindex="0"
         type="button"
@@ -534,8 +540,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               >
                                 <label
                                   class="text-foreground text-sm font-semibold"
-                                  for="select-:r2:"
-                                  id="select-:r2:-label"
+                                  for="select-:r4:"
+                                  id="select-:r4:-label"
                                 >
                                   Language
                                 </label>
@@ -544,7 +550,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                                   aria-haspopup="listbox"
                                   class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded-md border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
                                   data-headlessui-state=""
-                                  id="select-:r2:"
+                                  id="select-:r4:"
                                   type="button"
                                 >
                                   <span
@@ -576,7 +582,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                                 </button>
                                 <p
                                   class="text-foreground-secondary text-sm select-none"
-                                  id="select-:r2:-description"
+                                  id="select-:r4:-description"
                                 >
                                   Select your preferred language
                                 </p>
@@ -603,49 +609,24 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                               >
                                 <label
                                   class="text-foreground text-sm font-semibold"
-                                  for="input-:r6:"
-                                  id="input-:r6:-label"
+                                  for="input-:r8:"
+                                  id="input-:r8:-label"
                                 >
                                   Skip duration
                                 </label>
                                 <input
-                                  class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
+                                  class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-md border-2"
                                   data-headlessui-state=""
-                                  id="input-:r6:"
+                                  id="input-:r8:"
                                   inputmode="numeric"
                                   type="number"
                                   value="10"
                                 />
                                 <p
                                   class="text-foreground-secondary text-sm select-none"
-                                  id="input-:r6:-description"
-                                >
-                                  Number of seconds to skip forward/backward
-                                </p>
-                              </div>
-                              <div
-                                class="flex w-full flex-col gap-2"
-                              >
-                                <label
-                                  class="text-foreground text-sm font-semibold"
-                                  for="input-:r8:"
-                                  id="input-:r8:-label"
-                                >
-                                  Crossfade
-                                </label>
-                                <input
-                                  class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
-                                  data-headlessui-state=""
-                                  id="input-:r8:"
-                                  inputmode="numeric"
-                                  type="number"
-                                  value="0"
-                                />
-                                <p
-                                  class="text-foreground-secondary text-sm select-none"
                                   id="input-:r8:-description"
                                 >
-                                  Crossfade duration between tracks in milliseconds
+                                  Number of seconds to skip forward/backward
                                 </p>
                               </div>
                               <div
@@ -656,21 +637,21 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                                   for="input-:ra:"
                                   id="input-:ra:-label"
                                 >
-                                  Stream expiry time
+                                  Crossfade
                                 </label>
                                 <input
-                                  class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
+                                  class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-md border-2"
                                   data-headlessui-state=""
                                   id="input-:ra:"
                                   inputmode="numeric"
                                   type="number"
-                                  value="3600000"
+                                  value="0"
                                 />
                                 <p
                                   class="text-foreground-secondary text-sm select-none"
                                   id="input-:ra:-description"
                                 >
-                                  How long before a resolved stream URL is considered expired and needs re-resolution
+                                  Crossfade duration between tracks in milliseconds
                                 </p>
                               </div>
                               <div
@@ -681,21 +662,128 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                                   for="input-:rc:"
                                   id="input-:rc:-label"
                                 >
+                                  Stream expiry time
+                                </label>
+                                <input
+                                  class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-md border-2"
+                                  data-headlessui-state=""
+                                  id="input-:rc:"
+                                  inputmode="numeric"
+                                  type="number"
+                                  value="3600000"
+                                />
+                                <p
+                                  class="text-foreground-secondary text-sm select-none"
+                                  id="input-:rc:-description"
+                                >
+                                  How long before a resolved stream URL is considered expired and needs re-resolution
+                                </p>
+                              </div>
+                              <div
+                                class="flex w-full flex-col gap-2"
+                              >
+                                <label
+                                  class="text-foreground text-sm font-semibold"
+                                  for="input-:re:"
+                                  id="input-:re:-label"
+                                >
                                   Stream resolution retries
                                 </label>
                                 <input
-                                  class="border-border bg-background-input text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none h-10 rounded-md border-2"
+                                  class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-md border-2"
                                   data-headlessui-state=""
-                                  id="input-:rc:"
+                                  id="input-:re:"
                                   inputmode="numeric"
                                   type="number"
                                   value="3"
                                 />
                                 <p
                                   class="text-foreground-secondary text-sm select-none"
-                                  id="input-:rc:-description"
+                                  id="input-:re:-description"
                                 >
                                   Number of times to retry resolving a stream URL before moving to the next candidate
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                        <section
+                          class="mb-6 flex w-full flex-col items-start justify-start"
+                        >
+                          <h2
+                            class="mb-3 flex w-full flex-0 flex-row text-left text-2xl font-bold"
+                          >
+                            Updates
+                          </h2>
+                          <div
+                            class="flex w-full flex-1 flex-col"
+                          >
+                            <div
+                              class="flex flex-col gap-6"
+                            >
+                              <div
+                                class="flex flex-col gap-2"
+                              >
+                                <div
+                                  class="flex items-center gap-3"
+                                >
+                                  <button
+                                    aria-checked="true"
+                                    aria-label="Check for updates"
+                                    class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+                                    data-checked=""
+                                    data-headlessui-state="checked"
+                                    id="headlessui-switch-:rg:"
+                                    role="switch"
+                                    tabindex="0"
+                                    type="button"
+                                  >
+                                    <span
+                                      class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1 group-data-checked:translate-x-5"
+                                    />
+                                  </button>
+                                  <span
+                                    class="text-foreground text-sm font-semibold"
+                                  >
+                                    Check for updates
+                                  </span>
+                                </div>
+                                <p
+                                  class="text-foreground-secondary text-sm select-none"
+                                >
+                                  Automatically check for new versions on startup
+                                </p>
+                              </div>
+                              <div
+                                class="flex flex-col gap-2"
+                              >
+                                <div
+                                  class="flex items-center gap-3"
+                                >
+                                  <button
+                                    aria-checked="false"
+                                    aria-label="Auto-install updates"
+                                    class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+                                    data-headlessui-state=""
+                                    id="headlessui-switch-:rh:"
+                                    role="switch"
+                                    tabindex="0"
+                                    type="button"
+                                  >
+                                    <span
+                                      class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1 group-data-checked:translate-x-5"
+                                    />
+                                  </button>
+                                  <span
+                                    class="text-foreground text-sm font-semibold"
+                                  >
+                                    Auto-install updates
+                                  </span>
+                                </div>
+                                <p
+                                  class="text-foreground-secondary text-sm select-none"
+                                >
+                                  Download and install updates automatically when available
                                 </p>
                               </div>
                             </div>
@@ -1105,13 +1193,13 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                     </div>
                   </div>
                   <input
-                    aria-labelledby=":r1:-label"
+                    aria-labelledby=":r3:-label"
                     aria-valuemax="100"
                     aria-valuemin="0"
                     aria-valuenow="100"
                     aria-valuetext="100"
                     class="absolute inset-0 z-[1] h-6 w-full appearance-none opacity-0 cursor-pointer"
-                    id=":r1:"
+                    id=":r3:"
                     max="100"
                     min="0"
                     step="1"

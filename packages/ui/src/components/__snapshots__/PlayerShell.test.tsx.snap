@@ -6,41 +6,12 @@ exports[`PlayerShell > matches snapshot with complete layout 1`] = `
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
   >
     <header
-      class="bg-background-secondary border-border flex h-12 items-center border-b-2 px-4"
+      class="bg-background-secondary border-border grid h-12 grid-cols-[1fr_4fr_1fr] items-center gap-2 border-b-2 px-4"
     >
-      <svg
-        class="inline-flex h-6 w-6"
-        height="100"
-        viewBox="0 0 100 100"
-        width="100"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g
-          fill="none"
-          stroke="currentColor"
-          stroke-width="8"
-          transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
-        >
-          <rect
-            height="96"
-            rx="19.2"
-            ry="19.2"
-            width="96"
-            x="2"
-            y="2"
-          />
-          <path
-            d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
-          />
-        </g>
-      </svg>
-      <div
-        class="flex-1"
-      />
       <button
         aria-checked="false"
         aria-label="Toggle theme"
-        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group justify-self-end"
         data-headlessui-state=""
         id="headlessui-switch-:r0:"
         role="switch"

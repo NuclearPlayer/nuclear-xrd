@@ -1,3 +1,4 @@
+export * from './Badge';
 export * from './BottomBar';
 export * from './Box';
 export * from './Button';
@@ -24,6 +25,7 @@ export * from './ThemeController';
 export * from './Toaster';
 export * from './Toggle';
 export * from './TopBar';
+export * from './TopBarLogo';
 export * from './ViewShell';
 export * from '../utils/time';
 export * from './TrackTable';

@@ -5,11 +5,12 @@ import { FC } from 'react';
 import type { QueueItem as QueueItemType } from '@nuclearplayer/model';
 
 import { cn } from '../../utils';
+import { type QueueItemLabels } from '../QueueItem/types';
 import { ScrollableArea } from '../ScrollableArea';
 import { QueueReorderLayer } from './QueueReorderLayer';
 import { ReorderableQueueItem } from './ReorderableQueueItem';
 
-type QueuePanelProps = {
+export type QueuePanelProps = {
   items: QueueItemType[];
   currentItemId?: string;
   isCollapsed?: boolean;
@@ -17,11 +18,9 @@ type QueuePanelProps = {
   onReorder?: (fromIndex: number, toIndex: number) => void;
   onSelectItem?: (itemId: string) => void;
   onRemoveItem?: (itemId: string) => void;
-  labels?: {
+  labels: QueueItemLabels & {
     emptyTitle?: string;
     emptySubtitle?: string;
-    removeButton?: string;
-    errorPrefix?: string;
   };
   classes?: {
     root?: string;
@@ -115,7 +114,7 @@ export const QueuePanel: FC<QueuePanelProps> = ({
                 onRemove={onRemoveItem}
                 labels={{
                   removeButton: labels?.removeButton,
-                  errorPrefix: labels?.errorPrefix,
+                  playbackError: labels?.playbackError,
                 }}
               />
             ))}

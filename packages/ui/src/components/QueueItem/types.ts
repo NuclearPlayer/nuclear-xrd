@@ -4,15 +4,17 @@ import type { Track } from '@nuclearplayer/model';
 
 import { queueItemVariants } from './variants';
 
+export type QueueItemLabels = {
+  removeButton?: string;
+  playbackError?: string;
+};
+
 export type QueueItemProps = VariantProps<typeof queueItemVariants> & {
   track: Track;
   onSelect?: () => void;
   onRemove?: () => void;
   errorMessage?: string;
-  labels?: {
-    removeButton?: string;
-    errorPrefix?: string;
-  };
+  labels: QueueItemLabels;
   classes?: {
     root?: string;
     thumbnail?: string;

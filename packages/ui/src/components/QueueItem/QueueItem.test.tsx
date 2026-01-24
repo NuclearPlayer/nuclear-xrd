@@ -23,10 +23,20 @@ const mockTrack: Track = {
   },
 };
 
+const mockLabels = {
+  removeButton: 'Remove from queue',
+  playbackError: 'Playback error',
+};
+
 describe('QueueItem', () => {
   it('(Snapshot) renders default state', () => {
     const { container } = render(
-      <QueueItem track={mockTrack} onSelect={vi.fn()} onRemove={vi.fn()} />,
+      <QueueItem
+        track={mockTrack}
+        labels={mockLabels}
+        onSelect={vi.fn()}
+        onRemove={vi.fn()}
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
@@ -35,6 +45,7 @@ describe('QueueItem', () => {
     const { container } = render(
       <QueueItem
         track={mockTrack}
+        labels={mockLabels}
         isCurrent={true}
         onSelect={vi.fn()}
         onRemove={vi.fn()}
@@ -47,6 +58,7 @@ describe('QueueItem', () => {
     const { container } = render(
       <QueueItem
         track={mockTrack}
+        labels={mockLabels}
         status="loading"
         onSelect={vi.fn()}
         onRemove={vi.fn()}
@@ -59,6 +71,7 @@ describe('QueueItem', () => {
     const { container } = render(
       <QueueItem
         track={mockTrack}
+        labels={mockLabels}
         status="error"
         errorMessage="Failed to load stream"
         onSelect={vi.fn()}
@@ -70,34 +83,45 @@ describe('QueueItem', () => {
 
   it('(Snapshot) renders collapsed state', () => {
     const { container } = render(
-      <QueueItem track={mockTrack} isCollapsed={true} onSelect={vi.fn()} />,
+      <QueueItem
+        track={mockTrack}
+        labels={mockLabels}
+        isCollapsed={true}
+        onSelect={vi.fn()}
+      />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('(Snapshot) renders collapsed state without onSelect', () => {
     const { container } = render(
-      <QueueItem track={mockTrack} isCollapsed={true} />,
+      <QueueItem track={mockTrack} labels={mockLabels} isCollapsed={true} />,
     );
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('calls onSelect when clicked', async () => {
     const onSelect = vi.fn();
-    render(<QueueItem track={mockTrack} onSelect={onSelect} />);
+    render(
+      <QueueItem track={mockTrack} labels={mockLabels} onSelect={onSelect} />,
+    );
     await userEvent.click(screen.getByTestId('queue-item'));
     expect(onSelect).toHaveBeenCalled();
   });
 
   it('calls onRemove when remove button is clicked', async () => {
     const onRemove = vi.fn();
-    render(<QueueItem track={mockTrack} onRemove={onRemove} />);
+    render(
+      <QueueItem track={mockTrack} labels={mockLabels} onRemove={onRemove} />,
+    );
     await userEvent.click(screen.getByTestId('queue-item-remove-button'));
     expect(onRemove).toHaveBeenCalled();
   });
 
   it('renders without callbacks', () => {
-    const { container } = render(<QueueItem track={mockTrack} />);
+    const { container } = render(
+      <QueueItem track={mockTrack} labels={mockLabels} />,
+    );
     expect(container.firstChild).toMatchSnapshot();
   });
 });

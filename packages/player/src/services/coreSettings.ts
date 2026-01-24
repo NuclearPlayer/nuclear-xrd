@@ -150,6 +150,24 @@ export const CORE_SETTINGS: SettingDefinition[] = [
     default: 'en_US',
     widget: { type: 'select' },
   },
+  {
+    id: 'updates.checkForUpdates',
+    title: 'settings.updates.checkForUpdates.title',
+    description: 'settings.updates.checkForUpdates.description',
+    category: 'updates',
+    kind: 'boolean',
+    default: true,
+    widget: { type: 'toggle' },
+  },
+  {
+    id: 'updates.autoInstall',
+    title: 'settings.updates.autoInstall.title',
+    description: 'settings.updates.autoInstall.description',
+    category: 'updates',
+    kind: 'boolean',
+    default: false,
+    widget: { type: 'toggle' },
+  },
 ];
 
 export const registerBuiltInCoreSettings = () => {
