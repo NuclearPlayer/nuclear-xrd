@@ -6,24 +6,25 @@ import {
   PopoverPanelProps,
 } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { FC, ReactNode } from 'react';
 
 import { cn } from '../../utils';
 
 export type PopoverProps = {
-  trigger: React.ReactNode;
-  children: React.ReactNode;
+  trigger: ReactNode;
+  children: ReactNode;
   className?: string;
   anchor?: PopoverPanelProps['anchor'];
   backdrop?: boolean;
 };
 
-export const Popover = ({
+export const Popover: FC<PopoverProps> = ({
   trigger,
   children,
   className,
   anchor,
   backdrop,
-}: PopoverProps) => {
+}) => {
   return (
     <HeadlessPopover className={cn('absolute', className)}>
       {({ open }) => (

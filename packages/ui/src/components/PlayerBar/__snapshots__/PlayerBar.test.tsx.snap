@@ -48,7 +48,7 @@ exports[`PlayerBar > (Snapshot) active states render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -83,7 +83,7 @@ exports[`PlayerBar > (Snapshot) active states render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -109,7 +109,7 @@ exports[`PlayerBar > (Snapshot) active states render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -143,7 +143,7 @@ exports[`PlayerBar > (Snapshot) active states render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -169,7 +169,7 @@ exports[`PlayerBar > (Snapshot) active states render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -209,7 +209,7 @@ exports[`PlayerBar > (Snapshot) active states render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -332,7 +332,7 @@ exports[`PlayerBar > (Snapshot) default render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -367,7 +367,7 @@ exports[`PlayerBar > (Snapshot) default render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -393,7 +393,7 @@ exports[`PlayerBar > (Snapshot) default render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -416,7 +416,7 @@ exports[`PlayerBar > (Snapshot) default render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -442,7 +442,7 @@ exports[`PlayerBar > (Snapshot) default render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -482,7 +482,7 @@ exports[`PlayerBar > (Snapshot) default render 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -608,7 +608,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -643,7 +643,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -669,7 +669,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -692,7 +692,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -718,7 +718,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -758,7 +758,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -903,7 +903,7 @@ exports[`PlayerBar > (Snapshot) no artwork fallback 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -938,7 +938,7 @@ exports[`PlayerBar > (Snapshot) no artwork fallback 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -964,7 +964,7 @@ exports[`PlayerBar > (Snapshot) no artwork fallback 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -987,7 +987,7 @@ exports[`PlayerBar > (Snapshot) no artwork fallback 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1013,7 +1013,7 @@ exports[`PlayerBar > (Snapshot) no artwork fallback 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1053,7 +1053,7 @@ exports[`PlayerBar > (Snapshot) no artwork fallback 1`] = `
           <button
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
             data-headlessui-state=""
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"

@@ -276,7 +276,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-left"
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -320,7 +320,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
               <button
                 class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
-                type="submit"
+                type="button"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -379,7 +379,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
               <button
                 class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
-                type="submit"
+                type="button"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -438,7 +438,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
               <button
                 class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
-                type="submit"
+                type="button"
               >
                 <span
                   class="inline-flex flex-row items-center gap-2"
@@ -706,7 +706,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                                     class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
                                     data-headlessui-state=""
                                     data-testid="add-to-queue-button"
-                                    type="submit"
+                                    type="button"
                                   >
                                     <svg
                                       aria-hidden="true"
@@ -799,7 +799,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                         class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                         data-headlessui-state=""
                         data-testid="card"
-                        type="submit"
+                        type="button"
                       >
                         <div
                           class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
@@ -892,7 +892,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-right"
-            type="submit"
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -1073,7 +1073,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1108,7 +1108,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1134,7 +1134,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1157,7 +1157,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1183,7 +1183,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"
@@ -1223,7 +1223,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
-              type="submit"
+              type="button"
             >
               <svg
                 aria-hidden="true"

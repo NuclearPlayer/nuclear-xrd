@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { FC, ReactNode, useState } from 'react';
 
+import { cn } from '../../utils';
 import { Button } from '../Button/Button';
 
 type SidebarNavigationCollapsibleProps = {
@@ -15,7 +15,7 @@ export const SidebarNavigationCollapsible: FC<
 > = ({ children, title, icon }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
-    <div className={clsx('mb-4 flex w-full flex-col text-sm')}>
+    <div className={cn('mb-4 flex w-full flex-col text-sm')}>
       <Button
         variant={isCollapsed ? 'text' : 'noShadow'}
         size="sm"

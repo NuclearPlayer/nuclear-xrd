@@ -45,7 +45,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(function Button(
       as="button"
       ref={ref}
       className={cn(buttonVariants({ variant, size, intent, className }))}
-      type={type ?? 'submit'}
+      type={type ?? 'button'}
       {...rest}
     >
       {children}

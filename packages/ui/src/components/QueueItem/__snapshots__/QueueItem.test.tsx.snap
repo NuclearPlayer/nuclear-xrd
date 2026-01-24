@@ -88,7 +88,7 @@ exports[`QueueItem > (Snapshot) renders current state 1`] = `
       class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border size-8 justify-center absolute right-4 opacity-0 group-hover:opacity-100"
       data-headlessui-state=""
       data-testid="queue-item-remove-button"
-      type="submit"
+      type="button"
     >
       <svg
         aria-hidden="true"
@@ -162,7 +162,7 @@ exports[`QueueItem > (Snapshot) renders default state 1`] = `
       class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border size-8 justify-center absolute right-4 opacity-0 group-hover:opacity-100"
       data-headlessui-state=""
       data-testid="queue-item-remove-button"
-      type="submit"
+      type="button"
     >
       <svg
         aria-hidden="true"
@@ -280,7 +280,7 @@ exports[`QueueItem > (Snapshot) renders error state 1`] = `
       class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border size-8 justify-center absolute right-4 opacity-0 group-hover:opacity-100"
       data-headlessui-state=""
       data-testid="queue-item-remove-button"
-      type="submit"
+      type="button"
     >
       <svg
         aria-hidden="true"
@@ -354,7 +354,7 @@ exports[`QueueItem > (Snapshot) renders loading state 1`] = `
       class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border size-8 justify-center absolute right-4 opacity-0 group-hover:opacity-100"
       data-headlessui-state=""
       data-testid="queue-item-remove-button"
-      type="submit"
+      type="button"
     >
       <svg
         aria-hidden="true"

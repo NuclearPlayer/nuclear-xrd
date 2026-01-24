@@ -173,8 +173,15 @@ pnpm --filter @nuclearplayer/ui test -- src/components/Badge/Badge.test.tsx
 pnpm --filter @nuclearplayer/player test -- --testNamePattern="queue"
 
 # Update snapshots (run at root for all, or filter to a specific package)
+
+# At root
+pnpm test -- -u
+
+# Filtering for a specific package
+pnpm --filter @nuclearplayer/ui test -- -u
+
+# After cd'ing into a package
 pnpm test -u
-pnpm --filter @nuclearplayer/ui test -u
 ```
 
 ### Test Patterns

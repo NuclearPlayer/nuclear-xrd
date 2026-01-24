@@ -22,7 +22,7 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
           class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2"
           data-headlessui-state="hover"
           data-hover=""
-          type="submit"
+          type="button"
         >
           Open Popover
         </button>
@@ -92,7 +92,7 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
           class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2"
           data-headlessui-state="hover"
           data-hover=""
-          type="submit"
+          type="button"
         >
           Open Popover
         </button>

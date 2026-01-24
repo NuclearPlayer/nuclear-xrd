@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { PanelLeft, PanelRight } from 'lucide-react';
 import { FC, ReactNode, useRef } from 'react';
 
+import { cn } from '../../utils';
 import { Button } from '../Button';
 import { SIDEBAR_CONFIG } from './constants';
 import { useSidebarResize } from './hooks';
@@ -42,7 +42,7 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
   return (
     <motion.div
       ref={sidebarRef}
-      className={clsx(
+      className={cn(
         'bg-background-secondary border-border relative flex flex-col p-2',
         { 'border-r-2': side === 'left', 'border-l-2': side === 'right' },
         className,
@@ -60,14 +60,14 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
       }
     >
       <span
-        className={clsx('mb-4 flex flex-row items-center', {
+        className={cn('mb-4 flex flex-row items-center', {
           'justify-end': side === 'left',
           'justify-start': side === 'right',
         })}
       >
         <Button
           data-testid={`sidebar-toggle-${side}`}
-          className={clsx('top-2 px-2', {
+          className={cn('top-2 px-2', {
             'right-1': side === 'left',
             'left-1': side === 'right',
           })}
@@ -98,9 +98,10 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
 
       {!isCollapsed && (
         <div
-          className={`absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors ${
-            side === 'left' ? 'right-0' : 'left-0'
-          }`}
+          className={cn(
+            'absolute top-0 bottom-0 w-1 cursor-col-resize transition-colors',
+            side === 'left' ? 'right-0' : 'left-0',
+          )}
           onMouseDown={handleMouseDown}
         />
       )}
