@@ -51,6 +51,7 @@ describe('Badge', () => {
   });
 
   it('throws error when dot variant has children', () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     expect(() => {
       render(
         <Badge variant="dot" color="green">
@@ -58,5 +59,6 @@ describe('Badge', () => {
         </Badge>,
       );
     }).toThrow('Badge variant "dot" does not support children');
+    consoleSpy.mockRestore();
   });
 });
