@@ -65,6 +65,7 @@ pnpm storybook      # run Storybook
 - Do not leave comments in code. Their place is in the chat.
 - Stick to existing conventions. This is a monorepo so standardizing everything is very very important. Look at other packages when in doubt. Use centralized configs for tools like Typescript, Eslint, Prettier, Tailwind.
 - Break work into the smallest reasonable steps. Small commits > big dumps.
+- Always be on the lookout for dead code, copy-pasta, and other opportunities to optimize and trim the codebase in a sensible way.
 
 ### TypeScript / React
 - Use `type`, not `interface` (except when TS requires merging). Do not use interfaces for props.
