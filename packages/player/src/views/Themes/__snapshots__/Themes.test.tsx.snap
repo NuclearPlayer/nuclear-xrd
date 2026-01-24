@@ -6,51 +6,57 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
   >
     <header
-      class="bg-background-secondary border-border flex h-12 items-center border-b-2 px-4"
+      class="bg-background-secondary border-border grid h-12 grid-cols-[1fr_4fr_1fr] items-center gap-2 border-b-2 px-4"
     >
-      <svg
-        class="inline-flex h-6 w-6"
-        height="100"
-        viewBox="0 0 100 100"
-        width="100"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="flex flex-row items-center gap-4"
       >
-        <g
-          fill="none"
-          stroke="currentColor"
-          stroke-width="8"
-          transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+        <svg
+          class="inline-flex h-6 w-6"
+          height="100"
+          viewBox="0 0 100 100"
+          width="100"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <rect
-            height="96"
-            rx="19.2"
-            ry="19.2"
-            width="96"
-            x="2"
-            y="2"
-          />
-          <path
-            d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
-          />
-        </g>
-      </svg>
-      <div>
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="8"
+            transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+          >
+            <rect
+              height="96"
+              rx="19.2"
+              ry="19.2"
+              width="96"
+              x="2"
+              y="2"
+            />
+            <path
+              d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
+            />
+          </g>
+        </svg>
+      </div>
+      <div
+        class="flex w-full flex-col gap-2"
+      >
         <input
-          class="bg-background border-border ml-4 w-80 rounded-md border-2 px-3 py-1 outline-none"
+          class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background rounded-md border-2 h-8"
+          data-headlessui-state=""
           data-testid="search-box"
+          id="input-:r0:"
           placeholder="Search"
+          type="text"
           value=""
         />
       </div>
-      <div
-        class="flex-1"
-      />
       <button
         aria-checked="false"
         aria-label="Toggle theme"
-        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group"
+        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group justify-self-end"
         data-headlessui-state=""
-        id="headlessui-switch-:r0:"
+        id="headlessui-switch-:r2:"
         role="switch"
         tabindex="0"
         type="button"
@@ -690,7 +696,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                               aria-haspopup="listbox"
                               class="border-border bg-primary text-foreground relative flex w-full items-center justify-between rounded-md border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 text-sm"
                               data-headlessui-state=""
-                              id="select-:r2:"
+                              id="select-:r4:"
                               type="button"
                             >
                               <span
@@ -722,7 +728,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                             </button>
                             <p
                               class="text-foreground-secondary text-sm select-none"
-                              id="select-:r2:-description"
+                              id="select-:r4:-description"
                             >
                               Themes found in your app data themes directory
                             </p>
@@ -1132,13 +1138,13 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                     </div>
                   </div>
                   <input
-                    aria-labelledby=":r1:-label"
+                    aria-labelledby=":r3:-label"
                     aria-valuemax="100"
                     aria-valuemin="0"
                     aria-valuenow="100"
                     aria-valuetext="100"
                     class="absolute inset-0 z-[1] h-6 w-full appearance-none opacity-0 cursor-pointer"
-                    id=":r1:"
+                    id=":r3:"
                     max="100"
                     min="0"
                     step="1"
