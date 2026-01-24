@@ -101,18 +101,32 @@
     "title": "Plugins",
     "addPlugin": "Adicionar plugin"
   },
+  "updater": {
+    "updateAvailable": "Update available"
+  },
   "settings": {
     "title": "Configurações",
     "categories": {
       "general": "Geral",
       "appearance": "Aparência",
       "playback": "Reprodução",
-      "layout": "Layout"
+      "layout": "Layout",
+      "updates": "Updates"
     },
     "general": {
       "language": {
         "title": "Idioma",
         "description": "Selecione seu idioma preferido"
+      }
+    },
+    "updates": {
+      "checkForUpdates": {
+        "title": "Check for updates",
+        "description": "Automatically check for new versions on startup"
+      },
+      "autoInstall": {
+        "title": "Auto-install updates",
+        "description": "Download and install updates automatically when available"
       }
     },
     "playback": {
@@ -143,8 +157,8 @@
     "actions": {
       "remove": "Remove from queue"
     },
-    "error": {
-      "prefix": "Error:"
+    "errors": {
+      "playback": "Playback error"
     }
   },
   "streaming": {
