@@ -107,12 +107,23 @@
       "general": "General",
       "appearance": "Appearance",
       "playback": "Playback",
-      "layout": "Layout"
+      "layout": "Layout",
+      "updates": "Updates"
     },
     "general": {
       "language": {
         "title": "Language",
         "description": "Select your preferred language"
+      }
+    },
+    "updates": {
+      "checkForUpdates": {
+        "title": "Check for updates",
+        "description": "Automatically check for new versions on startup"
+      },
+      "autoInstall": {
+        "title": "Auto-install updates",
+        "description": "Download and install updates automatically when available"
       }
     },
     "playback": {
