@@ -133,6 +133,29 @@ export const Component: FC<ComponentProps> = ({
 - Validate inputs at boundaries
 - Lift performance-critical logic to Rust (Tauri)
 
+### Internationalization (i18n)
+
+All user-facing strings must go through the i18n system - no hardcoded strings in UI code.
+
+**Translation files:** `packages/i18n/src/locales/{locale}.json` (e.g., `en_US.json`)
+
+**Using translations in components:**
+
+```tsx
+import { useTranslation } from '@nuclearplayer/i18n';
+
+export const MyComponent: FC = () => {
+  const { t } = useTranslation();
+  return <span>{t('navigation.settings')}</span>;
+};
+```
+
+**Adding new strings:**
+
+1. Add the key to `packages/i18n/src/locales/en_US.json` only
+2. Use nested keys matching the feature area: `"feature.subfeature.key": "Value"`
+3. Other locales are translated by contributors on Crowdin and merged automatically
+
 ## Testing Guidelines
 
 Tests use Vitest + React Testing Library.
