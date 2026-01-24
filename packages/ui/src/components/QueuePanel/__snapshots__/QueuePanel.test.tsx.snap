@@ -187,6 +187,7 @@ exports[`QueuePanel > (Snapshot) renders default state 1`] = `
                 5:54
               </div>
               <button
+                aria-label="Remove from queue"
                 class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border size-8 justify-center absolute right-4 opacity-0 group-hover:opacity-100"
                 data-headlessui-state=""
                 data-testid="queue-item-remove-button"
@@ -266,6 +267,7 @@ exports[`QueuePanel > (Snapshot) renders default state 1`] = `
                 8:02
               </div>
               <button
+                aria-label="Remove from queue"
                 class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border size-8 justify-center absolute right-4 opacity-0 group-hover:opacity-100"
                 data-headlessui-state=""
                 data-testid="queue-item-remove-button"
@@ -345,6 +347,7 @@ exports[`QueuePanel > (Snapshot) renders default state 1`] = `
                 6:31
               </div>
               <button
+                aria-label="Remove from queue"
                 class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border size-8 justify-center absolute right-4 opacity-0 group-hover:opacity-100"
                 data-headlessui-state=""
                 data-testid="queue-item-remove-button"
@@ -432,6 +435,18 @@ exports[`QueuePanel > (Snapshot) renders empty state 1`] = `
       r="3"
     />
   </svg>
+  <div>
+    <div
+      class="text-foreground text-lg font-bold"
+    >
+      Your queue is empty
+    </div>
+    <div
+      class="text-foreground-secondary mt-2 text-sm"
+    >
+      Add some tracks to get started
+    </div>
+  </div>
 </div>
 `;
 

@@ -70,15 +70,24 @@ export const useUpdaterStore = create<UpdaterState>((set, get) => ({
     }
 
     set({ isDownloading: true, downloadProgress: 0, error: null });
+    let totalSize = 0;
+    let downloadedSize = 0;
     try {
       await updateInfo.downloadAndInstall((event) => {
         if (event.event === 'Started' && event.data.contentLength) {
+          totalSize = event.data.contentLength;
           set({ downloadProgress: 0 });
         } else if (event.event === 'Progress') {
-          const current = get().downloadProgress + event.data.chunkLength;
-          set({ downloadProgress: current });
+          downloadedSize += event.data.chunkLength;
+          const percentage =
+            totalSize > 0 ? Math.round((downloadedSize / totalSize) * 100) : 0;
+          set({ downloadProgress: percentage });
         } else if (event.event === 'Finished') {
-          set({ isDownloading: false, isInstalling: true });
+          set({
+            isDownloading: false,
+            isInstalling: true,
+            downloadProgress: 100,
+          });
         }
       });
     } catch (error) {

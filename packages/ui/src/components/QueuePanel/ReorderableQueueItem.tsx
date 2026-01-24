@@ -6,7 +6,7 @@ import type { QueueItem as QueueItemType } from '@nuclearplayer/model';
 
 import { cn } from '../../utils';
 import { QueueItem } from '../QueueItem';
-import { type QueuePanelProps } from './QueuePanel';
+import { type QueueItemLabels } from '../QueueItem/types';
 
 export type ReorderableQueueItemProps = {
   item: QueueItemType;
@@ -15,7 +15,7 @@ export type ReorderableQueueItemProps = {
   isReorderable?: boolean;
   onSelect?: (id: string) => void;
   onRemove?: (id: string) => void;
-  labels: Pick<QueuePanelProps['labels'], 'removeButton' | 'playbackError'>;
+  labels: QueueItemLabels;
 };
 
 export const ReorderableQueueItem: FC<ReorderableQueueItemProps> = ({

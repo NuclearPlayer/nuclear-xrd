@@ -1,10 +1,10 @@
 import { useRouter } from '@tanstack/react-router';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Input } from '@nuclearplayer/ui';
 
-export const SearchBox = () => {
+export const SearchBox: FC = () => {
   const { t } = useTranslation('search');
   const [query, setQuery] = useState('');
   const router = useRouter();

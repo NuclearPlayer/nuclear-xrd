@@ -101,6 +101,9 @@
     "title": "Plugins",
     "addPlugin": "Add Plugin"
   },
+  "updater": {
+    "updateAvailable": "Update available"
+  },
   "settings": {
     "title": "Settings",
     "categories": {
