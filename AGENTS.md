@@ -133,6 +133,36 @@ export const Component: FC<ComponentProps> = ({
 - Validate inputs at boundaries
 - Lift performance-critical logic to Rust (Tauri)
 
+### External API Clients
+
+External HTTP APIs live in `packages/player/src/apis/`. Use the `ApiClient` base class which handles fetch→json→Zod parse:
+
+```typescript
+import { z } from 'zod';
+import { ApiClient } from './ApiClient';
+
+const ItemSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+class MyApi extends ApiClient {
+  constructor() {
+    super('https://api.example.com');
+  }
+
+  async getItem(id: string) {
+    return this.fetch(`/items/${id}`, ItemSchema);
+  }
+}
+
+export const myApi = new MyApi();
+```
+
+- Always validate external data with Zod schemas
+- Export a singleton instance
+- Keep API clients focused - one class per external service
+
 ### Internationalization (i18n)
 
 All user-facing strings must go through the i18n system - no hardcoded strings in UI code.
