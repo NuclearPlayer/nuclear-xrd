@@ -14,6 +14,7 @@ const MarketplacePluginSchema = z.object({
 });
 
 const RegistrySchema = z.object({
+  $schema: z.string().optional(),
   version: z.number(),
   plugins: z.array(MarketplacePluginSchema),
 });

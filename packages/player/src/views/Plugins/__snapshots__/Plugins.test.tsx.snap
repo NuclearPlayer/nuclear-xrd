@@ -509,30 +509,98 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
                 class="flex w-full flex-1 flex-col overflow-hidden"
               >
                 <div
-                  class="relative flex w-full flex-col gap-4 overflow-hidden"
+                  class="max-h-full w-full gap-2 flex flex-1 flex-col overflow-hidden"
                 >
                   <div
-                    class="flex items-center"
+                    aria-orientation="horizontal"
+                    class="flex w-full items-center gap-2"
+                    id="tabs-:r4:-list"
+                    role="tablist"
                   >
                     <button
-                      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
+                      aria-controls="headlessui-tabs-panel-:r9:"
+                      aria-selected="true"
+                      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2"
                       data-headlessui-state=""
+                      data-selected=""
+                      id="headlessui-tabs-tab-:r5:"
+                      role="tab"
+                      tabindex="0"
                       type="button"
                     >
-                      Add Plugin
+                      Installed
+                    </button>
+                    <button
+                      aria-controls="headlessui-tabs-panel-:rb:"
+                      aria-selected="false"
+                      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
+                      data-headlessui-state=""
+                      id="headlessui-tabs-tab-:r7:"
+                      role="tab"
+                      tabindex="-1"
+                      type="button"
+                    >
+                      Store
                     </button>
                   </div>
                   <div
-                    class="relative h-full w-full flex-1 overflow-hidden"
+                    class="mt-2 flex flex-col flex-1 overflow-hidden"
+                    id="tabs-:r4:-panels"
                   >
                     <div
-                      class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
-                      style="scrollbar-width: none;"
+                      aria-labelledby="headlessui-tabs-tab-:r5:"
+                      class="relative outline-none flex flex-1 overflow-hidden"
+                      data-headlessui-state="selected"
+                      data-selected=""
+                      id="headlessui-tabs-panel-:r9:"
+                      role="tabpanel"
+                      tabindex="0"
                     >
                       <div
-                        class="flex flex-col gap-4 overflow-visible px-2 py-2"
-                      />
+                        class="relative h-full w-full"
+                      >
+                        <div
+                          class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                          style="scrollbar-width: none;"
+                        >
+                          <div
+                            class="relative flex w-full flex-1 flex-col gap-4 overflow-hidden"
+                          >
+                            <div
+                              class="flex items-center"
+                            >
+                              <button
+                                class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
+                                data-headlessui-state=""
+                                type="button"
+                              >
+                                Add Plugin
+                              </button>
+                            </div>
+                            <div
+                              class="relative h-full w-full flex-1 overflow-hidden"
+                            >
+                              <div
+                                class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                                style="scrollbar-width: none;"
+                              >
+                                <div
+                                  class="flex flex-col gap-4 overflow-visible px-2 py-2"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <span
+                      aria-hidden="true"
+                      aria-labelledby="headlessui-tabs-tab-:r7:"
+                      id="headlessui-tabs-panel-:rb:"
+                      role="tabpanel"
+                      style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+                      tabindex="-1"
+                    />
                   </div>
                 </div>
               </div>

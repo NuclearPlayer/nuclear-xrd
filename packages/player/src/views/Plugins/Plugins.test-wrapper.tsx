@@ -42,15 +42,12 @@ class PluginItemWrapper {
 
   get enabled() {
     return (
-      within(this.element)
-        .getByTestId('toggle-enable-plugin')
-        .getAttribute('data-enabled') === 'true'
+      within(this.element).getByRole('switch').getAttribute('data-enabled') ===
+      'true'
     );
   }
 
   toggle = async () => {
-    await userEvent.click(
-      within(this.element).getByTestId('toggle-enable-plugin'),
-    );
+    await userEvent.click(within(this.element).getByRole('switch'));
   };
 }

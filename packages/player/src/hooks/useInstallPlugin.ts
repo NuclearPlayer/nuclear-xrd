@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import {
   pluginMarketplaceApi,
@@ -10,7 +10,6 @@ import {
 } from '../services/plugins/pluginDownloader';
 import { upsertRegistryEntry } from '../services/plugins/pluginRegistry';
 import { usePluginStore } from '../stores/pluginStore';
-import { MARKETPLACE_QUERY_KEY } from './useMarketplacePlugins';
 
 type InstallPluginParams = {
   plugin: MarketplacePlugin;
@@ -18,7 +17,6 @@ type InstallPluginParams = {
 };
 
 export const useInstallPlugin = () => {
-  const queryClient = useQueryClient();
   const loadPluginFromPath = usePluginStore((s) => s.loadPluginFromPath);
 
   return useMutation({
@@ -29,29 +27,31 @@ export const useInstallPlugin = () => {
         pluginId: plugin.id,
         downloadUrl: release.downloadUrl,
         onProgress: onProgress
-          ? (p) => onProgress((p.progress / p.total) * 100)
+          ? (p) => {
+              const percent = p.total > 0 ? (p.progress / p.total) * 100 : 0;
+              onProgress(percent);
+            }
           : undefined,
       });
 
-      const now = new Date().toISOString();
-      await upsertRegistryEntry({
-        id: plugin.id,
-        version: release.version,
-        path: '',
-        installationMethod: 'store',
-        enabled: false,
-        installedAt: now,
-        lastUpdatedAt: now,
-      });
+      try {
+        const now = new Date().toISOString();
+        await upsertRegistryEntry({
+          id: plugin.id,
+          version: release.version,
+          path: extractedPath,
+          installationMethod: 'store',
+          enabled: false,
+          installedAt: now,
+          lastUpdatedAt: now,
+        });
 
-      await loadPluginFromPath(extractedPath);
-
-      await cleanupDownload(plugin.id);
+        await loadPluginFromPath(extractedPath);
+      } finally {
+        await cleanupDownload(plugin.id);
+      }
 
       return { plugin, version: release.version };
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: MARKETPLACE_QUERY_KEY });
     },
   });
 };
