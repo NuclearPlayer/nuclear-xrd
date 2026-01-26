@@ -6,3 +6,10 @@ export const copyDirRecursive = async (
 ): Promise<void> => {
   await invoke('copy_dir_recursive', { from, to });
 };
+
+export const extractZip = async (
+  zipPath: string,
+  destPath: string,
+): Promise<void> => {
+  await invoke('extract_zip', { zipPath, destPath });
+};
