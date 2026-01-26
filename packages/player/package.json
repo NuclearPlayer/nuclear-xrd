@@ -37,6 +37,7 @@
     "@tauri-apps/plugin-log": "~2.6.0",
     "@tauri-apps/plugin-store": "~2.3.0",
     "@tauri-apps/plugin-updater": "~2.9.0",
+    "@tauri-apps/plugin-upload": "~2.2.1",
     "esbuild-wasm": "^0.21.5",
     "framer-motion": "^12.23.12",
     "immer": "^10.1.3",

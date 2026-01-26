@@ -135,29 +135,7 @@ export const Component: FC<ComponentProps> = ({
 
 ### External API Clients
 
-External HTTP APIs live in `packages/player/src/apis/`. Use the `ApiClient` base class which handles fetch→json→Zod parse:
-
-```typescript
-import { z } from 'zod';
-import { ApiClient } from './ApiClient';
-
-const ItemSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-});
-
-class MyApi extends ApiClient {
-  constructor() {
-    super('https://api.example.com');
-  }
-
-  async getItem(id: string) {
-    return this.fetch(`/items/${id}`, ItemSchema);
-  }
-}
-
-export const myApi = new MyApi();
-```
+External HTTP APIs live in `packages/player/src/apis/`. Use the `ApiClient` base class which handles fetch→json→Zod parse.
 
 - Always validate external data with Zod schemas
 - Export a singleton instance

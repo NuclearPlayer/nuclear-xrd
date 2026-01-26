@@ -10,6 +10,7 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::new().build())
+        .plugin(tauri_plugin_upload::init())
         .register_asynchronous_uri_scheme_protocol("nuclear-stream", |ctx, request, responder| {
             stream_proxy::handle_stream_request(ctx.app_handle(), request, responder);
         })

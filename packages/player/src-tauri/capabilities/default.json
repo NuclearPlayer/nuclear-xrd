@@ -89,6 +89,7 @@
         }
       ]
     },
-    "store:default"
+    "store:default",
+    "upload:default"
   ]
 }
