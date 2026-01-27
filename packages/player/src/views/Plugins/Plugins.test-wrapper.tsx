@@ -18,10 +18,18 @@ export const PluginsWrapper = {
 
     return component;
   },
+  async goToStoreTab(): Promise<void> {
+    await userEvent.click(screen.getByRole('tab', { name: 'Store' }));
+  },
   getPlugins: () => {
     return screen
       .queryAllByTestId('plugin-item')
       .map((item) => new PluginItemWrapper(item));
+  },
+  getStorePlugins: () => {
+    return screen
+      .queryAllByTestId('plugin-store-item')
+      .map((item) => new PluginStoreItemWrapper(item));
   },
 };
 
@@ -50,4 +58,23 @@ class PluginItemWrapper {
   toggle = async () => {
     await userEvent.click(within(this.element).getByRole('switch'));
   };
+}
+
+class PluginStoreItemWrapper {
+  constructor(private element: HTMLElement) {}
+
+  get name() {
+    return within(this.element).getByTestId('plugin-store-item-name')
+      .textContent;
+  }
+
+  get author() {
+    return within(this.element).getByTestId('plugin-store-item-author')
+      .textContent;
+  }
+
+  get description() {
+    return within(this.element).getByTestId('plugin-store-item-description')
+      .textContent;
+  }
 }
