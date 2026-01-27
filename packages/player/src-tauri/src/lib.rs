@@ -17,6 +17,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             commands::copy_dir_recursive,
             commands::extract_zip,
+            commands::download_file,
             http::http_fetch,
             ytdlp::ytdlp_search,
             ytdlp::ytdlp_get_stream

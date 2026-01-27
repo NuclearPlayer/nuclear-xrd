@@ -13,3 +13,10 @@ export const extractZip = async (
 ): Promise<void> => {
   await invoke('extract_zip', { zipPath, destPath });
 };
+
+export const downloadFile = async (
+  url: string,
+  destPath: string,
+): Promise<void> => {
+  await invoke('download_file', { url, destPath });
+};

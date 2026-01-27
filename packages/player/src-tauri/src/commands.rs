@@ -88,6 +88,48 @@ pub fn extract_zip(zip_path: PathBuf, dest_path: PathBuf) -> Result<(), String> 
     Ok(())
 }
 
+#[command]
+pub async fn download_file(url: String, dest_path: PathBuf) -> Result<(), String> {
+    use std::time::Duration;
+    use tokio::io::AsyncWriteExt;
+
+    async fn inner(url: &str, dest_path: &Path) -> Result<(), Box<dyn std::error::Error>> {
+        log::info!("Downloading {} to {:?}", url, dest_path);
+
+        let client = reqwest::Client::builder()
+            .timeout(Duration::from_secs(300))
+            .connect_timeout(Duration::from_secs(30))
+            .build()?;
+
+        let response = client.get(url).send().await?;
+
+        if !response.status().is_success() {
+            return Err(format!("HTTP error: {}", response.status()).into());
+        }
+
+        if let Some(parent) = dest_path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+
+        let mut file = tokio::fs::File::create(dest_path).await?;
+        let mut stream = response.bytes_stream();
+
+        use futures::StreamExt;
+        while let Some(chunk) = stream.next().await {
+            let chunk = chunk?;
+            file.write_all(&chunk).await?;
+        }
+
+        log::info!("Download complete: {:?}", dest_path);
+        Ok(())
+    }
+
+    inner(&url, &dest_path).await.map_err(|e| {
+        log::error!("download_file failed for {}: {}", url, e);
+        e.to_string()
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
