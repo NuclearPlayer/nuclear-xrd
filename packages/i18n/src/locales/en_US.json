@@ -127,6 +127,9 @@
         "title": "No plugins found",
         "filtered": "Try adjusting your search or filters.",
         "empty": "No plugins available yet."
+      },
+      "installError": {
+        "title": "Failed to install {{name}}"
       }
     }
   },

@@ -3349,6 +3349,7 @@ name = "player"
 version = "0.0.10"
 dependencies = [
  "base64 0.22.1",
+ "futures",
  "http",
  "log",
  "mockall",

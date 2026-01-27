@@ -26,7 +26,8 @@ tauri-plugin-dialog = "2"
 tauri-plugin-store = "2"
 tauri-plugin-upload = "2"
 zip = "2.1"
-reqwest = { version = "0.12", features = ["json", "cookies"] }
+reqwest = { version = "0.12", features = ["json", "cookies", "stream"] }
+futures = "0.3"
 tokio = { version = "1", features = ["full"] }
 base64 = "0.22"
 http = "1.0"

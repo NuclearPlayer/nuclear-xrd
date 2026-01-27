@@ -23,6 +23,12 @@
         },
         {
           "path": "$APPDATA/plugins/**/*"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads/**/*"
         }
       ]
     },
@@ -34,6 +40,12 @@
         },
         {
           "path": "$APPDATA/plugins/**/*"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads/**/*"
         }
       ]
     },
@@ -48,6 +60,12 @@
         },
         {
           "path": "$APPDATA/plugins/**/*"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads/**/*"
         }
       ]
     },
@@ -67,6 +85,9 @@
         },
         {
           "path": "$APPDATA/plugins/**/*"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads/**/*"
         }
       ]
     },
@@ -78,6 +99,9 @@
         },
         {
           "path": "$APPDATA/plugins/**/*"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads/**/*"
         }
       ]
     },
@@ -86,6 +110,12 @@
       "allow": [
         {
           "path": "$APPDATA/plugins/**/*"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads"
+        },
+        {
+          "path": "$APPDATA/plugins/.downloads/**/*"
         }
       ]
     },

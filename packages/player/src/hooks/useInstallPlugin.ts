@@ -1,4 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
+
+import { useTranslation } from '@nuclearplayer/i18n';
 
 import {
   pluginMarketplaceApi,
@@ -10,28 +13,24 @@ import {
 } from '../services/plugins/pluginDownloader';
 import { upsertRegistryEntry } from '../services/plugins/pluginRegistry';
 import { usePluginStore } from '../stores/pluginStore';
+import { resolveErrorMessage } from '../utils/logging';
 
 type InstallPluginParams = {
   plugin: MarketplacePlugin;
-  onProgress?: (percent: number) => void;
 };
 
 export const useInstallPlugin = () => {
+  const { t } = useTranslation('plugins');
   const loadPluginFromPath = usePluginStore((s) => s.loadPluginFromPath);
+  const enablePlugin = usePluginStore((s) => s.enablePlugin);
 
   return useMutation({
-    mutationFn: async ({ plugin, onProgress }: InstallPluginParams) => {
+    mutationFn: async ({ plugin }: InstallPluginParams) => {
       const release = await pluginMarketplaceApi.getLatestRelease(plugin.repo);
 
       const extractedPath = await downloadAndExtractPlugin({
         pluginId: plugin.id,
         downloadUrl: release.downloadUrl,
-        onProgress: onProgress
-          ? (p) => {
-              const percent = p.total > 0 ? (p.progress / p.total) * 100 : 0;
-              onProgress(percent);
-            }
-          : undefined,
       });
 
       try {
@@ -47,11 +46,18 @@ export const useInstallPlugin = () => {
         });
 
         await loadPluginFromPath(extractedPath);
+        await enablePlugin(plugin.id);
       } finally {
         await cleanupDownload(plugin.id);
       }
 
       return { plugin, version: release.version };
+    },
+    onError: (error, { plugin }) => {
+      const message = resolveErrorMessage(error);
+      toast.error(t('store.installError.title', { name: plugin.name }), {
+        description: message,
+      });
     },
   });
 };
