@@ -48,3 +48,32 @@ export const fakeMarketplacePlugins: MarketplacePlugin[] = [
     addedAt: '2026-03-10T00:00:00Z',
   },
 ];
+
+export const fakeGitHubRelease = (repo: string) => ({
+  tag_name: 'v1.0.0',
+  name: 'Release 1.0.0',
+  published_at: '2026-01-20T00:00:00Z',
+  assets: [
+    {
+      name: 'plugin.zip',
+      browser_download_url: `https://github.com/${repo}/releases/download/v1.0.0/plugin.zip`,
+      size: 12345,
+    },
+  ],
+});
+
+export const fakeYouTubePluginManifest = JSON.stringify({
+  name: 'nuclear-youtube-plugin',
+  version: '1.0.0',
+  description: 'Stream music from YouTube',
+  main: 'index.ts',
+  license: 'AGPL-3.0-only',
+  author: 'nukeop',
+  keywords: ['nuclear', 'youtube'],
+  nuclear: {
+    displayName: 'YouTube Music',
+    category: 'streaming',
+    icon: { type: 'lucide', name: 'Youtube' },
+    permissions: [],
+  },
+});
