@@ -519,7 +519,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
               class="relative h-full w-full bg-background"
             >
               <div
-                class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
                 style="scrollbar-width: none;"
               >
                 <div
@@ -787,7 +787,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
                   class="relative h-full w-full"
                 >
                   <div
-                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
                     style="scrollbar-width: none;"
                   >
                     <div

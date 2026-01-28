@@ -87,7 +87,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
                   class="relative h-full w-full"
                 >
                   <div
-                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
                     style="scrollbar-width: none;"
                   >
                     <div
@@ -168,7 +168,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
                         class="relative h-full w-full flex-1 overflow-hidden"
                       >
                         <div
-                          class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                          class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
                           style="scrollbar-width: none;"
                         >
                           <div

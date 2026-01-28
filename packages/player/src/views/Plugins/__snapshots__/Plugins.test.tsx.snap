@@ -78,7 +78,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
                   class="relative h-full w-full"
                 >
                   <div
-                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                    class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
                     style="scrollbar-width: none;"
                   >
                     <div
@@ -99,7 +99,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
                         class="relative h-full w-full flex-1 overflow-hidden"
                       >
                         <div
-                          class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                          class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
                           style="scrollbar-width: none;"
                         >
                           <div

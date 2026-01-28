@@ -369,7 +369,7 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
               data-testid="album-view"
             >
               <div
-                class="scrollbar-hide flex h-full w-full flex-col overflow-auto pr-6 pb-6"
+                class="scrollbar-hide flex h-full w-full flex-col overflow-auto"
                 style="scrollbar-width: none;"
               >
                 <div
