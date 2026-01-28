@@ -99,7 +99,39 @@
   },
   "plugins": {
     "title": "Plugin",
-    "addPlugin": "Aggiungi plugin"
+    "addPlugin": "Aggiungi plugin",
+    "tabs": {
+      "installed": "Installed",
+      "store": "Store"
+    },
+    "store": {
+      "searchPlaceholder": "Search plugins...",
+      "install": "Install",
+      "installing": "Installing",
+      "installed": "Installed",
+      "by": "by",
+      "categories": {
+        "all": "All",
+        "streaming": "Streaming",
+        "metadata": "Metadata",
+        "lyrics": "Lyrics",
+        "scrobbling": "Scrobbling",
+        "other": "Other"
+      },
+      "error": {
+        "title": "Failed to load plugins",
+        "description": "Could not fetch the plugin registry. Please check your internet connection.",
+        "retry": "Retry"
+      },
+      "noResults": {
+        "title": "No plugins found",
+        "filtered": "Try adjusting your search or filters.",
+        "empty": "No plugins available yet."
+      },
+      "installError": {
+        "title": "Failed to install {{name}}"
+      }
+    }
   },
   "updater": {
     "updateAvailable": "Update available"
