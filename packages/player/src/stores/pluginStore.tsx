@@ -21,6 +21,7 @@ import {
 import { providersHost } from '../services/providersHost';
 import { queueHost } from '../services/queueHost';
 import { createPluginSettingsHost } from '../services/settingsHost';
+import { ytdlpHost } from '../services/ytdlpHost';
 import { resolveErrorMessage } from '../utils/logging';
 
 const allowedPermissions: string[] = [];
@@ -142,6 +143,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         settingsHost: createPluginSettingsHost(id, loadedMetadata.displayName),
         queueHost,
         providersHost,
+        ytdlpHost,
       });
 
       set(
