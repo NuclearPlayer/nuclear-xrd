@@ -106,7 +106,7 @@ async function ensureInit() {
       if (!es.mod) {
         es.mod = await import('esbuild-wasm');
       }
-      await es.mod.initialize({ wasmURL: wasmUrl, worker: true });
+      await es.mod.initialize({ wasmURL: wasmUrl, worker: false });
       es.initialized = true;
     })();
   }

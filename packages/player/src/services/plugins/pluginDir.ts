@@ -32,7 +32,6 @@ export const installPluginToManagedDir = async (
   version: string,
   fromPath: string,
 ): Promise<string> => {
-  // Destination path is relative to the app data directory
   const destination = await getManagedPluginPath(id, version);
 
   // Remove existing plugin version if present

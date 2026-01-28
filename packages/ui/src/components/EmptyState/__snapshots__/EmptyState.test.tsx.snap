@@ -1,0 +1,298 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EmptyState > (Snapshot) renders all size variants 1`] = `
+<div
+  class="flex flex-col gap-8"
+>
+  <div
+    class="flex flex-col items-center justify-center text-center gap-2 p-4"
+    data-testid="empty-state"
+  >
+    <div
+      class="text-foreground-secondary"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-search"
+        fill="none"
+        height="32"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="32"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="m21 21-4.34-4.34"
+        />
+        <circle
+          cx="11"
+          cy="11"
+          r="8"
+        />
+      </svg>
+    </div>
+    <div
+      class="flex flex-col gap-1"
+    >
+      <h3
+        class="text-foreground text-lg font-bold"
+      >
+        Small size
+      </h3>
+      <p
+        class="text-foreground-secondary text-sm"
+      >
+        Compact empty state
+      </p>
+    </div>
+  </div>
+  <div
+    class="flex flex-col items-center justify-center text-center gap-4 p-8"
+    data-testid="empty-state"
+  >
+    <div
+      class="text-foreground-secondary"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-search"
+        fill="none"
+        height="48"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="48"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="m21 21-4.34-4.34"
+        />
+        <circle
+          cx="11"
+          cy="11"
+          r="8"
+        />
+      </svg>
+    </div>
+    <div
+      class="flex flex-col gap-1"
+    >
+      <h3
+        class="text-foreground text-lg font-bold"
+      >
+        Default size
+      </h3>
+      <p
+        class="text-foreground-secondary text-sm"
+      >
+        Standard empty state
+      </p>
+    </div>
+  </div>
+  <div
+    class="flex flex-col items-center justify-center text-center gap-6 p-12"
+    data-testid="empty-state"
+  >
+    <div
+      class="text-foreground-secondary"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-search"
+        fill="none"
+        height="64"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="64"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="m21 21-4.34-4.34"
+        />
+        <circle
+          cx="11"
+          cy="11"
+          r="8"
+        />
+      </svg>
+    </div>
+    <div
+      class="flex flex-col gap-1"
+    >
+      <h3
+        class="text-foreground text-lg font-bold"
+      >
+        Large size
+      </h3>
+      <p
+        class="text-foreground-secondary text-sm"
+      >
+        Spacious empty state
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`EmptyState > (Snapshot) renders with action button 1`] = `
+<div
+  class="flex flex-col items-center justify-center text-center gap-4 p-8"
+  data-testid="empty-state"
+>
+  <div
+    class="text-foreground-secondary"
+  >
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-wifi-off"
+      fill="none"
+      height="64"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="64"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 20h.01"
+      />
+      <path
+        d="M8.5 16.429a5 5 0 0 1 7 0"
+      />
+      <path
+        d="M5 12.859a10 10 0 0 1 5.17-2.69"
+      />
+      <path
+        d="M19 12.859a10 10 0 0 0-2.007-1.523"
+      />
+      <path
+        d="M2 8.82a15 15 0 0 1 4.177-2.643"
+      />
+      <path
+        d="M22 8.82a15 15 0 0 0-11.288-3.764"
+      />
+      <path
+        d="m2 2 20 20"
+      />
+    </svg>
+  </div>
+  <div
+    class="flex flex-col gap-1"
+  >
+    <h3
+      class="text-foreground text-lg font-bold"
+    >
+      Connection failed
+    </h3>
+    <p
+      class="text-foreground-secondary text-sm"
+    >
+      Could not reach the server.
+    </p>
+  </div>
+  <div>
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2"
+      data-headlessui-state=""
+      type="button"
+    >
+      Retry
+    </button>
+  </div>
+</div>
+`;
+
+exports[`EmptyState > (Snapshot) renders with icon 1`] = `
+<div
+  class="flex flex-col items-center justify-center text-center gap-4 p-8"
+  data-testid="empty-state"
+>
+  <div
+    class="text-foreground-secondary"
+  >
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-inbox"
+      fill="none"
+      height="64"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="64"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <polyline
+        points="22 12 16 12 14 15 10 15 8 12 2 12"
+      />
+      <path
+        d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"
+      />
+    </svg>
+  </div>
+  <div
+    class="flex flex-col gap-1"
+  >
+    <h3
+      class="text-foreground text-lg font-bold"
+    >
+      Your inbox is empty
+    </h3>
+    <p
+      class="text-foreground-secondary text-sm"
+    >
+      New messages will appear here.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`EmptyState > (Snapshot) renders with title and description 1`] = `
+<div
+  class="flex flex-col items-center justify-center text-center gap-4 p-8"
+  data-testid="empty-state"
+>
+  <div
+    class="flex flex-col gap-1"
+  >
+    <h3
+      class="text-foreground text-lg font-bold"
+    >
+      No plugins installed
+    </h3>
+    <p
+      class="text-foreground-secondary text-sm"
+    >
+      Browse the store to find plugins for your music player.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`EmptyState > (Snapshot) renders with title only 1`] = `
+<div
+  class="flex flex-col items-center justify-center text-center gap-4 p-8"
+  data-testid="empty-state"
+>
+  <div
+    class="flex flex-col gap-1"
+  >
+    <h3
+      class="text-foreground text-lg font-bold"
+    >
+      No items found
+    </h3>
+  </div>
+</div>
+`;

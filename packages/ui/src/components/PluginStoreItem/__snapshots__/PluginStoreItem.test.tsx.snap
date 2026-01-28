@@ -1,0 +1,400 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PluginStoreItem > (Snapshot) renders default state 1`] = `
+<div
+  class="border-border text-foreground flex h-full w-full rounded-md border p-4 bg-background-secondary shadow-shadow flex-row items-center justify-between gap-4"
+  data-testid="plugin-store-item"
+>
+  <div
+    class="flex min-w-0 flex-1 flex-col gap-1"
+  >
+    <div
+      class="flex items-center gap-2"
+    >
+      <h3
+        class="text-foreground truncate text-base font-bold"
+        data-testid="plugin-store-item-name"
+      >
+        YouTube Music
+      </h3>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-cyan text-foreground"
+      >
+        Streaming
+      </span>
+    </div>
+    <p
+      class="text-foreground-secondary line-clamp-2 text-sm"
+      data-testid="plugin-store-item-description"
+    >
+      Stream music directly from YouTube Music with full search and playlist support.
+    </p>
+    <p
+      class="text-foreground-secondary text-xs"
+      data-testid="plugin-store-item-author"
+    >
+      by
+       
+      Nuclear Team
+    </p>
+  </div>
+  <div
+    class="shrink-0"
+  >
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2 w-28"
+      data-headlessui-state=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-download"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 15V3"
+        />
+        <path
+          d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+        />
+        <path
+          d="m7 10 5 5 5-5"
+        />
+      </svg>
+      <span
+        class="ml-2"
+      >
+        Install
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PluginStoreItem > (Snapshot) renders installed state 1`] = `
+<div
+  class="border-border text-foreground flex h-full w-full rounded-md border p-4 bg-background-secondary shadow-shadow flex-row items-center justify-between gap-4"
+  data-testid="plugin-store-item"
+>
+  <div
+    class="flex min-w-0 flex-1 flex-col gap-1"
+  >
+    <div
+      class="flex items-center gap-2"
+    >
+      <h3
+        class="text-foreground truncate text-base font-bold"
+        data-testid="plugin-store-item-name"
+      >
+        YouTube Music
+      </h3>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-cyan text-foreground"
+      >
+        Streaming
+      </span>
+    </div>
+    <p
+      class="text-foreground-secondary line-clamp-2 text-sm"
+      data-testid="plugin-store-item-description"
+    >
+      Stream music directly from YouTube Music with full search and playlist support.
+    </p>
+    <p
+      class="text-foreground-secondary text-xs"
+      data-testid="plugin-store-item-author"
+    >
+      by
+       
+      Nuclear Team
+    </p>
+  </div>
+  <div
+    class="shrink-0"
+  >
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2 w-28"
+      data-disabled=""
+      data-headlessui-state="disabled"
+      disabled=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-check"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20 6 9 17l-5-5"
+        />
+      </svg>
+      <span
+        class="ml-2"
+      >
+        Installed
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PluginStoreItem > (Snapshot) renders installing state 1`] = `
+<div
+  class="border-border text-foreground flex h-full w-full rounded-md border p-4 bg-background-secondary shadow-shadow flex-row items-center justify-between gap-4"
+  data-testid="plugin-store-item"
+>
+  <div
+    class="flex min-w-0 flex-1 flex-col gap-1"
+  >
+    <div
+      class="flex items-center gap-2"
+    >
+      <h3
+        class="text-foreground truncate text-base font-bold"
+        data-testid="plugin-store-item-name"
+      >
+        YouTube Music
+      </h3>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-cyan text-foreground"
+      >
+        Streaming
+      </span>
+    </div>
+    <p
+      class="text-foreground-secondary line-clamp-2 text-sm"
+      data-testid="plugin-store-item-description"
+    >
+      Stream music directly from YouTube Music with full search and playlist support.
+    </p>
+    <p
+      class="text-foreground-secondary text-xs"
+      data-testid="plugin-store-item-author"
+    >
+      by
+       
+      Nuclear Team
+    </p>
+  </div>
+  <div
+    class="shrink-0"
+  >
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2 w-28"
+      data-disabled=""
+      data-headlessui-state="disabled"
+      disabled=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-loader-pinwheel animate-spin"
+        data-testid="loader"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M22 12a1 1 0 0 1-10 0 1 1 0 0 0-10 0"
+        />
+        <path
+          d="M7 20.7a1 1 0 1 1 5-8.7 1 1 0 1 0 5-8.6"
+        />
+        <path
+          d="M7 3.3a1 1 0 1 1 5 8.6 1 1 0 1 0 5 8.6"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+        />
+      </svg>
+      <span
+        class="ml-2"
+      >
+        Installing
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PluginStoreItem > (Snapshot) renders with custom labels 1`] = `
+<div
+  class="border-border text-foreground flex h-full w-full rounded-md border p-4 bg-background-secondary shadow-shadow flex-row items-center justify-between gap-4"
+  data-testid="plugin-store-item"
+>
+  <div
+    class="flex min-w-0 flex-1 flex-col gap-1"
+  >
+    <div
+      class="flex items-center gap-2"
+    >
+      <h3
+        class="text-foreground truncate text-base font-bold"
+        data-testid="plugin-store-item-name"
+      >
+        YouTube Music
+      </h3>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-cyan text-foreground"
+      >
+        Streaming
+      </span>
+    </div>
+    <p
+      class="text-foreground-secondary line-clamp-2 text-sm"
+      data-testid="plugin-store-item-description"
+    >
+      Stream music directly from YouTube Music with full search and playlist support.
+    </p>
+    <p
+      class="text-foreground-secondary text-xs"
+      data-testid="plugin-store-item-author"
+    >
+      from
+       
+      Nuclear Team
+    </p>
+  </div>
+  <div
+    class="shrink-0"
+  >
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2 w-28"
+      data-headlessui-state=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-download"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 15V3"
+        />
+        <path
+          d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+        />
+        <path
+          d="m7 10 5 5 5-5"
+        />
+      </svg>
+      <span
+        class="ml-2"
+      >
+        Get
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PluginStoreItem > (Snapshot) renders with long description 1`] = `
+<div
+  class="border-border text-foreground flex h-full w-full rounded-md border p-4 bg-background-secondary shadow-shadow flex-row items-center justify-between gap-4"
+  data-testid="plugin-store-item"
+>
+  <div
+    class="flex min-w-0 flex-1 flex-col gap-1"
+  >
+    <div
+      class="flex items-center gap-2"
+    >
+      <h3
+        class="text-foreground truncate text-base font-bold"
+        data-testid="plugin-store-item-name"
+      >
+        YouTube Music
+      </h3>
+      <span
+        class="border-border inline-flex items-center justify-center border-2 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-semibold bg-accent-cyan text-foreground"
+      >
+        Streaming
+      </span>
+    </div>
+    <p
+      class="text-foreground-secondary line-clamp-2 text-sm"
+      data-testid="plugin-store-item-description"
+    >
+      This is a very long description that should be truncated after two lines. It contains a lot of text that explains what the plugin does in great detail, including all the features and capabilities it provides to users.
+    </p>
+    <p
+      class="text-foreground-secondary text-xs"
+      data-testid="plugin-store-item-author"
+    >
+      by
+       
+      Nuclear Team
+    </p>
+  </div>
+  <div
+    class="shrink-0"
+  >
+    <button
+      class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2 w-28"
+      data-headlessui-state=""
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="lucide lucide-download"
+        fill="none"
+        height="16"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 15V3"
+        />
+        <path
+          d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+        />
+        <path
+          d="m7 10 5 5 5-5"
+        />
+      </svg>
+      <span
+        class="ml-2"
+      >
+        Install
+      </span>
+    </button>
+  </div>
+</div>
+`;

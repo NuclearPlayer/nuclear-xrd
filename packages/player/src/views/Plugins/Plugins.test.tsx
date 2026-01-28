@@ -21,9 +21,12 @@ describe('Plugins view', () => {
     resetInMemoryTauriStore();
     mockCopyDirRecursive();
   });
+
   it('(Snapshot) renders the plugins view', async () => {
-    const { asFragment } = await PluginsWrapper.mount();
-    expect(asFragment()).toMatchSnapshot();
+    const component = (await PluginsWrapper.mount()).getByTestId(
+      'player-workspace-main',
+    );
+    expect(component).toMatchSnapshot();
   });
 
   it('adds a plugin and enables it', async () => {

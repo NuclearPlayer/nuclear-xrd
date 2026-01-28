@@ -77,6 +77,10 @@ export const PluginFsMock = {
       throw new Error(`fs.readTextFile called for unknown path: ${path}`);
     });
   },
+  setRemove: (value: undefined = undefined) => {
+    (fs.remove as Mock).mockResolvedValue(value);
+    return fs.remove as Mock;
+  },
   setRemoveFor: (path: string, baseDir: string, value: boolean | undefined) => {
     (fs.remove as Mock).mockImplementation(
       async (
