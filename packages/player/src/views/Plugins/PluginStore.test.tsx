@@ -111,10 +111,10 @@ describe('Plugin Store', () => {
     expect(screen.getByText('No plugins found')).toBeVisible();
   });
 
-  it.todo('installs a plugin from the store', async () => {
+  it('installs a plugin from the store', async () => {
     setupRegistryMock();
     FetchMock.get(
-      'NuclearPlayer/nuclear-youtube-plugin/releases/latest',
+      '/repos/NuclearPlayer/nuclear-youtube-plugin/releases/latest',
       fakeGitHubRelease('NuclearPlayer/nuclear-youtube-plugin'),
     );
 
@@ -145,13 +145,11 @@ describe('Plugin Store', () => {
 
     await youtubePlugin.install();
 
-    const installedButton = await screen.findByRole('button', {
-      name: /installed/i,
-    });
-    expect(installedButton).toBeVisible();
+    await screen.findByRole('button', { name: /installed/i });
 
     await PluginsWrapper.goToInstalledTab();
     const installedPlugins = PluginsWrapper.getPlugins();
+    expect(installedPlugins).toHaveLength(1);
     expect(installedPlugins[0].name).toBe('YouTube Music');
   });
 });

@@ -73,7 +73,7 @@ export const fakeYouTubePluginManifest = JSON.stringify({
   nuclear: {
     displayName: 'YouTube Music',
     category: 'streaming',
-    icon: { type: 'lucide', name: 'Youtube' },
+    icon: { type: 'link', link: 'https://example.com/youtube-icon.png' },
     permissions: [],
   },
 });
