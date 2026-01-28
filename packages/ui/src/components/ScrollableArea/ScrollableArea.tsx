@@ -16,7 +16,6 @@ export type ScrollableAreaProps = {
   fadeScrollbars?: boolean;
   autoHideDelay?: number; // ms, default 1000
   'data-testid'?: string;
-  noPadding?: boolean;
 };
 
 type ScrollMetrics = {
@@ -249,7 +248,6 @@ export const ScrollableArea: FC<ScrollableAreaProps> = ({
   fadeScrollbars = true,
   autoHideDelay = 1000,
   'data-testid': testId,
-  noPadding,
 }) => {
   const { ref, metrics, isScrolling, handleScroll } = useScrollMetrics(
     fadeScrollbars,
@@ -259,7 +257,6 @@ export const ScrollableArea: FC<ScrollableAreaProps> = ({
   const needsVertical = metrics.scrollHeight > metrics.clientHeight;
   const needsHorizontal = metrics.scrollWidth > metrics.clientWidth;
   const needsCorner = needsVertical && needsHorizontal;
-  const hasPadding = !noPadding;
 
   return (
     <div
@@ -268,11 +265,7 @@ export const ScrollableArea: FC<ScrollableAreaProps> = ({
     >
       <div
         ref={ref}
-        //The padding is needed here to make room for scrollbars
-        className={cn(
-          'scrollbar-hide flex h-full w-full flex-col overflow-auto',
-          { 'pr-6 pb-6': hasPadding },
-        )}
+        className="scrollbar-hide flex h-full w-full flex-col overflow-auto"
         onScroll={handleScroll}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
