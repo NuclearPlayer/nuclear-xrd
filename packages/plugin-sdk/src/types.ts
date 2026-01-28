@@ -18,9 +18,9 @@ export type PluginManifest = {
 
 export type NuclearPlugin = {
   onLoad?(api: NuclearPluginAPI): void | Promise<void>;
-  onUnload?(): void | Promise<void>;
+  onUnload?(api: NuclearPluginAPI): void | Promise<void>;
   onEnable?(api: NuclearPluginAPI): void | Promise<void>;
-  onDisable?(): void | Promise<void>;
+  onDisable?(api: NuclearPluginAPI): void | Promise<void>;
 };
 
 export type PluginMetadata = {

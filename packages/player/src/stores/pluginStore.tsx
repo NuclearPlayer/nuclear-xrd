@@ -34,6 +34,7 @@ export type PluginState = {
   installationMethod: PluginInstallationMethod;
   originalPath?: string;
   instance?: NuclearPlugin;
+  api?: NuclearPluginAPI;
   isLoading?: boolean;
 };
 
@@ -137,6 +138,12 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         warnings,
       });
 
+      const api = new NuclearPluginAPI({
+        settingsHost: createPluginSettingsHost(id, loadedMetadata.displayName),
+        queueHost,
+        providersHost,
+      });
+
       set(
         produce((state: PluginStore) => {
           state.plugins[id] = {
@@ -148,6 +155,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
             installationMethod,
             originalPath,
             instance,
+            api,
           };
         }),
       );
@@ -173,12 +181,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       return;
     }
     if (plugin.instance!.onEnable) {
-      const api = new NuclearPluginAPI({
-        settingsHost: createPluginSettingsHost(id, plugin.metadata.displayName),
-        queueHost,
-        providersHost,
-      });
-      await plugin.instance!.onEnable(api);
+      await plugin.instance!.onEnable(plugin.api!);
     }
     set(
       produce((state: PluginStore) => {
@@ -195,7 +198,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       return;
     }
     if (plugin.instance!.onDisable) {
-      await plugin.instance!.onDisable();
+      await plugin.instance!.onDisable(plugin.api!);
     }
     set(
       produce((state: PluginStore) => {
@@ -217,7 +220,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         await get().disablePlugin(id);
       }
       if (plugin.instance?.onUnload) {
-        await plugin.instance.onUnload();
+        await plugin.instance.onUnload(plugin.api!);
       }
     } catch (error) {
       unloadError = error;
@@ -249,7 +252,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       await get().disablePlugin(id);
     }
     if (plugin.instance?.onUnload) {
-      await plugin.instance.onUnload();
+      await plugin.instance.onUnload(plugin.api!);
     }
   },
 
