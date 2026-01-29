@@ -5,7 +5,7 @@ import type {
   AlbumRef,
   ArtistRef,
   ProviderRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 import type { FavoriteEntry, FavoritesData } from '@nuclearplayer/plugin-sdk';
 
@@ -21,7 +21,7 @@ type FavoritesState = FavoritesData & {
 
   loadFromDisk: () => Promise<void>;
 
-  addTrack: (ref: TrackRef) => Promise<void>;
+  addTrack: (track: Track) => Promise<void>;
   removeTrack: (source: ProviderRef) => Promise<void>;
   isTrackFavorite: (source: ProviderRef) => boolean;
 
@@ -88,7 +88,7 @@ export const useFavoritesStore = create<FavoritesState>(() => ({
 
   loadFromDisk: async () => {
     const tracks =
-      (await store.get<FavoriteEntry<TrackRef>[]>('favorites.tracks')) ?? [];
+      (await store.get<FavoriteEntry<Track>[]>('favorites.tracks')) ?? [];
     const albums =
       (await store.get<FavoriteEntry<AlbumRef>[]>('favorites.albums')) ?? [];
     const artists =
@@ -97,9 +97,9 @@ export const useFavoritesStore = create<FavoritesState>(() => ({
     useFavoritesStore.setState({ tracks, albums, artists, loaded: true });
   },
 
-  addTrack: createAddFavorite<TrackRef>('tracks'),
-  removeTrack: createRemoveFavorite<TrackRef>('tracks'),
-  isTrackFavorite: createIsFavorite<TrackRef>('tracks'),
+  addTrack: createAddFavorite<Track>('tracks'),
+  removeTrack: createRemoveFavorite<Track>('tracks'),
+  isTrackFavorite: createIsFavorite<Track>('tracks'),
 
   addAlbum: createAddFavorite<AlbumRef>('albums'),
   removeAlbum: createRemoveFavorite<AlbumRef>('albums'),

@@ -2,7 +2,7 @@ import type {
   AlbumRef,
   ArtistRef,
   ProviderRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 
 import type { FavoritesHost, FavoritesListener } from '../types/favorites';
@@ -34,8 +34,8 @@ export class FavoritesAPI {
     return this.#withHost((h) => h.getArtists());
   }
 
-  addTrack(ref: TrackRef) {
-    return this.#withHost((h) => h.addTrack(ref));
+  addTrack(track: Track) {
+    return this.#withHost((h) => h.addTrack(track));
   }
 
   removeTrack(source: ProviderRef) {

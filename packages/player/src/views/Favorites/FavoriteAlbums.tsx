@@ -1,9 +1,10 @@
 import { useNavigate } from '@tanstack/react-router';
+import { Disc3 } from 'lucide-react';
 import { useMemo, type FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
-import { Card, CardGrid, ViewShell } from '@nuclearplayer/ui';
+import { Card, CardGrid, EmptyState, ViewShell } from '@nuclearplayer/ui';
 
 import { useFavoritesStore } from '../../stores/favoritesStore';
 
@@ -20,9 +21,12 @@ export const FavoriteAlbums: FC = () => {
   return (
     <ViewShell data-testid="favorite-albums-view" title={t('favoriteAlbums')}>
       {sortedAlbums.length === 0 ? (
-        <div className="text-muted-foreground flex flex-1 items-center justify-center">
-          {t('noFavoriteAlbums')}
-        </div>
+        <EmptyState
+          icon={<Disc3 size={48} />}
+          title={t('noFavoriteAlbums')}
+          description={t('noFavoriteAlbumsDescription')}
+          className="flex-1"
+        />
       ) : (
         <CardGrid>
           {sortedAlbums.map((entry) => (

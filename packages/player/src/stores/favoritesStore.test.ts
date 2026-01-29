@@ -4,7 +4,7 @@ import {
   createAlbumRef,
   createArtistRef,
   createProviderRef,
-  createTrackRef,
+  createTrack,
 } from '../test/fixtures/favorites';
 import { resetInMemoryTauriStore } from '../test/utils/inMemoryTauriStore';
 import { initializeFavoritesStore, useFavoritesStore } from './favoritesStore';
@@ -37,7 +37,7 @@ describe('useFavoritesStore', () => {
   describe('tracks', () => {
     describe('addTrack', () => {
       it('adds a track with timestamp', async () => {
-        const trackRef = createTrackRef('spotify', 'track-1');
+        const trackRef = createTrack('spotify', 'track-1');
         await useFavoritesStore.getState().addTrack(trackRef);
 
         const state = useFavoritesStore.getState();
@@ -47,8 +47,8 @@ describe('useFavoritesStore', () => {
       });
 
       it('does not add duplicate (same provider + id)', async () => {
-        const trackRef1 = createTrackRef('spotify', 'track-1');
-        const trackRef2 = createTrackRef('spotify', 'track-1');
+        const trackRef1 = createTrack('spotify', 'track-1');
+        const trackRef2 = createTrack('spotify', 'track-1');
         trackRef2.title = 'Different Title';
 
         await useFavoritesStore.getState().addTrack(trackRef1);
@@ -60,8 +60,8 @@ describe('useFavoritesStore', () => {
       });
 
       it('allows same id from different provider', async () => {
-        const trackRef1 = createTrackRef('spotify', 'track-1');
-        const trackRef2 = createTrackRef('youtube', 'track-1');
+        const trackRef1 = createTrack('spotify', 'track-1');
+        const trackRef2 = createTrack('youtube', 'track-1');
 
         await useFavoritesStore.getState().addTrack(trackRef1);
         await useFavoritesStore.getState().addTrack(trackRef2);
@@ -73,7 +73,7 @@ describe('useFavoritesStore', () => {
 
     describe('removeTrack', () => {
       it('removes by provider + id', async () => {
-        const trackRef = createTrackRef('spotify', 'track-1');
+        const trackRef = createTrack('spotify', 'track-1');
         await useFavoritesStore.getState().addTrack(trackRef);
 
         await useFavoritesStore
@@ -85,7 +85,7 @@ describe('useFavoritesStore', () => {
       });
 
       it('does nothing if not found', async () => {
-        const trackRef = createTrackRef('spotify', 'track-1');
+        const trackRef = createTrack('spotify', 'track-1');
         await useFavoritesStore.getState().addTrack(trackRef);
 
         await useFavoritesStore
@@ -97,7 +97,7 @@ describe('useFavoritesStore', () => {
       });
 
       it('matches only provider + id, ignoring other fields', async () => {
-        const trackRef = createTrackRef('spotify', 'track-1');
+        const trackRef = createTrack('spotify', 'track-1');
         await useFavoritesStore.getState().addTrack(trackRef);
 
         await useFavoritesStore.getState().removeTrack({
@@ -113,7 +113,7 @@ describe('useFavoritesStore', () => {
 
     describe('isTrackFavorite', () => {
       it('returns true when track is favorite', async () => {
-        const trackRef = createTrackRef('spotify', 'track-1');
+        const trackRef = createTrack('spotify', 'track-1');
         await useFavoritesStore.getState().addTrack(trackRef);
 
         const result = useFavoritesStore
@@ -132,7 +132,7 @@ describe('useFavoritesStore', () => {
       });
 
       it('matches only provider + id', async () => {
-        const trackRef = createTrackRef('spotify', 'track-1');
+        const trackRef = createTrack('spotify', 'track-1');
         await useFavoritesStore.getState().addTrack(trackRef);
 
         const result = useFavoritesStore.getState().isTrackFavorite({
@@ -272,7 +272,7 @@ describe('useFavoritesStore', () => {
 
   describe('persistence', () => {
     it('loadFromDisk restores state and sets loaded: true', async () => {
-      const trackRef = createTrackRef('spotify', 'track-1');
+      const trackRef = createTrack('spotify', 'track-1');
       const albumRef = createAlbumRef('spotify', 'album-1');
       const artistRef = createArtistRef('spotify', 'artist-1');
 
@@ -302,7 +302,7 @@ describe('useFavoritesStore', () => {
     });
 
     it('changes survive reload', async () => {
-      const trackRef = createTrackRef('spotify', 'track-1');
+      const trackRef = createTrack('spotify', 'track-1');
       await useFavoritesStore.getState().addTrack(trackRef);
 
       await useFavoritesStore

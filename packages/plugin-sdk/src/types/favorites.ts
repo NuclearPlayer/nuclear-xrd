@@ -2,7 +2,7 @@ import type {
   AlbumRef,
   ArtistRef,
   ProviderRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 
 export type FavoriteEntry<T> = {
@@ -11,7 +11,7 @@ export type FavoriteEntry<T> = {
 };
 
 export type FavoritesData = {
-  tracks: FavoriteEntry<TrackRef>[];
+  tracks: FavoriteEntry<Track>[];
   albums: FavoriteEntry<AlbumRef>[];
   artists: FavoriteEntry<ArtistRef>[];
 };
@@ -19,11 +19,11 @@ export type FavoritesData = {
 export type FavoritesListener = (favorites: FavoritesData) => void;
 
 export type FavoritesHost = {
-  getTracks: () => Promise<FavoriteEntry<TrackRef>[]>;
+  getTracks: () => Promise<FavoriteEntry<Track>[]>;
   getAlbums: () => Promise<FavoriteEntry<AlbumRef>[]>;
   getArtists: () => Promise<FavoriteEntry<ArtistRef>[]>;
 
-  addTrack: (ref: TrackRef) => Promise<void>;
+  addTrack: (track: Track) => Promise<void>;
   removeTrack: (source: ProviderRef) => Promise<void>;
   isTrackFavorite: (source: ProviderRef) => Promise<boolean>;
 

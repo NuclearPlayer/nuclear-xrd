@@ -2,7 +2,7 @@ import type {
   AlbumRef,
   ArtistRef,
   ProviderRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 import type {
   FavoritesHost,
@@ -16,7 +16,8 @@ export const createFavoritesHost = (): FavoritesHost => ({
   getAlbums: async () => useFavoritesStore.getState().albums,
   getArtists: async () => useFavoritesStore.getState().artists,
 
-  addTrack: async (ref: TrackRef) => useFavoritesStore.getState().addTrack(ref),
+  addTrack: async (track: Track) =>
+    useFavoritesStore.getState().addTrack(track),
   removeTrack: async (source: ProviderRef) =>
     useFavoritesStore.getState().removeTrack(source),
   isTrackFavorite: async (source: ProviderRef) =>

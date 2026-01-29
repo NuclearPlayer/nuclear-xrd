@@ -1,9 +1,10 @@
 import { useNavigate } from '@tanstack/react-router';
+import { User } from 'lucide-react';
 import { useMemo, type FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
-import { Card, CardGrid, ViewShell } from '@nuclearplayer/ui';
+import { Card, CardGrid, EmptyState, ViewShell } from '@nuclearplayer/ui';
 
 import { useFavoritesStore } from '../../stores/favoritesStore';
 
@@ -20,9 +21,12 @@ export const FavoriteArtists: FC = () => {
   return (
     <ViewShell data-testid="favorite-artists-view" title={t('favoriteArtists')}>
       {sortedArtists.length === 0 ? (
-        <div className="text-muted-foreground flex flex-1 items-center justify-center">
-          {t('noFavoriteArtists')}
-        </div>
+        <EmptyState
+          icon={<User size={48} />}
+          title={t('noFavoriteArtists')}
+          description={t('noFavoriteArtistsDescription')}
+          className="flex-1"
+        />
       ) : (
         <CardGrid>
           {sortedArtists.map((entry) => (

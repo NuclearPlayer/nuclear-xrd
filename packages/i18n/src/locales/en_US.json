@@ -37,8 +37,11 @@
     "favoriteTracks": "Favorite tracks",
     "favoriteArtists": "Favorite artists",
     "noFavoriteAlbums": "No favorite albums yet",
+    "noFavoriteAlbumsDescription": "Albums you mark as favorites will appear here",
     "noFavoriteTracks": "No favorite tracks yet",
-    "noFavoriteArtists": "No favorite artists yet"
+    "noFavoriteTracksDescription": "Tracks you mark as favorites will appear here",
+    "noFavoriteArtists": "No favorite artists yet",
+    "noFavoriteArtistsDescription": "Artists you mark as favorites will appear here"
   },
   "search": {
     "title": "Search",

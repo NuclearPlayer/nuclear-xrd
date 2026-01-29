@@ -5,7 +5,7 @@ import {
   createAlbumRef,
   createArtistRef,
   createProviderRef,
-  createTrackRef,
+  createTrack,
 } from '../test/fixtures/favorites';
 import { resetInMemoryTauriStore } from '../test/utils/inMemoryTauriStore';
 import { favoritesHost } from './favoritesHost';
@@ -23,9 +23,7 @@ describe('favoritesHost', () => {
   });
 
   it('gets tracks', async () => {
-    await useFavoritesStore
-      .getState()
-      .addTrack(createTrackRef('spotify', 't1'));
+    await useFavoritesStore.getState().addTrack(createTrack('spotify', 't1'));
 
     const tracks = await favoritesHost.getTracks();
 
@@ -37,6 +35,7 @@ describe('favoritesHost', () => {
             "artists": [
               {
                 "name": "Test Artist",
+                "roles": [],
                 "source": {
                   "id": "artist-1",
                   "provider": "test",
@@ -101,7 +100,7 @@ describe('favoritesHost', () => {
   });
 
   it('adds and removes a track', async () => {
-    const trackRef = createTrackRef('spotify', 't1');
+    const trackRef = createTrack('spotify', 't1');
 
     await favoritesHost.addTrack(trackRef);
     expect(await favoritesHost.isTrackFavorite(trackRef.source)).toBe(true);
@@ -131,7 +130,7 @@ describe('favoritesHost', () => {
   });
 
   it('checks favorite status with ProviderRef', async () => {
-    await favoritesHost.addTrack(createTrackRef('spotify', 't1'));
+    await favoritesHost.addTrack(createTrack('spotify', 't1'));
 
     expect(
       await favoritesHost.isTrackFavorite(createProviderRef('spotify', 't1')),
@@ -145,7 +144,7 @@ describe('favoritesHost', () => {
     const listener = vi.fn();
     const unsubscribe = favoritesHost.subscribe(listener);
 
-    await favoritesHost.addTrack(createTrackRef('spotify', 't1'));
+    await favoritesHost.addTrack(createTrack('spotify', 't1'));
 
     expect(listener).toHaveBeenCalled();
     const lastCall = listener.mock.calls[listener.mock.calls.length - 1][0];
@@ -157,6 +156,7 @@ describe('favoritesHost', () => {
             "artists": [
               {
                 "name": "Test Artist",
+                "roles": [],
                 "source": {
                   "id": "artist-1",
                   "provider": "test",

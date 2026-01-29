@@ -2,14 +2,15 @@ import type {
   AlbumRef,
   ArtistRef,
   ProviderRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 
-export const createTrackRef = (provider: string, id: string): TrackRef => ({
+export const createTrack = (provider: string, id: string): Track => ({
   title: `Track ${id}`,
   artists: [
     {
       name: 'Test Artist',
+      roles: [],
       source: { provider: 'test', id: 'artist-1' },
     },
   ],
