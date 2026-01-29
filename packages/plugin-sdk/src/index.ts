@@ -18,6 +18,7 @@ export * from './types/search';
 export * from './types/queue';
 export * from './types/streaming';
 export * from './types/metadata';
+export * from './types/favorites';
 export type {
   ProvidersHost,
   ProviderKind,
