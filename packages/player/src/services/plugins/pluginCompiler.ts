@@ -65,6 +65,8 @@ const cache = new Map<string, string>();
 
 const isTs = (p: string) => p.endsWith('.ts') || p.endsWith('.tsx');
 
+const toForwardSlashes = (p: string) => p.replace(/\\/g, '/');
+
 const normalize = (parts: string[]) => {
   const out: string[] = [];
   for (const part of parts) {
@@ -137,6 +139,7 @@ export async function compilePlugin(
     return undefined;
   }
   const entrySource = await readTextFile(entryPath);
+  entryPath = toForwardSlashes(entryPath);
   const key = entryPath + ':' + simpleHash(entrySource);
   if (cache.has(key)) {
     return cache.get(key);
