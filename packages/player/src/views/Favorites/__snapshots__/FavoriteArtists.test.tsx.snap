@@ -1,0 +1,249 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FavoriteArtists view > (Snapshot) renders empty state 1`] = `
+<main
+  class="bg-background-secondary overflow-auto"
+  data-testid="player-workspace-main"
+>
+  <div
+    class="relative h-full w-full overflow-hidden"
+  >
+    <div
+      animate="center"
+      class="absolute inset-0 h-full w-full"
+      exit="exit"
+      initial="enter"
+      transition="[object Object]"
+    >
+      <div
+        class="bg-background relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
+        data-testid="favorite-artists-view"
+      >
+        <h1
+          class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+        >
+          Favorite artists
+        </h1>
+        <div
+          class="flex w-full flex-1 flex-col overflow-hidden"
+        >
+          <div
+            class="flex flex-col items-center justify-center text-center gap-4 p-8 flex-1"
+            data-testid="empty-state"
+          >
+            <div
+              class="text-foreground-secondary"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-user"
+                fill="none"
+                height="48"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"
+                />
+                <circle
+                  cx="12"
+                  cy="7"
+                  r="4"
+                />
+              </svg>
+            </div>
+            <div
+              class="flex flex-col gap-1"
+            >
+              <h3
+                class="text-foreground text-lg font-bold"
+              >
+                No favorite artists yet
+              </h3>
+              <p
+                class="text-foreground-secondary text-sm"
+              >
+                Artists you mark as favorites will appear here
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+`;
+
+exports[`FavoriteArtists view > (Snapshot) renders with artists 1`] = `
+<main
+  class="bg-background-secondary overflow-auto"
+  data-testid="player-workspace-main"
+>
+  <div
+    class="relative h-full w-full overflow-hidden"
+  >
+    <div
+      animate="center"
+      class="absolute inset-0 h-full w-full"
+      exit="exit"
+      initial="enter"
+      transition="[object Object]"
+    >
+      <div
+        class="bg-background relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
+        data-testid="favorite-artists-view"
+      >
+        <h1
+          class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+        >
+          Favorite artists
+        </h1>
+        <div
+          class="flex w-full flex-1 flex-col overflow-hidden"
+        >
+          <div
+            class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4"
+            role="grid"
+          >
+            <button
+              class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+              data-headlessui-state=""
+              data-testid="card"
+              type="button"
+            >
+              <div
+                class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+              >
+                <div
+                  class="overflow-hidden absolute inset-0"
+                >
+                  <div
+                    class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                      fill="none"
+                      height="96"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.5"
+                      viewBox="0 0 24 24"
+                      width="96"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        height="16"
+                        rx="2"
+                        width="20"
+                        x="2"
+                        y="4"
+                      />
+                      <circle
+                        cx="8"
+                        cy="10"
+                        r="2"
+                      />
+                      <path
+                        d="M8 12h8"
+                      />
+                      <circle
+                        cx="16"
+                        cy="10"
+                        r="2"
+                      />
+                      <path
+                        d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-foreground truncate text-sm font-bold"
+                >
+                  Artist artist-1
+                </div>
+              </div>
+            </button>
+            <button
+              class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+              data-headlessui-state=""
+              data-testid="card"
+              type="button"
+            >
+              <div
+                class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+              >
+                <div
+                  class="overflow-hidden absolute inset-0"
+                >
+                  <div
+                    class="pointer-events-none absolute inset-0 flex items-center justify-center"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                      fill="none"
+                      height="96"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0.5"
+                      viewBox="0 0 24 24"
+                      width="96"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        height="16"
+                        rx="2"
+                        width="20"
+                        x="2"
+                        y="4"
+                      />
+                      <circle
+                        cx="8"
+                        cy="10"
+                        r="2"
+                      />
+                      <path
+                        d="M8 12h8"
+                      />
+                      <circle
+                        cx="16"
+                        cy="10"
+                        r="2"
+                      />
+                      <path
+                        d="m6 20 .7-2.9A1.4 1.4 0 0 1 8.1 16h7.8a1.4 1.4 0 0 1 1.4 1l.7 3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="min-w-0"
+              >
+                <div
+                  class="text-foreground truncate text-sm font-bold"
+                >
+                  Artist artist-2
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+`;

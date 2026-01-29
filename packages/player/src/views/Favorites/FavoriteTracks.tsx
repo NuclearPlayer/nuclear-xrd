@@ -8,7 +8,7 @@ import { ConnectedTrackTable } from '../../components/ConnectedTrackTable';
 import { useFavoritesStore } from '../../stores/favoritesStore';
 
 export const FavoriteTracks: FC = () => {
-  const { t } = useTranslation('navigation');
+  const { t } = useTranslation('favorites');
   const favorites = useFavoritesStore((state) => state.tracks);
 
   const sortedTracks = useMemo(
@@ -22,12 +22,12 @@ export const FavoriteTracks: FC = () => {
   const hasDuration = sortedTracks.some((track) => track.durationMs != null);
 
   return (
-    <ViewShell data-testid="favorite-tracks-view" title={t('favoriteTracks')}>
+    <ViewShell data-testid="favorite-tracks-view" title={t('tracks.title')}>
       {sortedTracks.length === 0 ? (
         <EmptyState
           icon={<Music size={48} />}
-          title={t('noFavoriteTracks')}
-          description={t('noFavoriteTracksDescription')}
+          title={t('tracks.empty')}
+          description={t('tracks.emptyDescription')}
           className="flex-1"
         />
       ) : (

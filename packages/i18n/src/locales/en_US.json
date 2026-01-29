@@ -35,13 +35,24 @@
     "collection": "Collection",
     "favoriteAlbums": "Favorite albums",
     "favoriteTracks": "Favorite tracks",
-    "favoriteArtists": "Favorite artists",
-    "noFavoriteAlbums": "No favorite albums yet",
-    "noFavoriteAlbumsDescription": "Albums you mark as favorites will appear here",
-    "noFavoriteTracks": "No favorite tracks yet",
-    "noFavoriteTracksDescription": "Tracks you mark as favorites will appear here",
-    "noFavoriteArtists": "No favorite artists yet",
-    "noFavoriteArtistsDescription": "Artists you mark as favorites will appear here"
+    "favoriteArtists": "Favorite artists"
+  },
+  "favorites": {
+    "albums": {
+      "title": "Favorite albums",
+      "empty": "No favorite albums yet",
+      "emptyDescription": "Albums you mark as favorites will appear here"
+    },
+    "tracks": {
+      "title": "Favorite tracks",
+      "empty": "No favorite tracks yet",
+      "emptyDescription": "Tracks you mark as favorites will appear here"
+    },
+    "artists": {
+      "title": "Favorite artists",
+      "empty": "No favorite artists yet",
+      "emptyDescription": "Artists you mark as favorites will appear here"
+    }
   },
   "search": {
     "title": "Search",

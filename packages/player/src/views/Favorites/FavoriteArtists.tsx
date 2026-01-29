@@ -9,7 +9,7 @@ import { Card, CardGrid, EmptyState, ViewShell } from '@nuclearplayer/ui';
 import { useFavoritesStore } from '../../stores/favoritesStore';
 
 export const FavoriteArtists: FC = () => {
-  const { t } = useTranslation('navigation');
+  const { t } = useTranslation('favorites');
   const navigate = useNavigate();
   const artists = useFavoritesStore((state) => state.artists);
 
@@ -19,12 +19,12 @@ export const FavoriteArtists: FC = () => {
   );
 
   return (
-    <ViewShell data-testid="favorite-artists-view" title={t('favoriteArtists')}>
+    <ViewShell data-testid="favorite-artists-view" title={t('artists.title')}>
       {sortedArtists.length === 0 ? (
         <EmptyState
           icon={<User size={48} />}
-          title={t('noFavoriteArtists')}
-          description={t('noFavoriteArtistsDescription')}
+          title={t('artists.empty')}
+          description={t('artists.emptyDescription')}
           className="flex-1"
         />
       ) : (
