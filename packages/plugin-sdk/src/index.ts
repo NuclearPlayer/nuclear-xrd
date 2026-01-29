@@ -1,4 +1,5 @@
 export { NuclearPluginAPI, NuclearAPI } from './api';
+export { FavoritesAPI } from './api/favorites';
 export { HttpAPI } from './api/http';
 export { YtdlpAPI } from './api/ytdlp';
 export type {

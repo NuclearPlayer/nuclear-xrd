@@ -1,3 +1,4 @@
+import type { FavoritesHost } from '../types/favorites';
 import type { HttpHost } from '../types/http';
 import type { MetadataHost } from '../types/metadata';
 import { ProvidersHost } from '../types/providers';
@@ -5,6 +6,7 @@ import type { QueueHost } from '../types/queue';
 import type { SettingsHost } from '../types/settings';
 import type { StreamingHost } from '../types/streaming';
 import type { YtdlpHost } from '../types/ytdlp';
+import { FavoritesAPI } from './favorites';
 import { HttpAPI } from './http';
 import { MetadataAPI } from './metadata';
 import { Providers } from './providers';
@@ -21,8 +23,8 @@ export class NuclearAPI {
   readonly Metadata: MetadataAPI;
   readonly Http: HttpAPI;
   readonly Ytdlp: YtdlpAPI;
+  readonly Favorites: FavoritesAPI;
 
-  // All these are optional so we don't have to provide all of them in tests
   constructor(opts?: {
     settingsHost?: SettingsHost;
     providersHost?: ProvidersHost;
@@ -31,6 +33,7 @@ export class NuclearAPI {
     metadataHost?: MetadataHost;
     httpHost?: HttpHost;
     ytdlpHost?: YtdlpHost;
+    favoritesHost?: FavoritesHost;
   }) {
     this.Settings = new Settings(opts?.settingsHost);
     this.Providers = new Providers(opts?.providersHost);
@@ -39,6 +42,7 @@ export class NuclearAPI {
     this.Metadata = new MetadataAPI(opts?.metadataHost);
     this.Http = new HttpAPI(opts?.httpHost);
     this.Ytdlp = new YtdlpAPI(opts?.ytdlpHost);
+    this.Favorites = new FavoritesAPI(opts?.favoritesHost);
   }
 }
 
