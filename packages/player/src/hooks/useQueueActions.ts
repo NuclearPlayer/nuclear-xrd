@@ -1,4 +1,9 @@
+import { useCallback } from 'react';
+
+import type { Track } from '@nuclearplayer/model';
+
 import { useQueueStore } from '../stores/queueStore';
+import { useSoundStore } from '../stores/soundStore';
 
 // You can't replace this with lodash pick because it causes infinite re-renders
 export const useQueueActions = () => {
@@ -19,6 +24,15 @@ export const useQueueActions = () => {
     setShuffleEnabled,
   } = useQueueStore();
 
+  const playNow = useCallback(
+    (track: Track) => {
+      clearQueue();
+      addToQueue([track]);
+      useSoundStore.getState().play();
+    },
+    [clearQueue, addToQueue],
+  );
+
   return {
     addToQueue,
     addNext,
@@ -34,5 +48,6 @@ export const useQueueActions = () => {
     goToId,
     setRepeatMode,
     setShuffleEnabled,
+    playNow,
   };
 };
