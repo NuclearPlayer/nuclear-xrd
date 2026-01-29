@@ -7,20 +7,12 @@ import type {
   ProviderRef,
   TrackRef,
 } from '@nuclearplayer/model';
+import type { FavoriteEntry, FavoritesData } from '@nuclearplayer/plugin-sdk';
+
+export type { FavoriteEntry, FavoritesData };
 
 const FAVORITES_FILE = 'favorites.json';
 const store = new LazyStore(FAVORITES_FILE);
-
-export type FavoriteEntry<T> = {
-  ref: T;
-  addedAtIso: string;
-};
-
-export type FavoritesData = {
-  tracks: FavoriteEntry<TrackRef>[];
-  albums: FavoriteEntry<AlbumRef>[];
-  artists: FavoriteEntry<ArtistRef>[];
-};
 
 type RefWithSource = { source: ProviderRef };
 
