@@ -6,3 +6,4 @@ build
 .turbo
 storybook-static
 coverage
+.DS_Store

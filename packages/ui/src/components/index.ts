@@ -3,6 +3,7 @@ export * from './BottomBar';
 export * from './Box';
 export * from './Button';
 export * from './Card';
+export * from './FavoriteButton';
 export * from './CardGrid';
 export * from './EmptyState';
 export * from './FilterChips';
