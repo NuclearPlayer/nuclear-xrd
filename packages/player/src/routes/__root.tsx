@@ -91,18 +91,24 @@ const RootComponent = () => {
                 title={t('collection')}
                 icon={<LibraryIcon />}
               >
-                <SidebarNavigationItem>
-                  <DiscIcon />
-                  {t('favoriteAlbums')}
-                </SidebarNavigationItem>
-                <SidebarNavigationItem>
-                  <MusicIcon />
-                  {t('favoriteTracks')}
-                </SidebarNavigationItem>
-                <SidebarNavigationItem>
-                  <UserIcon />
-                  {t('favoriteArtists')}
-                </SidebarNavigationItem>
+                <Link to="/favorites/albums">
+                  <SidebarNavigationItem>
+                    <DiscIcon />
+                    {t('favoriteAlbums')}
+                  </SidebarNavigationItem>
+                </Link>
+                <Link to="/favorites/tracks">
+                  <SidebarNavigationItem>
+                    <MusicIcon />
+                    {t('favoriteTracks')}
+                  </SidebarNavigationItem>
+                </Link>
+                <Link to="/favorites/artists">
+                  <SidebarNavigationItem>
+                    <UserIcon />
+                    {t('favoriteArtists')}
+                  </SidebarNavigationItem>
+                </Link>
               </SidebarNavigationCollapsible>
             </SidebarNavigation>
           </PlayerWorkspace.LeftSidebar>

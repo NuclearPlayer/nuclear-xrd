@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App';
 import { registerBuiltInCoreSettings } from './services/coreSettings';
+import { initializeFavoritesStore } from './stores/favoritesStore';
 import { initializeQueueStore } from './stores/queueStore';
 import { initializeSettingsStore } from './stores/settingsStore';
 
@@ -22,6 +23,7 @@ import { useUpdaterStore } from './stores/updaterStore';
 
 initializeSettingsStore()
   .then(() => initializeQueueStore())
+  .then(() => initializeFavoritesStore())
   .then(() => registerBuiltInCoreSettings())
   .then(() => applyLanguageFromSettings())
   .then(() => initLanguageWatcher())

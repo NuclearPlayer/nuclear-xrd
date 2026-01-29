@@ -35,7 +35,10 @@
     "collection": "Collection",
     "favoriteAlbums": "Favorite albums",
     "favoriteTracks": "Favorite tracks",
-    "favoriteArtists": "Favorite artists"
+    "favoriteArtists": "Favorite artists",
+    "noFavoriteAlbums": "No favorite albums yet",
+    "noFavoriteTracks": "No favorite tracks yet",
+    "noFavoriteArtists": "No favorite artists yet"
   },
   "search": {
     "title": "Search",
