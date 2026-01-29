@@ -6,6 +6,8 @@ import { create } from 'zustand';
 import type { NuclearPlugin, PluginMetadata } from '@nuclearplayer/plugin-sdk';
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
+import { favoritesHost } from '../services/favoritesHost';
+import { httpHost } from '../services/httpHost';
 import {
   installPluginToManagedDir,
   removeManagedPluginInstall,
@@ -143,7 +145,9 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         settingsHost: createPluginSettingsHost(id, loadedMetadata.displayName),
         queueHost,
         providersHost,
+        httpHost,
         ytdlpHost,
+        favoritesHost,
       });
 
       set(
