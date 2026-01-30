@@ -5,6 +5,7 @@ import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
 import { Loader } from '@nuclearplayer/ui';
 
+import { ConnectedFavoriteButton } from '../../../components/ConnectedFavoriteButton';
 import { useArtistDetails } from '../hooks/useArtistDetails';
 
 type ArtistHeaderProps = {
@@ -57,6 +58,12 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
   return (
     <div className="relative">
       <div className="absolute h-100 w-full bg-gradient-to-b from-transparent to-black"></div>
+      <ConnectedFavoriteButton
+        type="artist"
+        source={{ provider: providerId, id: artistId }}
+        data={{ name: artist.name, artwork: artist.artwork }}
+        className="absolute top-4 right-4 z-10"
+      />
       <>
         {cover && (
           <div
