@@ -37,39 +37,32 @@ export const Default: Story = {
             subtitle="Queen"
             coverUrl="https://picsum.photos/seed/queen/64/64"
           />
-          <div className="py-1">
-            <TrackContextMenu.Action
-              icon={
-                <Heart
-                  size={16}
-                  className={
-                    isFavorite ? 'fill-accent-red text-accent-red' : ''
-                  }
-                />
-              }
-              onClick={() => setIsFavorite(!isFavorite)}
-            >
-              {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-            </TrackContextMenu.Action>
-            <TrackContextMenu.Action
-              icon={<Play size={16} />}
-              onClick={() => {}}
-            >
-              Play now
-            </TrackContextMenu.Action>
-            <TrackContextMenu.Action
-              icon={<ListPlus size={16} />}
-              onClick={() => {}}
-            >
-              Add to queue
-            </TrackContextMenu.Action>
-            <TrackContextMenu.Action
-              icon={<SkipForward size={16} />}
-              onClick={() => {}}
-            >
-              Play next
-            </TrackContextMenu.Action>
-          </div>
+          <TrackContextMenu.Action
+            icon={
+              <Heart
+                size={16}
+                className={isFavorite ? 'fill-accent-red text-accent-red' : ''}
+              />
+            }
+            onClick={() => setIsFavorite(!isFavorite)}
+          >
+            {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          </TrackContextMenu.Action>
+          <TrackContextMenu.Action icon={<Play size={16} />} onClick={() => {}}>
+            Play now
+          </TrackContextMenu.Action>
+          <TrackContextMenu.Action
+            icon={<ListPlus size={16} />}
+            onClick={() => {}}
+          >
+            Add to queue
+          </TrackContextMenu.Action>
+          <TrackContextMenu.Action
+            icon={<SkipForward size={16} />}
+            onClick={() => {}}
+          >
+            Play next
+          </TrackContextMenu.Action>
         </TrackContextMenu.Content>
       </TrackContextMenu>
     );
