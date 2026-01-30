@@ -210,6 +210,15 @@
       "playback": "Playback error"
     }
   },
+  "track": {
+    "actions": {
+      "playNow": "Play now",
+      "playNext": "Play next",
+      "addToQueue": "Add to queue",
+      "addToFavorites": "Add to favorites",
+      "removeFromFavorites": "Remove from favorites"
+    }
+  },
   "streaming": {
     "errors": {
       "noCandidatesFound": "Failed to find stream candidates",

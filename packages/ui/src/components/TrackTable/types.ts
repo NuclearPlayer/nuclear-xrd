@@ -31,6 +31,8 @@ export type TrackTableActions<T extends Track = Track> = {
   onPlayNow?: (track: T) => void;
   onPlayNext?: (track: T) => void;
   onAddToQueue?: (track: T) => void;
+  onToggleFavorite?: (track: T) => void;
+  onRemove?: (track: T) => void;
 };
 
 export type TrackTableProps<T extends Track = Track> = {
@@ -56,6 +58,9 @@ export type TrackTableProps<T extends Track = Track> = {
     displayQueueControls?: boolean;
   };
   actions?: TrackTableActions<T>;
+  meta?: {
+    isTrackFavorite?: (track: T) => boolean;
+  };
   rowHeight?: number;
   overscan?: number;
   classes?: TrackTableClasses;
