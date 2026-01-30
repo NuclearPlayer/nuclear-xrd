@@ -1,12 +1,22 @@
 import { screen } from '@testing-library/react';
 
 import { providersHost } from '../../services/providersHost';
+import { useFavoritesStore } from '../../stores/favoritesStore';
 import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
+import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 import { AlbumWrapper } from './Album.test-wrapper';
 
 describe('Album view', () => {
   beforeEach(() => {
+    vi.setSystemTime(new Date('2026-01-30T12:00:00.000Z'));
     providersHost.clear();
+    resetInMemoryTauriStore();
+    useFavoritesStore.setState({
+      tracks: [],
+      albums: [],
+      artists: [],
+      loaded: true,
+    });
     const provider = new MetadataProviderBuilder()
       .withSearchCapabilities(['unified', 'albums'])
       .withAlbumMetadataCapabilities(['albumDetails'])
@@ -152,5 +162,42 @@ describe('Album view', () => {
     expect(
       await screen.findByTestId('album-tracks-loader'),
     ).toBeInTheDocument();
+  });
+
+  it('adds album to favorites when clicking the heart button', async () => {
+    await AlbumWrapper.mount('Prism');
+    await AlbumWrapper.addToFavorites();
+
+    expect(useFavoritesStore.getState().albums).toMatchInlineSnapshot(`
+      [
+        {
+          "addedAtIso": "2026-01-30T12:00:00.000Z",
+          "ref": {
+            "artwork": {
+              "items": [
+                {
+                  "purpose": "cover",
+                  "url": "https://img/album-cover.jpg",
+                  "width": 600,
+                },
+              ],
+            },
+            "source": {
+              "id": "test-album-id",
+              "provider": "test-metadata-provider",
+            },
+            "title": "Prism",
+          },
+        },
+      ]
+    `);
+  });
+
+  it('removes album from favorites when clicking the heart button again', async () => {
+    await AlbumWrapper.mount('Prism');
+    await AlbumWrapper.addToFavorites();
+    await AlbumWrapper.removeFromFavorites();
+
+    expect(useFavoritesStore.getState().albums).toHaveLength(0);
   });
 });

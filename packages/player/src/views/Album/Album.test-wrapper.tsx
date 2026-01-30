@@ -4,6 +4,8 @@ import userEvent from '@testing-library/user-event';
 import App from '../../App';
 import { SearchWrapper } from '../Search/Search.test-wrapper';
 
+const user = userEvent.setup();
+
 export const AlbumWrapper = {
   async mount(header: string): Promise<RenderResult> {
     const component = await SearchWrapper.mount('test album');
@@ -11,7 +13,7 @@ export const AlbumWrapper = {
     if (albums.length === 0) {
       throw new Error('No albums found in search results');
     }
-    await userEvent.click(albums[0]!);
+    await user.click(albums[0]!);
     await screen.findByText(header);
     return component;
   },
@@ -21,7 +23,7 @@ export const AlbumWrapper = {
     if (albums.length === 0) {
       throw new Error('No albums found in search results');
     }
-    await userEvent.click(albums[0]!);
+    await user.click(albums[0]!);
     await new Promise((r) => setTimeout(r, 0));
     return component;
   },
@@ -37,9 +39,19 @@ export const AlbumWrapper = {
   getHeader: (name: string) => screen.getByRole('heading', { name }),
   getTracksTable: () => screen.queryByRole('table'),
   getTracks: () => screen.queryAllByTestId('track-row'),
-  addTrackToQueueByTitle: async (title: string) => {
+  async addTrackToQueueByTitle(title: string) {
     const allTracks = screen.getAllByTestId('track-row');
     const trackRow = allTracks.find((row) => row.textContent?.includes(title));
-    await userEvent.click(within(trackRow!).getByTestId('add-to-queue-button'));
+    await user.click(within(trackRow!).getByTestId('add-to-queue-button'));
+  },
+  async addToFavorites() {
+    const button = screen.getByRole('button', { name: 'Add to favorites' });
+    await user.click(button);
+  },
+  async removeFromFavorites() {
+    const button = screen.getByRole('button', {
+      name: 'Remove from favorites',
+    });
+    await user.click(button);
   },
 };
