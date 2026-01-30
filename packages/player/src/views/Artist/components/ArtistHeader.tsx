@@ -63,6 +63,7 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
         source={{ provider: providerId, id: artistId }}
         data={{ name: artist.name, artwork: artist.artwork }}
         className="absolute top-4 right-4 z-10"
+        data-testid="artist-favorite-button"
       />
       <>
         {cover && (

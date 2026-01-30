@@ -53,6 +53,7 @@ export const AlbumHeader: FC<AlbumHeaderProps> = ({ providerId, albumId }) => {
         source={{ provider: providerId, id: albumId }}
         data={{ title: album.title, artwork: album.artwork }}
         className="absolute top-4 right-4"
+        data-testid="album-favorite-button"
       />
       {cover && (
         <img

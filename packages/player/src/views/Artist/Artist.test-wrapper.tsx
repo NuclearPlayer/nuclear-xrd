@@ -33,14 +33,8 @@ export const ArtistWrapper = {
     const name = utils.getByText(/.+/);
     return { img, name };
   },
-  async addToFavorites() {
-    const button = screen.getByRole('button', { name: 'Add to favorites' });
-    await user.click(button);
-  },
-  async removeFromFavorites() {
-    const button = screen.getByRole('button', {
-      name: 'Remove from favorites',
-    });
+  async toggleFavorite() {
+    const button = screen.getByTestId('artist-favorite-button');
     await user.click(button);
   },
 };

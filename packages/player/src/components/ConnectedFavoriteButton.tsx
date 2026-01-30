@@ -7,6 +7,7 @@ import { useFavoritesStore } from '../stores/favoritesStore';
 
 type ConnectedFavoriteButtonProps = {
   className?: string;
+  'data-testid'?: string;
 } & (
   | { type: 'album'; source: ProviderRef; data: Omit<AlbumRef, 'source'> }
   | { type: 'artist'; source: ProviderRef; data: Omit<ArtistRef, 'source'> }
@@ -24,7 +25,7 @@ export const ConnectedFavoriteButton: FC<ConnectedFavoriteButtonProps> = (
     removeArtist,
   } = useFavoritesStore();
 
-  const { type, source, data, className } = props;
+  const { type, source, data, className, 'data-testid': testId } = props;
 
   const isFavorite =
     type === 'album' ? isAlbumFavorite(source) : isArtistFavorite(source);
@@ -50,6 +51,7 @@ export const ConnectedFavoriteButton: FC<ConnectedFavoriteButtonProps> = (
       isFavorite={isFavorite}
       onToggle={handleToggle}
       className={className}
+      data-testid={testId}
     />
   );
 };

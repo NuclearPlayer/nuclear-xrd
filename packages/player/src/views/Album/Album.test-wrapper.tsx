@@ -44,14 +44,8 @@ export const AlbumWrapper = {
     const trackRow = allTracks.find((row) => row.textContent?.includes(title));
     await user.click(within(trackRow!).getByTestId('add-to-queue-button'));
   },
-  async addToFavorites() {
-    const button = screen.getByRole('button', { name: 'Add to favorites' });
-    await user.click(button);
-  },
-  async removeFromFavorites() {
-    const button = screen.getByRole('button', {
-      name: 'Remove from favorites',
-    });
+  async toggleFavorite() {
+    const button = screen.getByTestId('album-favorite-button');
     await user.click(button);
   },
 };

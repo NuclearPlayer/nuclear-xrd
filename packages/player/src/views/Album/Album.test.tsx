@@ -166,7 +166,7 @@ describe('Album view', () => {
 
   it('adds album to favorites when clicking the heart button', async () => {
     await AlbumWrapper.mount('Prism');
-    await AlbumWrapper.addToFavorites();
+    await AlbumWrapper.toggleFavorite();
 
     expect(useFavoritesStore.getState().albums).toMatchInlineSnapshot(`
       [
@@ -195,8 +195,8 @@ describe('Album view', () => {
 
   it('removes album from favorites when clicking the heart button again', async () => {
     await AlbumWrapper.mount('Prism');
-    await AlbumWrapper.addToFavorites();
-    await AlbumWrapper.removeFromFavorites();
+    await AlbumWrapper.toggleFavorite();
+    await AlbumWrapper.toggleFavorite();
 
     expect(useFavoritesStore.getState().albums).toHaveLength(0);
   });

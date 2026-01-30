@@ -195,7 +195,7 @@ describe('Artist view', () => {
   it('adds artist to favorites when clicking the heart button', async () => {
     vi.setSystemTime(new Date('2026-01-30T12:00:00.000Z'));
     await ArtistWrapper.mount('The Beatles');
-    await ArtistWrapper.addToFavorites();
+    await ArtistWrapper.toggleFavorite();
 
     expect(useFavoritesStore.getState().artists).toMatchInlineSnapshot(`
       [
@@ -229,8 +229,8 @@ describe('Artist view', () => {
 
   it('removes artist from favorites when clicking the heart button again', async () => {
     await ArtistWrapper.mount('The Beatles');
-    await ArtistWrapper.addToFavorites();
-    await ArtistWrapper.removeFromFavorites();
+    await ArtistWrapper.toggleFavorite();
+    await ArtistWrapper.toggleFavorite();
 
     expect(useFavoritesStore.getState().artists).toHaveLength(0);
   });
