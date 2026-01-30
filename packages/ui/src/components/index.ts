@@ -30,6 +30,7 @@ export * from './Toaster';
 export * from './Toggle';
 export * from './TopBar';
 export * from './TopBarLogo';
+export * from './TrackContextMenu';
 export * from './ViewShell';
 export * from '../utils/time';
 export * from './TrackTable';
