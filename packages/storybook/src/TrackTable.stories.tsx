@@ -99,18 +99,20 @@ export const DragAndDrop: Story = {
       <TrackTable
         {...args}
         tracks={tracksState}
-        onReorder={(ids) => {
-          const map = new Map(
-            tracksState.map((track: Track) => [track.source.id, track]),
-          );
-          const reordered = ids
-            .map((id) => map.get(id)!)
-            .filter(Boolean) as Track[];
-          const withUpdatedPositions = reordered.map((t, idx) => ({
-            ...t,
-            trackNumber: idx + 1,
-          }));
-          setTracksState(withUpdatedPositions);
+        actions={{
+          onReorder: (ids: string[]) => {
+            const map = new Map(
+              tracksState.map((track: Track) => [track.source.id, track]),
+            );
+            const reordered = ids
+              .map((id) => map.get(id)!)
+              .filter(Boolean) as Track[];
+            const withUpdatedPositions = reordered.map((t, idx) => ({
+              ...t,
+              trackNumber: idx + 1,
+            }));
+            setTracksState(withUpdatedPositions);
+          },
         }}
       />
     );
@@ -171,4 +173,43 @@ export const Filtering: Story = {
       <TrackTable {...(args as TrackTableProps)} />
     </div>
   ),
+};
+
+export const WithFavorites: Story = {
+  args: {
+    tracks,
+    display: {
+      displayFavorite: true,
+      displayPosition: true,
+      displayThumbnail: true,
+      displayArtist: true,
+      displayAlbum: true,
+      displayDuration: true,
+    },
+  },
+  render: (args) => {
+    const [favorites, setFavorites] = useState<Set<string>>(new Set());
+
+    return (
+      <TrackTable
+        {...(args as TrackTableProps)}
+        actions={{
+          onToggleFavorite: (track) => {
+            setFavorites((prev) => {
+              const next = new Set(prev);
+              if (next.has(track.source.id)) {
+                next.delete(track.source.id);
+              } else {
+                next.add(track.source.id);
+              }
+              return next;
+            });
+          },
+        }}
+        meta={{
+          isTrackFavorite: (track) => favorites.has(track.source.id),
+        }}
+      />
+    );
+  },
 };

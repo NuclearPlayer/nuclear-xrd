@@ -1,10 +1,11 @@
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
-import { HashIcon, ImageIcon } from 'lucide-react';
+import { HashIcon, Heart, ImageIcon } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { pickArtwork, Track } from '@nuclearplayer/model';
 
 import { formatTimeMillis } from '../../../utils/time';
+import { FavoriteCell } from '../Cells/FavoriteCell';
 import { PositionCell } from '../Cells/PositionCell';
 import { TextCell } from '../Cells/TextCell';
 import { ThumbnailCell } from '../Cells/ThumbnailCell';
@@ -23,6 +24,12 @@ export function useColumns<T extends Track = Track>(
 
   const columns: ColumnDef<T>[] = useMemo(
     () => [
+      display?.displayFavorite &&
+        columnHelper.display({
+          id: 'favorite',
+          header: (context) => <IconHeader Icon={Heart} context={context} />,
+          cell: FavoriteCell,
+        }),
       display?.displayPosition &&
         columnHelper.accessor((track) => track.trackNumber, {
           id: 'position',

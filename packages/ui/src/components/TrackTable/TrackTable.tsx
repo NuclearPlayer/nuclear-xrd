@@ -33,6 +33,7 @@ export function TrackTable<T extends Track = Track>({
   display,
   features,
   actions,
+  meta,
   rowHeight = DEFAULT_ROW_HEIGHT,
   overscan = DEFAULT_OVERSCAN,
 }: TrackTableProps<T>) {
@@ -73,6 +74,8 @@ export function TrackTable<T extends Track = Track>({
     meta: {
       displayQueueControls: resolvedDisplay.displayQueueControls,
       onAddToQueue: actions?.onAddToQueue,
+      onToggleFavorite: actions?.onToggleFavorite,
+      isTrackFavorite: meta?.isTrackFavorite,
     },
   });
 
