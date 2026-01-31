@@ -3,16 +3,20 @@ import userEvent from '@testing-library/user-event';
 
 import { SearchWrapper } from '../Search/Search.test-wrapper';
 
+const user = userEvent.setup();
+
 export const ArtistWrapper = {
   async mount(header: string): Promise<RenderResult> {
     const component = await SearchWrapper.mount('test artist');
-    await userEvent.click(component.getByText('Test Artist'));
+    const artistLink = await screen.findByText('Test Artist');
+    await user.click(artistLink);
     await screen.findByText(header);
     return component;
   },
   async mountNoWait(): Promise<RenderResult> {
     const component = await SearchWrapper.mount('test artist');
-    await userEvent.click(component.getByText('Test Artist'));
+    const artistLink = await screen.findByText('Test Artist');
+    await user.click(artistLink);
     await new Promise((r) => setTimeout(r, 0));
     return component;
   },
@@ -30,5 +34,9 @@ export const ArtistWrapper = {
     const img = utils.queryByRole('img');
     const name = utils.getByText(/.+/);
     return { img, name };
+  },
+  async toggleFavorite() {
+    const button = await screen.findByTestId('artist-favorite-button');
+    await user.click(button);
   },
 };

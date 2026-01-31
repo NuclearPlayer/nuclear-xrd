@@ -1,0 +1,289 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TrackContextMenu > (Snapshot) renders header without cover image 1`] = `
+<body>
+  <div>
+    <div
+      class="relative"
+      data-headlessui-state="open"
+      data-open=""
+    >
+      <div
+        aria-controls="headlessui-menu-items-:rb:"
+        aria-expanded="true"
+        aria-haspopup="menu"
+        data-active=""
+        data-headlessui-state="open active hover"
+        data-hover=""
+        data-open=""
+        id="headlessui-menu-button-:ra:"
+      >
+        <button>
+          Open
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    id="headlessui-portal-root"
+  >
+    <div
+      data-headlessui-portal=""
+    >
+      <div
+        aria-labelledby="headlessui-menu-button-:ra:"
+        class="bg-background border-border z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg focus:outline-none"
+        data-anchor="bottom end"
+        data-floating-ui-focusable=""
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-menu-items-:rb:"
+        role="menu"
+        style="position: absolute; left: 0px; top: 0px; --button-width: 0px; overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
+        tabindex="0"
+      >
+        <div
+          class="border-border flex items-center gap-3 border-b"
+          role="none"
+        >
+          <div
+            class="min-w-0 flex-1 py-3 pr-3 pl-3"
+            role="none"
+          >
+            <div
+              class="text-foreground truncate text-sm font-bold"
+              role="none"
+            >
+              Paranoid Android
+            </div>
+            <div
+              class="text-foreground-secondary truncate text-xs"
+              role="none"
+            >
+              Radiohead
+            </div>
+          </div>
+        </div>
+        <button
+          class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
+          data-headlessui-state=""
+          id="headlessui-menu-item-:re:"
+          role="menuitem"
+          tabindex="-1"
+        >
+          <span
+            class="shrink-0"
+          >
+            <span>
+              •
+            </span>
+          </span>
+          <span>
+            Play Now
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`TrackContextMenu > (Snapshot) renders header without subtitle 1`] = `
+<body>
+  <div>
+    <div
+      class="relative"
+      data-headlessui-state="open"
+      data-open=""
+    >
+      <div
+        aria-controls="headlessui-menu-items-:ri:"
+        aria-expanded="true"
+        aria-haspopup="menu"
+        data-active=""
+        data-headlessui-state="open active hover"
+        data-hover=""
+        data-open=""
+        id="headlessui-menu-button-:rh:"
+      >
+        <button>
+          Open
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    id="headlessui-portal-root"
+  >
+    <div
+      data-headlessui-portal=""
+    >
+      <div
+        aria-labelledby="headlessui-menu-button-:rh:"
+        class="bg-background border-border z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg focus:outline-none"
+        data-anchor="bottom end"
+        data-floating-ui-focusable=""
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-menu-items-:ri:"
+        role="menu"
+        style="position: absolute; left: 0px; top: 0px; --button-width: 0px; overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
+        tabindex="0"
+      >
+        <div
+          class="border-border flex items-center gap-3 border-b"
+          role="none"
+        >
+          <img
+            alt=""
+            class="border-border size-16 border-r object-cover"
+            role="none"
+            src="https://example.com/night-at-the-opera.jpg"
+          />
+          <div
+            class="min-w-0 flex-1 py-3 pr-3"
+            role="none"
+          >
+            <div
+              class="text-foreground truncate text-sm font-bold"
+              role="none"
+            >
+              Bohemian Rhapsody
+            </div>
+          </div>
+        </div>
+        <button
+          class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
+          data-headlessui-state=""
+          id="headlessui-menu-item-:rl:"
+          role="menuitem"
+          tabindex="-1"
+        >
+          <span
+            class="shrink-0"
+          >
+            <span>
+              •
+            </span>
+          </span>
+          <span>
+            Play Now
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`TrackContextMenu > (Snapshot) renders with header and actions 1`] = `
+<body>
+  <div>
+    <div
+      class="relative"
+      data-headlessui-state="open"
+      data-open=""
+    >
+      <div
+        aria-controls="headlessui-menu-items-:r3:"
+        aria-expanded="true"
+        aria-haspopup="menu"
+        data-active=""
+        data-headlessui-state="open active hover"
+        data-hover=""
+        data-open=""
+        id="headlessui-menu-button-:r2:"
+      >
+        <button>
+          Open
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    id="headlessui-portal-root"
+  >
+    <div
+      data-headlessui-portal=""
+    >
+      <div
+        aria-labelledby="headlessui-menu-button-:r2:"
+        class="bg-background border-border z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg focus:outline-none"
+        data-anchor="bottom end"
+        data-floating-ui-focusable=""
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-menu-items-:r3:"
+        role="menu"
+        style="position: absolute; left: 0px; top: 0px; --button-width: 0px; overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
+        tabindex="0"
+      >
+        <div
+          class="border-border flex items-center gap-3 border-b"
+          role="none"
+        >
+          <img
+            alt=""
+            class="border-border size-16 border-r object-cover"
+            role="none"
+            src="https://example.com/meddle.jpg"
+          />
+          <div
+            class="min-w-0 flex-1 py-3 pr-3"
+            role="none"
+          >
+            <div
+              class="text-foreground truncate text-sm font-bold"
+              role="none"
+            >
+              Echoes
+            </div>
+            <div
+              class="text-foreground-secondary truncate text-xs"
+              role="none"
+            >
+              Pink Floyd
+            </div>
+          </div>
+        </div>
+        <button
+          class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
+          data-headlessui-state=""
+          id="headlessui-menu-item-:r6:"
+          role="menuitem"
+          tabindex="-1"
+        >
+          <span
+            class="shrink-0"
+          >
+            <span>
+              •
+            </span>
+          </span>
+          <span>
+            Play Now
+          </span>
+        </button>
+        <button
+          class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
+          data-headlessui-state=""
+          id="headlessui-menu-item-:r7:"
+          role="menuitem"
+          tabindex="-1"
+        >
+          <span
+            class="shrink-0"
+          >
+            <span>
+              •
+            </span>
+          </span>
+          <span>
+            Add to Queue
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;

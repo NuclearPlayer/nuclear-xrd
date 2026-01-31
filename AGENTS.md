@@ -252,6 +252,8 @@ packages/ui/src/components/Badge/
 
 Always use centralized configs from the eslint-config and tailwind-config packages.
 
+Assume I will regenerate tanstack router routes myself when I run the app to test. Do not regenerate them manually.
+
 ## Writing Plugins
 
 Plugins are standalone repos that extend Nuclear. They're compiled in-browser via esbuild-wasm - no build step needed.

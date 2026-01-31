@@ -1,12 +1,21 @@
 import { screen } from '@testing-library/react';
 
 import { providersHost } from '../../services/providersHost';
+import { useFavoritesStore } from '../../stores/favoritesStore';
 import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
+import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 import { ArtistWrapper } from './Artist.test-wrapper';
 
 describe('Artist view', () => {
   beforeEach(() => {
     providersHost.clear();
+    resetInMemoryTauriStore();
+    useFavoritesStore.setState({
+      tracks: [],
+      albums: [],
+      artists: [],
+      loaded: true,
+    });
     const provider = new MetadataProviderBuilder()
       .withSearchCapabilities(['unified', 'artists'])
       .withArtistMetadataCapabilities([
@@ -181,5 +190,48 @@ describe('Artist view', () => {
     expect(
       await screen.findByTestId('similar-artists-loader'),
     ).toBeInTheDocument();
+  });
+
+  it('adds artist to favorites when clicking the heart button', async () => {
+    vi.setSystemTime(new Date('2026-01-30T12:00:00.000Z'));
+    await ArtistWrapper.mount('The Beatles');
+    await ArtistWrapper.toggleFavorite();
+
+    expect(useFavoritesStore.getState().artists).toMatchInlineSnapshot(`
+      [
+        {
+          "addedAtIso": "2026-01-30T12:00:00.000Z",
+          "ref": {
+            "artwork": {
+              "items": [
+                {
+                  "purpose": "avatar",
+                  "url": "https://img/avatar.jpg",
+                  "width": 300,
+                },
+                {
+                  "purpose": "cover",
+                  "url": "https://img/cover.jpg",
+                  "width": 1200,
+                },
+              ],
+            },
+            "name": "The Beatles",
+            "source": {
+              "id": "test-artist-id",
+              "provider": "test-metadata-provider",
+            },
+          },
+        },
+      ]
+    `);
+  });
+
+  it('removes artist from favorites when clicking the heart button again', async () => {
+    await ArtistWrapper.mount('The Beatles');
+    await ArtistWrapper.toggleFavorite();
+    await ArtistWrapper.toggleFavorite();
+
+    expect(useFavoritesStore.getState().artists).toHaveLength(0);
   });
 });

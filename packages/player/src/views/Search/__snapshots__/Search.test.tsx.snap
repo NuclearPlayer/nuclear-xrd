@@ -50,7 +50,7 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
           id="input-:r0:"
           placeholder="Search"
           type="text"
-          value="te"
+          value="test"
         />
       </div>
       <button
@@ -378,7 +378,7 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
               <h2
                 class="mb-4 flex w-full flex-0 flex-row text-center text-xl font-semibold"
               >
-                Query: "t"
+                Query: "test"
               </h2>
               <div
                 class="flex w-full flex-1 flex-col overflow-hidden"
@@ -567,7 +567,7 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
               </div>
             </div>
             <div
-              class="min-w-0"
+              class="min-w-0 flex-1"
             >
               <div
                 class="text-foreground truncate text-sm font-bold"

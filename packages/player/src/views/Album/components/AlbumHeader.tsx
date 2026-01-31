@@ -4,6 +4,7 @@ import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
 import { Loader } from '@nuclearplayer/ui';
 
+import { ConnectedFavoriteButton } from '../../../components/ConnectedFavoriteButton';
 import { useAlbumDetails } from '../hooks/useAlbumDetails';
 
 type AlbumHeaderProps = {
@@ -46,7 +47,14 @@ export const AlbumHeader: FC<AlbumHeaderProps> = ({ providerId, albumId }) => {
   const trackCount = album.tracks?.length ?? 0;
 
   return (
-    <div className="bg-primary border-border flex flex-col gap-6 border-b-2 p-8 md:flex-row">
+    <div className="bg-primary border-border relative flex flex-col gap-6 border-b-2 p-8 md:flex-row">
+      <ConnectedFavoriteButton
+        type="album"
+        source={{ provider: providerId, id: albumId }}
+        data={{ title: album.title, artwork: album.artwork }}
+        className="absolute top-4 right-4"
+        data-testid="album-favorite-button"
+      />
       {cover && (
         <img
           src={cover.url}

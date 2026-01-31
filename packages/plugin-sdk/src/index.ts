@@ -1,4 +1,5 @@
 export { NuclearPluginAPI, NuclearAPI } from './api';
+export { FavoritesAPI } from './api/favorites';
 export { HttpAPI } from './api/http';
 export { YtdlpAPI } from './api/ytdlp';
 export type {
@@ -18,6 +19,7 @@ export * from './types/search';
 export * from './types/queue';
 export * from './types/streaming';
 export * from './types/metadata';
+export * from './types/favorites';
 export type {
   ProvidersHost,
   ProviderKind,

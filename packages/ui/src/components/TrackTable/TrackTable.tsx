@@ -19,6 +19,7 @@ import { useGlobalFilter } from './hooks/useGlobalFilter';
 import { useReorder } from './hooks/useReorder';
 import { useSorting } from './hooks/useSorting';
 import { useVirtualRows } from './hooks/useVirtualRows';
+import { mergeLabels } from './labels';
 import { ReorderLayer } from './ReorderLayer';
 import { SortableRow } from './SortableRow';
 import { TrackTableProvider } from './TrackTableContext';
@@ -33,6 +34,7 @@ export function TrackTable<T extends Track = Track>({
   display,
   features,
   actions,
+  meta,
   rowHeight = DEFAULT_ROW_HEIGHT,
   overscan = DEFAULT_OVERSCAN,
 }: TrackTableProps<T>) {
@@ -54,9 +56,12 @@ export function TrackTable<T extends Track = Track>({
   const { globalFilter, setGlobalFilter, globalFilterFn, hasFilter } =
     useGlobalFilter<T>();
 
+  const mergedLabels = mergeLabels(labels);
+
   const columns: ColumnDef<T>[] = useColumns<T>({
     display: resolvedDisplay,
     labels,
+    actions,
   });
 
   const table = useReactTable({
@@ -73,6 +78,12 @@ export function TrackTable<T extends Track = Track>({
     meta: {
       displayQueueControls: resolvedDisplay.displayQueueControls,
       onAddToQueue: actions?.onAddToQueue,
+      onToggleFavorite: actions?.onToggleFavorite,
+      onRemove: actions?.onRemove,
+      isTrackFavorite: meta?.isTrackFavorite,
+      ContextMenuWrapper: meta?.ContextMenuWrapper,
+      favoriteLabel: mergedLabels.favorite,
+      unfavoriteLabel: mergedLabels.unfavorite,
     },
   });
 
