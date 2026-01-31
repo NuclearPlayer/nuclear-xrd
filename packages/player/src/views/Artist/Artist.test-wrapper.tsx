@@ -34,7 +34,7 @@ export const ArtistWrapper = {
     return { img, name };
   },
   async toggleFavorite() {
-    const button = screen.getByTestId('artist-favorite-button');
+    const button = await screen.findByTestId('artist-favorite-button');
     await user.click(button);
   },
 };

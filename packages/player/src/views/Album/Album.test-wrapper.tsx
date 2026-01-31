@@ -45,7 +45,7 @@ export const AlbumWrapper = {
     await user.click(within(trackRow!).getByTestId('add-to-queue-button'));
   },
   async toggleFavorite() {
-    const button = screen.getByTestId('album-favorite-button');
+    const button = await screen.findByTestId('album-favorite-button');
     await user.click(button);
   },
 };
