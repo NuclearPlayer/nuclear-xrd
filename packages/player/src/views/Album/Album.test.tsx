@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react';
 
 import { providersHost } from '../../services/providersHost';
 import { useFavoritesStore } from '../../stores/favoritesStore';
+import { useQueueStore } from '../../stores/queueStore';
 import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 import { AlbumWrapper } from './Album.test-wrapper';
@@ -199,5 +200,48 @@ describe('Album view', () => {
     await AlbumWrapper.toggleFavorite();
 
     expect(useFavoritesStore.getState().albums).toHaveLength(0);
+  });
+
+  describe('Track context menu', () => {
+    beforeEach(() => {
+      useQueueStore.getState().clearQueue();
+    });
+
+    it('opens track context menu when clicking menu button', async () => {
+      await AlbumWrapper.mount('Prism');
+      await AlbumWrapper.openTrackContextMenu('Going Solo');
+
+      expect(screen.getByText('Play now')).toBeInTheDocument();
+      expect(screen.getByText('Play next')).toBeInTheDocument();
+      expect(screen.getByText('Add to queue')).toBeInTheDocument();
+      expect(screen.getByText('Add to favorites')).toBeInTheDocument();
+    });
+
+    it('adds track to favorites via context menu', async () => {
+      await AlbumWrapper.mount('Prism');
+      await AlbumWrapper.toggleTrackFavoriteViaContextMenu('Going Solo');
+
+      expect(useFavoritesStore.getState().tracks).toHaveLength(1);
+      expect(useFavoritesStore.getState().tracks[0]?.ref.source).toEqual({
+        provider: 'test-metadata-provider',
+        id: 'track-1',
+      });
+    });
+
+    it('removes track from favorites via context menu', async () => {
+      await AlbumWrapper.mount('Prism');
+      await AlbumWrapper.toggleTrackFavoriteViaContextMenu('Going Solo');
+      await AlbumWrapper.toggleTrackFavoriteViaContextMenu('Going Solo');
+
+      expect(useFavoritesStore.getState().tracks).toHaveLength(0);
+    });
+
+    it('adds track to queue via context menu', async () => {
+      await AlbumWrapper.mount('Prism');
+      await AlbumWrapper.addTrackToQueueViaContextMenu('Going Solo');
+
+      expect(useQueueStore.getState().items).toHaveLength(1);
+      expect(useQueueStore.getState().items[0]?.track.title).toBe('Going Solo');
+    });
   });
 });

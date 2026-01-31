@@ -48,4 +48,27 @@ export const AlbumWrapper = {
     const button = await screen.findByTestId('album-favorite-button');
     await user.click(button);
   },
+  async openTrackContextMenu(trackTitle: string) {
+    const allTracks = screen.getAllByTestId('track-row');
+    const trackRow = allTracks.find((row) =>
+      row.textContent?.includes(trackTitle),
+    );
+
+    await user.click(
+      within(trackRow!).getByTestId('track-context-menu-button'),
+    );
+    await screen.findByText('Play now');
+  },
+  async toggleTrackFavoriteViaContextMenu(trackTitle: string) {
+    await this.openTrackContextMenu(trackTitle);
+    const addButton = screen.queryByText('Add to favorites');
+    const removeButton = screen.queryByText('Remove from favorites');
+    const button = addButton || removeButton;
+
+    await user.click(button!);
+  },
+  async addTrackToQueueViaContextMenu(trackTitle: string) {
+    await this.openTrackContextMenu(trackTitle);
+    await user.click(screen.getByText('Add to queue'));
+  },
 };
