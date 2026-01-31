@@ -876,7 +876,7 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
               </div>
             </div>
             <div
-              class="min-w-0"
+              class="min-w-0 flex-1"
             >
               <div
                 class="text-foreground truncate text-sm font-bold"

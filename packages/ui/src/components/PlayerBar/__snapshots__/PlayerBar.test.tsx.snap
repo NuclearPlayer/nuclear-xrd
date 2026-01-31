@@ -24,7 +24,7 @@ exports[`PlayerBar > (Snapshot) active states render 1`] = `
             />
           </div>
           <div
-            class="min-w-0"
+            class="min-w-0 flex-1"
           >
             <div
               class="text-foreground truncate text-sm font-bold"
@@ -308,7 +308,7 @@ exports[`PlayerBar > (Snapshot) default render 1`] = `
             />
           </div>
           <div
-            class="min-w-0"
+            class="min-w-0 flex-1"
           >
             <div
               class="text-foreground truncate text-sm font-bold"
@@ -584,7 +584,7 @@ exports[`PlayerBar > (Snapshot) long metadata truncation 1`] = `
               />
             </div>
             <div
-              class="min-w-0"
+              class="min-w-0 flex-1"
             >
               <div
                 class="text-foreground truncate text-sm font-bold"
@@ -879,7 +879,7 @@ exports[`PlayerBar > (Snapshot) no artwork fallback 1`] = `
             </div>
           </div>
           <div
-            class="min-w-0"
+            class="min-w-0 flex-1"
           >
             <div
               class="text-foreground truncate text-sm font-bold"

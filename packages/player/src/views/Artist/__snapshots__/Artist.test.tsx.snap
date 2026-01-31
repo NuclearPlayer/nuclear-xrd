@@ -1130,7 +1130,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
               </div>
             </div>
             <div
-              class="min-w-0"
+              class="min-w-0 flex-1"
             >
               <div
                 class="text-foreground truncate text-sm font-bold"
