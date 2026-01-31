@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { cn } from '../../utils';
+
 type TrackContextMenuHeaderProps = {
   title: string;
   subtitle?: string;
@@ -20,7 +22,11 @@ export const TrackContextMenuHeader: FC<TrackContextMenuHeaderProps> = ({
           className="border-border size-16 border-r object-cover"
         />
       )}
-      <div className="min-w-0 flex-1 py-3 pr-3">
+      <div
+        className={cn('min-w-0 flex-1 py-3 pr-3', {
+          'pl-3': !coverUrl,
+        })}
+      >
         <div className="text-foreground truncate text-sm font-bold">
           {title}
         </div>

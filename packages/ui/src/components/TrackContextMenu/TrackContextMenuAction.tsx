@@ -19,7 +19,7 @@ export const TrackContextMenuAction: FC<TrackContextMenuActionProps> = ({
       {({ focus }) => (
         <button
           className={cn(
-            'flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-sm not-last:border-b',
+            'flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b',
             {
               'bg-background-secondary border-border inset-2 nth-[2]:border-t-transparent':
                 focus,
@@ -30,8 +30,8 @@ export const TrackContextMenuAction: FC<TrackContextMenuActionProps> = ({
             onClick();
           }}
         >
-          {icon}
-          {children}
+          <span className="shrink-0">{icon}</span>
+          <span>{children}</span>
         </button>
       )}
     </MenuItem>
