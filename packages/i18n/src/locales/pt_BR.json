@@ -37,6 +37,23 @@
     "favoriteTracks": "Tracks favoritos",
     "favoriteArtists": "Artistas favoritos"
   },
+  "favorites": {
+    "albums": {
+      "title": "Favorite albums",
+      "empty": "No favorite albums yet",
+      "emptyDescription": "Albums you mark as favorites will appear here"
+    },
+    "tracks": {
+      "title": "Favorite tracks",
+      "empty": "No favorite tracks yet",
+      "emptyDescription": "Tracks you mark as favorites will appear here"
+    },
+    "artists": {
+      "title": "Favorite artists",
+      "empty": "No favorite artists yet",
+      "emptyDescription": "Artists you mark as favorites will appear here"
+    }
+  },
   "search": {
     "title": "Buscar",
     "query": "Busca",
@@ -191,6 +208,15 @@
     },
     "errors": {
       "playback": "Playback error"
+    }
+  },
+  "track": {
+    "actions": {
+      "playNow": "Play now",
+      "playNext": "Play next",
+      "addToQueue": "Add to queue",
+      "addToFavorites": "Add to favorites",
+      "removeFromFavorites": "Remove from favorites"
     }
   },
   "streaming": {
