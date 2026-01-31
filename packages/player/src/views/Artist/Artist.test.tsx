@@ -230,6 +230,7 @@ describe('Artist view', () => {
   it('removes artist from favorites when clicking the heart button again', async () => {
     await ArtistWrapper.mount('The Beatles');
     await ArtistWrapper.toggleFavorite();
+    await new Promise((r) => setImmediate(r));
     await ArtistWrapper.toggleFavorite();
 
     expect(useFavoritesStore.getState().artists).toHaveLength(0);
