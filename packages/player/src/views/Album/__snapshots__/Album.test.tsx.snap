@@ -48,7 +48,7 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
           id="input-:r0:"
           placeholder="Search"
           type="text"
-          value="test "
+          value="test album"
         />
       </div>
       <button

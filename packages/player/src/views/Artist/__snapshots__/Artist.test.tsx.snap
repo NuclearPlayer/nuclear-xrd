@@ -199,7 +199,7 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
           id="input-:r0:"
           placeholder="Search"
           type="text"
-          value="test"
+          value="test artist"
         />
       </div>
       <button

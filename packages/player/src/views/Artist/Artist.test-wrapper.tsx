@@ -8,13 +8,15 @@ const user = userEvent.setup();
 export const ArtistWrapper = {
   async mount(header: string): Promise<RenderResult> {
     const component = await SearchWrapper.mount('test artist');
-    await user.click(component.getByText('Test Artist'));
+    const artistLink = await screen.findByText('Test Artist');
+    await user.click(artistLink);
     await screen.findByText(header);
     return component;
   },
   async mountNoWait(): Promise<RenderResult> {
     const component = await SearchWrapper.mount('test artist');
-    await user.click(component.getByText('Test Artist'));
+    const artistLink = await screen.findByText('Test Artist');
+    await user.click(artistLink);
     await new Promise((r) => setTimeout(r, 0));
     return component;
   },
