@@ -6,16 +6,14 @@ import { EmptyState, ViewShell } from '@nuclearplayer/ui';
 
 import { ConnectedTrackTable } from '../../components/ConnectedTrackTable';
 import { useFavoritesStore } from '../../stores/favoritesStore';
+import { sortByAddedAtDesc } from '../../utils/sort';
 
 export const FavoriteTracks: FC = () => {
   const { t } = useTranslation('favorites');
   const favorites = useFavoritesStore((state) => state.tracks);
 
   const sortedTracks = useMemo(
-    () =>
-      [...favorites]
-        .sort((a, b) => b.addedAtIso.localeCompare(a.addedAtIso))
-        .map((entry) => entry.ref),
+    () => sortByAddedAtDesc(favorites).map((entry) => entry.ref),
     [favorites],
   );
 

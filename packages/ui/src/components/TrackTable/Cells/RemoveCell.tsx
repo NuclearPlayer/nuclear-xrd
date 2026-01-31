@@ -6,21 +6,15 @@ import { Track } from '@nuclearplayer/model';
 import { Button } from '../../Button';
 
 type RemoveCellMeta = {
-  onRemove?: (track: Track) => void;
+  onRemove: (track: Track) => void;
 };
 
 export const RemoveCell = <T extends Track>({
   row,
   table,
 }: CellContext<T, unknown>) => {
-  const meta = table.options.meta as RemoveCellMeta | undefined;
+  const meta = table.options.meta as RemoveCellMeta;
   const track = row.original;
-
-  const onRemove = meta?.onRemove;
-
-  if (!onRemove) {
-    return <td className="w-10" />;
-  }
 
   return (
     <td className="w-10 text-center">
@@ -29,7 +23,7 @@ export const RemoveCell = <T extends Track>({
         variant="text"
         onClick={(e) => {
           e.stopPropagation();
-          onRemove(track);
+          meta.onRemove(track);
         }}
         aria-label="Remove from list"
       >

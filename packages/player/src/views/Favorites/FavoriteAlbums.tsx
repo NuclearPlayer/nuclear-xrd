@@ -7,16 +7,14 @@ import { pickArtwork } from '@nuclearplayer/model';
 import { Card, CardGrid, EmptyState, ViewShell } from '@nuclearplayer/ui';
 
 import { useFavoritesStore } from '../../stores/favoritesStore';
+import { sortByAddedAtDesc } from '../../utils/sort';
 
 export const FavoriteAlbums: FC = () => {
   const { t } = useTranslation('favorites');
   const navigate = useNavigate();
   const albums = useFavoritesStore((state) => state.albums);
 
-  const sortedAlbums = useMemo(
-    () => [...albums].sort((a, b) => b.addedAtIso.localeCompare(a.addedAtIso)),
-    [albums],
-  );
+  const sortedAlbums = useMemo(() => sortByAddedAtDesc(albums), [albums]);
 
   return (
     <ViewShell data-testid="favorite-albums-view" title={t('albums.title')}>

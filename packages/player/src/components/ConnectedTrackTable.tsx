@@ -9,6 +9,7 @@ import {
 
 import { useQueueActions } from '../hooks/useQueueActions';
 import { useFavoritesStore } from '../stores/favoritesStore';
+import { ConnectedTrackContextMenu } from './ConnectedTrackContextMenu';
 
 type ConnectedTrackTableProps = Omit<
   TrackTableProps<Track>,
@@ -46,6 +47,7 @@ export const ConnectedTrackTable: FC<ConnectedTrackTableProps> = (props) => {
       }}
       meta={{
         isTrackFavorite: (track) => isTrackFavorite(track.source),
+        ContextMenuWrapper: ConnectedTrackContextMenu,
       }}
     />
   );

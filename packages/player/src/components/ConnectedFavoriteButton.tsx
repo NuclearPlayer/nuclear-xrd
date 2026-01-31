@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import type { AlbumRef, ArtistRef, ProviderRef } from '@nuclearplayer/model';
 import { FavoriteButton } from '@nuclearplayer/ui';
 
@@ -16,6 +17,7 @@ type ConnectedFavoriteButtonProps = {
 export const ConnectedFavoriteButton: FC<ConnectedFavoriteButtonProps> = (
   props,
 ) => {
+  const { t } = useTranslation('track');
   const {
     isAlbumFavorite,
     isArtistFavorite,
@@ -35,13 +37,13 @@ export const ConnectedFavoriteButton: FC<ConnectedFavoriteButtonProps> = (
       if (isFavorite) {
         removeAlbum(source);
       } else {
-        addAlbum({ ...data, source } as AlbumRef);
+        addAlbum({ ...data, source });
       }
     } else {
       if (isFavorite) {
         removeArtist(source);
       } else {
-        addArtist({ ...data, source } as ArtistRef);
+        addArtist({ ...data, source });
       }
     }
   };
@@ -52,6 +54,8 @@ export const ConnectedFavoriteButton: FC<ConnectedFavoriteButtonProps> = (
       onToggle={handleToggle}
       className={className}
       data-testid={testId}
+      ariaLabelAdd={t('actions.addToFavorites')}
+      ariaLabelRemove={t('actions.removeFromFavorites')}
     />
   );
 };

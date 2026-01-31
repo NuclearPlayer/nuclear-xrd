@@ -1,3 +1,5 @@
+import { FC, ReactNode } from 'react';
+
 import { Track } from '@nuclearplayer/model';
 
 export interface TrackTableLabels {
@@ -35,6 +37,11 @@ export type TrackTableActions<T extends Track = Track> = {
   onRemove?: (track: T) => void;
 };
 
+export type ContextMenuWrapperProps<T extends Track = Track> = {
+  track: T;
+  children: ReactNode;
+};
+
 export type TrackTableProps<T extends Track = Track> = {
   tracks: T[];
   customColumns?: unknown[];
@@ -60,6 +67,7 @@ export type TrackTableProps<T extends Track = Track> = {
   actions?: TrackTableActions<T>;
   meta?: {
     isTrackFavorite?: (track: T) => boolean;
+    ContextMenuWrapper?: FC<ContextMenuWrapperProps<T>>;
   };
   rowHeight?: number;
   overscan?: number;

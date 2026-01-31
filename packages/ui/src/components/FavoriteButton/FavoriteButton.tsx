@@ -22,10 +22,17 @@ const iconSizes = {
   default: 24,
 } as const;
 
+const buttonSizes = {
+  sm: 'icon-sm',
+  default: 'icon',
+} as const;
+
 type FavoriteButtonProps = Omit<ComponentProps<typeof Button>, 'size'> &
   VariantProps<typeof favoriteButtonVariants> & {
     isFavorite: boolean;
     onToggle: () => void;
+    ariaLabelAdd: string;
+    ariaLabelRemove: string;
   };
 
 export const FavoriteButton: FC<FavoriteButtonProps> = ({
@@ -33,25 +40,26 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
   onToggle,
   size = 'default',
   className,
+  ariaLabelAdd,
+  ariaLabelRemove,
   ...props
 }) => {
-  const iconSize = iconSizes[size ?? 'default'];
-  const buttonSize = size === 'sm' ? 'icon-sm' : 'icon';
+  const resolvedSize = size ?? 'default';
 
   return (
     <Button
-      size={buttonSize}
+      size={buttonSizes[resolvedSize]}
       variant="text"
       className={cn(favoriteButtonVariants({ size, className }))}
       onClick={(e) => {
         e.stopPropagation();
         onToggle();
       }}
-      aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+      aria-label={isFavorite ? ariaLabelRemove : ariaLabelAdd}
       {...props}
     >
       <Heart
-        size={iconSize}
+        size={iconSizes[resolvedSize]}
         className={cn(
           'transition-colors',
           isFavorite

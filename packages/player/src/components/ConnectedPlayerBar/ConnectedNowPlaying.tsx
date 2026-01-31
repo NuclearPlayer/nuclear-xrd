@@ -9,6 +9,7 @@ import { useQueueStore } from '../../stores/queueStore';
 
 export const ConnectedNowPlaying: FC = () => {
   const { t } = useTranslation('playerBar');
+  const { t: tTrack } = useTranslation('track');
   const currentItem = useQueueStore((s) => s.getCurrentItem());
   const { isTrackFavorite, addTrack, removeTrack } = useFavoritesStore();
 
@@ -41,6 +42,8 @@ export const ConnectedNowPlaying: FC = () => {
             size="sm"
             isFavorite={isFavorite}
             onToggle={handleToggleFavorite}
+            ariaLabelAdd={tTrack('actions.addToFavorites')}
+            ariaLabelRemove={tTrack('actions.removeFromFavorites')}
           />
         )
       }

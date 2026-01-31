@@ -3,17 +3,23 @@ import userEvent from '@testing-library/user-event';
 
 import { FavoriteButton } from '.';
 
+const defaultProps = {
+  onToggle: () => {},
+  ariaLabelAdd: 'Add to favorites',
+  ariaLabelRemove: 'Remove from favorites',
+};
+
 describe('FavoriteButton', () => {
   it('(Snapshot) renders unfavorited state', () => {
     const { container } = render(
-      <FavoriteButton isFavorite={false} onToggle={() => {}} />,
+      <FavoriteButton {...defaultProps} isFavorite={false} />,
     );
     expect(container).toMatchSnapshot();
   });
 
   it('(Snapshot) renders favorited state', () => {
     const { container } = render(
-      <FavoriteButton isFavorite={true} onToggle={() => {}} />,
+      <FavoriteButton {...defaultProps} isFavorite={true} />,
     );
     expect(container).toMatchSnapshot();
   });
@@ -22,7 +28,11 @@ describe('FavoriteButton', () => {
     const user = userEvent.setup();
     const onToggle = vi.fn();
     const { getByRole } = render(
-      <FavoriteButton isFavorite={false} onToggle={onToggle} />,
+      <FavoriteButton
+        {...defaultProps}
+        isFavorite={false}
+        onToggle={onToggle}
+      />,
     );
 
     await user.click(getByRole('button'));
