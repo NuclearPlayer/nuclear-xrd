@@ -58,6 +58,7 @@ export function TrackTable<T extends Track = Track>({
   const columns: ColumnDef<T>[] = useColumns<T>({
     display: resolvedDisplay,
     labels,
+    actions,
   });
 
   const table = useReactTable({
@@ -75,6 +76,7 @@ export function TrackTable<T extends Track = Track>({
       displayQueueControls: resolvedDisplay.displayQueueControls,
       onAddToQueue: actions?.onAddToQueue,
       onToggleFavorite: actions?.onToggleFavorite,
+      onRemove: actions?.onRemove,
       isTrackFavorite: meta?.isTrackFavorite,
     },
   });

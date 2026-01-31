@@ -1,14 +1,24 @@
 import { FC } from 'react';
 
 import type { Track } from '@nuclearplayer/model';
-import { TrackTable, TrackTableProps } from '@nuclearplayer/ui';
+import {
+  TrackTable,
+  TrackTableActions,
+  TrackTableProps,
+} from '@nuclearplayer/ui';
 
 import { useQueueActions } from '../hooks/useQueueActions';
 import { useFavoritesStore } from '../stores/favoritesStore';
 
-export const ConnectedTrackTable: FC<
-  Omit<TrackTableProps<Track>, 'actions' | 'meta'>
-> = (props) => {
+type ConnectedTrackTableProps = Omit<
+  TrackTableProps<Track>,
+  'actions' | 'meta'
+> & {
+  actions?: Pick<TrackTableActions<Track>, 'onRemove'>;
+};
+
+export const ConnectedTrackTable: FC<ConnectedTrackTableProps> = (props) => {
+  const { actions: externalActions, ...restProps } = props;
   const queueActions = useQueueActions();
   const { isTrackFavorite, addTrack, removeTrack } = useFavoritesStore();
 
@@ -22,16 +32,17 @@ export const ConnectedTrackTable: FC<
 
   return (
     <TrackTable
-      {...props}
+      {...restProps}
       display={{
         displayFavorite: true,
-        ...props.display,
+        ...restProps.display,
       }}
       actions={{
         onAddToQueue: (track) => queueActions.addToQueue([track]),
         onPlayNow: (track) => queueActions.playNow(track),
         onPlayNext: (track) => queueActions.addNext([track]),
         onToggleFavorite: handleToggleFavorite,
+        onRemove: externalActions?.onRemove,
       }}
       meta={{
         isTrackFavorite: (track) => isTrackFavorite(track.source),

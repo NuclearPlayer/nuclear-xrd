@@ -1,5 +1,5 @@
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
-import { HashIcon, Heart, ImageIcon } from 'lucide-react';
+import { HashIcon, Heart, ImageIcon, Trash2 } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { pickArtwork, Track } from '@nuclearplayer/model';
@@ -7,6 +7,7 @@ import { pickArtwork, Track } from '@nuclearplayer/model';
 import { formatTimeMillis } from '../../../utils/time';
 import { FavoriteCell } from '../Cells/FavoriteCell';
 import { PositionCell } from '../Cells/PositionCell';
+import { RemoveCell } from '../Cells/RemoveCell';
 import { TextCell } from '../Cells/TextCell';
 import { ThumbnailCell } from '../Cells/ThumbnailCell';
 import { TitleCell } from '../Cells/TitleCell';
@@ -16,15 +17,19 @@ import { mergeLabels } from '../labels';
 import { TrackTableProps } from '../types';
 
 export function useColumns<T extends Track = Track>(
-  props: Pick<TrackTableProps<T>, 'display' | 'labels'>,
+  props: Pick<TrackTableProps<T>, 'display' | 'labels' | 'actions'>,
 ): ColumnDef<T>[] {
-  const { display, labels } = props;
+  const { display, labels, actions } = props;
   const columnHelper = createColumnHelper<T>();
   const mergedLabels = useMemo(() => mergeLabels(labels), [labels]);
 
+  const showFavorite =
+    display?.displayFavorite && Boolean(actions?.onToggleFavorite);
+  const showDelete = display?.displayDeleteButton && Boolean(actions?.onRemove);
+
   const columns: ColumnDef<T>[] = useMemo(
     () => [
-      display?.displayFavorite &&
+      showFavorite &&
         columnHelper.display({
           id: 'favorite',
           header: (context) => <IconHeader Icon={Heart} context={context} />,
@@ -91,8 +96,14 @@ export function useColumns<T extends Track = Track>(
           ),
           cell: TextCell,
         }),
+      showDelete &&
+        columnHelper.display({
+          id: 'delete',
+          header: (context) => <IconHeader Icon={Trash2} context={context} />,
+          cell: RemoveCell,
+        }),
     ],
-    [mergedLabels, display],
+    [mergedLabels, display, showFavorite, showDelete],
   ).filter(Boolean) as ColumnDef<T>[];
 
   return columns;

@@ -213,3 +213,34 @@ export const WithFavorites: Story = {
     );
   },
 };
+
+export const WithDeleteButton: Story = {
+  args: {
+    tracks,
+    display: {
+      displayPosition: true,
+      displayThumbnail: true,
+      displayArtist: true,
+      displayAlbum: true,
+      displayDuration: true,
+      displayDeleteButton: true,
+    },
+  },
+  render: (args) => {
+    const [tracksState, setTracksState] = useState(args.tracks);
+
+    return (
+      <TrackTable
+        {...(args as TrackTableProps)}
+        tracks={tracksState}
+        actions={{
+          onRemove: (track) => {
+            setTracksState((prev) =>
+              prev.filter((t: Track) => t.source.id !== track.source.id),
+            );
+          },
+        }}
+      />
+    );
+  },
+};
