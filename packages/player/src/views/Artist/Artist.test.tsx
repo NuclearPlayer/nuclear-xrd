@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import { providersHost } from '../../services/providersHost';
 import { useFavoritesStore } from '../../stores/favoritesStore';
@@ -230,9 +230,6 @@ describe('Artist view', () => {
   it('removes artist from favorites when clicking the heart button again', async () => {
     await ArtistWrapper.mount('The Beatles');
     await ArtistWrapper.toggleFavorite();
-    await waitFor(() => {
-      expect(screen.getByTestId('artist-favorite-button')).toBeInTheDocument();
-    });
     await ArtistWrapper.toggleFavorite();
 
     expect(useFavoritesStore.getState().artists).toHaveLength(0);
