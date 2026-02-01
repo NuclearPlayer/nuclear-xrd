@@ -4,6 +4,7 @@ build
 *.d.ts.map
 *.js.map
 .turbo
+.astro
 storybook-static
 coverage
 .DS_Store

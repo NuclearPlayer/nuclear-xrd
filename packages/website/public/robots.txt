@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nuclearplayer.github.io/nuclear-xrd/sitemap-index.xml
