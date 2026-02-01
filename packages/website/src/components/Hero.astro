@@ -8,36 +8,50 @@ type Props = {
 const { version = 'v1.1.0' } = Astro.props;
 ---
 
-<section class="mb-16 text-center relative">
+<section class="mb-16 relative">
   <div
     class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-grid-pattern opacity-10 pointer-events-none -z-10"
   >
   </div>
 
-  <div
-    class="inline-block mb-6 border-2 border-foreground bg-primary px-4 py-1 text-sm font-bold uppercase tracking-widest shadow-[4px_4px_0px_0px_var(--color-foreground)]"
-  >
-    {version} Available Now
+  <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+    <div class="text-center lg:text-left">
+      <div
+        class="inline-block mb-6 border-border border bg-primary rounded-md px-4 py-1 text-sm font-bold uppercase tracking-widest shadow-shadow"
+      >
+        {version} Available Now
+      </div>
+
+      <h1
+        class="font-heading mb-8 text-5xl font-black uppercase leading-none md:text-6xl lg:text-7xl xl:text-8xl"
+      >
+        A GODDAMN<br />
+        <span
+          class="text-primary font-heading"
+          style="text-shadow: 2px 2px 0px var(--color-foreground)"
+          >MUSIC PLAYER</span
+        >
+      </h1>
+
+      <p
+        class="mb-8 text-xl md:text-2xl font-medium text-foreground-secondary max-w-xl mx-auto lg:mx-0"
+      >
+        Nuclear was built with one purpose: to let you listen to music however
+        you want.
+      </p>
+
+      <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+        <Button href="/downloads" variant="default" size="lg">Download</Button>
+        <Button href="#features" variant="secondary" size="lg">Learn more</Button>
+      </div>
+    </div>
+
+    <div class="hidden lg:block">
+      <slot />
+    </div>
   </div>
 
-  <h1
-    class="font-heading mb-8 text-6xl font-black uppercase leading-none md:text-8xl lg:text-9xl"
-  >
-    A GODDAMN<br />
-    <span
-      class="text-primary font-heading"
-      style="text-shadow: 4px 4px 0px var(--color-foreground)"
-      >MUSIC PLAYER</span
-    >
-  </h1>
-
-  <p class="mx-auto mb-12 max-w-2xl text-2xl font-medium text-foreground-secondary">
-    Nuclear was built with one purpose: to let you listen to music however you
-    want.
-  </p>
-
-  <div class="flex flex-wrap justify-center gap-6">
-    <Button href="/downloads" variant="default" size="lg">DOWNLOAD NOW</Button>
-    <Button href="#features" variant="outline" size="lg">LEARN MORE</Button>
+  <div class="mt-12 lg:hidden">
+    <slot />
   </div>
 </section>

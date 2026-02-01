@@ -16,9 +16,10 @@ const description = 'Component preview page';
 
 <BaseLayout title={title} description={description}>
   <main class="mx-auto max-w-6xl px-4 py-16">
-    <Hero version="v1.1.0" />
+    <Hero version="v1.1.0">
+      <Screenshot />
+    </Hero>
     <SocialProof />
-    <Screenshot />
     <Testimonials testimonials={testimonials} />
   </main>
 

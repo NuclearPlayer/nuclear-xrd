@@ -1,25 +1,30 @@
 ---
 type Props = {
   href: string;
-  variant?: 'default' | 'outline';
-  size?: 'default' | 'lg';
+  variant?: 'default' | 'secondary' | 'text';
+  size?: 'default' | 'lg' | 'sm';
   class?: string;
 };
 
-const { href, variant = 'default', size = 'default', class: className } = Astro.props;
+const {
+  href,
+  variant = 'default',
+  size = 'default',
+  class: className,
+} = Astro.props;
 
 const baseClasses =
-  'inline-flex cursor-pointer items-center justify-center border-2 border-foreground transition-all duration-200 font-bold uppercase tracking-wider';
+  'inline-flex cursor-pointer items-center rounded-md transition-all border-border border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none';
 
 const variantClasses = {
-  default:
-    'bg-primary text-primary-foreground shadow-[4px_4px_0px_0px_var(--color-foreground)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--color-foreground)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
-  outline:
-    'bg-background text-foreground shadow-[4px_4px_0px_0px_var(--color-foreground)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--color-foreground)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none',
+  default: 'text-foreground bg-primary',
+  secondary: 'text-foreground bg-background',
+  text: 'text-foreground bg-transparent border-transparent shadow-none hover:translate-x-0 hover:translate-y-0',
 };
 
 const sizeClasses = {
   default: 'h-10 px-4 py-2',
+  sm: 'h-9 px-3',
   lg: 'h-11 px-8',
 };
 ---

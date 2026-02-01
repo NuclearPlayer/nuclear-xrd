@@ -23,7 +23,7 @@ const socialLinks = [
 ];
 ---
 
-<footer class="border-t-4 border-foreground bg-background py-16">
+<footer class="border-t border-border bg-background py-16">
   <div class="mx-auto max-w-6xl px-4">
     <div
       class="flex flex-col items-center gap-12 md:flex-row md:justify-between"
@@ -32,12 +32,12 @@ const socialLinks = [
         <h2 class="font-heading text-4xl font-black uppercase tracking-tight">
           Nuclear
         </h2>
-        <div class="flex gap-4">
+        <div class="flex gap-3">
           {
             socialLinks.map((link) => (
               <a
                 href={link.href}
-                class="flex h-12 w-12 items-center justify-center border-2 border-foreground bg-background text-foreground shadow-[4px_4px_0px_0px_var(--color-foreground)] transition-transform hover:-translate-y-1 hover:bg-primary hover:text-primary-foreground"
+                class="flex size-10 items-center justify-center border-border border bg-background text-foreground rounded-md shadow-shadow transition-all hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none hover:bg-primary hover:text-primary-foreground"
                 aria-label={link.label}
                 rel={link.rel}
               >
@@ -53,7 +53,7 @@ const socialLinks = [
           Nuclear was created by{' '}
           <a
             href="https://github.com/nukeop"
-            class="bg-primary px-1 text-primary-foreground hover:bg-foreground hover:text-background transition-colors"
+            class="bg-primary px-1 rounded-sm hover:bg-foreground hover:text-background transition-colors"
           >
             nukeop
           </a>
