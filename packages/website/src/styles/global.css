@@ -1,0 +1,4 @@
+@import '@nuclearplayer/tailwind-config';
+@source "../components";
+@source "../layouts";
+@source "../pages";

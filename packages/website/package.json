@@ -1,0 +1,25 @@
+{
+  "name": "@nuclearplayer/website",
+  "version": "0.0.10",
+  "description": "Nuclear Music Player website",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "clean": "rm -rf dist .turbo node_modules/.cache .astro"
+  },
+  "packageManager": "pnpm@10.16.1",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
+    "astro": "^5.16.15"
+  },
+  "devDependencies": {
+    "@nuclearplayer/eslint-config": "workspace:*",
+    "@nuclearplayer/tailwind-config": "workspace:*",
+    "@tailwindcss/vite": "^4.1.11",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2"
+  }
+}

@@ -65,6 +65,14 @@
       "outputs": [
         "storybook-static/**"
       ]
+    },
+    "@nuclearplayer/website#build": {
+      "dependsOn": ["@nuclearplayer/tailwind-config#build"],
+      "outputs": ["dist/**"]
+    },
+    "@nuclearplayer/website#dev": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
