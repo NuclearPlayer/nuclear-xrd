@@ -21,6 +21,7 @@ const ignores = [
   '**/*.d.ts.map',
   '**/*.js.map',
   'packages/*/coverage',
+  '**/.astro/**/*',
 ];
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config([
