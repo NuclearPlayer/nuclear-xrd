@@ -1,0 +1,32 @@
+---
+type Props = {
+  text: string;
+  author: string;
+  link?: string;
+};
+
+const { text, author, link } = Astro.props;
+---
+
+<div class="h-full border-2 border-foreground bg-background p-6 shadow-[4px_4px_0px_0px_var(--color-foreground)]">
+  <div class="mb-4 text-4xl text-primary font-bold">"</div>
+  <blockquote class="mb-6 text-xl font-medium leading-relaxed">
+    {text}
+  </blockquote>
+  <div class="mt-auto border-t-2 border-foreground pt-4">
+    {
+      link ? (
+        <a
+          href={link}
+          class="font-bold uppercase tracking-wide hover:bg-primary hover:text-primary-foreground transition-colors px-1 -ml-1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          — {author}
+        </a>
+      ) : (
+        <span class="font-bold uppercase tracking-wide">— {author}</span>
+      )
+    }
+  </div>
+</div>

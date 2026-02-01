@@ -2,3 +2,10 @@
 @source "../components";
 @source "../layouts";
 @source "../pages";
+
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, var(--color-foreground) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-foreground) 1px, transparent 1px);
+}

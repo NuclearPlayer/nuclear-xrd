@@ -1,0 +1,26 @@
+---
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import Screenshot from '../components/Screenshot.astro';
+import SocialProof from '../components/SocialProof.astro';
+import Testimonials from '../components/Testimonials.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import '../styles/global.css';
+
+import testimonials from '../data/testimonials.json';
+
+const title = 'Preview - Nuclear Music Player';
+const description = 'Component preview page';
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="mx-auto max-w-6xl px-4 py-16">
+    <Hero version="v1.1.0" />
+    <SocialProof />
+    <Screenshot />
+    <Testimonials testimonials={testimonials} />
+  </main>
+
+  <Footer />
+</BaseLayout>

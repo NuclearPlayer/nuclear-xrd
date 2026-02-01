@@ -1,0 +1,43 @@
+---
+import Button from './Button.astro';
+
+type Props = {
+  version?: string;
+};
+
+const { version = 'v1.1.0' } = Astro.props;
+---
+
+<section class="mb-16 text-center relative">
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-grid-pattern opacity-10 pointer-events-none -z-10"
+  >
+  </div>
+
+  <div
+    class="inline-block mb-6 border-2 border-foreground bg-primary px-4 py-1 text-sm font-bold uppercase tracking-widest shadow-[4px_4px_0px_0px_var(--color-foreground)]"
+  >
+    {version} Available Now
+  </div>
+
+  <h1
+    class="font-heading mb-8 text-6xl font-black uppercase leading-none md:text-8xl lg:text-9xl"
+  >
+    A GODDAMN<br />
+    <span
+      class="text-primary font-heading"
+      style="text-shadow: 4px 4px 0px var(--color-foreground)"
+      >MUSIC PLAYER</span
+    >
+  </h1>
+
+  <p class="mx-auto mb-12 max-w-2xl text-2xl font-medium text-foreground-secondary">
+    Nuclear was built with one purpose: to let you listen to music however you
+    want.
+  </p>
+
+  <div class="flex flex-wrap justify-center gap-6">
+    <Button href="/downloads" variant="default" size="lg">DOWNLOAD NOW</Button>
+    <Button href="#features" variant="outline" size="lg">LEARN MORE</Button>
+  </div>
+</section>
