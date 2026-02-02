@@ -8,7 +8,13 @@ type Props = {
 const { version = 'v1.1.0' } = Astro.props;
 ---
 
-<section class="p-8 z-10">
+<section class="p-8 z-10 relative">
+  <img
+    src="/images/nuki-running.png"
+    alt=""
+    class="absolute -bottom-8 right-8 w-32 md:w-40 lg:w-48 pointer-events-none select-none"
+    aria-hidden="true"
+  />
   <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
     <div class="text-center lg:text-left">
       <div
