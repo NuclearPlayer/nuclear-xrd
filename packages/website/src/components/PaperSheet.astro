@@ -1,14 +1,9 @@
 ---
+type PaperColor = 'default' | 'primary' | 'purple' | 'pink' | 'orange' | 'cyan' | 'white';
+
 type Props = {
-  color?:
-    | 'default'
-    | 'primary'
-    | 'purple'
-    | 'pink'
-    | 'orange'
-    | 'cyan'
-    | 'white';
-  rotation?: 'none' | 'random' | 'slight-left' | 'slight-right';
+  color?: PaperColor;
+  rotation?: 'none' | 'random';
   showGrid?: boolean;
   class?: string;
 };
@@ -20,7 +15,7 @@ const {
   class: className = '',
 } = Astro.props;
 
-const colorClasses: Record = {
+const colorClasses: Record<PaperColor, string> = {
   default: 'bg-background',
   primary: 'bg-primary',
   purple: 'bg-accent-purple',
@@ -70,28 +65,3 @@ const rotationStyle = getRotationStyle(rotation);
     <slot />
   </div>
 </section>
-
-<style>
-  .paper-sheet {
-    box-shadow:
-      0 1px 1px rgba(0, 0, 0, 0.04),
-      0 2px 2px rgba(0, 0, 0, 0.04),
-      0 4px 4px rgba(0, 0, 0, 0.04),
-      0 8px 8px rgba(0, 0, 0, 0.04),
-      0 16px 16px rgba(0, 0, 0, 0.04),
-      0 32px 32px rgba(0, 0, 0, 0.04);
-  }
-
-  .bg-paper-texture {
-    background-image: url('/textures/paper.png');
-    background-size: cover;
-    background-position: center;
-  }
-
-  .bg-grid-pattern {
-    background-size: 40px 40px;
-    background-image:
-      linear-gradient(to right, var(--color-foreground) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--color-foreground) 1px, transparent 1px);
-  }
-</style>

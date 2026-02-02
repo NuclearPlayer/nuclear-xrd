@@ -1,6 +1,5 @@
 ---
 type Props = {
-  spacing?: string;
   class?: string;
 };
 
@@ -18,9 +17,3 @@ const { class: className = '' } = Astro.props;
     <slot />
   </div>
 </div>
-
-<style>
-  .bg-paper-texture {
-    background-image: url('/textures/paper.png');
-  }
-</style>
