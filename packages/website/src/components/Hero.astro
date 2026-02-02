@@ -8,12 +8,7 @@ type Props = {
 const { version = 'v1.1.0' } = Astro.props;
 ---
 
-<section class="mb-16 relative">
-  <div
-    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-grid-pattern opacity-10 pointer-events-none -z-10"
-  >
-  </div>
-
+<section class="p-8 z-10">
   <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
     <div class="text-center lg:text-left">
       <div
@@ -42,7 +37,9 @@ const { version = 'v1.1.0' } = Astro.props;
 
       <div class="flex flex-wrap justify-center lg:justify-start gap-4">
         <Button href="/downloads" variant="default" size="lg">Download</Button>
-        <Button href="#features" variant="secondary" size="lg">Learn more</Button>
+        <Button href="#features" variant="secondary" size="lg"
+          >Learn more</Button
+        >
       </div>
     </div>
 

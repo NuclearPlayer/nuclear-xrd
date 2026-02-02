@@ -9,7 +9,6 @@ type FeaturedLink = {
 type Props = {
   starCount?: string;
   featuredOn?: FeaturedLink[];
-  alsoSeenOn?: FeaturedLink[];
 };
 
 const {
@@ -18,56 +17,36 @@ const {
     { name: 'Reddit', href: '#' },
     { name: 'Hacker News', href: '#' },
     { name: 'DistroTube', href: '#' },
-  ],
-  alsoSeenOn = [
-    { name: 'OMG! Ubuntu!', href: '#' },
-    { name: 'FOSSMint', href: '#' },
-    { name: 'Korben.info', href: '#' },
-    { name: 'Softpedia', href: '#' },
     { name: "It's FOSS", href: '#' },
+    { name: 'OMG! Ubuntu!', href: '#' },
   ],
 } = Astro.props;
 ---
 
-<section class="mb-16 text-center">
-  <div class="inline-flex items-center gap-2 mb-8">
-    <Star class="size-5 text-primary" />
+<section class="text-center p-4">
+  <div class="inline-flex items-center gap-2 mb-6">
+    <Star class="size-5 fill-amber-300" />
     <span class="text-lg font-bold uppercase tracking-wide">
-      Loved by {starCount} people on GitHub
+      {starCount} stars on GitHub
     </span>
-  </div>
-
-  <div class="mb-4">
-    <span
-      class="text-sm font-bold uppercase tracking-widest text-foreground-secondary"
-    >
-      Featured on
-    </span>
-  </div>
-
-  <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10 mb-8">
-    {
-      featuredOn.map((link) => (
-        <a
-          href={link.href}
-          class="text-xl md:text-2xl font-bold hover:text-primary transition-colors"
-        >
-          {link.name}
-        </a>
-      ))
-    }
+    <Star class="size-5 fill-amber-300" />
   </div>
 
   <div
-    class="flex flex-wrap justify-center items-center gap-4 text-sm text-foreground-secondary"
+    class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm font-medium"
   >
     {
-      alsoSeenOn.map((link, index) => (
+      featuredOn.map((link, index) => (
         <>
-          <a href={link.href} class="hover:text-foreground transition-colors">
+          <a
+            href={link.href}
+            class="hover:underline underline-offset-4 transition-colors"
+          >
             {link.name}
           </a>
-          {index < alsoSeenOn.length - 1 && <span>•</span>}
+          {index < featuredOn.length - 1 && (
+            <span class="text-foreground-secondary hidden sm:inline">•</span>
+          )}
         </>
       ))
     }

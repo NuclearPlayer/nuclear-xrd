@@ -1,6 +1,9 @@
 ---
+import Doodles from '../components/Doodles.astro';
 import Footer from '../components/Footer.astro';
+import Frame from '../components/Frame.astro';
 import Hero from '../components/Hero.astro';
+import PaperSheet from '../components/PaperSheet.astro';
 import Screenshot from '../components/Screenshot.astro';
 import SocialProof from '../components/SocialProof.astro';
 import Testimonials from '../components/Testimonials.astro';
@@ -15,13 +18,25 @@ const description = 'Component preview page';
 ---
 
 <BaseLayout title={title} description={description}>
-  <main class="mx-auto max-w-6xl px-4 py-16">
-    <Hero version="v1.1.0">
-      <Screenshot />
-    </Hero>
-    <SocialProof />
-    <Testimonials testimonials={testimonials} />
-  </main>
+  <Frame spacing="48px">
+    <PaperSheet color="white" showGrid>
+      <Doodles slot="doodles" variant="scattered" count={18} />
+      <Hero version="v1.1.0">
+        <Screenshot />
+      </Hero>
+    </PaperSheet>
 
-  <Footer />
+    <PaperSheet color="cyan">
+      <SocialProof />
+    </PaperSheet>
+
+    <PaperSheet color="default">
+      <Doodles slot="doodles" variant="scattered" count={10} />
+      <Testimonials testimonials={testimonials} />
+    </PaperSheet>
+
+    <PaperSheet color="default">
+      <Footer />
+    </PaperSheet>
+  </Frame>
 </BaseLayout>

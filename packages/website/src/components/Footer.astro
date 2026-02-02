@@ -1,8 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-const currentYear = new Date().getFullYear();
-
 const socialLinks = [
   {
     href: 'https://github.com/NuclearPlayer/nuclear-xrd',
@@ -23,8 +21,8 @@ const socialLinks = [
 ];
 ---
 
-<footer class="border-t border-border bg-background py-16">
-  <div class="mx-auto max-w-6xl px-4">
+<footer class="p-4">
+  <div class="mx-auto max-w-6xl">
     <div
       class="flex flex-col items-center gap-12 md:flex-row md:justify-between"
     >
@@ -57,11 +55,6 @@ const socialLinks = [
           >
             nukeop
           </a>
-        </p>
-        <p
-          class="text-sm font-medium text-foreground-secondary uppercase tracking-widest"
-        >
-          &copy; {currentYear} Nuclear Music Player
         </p>
       </div>
     </div>

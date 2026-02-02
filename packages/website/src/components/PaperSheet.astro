@@ -1,0 +1,97 @@
+---
+type Props = {
+  color?:
+    | 'default'
+    | 'primary'
+    | 'purple'
+    | 'pink'
+    | 'orange'
+    | 'cyan'
+    | 'white';
+  rotation?: 'none' | 'random' | 'slight-left' | 'slight-right';
+  showGrid?: boolean;
+  class?: string;
+};
+
+const {
+  color = 'default',
+  rotation = 'random',
+  showGrid = false,
+  class: className = '',
+} = Astro.props;
+
+const colorClasses: Record = {
+  default: 'bg-background',
+  primary: 'bg-primary',
+  purple: 'bg-accent-purple',
+  pink: 'bg-pink-400',
+  orange: 'bg-accent-orange',
+  cyan: 'bg-accent-cyan',
+  white: 'bg-white',
+};
+
+const getRotationStyle = (rot: string): string => {
+  if (rot === 'none') return '';
+
+  // Random rotation between -1.5 and 1.5 degrees
+  const angle = (Math.random() * 3 - 1.5).toFixed(2);
+  return `transform: rotate(${angle}deg);`;
+};
+
+const rotationStyle = getRotationStyle(rotation);
+---
+
+<section
+  class:list={[
+    'paper-sheet relative overflow-hidden',
+    colorClasses[color],
+    className,
+  ]}
+  style={rotationStyle}
+>
+  {
+    showGrid && (
+      <div
+        class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"
+        aria-hidden="true"
+      />
+    )
+  }
+
+  <slot name="doodles" />
+
+  <div
+    class="absolute inset-0 bg-paper-texture mix-blend-multiply opacity-[0.7] pointer-events-none z-20"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative z-10">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .paper-sheet {
+    box-shadow:
+      0 1px 1px rgba(0, 0, 0, 0.04),
+      0 2px 2px rgba(0, 0, 0, 0.04),
+      0 4px 4px rgba(0, 0, 0, 0.04),
+      0 8px 8px rgba(0, 0, 0, 0.04),
+      0 16px 16px rgba(0, 0, 0, 0.04),
+      0 32px 32px rgba(0, 0, 0, 0.04);
+  }
+
+  .bg-paper-texture {
+    background-image: url('/textures/paper.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, var(--color-foreground) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-foreground) 1px, transparent 1px);
+  }
+</style>
