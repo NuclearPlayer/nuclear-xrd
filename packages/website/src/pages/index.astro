@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+
+const title = 'Nuclear Music Player';
+const description =
+  'A free, open-source desktop music player that streams from free sources. Currently being rebuilt from scratch.';
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="flex min-h-screen flex-col items-center justify-center px-4">
+    <img
+      src="/images/nuki-construction.png"
+      alt="Nuki the Nuclear mascot wearing a hard hat"
+      class="mb-8 h-64 w-auto"
+    />
+
+    <h1 class="font-heading mb-4 text-center text-4xl font-bold md:text-5xl">
+      Under Construction
+    </h1>
+
+    <p class="mb-8 max-w-md text-center text-lg text-muted-foreground">
+      Nuclear is being rebuilt from scratch. A new player, a new website, and a
+      whole lot of improvements are on the way.
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-4">
+      <a
+        href="https://discord.gg/JqPjKxE"
+        class="inline-flex items-center gap-2 rounded-md border-2 border-foreground bg-foreground px-6 py-3 font-medium text-background transition-colors hover:bg-background hover:text-foreground"
+      >
+        Join Discord
+      </a>
+      <a
+        href="https://github.com/NuclearPlayer/nuclear-xrd"
+        class="inline-flex items-center gap-2 rounded-md border-2 border-foreground px-6 py-3 font-medium transition-colors hover:bg-foreground hover:text-background"
+      >
+        View on GitHub
+      </a>
+    </div>
+  </main>
+</BaseLayout>

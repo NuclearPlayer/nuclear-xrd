@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+
+const title = 'Page Not Found - Nuclear Music Player';
+const description = 'The page you are looking for does not exist.';
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="flex min-h-screen flex-col items-center justify-center px-4">
+    <img
+      src="/images/nuki-construction.png"
+      alt="Nuki the Nuclear mascot"
+      class="mb-8 h-48 w-auto opacity-60"
+    />
+
+    <h1 class="font-heading mb-4 text-center text-6xl font-bold">404</h1>
+
+    <p class="mb-8 text-center text-lg text-muted-foreground">
+      This page doesn't exist. Maybe it's still under construction?
+    </p>
+
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 rounded-md border-2 border-foreground bg-foreground px-6 py-3 font-medium text-background transition-colors hover:bg-background hover:text-foreground"
+    >
+      Back to Home
+    </a>
+  </main>
+</BaseLayout>

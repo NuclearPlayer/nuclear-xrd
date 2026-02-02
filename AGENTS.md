@@ -19,6 +19,7 @@ Nuclear is a music player desktop app built with Tauri (Rust + React). This is a
 - `@nuclearplayer/i18n` - Internationalization
 - `@nuclearplayer/storybook` - Component demos
 - `@nuclearplayer/docs` - Documentation
+- `@nuclearplayer/website` - Project website (Astro, separate from React ecosystem)
 
 ## Build/Lint/Test Commands
 
@@ -230,6 +231,7 @@ Tests have `vitest.globals` enabled - `describe`, `it`, `expect`, `vi` are avail
 - Use `framer-motion` and `tw-animate-css` for animations
 - Disable animations during high-friction moments (resize, drag)
 - Feel: professional yet approachable, Discord-like
+- Avoid generic AI patterns. Icon-grid feature cards, stock hero images, "Built with love" badges, and other templated designs scream "AI-generated." Be intentional about design choices.
 
 ## File Organization
 

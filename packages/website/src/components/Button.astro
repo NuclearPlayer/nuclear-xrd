@@ -1,0 +1,37 @@
+---
+type Props = {
+  href: string;
+  variant?: 'default' | 'secondary' | 'text';
+  size?: 'default' | 'lg' | 'sm';
+  class?: string;
+};
+
+const {
+  href,
+  variant = 'default',
+  size = 'default',
+  class: className,
+} = Astro.props;
+
+const baseClasses =
+  'inline-flex cursor-pointer items-center rounded-md transition-all border-border border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y hover:shadow-none';
+
+const variantClasses = {
+  default: 'text-foreground bg-primary',
+  secondary: 'text-foreground bg-background',
+  text: 'text-foreground bg-transparent border-transparent shadow-none hover:translate-x-0 hover:translate-y-0',
+};
+
+const sizeClasses = {
+  default: 'h-10 px-4 py-2',
+  sm: 'h-9 px-3',
+  lg: 'h-11 px-8',
+};
+---
+
+<a
+  href={href}
+  class:list={[baseClasses, variantClasses[variant], sizeClasses[size], className]}
+>
+  <slot />
+</a>

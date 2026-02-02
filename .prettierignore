@@ -4,3 +4,4 @@ src-tauri/target/
 src-tauri/Cargo.lock
 *.json
 *.md
+.astro/
