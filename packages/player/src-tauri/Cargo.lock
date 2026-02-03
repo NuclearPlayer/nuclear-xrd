@@ -3357,6 +3357,7 @@ dependencies = [
  "log",
  "mockall",
  "once_cell",
+ "percent-encoding",
  "reqwest",
  "serde",
  "serde_json",

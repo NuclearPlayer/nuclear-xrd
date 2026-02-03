@@ -1,3 +1,5 @@
+use log::{debug, error, warn};
+use percent_encoding::percent_decode_str;
 use reqwest::{header::HeaderMap, header::HeaderName, header::HeaderValue, Client, Method};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -31,32 +33,8 @@ const REDACTED_QUERY_PARAMS: &[&str] = &[
     "signature",
 ];
 
-fn url_decode(s: &str) -> String {
-    let mut result = String::with_capacity(s.len());
-    let mut chars = s.chars().peekable();
-
-    while let Some(c) = chars.next() {
-        if c == '%' {
-            let hex: String = chars.by_ref().take(2).collect();
-            if hex.len() == 2 {
-                if let Ok(byte) = u8::from_str_radix(&hex, 16) {
-                    result.push(byte as char);
-                    continue;
-                }
-            }
-            result.push('%');
-            result.push_str(&hex);
-        } else if c == '+' {
-            result.push(' ');
-        } else {
-            result.push(c);
-        }
-    }
-    result
-}
-
 fn is_sensitive_param(name: &str) -> bool {
-    let decoded = url_decode(name);
+    let decoded = percent_decode_str(name).decode_utf8_lossy();
     let lower = decoded.to_lowercase();
     REDACTED_QUERY_PARAMS.contains(&lower.as_str())
 }
@@ -140,27 +118,43 @@ pub async fn http_fetch(request: HttpRequest) -> Result<HttpResponse, String> {
         .and_then(|m| Method::from_str(m).ok())
         .unwrap_or(Method::GET);
 
+    let method_str = method.to_string();
+
     let mut req_builder = client.request(method, &request.url);
 
-    if let Some(headers) = request.headers {
+    if let Some(ref headers) = request.headers {
         let mut header_map = HeaderMap::new();
         for (key, value) in headers {
-            if let (Ok(name), Ok(val)) = (HeaderName::from_str(&key), HeaderValue::from_str(&value))
-            {
+            if let (Ok(name), Ok(val)) = (HeaderName::from_str(key), HeaderValue::from_str(value)) {
                 header_map.insert(name, val);
             }
         }
         req_builder = req_builder.headers(header_map);
     }
 
-    if let Some(body) = request.body {
-        req_builder = req_builder.body(body);
+    if let Some(ref body) = request.body {
+        req_builder = req_builder.body(body.clone());
     }
+
+    let redacted_url = redact_url(&request.url);
+    let redacted_hdrs = redact_headers(&request.headers.clone().unwrap_or_default());
+    let body_log = format_body_for_log(request.body.as_deref());
+    debug!(
+        target: "http",
+        "{} {} headers={:?} {}",
+        method_str,
+        redacted_url,
+        redacted_hdrs,
+        body_log
+    );
 
     let response = req_builder
         .send()
         .await
-        .map_err(|e| format!("HTTP request failed: {}", e))?;
+        .map_err(|e| {
+            error!(target: "http", "{} {} failed: {}", method_str, redacted_url, e);
+            format!("HTTP request failed: {}", e)
+        })?;
 
     let status = response.status().as_u16();
 
@@ -173,7 +167,36 @@ pub async fn http_fetch(request: HttpRequest) -> Result<HttpResponse, String> {
     let body = response
         .text()
         .await
-        .map_err(|e| format!("Failed to read response body: {}", e))?;
+        .map_err(|e| {
+            error!(target: "http", "{} {} failed to read body: {}", method_str, redacted_url, e);
+            format!("Failed to read response body: {}", e)
+        })?;
+
+    let response_hdrs = redact_headers(&headers);
+    let response_body_log = format_body_for_log(Some(&body));
+    match status {
+        500..=599 => {
+            error!(
+                target: "http",
+                "{} {} -> {} headers={:?} {}",
+                method_str, redacted_url, status, response_hdrs, response_body_log
+            );
+        }
+        400..=499 => {
+            warn!(
+                target: "http",
+                "{} {} -> {} headers={:?} {}",
+                method_str, redacted_url, status, response_hdrs, response_body_log
+            );
+        }
+        _ => {
+            debug!(
+                target: "http",
+                "{} {} -> {} headers={:?} {}",
+                method_str, redacted_url, status, response_hdrs, response_body_log
+            );
+        }
+    }
 
     Ok(HttpResponse {
         status,
