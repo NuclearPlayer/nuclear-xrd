@@ -135,6 +135,27 @@ When adding a new component to `@nuclearplayer/ui`:
 - **Utilities**: lodash-es (use individual imports: `import isEqual from 'lodash-es/isEqual'`)
 - **HTTP**: Native fetch via ApiClient base class (no axios)
 
+### Adding New Domains
+
+A "domain" is a feature area exposed to plugins (e.g., settings, queue, favorites). When adding a new domain:
+
+1. **Types** (`packages/plugin-sdk/src/types/myDomain.ts`)
+   - Define the `MyDomainHost` interface (the contract between player and SDK)
+   - Export any related types plugins will use
+
+2. **API class** (`packages/plugin-sdk/src/api/myDomain.ts`)
+   - Create a class that wraps the host and exposes methods to plugins
+   - Add to `NuclearAPI` constructor in `packages/plugin-sdk/src/api/index.ts`
+
+3. **Store** (`packages/player/src/stores/myDomainStore.ts`)
+   - Zustand store holding the domain state
+   - Persists to disk via `@tauri-apps/plugin-store` if needed
+
+4. **Host** (`packages/player/src/services/myDomainHost.ts`)
+   - Implements the `MyDomainHost` interface
+   - Bridges the SDK API to the Zustand store
+   - Passed to `NuclearAPI` when initializing plugins
+
 ### External API Clients
 
 Live in `packages/player/src/apis/`. Use `ApiClient` base class (fetch→json→Zod).
