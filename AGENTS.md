@@ -115,6 +115,14 @@ export const Component: FC<ComponentProps> = ({
 - **TanStack Query v5** - HTTP requests/server state
 - **TanStack Router** - client-side routing
 
+### Standardized Libraries
+
+- **Icons**: Lucide React (not heroicons, not font-awesome)
+- **Toasts**: Sonner
+- **Dates**: Luxon
+- **Utilities**: lodash-es (use individual imports: `import isEqual from 'lodash-es/isEqual'`)
+- **HTTP**: Native fetch via ApiClient base class (no axios)
+
 ### External API Clients
 
 Live in `packages/player/src/apis/`. Use `ApiClient` base class (fetch→json→Zod).
