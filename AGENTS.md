@@ -101,6 +101,18 @@ export const Component: FC<ComponentProps> = ({
 - Compound components (`Component.Sub`) for complex widgets
 - Keep business logic out of UI components
 
+### Adding UI Components
+
+When adding a new component to `@nuclearplayer/ui`:
+
+1. Create component directory: `packages/ui/src/components/MyComponent/`
+   - `MyComponent.tsx` - implementation
+   - `MyComponent.test.tsx` - tests (aim for 100% coverage)
+   - `index.ts` - re-exports
+2. Export from `packages/ui/src/components/index.ts`
+3. Add Storybook story in `packages/storybook/src/MyComponent.stories.tsx`
+4. Include snapshot test(s) covering all variants
+
 ### Styling (Tailwind v4)
 
 - CSS-first config in `packages/tailwind-config/global.css`
