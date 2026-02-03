@@ -1,5 +1,7 @@
 pub mod commands;
 pub mod http;
+pub mod logging;
+mod setup;
 pub mod stream_proxy;
 pub mod ytdlp;
 
@@ -20,18 +22,10 @@ pub fn run() {
             commands::download_file,
             http::http_fetch,
             ytdlp::ytdlp_search,
-            ytdlp::ytdlp_get_stream
+            ytdlp::ytdlp_get_stream,
+            logging::get_startup_logs
         ])
-        .setup(|app| {
-            if cfg!(debug_assertions) {
-                app.handle().plugin(
-                    tauri_plugin_log::Builder::default()
-                        .level(log::LevelFilter::Info)
-                        .build(),
-                )?;
-            }
-            Ok(())
-        })
+        .setup(|app| setup::init(app).map_err(|e| e.into()))
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
