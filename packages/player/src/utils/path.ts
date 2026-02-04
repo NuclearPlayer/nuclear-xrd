@@ -1,6 +1,7 @@
 import { BaseDirectory, exists, mkdir } from '@tauri-apps/plugin-fs';
 
-import { logFsError } from './logging';
+import { Logger } from '../services/logger';
+import { reportError, resolveErrorMessage } from './logging';
 
 export const ensureDir = async (
   dir: string,
@@ -15,23 +16,16 @@ export const ensureDir = async (
           baseDir,
         });
       } catch (error) {
-        await logFsError({
-          scope: 'ensureDir',
-          command: 'fs.mkdir',
-          targetPath: dir,
+        await reportError('fs', {
+          userMessage: `Failed to create directory ${dir}`,
           error,
-          withToast: true,
-          toastMessage: `Failed to create directory ${dir}`,
         });
       }
     }
   } catch (error) {
-    await logFsError({
-      scope: 'ensureDir',
-      command: 'fs.exists',
-      targetPath: dir,
-      error,
-    });
+    Logger.fs.error(
+      `fs.exists failed for ${dir}: ${resolveErrorMessage(error)}`,
+    );
   }
   return dir;
 };

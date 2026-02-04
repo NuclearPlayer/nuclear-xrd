@@ -1,8 +1,9 @@
 import { appDataDir, join } from '@tauri-apps/api/path';
 import { BaseDirectory, mkdir, remove } from '@tauri-apps/plugin-fs';
 
-import { logFsError } from '../../utils/logging';
+import { reportError, resolveErrorMessage } from '../../utils/logging';
 import { ensureDir } from '../../utils/path';
+import { Logger } from '../logger';
 import { copyDirRecursive } from '../tauri/commands';
 
 export const PLUGINS_DIR_NAME = 'plugins';
@@ -41,12 +42,9 @@ export const installPluginToManagedDir = async (
       baseDir: BaseDirectory.AppData,
     });
   } catch (error) {
-    logFsError({
-      scope: 'plugins',
-      command: 'fs.remove',
-      targetPath: destination,
-      error,
-    });
+    Logger.plugins.debug(
+      `fs.remove failed for ${destination}: ${resolveErrorMessage(error)}`,
+    );
   }
 
   // Create plugin directory
@@ -56,13 +54,9 @@ export const installPluginToManagedDir = async (
       baseDir: BaseDirectory.AppData,
     });
   } catch (error) {
-    await logFsError({
-      scope: 'plugins',
-      command: 'fs.mkdir',
-      targetPath: destination,
+    await reportError('plugins', {
+      userMessage: 'Failed to create managed plugin directory',
       error,
-      withToast: true,
-      toastMessage: 'Failed to create managed plugin directory',
     });
   }
 
@@ -98,13 +92,9 @@ export const removeManagedPluginInstall = async (
       baseDir: BaseDirectory.AppData,
     });
   } catch (error) {
-    await logFsError({
-      scope: 'plugins',
-      command: 'fs.remove',
-      targetPath: absolutePath,
+    await reportError('plugins', {
+      userMessage: 'Failed to remove managed plugin directory',
       error,
-      withToast: true,
-      toastMessage: 'Failed to remove managed plugin directory',
     });
   }
 };
