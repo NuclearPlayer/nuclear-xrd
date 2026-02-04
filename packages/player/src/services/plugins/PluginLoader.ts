@@ -12,6 +12,7 @@ import type {
 import { favoritesHost } from '../favoritesHost';
 import { httpHost } from '../httpHost';
 import { Logger } from '../logger';
+import { createLoggerHost } from '../loggerHost';
 import { providersHost } from '../providersHost';
 import { queueHost } from '../queueHost';
 import { createPluginSettingsHost } from '../settingsHost';
@@ -176,6 +177,7 @@ export class PluginLoader {
         httpHost,
         ytdlpHost,
         favoritesHost,
+        loggerHost: createLoggerHost(metadata.id),
       });
       await instance.onLoad(api);
     }

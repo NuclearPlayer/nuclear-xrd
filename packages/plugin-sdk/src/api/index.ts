@@ -1,5 +1,6 @@
 import type { FavoritesHost } from '../types/favorites';
 import type { HttpHost } from '../types/http';
+import type { LoggerHost } from '../types/logger';
 import type { MetadataHost } from '../types/metadata';
 import { ProvidersHost } from '../types/providers';
 import type { QueueHost } from '../types/queue';
@@ -8,6 +9,7 @@ import type { StreamingHost } from '../types/streaming';
 import type { YtdlpHost } from '../types/ytdlp';
 import { FavoritesAPI } from './favorites';
 import { HttpAPI } from './http';
+import { LoggerAPI } from './logger';
 import { MetadataAPI } from './metadata';
 import { Providers } from './providers';
 import { QueueAPI } from './queue';
@@ -24,6 +26,7 @@ export class NuclearAPI {
   readonly Http: HttpAPI;
   readonly Ytdlp: YtdlpAPI;
   readonly Favorites: FavoritesAPI;
+  readonly Logger: LoggerAPI;
 
   constructor(opts?: {
     settingsHost?: SettingsHost;
@@ -34,6 +37,7 @@ export class NuclearAPI {
     httpHost?: HttpHost;
     ytdlpHost?: YtdlpHost;
     favoritesHost?: FavoritesHost;
+    loggerHost?: LoggerHost;
   }) {
     this.Settings = new Settings(opts?.settingsHost);
     this.Providers = new Providers(opts?.providersHost);
@@ -43,6 +47,7 @@ export class NuclearAPI {
     this.Http = new HttpAPI(opts?.httpHost);
     this.Ytdlp = new YtdlpAPI(opts?.ytdlpHost);
     this.Favorites = new FavoritesAPI(opts?.favoritesHost);
+    this.Logger = new LoggerAPI(opts?.loggerHost);
   }
 }
 

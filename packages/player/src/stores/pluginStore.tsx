@@ -7,6 +7,7 @@ import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 import { favoritesHost } from '../services/favoritesHost';
 import { httpHost } from '../services/httpHost';
 import { Logger } from '../services/logger';
+import { createLoggerHost } from '../services/loggerHost';
 import {
   installPluginToManagedDir,
   removeManagedPluginInstall,
@@ -154,6 +155,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         httpHost,
         ytdlpHost,
         favoritesHost,
+        loggerHost: createLoggerHost(id),
       });
 
       set(
