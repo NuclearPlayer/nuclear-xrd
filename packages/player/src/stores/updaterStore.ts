@@ -1,7 +1,7 @@
-import * as Logger from '@tauri-apps/plugin-log';
 import { check, type Update } from '@tauri-apps/plugin-updater';
 import { create } from 'zustand';
 
+import { Logger } from '../services/logger';
 import { resolveErrorMessage } from '../utils/logging';
 import { getSetting } from './settingsStore';
 
@@ -54,7 +54,7 @@ export const useUpdaterStore = create<UpdaterState>((set, get) => ({
     } catch (error) {
       const message = resolveErrorMessage(error);
 
-      Logger.error(`Failed to check for updates: ${message}`);
+      Logger.updates.error(`Failed to check for updates: ${message}`);
       set({
         isChecking: false,
         lastChecked: new Date(),
@@ -92,7 +92,7 @@ export const useUpdaterStore = create<UpdaterState>((set, get) => ({
       });
     } catch (error) {
       const message = resolveErrorMessage(error);
-      Logger.error(`Failed to download/install update: ${message}`);
+      Logger.updates.error(`Failed to download/install update: ${message}`);
       set({
         isDownloading: false,
         isInstalling: false,
