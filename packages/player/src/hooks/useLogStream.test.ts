@@ -1,0 +1,220 @@
+import { invoke } from '@tauri-apps/api/core';
+import { attachLogger } from '@tauri-apps/plugin-log';
+import { act, renderHook, waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { useLogStream } from './useLogStream';
+
+vi.mock('@tauri-apps/api/core', () => ({
+  invoke: vi.fn(),
+}));
+
+vi.mock('@tauri-apps/plugin-log', () => ({
+  attachLogger: vi.fn(),
+}));
+
+describe('useLogStream', () => {
+  let detachFn: ReturnType<typeof vi.fn>;
+  let logCallback: (record: { level: number; message: string }) => void;
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    detachFn = vi.fn();
+
+    vi.mocked(attachLogger).mockImplementation(async (callback) => {
+      logCallback = callback;
+      return detachFn;
+    });
+
+    vi.mocked(invoke).mockResolvedValue([]);
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.clearAllMocks();
+  });
+
+  it('attaches logger on mount and detaches on unmount', async () => {
+    const { unmount } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(attachLogger).toHaveBeenCalledOnce();
+    });
+
+    unmount();
+
+    expect(detachFn).toHaveBeenCalledOnce();
+  });
+
+  it('fetches startup logs on mount', async () => {
+    vi.mocked(invoke).mockResolvedValue([
+      {
+        timestamp: '2026-02-04T10:00:00Z',
+        level: 'INFO',
+        message: '[app] Starting up',
+      },
+    ]);
+
+    const { result } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(invoke).toHaveBeenCalledWith('get_startup_logs');
+    });
+
+    await act(async () => {
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.logs).toHaveLength(1);
+    expect(result.current.logs[0]).toMatchObject({
+      level: 'info',
+      message: 'Starting up',
+      source: { type: 'core', scope: 'app' },
+    });
+  });
+
+  it('parses incoming log messages and extracts scope', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(attachLogger).toHaveBeenCalled();
+    });
+
+    act(() => {
+      logCallback({ level: 3, message: '[streaming] Resolving track' });
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.logs).toHaveLength(1);
+    expect(result.current.logs[0]).toMatchObject({
+      level: 'info',
+      message: 'Resolving track',
+      source: { type: 'core', scope: 'streaming' },
+    });
+  });
+
+  it('identifies plugin logs from plugin: prefix', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(attachLogger).toHaveBeenCalled();
+    });
+
+    act(() => {
+      logCallback({ level: 3, message: '[plugin:youtube-music] Searching' });
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.logs[0]).toMatchObject({
+      level: 'info',
+      message: 'Searching',
+      source: { type: 'plugin', scope: 'youtube-music' },
+    });
+  });
+
+  it('handles messages without scope prefix', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(attachLogger).toHaveBeenCalled();
+    });
+
+    act(() => {
+      logCallback({ level: 4, message: 'Raw message without scope' });
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.logs[0]).toMatchObject({
+      level: 'warn',
+      message: 'Raw message without scope',
+      source: { type: 'core', scope: 'unknown' },
+    });
+  });
+
+  it('maps Tauri log levels correctly', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(attachLogger).toHaveBeenCalled();
+    });
+
+    act(() => {
+      logCallback({ level: 1, message: '[app] trace' });
+      logCallback({ level: 2, message: '[app] debug' });
+      logCallback({ level: 3, message: '[app] info' });
+      logCallback({ level: 4, message: '[app] warn' });
+      logCallback({ level: 5, message: '[app] error' });
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.logs.map((l: { level: string }) => l.level)).toEqual([
+      'trace',
+      'debug',
+      'info',
+      'warn',
+      'error',
+    ]);
+  });
+
+  it('limits buffer to 1000 entries (ring buffer)', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(attachLogger).toHaveBeenCalled();
+    });
+
+    act(() => {
+      for (let i = 0; i < 1050; i++) {
+        logCallback({ level: 3, message: `[app] Message ${i}` });
+      }
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.logs).toHaveLength(1000);
+    expect(result.current.logs[0].message).toBe('Message 50');
+    expect(result.current.logs[999].message).toBe('Message 1049');
+  });
+
+  it('provides clearLogs function', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(attachLogger).toHaveBeenCalled();
+    });
+
+    act(() => {
+      logCallback({ level: 3, message: '[app] Test message' });
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.logs).toHaveLength(1);
+
+    act(() => {
+      result.current.clearLogs();
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.logs).toHaveLength(0);
+  });
+
+  it('exposes unique scopes from logs', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await waitFor(() => {
+      expect(attachLogger).toHaveBeenCalled();
+    });
+
+    act(() => {
+      logCallback({ level: 3, message: '[app] msg1' });
+      logCallback({ level: 3, message: '[streaming] msg2' });
+      logCallback({ level: 3, message: '[plugin:yt] msg3' });
+      logCallback({ level: 3, message: '[app] msg4' });
+      vi.advanceTimersByTime(100);
+    });
+
+    expect(result.current.scopes).toEqual(
+      expect.arrayContaining(['app', 'streaming', 'yt']),
+    );
+    expect(result.current.scopes).toHaveLength(3);
+  });
+});
