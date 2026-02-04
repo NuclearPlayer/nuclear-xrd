@@ -33,6 +33,7 @@ export const installPluginToManagedDir = async (
   version: string,
   fromPath: string,
 ): Promise<string> => {
+  Logger.plugins.debug(`Installing plugin ${id}@${version} from ${fromPath}`);
   const destination = await getManagedPluginPath(id, version);
 
   // Remove existing plugin version if present
@@ -41,6 +42,7 @@ export const installPluginToManagedDir = async (
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
+    Logger.plugins.debug(`Removed existing installation at ${destination}`);
   } catch (error) {
     Logger.plugins.debug(
       `fs.remove failed for ${destination}: ${resolveErrorMessage(error)}`,
@@ -53,6 +55,7 @@ export const installPluginToManagedDir = async (
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
+    Logger.plugins.debug(`Created plugin directory at ${destination}`);
   } catch (error) {
     await reportError('plugins', {
       userMessage: 'Failed to create managed plugin directory',
@@ -62,7 +65,11 @@ export const installPluginToManagedDir = async (
 
   const appData = await appDataDir();
   const absoluteDestination = await join(appData, destination);
+  Logger.plugins.debug(`Copying plugin files to ${absoluteDestination}`);
   await copyDirRecursive(fromPath, absoluteDestination);
+  Logger.plugins.debug(
+    `Plugin ${id}@${version} installed to ${absoluteDestination}`,
+  );
   return absoluteDestination;
 };
 
@@ -80,8 +87,12 @@ const resolveRelativeManagedPath = async (
 export const removeManagedPluginInstall = async (
   absolutePath: string,
 ): Promise<void> => {
+  Logger.plugins.debug(`Removing managed plugin install at ${absolutePath}`);
   const relative = await resolveRelativeManagedPath(absolutePath);
   if (!relative) {
+    Logger.plugins.error(
+      `Path ${absolutePath} is not within managed plugins directory`,
+    );
     throw new Error(
       'Path is not within the managed plugins directory. For safety, refusing to delete.',
     );
@@ -91,6 +102,7 @@ export const removeManagedPluginInstall = async (
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
+    Logger.plugins.debug(`Removed managed plugin install at ${relative}`);
   } catch (error) {
     await reportError('plugins', {
       userMessage: 'Failed to remove managed plugin directory',

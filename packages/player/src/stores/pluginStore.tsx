@@ -104,13 +104,14 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
   plugins: {},
 
   loadPluginFromPath: async (path: string) => {
+    Logger.plugins.info(`Loading plugin from path: ${path}`);
     try {
       const loader = new PluginLoader(path);
       const metadata = await loader.loadMetadata();
       const id = metadata.id;
 
       if (get().plugins[id]) {
-        Logger.plugins.debug(`Plugin ${id} already loaded.`);
+        Logger.plugins.debug(`Plugin ${id} already loaded, skipping`);
         return;
       }
 
@@ -119,6 +120,10 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         existing?.installationMethod ?? 'dev';
       const originalPath =
         installationMethod === 'dev' ? path : existing?.originalPath;
+
+      Logger.plugins.debug(
+        `Plugin ${id}: installationMethod=${installationMethod}, hasExistingEntry=${!!existing}`,
+      );
 
       const {
         metadata: loadedMetadata,
@@ -167,7 +172,14 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         }),
       );
 
+      Logger.plugins.info(
+        `Plugin ${id}@${loadedMetadata.version} loaded successfully`,
+      );
+
       if (enabled) {
+        Logger.plugins.debug(
+          `Auto-enabling plugin ${id} (was previously enabled)`,
+        );
         await get().enablePlugin(id);
       }
     } catch (error) {
@@ -179,12 +191,14 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
   },
 
   enablePlugin: async (id: string) => {
+    Logger.plugins.debug(`Enabling plugin ${id}`);
     const plugin = requireInstance(id);
     if (plugin.enabled) {
-      Logger.plugins.debug(`Plugin ${id} is already enabled.`);
+      Logger.plugins.debug(`Plugin ${id} is already enabled, skipping`);
       return;
     }
     if (plugin.instance!.onEnable) {
+      Logger.plugins.debug(`Calling onEnable for ${id}`);
       await plugin.instance!.onEnable(plugin.api!);
     }
     set(
@@ -193,15 +207,18 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       }),
     );
     await setRegistryEntryEnabled(id, true);
+    Logger.plugins.info(`Plugin ${id} enabled`);
   },
 
   disablePlugin: async (id: string) => {
+    Logger.plugins.debug(`Disabling plugin ${id}`);
     const plugin = requireInstance(id);
     if (!plugin.enabled) {
-      Logger.plugins.debug(`Plugin ${id} is already disabled.`);
+      Logger.plugins.debug(`Plugin ${id} is already disabled, skipping`);
       return;
     }
     if (plugin.instance!.onDisable) {
+      Logger.plugins.debug(`Calling onDisable for ${id}`);
       await plugin.instance!.onDisable(plugin.api!);
     }
     set(
@@ -210,12 +227,14 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       }),
     );
     await setRegistryEntryEnabled(id, false);
+    Logger.plugins.info(`Plugin ${id} disabled`);
   },
 
   unloadPlugin: async (id: string) => {
+    Logger.plugins.debug(`Unloading plugin ${id}`);
     const plugin = get().plugins[id];
     if (!plugin) {
-      Logger.plugins.error(`Plugin ${id} not found`);
+      Logger.plugins.error(`Cannot unload plugin ${id}: not found`);
       throw new Error(`Plugin ${id} not found`);
     }
     let unloadError: unknown = null;
@@ -224,6 +243,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         await get().disablePlugin(id);
       }
       if (plugin.instance?.onUnload) {
+        Logger.plugins.debug(`Calling onUnload for ${id}`);
         await plugin.instance.onUnload(plugin.api!);
       }
     } catch (error) {
@@ -244,6 +264,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       );
       throw unloadError;
     }
+    Logger.plugins.info(`Plugin ${id} unloaded`);
   },
 
   cleanupPluginInstance: async (id: string) => {
@@ -260,23 +281,29 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
   },
 
   reloadPlugin: async (id: string) => {
+    Logger.plugins.info(`Reloading plugin ${id}`);
     const plugin = get().plugins[id];
     if (!plugin) {
+      Logger.plugins.error(`Cannot reload plugin ${id}: not found`);
       throw new Error(`Plugin ${id} not found`);
     }
     if (plugin.installationMethod !== 'dev') {
-      // Should never happen - we don't show the reload button for non-dev plugins
+      Logger.plugins.error(`Cannot reload plugin ${id}: not a dev plugin`);
       throw new Error(
         `Plugin ${id} cannot be reloaded. Reinstall it from the store.`,
       );
     }
     if (!plugin.originalPath) {
+      Logger.plugins.error(`Cannot reload plugin ${id}: no original path`);
       throw new Error(`Plugin ${id} has no original path`);
     }
 
     const wasEnabled = plugin.enabled;
     const originalPath = plugin.originalPath;
     const currentVersion = plugin.metadata.version;
+    Logger.plugins.debug(
+      `Plugin ${id}: wasEnabled=${wasEnabled}, currentVersion=${currentVersion}`,
+    );
 
     try {
       set(
@@ -332,7 +359,12 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         }),
       );
 
+      Logger.plugins.info(
+        `Plugin ${id} reloaded successfully (${currentVersion} -> ${loadedMetadata.version})`,
+      );
+
       if (wasEnabled) {
+        Logger.plugins.debug(`Re-enabling plugin ${id} after reload`);
         await get().enablePlugin(id);
       }
     } catch (error) {
@@ -352,9 +384,11 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
   },
 
   removePlugin: async (id: string) => {
+    Logger.plugins.info(`Removing plugin ${id}`);
     const plugin = get().plugins[id];
     const fallbackEntry = plugin ? undefined : await getRegistryEntry(id);
     if (!plugin && !fallbackEntry) {
+      Logger.plugins.error(`Cannot remove plugin ${id}: not found`);
       throw new Error(`Plugin ${id} not found`);
     }
     const managedPath = plugin ? plugin.path : fallbackEntry!.path;
@@ -364,6 +398,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       }
       await removeManagedPluginInstall(managedPath);
       await removeRegistryEntry(id);
+      Logger.plugins.info(`Plugin ${id} removed successfully`);
     } catch (error) {
       await reportError('plugins', {
         userMessage: 'Failed to remove plugin',

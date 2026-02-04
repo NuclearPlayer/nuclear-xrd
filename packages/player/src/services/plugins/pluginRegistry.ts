@@ -1,5 +1,7 @@
 import { LazyStore } from '@tauri-apps/plugin-store';
 
+import { Logger } from '../logger';
+
 const REGISTRY_FILE = 'plugins.json';
 const PREFIX = 'plugins.';
 const store = new LazyStore(REGISTRY_FILE);
@@ -44,6 +46,9 @@ export const getRegistryEntry = async (
 export const upsertRegistryEntry = async (
   entry: PluginRegistryEntry,
 ): Promise<void> => {
+  Logger.plugins.debug(
+    `Upserting registry entry for ${entry.id}@${entry.version}`,
+  );
   await store.set(keyFor(entry.id), entry);
   await store.save();
 };
@@ -54,11 +59,15 @@ export const setRegistryEntryEnabled = async (
 ): Promise<void> => {
   const current = await getRegistryEntry(id);
   if (!current) {
+    Logger.plugins.warn(
+      `Cannot set enabled=${enabled} for ${id}: not found in registry`,
+    );
     return;
   }
   const next: PluginRegistryEntry = { ...current, enabled };
   await store.set(keyFor(id), next);
   await store.save();
+  Logger.plugins.debug(`Set registry entry ${id} enabled=${enabled}`);
 };
 
 export const setRegistryEntryWarnings = async (
@@ -78,6 +87,7 @@ export const setRegistryEntryWarnings = async (
 };
 
 export const removeRegistryEntry = async (id: string): Promise<void> => {
+  Logger.plugins.debug(`Removing registry entry for ${id}`);
   await store.delete(keyFor(id));
   await store.save();
 };
