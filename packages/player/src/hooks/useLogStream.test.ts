@@ -209,4 +209,38 @@ describe('useLogStream', () => {
     );
     expect(result.current.scopes).toHaveLength(3);
   });
+
+  it('preserves logs that arrive during startup log fetch', async () => {
+    let resolveStartupLogs: (value: unknown) => void;
+    vi.mocked(invoke).mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          resolveStartupLogs = resolve;
+        }),
+    );
+
+    const { result } = renderHook(() => useLogStream());
+
+    await vi.advanceTimersByTimeAsync(0);
+
+    act(() => {
+      logCallback({ level: 3, message: '[app] Live log during fetch' });
+    });
+
+    act(() => {
+      resolveStartupLogs([
+        {
+          timestamp: '2026-02-04T10:00:00Z',
+          level: 'INFO',
+          message: '[app] Startup log',
+        },
+      ]);
+    });
+
+    await vi.advanceTimersByTimeAsync(100);
+
+    expect(result.current.logs).toHaveLength(2);
+    expect(result.current.logs[0].message).toBe('Startup log');
+    expect(result.current.logs[1].message).toBe('Live log during fetch');
+  });
 });

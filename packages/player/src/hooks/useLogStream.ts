@@ -1,7 +1,9 @@
 import { invoke } from '@tauri-apps/api/core';
 import { attachLogger } from '@tauri-apps/plugin-log';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
+
+import { RingBuffer } from '../utils/RingBuffer';
 
 const FLUSH_INTERVAL_MS = 100;
 const MAX_LOG_ENTRIES = 1000;
@@ -58,20 +60,22 @@ const createLogEntry = (
 
 export const useLogStream = () => {
   const [logs, setLogs] = useState<LogEntry[]>([]);
-  const logBufferRef = useRef<LogEntry[]>([]);
+  const ringBufferRef = useRef(new RingBuffer<LogEntry>(MAX_LOG_ENTRIES));
 
   useEffect(() => {
+    let mounted = true;
     let detach: (() => void) | undefined;
 
     const init = async () => {
       const startupLogs = await invoke<StartupLogEntry[]>('get_startup_logs');
-      logBufferRef.current = startupLogs.map((entry) =>
+      const parsed = startupLogs.map((entry) =>
         createLogEntry(
           entry.message,
           entry.level.toLowerCase() as LogLevel,
           new Date(entry.timestamp),
         ),
       );
+      ringBufferRef.current.prepend(parsed);
     };
 
     init();
@@ -82,29 +86,34 @@ export const useLogStream = () => {
         LEVEL_MAP[record.level] ?? 'info',
         new Date(),
       );
-      logBufferRef.current.push(entry);
-      if (logBufferRef.current.length > MAX_LOG_ENTRIES) {
-        logBufferRef.current.shift();
-      }
+      ringBufferRef.current.push(entry);
     }).then((fn) => {
-      detach = fn;
+      if (mounted) {
+        detach = fn;
+      } else {
+        fn();
+      }
     });
 
     const flushInterval = setInterval(() => {
-      setLogs([...logBufferRef.current]);
+      setLogs(ringBufferRef.current.toArray());
     }, FLUSH_INTERVAL_MS);
 
     return () => {
+      mounted = false;
       detach?.();
       clearInterval(flushInterval);
     };
   }, []);
 
   const clearLogs = useCallback(() => {
-    logBufferRef.current = [];
+    ringBufferRef.current.clear();
   }, []);
 
-  const scopes = [...new Set(logs.map((l) => l.source.scope))];
+  const scopes = useMemo(
+    () => [...new Set(logs.map((l) => l.source.scope))],
+    [logs],
+  );
 
   return {
     logs,
