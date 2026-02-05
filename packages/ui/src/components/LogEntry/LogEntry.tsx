@@ -18,7 +18,7 @@ export type LogEntryData = {
 };
 
 const levelBadgeVariants = cva(
-  'inline-flex items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase',
+  'inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase',
   {
     variants: {
       level: {
@@ -38,7 +38,7 @@ const sourceChipVariants = cva(
     variants: {
       type: {
         core: 'bg-foreground/10 text-foreground',
-        plugin: 'bg-accent-purple/20 text-accent-purple',
+        plugin: 'bg-accent-orange/50 text-foreground',
       },
     },
   },
