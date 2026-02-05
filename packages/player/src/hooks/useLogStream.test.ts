@@ -3,7 +3,7 @@ import { attachLogger } from '@tauri-apps/plugin-log';
 import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { useLogStream } from './useLogStream';
+import { resetLogStreamForTesting, useLogStream } from './useLogStream';
 
 vi.mock('@tauri-apps/api/core', () => ({
   invoke: vi.fn(),
@@ -14,16 +14,15 @@ vi.mock('@tauri-apps/plugin-log', () => ({
 }));
 
 describe('useLogStream', () => {
-  let detachFn: ReturnType<typeof vi.fn>;
   let logCallback: (record: { level: number; message: string }) => void;
 
   beforeEach(() => {
     vi.useFakeTimers();
-    detachFn = vi.fn();
+    resetLogStreamForTesting();
 
     vi.mocked(attachLogger).mockImplementation(async (callback) => {
       logCallback = callback;
-      return detachFn;
+      return vi.fn();
     });
 
     vi.mocked(invoke).mockResolvedValue([]);
@@ -32,18 +31,6 @@ describe('useLogStream', () => {
   afterEach(() => {
     vi.useRealTimers();
     vi.clearAllMocks();
-  });
-
-  it('attaches logger on mount and detaches on unmount', async () => {
-    const { unmount } = renderHook(() => useLogStream());
-
-    await vi.advanceTimersByTimeAsync(0);
-
-    expect(attachLogger).toHaveBeenCalledOnce();
-
-    unmount();
-
-    expect(detachFn).toHaveBeenCalledOnce();
   });
 
   it('fetches startup logs on mount', async () => {
@@ -58,11 +45,9 @@ describe('useLogStream', () => {
     const { result } = renderHook(() => useLogStream());
 
     await vi.advanceTimersByTimeAsync(0);
-
-    expect(invoke).toHaveBeenCalledWith('get_startup_logs');
-
     await vi.advanceTimersByTimeAsync(100);
 
+    expect(invoke).toHaveBeenCalledWith('get_startup_logs');
     expect(result.current.logs).toHaveLength(1);
     expect(result.current.logs[0]).toMatchObject({
       level: 'info',
@@ -168,17 +153,16 @@ describe('useLogStream', () => {
     expect(result.current.logs[999].message).toBe('Message 1049');
   });
 
-  it('provides clearLogs function', async () => {
+  it('clears logs and continues receiving new ones', async () => {
     const { result } = renderHook(() => useLogStream());
 
     await vi.advanceTimersByTimeAsync(0);
 
     act(() => {
-      logCallback({ level: 3, message: '[app] Test message' });
+      logCallback({ level: 3, message: '[app] Before clear' });
     });
 
     await vi.advanceTimersByTimeAsync(100);
-
     expect(result.current.logs).toHaveLength(1);
 
     act(() => {
@@ -186,8 +170,15 @@ describe('useLogStream', () => {
     });
 
     await vi.advanceTimersByTimeAsync(100);
-
     expect(result.current.logs).toHaveLength(0);
+
+    act(() => {
+      logCallback({ level: 3, message: '[app] After clear' });
+    });
+
+    await vi.advanceTimersByTimeAsync(100);
+    expect(result.current.logs).toHaveLength(1);
+    expect(result.current.logs[0].message).toBe('After clear');
   });
 
   it('exposes unique scopes from logs', async () => {

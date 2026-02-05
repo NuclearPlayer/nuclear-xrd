@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api/core';
 import { attachLogger } from '@tauri-apps/plugin-log';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import { RingBuffer } from '../utils/RingBuffer';
@@ -58,16 +58,17 @@ const createLogEntry = (
   };
 };
 
-export const useLogStream = () => {
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-  const ringBufferRef = useRef(new RingBuffer<LogEntry>(MAX_LOG_ENTRIES));
+const logBuffer = new RingBuffer<LogEntry>(MAX_LOG_ENTRIES);
+let logStreamInitialized = false;
 
-  useEffect(() => {
-    let mounted = true;
-    let detach: (() => void) | undefined;
+const initLogStream = () => {
+  if (logStreamInitialized) {
+    return;
+  }
+  logStreamInitialized = true;
 
-    const init = async () => {
-      const startupLogs = await invoke<StartupLogEntry[]>('get_startup_logs');
+  invoke<StartupLogEntry[]>('get_startup_logs')
+    .then((startupLogs) => {
       const parsed = startupLogs.map((entry) =>
         createLogEntry(
           entry.message,
@@ -75,39 +76,42 @@ export const useLogStream = () => {
           new Date(entry.timestamp),
         ),
       );
-      ringBufferRef.current.prepend(parsed);
-    };
+      logBuffer.prepend(parsed);
+    })
+    .catch(() => {});
 
-    init();
+  attachLogger((record: { level: number; message: string }) => {
+    const entry = createLogEntry(
+      record.message,
+      LEVEL_MAP[record.level] ?? 'info',
+      new Date(),
+    );
+    logBuffer.push(entry);
+  }).catch(() => {});
+};
 
-    attachLogger((record: { level: number; message: string }) => {
-      const entry = createLogEntry(
-        record.message,
-        LEVEL_MAP[record.level] ?? 'info',
-        new Date(),
-      );
-      ringBufferRef.current.push(entry);
-    }).then((fn) => {
-      if (mounted) {
-        detach = fn;
-      } else {
-        fn();
-      }
-    });
+export const resetLogStreamForTesting = () => {
+  logBuffer.clear();
+  logStreamInitialized = false;
+};
+
+export const useLogStream = () => {
+  const [logs, setLogs] = useState<LogEntry[]>([]);
+
+  useEffect(() => {
+    initLogStream();
 
     const flushInterval = setInterval(() => {
-      setLogs(ringBufferRef.current.toArray());
+      setLogs(logBuffer.toArray());
     }, FLUSH_INTERVAL_MS);
 
     return () => {
-      mounted = false;
-      detach?.();
       clearInterval(flushInterval);
     };
   }, []);
 
   const clearLogs = useCallback(() => {
-    ringBufferRef.current.clear();
+    logBuffer.clear();
   }, []);
 
   const scopes = useMemo(
