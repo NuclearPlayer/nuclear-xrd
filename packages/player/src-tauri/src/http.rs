@@ -148,13 +148,10 @@ pub async fn http_fetch(request: HttpRequest) -> Result<HttpResponse, String> {
         body_log
     );
 
-    let response = req_builder
-        .send()
-        .await
-        .map_err(|e| {
-            error!(target: "http", "{} {} failed: {}", method_str, redacted_url, e);
-            format!("HTTP request failed: {}", e)
-        })?;
+    let response = req_builder.send().await.map_err(|e| {
+        error!(target: "http", "{} {} failed: {}", method_str, redacted_url, e);
+        format!("HTTP request failed: {}", e)
+    })?;
 
     let status = response.status().as_u16();
 
@@ -164,13 +161,10 @@ pub async fn http_fetch(request: HttpRequest) -> Result<HttpResponse, String> {
         .map(|(k, v)| (k.to_string(), v.to_str().unwrap_or("").to_string()))
         .collect();
 
-    let body = response
-        .text()
-        .await
-        .map_err(|e| {
-            error!(target: "http", "{} {} failed to read body: {}", method_str, redacted_url, e);
-            format!("Failed to read response body: {}", e)
-        })?;
+    let body = response.text().await.map_err(|e| {
+        error!(target: "http", "{} {} failed to read body: {}", method_str, redacted_url, e);
+        format!("Failed to read response body: {}", e)
+    })?;
 
     let response_hdrs = redact_headers(&headers);
     let response_body_log = format_body_for_log(Some(&body));
@@ -215,7 +209,10 @@ mod tests {
         #[test]
         fn redacts_authorization_header() {
             let mut headers = HashMap::new();
-            headers.insert("authorization".to_string(), "Bearer secret-token".to_string());
+            headers.insert(
+                "authorization".to_string(),
+                "Bearer secret-token".to_string(),
+            );
             headers.insert("content-type".to_string(), "application/json".to_string());
 
             let redacted = redact_headers(&headers);

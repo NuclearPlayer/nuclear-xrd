@@ -7,6 +7,8 @@ import { useCallback } from 'react';
 
 import type { LogEntryData } from '@nuclearplayer/ui';
 
+import { Logger } from '../services/logger';
+
 const formatLogForExport = (log: LogEntryData): string => {
   const timestamp = log.timestamp.toISOString();
   const level = log.level.toUpperCase().padEnd(5);
@@ -53,6 +55,10 @@ export const useLogExport = (logs: LogEntryData[]) => {
 
   const openLogFolder = useCallback(async () => {
     const logDir = await appLogDir();
+    if (!logDir) {
+      Logger.fs.error('appLogDir returned undefined');
+      return;
+    }
     await revealItemInDir(logDir);
   }, []);
 
