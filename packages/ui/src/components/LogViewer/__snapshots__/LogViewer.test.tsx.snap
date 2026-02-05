@@ -59,7 +59,7 @@ exports[`LogViewer > (Snapshot) renders empty state 1`] = `
       class="flex gap-2"
     >
       <button
-        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border h-9 px-3"
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
         data-headlessui-state=""
         type="button"
       >
@@ -95,7 +95,7 @@ exports[`LogViewer > (Snapshot) renders empty state 1`] = `
         Clear
       </button>
       <button
-        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border h-9 px-3"
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
         data-headlessui-state=""
         type="button"
       >
@@ -125,7 +125,7 @@ exports[`LogViewer > (Snapshot) renders empty state 1`] = `
         Export
       </button>
       <button
-        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border h-9 px-3"
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
         data-headlessui-state=""
         type="button"
       >
@@ -212,9 +212,7 @@ exports[`LogViewer > (Snapshot) renders empty state 1`] = `
     <span
       class="text-foreground/60 ml-auto text-sm"
     >
-      0
-       
-      entries
+      0 entries
     </span>
   </div>
   <div
@@ -291,7 +289,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
       class="flex gap-2"
     >
       <button
-        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border h-9 px-3"
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
         data-headlessui-state=""
         type="button"
       >
@@ -327,7 +325,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         Clear
       </button>
       <button
-        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border h-9 px-3"
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
         data-headlessui-state=""
         type="button"
       >
@@ -357,7 +355,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         Export
       </button>
       <button
-        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border h-9 px-3"
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
         data-headlessui-state=""
         type="button"
       >
@@ -508,9 +506,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
     <span
       class="text-foreground/60 ml-auto text-sm"
     >
-      6
-       
-      entries
+      6 entries
     </span>
   </div>
   <div
@@ -519,11 +515,13 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
     role="log"
   >
     <div
-      style="height: 192px; width: 100%; position: relative;"
+      class="relative w-full"
+      style="height: 192px;"
     >
       <div
+        class="absolute top-0 left-0 w-full"
         data-index="0"
-        style="position: absolute; top: 0px; left: 0px; width: 100%; transform: translateY(0px);"
+        style="transform: translateY(0px);"
       >
         <div
           class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
@@ -531,7 +529,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           <span
             class="text-foreground/60 whitespace-nowrap"
           >
-            11:00:00.000
+            10:00:00.000
           </span>
           <span
             class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-red text-foreground"
@@ -551,8 +549,9 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         </div>
       </div>
       <div
+        class="absolute top-0 left-0 w-full"
         data-index="1"
-        style="position: absolute; top: 0px; left: 0px; width: 100%; transform: translateY(32px);"
+        style="transform: translateY(32px);"
       >
         <div
           class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
@@ -560,7 +559,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           <span
             class="text-foreground/60 whitespace-nowrap"
           >
-            11:00:01.000
+            10:00:01.000
           </span>
           <span
             class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-yellow text-foreground"
@@ -580,8 +579,9 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         </div>
       </div>
       <div
+        class="absolute top-0 left-0 w-full"
         data-index="2"
-        style="position: absolute; top: 0px; left: 0px; width: 100%; transform: translateY(64px);"
+        style="transform: translateY(64px);"
       >
         <div
           class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
@@ -589,7 +589,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           <span
             class="text-foreground/60 whitespace-nowrap"
           >
-            11:00:02.000
+            10:00:02.000
           </span>
           <span
             class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground"
@@ -609,8 +609,9 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         </div>
       </div>
       <div
+        class="absolute top-0 left-0 w-full"
         data-index="3"
-        style="position: absolute; top: 0px; left: 0px; width: 100%; transform: translateY(96px);"
+        style="transform: translateY(96px);"
       >
         <div
           class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
@@ -618,7 +619,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           <span
             class="text-foreground/60 whitespace-nowrap"
           >
-            11:00:03.000
+            10:00:03.000
           </span>
           <span
             class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-purple text-foreground"
@@ -638,8 +639,9 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         </div>
       </div>
       <div
+        class="absolute top-0 left-0 w-full"
         data-index="4"
-        style="position: absolute; top: 0px; left: 0px; width: 100%; transform: translateY(128px);"
+        style="transform: translateY(128px);"
       >
         <div
           class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
@@ -647,7 +649,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           <span
             class="text-foreground/60 whitespace-nowrap"
           >
-            11:00:04.000
+            10:00:04.000
           </span>
           <span
             class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-foreground/50 text-background"
@@ -667,8 +669,9 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         </div>
       </div>
       <div
+        class="absolute top-0 left-0 w-full"
         data-index="5"
-        style="position: absolute; top: 0px; left: 0px; width: 100%; transform: translateY(160px);"
+        style="transform: translateY(160px);"
       >
         <div
           class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
@@ -676,7 +679,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           <span
             class="text-foreground/60 whitespace-nowrap"
           >
-            11:00:05.000
+            10:00:05.000
           </span>
           <span
             class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground"
