@@ -2,18 +2,10 @@ import { FolderOpen, Loader2, Trash2, Upload } from 'lucide-react';
 import { FC, useState } from 'react';
 
 import { Button } from '../Button';
+import { useLogViewerContext } from './context';
 
-export type LogToolbarProps = {
-  onClear: () => void;
-  onExport: () => void | Promise<void>;
-  onOpenLogFolder: () => void;
-};
-
-export const LogToolbar: FC<LogToolbarProps> = ({
-  onClear,
-  onExport,
-  onOpenLogFolder,
-}) => {
+export const LogToolbar: FC = () => {
+  const { onClear, onExport, onOpenLogFolder } = useLogViewerContext();
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExport = async () => {
@@ -29,16 +21,11 @@ export const LogToolbar: FC<LogToolbarProps> = ({
 
   return (
     <div className="flex gap-2">
-      <Button variant="noShadow" size="sm" onClick={onClear}>
+      <Button size="sm" onClick={onClear}>
         <Trash2 className="mr-1 size-4" />
         Clear
       </Button>
-      <Button
-        variant="noShadow"
-        size="sm"
-        onClick={handleExport}
-        disabled={isExporting}
-      >
+      <Button size="sm" onClick={handleExport} disabled={isExporting}>
         {isExporting ? (
           <Loader2 className="mr-1 size-4 animate-spin" />
         ) : (
@@ -46,7 +33,7 @@ export const LogToolbar: FC<LogToolbarProps> = ({
         )}
         Export
       </Button>
-      <Button variant="noShadow" size="sm" onClick={onOpenLogFolder}>
+      <Button size="sm" onClick={onOpenLogFolder}>
         <FolderOpen className="mr-1 size-4" />
         Open Log Folder
       </Button>

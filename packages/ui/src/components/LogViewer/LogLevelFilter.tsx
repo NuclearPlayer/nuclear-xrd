@@ -2,18 +2,13 @@ import { FC, useMemo } from 'react';
 
 import { FilterChips } from '../FilterChips';
 import type { LogLevel } from '../LogEntry';
+import { useLogViewerContext } from './context';
 
 const ALL_LEVELS: LogLevel[] = ['error', 'warn', 'info', 'debug', 'trace'];
 
-export type LogLevelFilterProps = {
-  selected: string[];
-  onChange: (levels: string[]) => void;
-};
+export const LogLevelFilter: FC = () => {
+  const { selectedLevels, setSelectedLevels } = useLogViewerContext();
 
-export const LogLevelFilter: FC<LogLevelFilterProps> = ({
-  selected,
-  onChange,
-}) => {
   const items = useMemo(
     () => ALL_LEVELS.map((level) => ({ id: level, label: level })),
     [],
@@ -25,8 +20,8 @@ export const LogLevelFilter: FC<LogLevelFilterProps> = ({
       <FilterChips
         multiple
         items={items}
-        selected={selected}
-        onChange={onChange}
+        selected={selectedLevels}
+        onChange={setSelectedLevels}
       />
     </div>
   );

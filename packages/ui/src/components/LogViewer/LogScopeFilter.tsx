@@ -1,18 +1,11 @@
 import { FC, useMemo } from 'react';
 
 import { FilterChips } from '../FilterChips';
+import { useLogViewerContext } from './context';
 
-export type LogScopeFilterProps = {
-  scopes: string[];
-  selected: string[];
-  onChange: (scopes: string[]) => void;
-};
+export const LogScopeFilter: FC = () => {
+  const { scopes, selectedScopes, setSelectedScopes } = useLogViewerContext();
 
-export const LogScopeFilter: FC<LogScopeFilterProps> = ({
-  scopes,
-  selected,
-  onChange,
-}) => {
   const items = useMemo(
     () => scopes.map((scope) => ({ id: scope, label: scope })),
     [scopes],
@@ -28,8 +21,8 @@ export const LogScopeFilter: FC<LogScopeFilterProps> = ({
       <FilterChips
         multiple
         items={items}
-        selected={selected}
-        onChange={onChange}
+        selected={selectedScopes}
+        onChange={setSelectedScopes}
       />
     </div>
   );
