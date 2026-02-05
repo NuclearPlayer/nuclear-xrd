@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import type { LogEntryData } from '../LogEntry';
+import { LogViewerLabels } from './context';
 import { LogEntryCount } from './LogEntryCount';
 import { LogLevelFilter } from './LogLevelFilter';
 import { LogScopeFilter } from './LogScopeFilter';
@@ -15,6 +16,7 @@ export type LogViewerProps = {
   onClear: () => void;
   onExport: () => void | Promise<void>;
   onOpenLogFolder: () => void;
+  labels?: Partial<LogViewerLabels>;
   className?: string;
 };
 
@@ -34,6 +36,7 @@ const LogViewerImpl: FC<LogViewerProps> = ({
   onClear,
   onExport,
   onOpenLogFolder,
+  labels,
   className,
 }) => (
   <LogViewerRoot
@@ -42,6 +45,7 @@ const LogViewerImpl: FC<LogViewerProps> = ({
     onClear={onClear}
     onExport={onExport}
     onOpenLogFolder={onOpenLogFolder}
+    labels={labels}
     className={className}
   >
     <div className="flex flex-wrap items-center gap-4">

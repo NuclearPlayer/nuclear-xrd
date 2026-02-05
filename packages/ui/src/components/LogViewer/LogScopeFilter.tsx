@@ -4,7 +4,8 @@ import { FilterChips } from '../FilterChips';
 import { useLogViewerContext } from './context';
 
 export const LogScopeFilter: FC = () => {
-  const { scopes, selectedScopes, setSelectedScopes } = useLogViewerContext();
+  const { scopes, selectedScopes, setSelectedScopes, labels } =
+    useLogViewerContext();
 
   const items = useMemo(
     () => scopes.map((scope) => ({ id: scope, label: scope })),
@@ -17,7 +18,7 @@ export const LogScopeFilter: FC = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-foreground/60 text-sm">Scope:</span>
+      <span className="text-foreground/60 text-sm">{labels.scopeLabel}</span>
       <FilterChips
         multiple
         items={items}

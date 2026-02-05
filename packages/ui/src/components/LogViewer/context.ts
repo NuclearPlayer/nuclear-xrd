@@ -7,6 +7,32 @@ type SearchResult = {
   isValid: boolean;
 };
 
+export type LogViewerLabels = {
+  searchPlaceholder: string;
+  searchAriaLabel: string;
+  levelLabel: string;
+  scopeLabel: string;
+  clearButton: string;
+  exportButton: string;
+  openLogFolderButton: string;
+  noLogsMessage: string;
+  invalidRegexMessage: string;
+  entryCount: (count: number) => string;
+};
+
+export const defaultLabels: LogViewerLabels = {
+  searchPlaceholder: 'Search logs...',
+  searchAriaLabel: 'Search logs',
+  levelLabel: 'Level:',
+  scopeLabel: 'Scope:',
+  clearButton: 'Clear',
+  exportButton: 'Export',
+  openLogFolderButton: 'Open Log Folder',
+  noLogsMessage: 'No logs to display',
+  invalidRegexMessage: 'Invalid regex pattern',
+  entryCount: (count) => (count === 1 ? '1 entry' : `${count} entries`),
+};
+
 export type LogViewerContextValue = {
   logs: LogEntryData[];
   filteredLogs: LogEntryData[];
@@ -25,6 +51,8 @@ export type LogViewerContextValue = {
   onClear: () => void;
   onExport: () => void | Promise<void>;
   onOpenLogFolder: () => void;
+
+  labels: LogViewerLabels;
 };
 
 export const LogViewerContext = createContext<LogViewerContextValue | null>(

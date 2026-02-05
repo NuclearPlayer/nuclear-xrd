@@ -7,7 +7,7 @@ import { useLogViewerContext } from './context';
 const ALL_LEVELS: LogLevel[] = ['error', 'warn', 'info', 'debug', 'trace'];
 
 export const LogLevelFilter: FC = () => {
-  const { selectedLevels, setSelectedLevels } = useLogViewerContext();
+  const { selectedLevels, setSelectedLevels, labels } = useLogViewerContext();
 
   const items = useMemo(
     () => ALL_LEVELS.map((level) => ({ id: level, label: level })),
@@ -16,7 +16,7 @@ export const LogLevelFilter: FC = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-foreground/60 text-sm">Level:</span>
+      <span className="text-foreground/60 text-sm">{labels.levelLabel}</span>
       <FilterChips
         multiple
         items={items}

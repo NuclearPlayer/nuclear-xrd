@@ -5,7 +5,7 @@ import { Button } from '../Button';
 import { useLogViewerContext } from './context';
 
 export const LogToolbar: FC = () => {
-  const { onClear, onExport, onOpenLogFolder } = useLogViewerContext();
+  const { onClear, onExport, onOpenLogFolder, labels } = useLogViewerContext();
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExport = async () => {
@@ -23,7 +23,7 @@ export const LogToolbar: FC = () => {
     <div className="flex gap-2">
       <Button size="sm" onClick={onClear}>
         <Trash2 className="mr-1 size-4" />
-        Clear
+        {labels.clearButton}
       </Button>
       <Button size="sm" onClick={handleExport} disabled={isExporting}>
         {isExporting ? (
@@ -31,11 +31,11 @@ export const LogToolbar: FC = () => {
         ) : (
           <Upload className="mr-1 size-4" />
         )}
-        Export
+        {labels.exportButton}
       </Button>
       <Button size="sm" onClick={onOpenLogFolder}>
         <FolderOpen className="mr-1 size-4" />
-        Open Log Folder
+        {labels.openLogFolderButton}
       </Button>
     </div>
   );

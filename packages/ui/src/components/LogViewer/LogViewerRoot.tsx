@@ -2,7 +2,12 @@ import { FC, PropsWithChildren, useEffect, useMemo, useState } from 'react';
 
 import { cn } from '../../utils';
 import type { LogEntryData } from '../LogEntry';
-import { LogViewerContext, parseSearch } from './context';
+import {
+  defaultLabels,
+  LogViewerContext,
+  LogViewerLabels,
+  parseSearch,
+} from './context';
 
 export type LogViewerRootProps = PropsWithChildren<{
   logs: LogEntryData[];
@@ -10,6 +15,7 @@ export type LogViewerRootProps = PropsWithChildren<{
   onClear: () => void;
   onExport: () => void | Promise<void>;
   onOpenLogFolder: () => void;
+  labels?: Partial<LogViewerLabels>;
   className?: string;
 }>;
 
@@ -20,11 +26,17 @@ export const LogViewerRoot: FC<LogViewerRootProps> = ({
   onClear,
   onExport,
   onOpenLogFolder,
+  labels: labelOverrides,
   className,
 }) => {
   const [search, setSearch] = useState('');
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [selectedScopes, setSelectedScopes] = useState<string[]>([]);
+
+  const labels = useMemo(
+    () => ({ ...defaultLabels, ...labelOverrides }),
+    [labelOverrides],
+  );
 
   useEffect(() => {
     setSelectedScopes((prev) => prev.filter((s) => scopes.includes(s)));
@@ -70,6 +82,7 @@ export const LogViewerRoot: FC<LogViewerRootProps> = ({
       onClear,
       onExport,
       onOpenLogFolder,
+      labels,
     }),
     [
       logs,
@@ -82,6 +95,7 @@ export const LogViewerRoot: FC<LogViewerRootProps> = ({
       onClear,
       onExport,
       onOpenLogFolder,
+      labels,
     ],
   );
 

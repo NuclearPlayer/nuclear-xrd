@@ -7,7 +7,7 @@ import { useLogViewerContext } from './context';
 const ESTIMATED_ROW_HEIGHT = 32;
 
 const LogViewerVirtualizedListImpl: FC = () => {
-  const { filteredLogs, searchResult } = useLogViewerContext();
+  const { filteredLogs, searchResult, labels } = useLogViewerContext();
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualizer({
@@ -30,8 +30,8 @@ const LogViewerVirtualizedListImpl: FC = () => {
           className="text-foreground/40 flex h-full items-center justify-center p-8 text-center"
         >
           {searchResult.isValid
-            ? 'No logs to display'
-            : 'Invalid regex pattern'}
+            ? labels.noLogsMessage
+            : labels.invalidRegexMessage}
         </div>
       ) : (
         <div
