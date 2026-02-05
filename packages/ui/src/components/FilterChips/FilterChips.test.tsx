@@ -10,13 +10,15 @@ const mockItems: FilterChip[] = [
 ];
 
 describe('FilterChips', () => {
-  it('(Snapshot) renders single and multi-select modes', () => {
-    const { container, rerender } = render(
+  it('(Snapshot) renders single-select mode', () => {
+    const { container } = render(
       <FilterChips items={mockItems} selected="all" onChange={vi.fn()} />,
     );
-    expect(container.firstChild).toMatchSnapshot('single-select');
+    expect(container.firstChild).toMatchSnapshot();
+  });
 
-    rerender(
+  it('(Snapshot) renders multi-select mode', () => {
+    const { container } = render(
       <FilterChips
         multiple
         items={mockItems}
@@ -24,7 +26,7 @@ describe('FilterChips', () => {
         onChange={vi.fn()}
       />,
     );
-    expect(container.firstChild).toMatchSnapshot('multi-select');
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('single select: calls onChange with clicked id', async () => {

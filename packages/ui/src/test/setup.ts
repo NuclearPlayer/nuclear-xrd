@@ -4,6 +4,8 @@ import { MotionGlobalConfig } from 'framer-motion';
 
 import { setupResizeObserverMock } from './resizeObserverMock';
 
+process.env.TZ = 'UTC';
+
 setupResizeObserverMock();
 
 MotionGlobalConfig.skipAnimations = true;

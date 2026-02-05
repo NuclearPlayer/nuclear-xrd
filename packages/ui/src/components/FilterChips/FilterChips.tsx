@@ -45,29 +45,32 @@ export type FilterChipsProps = SingleSelectProps | MultiSelectProps;
 export const FilterChips: FC<FilterChipsProps> = (props) => {
   const { items, className, multiple, selected, onChange, ...rest } = props;
 
-  const { isSelected, handleClick } = useFilterChips({
-    multiple,
-    selected,
-    onChange,
-  } as UseFilterChipsConfig);
+  const hookConfig: UseFilterChipsConfig = multiple
+    ? { multiple: true, selected, onChange }
+    : {
+        selected: selected as string,
+        onChange: onChange as (id: string) => void,
+      };
+
+  const { isSelected, handleClick } = useFilterChips(hookConfig);
 
   return (
     <div
       data-testid="filter-chips"
       className={cn('flex flex-wrap gap-2', className)}
-      role="group"
+      role={multiple ? 'group' : 'radiogroup'}
       aria-label="Filter options"
       {...rest}
     >
       {items.map((item) => {
-        const selected = isSelected(item.id);
+        const checked = isSelected(item.id);
         return (
           <button
             key={item.id}
             type="button"
             role={multiple ? 'checkbox' : 'radio'}
-            aria-checked={selected}
-            className={chipVariants({ selected })}
+            aria-checked={checked}
+            className={chipVariants({ selected: checked })}
             onClick={() => handleClick(item.id)}
           >
             {item.label}

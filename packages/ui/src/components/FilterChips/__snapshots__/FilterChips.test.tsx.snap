@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`FilterChips > (Snapshot) renders single and multi-select modes > multi-select 1`] = `
+exports[`FilterChips > (Snapshot) renders multi-select mode 1`] = `
 <div
   aria-label="Filter options"
   class="flex flex-wrap gap-2"
@@ -34,12 +34,12 @@ exports[`FilterChips > (Snapshot) renders single and multi-select modes > multi-
 </div>
 `;
 
-exports[`FilterChips > (Snapshot) renders single and multi-select modes > single-select 1`] = `
+exports[`FilterChips > (Snapshot) renders single-select mode 1`] = `
 <div
   aria-label="Filter options"
   class="flex flex-wrap gap-2"
   data-testid="filter-chips"
-  role="group"
+  role="radiogroup"
 >
   <button
     aria-checked="true"

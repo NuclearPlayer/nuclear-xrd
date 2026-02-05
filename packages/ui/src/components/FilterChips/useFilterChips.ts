@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 type SingleSelectConfig = {
   multiple?: false;
   selected: string;
@@ -15,34 +13,21 @@ type MultiSelectConfig = {
 export type UseFilterChipsConfig = SingleSelectConfig | MultiSelectConfig;
 
 export const useFilterChips = (config: UseFilterChipsConfig) => {
-  const { multiple, selected, onChange } = config;
-
-  const isSelected = useCallback(
-    (id: string): boolean => {
-      if (multiple) {
-        return (selected as string[]).includes(id);
-      }
-      return selected === id;
-    },
-    [multiple, selected],
-  );
-
-  const handleClick = useCallback(
-    (id: string) => {
-      if (multiple) {
-        const selectedArr = selected as string[];
-        const onChangeMulti = onChange as (ids: string[]) => void;
-        if (selectedArr.includes(id)) {
-          onChangeMulti(selectedArr.filter((s) => s !== id));
+  if (config.multiple) {
+    return {
+      isSelected: (id: string) => config.selected.includes(id),
+      handleClick: (id: string) => {
+        if (config.selected.includes(id)) {
+          config.onChange(config.selected.filter((s) => s !== id));
         } else {
-          onChangeMulti([...selectedArr, id]);
+          config.onChange([...config.selected, id]);
         }
-      } else {
-        (onChange as (id: string) => void)(id);
-      }
-    },
-    [multiple, selected, onChange],
-  );
+      },
+    };
+  }
 
-  return { isSelected, handleClick };
+  return {
+    isSelected: (id: string) => config.selected === id,
+    handleClick: (id: string) => config.onChange(id),
+  };
 };
