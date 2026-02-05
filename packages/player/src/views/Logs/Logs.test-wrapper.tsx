@@ -17,11 +17,25 @@ export const LogsWrapper = {
     return component;
   },
 
-  getSearchInput() {
+  get searchInput() {
     return screen.getByRole('textbox', { name: /search logs/i });
   },
 
-  async clickExportButton() {
-    await userEvent.click(screen.getByRole('button', { name: /export/i }));
+  exportButton: {
+    get element() {
+      return screen.getByRole('button', { name: /export/i });
+    },
+    async click() {
+      await userEvent.click(this.element);
+    },
+  },
+
+  openLogFolderButton: {
+    get element() {
+      return screen.getByRole('button', { name: /open log folder/i });
+    },
+    async click() {
+      await userEvent.click(this.element);
+    },
   },
 };
