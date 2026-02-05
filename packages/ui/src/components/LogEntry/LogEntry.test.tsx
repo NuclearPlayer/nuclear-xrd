@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { LogEntry, LogEntryData } from './LogEntry';
 
@@ -29,13 +29,14 @@ describe('LogEntry', () => {
   });
 
   it('formats timestamp with HH:mm:ss.SSS pattern', () => {
-    const { container } = render(<LogEntry entry={baseEntry} />);
-    const timestampEl = container.querySelector('span');
-    expect(timestampEl?.textContent).toMatch(/^\d{2}:\d{2}:\d{2}\.\d{3}$/);
+    render(<LogEntry entry={baseEntry} />);
+    expect(screen.getByTestId('log-timestamp')).toHaveTextContent(
+      /^\d{2}:\d{2}:\d{2}\.\d{3}$/,
+    );
   });
 
   it('preserves multi-line messages', () => {
-    const { container } = render(
+    render(
       <LogEntry
         entry={{
           ...baseEntry,
@@ -43,7 +44,8 @@ describe('LogEntry', () => {
         }}
       />,
     );
-    const messageEl = container.querySelectorAll('span')[3];
-    expect(messageEl.textContent).toBe('Line 1\nLine 2\nLine 3');
+    expect(screen.getByTestId('log-message').textContent).toBe(
+      'Line 1\nLine 2\nLine 3',
+    );
   });
 });

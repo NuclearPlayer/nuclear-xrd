@@ -61,16 +61,28 @@ export const LogEntry: FC<LogEntryProps> = ({ entry, className, ...props }) => {
       )}
       {...props}
     >
-      <span className="text-foreground/60 whitespace-nowrap">
+      <span
+        data-testid="log-timestamp"
+        className="text-foreground/60 whitespace-nowrap"
+      >
         {formattedTime}
       </span>
-      <span className={levelBadgeVariants({ level: entry.level })}>
+      <span
+        data-testid="log-level"
+        className={levelBadgeVariants({ level: entry.level })}
+      >
         {entry.level.toUpperCase()}
       </span>
-      <span className={sourceChipVariants({ type: entry.source.type })}>
+      <span
+        data-testid="log-scope"
+        className={sourceChipVariants({ type: entry.source.type })}
+      >
         {entry.source.scope}
       </span>
-      <span className="text-foreground break-all whitespace-pre-wrap">
+      <span
+        data-testid="log-message"
+        className="text-foreground break-all whitespace-pre-wrap"
+      >
         {entry.message}
       </span>
     </div>
