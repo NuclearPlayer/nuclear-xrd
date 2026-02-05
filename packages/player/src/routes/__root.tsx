@@ -7,6 +7,7 @@ import {
   LibraryIcon,
   MusicIcon,
   PaletteIcon,
+  ScrollTextIcon,
   Settings2Icon,
   SettingsIcon,
   UserIcon,
@@ -84,6 +85,12 @@ const RootComponent = () => {
                   <SidebarNavigationItem>
                     <PaletteIcon />
                     {t('themes')}
+                  </SidebarNavigationItem>
+                </Link>
+                <Link to="/logs">
+                  <SidebarNavigationItem>
+                    <ScrollTextIcon />
+                    {t('logs')}
                   </SidebarNavigationItem>
                 </Link>
               </SidebarNavigationCollapsible>
