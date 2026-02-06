@@ -94,20 +94,27 @@ export type Artist = {
 export type Playlist = {
   id: string;
   name: string;
-  lastModifiedIso?: string;
+  description?: string;
+  artwork?: ArtworkSet;
+  tags?: string[];
+  createdAtIso: string;
+  lastModifiedIso: string;
+  origin?: ProviderRef;
+  isReadOnly: boolean;
+  parentId?: string;
   items: PlaylistItem[];
 };
 
-export type PlaylistItem = {
+export type PlaylistIndexEntry = Omit<Playlist, 'items'> & {
+  itemCount: number;
+  totalDurationMs: number;
+};
+
+export type PlaylistItem<T extends Track = Track> = {
   id: string;
-  title: string;
-  artists: ArtistCredit[];
-  album?: string;
-  durationMs?: number;
-  artwork?: ArtworkSet;
+  track: T;
   note?: string;
-  addedAtIso?: string;
-  source: ProviderRef;
+  addedAtIso: string;
 };
 
 export { pickArtwork } from './artwork';
