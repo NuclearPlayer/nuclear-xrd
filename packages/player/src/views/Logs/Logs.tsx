@@ -6,7 +6,8 @@ import { useLogStream } from '../../hooks/useLogStream';
 
 export const Logs = () => {
   const { t } = useTranslation('logs');
-  const { logs, scopes, clearLogs } = useLogStream();
+  const { logs, scopes, targets, clearLogs } = useLogStream();
+  void targets;
   const { exportLogs, openLogFolder } = useLogExport(logs);
 
   return (

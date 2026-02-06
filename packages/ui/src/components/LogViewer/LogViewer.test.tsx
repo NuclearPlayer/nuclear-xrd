@@ -37,10 +37,12 @@ const createLog = (
   message: string,
   offsetMs = 0,
   type: 'core' | 'plugin' = 'core',
+  target = 'webview',
 ): LogEntryData => ({
   id,
   timestamp: new Date(baseTimestamp.getTime() + offsetMs),
   level,
+  target,
   source: { type, scope },
   message,
 });

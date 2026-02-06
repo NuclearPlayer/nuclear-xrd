@@ -38,7 +38,7 @@ describe('useLogStream', () => {
       {
         timestamp: '2026-02-04T10:00:00Z',
         level: 'INFO',
-        message: '[app] Starting up',
+        message: '[INFO][webview] [app] Starting up',
       },
     ]);
 
@@ -51,6 +51,7 @@ describe('useLogStream', () => {
     expect(result.current.logs).toHaveLength(1);
     expect(result.current.logs[0]).toMatchObject({
       level: 'info',
+      target: 'webview',
       message: 'Starting up',
       source: { type: 'core', scope: 'app' },
     });
@@ -62,7 +63,10 @@ describe('useLogStream', () => {
     await vi.advanceTimersByTimeAsync(0);
 
     act(() => {
-      logCallback({ level: 3, message: '[streaming] Resolving track' });
+      logCallback({
+        level: 3,
+        message: '[INFO][webview] [streaming] Resolving track',
+      });
     });
 
     await vi.advanceTimersByTimeAsync(100);
@@ -70,6 +74,7 @@ describe('useLogStream', () => {
     expect(result.current.logs).toHaveLength(1);
     expect(result.current.logs[0]).toMatchObject({
       level: 'info',
+      target: 'webview',
       message: 'Resolving track',
       source: { type: 'core', scope: 'streaming' },
     });
@@ -81,33 +86,60 @@ describe('useLogStream', () => {
     await vi.advanceTimersByTimeAsync(0);
 
     act(() => {
-      logCallback({ level: 3, message: '[plugin:youtube-music] Searching' });
+      logCallback({
+        level: 3,
+        message: '[INFO][webview] [plugin:youtube-music] Searching',
+      });
     });
 
     await vi.advanceTimersByTimeAsync(100);
 
     expect(result.current.logs[0]).toMatchObject({
       level: 'info',
+      target: 'webview',
       message: 'Searching',
       source: { type: 'plugin', scope: 'youtube-music' },
     });
   });
 
-  it('handles messages without scope prefix', async () => {
+  it('handles Tauri-internal logs without scope prefix', async () => {
     const { result } = renderHook(() => useLogStream());
 
     await vi.advanceTimersByTimeAsync(0);
 
     act(() => {
-      logCallback({ level: 4, message: 'Raw message without scope' });
+      logCallback({
+        level: 2,
+        message: '[DEBUG][reqwest::connect] starting new connection',
+      });
+    });
+
+    await vi.advanceTimersByTimeAsync(100);
+
+    expect(result.current.logs[0]).toMatchObject({
+      level: 'debug',
+      target: 'reqwest::connect',
+      message: 'starting new connection',
+      source: { type: 'core', scope: '' },
+    });
+  });
+
+  it('handles messages without any format', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await vi.advanceTimersByTimeAsync(0);
+
+    act(() => {
+      logCallback({ level: 4, message: 'Raw message without format' });
     });
 
     await vi.advanceTimersByTimeAsync(100);
 
     expect(result.current.logs[0]).toMatchObject({
       level: 'warn',
-      message: 'Raw message without scope',
-      source: { type: 'core', scope: 'unknown' },
+      target: '',
+      message: 'Raw message without format',
+      source: { type: 'core', scope: '' },
     });
   });
 
@@ -117,11 +149,11 @@ describe('useLogStream', () => {
     await vi.advanceTimersByTimeAsync(0);
 
     act(() => {
-      logCallback({ level: 1, message: '[app] trace' });
-      logCallback({ level: 2, message: '[app] debug' });
-      logCallback({ level: 3, message: '[app] info' });
-      logCallback({ level: 4, message: '[app] warn' });
-      logCallback({ level: 5, message: '[app] error' });
+      logCallback({ level: 1, message: '[TRACE][webview] [app] trace' });
+      logCallback({ level: 2, message: '[DEBUG][webview] [app] debug' });
+      logCallback({ level: 3, message: '[INFO][webview] [app] info' });
+      logCallback({ level: 4, message: '[WARN][webview] [app] warn' });
+      logCallback({ level: 5, message: '[ERROR][webview] [app] error' });
     });
 
     await vi.advanceTimersByTimeAsync(100);
@@ -142,7 +174,10 @@ describe('useLogStream', () => {
 
     act(() => {
       for (let i = 0; i < 1050; i++) {
-        logCallback({ level: 3, message: `[app] Message ${i}` });
+        logCallback({
+          level: 3,
+          message: `[INFO][webview] [app] Message ${i}`,
+        });
       }
     });
 
@@ -159,7 +194,7 @@ describe('useLogStream', () => {
     await vi.advanceTimersByTimeAsync(0);
 
     act(() => {
-      logCallback({ level: 3, message: '[app] Before clear' });
+      logCallback({ level: 3, message: '[INFO][webview] [app] Before clear' });
     });
 
     await vi.advanceTimersByTimeAsync(100);
@@ -173,7 +208,7 @@ describe('useLogStream', () => {
     expect(result.current.logs).toHaveLength(0);
 
     act(() => {
-      logCallback({ level: 3, message: '[app] After clear' });
+      logCallback({ level: 3, message: '[INFO][webview] [app] After clear' });
     });
 
     await vi.advanceTimersByTimeAsync(100);
@@ -187,10 +222,10 @@ describe('useLogStream', () => {
     await vi.advanceTimersByTimeAsync(0);
 
     act(() => {
-      logCallback({ level: 3, message: '[app] msg1' });
-      logCallback({ level: 3, message: '[streaming] msg2' });
-      logCallback({ level: 3, message: '[plugin:yt] msg3' });
-      logCallback({ level: 3, message: '[app] msg4' });
+      logCallback({ level: 3, message: '[INFO][webview] [app] msg1' });
+      logCallback({ level: 3, message: '[INFO][webview] [streaming] msg2' });
+      logCallback({ level: 3, message: '[INFO][webview] [plugin:yt] msg3' });
+      logCallback({ level: 3, message: '[INFO][webview] [app] msg4' });
     });
 
     await vi.advanceTimersByTimeAsync(100);
@@ -199,6 +234,55 @@ describe('useLogStream', () => {
       expect.arrayContaining(['app', 'streaming', 'yt']),
     );
     expect(result.current.scopes).toHaveLength(3);
+  });
+
+  it('filters empty scopes from scopes list', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await vi.advanceTimersByTimeAsync(0);
+
+    act(() => {
+      logCallback({ level: 3, message: '[INFO][webview] [app] msg1' });
+      logCallback({
+        level: 2,
+        message: '[DEBUG][reqwest::connect] starting connection',
+      });
+    });
+
+    await vi.advanceTimersByTimeAsync(100);
+
+    expect(result.current.scopes).toEqual(['app']);
+    expect(result.current.scopes).not.toContain('');
+  });
+
+  it('exposes unique targets from logs', async () => {
+    const { result } = renderHook(() => useLogStream());
+
+    await vi.advanceTimersByTimeAsync(0);
+
+    act(() => {
+      logCallback({ level: 3, message: '[INFO][webview] [app] msg1' });
+      logCallback({
+        level: 2,
+        message: '[DEBUG][reqwest::connect] starting connection',
+      });
+      logCallback({
+        level: 2,
+        message: '[DEBUG][tauri_plugin_updater::updater] checking updates',
+      });
+      logCallback({ level: 3, message: '[INFO][webview] [streaming] msg2' });
+    });
+
+    await vi.advanceTimersByTimeAsync(100);
+
+    expect(result.current.targets).toEqual(
+      expect.arrayContaining([
+        'webview',
+        'reqwest::connect',
+        'tauri_plugin_updater::updater',
+      ]),
+    );
+    expect(result.current.targets).toHaveLength(3);
   });
 
   it('preserves logs that arrive during startup log fetch', async () => {
@@ -215,7 +299,10 @@ describe('useLogStream', () => {
     await vi.advanceTimersByTimeAsync(0);
 
     act(() => {
-      logCallback({ level: 3, message: '[app] Live log during fetch' });
+      logCallback({
+        level: 3,
+        message: '[INFO][webview] [app] Live log during fetch',
+      });
     });
 
     act(() => {
@@ -223,7 +310,7 @@ describe('useLogStream', () => {
         {
           timestamp: '2026-02-04T10:00:00Z',
           level: 'INFO',
-          message: '[app] Startup log',
+          message: '[INFO][webview] [app] Startup log',
         },
       ]);
     });

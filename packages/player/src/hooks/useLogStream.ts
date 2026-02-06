@@ -7,6 +7,7 @@ import { RingBuffer } from '../utils/RingBuffer';
 
 const FLUSH_INTERVAL_MS = 100;
 const MAX_LOG_ENTRIES = 1000;
+const LOG_FORMAT_REGEX = /^\[[^\]]+\]\[([^\]]+)\]\s*(.*)/s;
 const SCOPE_PREFIX_REGEX = /^\[([^\]]+)\]\s*(.*)/s;
 
 type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error';
@@ -15,6 +16,7 @@ type LogEntry = {
   id: string;
   timestamp: Date;
   level: LogLevel;
+  target: string;
   source: {
     type: 'core' | 'plugin';
     scope: string;
@@ -41,15 +43,26 @@ const createLogEntry = (
   level: LogLevel,
   timestamp: Date,
 ): LogEntry => {
-  const match = message.match(SCOPE_PREFIX_REGEX);
-  const scopeRaw = match?.[1] ?? 'unknown';
-  const content = match?.[2] ?? message;
+  const formatMatch = message.match(LOG_FORMAT_REGEX);
+
+  let target = '';
+  let remainder = message;
+
+  if (formatMatch) {
+    target = formatMatch[1];
+    remainder = formatMatch[2];
+  }
+
+  const scopeMatch = remainder.match(SCOPE_PREFIX_REGEX);
+  const scopeRaw = scopeMatch?.[1] ?? '';
+  const content = scopeMatch?.[2] ?? remainder;
   const isPlugin = scopeRaw.startsWith('plugin:');
 
   return {
     id: uuid(),
     timestamp,
     level,
+    target,
     source: {
       type: isPlugin ? 'plugin' : 'core',
       scope: isPlugin ? scopeRaw.slice(7) : scopeRaw,
@@ -115,13 +128,19 @@ export const useLogStream = () => {
   }, []);
 
   const scopes = useMemo(
-    () => [...new Set(logs.map((l) => l.source.scope))],
+    () => [...new Set(logs.map((l) => l.source.scope).filter(Boolean))],
+    [logs],
+  );
+
+  const targets = useMemo(
+    () => [...new Set(logs.map((l) => l.target).filter(Boolean))],
     [logs],
   );
 
   return {
     logs,
     scopes,
+    targets,
     clearLogs,
   };
 };

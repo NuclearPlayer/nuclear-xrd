@@ -10,6 +10,7 @@ export type LogEntryData = {
   id: string;
   timestamp: Date;
   level: LogLevel;
+  target: string;
   source: {
     type: 'core' | 'plugin';
     scope: string;
@@ -53,6 +54,8 @@ export const LogEntry: FC<LogEntryProps> = ({ entry, className, ...props }) => {
     'HH:mm:ss.SSS',
   );
 
+  const displayLabel = entry.source.scope || entry.target;
+
   return (
     <div
       className={cn(
@@ -73,12 +76,14 @@ export const LogEntry: FC<LogEntryProps> = ({ entry, className, ...props }) => {
       >
         {entry.level.toUpperCase()}
       </span>
-      <span
-        data-testid="log-scope"
-        className={sourceChipVariants({ type: entry.source.type })}
-      >
-        {entry.source.scope}
-      </span>
+      {displayLabel && (
+        <span
+          data-testid="log-scope"
+          className={sourceChipVariants({ type: entry.source.type })}
+        >
+          {displayLabel}
+        </span>
+      )}
       <span
         data-testid="log-message"
         className="text-foreground break-all whitespace-pre-wrap"

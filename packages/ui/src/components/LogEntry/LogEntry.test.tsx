@@ -6,6 +6,7 @@ const baseEntry: LogEntryData = {
   id: 'test-1',
   timestamp: new Date('2026-02-04T12:30:45.123Z'),
   level: 'info',
+  target: 'webview',
   source: { type: 'core', scope: 'app' },
   message: 'Application started',
 };

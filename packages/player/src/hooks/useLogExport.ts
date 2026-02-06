@@ -16,7 +16,9 @@ const formatLogForExport = (log: LogEntryData): string => {
     log.source.type === 'plugin'
       ? `plugin:${log.source.scope}`
       : log.source.scope;
-  return `[${timestamp}] [${level}] [${scope}] ${log.message}`;
+  const scopePart = scope ? ` [${scope}]` : '';
+  const targetPart = log.target ? ` [${log.target}]` : '';
+  return `[${timestamp}] [${level}]${targetPart}${scopePart} ${log.message}`;
 };
 
 export const generateExportContent = async (
