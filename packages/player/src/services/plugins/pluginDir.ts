@@ -1,8 +1,9 @@
 import { appDataDir, join } from '@tauri-apps/api/path';
 import { BaseDirectory, mkdir, remove } from '@tauri-apps/plugin-fs';
 
-import { logFsError } from '../../utils/logging';
+import { reportError, resolveErrorMessage } from '../../utils/logging';
 import { ensureDir } from '../../utils/path';
+import { Logger } from '../logger';
 import { copyDirRecursive } from '../tauri/commands';
 
 export const PLUGINS_DIR_NAME = 'plugins';
@@ -32,6 +33,7 @@ export const installPluginToManagedDir = async (
   version: string,
   fromPath: string,
 ): Promise<string> => {
+  Logger.plugins.debug(`Installing plugin ${id}@${version} from ${fromPath}`);
   const destination = await getManagedPluginPath(id, version);
 
   // Remove existing plugin version if present
@@ -40,13 +42,11 @@ export const installPluginToManagedDir = async (
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
+    Logger.plugins.debug(`Removed existing installation at ${destination}`);
   } catch (error) {
-    logFsError({
-      scope: 'plugins',
-      command: 'fs.remove',
-      targetPath: destination,
-      error,
-    });
+    Logger.plugins.debug(
+      `fs.remove failed for ${destination}: ${resolveErrorMessage(error)}`,
+    );
   }
 
   // Create plugin directory
@@ -55,20 +55,21 @@ export const installPluginToManagedDir = async (
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
+    Logger.plugins.debug(`Created plugin directory at ${destination}`);
   } catch (error) {
-    await logFsError({
-      scope: 'plugins',
-      command: 'fs.mkdir',
-      targetPath: destination,
+    await reportError('plugins', {
+      userMessage: 'Failed to create managed plugin directory',
       error,
-      withToast: true,
-      toastMessage: 'Failed to create managed plugin directory',
     });
   }
 
   const appData = await appDataDir();
   const absoluteDestination = await join(appData, destination);
+  Logger.plugins.debug(`Copying plugin files to ${absoluteDestination}`);
   await copyDirRecursive(fromPath, absoluteDestination);
+  Logger.plugins.debug(
+    `Plugin ${id}@${version} installed to ${absoluteDestination}`,
+  );
   return absoluteDestination;
 };
 
@@ -86,8 +87,12 @@ const resolveRelativeManagedPath = async (
 export const removeManagedPluginInstall = async (
   absolutePath: string,
 ): Promise<void> => {
+  Logger.plugins.debug(`Removing managed plugin install at ${absolutePath}`);
   const relative = await resolveRelativeManagedPath(absolutePath);
   if (!relative) {
+    Logger.plugins.error(
+      `Path ${absolutePath} is not within managed plugins directory`,
+    );
     throw new Error(
       'Path is not within the managed plugins directory. For safety, refusing to delete.',
     );
@@ -97,14 +102,11 @@ export const removeManagedPluginInstall = async (
       recursive: true,
       baseDir: BaseDirectory.AppData,
     });
+    Logger.plugins.debug(`Removed managed plugin install at ${relative}`);
   } catch (error) {
-    await logFsError({
-      scope: 'plugins',
-      command: 'fs.remove',
-      targetPath: absolutePath,
+    await reportError('plugins', {
+      userMessage: 'Failed to remove managed plugin directory',
       error,
-      withToast: true,
-      toastMessage: 'Failed to remove managed plugin directory',
     });
   }
 };

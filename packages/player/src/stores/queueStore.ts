@@ -5,6 +5,8 @@ import { create } from 'zustand';
 
 import type { Queue, QueueItem, RepeatMode, Track } from '@nuclearplayer/model';
 
+import { Logger } from '../services/logger';
+import { resolveErrorMessage } from '../utils/logging';
 import { useSoundStore } from './soundStore';
 
 const QUEUE_FILE = 'queue.json';
@@ -83,12 +85,16 @@ const getShuffledIndex = (length: number, currentIndex: number): number => {
 };
 
 const saveToDisk = async (): Promise<void> => {
-  const state = useQueueStore.getState();
-  await store.set('queue.items', state.items);
-  await store.set('queue.currentIndex', state.currentIndex);
-  await store.set('queue.repeatMode', state.repeatMode);
-  await store.set('queue.shuffleEnabled', state.shuffleEnabled);
-  await store.save();
+  try {
+    const state = useQueueStore.getState();
+    await store.set('queue.items', state.items);
+    await store.set('queue.currentIndex', state.currentIndex);
+    await store.set('queue.repeatMode', state.repeatMode);
+    await store.set('queue.shuffleEnabled', state.shuffleEnabled);
+    await store.save();
+  } catch (error) {
+    Logger.queue.error(`Failed to save queue: ${resolveErrorMessage(error)}`);
+  }
 };
 
 const withPersistence = <T extends unknown[]>(
@@ -128,6 +134,8 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
       isReady: true,
       isLoading: false,
     });
+
+    Logger.queue.info(`Loaded ${items.length} items from disk`);
   },
 
   addToQueue: withPersistence((tracks: Track[]) => {
@@ -137,6 +145,7 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
         state.items.push(...newItems);
       }),
     );
+    Logger.queue.debug(`Added ${tracks.length} tracks to queue`);
   }),
 
   addNext: (tracks: Track[]) => {
@@ -213,8 +222,10 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
   }),
 
   clearQueue: withPersistence(() => {
+    const itemCount = get().items.length;
     set({ items: [], currentIndex: 0 });
     useSoundStore.getState().stop();
+    Logger.queue.info(`Cleared queue (${itemCount} items removed)`);
   }),
 
   reorder: withPersistence((fromIndex: number, toIndex: number) => {
@@ -258,6 +269,7 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
     const nextIndex = getDirectionalIndex(state, 'forward');
     if (nextIndex !== state.currentIndex) {
       set({ currentIndex: nextIndex });
+      Logger.queue.debug(`Moved to next track (index ${nextIndex})`);
     }
   }),
 
@@ -266,6 +278,7 @@ export const useQueueStore = create<QueueStore>((set, get) => ({
     const previousIndex = getDirectionalIndex(state, 'backward');
     if (previousIndex !== state.currentIndex) {
       set({ currentIndex: previousIndex });
+      Logger.queue.debug(`Moved to previous track (index ${previousIndex})`);
     }
   }),
 

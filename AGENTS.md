@@ -181,9 +181,13 @@ Add new strings to `packages/i18n/src/locales/en_US.json` only. Other locales co
 
 Tests use Vitest + React Testing Library. Globals enabled (`describe`, `it`, `expect`, `vi`).
 
+- Integration tests over unit tests for user-facing behavior. Render real components and assert on DOM content rather than verifying mock calls.
+- Unit tests for utilities - standalone data structures (RingBuffer, parsers) deserve isolated tests. Use them sparingly.
 - Test user behavior, not implementation details
 - Minimize mocks - only mock external deps (HTTP, FS, Tauri)
 - Snapshot tests: prefix with `(Snapshot)`, basic rendering only
+- Never use `querySelector` in tests. Prefer RTL queries.
+- When semantic queries aren't possible, add `data-testid` attributes. And don't be shy with them
 
 ```tsx
 describe('Component', () => {
@@ -362,6 +366,7 @@ const provider: MetadataProvider = {
 - `api.Queue` - playback queue control
 - `api.Metadata` - search music metadata
 - `api.Streaming` - resolve streams
+- `api.Logger` - logging (trace/debug/info/warn/error)
 
 ### Publishing Plugins
 

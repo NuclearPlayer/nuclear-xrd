@@ -1,6 +1,7 @@
 export { NuclearPluginAPI, NuclearAPI } from './api';
 export { FavoritesAPI } from './api/favorites';
 export { HttpAPI } from './api/http';
+export { LoggerAPI } from './api/logger';
 export { YtdlpAPI } from './api/ytdlp';
 export type {
   FetchFunction,
@@ -13,6 +14,7 @@ export type {
   YtdlpSearchResult,
   YtdlpStreamInfo,
 } from './types/ytdlp';
+export type { LogLevel, LoggerHost } from './types/logger';
 export * from './types';
 export * from './types/settings';
 export * from './types/search';

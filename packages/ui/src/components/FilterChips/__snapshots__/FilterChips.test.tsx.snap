@@ -1,11 +1,45 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`FilterChips > (Snapshot) renders with a selected item 1`] = `
+exports[`FilterChips > (Snapshot) renders multi-select mode 1`] = `
 <div
   aria-label="Filter options"
   class="flex flex-wrap gap-2"
   data-testid="filter-chips"
   role="group"
+>
+  <button
+    aria-checked="true"
+    class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors bg-foreground text-background"
+    role="checkbox"
+    type="button"
+  >
+    All
+  </button>
+  <button
+    aria-checked="true"
+    class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors bg-foreground text-background"
+    role="checkbox"
+    type="button"
+  >
+    Streaming
+  </button>
+  <button
+    aria-checked="false"
+    class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+    role="checkbox"
+    type="button"
+  >
+    Metadata
+  </button>
+</div>
+`;
+
+exports[`FilterChips > (Snapshot) renders single-select mode 1`] = `
+<div
+  aria-label="Filter options"
+  class="flex flex-wrap gap-2"
+  data-testid="filter-chips"
+  role="radiogroup"
 >
   <button
     aria-checked="true"
@@ -30,22 +64,6 @@ exports[`FilterChips > (Snapshot) renders with a selected item 1`] = `
     type="button"
   >
     Metadata
-  </button>
-  <button
-    aria-checked="false"
-    class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
-    role="radio"
-    type="button"
-  >
-    Lyrics
-  </button>
-  <button
-    aria-checked="false"
-    class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
-    role="radio"
-    type="button"
-  >
-    Other
   </button>
 </div>
 `;

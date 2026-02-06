@@ -120,6 +120,18 @@
       ]
     },
     "store:default",
-    "upload:default"
+    "upload:default",
+    "opener:default",
+    {
+      "identifier": "opener:allow-reveal-item-in-dir",
+      "allow": [
+        {
+          "path": "$APPLOG"
+        },
+        {
+          "path": "$APPLOG/**"
+        }
+      ]
+    }
   ]
 }

@@ -1,0 +1,728 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LogViewer > (Snapshot) renders empty state 1`] = `
+<div
+  class="flex h-full flex-col gap-4"
+>
+  <div
+    class="flex flex-wrap items-center gap-4"
+  >
+    <div
+      class="min-w-48 flex-1"
+    >
+      <div
+        class="flex w-full flex-col gap-2"
+      >
+        <div
+          class="inline-flex w-full items-stretch"
+        >
+          <input
+            aria-label="Search logs"
+            class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-l border-t-2 border-r-0 border-b-2 border-l-2"
+            data-headlessui-state=""
+            id="input-:r2:"
+            placeholder="Search logs..."
+            state="normal"
+            type="text"
+            value=""
+          />
+          <div
+            class="bg-primary border-border flex items-center gap-2 rounded-r border-2 border-l-0 px-3 text-sm"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-search size-4"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m21 21-4.34-4.34"
+              />
+              <circle
+                cx="11"
+                cy="11"
+                r="8"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex gap-2"
+    >
+      <button
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
+        data-headlessui-state=""
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-trash2 lucide-trash-2 mr-1 size-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 11v6"
+          />
+          <path
+            d="M14 11v6"
+          />
+          <path
+            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"
+          />
+          <path
+            d="M3 6h18"
+          />
+          <path
+            d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+          />
+        </svg>
+        Clear
+      </button>
+      <button
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
+        data-headlessui-state=""
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-upload mr-1 size-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 3v12"
+          />
+          <path
+            d="m17 8-5-5-5 5"
+          />
+          <path
+            d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+          />
+        </svg>
+        Export
+      </button>
+      <button
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
+        data-headlessui-state=""
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-folder-open mr-1 size-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"
+          />
+        </svg>
+        Open Log Folder
+      </button>
+    </div>
+  </div>
+  <div
+    class="flex flex-wrap items-center gap-4"
+  >
+    <div
+      class="flex items-center gap-2"
+    >
+      <span
+        class="text-foreground/60 text-sm"
+      >
+        Level:
+      </span>
+      <div
+        aria-label="Filter options"
+        class="flex flex-wrap gap-2"
+        data-testid="filter-chips"
+        role="group"
+      >
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          error
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          warn
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          info
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          debug
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          trace
+        </button>
+      </div>
+    </div>
+    <span
+      class="text-foreground/60 ml-auto text-sm"
+    >
+      0 entries
+    </span>
+  </div>
+  <div
+    aria-label="Log entries"
+    class="border-border bg-background-input flex-1 overflow-auto rounded-md border-2"
+    role="log"
+  >
+    <div
+      class="text-foreground/40 flex h-full items-center justify-center p-8 text-center"
+      role="status"
+    >
+      No logs to display
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LogViewer > (Snapshot) renders with logs 1`] = `
+<div
+  class="flex h-full flex-col gap-4"
+>
+  <div
+    class="flex flex-wrap items-center gap-4"
+  >
+    <div
+      class="min-w-48 flex-1"
+    >
+      <div
+        class="flex w-full flex-col gap-2"
+      >
+        <div
+          class="inline-flex w-full items-stretch"
+        >
+          <input
+            aria-label="Search logs"
+            class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-l border-t-2 border-r-0 border-b-2 border-l-2"
+            data-headlessui-state=""
+            id="input-:r0:"
+            placeholder="Search logs..."
+            state="normal"
+            type="text"
+            value=""
+          />
+          <div
+            class="bg-primary border-border flex items-center gap-2 rounded-r border-2 border-l-0 px-3 text-sm"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-search size-4"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m21 21-4.34-4.34"
+              />
+              <circle
+                cx="11"
+                cy="11"
+                r="8"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex gap-2"
+    >
+      <button
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
+        data-headlessui-state=""
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-trash2 lucide-trash-2 mr-1 size-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 11v6"
+          />
+          <path
+            d="M14 11v6"
+          />
+          <path
+            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"
+          />
+          <path
+            d="M3 6h18"
+          />
+          <path
+            d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+          />
+        </svg>
+        Clear
+      </button>
+      <button
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
+        data-headlessui-state=""
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-upload mr-1 size-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 3v12"
+          />
+          <path
+            d="m17 8-5-5-5 5"
+          />
+          <path
+            d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+          />
+        </svg>
+        Export
+      </button>
+      <button
+        class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-9 px-3"
+        data-headlessui-state=""
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-folder-open mr-1 size-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"
+          />
+        </svg>
+        Open Log Folder
+      </button>
+    </div>
+  </div>
+  <div
+    class="flex flex-wrap items-center gap-4"
+  >
+    <div
+      class="flex items-center gap-2"
+    >
+      <span
+        class="text-foreground/60 text-sm"
+      >
+        Level:
+      </span>
+      <div
+        aria-label="Filter options"
+        class="flex flex-wrap gap-2"
+        data-testid="filter-chips"
+        role="group"
+      >
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          error
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          warn
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          info
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          debug
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          trace
+        </button>
+      </div>
+    </div>
+    <div
+      class="flex items-center gap-2"
+    >
+      <span
+        class="text-foreground/60 text-sm"
+      >
+        Scope:
+      </span>
+      <div
+        aria-label="Filter options"
+        class="flex flex-wrap gap-2"
+        data-testid="filter-chips"
+        role="group"
+      >
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          plugins
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          http
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          app
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          streaming
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          playback
+        </button>
+        <button
+          aria-checked="false"
+          class="border-border inline-flex cursor-pointer items-center justify-center rounded-full border-2 px-3 py-1 text-sm font-medium transition-colors text-foreground hover:bg-foreground/10 bg-transparent"
+          role="checkbox"
+          type="button"
+        >
+          youtube-music
+        </button>
+      </div>
+    </div>
+    <span
+      class="text-foreground/60 ml-auto text-sm"
+    >
+      6 entries
+    </span>
+  </div>
+  <div
+    aria-label="Log entries"
+    class="border-border bg-background-input flex-1 overflow-auto rounded-md border-2"
+    role="log"
+  >
+    <div
+      class="relative w-full"
+      style="height: 192px;"
+    >
+      <div
+        class="absolute top-0 left-0 w-full"
+        data-index="0"
+        style="transform: translateY(0px);"
+      >
+        <div
+          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+        >
+          <span
+            class="text-foreground/60 whitespace-nowrap"
+            data-testid="log-timestamp"
+          >
+            10:00:00.000
+          </span>
+          <span
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-red text-foreground"
+            data-testid="log-level"
+          >
+            ERROR
+          </span>
+          <span
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+            data-testid="log-scope"
+          >
+            plugins
+          </span>
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Plugin failed to load
+          </span>
+        </div>
+      </div>
+      <div
+        class="absolute top-0 left-0 w-full"
+        data-index="1"
+        style="transform: translateY(32px);"
+      >
+        <div
+          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+        >
+          <span
+            class="text-foreground/60 whitespace-nowrap"
+            data-testid="log-timestamp"
+          >
+            10:00:01.000
+          </span>
+          <span
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-yellow text-foreground"
+            data-testid="log-level"
+          >
+            WARN
+          </span>
+          <span
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+            data-testid="log-scope"
+          >
+            http
+          </span>
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Rate limited
+          </span>
+        </div>
+      </div>
+      <div
+        class="absolute top-0 left-0 w-full"
+        data-index="2"
+        style="transform: translateY(64px);"
+      >
+        <div
+          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+        >
+          <span
+            class="text-foreground/60 whitespace-nowrap"
+            data-testid="log-timestamp"
+          >
+            10:00:02.000
+          </span>
+          <span
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground"
+            data-testid="log-level"
+          >
+            INFO
+          </span>
+          <span
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+            data-testid="log-scope"
+          >
+            app
+          </span>
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Application started
+          </span>
+        </div>
+      </div>
+      <div
+        class="absolute top-0 left-0 w-full"
+        data-index="3"
+        style="transform: translateY(96px);"
+      >
+        <div
+          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+        >
+          <span
+            class="text-foreground/60 whitespace-nowrap"
+            data-testid="log-timestamp"
+          >
+            10:00:03.000
+          </span>
+          <span
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-purple text-foreground"
+            data-testid="log-level"
+          >
+            DEBUG
+          </span>
+          <span
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+            data-testid="log-scope"
+          >
+            streaming
+          </span>
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Resolving stream
+          </span>
+        </div>
+      </div>
+      <div
+        class="absolute top-0 left-0 w-full"
+        data-index="4"
+        style="transform: translateY(128px);"
+      >
+        <div
+          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+        >
+          <span
+            class="text-foreground/60 whitespace-nowrap"
+            data-testid="log-timestamp"
+          >
+            10:00:04.000
+          </span>
+          <span
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-foreground/50 text-background"
+            data-testid="log-level"
+          >
+            TRACE
+          </span>
+          <span
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+            data-testid="log-scope"
+          >
+            playback
+          </span>
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Buffer status
+          </span>
+        </div>
+      </div>
+      <div
+        class="absolute top-0 left-0 w-full"
+        data-index="5"
+        style="transform: translateY(160px);"
+      >
+        <div
+          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+        >
+          <span
+            class="text-foreground/60 whitespace-nowrap"
+            data-testid="log-timestamp"
+          >
+            10:00:05.000
+          </span>
+          <span
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground"
+            data-testid="log-level"
+          >
+            INFO
+          </span>
+          <span
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-accent-orange/50 text-foreground"
+            data-testid="log-scope"
+          >
+            youtube-music
+          </span>
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Searching...
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -112,7 +112,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
                           aria-label="Filter options"
                           class="flex flex-wrap gap-2"
                           data-testid="filter-chips"
-                          role="group"
+                          role="radiogroup"
                         >
                           <button
                             aria-checked="true"

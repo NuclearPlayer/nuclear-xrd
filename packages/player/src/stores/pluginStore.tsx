@@ -1,6 +1,4 @@
-import * as Logger from '@tauri-apps/plugin-log';
 import { produce } from 'immer';
-import { toast } from 'sonner';
 import { create } from 'zustand';
 
 import type { NuclearPlugin, PluginMetadata } from '@nuclearplayer/plugin-sdk';
@@ -8,6 +6,8 @@ import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
 import { favoritesHost } from '../services/favoritesHost';
 import { httpHost } from '../services/httpHost';
+import { Logger } from '../services/logger';
+import { createLoggerHost } from '../services/loggerHost';
 import {
   installPluginToManagedDir,
   removeManagedPluginInstall,
@@ -24,7 +24,7 @@ import { providersHost } from '../services/providersHost';
 import { queueHost } from '../services/queueHost';
 import { createPluginSettingsHost } from '../services/settingsHost';
 import { ytdlpHost } from '../services/ytdlpHost';
-import { resolveErrorMessage } from '../utils/logging';
+import { reportError } from '../utils/logging';
 
 const allowedPermissions: string[] = [];
 
@@ -89,7 +89,9 @@ const loadPluginData = async (
     : [];
 
   if (warnings.length > 0) {
-    Logger.warn(`Plugin ${id} loaded with warnings: ${warnings.join(', ')}`);
+    Logger.plugins.warn(
+      `Plugin ${id} loaded with warnings: ${warnings.join(', ')}`,
+    );
   }
 
   const managedPath = await installPluginToManagedDir(id, version, sourcePath);
@@ -103,13 +105,14 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
   plugins: {},
 
   loadPluginFromPath: async (path: string) => {
+    Logger.plugins.info(`Loading plugin from path: ${path}`);
     try {
       const loader = new PluginLoader(path);
       const metadata = await loader.loadMetadata();
       const id = metadata.id;
 
       if (get().plugins[id]) {
-        Logger.debug(`Plugin ${id} already loaded.`);
+        Logger.plugins.debug(`Plugin ${id} already loaded, skipping`);
         return;
       }
 
@@ -118,6 +121,10 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         existing?.installationMethod ?? 'dev';
       const originalPath =
         installationMethod === 'dev' ? path : existing?.originalPath;
+
+      Logger.plugins.debug(
+        `Plugin ${id}: installationMethod=${installationMethod}, hasExistingEntry=${!!existing}`,
+      );
 
       const {
         metadata: loadedMetadata,
@@ -148,6 +155,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         httpHost,
         ytdlpHost,
         favoritesHost,
+        loggerHost: createLoggerHost(id),
       });
 
       set(
@@ -166,27 +174,33 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         }),
       );
 
+      Logger.plugins.info(
+        `Plugin ${id}@${loadedMetadata.version} loaded successfully`,
+      );
+
       if (enabled) {
+        Logger.plugins.debug(
+          `Auto-enabling plugin ${id} (was previously enabled)`,
+        );
         await get().enablePlugin(id);
       }
     } catch (error) {
-      const message = resolveErrorMessage(error);
-
-      toast.error('Failed to load plugin', {
-        description: message,
+      await reportError('plugins', {
+        userMessage: 'Failed to load plugin',
+        error,
       });
-
-      Logger.error(`Failed to load plugin: ${message}`);
     }
   },
 
   enablePlugin: async (id: string) => {
+    Logger.plugins.debug(`Enabling plugin ${id}`);
     const plugin = requireInstance(id);
     if (plugin.enabled) {
-      Logger.debug(`Plugin ${id} is already enabled.`);
+      Logger.plugins.debug(`Plugin ${id} is already enabled, skipping`);
       return;
     }
     if (plugin.instance!.onEnable) {
+      Logger.plugins.debug(`Calling onEnable for ${id}`);
       await plugin.instance!.onEnable(plugin.api!);
     }
     set(
@@ -195,15 +209,18 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       }),
     );
     await setRegistryEntryEnabled(id, true);
+    Logger.plugins.info(`Plugin ${id} enabled`);
   },
 
   disablePlugin: async (id: string) => {
+    Logger.plugins.debug(`Disabling plugin ${id}`);
     const plugin = requireInstance(id);
     if (!plugin.enabled) {
-      Logger.debug(`Plugin ${id} is already disabled.`);
+      Logger.plugins.debug(`Plugin ${id} is already disabled, skipping`);
       return;
     }
     if (plugin.instance!.onDisable) {
+      Logger.plugins.debug(`Calling onDisable for ${id}`);
       await plugin.instance!.onDisable(plugin.api!);
     }
     set(
@@ -212,12 +229,14 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       }),
     );
     await setRegistryEntryEnabled(id, false);
+    Logger.plugins.info(`Plugin ${id} disabled`);
   },
 
   unloadPlugin: async (id: string) => {
+    Logger.plugins.debug(`Unloading plugin ${id}`);
     const plugin = get().plugins[id];
     if (!plugin) {
-      Logger.error(`Plugin ${id} not found`);
+      Logger.plugins.error(`Cannot unload plugin ${id}: not found`);
       throw new Error(`Plugin ${id} not found`);
     }
     let unloadError: unknown = null;
@@ -226,6 +245,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         await get().disablePlugin(id);
       }
       if (plugin.instance?.onUnload) {
+        Logger.plugins.debug(`Calling onUnload for ${id}`);
         await plugin.instance.onUnload(plugin.api!);
       }
     } catch (error) {
@@ -241,12 +261,12 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
     });
 
     if (unloadError) {
-      Logger.error(
+      Logger.plugins.error(
         `Failed to unload plugin ${id}. It was removed, but might not have been able to complete cleanup.`,
-        unloadError,
       );
       throw unloadError;
     }
+    Logger.plugins.info(`Plugin ${id} unloaded`);
   },
 
   cleanupPluginInstance: async (id: string) => {
@@ -263,23 +283,29 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
   },
 
   reloadPlugin: async (id: string) => {
+    Logger.plugins.info(`Reloading plugin ${id}`);
     const plugin = get().plugins[id];
     if (!plugin) {
+      Logger.plugins.error(`Cannot reload plugin ${id}: not found`);
       throw new Error(`Plugin ${id} not found`);
     }
     if (plugin.installationMethod !== 'dev') {
-      // Should never happen - we don't show the reload button for non-dev plugins
+      Logger.plugins.error(`Cannot reload plugin ${id}: not a dev plugin`);
       throw new Error(
         `Plugin ${id} cannot be reloaded. Reinstall it from the store.`,
       );
     }
     if (!plugin.originalPath) {
+      Logger.plugins.error(`Cannot reload plugin ${id}: no original path`);
       throw new Error(`Plugin ${id} has no original path`);
     }
 
     const wasEnabled = plugin.enabled;
     const originalPath = plugin.originalPath;
     const currentVersion = plugin.metadata.version;
+    Logger.plugins.debug(
+      `Plugin ${id}: wasEnabled=${wasEnabled}, currentVersion=${currentVersion}`,
+    );
 
     try {
       set(
@@ -335,7 +361,12 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         }),
       );
 
+      Logger.plugins.info(
+        `Plugin ${id} reloaded successfully (${currentVersion} -> ${loadedMetadata.version})`,
+      );
+
       if (wasEnabled) {
+        Logger.plugins.debug(`Re-enabling plugin ${id} after reload`);
         await get().enablePlugin(id);
       }
     } catch (error) {
@@ -346,19 +377,20 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
           }
         }),
       );
-      const message = resolveErrorMessage(error);
-      toast.error('Failed to reload plugin', {
-        description: message,
+      await reportError('plugins', {
+        userMessage: 'Failed to reload plugin',
+        error,
       });
-      Logger.error(`Failed to reload plugin ${id}: ${message}`);
       throw error;
     }
   },
 
   removePlugin: async (id: string) => {
+    Logger.plugins.info(`Removing plugin ${id}`);
     const plugin = get().plugins[id];
     const fallbackEntry = plugin ? undefined : await getRegistryEntry(id);
     if (!plugin && !fallbackEntry) {
+      Logger.plugins.error(`Cannot remove plugin ${id}: not found`);
       throw new Error(`Plugin ${id} not found`);
     }
     const managedPath = plugin ? plugin.path : fallbackEntry!.path;
@@ -368,12 +400,12 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
       }
       await removeManagedPluginInstall(managedPath);
       await removeRegistryEntry(id);
+      Logger.plugins.info(`Plugin ${id} removed successfully`);
     } catch (error) {
-      const message = resolveErrorMessage(error);
-      toast.error('Failed to remove plugin', {
-        description: message,
+      await reportError('plugins', {
+        userMessage: 'Failed to remove plugin',
+        error,
       });
-      Logger.error(`Failed to remove plugin ${id}: ${message}`);
       throw error;
     }
   },

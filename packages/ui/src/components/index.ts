@@ -8,6 +8,8 @@ export * from './CardGrid';
 export * from './EmptyState';
 export * from './FilterChips';
 export * from './Input';
+export * from './LogEntry';
+export * from './LogViewer';
 export * from './Loader';
 export * from './PlayerBar';
 export * from './PlayerShell';

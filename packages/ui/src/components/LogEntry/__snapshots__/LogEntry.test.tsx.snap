@@ -1,0 +1,63 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LogEntry > (Snapshot) renders core log entry 1`] = `
+<div
+  class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+>
+  <span
+    class="text-foreground/60 whitespace-nowrap"
+    data-testid="log-timestamp"
+  >
+    12:30:45.123
+  </span>
+  <span
+    class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground"
+    data-testid="log-level"
+  >
+    INFO
+  </span>
+  <span
+    class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+    data-testid="log-scope"
+  >
+    app
+  </span>
+  <span
+    class="text-foreground break-all whitespace-pre-wrap"
+    data-testid="log-message"
+  >
+    Application started
+  </span>
+</div>
+`;
+
+exports[`LogEntry > (Snapshot) renders plugin log entry 1`] = `
+<div
+  class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+>
+  <span
+    class="text-foreground/60 whitespace-nowrap"
+    data-testid="log-timestamp"
+  >
+    12:30:45.123
+  </span>
+  <span
+    class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground"
+    data-testid="log-level"
+  >
+    INFO
+  </span>
+  <span
+    class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-accent-orange/50 text-foreground"
+    data-testid="log-scope"
+  >
+    youtube-music
+  </span>
+  <span
+    class="text-foreground break-all whitespace-pre-wrap"
+    data-testid="log-message"
+  >
+    Application started
+  </span>
+</div>
+`;

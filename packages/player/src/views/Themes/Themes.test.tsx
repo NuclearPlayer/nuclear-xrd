@@ -221,8 +221,10 @@ describe('Themes view', async () => {
     expect(toastError).toHaveBeenCalledWith('Failed to read themes directory', {
       description: 'boom',
     });
-    expect(logError).toHaveBeenCalledWith(
-      '[themes/fs] fs.readDir failed for themes: boom',
+    const calls = logError.mock.calls;
+    expect(calls.length).toBe(1);
+    expect(calls[0][0]).toMatch(
+      /^\[themes\] Failed to read themes directory: Error: boom/,
     );
   });
 });

@@ -1,5 +1,3 @@
-import * as Logger from '@tauri-apps/plugin-log';
-
 import type { StreamCandidate, Track } from '@nuclearplayer/model';
 import type {
   StreamingHost,
@@ -8,6 +6,7 @@ import type {
 
 import { useSettingsStore } from '../stores/settingsStore';
 import { resolveErrorMessage } from '../utils/logging';
+import { Logger } from './logger';
 import { providersHost } from './providersHost';
 
 const getActiveStreamingProvider = (): StreamingProvider | undefined => {
@@ -54,7 +53,7 @@ export const createStreamingHost = (): StreamingHost => ({
     const provider = getActiveStreamingProvider();
 
     if (!provider) {
-      Logger.warn('[StreamingHost] No streaming provider available');
+      Logger.streaming.warn('No streaming provider available');
       return {
         success: false,
         error: 'No streaming provider available',
@@ -76,8 +75,8 @@ export const createStreamingHost = (): StreamingHost => ({
         candidates,
       };
     } catch (error) {
-      Logger.error(
-        `[StreamingHost] resolveCandidatesForTrack error: ${resolveErrorMessage(error)}`,
+      Logger.streaming.error(
+        `resolveCandidatesForTrack error: ${resolveErrorMessage(error)}`,
       );
       const message = error instanceof Error ? error.message : 'Unknown error';
       return {
@@ -91,12 +90,12 @@ export const createStreamingHost = (): StreamingHost => ({
     const provider = getActiveStreamingProvider();
 
     if (!provider) {
-      Logger.warn('[StreamingHost] No provider for stream resolution');
+      Logger.streaming.warn('No provider for stream resolution');
       return undefined;
     }
 
     if (candidate.failed) {
-      Logger.warn('[StreamingHost] Candidate already marked as failed');
+      Logger.streaming.warn('Candidate already marked as failed');
       return candidate;
     }
 
@@ -122,8 +121,8 @@ export const createStreamingHost = (): StreamingHost => ({
         failed: false,
       };
     } catch (error) {
-      Logger.error(
-        `[StreamingHost] getStreamUrl failed: ${resolveErrorMessage(error)}`,
+      Logger.streaming.error(
+        `getStreamUrl failed: ${resolveErrorMessage(error)}`,
       );
       return {
         ...candidate,

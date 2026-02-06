@@ -11,7 +11,7 @@ import { parseAdvancedTheme } from '@nuclearplayer/themes';
 import type { AdvancedThemeFile } from '../stores/advancedThemeStore';
 import { useAdvancedThemeStore } from '../stores/advancedThemeStore';
 import { useSettingsStore } from '../stores/settingsStore';
-import { logFsError } from '../utils/logging';
+import { reportError } from '../utils/logging';
 import { ensureDir } from '../utils/path';
 import { loadAndApplyAdvancedThemeFromFile } from './advancedThemeService';
 
@@ -29,13 +29,9 @@ export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
   try {
     entries = await readDir(dir, { baseDir: BaseDirectory.AppData });
   } catch (error) {
-    await logFsError({
-      scope: 'themes',
-      command: 'fs.readDir',
-      targetPath: dir,
+    await reportError('themes', {
+      userMessage: 'Failed to read themes directory',
       error,
-      withToast: true,
-      toastMessage: 'Failed to read themes directory',
     });
     return [];
   }
@@ -55,13 +51,9 @@ export const listAdvancedThemes = async (): Promise<AdvancedThemeFile[]> => {
       const parsed = parseAdvancedTheme(json);
       themes.push({ path, name: parsed.name });
     } catch (error) {
-      await logFsError({
-        scope: 'themes',
-        command: 'fs.readTextFile',
-        targetPath: path,
+      await reportError('themes', {
+        userMessage: 'Failed to read theme file',
         error,
-        withToast: true,
-        toastMessage: 'Failed to read theme file',
       });
     }
   }
@@ -105,26 +97,18 @@ export const startAdvancedThemeWatcher = async (): Promise<void> => {
         try {
           await loadAndApplyAdvancedThemeFromFile(currentPath);
         } catch (error) {
-          await logFsError({
-            scope: 'themes',
-            command: 'fs.watch',
-            targetPath: currentPath,
+          await reportError('themes', {
+            userMessage: 'Theme reload failed',
             error,
-            withToast: true,
-            toastMessage: 'Theme reload failed',
           });
         }
       },
       { baseDir: BaseDirectory.AppData },
     );
   } catch (error) {
-    await logFsError({
-      scope: 'themes',
-      command: 'fs.watch',
-      targetPath: dir,
+    await reportError('themes', {
+      userMessage: "Couldn't watch themes directory",
       error,
-      withToast: true,
-      toastMessage: "Couldn't watch themes directory",
     });
   }
 };
