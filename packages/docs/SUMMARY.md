@@ -8,6 +8,7 @@
 * [Queue](plugins/queue.md)
 * [Favorites](plugins/favorites.md)
 * [Streaming](plugins/streaming.md)
+* [Metadata](plugins/metadata.md)
 * [Providers](plugins/providers.md)
 
 ## Theming
