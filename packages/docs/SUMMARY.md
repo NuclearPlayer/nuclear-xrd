@@ -15,6 +15,10 @@
 * [Basic themes](themes/themes-basic.md)
 * [Advanced themes](themes/themes-advanced.md)
 
+## Development
+
+* [Logging](development/logging.md)
+
 ## Misc
 
 * [Platform-specific notes](misc/platform-specific.md)
