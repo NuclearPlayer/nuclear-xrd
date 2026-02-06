@@ -6,6 +6,7 @@
 * [Plugin system](plugins/plugin-system.md)
 * [Settings](plugins/settings.md)
 * [Queue](plugins/queue.md)
+* [Favorites](plugins/favorites.md)
 * [Streaming](plugins/streaming.md)
 * [Providers](plugins/providers.md)
 
