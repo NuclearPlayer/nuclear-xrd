@@ -32,6 +32,7 @@
     "settings": "Paramètres",
     "plugins": "Plugins",
     "themes": "Thèmes",
+    "logs": "Logs",
     "collection": "Collection",
     "favoriteAlbums": "Albums favoris",
     "favoriteTracks": "Morceaux favoris",
@@ -227,5 +228,19 @@
   },
   "playerBar": {
     "noTrackPlaying": "No track playing"
+  },
+  "logs": {
+    "title": "Logs",
+    "searchPlaceholder": "Search logs...",
+    "searchAriaLabel": "Search logs",
+    "levelLabel": "Level:",
+    "scopeLabel": "Scope:",
+    "clearButton": "Clear",
+    "exportButton": "Export",
+    "openLogFolderButton": "Open Log Folder",
+    "noLogsMessage": "No logs to display",
+    "invalidRegexMessage": "Invalid regex pattern",
+    "entryCount": "{{count}} entry",
+    "entryCount_other": "{{count}} entries"
   }
 }
