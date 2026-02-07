@@ -82,6 +82,21 @@ describe('playlistStore', () => {
     expect(usePlaylistStore.getState().playlists.size).toBe(0);
   });
 
+  it('removes tracks by item IDs', async () => {
+    const id = await usePlaylistStore.getState().createPlaylist('My Playlist');
+    const trackA = createMockTrack('Song A');
+    const trackB = createMockTrack('Song B');
+    const items = await usePlaylistStore
+      .getState()
+      .addTracks(id, [trackA, trackB]);
+
+    await usePlaylistStore.getState().removeTracks(id, [items[0].id]);
+
+    const updated = usePlaylistStore.getState().playlists.get(id);
+    expect(updated?.items).toHaveLength(1);
+    expect(updated?.items[0].track.title).toBe('Song B');
+  });
+
   it('loads index from file service', async () => {
     const playlist = new PlaylistBuilder().withTrackCount(2).build();
     await playlistIndexStore.upsert(playlist);
