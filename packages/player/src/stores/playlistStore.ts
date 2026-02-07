@@ -23,6 +23,11 @@ type PlaylistStore = {
   deletePlaylist: (id: string) => Promise<void>;
   addTracks: (playlistId: string, tracks: Track[]) => Promise<PlaylistItem[]>;
   removeTracks: (playlistId: string, itemIds: string[]) => Promise<void>;
+  reorderTracks: (
+    playlistId: string,
+    from: number,
+    to: number,
+  ) => Promise<void>;
 };
 
 export const usePlaylistStore = create<PlaylistStore>((set) => ({
@@ -105,6 +110,29 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
     set((state) => ({
       playlists: new Map(state.playlists).set(playlistId, updated),
       index,
+    }));
+  },
+
+  reorderTracks: async (playlistId: string, from: number, to: number) => {
+    const playlist = usePlaylistStore.getState().playlists.get(playlistId);
+    if (!playlist) {
+      return;
+    }
+
+    const items = [...playlist.items];
+    const [moved] = items.splice(from, 1);
+    items.splice(to, 0, moved);
+
+    const updated: Playlist = {
+      ...playlist,
+      items,
+      lastModifiedIso: new Date().toISOString(),
+    };
+
+    await playlistFileStore.save(updated);
+
+    set((state) => ({
+      playlists: new Map(state.playlists).set(playlistId, updated),
     }));
   },
 

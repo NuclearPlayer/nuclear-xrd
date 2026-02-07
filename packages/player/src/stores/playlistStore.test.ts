@@ -97,6 +97,26 @@ describe('playlistStore', () => {
     expect(updated?.items[0].track.title).toBe('Song B');
   });
 
+  it('reorders tracks from one position to another', async () => {
+    const id = await usePlaylistStore.getState().createPlaylist('My Playlist');
+    const items = await usePlaylistStore
+      .getState()
+      .addTracks(id, [
+        createMockTrack('A'),
+        createMockTrack('B'),
+        createMockTrack('C'),
+      ]);
+
+    await usePlaylistStore.getState().reorderTracks(id, 0, 2);
+
+    const updated = usePlaylistStore.getState().playlists.get(id);
+    expect(updated?.items.map((i) => i.id)).toEqual([
+      items[1].id,
+      items[2].id,
+      items[0].id,
+    ]);
+  });
+
   it('loads index from file service', async () => {
     const playlist = new PlaylistBuilder().withTrackCount(2).build();
     await playlistIndexStore.upsert(playlist);
