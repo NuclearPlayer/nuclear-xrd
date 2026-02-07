@@ -1,4 +1,4 @@
-import { playlistIndexStore } from '../services/playlistFileService';
+import { playlistFileService } from '../services/playlistFileService';
 import { PlaylistBuilder } from '../test/builders/PlaylistBuilder';
 import { resetInMemoryTauriStore } from '../test/utils/inMemoryTauriStore';
 import { createMockTrack } from '../test/utils/mockTrack';
@@ -137,8 +137,9 @@ describe('playlistStore', () => {
 
   it('loads index from file service', async () => {
     const playlist = new PlaylistBuilder().withTrackCount(2).build();
-    await playlistIndexStore.upsert(playlist);
+    await playlistFileService.savePlaylist(playlist);
 
+    usePlaylistStore.setState({ index: [], loaded: false });
     await usePlaylistStore.getState().loadIndex();
 
     expect(usePlaylistStore.getState().index).toHaveLength(1);

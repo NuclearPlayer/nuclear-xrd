@@ -63,6 +63,9 @@ export class PlaylistBuilder {
   }
 
   build(): Playlist {
-    return { ...this.playlist };
+    return {
+      ...this.playlist,
+      items: this.playlist.items.map((item) => ({ ...item })),
+    };
   }
 }

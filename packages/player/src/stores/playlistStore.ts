@@ -8,10 +8,7 @@ import type {
   Track,
 } from '@nuclearplayer/model';
 
-import {
-  playlistFileStore,
-  playlistIndexStore,
-} from '../services/playlistFileService';
+import { playlistFileService } from '../services/playlistFileService';
 import { useQueueStore } from './queueStore';
 
 type PlaylistStore = {
@@ -39,7 +36,7 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
   loaded: false,
 
   loadIndex: async () => {
-    const index = await playlistIndexStore.load();
+    const index = await playlistFileService.loadIndex();
     set({ index, loaded: true });
   },
 
@@ -49,7 +46,7 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
       return cached;
     }
 
-    const playlist = await playlistFileStore.load(id);
+    const playlist = await playlistFileService.loadPlaylist(id);
     if (playlist) {
       set((state) => ({
         playlists: new Map(state.playlists).set(id, playlist),
@@ -69,8 +66,7 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
       items: [],
     };
 
-    await playlistFileStore.save(playlist);
-    const index = await playlistIndexStore.upsert(playlist);
+    const index = await playlistFileService.savePlaylist(playlist);
 
     set((state) => ({
       playlists: new Map(state.playlists).set(playlist.id, playlist),
@@ -86,20 +82,20 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
       return [];
     }
 
+    const now = new Date().toISOString();
     const newItems: PlaylistItem[] = tracks.map((track) => ({
       id: uuidv4(),
       track,
-      addedAtIso: new Date().toISOString(),
+      addedAtIso: now,
     }));
 
     const updated: Playlist = {
       ...playlist,
       items: [...playlist.items, ...newItems],
-      lastModifiedIso: new Date().toISOString(),
+      lastModifiedIso: now,
     };
 
-    await playlistFileStore.save(updated);
-    const index = await playlistIndexStore.upsert(updated);
+    const index = await playlistFileService.savePlaylist(updated);
 
     set((state) => ({
       playlists: new Map(state.playlists).set(playlistId, updated),
@@ -122,8 +118,7 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
       lastModifiedIso: new Date().toISOString(),
     };
 
-    await playlistFileStore.save(updated);
-    const index = await playlistIndexStore.upsert(updated);
+    const index = await playlistFileService.savePlaylist(updated);
 
     set((state) => ({
       playlists: new Map(state.playlists).set(playlistId, updated),
@@ -147,10 +142,11 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
       lastModifiedIso: new Date().toISOString(),
     };
 
-    await playlistFileStore.save(updated);
+    const index = await playlistFileService.savePlaylist(updated);
 
     set((state) => ({
       playlists: new Map(state.playlists).set(playlistId, updated),
+      index,
     }));
   },
 
@@ -171,8 +167,7 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
       })),
     };
 
-    await playlistFileStore.save(playlist);
-    const index = await playlistIndexStore.upsert(playlist);
+    const index = await playlistFileService.savePlaylist(playlist);
 
     set((state) => ({
       playlists: new Map(state.playlists).set(playlist.id, playlist),
@@ -183,8 +178,7 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
   },
 
   deletePlaylist: async (id: string) => {
-    await playlistFileStore.delete(id);
-    const index = await playlistIndexStore.remove(id);
+    const index = await playlistFileService.deletePlaylist(id);
 
     set((state) => {
       const playlists = new Map(state.playlists);
