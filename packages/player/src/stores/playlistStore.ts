@@ -1,7 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
-import type { Playlist, PlaylistIndexEntry } from '@nuclearplayer/model';
+import type {
+  Playlist,
+  PlaylistIndexEntry,
+  PlaylistItem,
+  Track,
+} from '@nuclearplayer/model';
 
 import {
   playlistFileStore,
@@ -16,6 +21,7 @@ type PlaylistStore = {
   loadIndex: () => Promise<void>;
   createPlaylist: (name: string) => Promise<string>;
   deletePlaylist: (id: string) => Promise<void>;
+  addTracks: (playlistId: string, tracks: Track[]) => Promise<void>;
 };
 
 export const usePlaylistStore = create<PlaylistStore>((set) => ({
@@ -48,6 +54,33 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
     }));
 
     return playlist.id;
+  },
+
+  addTracks: async (playlistId: string, tracks: Track[]) => {
+    const playlist = usePlaylistStore.getState().playlists.get(playlistId);
+    if (!playlist) {
+      return;
+    }
+
+    const newItems: PlaylistItem[] = tracks.map((track) => ({
+      id: uuidv4(),
+      track,
+      addedAtIso: new Date().toISOString(),
+    }));
+
+    const updated: Playlist = {
+      ...playlist,
+      items: [...playlist.items, ...newItems],
+      lastModifiedIso: new Date().toISOString(),
+    };
+
+    await playlistFileStore.save(updated);
+    const index = await playlistIndexStore.upsert(updated);
+
+    set((state) => ({
+      playlists: new Map(state.playlists).set(playlistId, updated),
+      index,
+    }));
   },
 
   deletePlaylist: async (id: string) => {
