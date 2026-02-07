@@ -58,11 +58,9 @@ vi.mock('@tauri-apps/plugin-store', async () => {
   return { LazyStore: mod.LazyStore };
 });
 
-let uuidCounter = 0;
 vi.mock('uuid', async () => {
-  return {
-    v4: () => `mock-uuid-${uuidCounter++}`,
-  };
+  const { mockUuid } = await import('./utils/mockUuid');
+  return { v4: mockUuid.v4 };
 });
 
 vi.mock('framer-motion', async (importOriginal) => {
