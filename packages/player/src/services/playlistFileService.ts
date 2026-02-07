@@ -37,13 +37,12 @@ export class PlaylistIndexStore {
     return index;
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: string): Promise<PlaylistIndexEntry[]> {
     const index = await this.load();
-    await this.#store.set(
-      'entries',
-      index.filter((e) => e.id !== id),
-    );
+    const updated = index.filter((e) => e.id !== id);
+    await this.#store.set('entries', updated);
     await this.#store.save();
+    return updated;
   }
 }
 

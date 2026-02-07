@@ -50,6 +50,14 @@ describe('playlistStore', () => {
     `);
   });
 
+  it('deletes a playlist from index and cache', async () => {
+    const id = await usePlaylistStore.getState().createPlaylist('To Delete');
+    await usePlaylistStore.getState().deletePlaylist(id);
+
+    expect(usePlaylistStore.getState().index).toHaveLength(0);
+    expect(usePlaylistStore.getState().playlists.has(id)).toBe(false);
+  });
+
   it('loads index from file service', async () => {
     const playlist = new PlaylistBuilder().withTrackCount(2).build();
     await playlistIndexStore.upsert(playlist);

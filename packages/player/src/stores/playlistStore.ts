@@ -15,6 +15,7 @@ type PlaylistStore = {
 
   loadIndex: () => Promise<void>;
   createPlaylist: (name: string) => Promise<string>;
+  deletePlaylist: (id: string) => Promise<void>;
 };
 
 export const usePlaylistStore = create<PlaylistStore>((set) => ({
@@ -47,5 +48,16 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
     }));
 
     return playlist.id;
+  },
+
+  deletePlaylist: async (id: string) => {
+    await playlistFileStore.delete(id);
+    const index = await playlistIndexStore.remove(id);
+
+    set((state) => {
+      const playlists = new Map(state.playlists);
+      playlists.delete(id);
+      return { playlists, index };
+    });
   },
 }));
