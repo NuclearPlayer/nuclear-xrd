@@ -4,6 +4,7 @@ import { resetInMemoryTauriStore } from '../test/utils/inMemoryTauriStore';
 import { createMockTrack } from '../test/utils/mockTrack';
 import { mockUuid } from '../test/utils/mockUuid';
 import { usePlaylistStore } from './playlistStore';
+import { useQueueStore } from './queueStore';
 
 const resetStore = () => {
   usePlaylistStore.setState({
@@ -115,6 +116,22 @@ describe('playlistStore', () => {
       items[2].id,
       items[0].id,
     ]);
+  });
+
+  it('saves current queue as a new playlist', async () => {
+    useQueueStore
+      .getState()
+      .addToQueue([
+        createMockTrack('Queue Track 1'),
+        createMockTrack('Queue Track 2'),
+      ]);
+
+    const id = await usePlaylistStore
+      .getState()
+      .saveQueueAsPlaylist('From Queue');
+
+    const playlist = usePlaylistStore.getState().playlists.get(id);
+    expect(playlist).toMatchSnapshot();
   });
 
   it('loads index from file service', async () => {

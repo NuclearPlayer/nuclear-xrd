@@ -12,6 +12,7 @@ import {
   playlistFileStore,
   playlistIndexStore,
 } from '../services/playlistFileService';
+import { useQueueStore } from './queueStore';
 
 type PlaylistStore = {
   index: PlaylistIndexEntry[];
@@ -23,6 +24,7 @@ type PlaylistStore = {
   deletePlaylist: (id: string) => Promise<void>;
   addTracks: (playlistId: string, tracks: Track[]) => Promise<PlaylistItem[]>;
   removeTracks: (playlistId: string, itemIds: string[]) => Promise<void>;
+  saveQueueAsPlaylist: (name: string) => Promise<string>;
   reorderTracks: (
     playlistId: string,
     from: number,
@@ -134,6 +136,34 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
     set((state) => ({
       playlists: new Map(state.playlists).set(playlistId, updated),
     }));
+  },
+
+  saveQueueAsPlaylist: async (name: string) => {
+    const tracks = useQueueStore.getState().items.map((item) => item.track);
+    const now = new Date().toISOString();
+
+    const playlist: Playlist = {
+      id: uuidv4(),
+      name,
+      createdAtIso: now,
+      lastModifiedIso: now,
+      isReadOnly: false,
+      items: tracks.map((track) => ({
+        id: uuidv4(),
+        track,
+        addedAtIso: now,
+      })),
+    };
+
+    await playlistFileStore.save(playlist);
+    const index = await playlistIndexStore.upsert(playlist);
+
+    set((state) => ({
+      playlists: new Map(state.playlists).set(playlist.id, playlist),
+      index,
+    }));
+
+    return playlist.id;
   },
 
   deletePlaylist: async (id: string) => {
