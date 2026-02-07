@@ -70,8 +70,9 @@ export class PlaylistFileStore {
 
   async delete(id: string): Promise<void> {
     const store = this.#get(id);
-    await store.delete('playlist');
+    await store.clear();
     await store.save();
+    await store.close();
     this.#stores.delete(id);
   }
 }
