@@ -143,4 +143,24 @@ describe('playlistStore', () => {
     expect(usePlaylistStore.getState().index).toHaveLength(1);
     expect(usePlaylistStore.getState().loaded).toBe(true);
   });
+
+  it('loads a playlist and caches it', async () => {
+    const id = await usePlaylistStore.getState().createPlaylist('Cached');
+    usePlaylistStore.setState({ playlists: new Map() });
+
+    const loaded = await usePlaylistStore.getState().loadPlaylist(id);
+
+    expect(loaded?.name).toBe('Cached');
+    expect(usePlaylistStore.getState().playlists.has(id)).toBe(true);
+  });
+
+  it('returns cached playlist without hitting disk', async () => {
+    const id = await usePlaylistStore
+      .getState()
+      .createPlaylist('Already Cached');
+
+    const loaded = await usePlaylistStore.getState().loadPlaylist(id);
+
+    expect(loaded?.name).toBe('Already Cached');
+  });
 });

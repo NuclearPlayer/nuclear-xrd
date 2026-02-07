@@ -20,6 +20,7 @@ type PlaylistStore = {
   loaded: boolean;
 
   loadIndex: () => Promise<void>;
+  loadPlaylist: (id: string) => Promise<Playlist | null>;
   createPlaylist: (name: string) => Promise<string>;
   deletePlaylist: (id: string) => Promise<void>;
   addTracks: (playlistId: string, tracks: Track[]) => Promise<PlaylistItem[]>;
@@ -32,7 +33,7 @@ type PlaylistStore = {
   ) => Promise<void>;
 };
 
-export const usePlaylistStore = create<PlaylistStore>((set) => ({
+export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
   index: [],
   playlists: new Map(),
   loaded: false,
@@ -40,6 +41,21 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
   loadIndex: async () => {
     const index = await playlistIndexStore.load();
     set({ index, loaded: true });
+  },
+
+  loadPlaylist: async (id: string) => {
+    const cached = get().playlists.get(id);
+    if (cached) {
+      return cached;
+    }
+
+    const playlist = await playlistFileStore.load(id);
+    if (playlist) {
+      set((state) => ({
+        playlists: new Map(state.playlists).set(id, playlist),
+      }));
+    }
+    return playlist;
   },
 
   createPlaylist: async (name: string) => {
@@ -65,7 +81,7 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
   },
 
   addTracks: async (playlistId: string, tracks: Track[]) => {
-    const playlist = usePlaylistStore.getState().playlists.get(playlistId);
+    const playlist = get().playlists.get(playlistId);
     if (!playlist) {
       return [];
     }
@@ -94,7 +110,7 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
   },
 
   removeTracks: async (playlistId: string, itemIds: string[]) => {
-    const playlist = usePlaylistStore.getState().playlists.get(playlistId);
+    const playlist = get().playlists.get(playlistId);
     if (!playlist) {
       return;
     }
@@ -116,7 +132,7 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
   },
 
   reorderTracks: async (playlistId: string, from: number, to: number) => {
-    const playlist = usePlaylistStore.getState().playlists.get(playlistId);
+    const playlist = get().playlists.get(playlistId);
     if (!playlist) {
       return;
     }
@@ -177,3 +193,7 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
     });
   },
 }));
+
+export const initializePlaylistStore = async (): Promise<void> => {
+  await usePlaylistStore.getState().loadIndex();
+};
