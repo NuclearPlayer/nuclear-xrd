@@ -105,7 +105,10 @@ export type Playlist = {
   items: PlaylistItem[];
 };
 
-export type PlaylistIndexEntry = Omit<Playlist, 'items'> & {
+export type PlaylistIndexEntry = Pick<
+  Playlist,
+  'id' | 'name' | 'createdAtIso' | 'lastModifiedIso' | 'isReadOnly' | 'artwork'
+> & {
   itemCount: number;
   totalDurationMs: number;
 };

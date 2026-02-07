@@ -4,17 +4,19 @@ import type { Playlist, PlaylistIndexEntry } from '@nuclearplayer/model';
 
 const PLAYLISTS_DIR = 'playlists';
 
-const toIndexEntry = (playlist: Playlist): PlaylistIndexEntry => {
-  const { items, ...rest } = playlist;
-  return {
-    ...rest,
-    itemCount: items.length,
-    totalDurationMs: items.reduce(
-      (sum, item) => sum + (item.track.durationMs ?? 0),
-      0,
-    ),
-  };
-};
+const toIndexEntry = (playlist: Playlist): PlaylistIndexEntry => ({
+  id: playlist.id,
+  name: playlist.name,
+  createdAtIso: playlist.createdAtIso,
+  lastModifiedIso: playlist.lastModifiedIso,
+  isReadOnly: playlist.isReadOnly,
+  artwork: playlist.artwork,
+  itemCount: playlist.items.length,
+  totalDurationMs: playlist.items.reduce(
+    (sum, item) => sum + (item.track.durationMs ?? 0),
+    0,
+  ),
+});
 
 export class PlaylistIndexStore {
   #store = new LazyStore(`${PLAYLISTS_DIR}/index.json`);
