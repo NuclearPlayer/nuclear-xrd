@@ -23,7 +23,7 @@ export class PlaylistIndexStore {
     return (await this.#store.get<PlaylistIndexEntry[]>('entries')) ?? [];
   }
 
-  async upsert(playlist: Playlist): Promise<void> {
+  async upsert(playlist: Playlist): Promise<PlaylistIndexEntry[]> {
     const index = await this.load();
     const entry = toIndexEntry(playlist);
     const existing = index.findIndex((e) => e.id === playlist.id);
@@ -34,6 +34,7 @@ export class PlaylistIndexStore {
     }
     await this.#store.set('entries', index);
     await this.#store.save();
+    return index;
   }
 
   async remove(id: string): Promise<void> {

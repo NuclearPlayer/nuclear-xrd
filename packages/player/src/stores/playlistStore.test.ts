@@ -20,6 +20,36 @@ describe('playlistStore', () => {
     resetStore();
   });
 
+  it('creates a new empty playlist', async () => {
+    const id = await usePlaylistStore.getState().createPlaylist('My Playlist');
+
+    expect(id).toBeDefined();
+    expect(usePlaylistStore.getState().index).toMatchInlineSnapshot(`
+      [
+        {
+          "createdAtIso": "2026-01-01T00:00:00.000Z",
+          "id": "mock-uuid-0",
+          "isReadOnly": false,
+          "itemCount": 0,
+          "lastModifiedIso": "2026-01-01T00:00:00.000Z",
+          "name": "My Playlist",
+          "totalDurationMs": 0,
+        },
+      ]
+    `);
+    expect(usePlaylistStore.getState().playlists.get(id))
+      .toMatchInlineSnapshot(`
+      {
+        "createdAtIso": "2026-01-01T00:00:00.000Z",
+        "id": "mock-uuid-0",
+        "isReadOnly": false,
+        "items": [],
+        "lastModifiedIso": "2026-01-01T00:00:00.000Z",
+        "name": "My Playlist",
+      }
+    `);
+  });
+
   it('loads index from file service', async () => {
     const playlist = new PlaylistBuilder().withTrackCount(2).build();
     await playlistIndexStore.upsert(playlist);

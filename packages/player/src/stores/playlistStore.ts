@@ -1,8 +1,12 @@
+import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
 import type { Playlist, PlaylistIndexEntry } from '@nuclearplayer/model';
 
-import { playlistIndexStore } from '../services/playlistFileService';
+import {
+  playlistFileStore,
+  playlistIndexStore,
+} from '../services/playlistFileService';
 
 type PlaylistStore = {
   index: PlaylistIndexEntry[];
@@ -10,6 +14,7 @@ type PlaylistStore = {
   loaded: boolean;
 
   loadIndex: () => Promise<void>;
+  createPlaylist: (name: string) => Promise<string>;
 };
 
 export const usePlaylistStore = create<PlaylistStore>((set) => ({
@@ -20,5 +25,27 @@ export const usePlaylistStore = create<PlaylistStore>((set) => ({
   loadIndex: async () => {
     const index = await playlistIndexStore.load();
     set({ index, loaded: true });
+  },
+
+  createPlaylist: async (name: string) => {
+    const now = new Date().toISOString();
+    const playlist: Playlist = {
+      id: uuidv4(),
+      name,
+      createdAtIso: now,
+      lastModifiedIso: now,
+      isReadOnly: false,
+      items: [],
+    };
+
+    await playlistFileStore.save(playlist);
+    const index = await playlistIndexStore.upsert(playlist);
+
+    set((state) => ({
+      playlists: new Map(state.playlists).set(playlist.id, playlist),
+      index,
+    }));
+
+    return playlist.id;
   },
 }));
