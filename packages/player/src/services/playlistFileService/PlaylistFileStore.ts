@@ -1,6 +1,9 @@
 import { LazyStore } from '@tauri-apps/plugin-store';
 
 import type { Playlist } from '@nuclearplayer/model';
+import { playlistSchema } from '@nuclearplayer/model';
+
+import { loadValidated } from '../validatedStore';
 
 const PLAYLISTS_DIR = 'playlists';
 const MAX_CACHED_STORES = 20;
@@ -39,7 +42,7 @@ export class PlaylistFileStore {
   }
 
   async load(id: string): Promise<Playlist | null> {
-    return (await this.#get(id).get<Playlist>('playlist')) ?? null;
+    return loadValidated(this.#get(id), 'playlist', playlistSchema);
   }
 
   async save(playlist: Playlist): Promise<void> {

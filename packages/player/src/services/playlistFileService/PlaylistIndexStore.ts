@@ -1,6 +1,9 @@
 import { LazyStore } from '@tauri-apps/plugin-store';
 
 import type { PlaylistIndexEntry } from '@nuclearplayer/model';
+import { playlistIndexSchema } from '@nuclearplayer/model';
+
+import { loadValidated } from '../validatedStore';
 
 const PLAYLISTS_DIR = 'playlists';
 
@@ -8,7 +11,9 @@ export class PlaylistIndexStore {
   #store = new LazyStore(`${PLAYLISTS_DIR}/index.json`);
 
   async load(): Promise<PlaylistIndexEntry[]> {
-    return (await this.#store.get<PlaylistIndexEntry[]>('entries')) ?? [];
+    return (
+      (await loadValidated(this.#store, 'entries', playlistIndexSchema)) ?? []
+    );
   }
 
   async save(index: PlaylistIndexEntry[]): Promise<void> {

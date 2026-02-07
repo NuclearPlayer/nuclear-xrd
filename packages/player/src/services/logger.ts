@@ -24,6 +24,7 @@ export const LOG_SCOPES = [
   'updates',
   'queue',
   'metadata',
+  'playlists',
 ] as const;
 
 export type LogScope = (typeof LOG_SCOPES)[number];

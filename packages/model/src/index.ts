@@ -91,36 +91,13 @@ export type Artist = {
   source: ProviderRef;
 };
 
-export type Playlist = {
-  id: string;
-  name: string;
-  description?: string;
-  artwork?: ArtworkSet;
-  tags?: string[];
-  createdAtIso: string;
-  lastModifiedIso: string;
-  origin?: ProviderRef;
-  isReadOnly: boolean;
-  parentId?: string;
-  items: PlaylistItem[];
-};
-
-export type PlaylistIndexEntry = Pick<
-  Playlist,
-  'id' | 'name' | 'createdAtIso' | 'lastModifiedIso' | 'isReadOnly' | 'artwork'
-> & {
-  itemCount: number;
-  totalDurationMs: number;
-};
-
-export type PlaylistItem<T extends Track = Track> = {
-  id: string;
-  track: T;
-  note?: string;
-  addedAtIso: string;
-};
-
 export { pickArtwork } from './artwork';
+export type { Playlist, PlaylistIndexEntry, PlaylistItem } from './playlists';
 export type { QueueItem, RepeatMode, Queue } from './queue';
 export type { SearchCategory, SearchParams, SearchResults } from './search';
 export type { LocalFileInfo, Stream, StreamCandidate } from './streaming';
+export {
+  playlistSchema,
+  playlistIndexEntrySchema,
+  playlistIndexSchema,
+} from './schemas';
