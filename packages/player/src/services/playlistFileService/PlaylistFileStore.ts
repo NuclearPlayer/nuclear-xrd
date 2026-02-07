@@ -1,8 +1,10 @@
+import { BaseDirectory, remove } from '@tauri-apps/plugin-fs';
 import { LazyStore } from '@tauri-apps/plugin-store';
 
 import type { Playlist } from '@nuclearplayer/model';
 import { playlistSchema } from '@nuclearplayer/model';
 
+import { Logger } from '../logger';
 import { loadValidated } from '../validatedStore';
 
 const PLAYLISTS_DIR = 'playlists';
@@ -58,5 +60,15 @@ export class PlaylistFileStore {
     await store.close();
     this.#stores.delete(id);
     this.#accessOrder = this.#accessOrder.filter((i) => i !== id);
+
+    try {
+      await remove(`${PLAYLISTS_DIR}/${id}.json`, {
+        baseDir: BaseDirectory.AppData,
+      });
+    } catch {
+      Logger.playlists.warn(
+        `Failed to delete playlist file for id ${id}. It may have already been removed.`,
+      );
+    }
   }
 }
