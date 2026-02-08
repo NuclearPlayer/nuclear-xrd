@@ -7,7 +7,7 @@ import { DialogRoot } from './DialogRoot';
 import { DialogTitle } from './DialogTitle';
 
 type DialogProps = PropsWithChildren<{
-  open: boolean;
+  isOpen: boolean;
   onClose: () => void;
   title: string;
   description?: string;
@@ -22,13 +22,13 @@ type DialogComponent = FC<DialogProps> & {
 };
 
 const DialogImpl: FC<DialogProps> = ({
-  open,
+  isOpen,
   onClose,
   title,
   description,
   children,
 }) => (
-  <DialogRoot open={open} onClose={onClose}>
+  <DialogRoot isOpen={isOpen} onClose={onClose}>
     <DialogTitle>{title}</DialogTitle>
     {description && <DialogDescription>{description}</DialogDescription>}
     <DialogActions>{children}</DialogActions>

@@ -6,13 +6,13 @@ import { Dialog } from '.';
 import { DialogWrapper } from '../../test/DialogWrapper';
 
 const StatefulDialog = ({ defaultOpen = false }: { defaultOpen?: boolean }) => {
-  const [open, setOpen] = useState(defaultOpen);
+  const [isOpen, setIsOpen] = useState(defaultOpen);
   return (
     <>
-      <button onClick={() => setOpen(true)}>Open</button>
+      <button onClick={() => setIsOpen(true)}>Open</button>
       <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
         title="Delete Playlist"
         description="This action cannot be undone."
       >
@@ -27,7 +27,7 @@ describe('Dialog', () => {
   it('(Snapshot) renders open dialog', () => {
     render(
       <Dialog
-        open
+        isOpen
         onClose={vi.fn()}
         title="Confirm"
         description="Are you sure?"
@@ -41,7 +41,7 @@ describe('Dialog', () => {
   it('(Snapshot) renders closed dialog', () => {
     const { container } = render(
       <Dialog
-        open={false}
+        isOpen={false}
         onClose={vi.fn()}
         title="Confirm"
         description="Are you sure?"
@@ -55,7 +55,7 @@ describe('Dialog', () => {
   it('displays title and description when open', () => {
     render(
       <Dialog
-        open
+        isOpen
         onClose={vi.fn()}
         title="Create Playlist"
         description="Give your playlist a name."
@@ -78,7 +78,7 @@ describe('Dialog', () => {
   it('calls onClose when the close button is clicked', async () => {
     const onClose = vi.fn();
     render(
-      <Dialog open onClose={onClose} title="Test" description="Test">
+      <Dialog isOpen onClose={onClose} title="Test" description="Test">
         <Dialog.Close>Cancel</Dialog.Close>
       </Dialog>,
     );

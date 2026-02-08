@@ -9,22 +9,22 @@ import { FC, PropsWithChildren } from 'react';
 import { DialogContext } from './context';
 
 type DialogRootProps = PropsWithChildren<{
-  open: boolean;
+  isOpen: boolean;
   onClose: () => void;
 }>;
 
 export const DialogRoot: FC<DialogRootProps> = ({
-  open,
+  isOpen,
   onClose,
   children,
 }) => {
   return (
     <DialogContext.Provider value={{ onClose }}>
       <AnimatePresence>
-        {open && (
+        {isOpen && (
           <HeadlessDialog
             static
-            open={open}
+            open={isOpen}
             onClose={onClose}
             className="relative z-50"
           >
