@@ -4,6 +4,7 @@ import type {
   Playlist,
   PlaylistIndexEntry,
   PlaylistItem,
+  ProviderRef,
   Track,
 } from '@nuclearplayer/model';
 
@@ -73,6 +74,11 @@ export class PlaylistBuilder {
 
   readOnly(): this {
     this.playlist.isReadOnly = true;
+    return this;
+  }
+
+  withOrigin(origin: ProviderRef): this {
+    this.playlist.origin = origin;
     return this;
   }
 

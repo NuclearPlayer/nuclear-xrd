@@ -38,6 +38,9 @@ export const PlaylistDetailWrapper = {
   trackTitle(name: string) {
     return screen.queryByText(name);
   },
+  get readOnlyBadge() {
+    return screen.queryByTestId('read-only-badge');
+  },
   get emptyState() {
     return screen.queryByTestId('empty-state');
   },

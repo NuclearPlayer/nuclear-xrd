@@ -33,4 +33,19 @@ describe('PlaylistDetail view', () => {
 
     expect(PlaylistDetailWrapper.trackCount).toHaveTextContent('2 tracks');
   });
+
+  it('shows read-only badge for external playlists', async () => {
+    PlaylistDetailWrapper.seedPlaylist(
+      new PlaylistBuilder()
+        .withId('external-playlist')
+        .withName('External Playlist')
+        .readOnly()
+        .withOrigin({ provider: 'spotify', id: 'ext-1' })
+        .withTrackNames(['Track A']),
+    );
+
+    await PlaylistDetailWrapper.mount('external-playlist');
+
+    expect(PlaylistDetailWrapper.readOnlyBadge).toBeInTheDocument();
+  });
 });
