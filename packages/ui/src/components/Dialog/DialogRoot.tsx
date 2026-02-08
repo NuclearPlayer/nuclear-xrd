@@ -4,8 +4,10 @@ import {
   Dialog as HeadlessDialog,
 } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { XIcon } from 'lucide-react';
 import { FC, PropsWithChildren } from 'react';
 
+import { Button } from '../Button';
 import { DialogContext } from './context';
 
 type DialogRootProps = PropsWithChildren<{
@@ -41,7 +43,16 @@ export const DialogRoot: FC<DialogRootProps> = ({
                   mass: 0.9,
                 }}
               >
-                <DialogPanel className="border-border bg-primary shadow-shadow w-full max-w-md rounded-md border-2 p-6">
+                <DialogPanel className="border-border bg-background shadow-shadow relative w-full max-w-md rounded-md border-2 p-6">
+                  <Button
+                    variant="text"
+                    size="icon-sm"
+                    onClick={onClose}
+                    className="absolute top-3 right-3"
+                    aria-label="Close"
+                  >
+                    <XIcon size={16} />
+                  </Button>
                   {children}
                 </DialogPanel>
               </motion.div>

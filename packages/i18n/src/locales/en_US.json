@@ -36,7 +36,8 @@
     "collection": "Collection",
     "favoriteAlbums": "Favorite albums",
     "favoriteTracks": "Favorite tracks",
-    "favoriteArtists": "Favorite artists"
+    "favoriteArtists": "Favorite artists",
+    "playlists": "Playlists"
   },
   "favorites": {
     "albums": {
@@ -54,6 +55,29 @@
       "empty": "No favorite artists yet",
       "emptyDescription": "Artists you mark as favorites will appear here"
     }
+  },
+  "playlists": {
+    "title": "Playlists",
+    "empty": "No playlists yet",
+    "emptyDescription": "Create a playlist or import one to get started",
+    "create": "Create new",
+    "importJson": "Import from JSON",
+    "add": "Add",
+    "delete": "Delete playlist",
+    "deleteConfirm": "Are you sure you want to delete this playlist?",
+    "play": "Play",
+    "addToQueue": "Add to queue",
+    "saveLocally": "Save locally",
+    "readOnlyBadge": "External playlist",
+    "readOnlyTooltip": "This playlist is from {{source}} and is read-only. Save a local copy to edit it.",
+    "trackCount": "{{count}} track",
+    "trackCount_other": "{{count}} tracks",
+    "addToPlaylist": "Add to playlist",
+    "filterPlaylists": "Filter playlists...",
+    "createNew": "Create new playlist",
+    "saveQueueAsPlaylist": "Save queue as playlist",
+    "name": "Name",
+    "namePlaceholder": "My playlist"
   },
   "search": {
     "title": "Search",
