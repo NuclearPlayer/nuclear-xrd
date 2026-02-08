@@ -24,6 +24,13 @@ export const PlaylistsWrapper = {
   get cards() {
     return screen.queryAllByTestId('card');
   },
+  async clickCard(index: number) {
+    const cards = screen.getAllByTestId('card');
+    await user.click(cards[index]);
+  },
+  get detailView() {
+    return screen.queryByTestId('playlist-detail-view');
+  },
 
   createButton: {
     get element() {

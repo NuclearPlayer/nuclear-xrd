@@ -56,4 +56,32 @@ describe('Playlists view', () => {
     expect(usePlaylistStore.getState().index).toHaveLength(1);
     expect(usePlaylistStore.getState().index[0]?.name).toBe('My New Playlist');
   });
+
+  it('navigates to playlist detail when clicking a card', async () => {
+    usePlaylistStore.setState({
+      index: [
+        new PlaylistBuilder()
+          .withId('nav-test')
+          .withName('Navigate Me')
+          .withTrackCount(3)
+          .buildIndexEntry(),
+      ],
+      playlists: new Map([
+        [
+          'nav-test',
+          new PlaylistBuilder()
+            .withId('nav-test')
+            .withName('Navigate Me')
+            .withTrackCount(3)
+            .build(),
+        ],
+      ]),
+      loaded: true,
+    });
+
+    await PlaylistsWrapper.mount();
+    await PlaylistsWrapper.clickCard(0);
+
+    expect(PlaylistsWrapper.detailView).toBeInTheDocument();
+  });
 });

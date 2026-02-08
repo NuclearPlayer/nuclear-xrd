@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import isEmpty from 'lodash-es/isEmpty';
 import { ListMusic, Plus } from 'lucide-react';
 import { type FC } from 'react';
@@ -12,6 +13,7 @@ import { PlaylistsProvider, usePlaylistsContext } from './PlaylistsContext';
 
 const PlaylistsContent: FC = () => {
   const { t } = useTranslation('playlists');
+  const navigate = useNavigate();
   const index = usePlaylistStore((state) => state.index);
   const { openCreateDialog } = usePlaylistsContext();
 
@@ -32,7 +34,15 @@ const PlaylistsContent: FC = () => {
           className="flex-1"
         />
       ) : (
-        <PlaylistCardGrid index={index} />
+        <PlaylistCardGrid
+          index={index}
+          onCardClick={(id) =>
+            navigate({
+              to: '/playlists/$playlistId',
+              params: { playlistId: id },
+            })
+          }
+        />
       )}
 
       <CreatePlaylistDialog />

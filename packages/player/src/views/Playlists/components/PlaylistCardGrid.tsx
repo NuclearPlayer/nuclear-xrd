@@ -6,9 +6,13 @@ import { Card, CardGrid } from '@nuclearplayer/ui';
 
 type PlaylistCardGridProps = {
   index: PlaylistIndexEntry[];
+  onCardClick: (id: string) => void;
 };
 
-export const PlaylistCardGrid: FC<PlaylistCardGridProps> = ({ index }) => {
+export const PlaylistCardGrid: FC<PlaylistCardGridProps> = ({
+  index,
+  onCardClick,
+}) => {
   const { t } = useTranslation('playlists');
 
   return (
@@ -18,6 +22,7 @@ export const PlaylistCardGrid: FC<PlaylistCardGridProps> = ({ index }) => {
           key={entry.id}
           title={entry.name}
           subtitle={t('trackCount', { count: entry.itemCount })}
+          onClick={() => onCardClick(entry.id)}
         />
       ))}
     </CardGrid>
