@@ -1,4 +1,5 @@
 import { usePlaylistStore } from '../../stores/playlistStore';
+import { PlaylistBuilder } from '../../test/builders/PlaylistBuilder';
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 import { PlaylistsWrapper } from './Playlists.test-wrapper';
 
@@ -21,24 +22,14 @@ describe('Playlists view', () => {
   it('renders playlist cards when playlists exist', async () => {
     usePlaylistStore.setState({
       index: [
-        {
-          id: 'p1',
-          name: 'Rock Classics',
-          createdAtIso: '2026-01-01T00:00:00.000Z',
-          lastModifiedIso: '2026-01-01T00:00:00.000Z',
-          isReadOnly: false,
-          itemCount: 10,
-          totalDurationMs: 1800000,
-        },
-        {
-          id: 'p2',
-          name: 'Chill Vibes',
-          createdAtIso: '2026-01-02T00:00:00.000Z',
-          lastModifiedIso: '2026-01-02T00:00:00.000Z',
-          isReadOnly: false,
-          itemCount: 8,
-          totalDurationMs: 1440000,
-        },
+        new PlaylistBuilder()
+          .withName('Rock Classics')
+          .withTrackCount(10)
+          .buildIndexEntry(),
+        new PlaylistBuilder()
+          .withName('Chill Vibes')
+          .withTrackCount(8)
+          .buildIndexEntry(),
       ],
       loaded: true,
     });
@@ -47,5 +38,12 @@ describe('Playlists view', () => {
 
     expect(PlaylistsWrapper.emptyState).not.toBeInTheDocument();
     expect(PlaylistsWrapper.cards).toMatchSnapshot();
+  });
+
+  it('opens create dialog when clicking create button', async () => {
+    await PlaylistsWrapper.mount();
+    await PlaylistsWrapper.createButton.click();
+
+    expect(PlaylistsWrapper.createDialog.isOpen()).toBe(true);
   });
 });

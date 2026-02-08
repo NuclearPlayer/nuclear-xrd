@@ -1,6 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import type { Playlist, PlaylistItem, Track } from '@nuclearplayer/model';
+import type {
+  Playlist,
+  PlaylistIndexEntry,
+  PlaylistItem,
+  Track,
+} from '@nuclearplayer/model';
 
 const now = () => new Date().toISOString();
 
@@ -66,6 +71,23 @@ export class PlaylistBuilder {
     return {
       ...this.playlist,
       items: this.playlist.items.map((item) => ({ ...item })),
+    };
+  }
+
+  buildIndexEntry(): PlaylistIndexEntry {
+    const playlist = this.build();
+    return {
+      id: playlist.id,
+      name: playlist.name,
+      createdAtIso: playlist.createdAtIso,
+      lastModifiedIso: playlist.lastModifiedIso,
+      isReadOnly: playlist.isReadOnly,
+      artwork: playlist.artwork,
+      itemCount: playlist.items.length,
+      totalDurationMs: playlist.items.reduce(
+        (sum, item) => sum + (item.track.durationMs ?? 0),
+        0,
+      ),
     };
   }
 }

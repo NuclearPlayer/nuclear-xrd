@@ -1,8 +1,13 @@
 import { createMemoryHistory, createRouter } from '@tanstack/react-router';
 import { render, RenderResult, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import { DialogWrapper } from '@nuclearplayer/ui';
 
 import App from '../../App';
 import { routeTree } from '../../routeTree.gen';
+
+const user = userEvent.setup();
 
 export const PlaylistsWrapper = {
   async mount(): Promise<RenderResult> {
@@ -18,5 +23,24 @@ export const PlaylistsWrapper = {
   },
   get cards() {
     return screen.queryAllByTestId('card');
+  },
+
+  createButton: {
+    get element() {
+      return screen.getByTestId('create-playlist-button');
+    },
+    async click() {
+      await user.click(this.element);
+    },
+  },
+
+  createDialog: {
+    isOpen: () => DialogWrapper.isOpen(),
+    get nameInput() {
+      return screen.getByTestId('playlist-name-input');
+    },
+    async typeName(name: string) {
+      await user.type(this.nameInput, name);
+    },
   },
 };

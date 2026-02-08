@@ -1,18 +1,30 @@
-import { ListMusic } from 'lucide-react';
+import isEmpty from 'lodash-es/isEmpty';
+import { ListMusic, Plus } from 'lucide-react';
 import { type FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
-import { Card, CardGrid, EmptyState, ViewShell } from '@nuclearplayer/ui';
+import { Button, EmptyState, ViewShell } from '@nuclearplayer/ui';
 
 import { usePlaylistStore } from '../../stores/playlistStore';
+import { CreatePlaylistDialog } from './components/CreatePlaylistDialog';
+import { PlaylistCardGrid } from './components/PlaylistCardGrid';
+import { PlaylistsProvider, usePlaylistsContext } from './PlaylistsContext';
 
-export const Playlists: FC = () => {
+const PlaylistsContent: FC = () => {
   const { t } = useTranslation('playlists');
   const index = usePlaylistStore((state) => state.index);
+  const { openCreateDialog } = usePlaylistsContext();
 
   return (
     <ViewShell data-testid="playlists-view" title={t('title')}>
-      {index.length === 0 ? (
+      <div className="mb-4 flex items-center gap-2">
+        <Button onClick={openCreateDialog} data-testid="create-playlist-button">
+          <Plus size={16} />
+          {t('create')}
+        </Button>
+      </div>
+
+      {isEmpty(index) ? (
         <EmptyState
           icon={<ListMusic size={48} />}
           title={t('empty')}
@@ -20,16 +32,16 @@ export const Playlists: FC = () => {
           className="flex-1"
         />
       ) : (
-        <CardGrid>
-          {index.map((entry) => (
-            <Card
-              key={entry.id}
-              title={entry.name}
-              subtitle={t('trackCount', { count: entry.itemCount })}
-            />
-          ))}
-        </CardGrid>
+        <PlaylistCardGrid index={index} />
       )}
+
+      <CreatePlaylistDialog />
     </ViewShell>
   );
 };
+
+export const Playlists: FC = () => (
+  <PlaylistsProvider>
+    <PlaylistsContent />
+  </PlaylistsProvider>
+);
