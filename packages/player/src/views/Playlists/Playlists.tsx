@@ -2,7 +2,7 @@ import { ListMusic } from 'lucide-react';
 import { type FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
-import { EmptyState, ViewShell } from '@nuclearplayer/ui';
+import { Card, CardGrid, EmptyState, ViewShell } from '@nuclearplayer/ui';
 
 import { usePlaylistStore } from '../../stores/playlistStore';
 
@@ -19,7 +19,17 @@ export const Playlists: FC = () => {
           description={t('emptyDescription')}
           className="flex-1"
         />
-      ) : null}
+      ) : (
+        <CardGrid>
+          {index.map((entry) => (
+            <Card
+              key={entry.id}
+              title={entry.name}
+              subtitle={t('trackCount', { count: entry.itemCount })}
+            />
+          ))}
+        </CardGrid>
+      )}
     </ViewShell>
   );
 };
