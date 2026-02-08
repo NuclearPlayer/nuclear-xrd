@@ -5,6 +5,7 @@ import {
   DiscIcon,
   GaugeIcon,
   LibraryIcon,
+  ListMusicIcon,
   MusicIcon,
   PaletteIcon,
   ScrollTextIcon,
@@ -114,6 +115,12 @@ const RootComponent = () => {
                   <SidebarNavigationItem>
                     <UserIcon />
                     {t('favoriteArtists')}
+                  </SidebarNavigationItem>
+                </Link>
+                <Link to="/playlists">
+                  <SidebarNavigationItem>
+                    <ListMusicIcon />
+                    {t('playlists')}
                   </SidebarNavigationItem>
                 </Link>
               </SidebarNavigationCollapsible>
