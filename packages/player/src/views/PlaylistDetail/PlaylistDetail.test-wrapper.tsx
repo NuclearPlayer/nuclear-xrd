@@ -3,8 +3,19 @@ import { render, RenderResult, screen } from '@testing-library/react';
 
 import App from '../../App';
 import { routeTree } from '../../routeTree.gen';
+import { usePlaylistStore } from '../../stores/playlistStore';
+import { PlaylistBuilder } from '../../test/builders/PlaylistBuilder';
 
 export const PlaylistDetailWrapper = {
+  seedPlaylist(builder: PlaylistBuilder) {
+    const playlist = builder.build();
+    usePlaylistStore.setState({
+      index: [builder.buildIndexEntry()],
+      playlists: new Map([[playlist.id, playlist]]),
+      loaded: true,
+    });
+  },
+
   async mount(playlistId: string): Promise<RenderResult> {
     const history = createMemoryHistory({
       initialEntries: [`/playlists/${playlistId}`],
