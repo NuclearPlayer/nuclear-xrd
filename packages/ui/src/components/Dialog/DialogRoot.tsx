@@ -5,7 +5,7 @@ import {
 } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { XIcon } from 'lucide-react';
-import { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import { Button } from '../Button';
 import { DialogContext } from './context';
@@ -13,11 +13,13 @@ import { DialogContext } from './context';
 type DialogRootProps = PropsWithChildren<{
   isOpen: boolean;
   onClose: () => void;
+  initialFocus?: React.RefObject<HTMLElement | null>;
 }>;
 
 export const DialogRoot: FC<DialogRootProps> = ({
   isOpen,
   onClose,
+  initialFocus,
   children,
 }) => {
   return (
@@ -28,9 +30,17 @@ export const DialogRoot: FC<DialogRootProps> = ({
             static
             open={isOpen}
             onClose={onClose}
+            initialFocus={initialFocus}
             className="relative z-50"
           >
-            <DialogBackdrop className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+            >
+              <DialogBackdrop className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
+            </motion.div>
             <div className="fixed inset-0 flex items-center justify-center p-4">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 8 }}
@@ -50,6 +60,7 @@ export const DialogRoot: FC<DialogRootProps> = ({
                     onClick={onClose}
                     className="absolute top-3 right-3"
                     aria-label="Close"
+                    data-testid="dialog-x-close"
                   >
                     <XIcon size={16} />
                   </Button>

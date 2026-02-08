@@ -12,9 +12,18 @@ export const DialogWrapper = {
     return this.queryPanel !== null;
   },
 
-  closeButton: {
+  cancelButton: {
     get element() {
       return within(screen.getByRole('dialog')).getByTestId('dialog-close');
+    },
+    async click() {
+      await userEvent.click(this.element);
+    },
+  },
+
+  xButton: {
+    get element() {
+      return within(screen.getByRole('dialog')).getByTestId('dialog-x-close');
     },
     async click() {
       await userEvent.click(this.element);

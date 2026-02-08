@@ -7,6 +7,7 @@ const meta: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
   component: Dialog,
   parameters: { layout: 'centered' },
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -24,12 +25,15 @@ export const Confirmation: Story = {
           onClose={() => setIsOpen(false)}
           title="Delete Playlist"
           description="Are you sure you want to delete this playlist? This action cannot be undone."
-        >
-          <Dialog.Close>Cancel</Dialog.Close>
-          <Button intent="danger" onClick={() => setIsOpen(false)}>
-            Delete
-          </Button>
-        </Dialog>
+          actions={
+            <>
+              <Dialog.Close>Cancel</Dialog.Close>
+              <Button intent="danger" onClick={() => setIsOpen(false)}>
+                Delete
+              </Button>
+            </>
+          }
+        />
       </>
     );
   },

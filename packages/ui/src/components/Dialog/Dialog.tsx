@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { DialogActions } from './DialogActions';
 import { DialogClose } from './DialogClose';
@@ -11,6 +11,7 @@ type DialogProps = PropsWithChildren<{
   onClose: () => void;
   title: string;
   description?: string;
+  actions?: ReactNode;
 }>;
 
 type DialogComponent = FC<DialogProps> & {
@@ -27,11 +28,13 @@ const DialogImpl: FC<DialogProps> = ({
   title,
   description,
   children,
+  actions,
 }) => (
   <DialogRoot isOpen={isOpen} onClose={onClose}>
     <DialogTitle>{title}</DialogTitle>
     {description && <DialogDescription>{description}</DialogDescription>}
-    <DialogActions>{children}</DialogActions>
+    {children}
+    {actions && <DialogActions>{actions}</DialogActions>}
   </DialogRoot>
 );
 

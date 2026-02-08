@@ -1,7 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Dialog > (Snapshot) renders closed dialog 1`] = `<div />`;
-
 exports[`Dialog > (Snapshot) renders open dialog 1`] = `
 <div
   aria-describedby="headlessui-description-:r8:"
@@ -15,11 +13,18 @@ exports[`Dialog > (Snapshot) renders open dialog 1`] = `
   tabindex="-1"
 >
   <div
-    aria-hidden="true"
-    class="fixed inset-0 bg-black/40 backdrop-blur-sm"
-    data-headlessui-state="open"
-    data-open=""
-  />
+    animate="[object Object]"
+    exit="[object Object]"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      aria-hidden="true"
+      class="fixed inset-0 bg-black/40 backdrop-blur-sm"
+      data-headlessui-state="open"
+      data-open=""
+    />
+  </div>
   <div
     class="fixed inset-0 flex items-center justify-center p-4"
   >
@@ -39,6 +44,7 @@ exports[`Dialog > (Snapshot) renders open dialog 1`] = `
           aria-label="Close"
           class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center absolute top-3 right-3"
           data-headlessui-state=""
+          data-testid="dialog-x-close"
           type="button"
         >
           <svg

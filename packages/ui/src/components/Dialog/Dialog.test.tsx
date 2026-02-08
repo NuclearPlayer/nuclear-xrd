@@ -15,10 +15,13 @@ const StatefulDialog = ({ defaultOpen = false }: { defaultOpen?: boolean }) => {
         onClose={() => setIsOpen(false)}
         title="Delete Playlist"
         description="This action cannot be undone."
-      >
-        <Dialog.Close>Cancel</Dialog.Close>
-        <button>Delete</button>
-      </Dialog>
+        actions={
+          <>
+            <Dialog.Close>Cancel</Dialog.Close>
+            <button>Delete</button>
+          </>
+        }
+      />
     </>
   );
 };
@@ -31,25 +34,10 @@ describe('Dialog', () => {
         onClose={vi.fn()}
         title="Confirm"
         description="Are you sure?"
-      >
-        <button>OK</button>
-      </Dialog>,
+        actions={<button>OK</button>}
+      />,
     );
     expect(DialogWrapper.panel).toMatchSnapshot();
-  });
-
-  it('(Snapshot) renders closed dialog', () => {
-    const { container } = render(
-      <Dialog
-        isOpen={false}
-        onClose={vi.fn()}
-        title="Confirm"
-        description="Are you sure?"
-      >
-        <button>OK</button>
-      </Dialog>,
-    );
-    expect(container).toMatchSnapshot();
   });
 
   it('displays title and description when open', () => {
@@ -59,9 +47,8 @@ describe('Dialog', () => {
         onClose={vi.fn()}
         title="Create Playlist"
         description="Give your playlist a name."
-      >
-        <button>Create</button>
-      </Dialog>,
+        actions={<button>Create</button>}
+      />,
     );
     expect(DialogWrapper.getByText('Create Playlist')).toBeInTheDocument();
     expect(
@@ -69,21 +56,40 @@ describe('Dialog', () => {
     ).toBeInTheDocument();
   });
 
-  it('closes when the close button is clicked', async () => {
+  it('closes when the cancel button is clicked', async () => {
     render(<StatefulDialog defaultOpen />);
-    await DialogWrapper.closeButton.click();
+    await DialogWrapper.cancelButton.click();
     expect(DialogWrapper.isOpen()).toBe(false);
   });
 
-  it('calls onClose when the close button is clicked', async () => {
+  it('calls onClose when the cancel button is clicked', async () => {
     const onClose = vi.fn();
     render(
-      <Dialog isOpen onClose={onClose} title="Test" description="Test">
-        <Dialog.Close>Cancel</Dialog.Close>
-      </Dialog>,
+      <Dialog
+        isOpen
+        onClose={onClose}
+        title="Test"
+        description="Test"
+        actions={<Dialog.Close>Cancel</Dialog.Close>}
+      />,
     );
-    await DialogWrapper.closeButton.click();
+    await DialogWrapper.cancelButton.click();
     expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClose when the X button is clicked', async () => {
+    const onClose = vi.fn();
+    render(<Dialog isOpen onClose={onClose} title="Test" description="Test" />);
+    await DialogWrapper.xButton.click();
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('closes when Escape is pressed', async () => {
+    const user = userEvent.setup();
+    render(<StatefulDialog defaultOpen />);
+    expect(DialogWrapper.isOpen()).toBe(true);
+    await user.keyboard('{Escape}');
+    expect(DialogWrapper.isOpen()).toBe(false);
   });
 
   it('opens and closes via external state', async () => {
