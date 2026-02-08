@@ -32,6 +32,12 @@ export const PlaylistDetailWrapper = {
   get trackCount() {
     return screen.queryByTestId('playlist-detail-track-count');
   },
+  get trackTable() {
+    return screen.queryByRole('table');
+  },
+  trackTitle(name: string) {
+    return screen.queryByText(name);
+  },
   get emptyState() {
     return screen.queryByTestId('empty-state');
   },

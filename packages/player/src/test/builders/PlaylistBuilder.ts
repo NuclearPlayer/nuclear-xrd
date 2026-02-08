@@ -62,6 +62,15 @@ export class PlaylistBuilder {
     return this;
   }
 
+  withTrackNames(names: string[]): this {
+    this.playlist.items = names.map((title) => ({
+      id: uuidv4(),
+      track: { ...defaultTrack(), title },
+      addedAtIso: now(),
+    }));
+    return this;
+  }
+
   readOnly(): this {
     this.playlist.isReadOnly = true;
     return this;
