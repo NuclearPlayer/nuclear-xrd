@@ -42,5 +42,17 @@ export const PlaylistsWrapper = {
     async typeName(name: string) {
       await user.type(this.nameInput, name);
     },
+    submitButton: {
+      get element() {
+        return DialogWrapper.getByText('Create new');
+      },
+      async click() {
+        await user.click(this.element);
+      },
+    },
+    async createPlaylist(name: string) {
+      await PlaylistsWrapper.createDialog.typeName(name);
+      await PlaylistsWrapper.createDialog.submitButton.click();
+    },
   },
 };

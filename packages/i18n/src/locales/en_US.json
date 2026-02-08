@@ -77,7 +77,7 @@
     "createNew": "Create new playlist",
     "saveQueueAsPlaylist": "Save queue as playlist",
     "name": "Name",
-    "namePlaceholder": "My playlist"
+    "namePlaceholder": "Playlist name..."
   },
   "search": {
     "title": "Search",

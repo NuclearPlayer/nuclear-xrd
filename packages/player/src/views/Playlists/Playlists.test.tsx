@@ -46,4 +46,14 @@ describe('Playlists view', () => {
 
     expect(PlaylistsWrapper.createDialog.isOpen()).toBe(true);
   });
+
+  it('creates a playlist and adds it to the list', async () => {
+    await PlaylistsWrapper.mount();
+    await PlaylistsWrapper.createButton.click();
+    await PlaylistsWrapper.createDialog.createPlaylist('My New Playlist');
+
+    expect(PlaylistsWrapper.createDialog.isOpen()).toBe(false);
+    expect(usePlaylistStore.getState().index).toHaveLength(1);
+    expect(usePlaylistStore.getState().index[0]?.name).toBe('My New Playlist');
+  });
 });
