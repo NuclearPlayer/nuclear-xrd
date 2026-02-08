@@ -165,4 +165,15 @@ describe('playlistStore', () => {
 
     expect(loaded?.name).toBe('Already Cached');
   });
+
+  it('invalidates cache and reloads index', async () => {
+    const id = await usePlaylistStore.getState().createPlaylist('Cached');
+    expect(usePlaylistStore.getState().playlists.has(id)).toBe(true);
+    expect(usePlaylistStore.getState().index).toHaveLength(1);
+
+    await usePlaylistStore.getState().invalidateCache();
+
+    expect(usePlaylistStore.getState().playlists.size).toBe(0);
+    expect(usePlaylistStore.getState().index).toHaveLength(1);
+  });
 });
