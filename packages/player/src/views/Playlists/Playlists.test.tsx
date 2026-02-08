@@ -20,19 +20,10 @@ describe('Playlists view', () => {
   });
 
   it('renders playlist cards when playlists exist', async () => {
-    usePlaylistStore.setState({
-      index: [
-        new PlaylistBuilder()
-          .withName('Rock Classics')
-          .withTrackCount(10)
-          .buildIndexEntry(),
-        new PlaylistBuilder()
-          .withName('Chill Vibes')
-          .withTrackCount(8)
-          .buildIndexEntry(),
-      ],
-      loaded: true,
-    });
+    PlaylistsWrapper.seedPlaylists(
+      new PlaylistBuilder().withName('Rock Classics').withTrackCount(10),
+      new PlaylistBuilder().withName('Chill Vibes').withTrackCount(8),
+    );
 
     await PlaylistsWrapper.mount();
 
@@ -58,29 +49,15 @@ describe('Playlists view', () => {
   });
 
   it('navigates to playlist detail when clicking a card', async () => {
-    usePlaylistStore.setState({
-      index: [
-        new PlaylistBuilder()
-          .withId('nav-test')
-          .withName('Navigate Me')
-          .withTrackCount(3)
-          .buildIndexEntry(),
-      ],
-      playlists: new Map([
-        [
-          'nav-test',
-          new PlaylistBuilder()
-            .withId('nav-test')
-            .withName('Navigate Me')
-            .withTrackCount(3)
-            .build(),
-        ],
-      ]),
-      loaded: true,
-    });
+    PlaylistsWrapper.seedPlaylists(
+      new PlaylistBuilder()
+        .withId('nav-test')
+        .withName('Navigate Me')
+        .withTrackCount(3),
+    );
 
     await PlaylistsWrapper.mount();
-    await PlaylistsWrapper.clickCard(0);
+    await PlaylistsWrapper.card(0).click();
 
     expect(PlaylistsWrapper.detailView).toBeInTheDocument();
   });

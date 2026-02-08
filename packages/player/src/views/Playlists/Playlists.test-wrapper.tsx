@@ -6,10 +6,21 @@ import { DialogWrapper } from '@nuclearplayer/ui';
 
 import App from '../../App';
 import { routeTree } from '../../routeTree.gen';
+import { usePlaylistStore } from '../../stores/playlistStore';
+import { PlaylistBuilder } from '../../test/builders/PlaylistBuilder';
 
 const user = userEvent.setup();
 
 export const PlaylistsWrapper = {
+  seedPlaylists(...builders: PlaylistBuilder[]) {
+    const playlists = builders.map((b) => b.build());
+    usePlaylistStore.setState({
+      index: builders.map((b) => b.buildIndexEntry()),
+      playlists: new Map(playlists.map((p) => [p.id, p])),
+      loaded: true,
+    });
+  },
+
   async mount(): Promise<RenderResult> {
     const history = createMemoryHistory({ initialEntries: ['/playlists'] });
     const router = createRouter({ routeTree, history });
@@ -24,9 +35,15 @@ export const PlaylistsWrapper = {
   get cards() {
     return screen.queryAllByTestId('card');
   },
-  async clickCard(index: number) {
-    const cards = screen.getAllByTestId('card');
-    await user.click(cards[index]);
+  card(index: number) {
+    return {
+      get element() {
+        return screen.getAllByTestId('card')[index];
+      },
+      async click() {
+        await user.click(this.element);
+      },
+    };
   },
   get detailView() {
     return screen.queryByTestId('playlist-detail-view');
