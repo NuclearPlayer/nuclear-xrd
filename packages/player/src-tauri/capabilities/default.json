@@ -74,6 +74,9 @@
       "allow": [
         {
           "path": "$APPDATA/themes"
+        },
+        {
+          "path": "$APPDATA/playlists"
         }
       ]
     },

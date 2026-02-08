@@ -1,0 +1,98 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Dialog > (Snapshot) renders open dialog 1`] = `
+<div
+  aria-describedby="headlessui-description-:r8:"
+  aria-labelledby="headlessui-dialog-title-:r7:"
+  aria-modal="true"
+  class="relative z-50"
+  data-headlessui-state="open"
+  data-open=""
+  id="headlessui-dialog-:r0:"
+  role="dialog"
+  tabindex="-1"
+>
+  <div
+    animate="[object Object]"
+    exit="[object Object]"
+    initial="[object Object]"
+    transition="[object Object]"
+  >
+    <div
+      aria-hidden="true"
+      class="fixed inset-0 bg-black/40 backdrop-blur-sm"
+      data-headlessui-state="open"
+      data-open=""
+    />
+  </div>
+  <div
+    class="fixed inset-0 flex items-center justify-center p-4"
+  >
+    <div
+      animate="[object Object]"
+      exit="[object Object]"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <div
+        class="border-border bg-background shadow-shadow relative w-full max-w-md rounded-md border-2 p-6"
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-dialog-panel-:r6:"
+      >
+        <button
+          aria-label="Close"
+          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center absolute top-3 right-3"
+          data-headlessui-state=""
+          data-testid="dialog-x-close"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-x"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6 6 18"
+            />
+            <path
+              d="m6 6 12 12"
+            />
+          </svg>
+        </button>
+        <h2
+          class="text-foreground text-lg font-bold"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-dialog-title-:r7:"
+        >
+          Confirm
+        </h2>
+        <p
+          class="text-foreground-secondary mt-2 text-sm"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-description-:r8:"
+        >
+          Are you sure?
+        </p>
+        <div
+          class="mt-6 flex justify-end gap-3"
+        >
+          <button>
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
