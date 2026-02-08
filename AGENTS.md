@@ -205,6 +205,46 @@ describe('Component', () => {
 });
 ```
 
+### Test Wrappers for Views
+
+Player views and some components use a `*.test-wrapper.tsx` file that creates a domain-specific abstraction layer over the DOM. This lets tests read like user stories, and if the implementation changes, only the wrapper needs updating.
+
+**Wrapper conventions:**
+- Use **getters** for element queries: `get emptyState()`, `get cards()` — not `getEmptyState()`
+- Use **nested objects** for interactive elements: `createButton: { get element(), async click() }`
+- Use **methods** for multi-step user actions: `async openContextMenu(title: string)`
+- Tests should use `Wrapper.emptyState`, `Wrapper.cards`, `Wrapper.createButton.click()` — not bare `screen` queries
+- The wrapper is the only place that knows about test IDs, roles, and DOM structure
+
+```tsx
+// Playlists.test-wrapper.tsx
+export const PlaylistsWrapper = {
+  async mount(): Promise<RenderResult> { /* ... */ },
+
+  get emptyState() {
+    return screen.queryByTestId('empty-state');
+  },
+  get cards() {
+    return screen.queryAllByTestId('card');
+  },
+
+  createButton: {
+    get element() {
+      return screen.getByTestId('create-playlist-button');
+    },
+    async click() {
+      await userEvent.click(this.element);
+    },
+  },
+};
+
+// Playlists.test.tsx — reads like a user story
+it('shows empty state when no playlists', async () => {
+  await PlaylistsWrapper.mount();
+  expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
+});
+```
+
 ## File Organization
 
 ```
