@@ -14,6 +14,7 @@ pub fn run() {
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::new().build())
         .plugin(tauri_plugin_upload::init())
+        .plugin(setup::log_plugin())
         .register_asynchronous_uri_scheme_protocol("nuclear-stream", |ctx, request, responder| {
             stream_proxy::handle_stream_request(ctx.app_handle(), request, responder);
         })
@@ -26,7 +27,10 @@ pub fn run() {
             ytdlp::ytdlp_get_stream,
             logging::get_startup_logs
         ])
-        .setup(|app| setup::init(app).map_err(|e| e.into()))
+        .setup(|_app| {
+            logging::mark_startup_complete();
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

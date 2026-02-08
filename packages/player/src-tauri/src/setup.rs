@@ -1,40 +1,30 @@
-use tauri::App;
-
 use crate::logging;
 
 const MAX_LOG_FILE_SIZE: u128 = 5_000_000; // 5MB
 const MAX_LOG_FILES: usize = 7;
 
-pub fn init(app: &App) -> Result<(), Box<dyn std::error::Error>> {
-    app.handle().plugin(
-        tauri_plugin_log::Builder::default()
-            .targets([
-                tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Stdout),
-                tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::LogDir {
-                    file_name: None,
-                }),
-                tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Webview),
-            ])
-            .max_file_size(MAX_LOG_FILE_SIZE)
-            .rotation_strategy(tauri_plugin_log::RotationStrategy::KeepSome(MAX_LOG_FILES))
-            .level(if cfg!(debug_assertions) {
-                log::LevelFilter::Debug
-            } else {
-                log::LevelFilter::Info
-            })
-            .format(|callback, message, record| {
-                logging::capture_startup_log(record.level(), &message.to_string());
-                callback.finish(format_args!(
-                    "[{}][{}] {}",
-                    record.level(),
-                    record.target(),
-                    message
-                ))
-            })
-            .build(),
-    )?;
-
-    logging::mark_startup_complete();
-
-    Ok(())
+pub fn log_plugin<R: tauri::Runtime>() -> tauri::plugin::TauriPlugin<R> {
+    tauri_plugin_log::Builder::default()
+        .targets([
+            tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Stdout),
+            tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::LogDir { file_name: None }),
+            tauri_plugin_log::Target::new(tauri_plugin_log::TargetKind::Webview),
+        ])
+        .max_file_size(MAX_LOG_FILE_SIZE)
+        .rotation_strategy(tauri_plugin_log::RotationStrategy::KeepSome(MAX_LOG_FILES))
+        .level(if cfg!(debug_assertions) {
+            log::LevelFilter::Debug
+        } else {
+            log::LevelFilter::Info
+        })
+        .format(|callback, message, record| {
+            logging::capture_startup_log(record.level(), &message.to_string());
+            callback.finish(format_args!(
+                "[{}][{}] {}",
+                record.level(),
+                record.target(),
+                message
+            ))
+        })
+        .build()
 }

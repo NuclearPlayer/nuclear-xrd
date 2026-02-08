@@ -12,6 +12,7 @@ import '@nuclearplayer/tailwind-config';
 import '@nuclearplayer/themes';
 import '@nuclearplayer/i18n';
 
+import { initLogStream } from './hooks/useLogStream';
 import { startAdvancedThemeWatcher } from './services/advancedThemeDirService';
 import { applyAdvancedThemeFromSettingsIfAny } from './services/advancedThemeService';
 import {
@@ -21,6 +22,8 @@ import {
 import { hydratePluginsFromRegistry } from './services/plugins/pluginBootstrap';
 import { applyThemeFromSettings } from './services/themeBootstrap';
 import { useUpdaterStore } from './stores/updaterStore';
+
+initLogStream();
 
 initializeSettingsStore()
   .then(() => initializeQueueStore())
