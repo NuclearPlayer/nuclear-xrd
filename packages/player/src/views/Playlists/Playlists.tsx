@@ -4,7 +4,12 @@ import { ListMusic, Plus } from 'lucide-react';
 import { type FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
-import { Button, EmptyState, ViewShell } from '@nuclearplayer/ui';
+import {
+  Button,
+  EmptyState,
+  ScrollableArea,
+  ViewShell,
+} from '@nuclearplayer/ui';
 
 import { usePlaylistStore } from '../../stores/playlistStore';
 import { CreatePlaylistDialog } from './components/CreatePlaylistDialog';
@@ -34,15 +39,17 @@ const PlaylistsContent: FC = () => {
           className="flex-1"
         />
       ) : (
-        <PlaylistCardGrid
-          index={index}
-          onCardClick={(id) =>
-            navigate({
-              to: '/playlists/$playlistId',
-              params: { playlistId: id },
-            })
-          }
-        />
+        <ScrollableArea className="flex-1 overflow-hidden">
+          <PlaylistCardGrid
+            index={index}
+            onCardClick={(id) =>
+              navigate({
+                to: '/playlists/$playlistId',
+                params: { playlistId: id },
+              })
+            }
+          />
+        </ScrollableArea>
       )}
 
       <CreatePlaylistDialog />
