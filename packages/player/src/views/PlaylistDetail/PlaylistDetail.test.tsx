@@ -1,3 +1,5 @@
+import { PlayerBarWrapper } from '../../integration-tests/PlayerBar.test-wrapper';
+import { QueueWrapper } from '../../integration-tests/Queue.test-wrapper';
 import { useQueueStore } from '../../stores/queueStore';
 import { PlaylistBuilder } from '../../test/builders/PlaylistBuilder';
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
@@ -69,10 +71,11 @@ describe('PlaylistDetail view', () => {
 
     await PlaylistDetailWrapper.playButton.click();
 
-    const queue = useQueueStore.getState();
-    expect(queue.items).toHaveLength(2);
-    expect(queue.items[0]?.track.title).toBe('Giant Steps');
-    expect(queue.items[1]?.track.title).toBe('So What');
+    const queueItems = QueueWrapper.getItems();
+    expect(queueItems).toHaveLength(2);
+    expect(queueItems[0]?.title).toBe('Giant Steps');
+    expect(queueItems[1]?.title).toBe('So What');
+    expect(PlayerBarWrapper.isPlaying).toBe(true);
   });
 
   it('adds all tracks to queue without clearing', async () => {
@@ -88,10 +91,10 @@ describe('PlaylistDetail view', () => {
 
     await PlaylistDetailWrapper.addToQueueFromActions();
 
-    const queue = useQueueStore.getState();
-    expect(queue.items).toHaveLength(3);
-    expect(queue.items[0]?.track.title).toBe('Existing Track');
-    expect(queue.items[1]?.track.title).toBe('Giant Steps');
-    expect(queue.items[2]?.track.title).toBe('So What');
+    const queueItems = QueueWrapper.getItems();
+    expect(queueItems).toHaveLength(3);
+    expect(queueItems[0]?.title).toBe('Existing Track');
+    expect(queueItems[1]?.title).toBe('Giant Steps');
+    expect(queueItems[2]?.title).toBe('So What');
   });
 });
