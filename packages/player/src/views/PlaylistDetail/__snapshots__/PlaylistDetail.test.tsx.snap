@@ -71,7 +71,7 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
               Play
             </button>
             <div
-              class="absolute"
+              class="relative"
               data-headlessui-state=""
             >
               <div

@@ -60,6 +60,8 @@
     "title": "Playlists",
     "empty": "No playlists yet",
     "emptyDescription": "Create a playlist or import one to get started",
+    "emptyTracks": "No tracks in this playlist",
+    "emptyTracksDescription": "Add tracks from search results or your library",
     "create": "Create new",
     "importJson": "Import from JSON",
     "add": "Add",

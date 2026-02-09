@@ -32,7 +32,8 @@ export const PlaylistDetailWrapper = {
   },
 
   get title() {
-    return screen.queryByTestId('playlist-detail-title');
+    const view = screen.queryByTestId('playlist-detail-view');
+    return view?.querySelector('h1') ?? null;
   },
   get trackCount() {
     return screen.queryByTestId('playlist-detail-track-count');

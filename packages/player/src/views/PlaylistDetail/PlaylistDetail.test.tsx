@@ -78,6 +78,17 @@ describe('PlaylistDetail view', () => {
     expect(PlayerBarWrapper.isPlaying).toBe(true);
   });
 
+  it('shows empty state when playlist has no tracks', async () => {
+    PlaylistDetailWrapper.seedPlaylist(
+      new PlaylistBuilder().withId('empty-playlist').withName('Empty Playlist'),
+    );
+
+    await PlaylistDetailWrapper.mount('empty-playlist');
+
+    expect(PlaylistDetailWrapper.emptyState).toBeInTheDocument();
+    expect(PlaylistDetailWrapper.trackTable).not.toBeInTheDocument();
+  });
+
   it('adds all tracks to queue without clearing', async () => {
     useQueueStore.getState().addToQueue([
       {
