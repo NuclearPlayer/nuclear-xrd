@@ -75,6 +75,20 @@ export const PlaylistDetailWrapper = {
     },
   },
 
+  playButton: {
+    get element() {
+      return screen.getByTestId('play-all-button');
+    },
+    async click() {
+      await user.click(this.element);
+    },
+  },
+
+  async addToQueueFromActions() {
+    await PlaylistDetailWrapper.actionsButton.click();
+    await user.click(screen.getByTestId('add-to-queue-action'));
+  },
+
   get playlistsListView() {
     return screen.queryByTestId('playlists-view');
   },

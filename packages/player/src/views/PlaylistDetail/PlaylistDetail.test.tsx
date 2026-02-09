@@ -1,3 +1,4 @@
+import { useQueueStore } from '../../stores/queueStore';
 import { PlaylistBuilder } from '../../test/builders/PlaylistBuilder';
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 import { mockUuid } from '../../test/utils/mockUuid';
@@ -13,6 +14,7 @@ describe('PlaylistDetail view', () => {
   beforeEach(() => {
     mockUuid.reset();
     resetInMemoryTauriStore();
+    useQueueStore.setState({ items: [], currentIndex: 0 });
     PlaylistDetailWrapper.seedPlaylist(defaultPlaylist());
   });
 
@@ -60,5 +62,36 @@ describe('PlaylistDetail view', () => {
     await vi.waitFor(() => {
       expect(PlaylistDetailWrapper.playlistsListView).toBeInTheDocument();
     });
+  });
+
+  it('adds all tracks to queue and plays', async () => {
+    await PlaylistDetailWrapper.mount('test-playlist');
+
+    await PlaylistDetailWrapper.playButton.click();
+
+    const queue = useQueueStore.getState();
+    expect(queue.items).toHaveLength(2);
+    expect(queue.items[0]?.track.title).toBe('Giant Steps');
+    expect(queue.items[1]?.track.title).toBe('So What');
+  });
+
+  it('adds all tracks to queue without clearing', async () => {
+    useQueueStore.getState().addToQueue([
+      {
+        title: 'Existing Track',
+        artists: [],
+        source: { provider: 'test', id: 'existing' },
+      },
+    ]);
+
+    await PlaylistDetailWrapper.mount('test-playlist');
+
+    await PlaylistDetailWrapper.addToQueueFromActions();
+
+    const queue = useQueueStore.getState();
+    expect(queue.items).toHaveLength(3);
+    expect(queue.items[0]?.track.title).toBe('Existing Track');
+    expect(queue.items[1]?.track.title).toBe('Giant Steps');
+    expect(queue.items[2]?.track.title).toBe('So What');
   });
 });

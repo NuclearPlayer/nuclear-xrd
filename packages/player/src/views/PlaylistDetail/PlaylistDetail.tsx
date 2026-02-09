@@ -14,7 +14,9 @@ export const PlaylistDetail: FC = () => {
   return (
     <ViewShell data-testid="playlist-detail-view" title={playlist?.name ?? ''}>
       {playlist && <PlaylistDetailHeader playlist={playlist} />}
-      {playlist && <PlaylistDetailActions playlistId={playlistId} />}
+      {playlist && (
+        <PlaylistDetailActions playlistId={playlistId} tracks={tracks} />
+      )}
       {!isEmpty(tracks) && (
         <ConnectedTrackTable
           tracks={tracks}
