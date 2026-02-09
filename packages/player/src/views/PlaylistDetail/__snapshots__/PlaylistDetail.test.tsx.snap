@@ -43,6 +43,58 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
             </span>
           </div>
           <div
+            class="mb-6 flex items-center gap-2"
+          >
+            <div
+              class="absolute"
+              data-headlessui-state=""
+            >
+              <div
+                aria-expanded="false"
+                class="cursor-pointer"
+                data-headlessui-state=""
+                id="headlessui-popover-button-:r5:"
+              >
+                <button
+                  class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
+                  data-headlessui-state=""
+                  data-testid="playlist-actions-button"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-ellipsis-vertical"
+                    fill="none"
+                    height="16"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="1"
+                    />
+                    <circle
+                      cx="12"
+                      cy="5"
+                      r="1"
+                    />
+                    <circle
+                      cx="12"
+                      cy="19"
+                      r="1"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
             class="flex justify-end m-2"
           >
             <div
@@ -57,7 +109,7 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
                   <input
                     class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-l border-t-2 border-r-0 border-b-2 border-l-2"
                     data-headlessui-state=""
-                    id="input-:r3:"
+                    id="input-:r7:"
                     placeholder="Filter tracks"
                     type="text"
                     value=""
@@ -307,7 +359,7 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
                             aria-expanded="false"
                             aria-haspopup="menu"
                             data-headlessui-state=""
-                            id="headlessui-menu-button-:r8:"
+                            id="headlessui-menu-button-:rc:"
                           >
                             <button
                               aria-label="Track options"
@@ -469,7 +521,7 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
                             aria-expanded="false"
                             aria-haspopup="menu"
                             data-headlessui-state=""
-                            id="headlessui-menu-button-:re:"
+                            id="headlessui-menu-button-:ri:"
                           >
                             <button
                               aria-label="Track options"

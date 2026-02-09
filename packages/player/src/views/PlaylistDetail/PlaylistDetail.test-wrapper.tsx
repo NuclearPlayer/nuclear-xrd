@@ -1,10 +1,15 @@
 import { createMemoryHistory, createRouter } from '@tanstack/react-router';
 import { render, RenderResult, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import { DialogWrapper } from '@nuclearplayer/ui';
 
 import App from '../../App';
 import { routeTree } from '../../routeTree.gen';
 import { usePlaylistStore } from '../../stores/playlistStore';
 import { PlaylistBuilder } from '../../test/builders/PlaylistBuilder';
+
+const user = userEvent.setup();
 
 export const PlaylistDetailWrapper = {
   seedPlaylist(builder: PlaylistBuilder) {
@@ -43,5 +48,34 @@ export const PlaylistDetailWrapper = {
   },
   get emptyState() {
     return screen.queryByTestId('empty-state');
+  },
+
+  actionsButton: {
+    get element() {
+      return screen.getByTestId('playlist-actions-button');
+    },
+    async click() {
+      await user.click(this.element);
+    },
+  },
+
+  deleteDialog: {
+    isOpen: () => DialogWrapper.isOpen(),
+    async openFromActions() {
+      await PlaylistDetailWrapper.actionsButton.click();
+      await user.click(screen.getByTestId('delete-playlist-action'));
+    },
+    confirmButton: {
+      get element() {
+        return DialogWrapper.getByText('Delete');
+      },
+      async click() {
+        await user.click(this.element);
+      },
+    },
+  },
+
+  get playlistsListView() {
+    return screen.queryByTestId('playlists-view');
   },
 };

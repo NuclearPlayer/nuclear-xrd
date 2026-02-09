@@ -48,4 +48,17 @@ describe('PlaylistDetail view', () => {
 
     expect(PlaylistDetailWrapper.readOnlyBadge).toBeInTheDocument();
   });
+
+  it('deletes playlist and navigates back to playlists list', async () => {
+    await PlaylistDetailWrapper.mount('test-playlist');
+
+    await PlaylistDetailWrapper.deleteDialog.openFromActions();
+    expect(PlaylistDetailWrapper.deleteDialog.isOpen()).toBe(true);
+
+    await PlaylistDetailWrapper.deleteDialog.confirmButton.click();
+
+    await vi.waitFor(() => {
+      expect(PlaylistDetailWrapper.playlistsListView).toBeInTheDocument();
+    });
+  });
 });
