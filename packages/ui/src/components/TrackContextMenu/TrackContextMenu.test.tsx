@@ -1,107 +1,46 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { ReactNode } from 'react';
+import { screen } from '@testing-library/react';
 
-import { TrackContextMenu } from '.';
-
-type ActionConfig = {
-  label: string;
-  onClick: () => void;
-};
-
-type RenderMenuOptions = {
-  title: string;
-  subtitle?: string;
-  coverUrl?: string;
-  actions?: ActionConfig[];
-  triggerLabel?: string;
-};
-
-const defaultActions: ActionConfig[] = [
-  { label: 'Play Now', onClick: () => {} },
-  { label: 'Add to Queue', onClick: () => {} },
-];
-
-const renderMenu = (options: RenderMenuOptions, wrapper?: ReactNode) => {
-  const {
-    title,
-    subtitle,
-    coverUrl,
-    actions = defaultActions,
-    triggerLabel = 'Open',
-  } = options;
-
-  const menu = (
-    <TrackContextMenu>
-      <TrackContextMenu.Trigger>
-        <button>{triggerLabel}</button>
-      </TrackContextMenu.Trigger>
-      <TrackContextMenu.Content>
-        <TrackContextMenu.Header
-          title={title}
-          subtitle={subtitle}
-          coverUrl={coverUrl}
-        />
-        {actions.map(({ label, onClick }) => (
-          <TrackContextMenu.Action
-            key={label}
-            icon={<span>•</span>}
-            onClick={onClick}
-          >
-            {label}
-          </TrackContextMenu.Action>
-        ))}
-      </TrackContextMenu.Content>
-    </TrackContextMenu>
-  );
-
-  return render(wrapper ? <div onClick={() => {}}>{menu}</div> : menu);
-};
-
-const openMenu = async (triggerLabel = 'Open') => {
-  await userEvent.click(screen.getByText(triggerLabel));
-};
+import { TrackContextMenuWrapper as Wrapper } from './TrackContextMenu.test-wrapper';
 
 describe('TrackContextMenu', () => {
   it('(Snapshot) renders with header and actions', async () => {
-    renderMenu({
+    Wrapper.mount({
       title: 'Echoes',
       subtitle: 'Pink Floyd',
       coverUrl: 'https://example.com/meddle.jpg',
     });
-    await openMenu();
+    await Wrapper.open();
     await screen.findByText('Echoes');
     expect(document.body).toMatchSnapshot();
   });
 
   it('(Snapshot) renders header without cover image', async () => {
-    renderMenu({
+    Wrapper.mount({
       title: 'Paranoid Android',
       subtitle: 'Radiohead',
       actions: [{ label: 'Play Now', onClick: () => {} }],
     });
-    await openMenu();
+    await Wrapper.open();
     await screen.findByText('Paranoid Android');
     expect(document.body).toMatchSnapshot();
   });
 
   it('(Snapshot) renders header without subtitle', async () => {
-    renderMenu({
+    Wrapper.mount({
       title: 'Bohemian Rhapsody',
       coverUrl: 'https://example.com/night-at-the-opera.jpg',
       actions: [{ label: 'Play Now', onClick: () => {} }],
     });
-    await openMenu();
+    await Wrapper.open();
     await screen.findByText('Bohemian Rhapsody');
     expect(document.body).toMatchSnapshot();
   });
 
   it('calls action onClick when action is clicked', async () => {
-    const user = userEvent.setup();
     const onPlay = vi.fn();
     const onAddToQueue = vi.fn();
 
-    renderMenu({
+    Wrapper.mount({
       title: 'Stairway to Heaven',
       subtitle: 'Led Zeppelin',
       actions: [
@@ -110,39 +49,109 @@ describe('TrackContextMenu', () => {
       ],
     });
 
-    await user.click(screen.getByText('Open'));
+    await Wrapper.open();
     await screen.findByText('Play Now');
-    await user.click(screen.getByText('Play Now'));
+    await Wrapper.action('Play Now').click();
 
     expect(onPlay).toHaveBeenCalledTimes(1);
     expect(onAddToQueue).not.toHaveBeenCalled();
   });
 
   it('stops propagation on trigger click', async () => {
-    const user = userEvent.setup();
     const onParentClick = vi.fn();
 
-    render(
-      <div onClick={onParentClick}>
-        <TrackContextMenu>
-          <TrackContextMenu.Trigger>
-            <button>Open Menu</button>
-          </TrackContextMenu.Trigger>
-          <TrackContextMenu.Content>
-            <TrackContextMenu.Header
-              title="Come Together"
-              subtitle="The Beatles"
-            />
-            <TrackContextMenu.Action icon={<span>•</span>} onClick={() => {}}>
-              Play Now
-            </TrackContextMenu.Action>
-          </TrackContextMenu.Content>
-        </TrackContextMenu>
-      </div>,
-    );
+    Wrapper.mount({
+      title: 'Come Together',
+      subtitle: 'The Beatles',
+      actions: [{ label: 'Play Now', onClick: () => {} }],
+      onParentClick,
+    });
 
-    await user.click(screen.getByText('Open Menu'));
+    await Wrapper.open();
 
     expect(onParentClick).not.toHaveBeenCalled();
+  });
+
+  describe('Submenu', () => {
+    const playlists = [
+      { id: 'p1', name: 'Rock Classics' },
+      { id: 'p2', name: 'Chill Vibes' },
+    ];
+
+    const manyPlaylists = Array.from({ length: 7 }, (_, i) => ({
+      id: `p${i}`,
+      name: `Playlist ${i}`,
+    }));
+
+    const mountWithSubmenu = (onSelect = vi.fn(), playlistList = playlists) => {
+      Wrapper.mount({
+        title: 'Test Track',
+        subtitle: 'Artist',
+        submenu: {
+          label: 'Add to playlist',
+          playlists: playlistList,
+          onSelect,
+          filterPlaceholder: 'Filter playlists...',
+        },
+      });
+      return { onSelect };
+    };
+
+    it('renders the submenu trigger when menu is open', async () => {
+      mountWithSubmenu();
+
+      await Wrapper.open();
+      expect(Wrapper.submenu.trigger).toHaveTextContent('Add to playlist');
+    });
+
+    it('shows playlist options when submenu trigger is clicked', async () => {
+      mountWithSubmenu();
+
+      await Wrapper.open();
+      await Wrapper.submenu.open();
+
+      expect(Wrapper.submenu.panel).toBeInTheDocument();
+      expect(Wrapper.submenu.item('Rock Classics').element).toBeInTheDocument();
+      expect(Wrapper.submenu.item('Chill Vibes').element).toBeInTheDocument();
+    });
+
+    it('calls onSelect with the playlist ID when a playlist is clicked', async () => {
+      const { onSelect } = mountWithSubmenu();
+
+      await Wrapper.open();
+      await Wrapper.submenu.open();
+      await Wrapper.submenu.item('Rock Classics').click();
+
+      expect(onSelect).toHaveBeenCalledWith('p1');
+    });
+
+    it('shows filter input when there are more than 5 playlists', async () => {
+      mountWithSubmenu(vi.fn(), manyPlaylists);
+
+      await Wrapper.open();
+      await Wrapper.submenu.open();
+
+      expect(Wrapper.submenu.filterInput).toBeInTheDocument();
+    });
+
+    it('filters playlists by name', async () => {
+      mountWithSubmenu(vi.fn(), manyPlaylists);
+
+      await Wrapper.open();
+      await Wrapper.submenu.open();
+      await Wrapper.submenu.filter('3');
+
+      expect(Wrapper.submenu.items).toHaveLength(1);
+      expect(Wrapper.submenu.items[0]).toHaveTextContent('Playlist 3');
+    });
+
+    it('does not show filter input when there are 5 or fewer playlists', async () => {
+      mountWithSubmenu();
+
+      await Wrapper.open();
+      await Wrapper.submenu.open();
+
+      expect(Wrapper.submenu.filterInput).not.toBeInTheDocument();
+    });
   });
 });
