@@ -60,16 +60,16 @@ export const TrackContextMenuWrapper = {
           ))}
           {submenu && (
             <TrackContextMenu.Submenu>
-              <TrackContextMenu.SubmenuTrigger icon={<span>+</span>}>
+              <TrackContextMenu.Submenu.Trigger icon={<span>+</span>}>
                 {submenu.label}
-              </TrackContextMenu.SubmenuTrigger>
-              <TrackContextMenu.SubmenuContent>
+              </TrackContextMenu.Submenu.Trigger>
+              <TrackContextMenu.Submenu.Content>
                 {submenu.items.map(({ label, onClick }) => (
                   <TrackContextMenu.Action key={label} onClick={onClick}>
                     {label}
                   </TrackContextMenu.Action>
                 ))}
-              </TrackContextMenu.SubmenuContent>
+              </TrackContextMenu.Submenu.Content>
             </TrackContextMenu.Submenu>
           )}
         </TrackContextMenu.Content>

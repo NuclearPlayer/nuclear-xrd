@@ -5,38 +5,26 @@ import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork, Track } from '@nuclearplayer/model';
 import { TrackContextMenu } from '@nuclearplayer/ui';
 
-import { useQueueActions } from '../hooks/useQueueActions';
-import { useFavoritesStore } from '../stores/favoritesStore';
+import { useTrackActions } from '../hooks/useTrackActions';
 
 type ConnectedTrackContextMenuProps = {
   track: Track;
   children: ReactNode;
-  className?: string;
 };
 
 export const ConnectedTrackContextMenu: FC<ConnectedTrackContextMenuProps> = ({
   track,
   children,
-  className,
 }) => {
   const { t } = useTranslation('track');
-  const { playNow, addNext, addToQueue } = useQueueActions();
-  const { isTrackFavorite, addTrack, removeTrack } = useFavoritesStore();
+  const trackActions = useTrackActions();
 
-  const isFavorite = isTrackFavorite(track.source);
+  const isFavorite = trackActions.isFavorite(track);
   const thumbnail = pickArtwork(track.artwork, 'thumbnail', 64)?.url;
   const artistNames = track.artists.map((a) => a.name).join(', ');
 
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
-      removeTrack(track.source);
-    } else {
-      addTrack(track);
-    }
-  };
-
   return (
-    <TrackContextMenu className={className}>
+    <TrackContextMenu>
       <TrackContextMenu.Trigger>{children}</TrackContextMenu.Trigger>
       <TrackContextMenu.Content>
         <TrackContextMenu.Header
@@ -46,25 +34,25 @@ export const ConnectedTrackContextMenu: FC<ConnectedTrackContextMenuProps> = ({
         />
         <TrackContextMenu.Action
           icon={<Play size={16} />}
-          onClick={() => playNow(track)}
+          onClick={() => trackActions.playNow(track)}
         >
           {t('actions.playNow')}
         </TrackContextMenu.Action>
         <TrackContextMenu.Action
           icon={<ListStart size={16} />}
-          onClick={() => addNext([track])}
+          onClick={() => trackActions.addNext(track)}
         >
           {t('actions.playNext')}
         </TrackContextMenu.Action>
         <TrackContextMenu.Action
           icon={<ListEnd size={16} />}
-          onClick={() => addToQueue([track])}
+          onClick={() => trackActions.addToQueue(track)}
         >
           {t('actions.addToQueue')}
         </TrackContextMenu.Action>
         <TrackContextMenu.Action
           icon={<Heart size={16} fill={isFavorite ? 'currentColor' : 'none'} />}
-          onClick={handleToggleFavorite}
+          onClick={() => trackActions.toggleFavorite(track)}
         >
           {isFavorite
             ? t('actions.removeFromFavorites')

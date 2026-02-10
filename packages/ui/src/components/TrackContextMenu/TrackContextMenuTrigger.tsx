@@ -10,7 +10,7 @@ export const TrackContextMenuTrigger: FC<TrackContextMenuTriggerProps> = ({
 }) => {
   return (
     <DropdownMenu.Trigger asChild onClick={(e) => e.stopPropagation()}>
-      <div>{children}</div>
+      {children}
     </DropdownMenu.Trigger>
   );
 };

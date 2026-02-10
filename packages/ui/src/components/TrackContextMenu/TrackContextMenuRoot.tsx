@@ -3,7 +3,6 @@ import { FC, ReactNode } from 'react';
 
 type TrackContextMenuRootProps = {
   children: ReactNode;
-  className?: string;
 };
 
 export const TrackContextMenuRoot: FC<TrackContextMenuRootProps> = ({

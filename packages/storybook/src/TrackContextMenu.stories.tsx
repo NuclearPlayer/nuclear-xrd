@@ -106,10 +106,10 @@ export const WithSubmenu: Story = {
     >
       <CommonActions />
       <TrackContextMenu.Submenu>
-        <TrackContextMenu.SubmenuTrigger icon={<ListMusic size={16} />}>
+        <TrackContextMenu.Submenu.Trigger icon={<ListMusic size={16} />}>
           Add to collection
-        </TrackContextMenu.SubmenuTrigger>
-        <TrackContextMenu.SubmenuContent>
+        </TrackContextMenu.Submenu.Trigger>
+        <TrackContextMenu.Submenu.Content>
           <TrackContextMenu.Action icon={<Star size={16} />} onClick={() => {}}>
             Favorites
           </TrackContextMenu.Action>
@@ -125,7 +125,7 @@ export const WithSubmenu: Story = {
           >
             Late Night
           </TrackContextMenu.Action>
-        </TrackContextMenu.SubmenuContent>
+        </TrackContextMenu.Submenu.Content>
       </TrackContextMenu.Submenu>
     </MenuShell>
   ),

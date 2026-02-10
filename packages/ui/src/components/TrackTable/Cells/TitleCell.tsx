@@ -1,15 +1,11 @@
 import { CellContext } from '@tanstack/react-table';
 import { EllipsisVertical, Plus } from 'lucide-react';
-import { FC, ReactNode } from 'react';
+import { FC, forwardRef } from 'react';
 
 import { Track } from '@nuclearplayer/model';
 
 import { Button } from '../../Button';
-
-type ContextMenuWrapperProps = {
-  track: Track;
-  children: ReactNode;
-};
+import { ContextMenuWrapperProps } from '../types';
 
 type TitleCellMeta = {
   displayQueueControls?: boolean;
@@ -37,17 +33,23 @@ const AddToQueueButton: FC<AddToQueueButtonProps> = ({ onClick }) => (
   </Button>
 );
 
-const ContextMenuButton: FC = () => (
-  <Button
-    data-testid="track-context-menu-button"
-    size="icon-sm"
-    variant="text"
-    className="opacity-0 transition-none group-hover:opacity-100"
-    onClick={(e) => e.stopPropagation()}
-    aria-label="Track options"
-  >
-    <EllipsisVertical size={16} />
-  </Button>
+const ContextMenuButton = forwardRef<HTMLElement>(
+  function ContextMenuButton(props, ref) {
+    return (
+      <Button
+        {...props}
+        ref={ref}
+        data-testid="track-context-menu-button"
+        size="icon-sm"
+        variant="text"
+        className="opacity-0 transition-none group-hover:opacity-100"
+        onClick={(e) => e.stopPropagation()}
+        aria-label="Track options"
+      >
+        <EllipsisVertical size={16} />
+      </Button>
+    );
+  },
 );
 
 export const TitleCell = <T extends Track>({
