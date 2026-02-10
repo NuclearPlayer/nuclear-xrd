@@ -6,6 +6,7 @@ import {
   MoreHorizontal,
   Play,
   SkipForward,
+  Star,
 } from 'lucide-react';
 import { FC, ReactNode, useState } from 'react';
 
@@ -96,86 +97,36 @@ export const Default: Story = {
   },
 };
 
-const fewPlaylists = [
-  { id: '1', name: 'Road Trip' },
-  { id: '2', name: 'Late Night' },
-  { id: '3', name: 'Workout Mix' },
-];
-
-const manyPlaylists = [
-  ...fewPlaylists,
-  { id: '4', name: 'Focus & Study' },
-  { id: '5', name: 'Sunday Morning' },
-  { id: '6', name: 'Party Bangers' },
-  { id: '7', name: 'Acoustic Chill' },
-  { id: '8', name: '90s Nostalgia' },
-];
-
-type PlaylistOption = { id: string; name: string };
-
-type SubmenuDemoProps = {
-  label: string;
-  title: string;
-  subtitle: string;
-  coverSeed: string;
-  playlists: PlaylistOption[];
-  onAction: (action: string) => void;
-};
-
-const SubmenuDemo: FC<SubmenuDemoProps> = ({
-  label,
-  title,
-  subtitle,
-  coverSeed,
-  playlists,
-  onAction,
-}) => (
-  <div className="flex flex-col items-center gap-2">
-    <span className="text-foreground-secondary text-xs">{label}</span>
-    <MenuShell title={title} subtitle={subtitle} coverSeed={coverSeed}>
-      <CommonActions onClick={onAction} />
-      <TrackContextMenu.Submenu
-        label="Add to playlist"
-        icon={<ListMusic size={16} />}
-        playlists={playlists}
-        onSelect={(id) => {
-          const name = playlists.find((p) => p.id === id)?.name;
-          onAction(`Added to "${name}"`);
-        }}
-        filterPlaceholder="Filter playlists..."
-      />
+export const WithSubmenu: Story = {
+  render: () => (
+    <MenuShell
+      title="Stairway to Heaven"
+      subtitle="Led Zeppelin"
+      coverSeed="zeppelin"
+    >
+      <CommonActions />
+      <TrackContextMenu.Submenu>
+        <TrackContextMenu.SubmenuTrigger icon={<ListMusic size={16} />}>
+          Add to collection
+        </TrackContextMenu.SubmenuTrigger>
+        <TrackContextMenu.SubmenuContent>
+          <TrackContextMenu.Action icon={<Star size={16} />} onClick={() => {}}>
+            Favorites
+          </TrackContextMenu.Action>
+          <TrackContextMenu.Action
+            icon={<ListMusic size={16} />}
+            onClick={() => {}}
+          >
+            Road Trip
+          </TrackContextMenu.Action>
+          <TrackContextMenu.Action
+            icon={<ListMusic size={16} />}
+            onClick={() => {}}
+          >
+            Late Night
+          </TrackContextMenu.Action>
+        </TrackContextMenu.SubmenuContent>
+      </TrackContextMenu.Submenu>
     </MenuShell>
-  </div>
-);
-
-export const WithPlaylistSubmenu: Story = {
-  render: () => {
-    const [lastAction, setLastAction] = useState('');
-
-    return (
-      <div className="flex items-start gap-8">
-        <SubmenuDemo
-          label="Few playlists"
-          title="Stairway to Heaven"
-          subtitle="Led Zeppelin"
-          coverSeed="zeppelin"
-          playlists={fewPlaylists}
-          onAction={setLastAction}
-        />
-        <SubmenuDemo
-          label="Many playlists (with filter)"
-          title="Paranoid Android"
-          subtitle="Radiohead"
-          coverSeed="radiohead"
-          playlists={manyPlaylists}
-          onAction={setLastAction}
-        />
-        {lastAction && (
-          <div className="text-foreground-secondary text-sm">
-            Last action: {lastAction}
-          </div>
-        )}
-      </div>
-    );
-  },
+  ),
 };

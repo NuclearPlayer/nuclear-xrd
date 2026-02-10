@@ -5,9 +5,9 @@ import { TrackContextMenu } from '.';
 
 const user = userEvent.setup();
 
-type PlaylistOption = {
-  id: string;
-  name: string;
+type SubmenuItem = {
+  label: string;
+  onClick: () => void;
 };
 
 type MountOptions = {
@@ -17,9 +17,7 @@ type MountOptions = {
   actions?: { label: string; onClick: () => void }[];
   submenu?: {
     label: string;
-    playlists: PlaylistOption[];
-    onSelect: () => void;
-    filterPlaceholder?: string;
+    items: SubmenuItem[];
   };
   onParentClick?: () => void;
 };
@@ -61,13 +59,18 @@ export const TrackContextMenuWrapper = {
             </TrackContextMenu.Action>
           ))}
           {submenu && (
-            <TrackContextMenu.Submenu
-              label={submenu.label}
-              icon={<span>+</span>}
-              playlists={submenu.playlists}
-              onSelect={submenu.onSelect}
-              filterPlaceholder={submenu.filterPlaceholder}
-            />
+            <TrackContextMenu.Submenu>
+              <TrackContextMenu.SubmenuTrigger icon={<span>+</span>}>
+                {submenu.label}
+              </TrackContextMenu.SubmenuTrigger>
+              <TrackContextMenu.SubmenuContent>
+                {submenu.items.map(({ label, onClick }) => (
+                  <TrackContextMenu.Action key={label} onClick={onClick}>
+                    {label}
+                  </TrackContextMenu.Action>
+                ))}
+              </TrackContextMenu.SubmenuContent>
+            </TrackContextMenu.Submenu>
           )}
         </TrackContextMenu.Content>
       </TrackContextMenu>
@@ -101,10 +104,7 @@ export const TrackContextMenuWrapper = {
       await user.click(screen.getByTestId('submenu-trigger'));
     },
     get panel() {
-      return screen.queryByTestId('playlist-submenu');
-    },
-    get items() {
-      return screen.queryAllByTestId('playlist-submenu-item');
+      return screen.queryByTestId('submenu-content');
     },
     item(name: string) {
       return {
@@ -115,12 +115,6 @@ export const TrackContextMenuWrapper = {
           return userEvent.click(this.element);
         },
       };
-    },
-    get filterInput() {
-      return screen.queryByTestId('playlist-filter-input');
-    },
-    async filter(text: string) {
-      return userEvent.type(screen.getByTestId('playlist-filter-input'), text);
     },
   },
 };

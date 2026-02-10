@@ -73,85 +73,54 @@ describe('TrackContextMenu', () => {
   });
 
   describe('Submenu', () => {
-    const playlists = [
-      { id: 'p1', name: 'Rock Classics' },
-      { id: 'p2', name: 'Chill Vibes' },
+    const submenuItems = [
+      { label: 'Option A', onClick: vi.fn() },
+      { label: 'Option B', onClick: vi.fn() },
     ];
 
-    const manyPlaylists = Array.from({ length: 7 }, (_, i) => ({
-      id: `p${i}`,
-      name: `Playlist ${i}`,
-    }));
-
-    const mountWithSubmenu = (onSelect = vi.fn(), playlistList = playlists) => {
+    const mountWithSubmenu = (items = submenuItems) => {
       Wrapper.mount({
         title: 'Test Track',
         subtitle: 'Artist',
         submenu: {
-          label: 'Add to playlist',
-          playlists: playlistList,
-          onSelect,
-          filterPlaceholder: 'Filter playlists...',
+          label: 'More options',
+          items,
         },
       });
-      return { onSelect };
     };
 
     it('renders the submenu trigger when menu is open', async () => {
       mountWithSubmenu();
 
       await Wrapper.open();
-      expect(Wrapper.submenu.trigger).toHaveTextContent('Add to playlist');
+      expect(Wrapper.submenu.trigger).toHaveTextContent('More options');
     });
 
-    it('shows playlist options when submenu trigger is clicked', async () => {
+    it('shows submenu content when trigger is clicked', async () => {
       mountWithSubmenu();
 
       await Wrapper.open();
       await Wrapper.submenu.open();
 
       expect(Wrapper.submenu.panel).toBeInTheDocument();
-      expect(Wrapper.submenu.item('Rock Classics').element).toBeInTheDocument();
-      expect(Wrapper.submenu.item('Chill Vibes').element).toBeInTheDocument();
+      expect(Wrapper.submenu.item('Option A').element).toBeInTheDocument();
+      expect(Wrapper.submenu.item('Option B').element).toBeInTheDocument();
     });
 
-    it('calls onSelect with the playlist ID when a playlist is clicked', async () => {
-      const { onSelect } = mountWithSubmenu();
+    it('calls onClick when a submenu item is clicked', async () => {
+      const onClickA = vi.fn();
+      const onClickB = vi.fn();
+      mountWithSubmenu([
+        { label: 'Option A', onClick: onClickA },
+        { label: 'Option B', onClick: onClickB },
+      ]);
 
       await Wrapper.open();
       await Wrapper.submenu.open();
-      await Wrapper.submenu.item('Rock Classics').click();
+      await Wrapper.submenu.item('Option A').click();
 
-      expect(onSelect).toHaveBeenCalledWith('p1');
-    });
-
-    it('shows filter input when there are more than 5 playlists', async () => {
-      mountWithSubmenu(vi.fn(), manyPlaylists);
-
-      await Wrapper.open();
-      await Wrapper.submenu.open();
-
-      expect(Wrapper.submenu.filterInput).toBeInTheDocument();
-    });
-
-    it('filters playlists by name', async () => {
-      mountWithSubmenu(vi.fn(), manyPlaylists);
-
-      await Wrapper.open();
-      await Wrapper.submenu.open();
-      await Wrapper.submenu.filter('3');
-
-      expect(Wrapper.submenu.items).toHaveLength(1);
-      expect(Wrapper.submenu.items[0]).toHaveTextContent('Playlist 3');
-    });
-
-    it('does not show filter input when there are 5 or fewer playlists', async () => {
-      mountWithSubmenu();
-
-      await Wrapper.open();
-      await Wrapper.submenu.open();
-
-      expect(Wrapper.submenu.filterInput).not.toBeInTheDocument();
+      expect(onClickA).toHaveBeenCalledTimes(1);
+      expect(onClickB).not.toHaveBeenCalled();
     });
   });
 });
