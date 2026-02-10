@@ -1,4 +1,4 @@
-import { MenuButton } from '@headlessui/react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC, ReactNode } from 'react';
 
 type TrackContextMenuTriggerProps = {
@@ -9,8 +9,8 @@ export const TrackContextMenuTrigger: FC<TrackContextMenuTriggerProps> = ({
   children,
 }) => {
   return (
-    <MenuButton as="div" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
-      {children}
-    </MenuButton>
+    <DropdownMenu.Trigger asChild onClick={(e) => e.stopPropagation()}>
+      <div>{children}</div>
+    </DropdownMenu.Trigger>
   );
 };

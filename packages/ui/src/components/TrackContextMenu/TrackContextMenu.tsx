@@ -4,6 +4,7 @@ import { TrackContextMenuAction } from './TrackContextMenuAction';
 import { TrackContextMenuContent } from './TrackContextMenuContent';
 import { TrackContextMenuHeader } from './TrackContextMenuHeader';
 import { TrackContextMenuRoot } from './TrackContextMenuRoot';
+import { TrackContextMenuSubmenu } from './TrackContextMenuSubmenu';
 import { TrackContextMenuTrigger } from './TrackContextMenuTrigger';
 
 type TrackContextMenuProps = {
@@ -16,6 +17,7 @@ type TrackContextMenuComponent = FC<TrackContextMenuProps> & {
   Content: typeof TrackContextMenuContent;
   Header: typeof TrackContextMenuHeader;
   Action: typeof TrackContextMenuAction;
+  Submenu: typeof TrackContextMenuSubmenu;
 };
 
 const TrackContextMenuImpl: FC<TrackContextMenuProps> = ({
@@ -35,3 +37,4 @@ TrackContextMenu.Trigger = TrackContextMenuTrigger;
 TrackContextMenu.Content = TrackContextMenuContent;
 TrackContextMenu.Header = TrackContextMenuHeader;
 TrackContextMenu.Action = TrackContextMenuAction;
+TrackContextMenu.Submenu = TrackContextMenuSubmenu;

@@ -112,7 +112,7 @@ export const TrackContextMenuWrapper = {
           return screen.getByText(name);
         },
         async click() {
-          await user.click(this.element);
+          return userEvent.click(this.element);
         },
       };
     },
@@ -120,7 +120,7 @@ export const TrackContextMenuWrapper = {
       return screen.queryByTestId('playlist-filter-input');
     },
     async filter(text: string) {
-      await user.type(screen.getByTestId('playlist-filter-input'), text);
+      return userEvent.type(screen.getByTestId('playlist-filter-input'), text);
     },
   },
 };
