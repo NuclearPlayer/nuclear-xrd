@@ -1,3 +1,5 @@
+import { screen } from '@testing-library/react';
+
 import { PlayerBarWrapper } from '../../integration-tests/PlayerBar.test-wrapper';
 import { QueueWrapper } from '../../integration-tests/Queue.test-wrapper';
 import { useQueueStore } from '../../stores/queueStore';
@@ -87,6 +89,63 @@ describe('PlaylistDetail view', () => {
 
     expect(PlaylistDetailWrapper.emptyState).toBeInTheDocument();
     expect(PlaylistDetailWrapper.trackTable).not.toBeInTheDocument();
+  });
+
+  it('removes a track from the playlist when clicking the delete button', async () => {
+    await PlaylistDetailWrapper.mount('test-playlist');
+
+    expect(PlaylistDetailWrapper.trackTitle('Giant Steps')).toBeInTheDocument();
+    expect(PlaylistDetailWrapper.trackTitle('So What')).toBeInTheDocument();
+    expect(PlaylistDetailWrapper.removeButtons).toHaveLength(2);
+
+    await PlaylistDetailWrapper.removeTrack('Giant Steps');
+
+    await vi.waitFor(() => {
+      expect(
+        PlaylistDetailWrapper.trackTitle('Giant Steps'),
+      ).not.toBeInTheDocument();
+    });
+    expect(PlaylistDetailWrapper.trackTitle('So What')).toBeInTheDocument();
+    expect(PlaylistDetailWrapper.trackCount).toHaveTextContent('1 track');
+  });
+
+  it('does not show remove buttons for read-only playlists', async () => {
+    PlaylistDetailWrapper.seedPlaylist(
+      new PlaylistBuilder()
+        .withId('readonly-playlist')
+        .withName('Read-Only Playlist')
+        .readOnly()
+        .withOrigin({ provider: 'spotify', id: 'ext-1' })
+        .withTrackNames(['Track A', 'Track B']),
+    );
+
+    await PlaylistDetailWrapper.mount('readonly-playlist');
+
+    expect(PlaylistDetailWrapper.trackTable).toBeInTheDocument();
+    expect(PlaylistDetailWrapper.removeButtons).toHaveLength(0);
+  });
+
+  it('enables reorder for editable playlists', async () => {
+    await PlaylistDetailWrapper.mount('test-playlist');
+
+    const rows = screen.getAllByTestId('track-row');
+    expect(rows[0]).toHaveAttribute('aria-disabled', 'false');
+  });
+
+  it('does not enable reorder for read-only playlists', async () => {
+    PlaylistDetailWrapper.seedPlaylist(
+      new PlaylistBuilder()
+        .withId('readonly-playlist')
+        .withName('Read-Only')
+        .readOnly()
+        .withOrigin({ provider: 'spotify', id: 'ext-1' })
+        .withTrackNames(['Track A', 'Track B']),
+    );
+
+    await PlaylistDetailWrapper.mount('readonly-playlist');
+
+    const rows = screen.getAllByTestId('track-row');
+    expect(rows[0]).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('adds all tracks to queue without clearing', async () => {

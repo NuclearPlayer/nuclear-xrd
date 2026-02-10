@@ -12,10 +12,8 @@ export const usePlaylistDetail = () => {
     loadPlaylist(playlistId);
   }, [playlistId, loadPlaylist]);
 
-  const tracks = useMemo(
-    () => playlist?.items.map((item) => item.track) ?? [],
-    [playlist],
-  );
+  const items = playlist?.items ?? [];
+  const tracks = useMemo(() => items.map((item) => item.track), [items]);
 
-  return { playlistId, playlist, tracks };
+  return { playlistId, playlist, items, tracks };
 };

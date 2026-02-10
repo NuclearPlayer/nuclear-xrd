@@ -21,6 +21,7 @@ exports[`FavoriteTracks view > (Snapshot) renders empty state 1`] = `
       >
         <h1
           class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+          data-testid="title"
         >
           Favorite tracks
         </h1>
@@ -105,6 +106,7 @@ exports[`FavoriteTracks view > (Snapshot) renders with tracks 1`] = `
       >
         <h1
           class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+          data-testid="title"
         >
           Favorite tracks
         </h1>

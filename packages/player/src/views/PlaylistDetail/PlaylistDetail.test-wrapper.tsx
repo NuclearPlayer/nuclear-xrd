@@ -1,5 +1,5 @@
 import { createMemoryHistory, createRouter } from '@tanstack/react-router';
-import { render, RenderResult, screen } from '@testing-library/react';
+import { render, RenderResult, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { DialogWrapper } from '@nuclearplayer/ui';
@@ -32,8 +32,7 @@ export const PlaylistDetailWrapper = {
   },
 
   get title() {
-    const view = screen.queryByTestId('playlist-detail-view');
-    return view?.querySelector('h1') ?? null;
+    return screen.queryByTestId('title');
   },
   get trackCount() {
     return screen.queryByTestId('playlist-detail-track-count');
@@ -92,5 +91,16 @@ export const PlaylistDetailWrapper = {
 
   get playlistsListView() {
     return screen.queryByTestId('playlists-view');
+  },
+
+  get removeButtons() {
+    return screen.queryAllByLabelText('Remove from list');
+  },
+
+  async removeTrack(trackTitle: string) {
+    const row = screen
+      .getAllByTestId('track-row')
+      .find((r) => r.textContent?.includes(trackTitle))!;
+    await user.click(within(row).getByLabelText('Remove from list'));
   },
 };

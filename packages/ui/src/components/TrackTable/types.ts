@@ -29,7 +29,7 @@ export type TrackTableClasses = {
 };
 
 export type TrackTableActions<T extends Track = Track> = {
-  onReorder?: (ids: string[]) => void;
+  onReorder?: (fromIndex: number, toIndex: number) => void;
   onPlayNow?: (track: T) => void;
   onPlayNext?: (track: T) => void;
   onAddToQueue?: (track: T) => void;
@@ -44,6 +44,7 @@ export type ContextMenuWrapperProps<T extends Track = Track> = {
 
 export type TrackTableProps<T extends Track = Track> = {
   tracks: T[];
+  getItemId?: (track: T, index: number) => string;
   customColumns?: unknown[];
   features?: {
     header?: boolean;

@@ -9,10 +9,16 @@ import { ConnectedTrackTable } from '../../components/ConnectedTrackTable';
 import { PlaylistDetailActions } from './components/PlaylistDetailActions';
 import { PlaylistDetailHeader } from './components/PlaylistDetailHeader';
 import { usePlaylistDetail } from './usePlaylistDetail';
+import { usePlaylistEditing } from './usePlaylistEditing';
 
 export const PlaylistDetail: FC = () => {
   const { t } = useTranslation('playlists');
-  const { playlistId, playlist, tracks } = usePlaylistDetail();
+  const { playlistId, playlist, items, tracks } = usePlaylistDetail();
+  const editing = usePlaylistEditing(
+    playlistId,
+    items,
+    Boolean(playlist && !playlist.isReadOnly),
+  );
 
   return (
     <ViewShell data-testid="playlist-detail-view" title={playlist?.name ?? ''}>
@@ -30,13 +36,16 @@ export const PlaylistDetail: FC = () => {
       ) : (
         <ConnectedTrackTable
           tracks={tracks}
-          features={{ header: true }}
+          getItemId={editing.getItemId}
+          features={{ header: true, reorderable: editing.isEditable }}
           display={{
             displayThumbnail: true,
             displayArtist: true,
             displayDuration: tracks.some((t) => t.durationMs != null),
             displayQueueControls: true,
+            displayDeleteButton: editing.isEditable,
           }}
+          actions={editing.actions}
         />
       )}
     </ViewShell>

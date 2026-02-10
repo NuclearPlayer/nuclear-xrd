@@ -537,6 +537,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
             >
               <h1
                 class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+                data-testid="title"
               >
                 Settings
               </h1>

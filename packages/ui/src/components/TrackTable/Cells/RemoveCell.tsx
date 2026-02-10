@@ -18,9 +18,11 @@ export const RemoveCell = <T extends Track>({
 
   return (
     <td className="w-10 text-center">
+      {/* onPointerDown stop propagation is needed to be able to remove items that are also draggable */}
       <Button
         size="icon-sm"
         variant="text"
+        onPointerDown={(e) => e.stopPropagation()}
         onClick={(e) => {
           e.stopPropagation();
           meta.onRemove(track);

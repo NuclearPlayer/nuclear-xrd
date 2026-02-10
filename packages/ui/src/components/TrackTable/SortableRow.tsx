@@ -8,17 +8,17 @@ import { cn } from '../../utils';
 
 type SortableRowProps<T extends Track = Track> = {
   row: Row<T>;
+  itemId: string;
   isReorderable?: boolean;
   style?: React.CSSProperties;
 };
 
 export function SortableRow<T extends Track = Track>({
   row,
+  itemId,
   isReorderable = false,
   style: externalStyle,
 }: SortableRowProps<T>) {
-  const trackId = row.original.source.id;
-
   const {
     attributes,
     listeners,
@@ -27,7 +27,7 @@ export function SortableRow<T extends Track = Track>({
     transition,
     isDragging,
   } = useSortable({
-    id: trackId,
+    id: itemId,
     disabled: !isReorderable,
   });
 

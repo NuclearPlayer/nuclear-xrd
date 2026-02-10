@@ -20,6 +20,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
       >
         <h1
           class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+          data-testid="title"
         >
           Plugins
         </h1>
