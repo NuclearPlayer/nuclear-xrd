@@ -2,15 +2,11 @@ import { usePlaylistStore } from '../stores/playlistStore';
 import { PlaylistBuilder } from '../test/builders/PlaylistBuilder';
 import { ConnectedTrackContextMenuWrapper as Wrapper } from './ConnectedTrackContextMenu.test-wrapper';
 
-vi.mock('../services/playlistFileService', () => ({
-  playlistFileService: {
-    loadIndex: vi.fn().mockResolvedValue([]),
-    loadPlaylist: vi.fn().mockResolvedValue(null),
-    savePlaylist: vi.fn().mockResolvedValue(undefined),
-    deletePlaylist: vi.fn().mockResolvedValue(undefined),
-    rebuildIndex: vi.fn().mockResolvedValue([]),
-  },
-}));
+vi.mock(
+  '../services/playlistFileService',
+  async () =>
+    (await import('../test/fixtures/playlists')).playlistFileServiceMock,
+);
 
 describe('ConnectedTrackContextMenu', () => {
   beforeEach(() => {
