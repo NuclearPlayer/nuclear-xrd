@@ -28,7 +28,6 @@ type PlaylistStore = {
     from: number,
     to: number,
   ) => Promise<void>;
-  invalidateCache: () => Promise<void>;
 };
 
 export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
@@ -128,7 +127,7 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
   },
 
   reorderTracks: async (playlistId: string, from: number, to: number) => {
-    const playlist = await get().loadPlaylist(playlistId);
+    const playlist = get().playlists.get(playlistId);
     if (!playlist) {
       return;
     }
@@ -143,12 +142,12 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
       lastModifiedIso: new Date().toISOString(),
     };
 
-    const index = await playlistFileService.savePlaylist(updated);
-
     set((state) => ({
       playlists: new Map(state.playlists).set(playlistId, updated),
-      index,
     }));
+
+    const index = await playlistFileService.savePlaylist(updated);
+    set({ index });
   },
 
   saveQueueAsPlaylist: async (name: string) => {
@@ -187,16 +186,8 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
       return { playlists, index };
     });
   },
-
-  invalidateCache: async () => {
-    const index = await playlistFileService.loadIndex();
-    set({ index, playlists: new Map() });
-  },
 }));
 
 export const initializePlaylistStore = async (): Promise<void> => {
   await usePlaylistStore.getState().loadIndex();
-  await playlistFileService.startWatcher(async () => {
-    await usePlaylistStore.getState().invalidateCache();
-  });
 };

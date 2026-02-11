@@ -1,8 +1,5 @@
-import { BaseDirectory, watchImmediate } from '@tauri-apps/plugin-fs';
-
 import type { Playlist, PlaylistIndexEntry } from '@nuclearplayer/model';
 
-import { reportError } from '../../utils/logging';
 import { PlaylistFileStore } from './PlaylistFileStore';
 import { PlaylistIndexStore } from './PlaylistIndexStore';
 
@@ -23,7 +20,6 @@ const toIndexEntry = (playlist: Playlist): PlaylistIndexEntry => ({
 export class PlaylistFileService {
   #indexStore = new PlaylistIndexStore();
   #fileStore = new PlaylistFileStore();
-  #unwatch: (() => void) | null = null;
 
   async loadIndex(): Promise<PlaylistIndexEntry[]> {
     return this.#indexStore.load();
@@ -53,33 +49,6 @@ export class PlaylistFileService {
     const updated = index.filter((e) => e.id !== id);
     await this.#indexStore.save(updated);
     return updated;
-  }
-
-  async startWatcher(onChanged: () => Promise<void>): Promise<void> {
-    if (this.#unwatch) {
-      return;
-    }
-    try {
-      this.#unwatch = await watchImmediate(
-        'playlists',
-        async () => {
-          await onChanged();
-        },
-        { baseDir: BaseDirectory.AppData },
-      );
-    } catch (error) {
-      await reportError('playlists', {
-        userMessage: "Couldn't watch playlists directory",
-        error,
-      });
-    }
-  }
-
-  stopWatcher(): void {
-    if (this.#unwatch) {
-      this.#unwatch();
-      this.#unwatch = null;
-    }
   }
 }
 
