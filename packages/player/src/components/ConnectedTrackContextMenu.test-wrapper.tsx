@@ -1,4 +1,9 @@
-import { render, RenderResult, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import type { Track } from '@nuclearplayer/model';
@@ -57,7 +62,7 @@ export const ConnectedTrackContextMenuWrapper = {
 
   submenu: {
     get trigger() {
-      return screen.getByTestId('submenu-trigger');
+      return screen.queryByTestId('submenu-trigger');
     },
     async open() {
       await user.click(screen.getByTestId('submenu-trigger'));
@@ -76,10 +81,11 @@ export const ConnectedTrackContextMenuWrapper = {
       };
     },
     get filterInput() {
-      return screen.getByTestId('playlist-filter-input');
+      return screen.queryByTestId('playlist-filter-input');
     },
     async filter(text: string) {
-      await user.type(this.filterInput, text);
+      const input = screen.getByTestId('playlist-filter-input');
+      fireEvent.change(input, { target: { value: text } });
     },
     get items() {
       return screen.getAllByTestId('playlist-submenu-item');
