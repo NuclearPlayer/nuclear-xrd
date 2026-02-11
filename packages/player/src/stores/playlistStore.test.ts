@@ -75,6 +75,26 @@ describe('playlistStore', () => {
     expect(updated?.lastModifiedIso).toBe('2026-06-15T12:00:00.000Z');
   });
 
+  it('loads playlist from disk before adding tracks if not cached', async () => {
+    const id = await usePlaylistStore.getState().createPlaylist('Uncached');
+
+    usePlaylistStore.setState((state) => ({
+      playlists: (() => {
+        const map = new Map(state.playlists);
+        map.delete(id);
+        return map;
+      })(),
+    }));
+    expect(usePlaylistStore.getState().playlists.has(id)).toBe(false);
+
+    const track = createMockTrack('Added While Uncached');
+    await usePlaylistStore.getState().addTracks(id, [track]);
+
+    const updated = usePlaylistStore.getState().playlists.get(id);
+    expect(updated?.items).toHaveLength(1);
+    expect(updated?.items[0].track.title).toBe('Added While Uncached');
+  });
+
   it('does nothing when adding tracks to a nonexistent playlist', async () => {
     const track = createMockTrack('Orphan');
 
