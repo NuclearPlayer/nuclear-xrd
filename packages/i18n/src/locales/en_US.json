@@ -231,7 +231,9 @@
       "subtitle": "Add tracks to start playing"
     },
     "actions": {
-      "remove": "Remove from queue"
+      "remove": "Remove from queue",
+      "clear": "Clear queue",
+      "saveAsPlaylist": "Save queue as playlist"
     },
     "errors": {
       "playback": "Playback error"
