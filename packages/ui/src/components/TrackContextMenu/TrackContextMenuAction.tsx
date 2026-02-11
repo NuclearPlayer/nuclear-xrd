@@ -7,12 +7,14 @@ type TrackContextMenuActionProps = {
   icon?: ReactNode;
   children: ReactNode;
   onClick: () => void;
+  'data-testid'?: string;
 };
 
 export const TrackContextMenuAction: FC<TrackContextMenuActionProps> = ({
   icon,
   children,
   onClick,
+  'data-testid': testId,
 }) => {
   return (
     <DropdownMenu.Item
@@ -24,6 +26,7 @@ export const TrackContextMenuAction: FC<TrackContextMenuActionProps> = ({
         e.stopPropagation();
         onClick();
       }}
+      data-testid={testId}
     >
       <span className="shrink-0">{icon}</span>
       <span>{children}</span>

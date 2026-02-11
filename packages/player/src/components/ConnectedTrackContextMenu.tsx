@@ -1,10 +1,11 @@
-import { Heart, ListEnd, ListStart, Play } from 'lucide-react';
+import { Heart, ListEnd, ListMusicIcon, ListStart, Play } from 'lucide-react';
 import { FC, ReactNode } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork, Track } from '@nuclearplayer/model';
-import { TrackContextMenu } from '@nuclearplayer/ui';
+import { Input, TrackContextMenu } from '@nuclearplayer/ui';
 
+import { usePlaylistSubmenu } from '../hooks/usePlaylistSubmenu';
 import { useTrackActions } from '../hooks/useTrackActions';
 
 type ConnectedTrackContextMenuProps = {
@@ -17,7 +18,9 @@ export const ConnectedTrackContextMenu: FC<ConnectedTrackContextMenuProps> = ({
   children,
 }) => {
   const { t } = useTranslation('track');
+  const { t: tPlaylists } = useTranslation('playlists');
   const trackActions = useTrackActions();
+  const playlistSubmenu = usePlaylistSubmenu();
 
   const isFavorite = trackActions.isFavorite(track);
   const thumbnail = pickArtwork(track.artwork, 'thumbnail', 64)?.url;
@@ -58,6 +61,41 @@ export const ConnectedTrackContextMenu: FC<ConnectedTrackContextMenuProps> = ({
             ? t('actions.removeFromFavorites')
             : t('actions.addToFavorites')}
         </TrackContextMenu.Action>
+        {playlistSubmenu.hasPlaylists && (
+          <TrackContextMenu.Submenu>
+            <TrackContextMenu.Submenu.Trigger
+              icon={<ListMusicIcon size={16} />}
+            >
+              {tPlaylists('addToPlaylist')}
+            </TrackContextMenu.Submenu.Trigger>
+            <TrackContextMenu.Submenu.Content>
+              {playlistSubmenu.showFilter && (
+                <div
+                  className="p-2"
+                  onKeyDown={(event) => event.stopPropagation()}
+                >
+                  <Input
+                    placeholder={tPlaylists('filterPlaylists')}
+                    value={playlistSubmenu.filterText}
+                    onChange={(event) =>
+                      playlistSubmenu.setFilterText(event.target.value)
+                    }
+                    data-testid="playlist-filter-input"
+                  />
+                </div>
+              )}
+              {playlistSubmenu.playlists.map((entry) => (
+                <TrackContextMenu.Action
+                  key={entry.id}
+                  onClick={() => playlistSubmenu.addTracks(entry.id, [track])}
+                  data-testid="playlist-submenu-item"
+                >
+                  {entry.name}
+                </TrackContextMenu.Action>
+              ))}
+            </TrackContextMenu.Submenu.Content>
+          </TrackContextMenu.Submenu>
+        )}
       </TrackContextMenu.Content>
     </TrackContextMenu>
   );

@@ -71,6 +71,9 @@ pnpm test -u
 - Use `type` not `interface` (except when merging is required)
 - No magic numbers - extract into named constants
 - Strict mode with `noUnusedLocals` and `noUnusedParameters`
+- Do not use one-letter variable names.
+AVOID: `(b) => b.buildIndexEntry()`
+PREFER: `(build) => build.buildIndexEntry()`
 
 ### React Components
 
@@ -188,22 +191,7 @@ Tests use Vitest + React Testing Library. Globals enabled (`describe`, `it`, `ex
 - Snapshot tests: prefix with `(Snapshot)`, basic rendering only
 - Never use `querySelector` in tests. Prefer RTL queries.
 - When semantic queries aren't possible, add `data-testid` attributes. And don't be shy with them
-
-```tsx
-describe('Component', () => {
-  it('(Snapshot) renders correctly', () => {
-    const { container } = render(<Component />);
-    expect(container).toMatchSnapshot();
-  });
-
-  it('handles user interaction', async () => {
-    const user = userEvent.setup();
-    const { getByRole } = render(<Component />);
-    await user.click(getByRole('button'));
-    expect(getByRole('status')).toHaveTextContent('clicked');
-  });
-});
-```
+- Don't use defensive measures like try-catch or conditional checks in tests. The test will fail anyway if our assumptions are wrong.
 
 ### Test Wrappers for Views
 
@@ -215,6 +203,8 @@ Player views and some components use a `*.test-wrapper.tsx` file that creates a 
 - Use **methods** for multi-step user actions: `async openContextMenu(title: string)`
 - Tests should use `Wrapper.emptyState`, `Wrapper.cards`, `Wrapper.createButton.click()` — not bare `screen` queries
 - The wrapper is the only place that knows about test IDs, roles, and DOM structure
+- Don't use queryX methods in the wrapper - always get or find as appropriate.
+- Never use fireEvent. Always use userEvent for interactions.
 
 ```tsx
 // Playlists.test-wrapper.tsx
