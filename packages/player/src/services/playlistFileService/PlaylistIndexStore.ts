@@ -12,7 +12,12 @@ export class PlaylistIndexStore {
 
   async load(): Promise<PlaylistIndexEntry[]> {
     return (
-      (await loadValidated(this.#store, 'entries', playlistIndexSchema)) ?? []
+      (await loadValidated(
+        this.#store,
+        'entries',
+        playlistIndexSchema,
+        'playlists',
+      )) ?? []
     );
   }
 

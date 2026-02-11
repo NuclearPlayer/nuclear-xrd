@@ -27,20 +27,28 @@ export const CreatePlaylistDialog: FC = () => {
 
   return (
     <Dialog.Root isOpen={isCreateDialogOpen} onClose={handleClose}>
-      <Dialog.Title>{t('createNew')}</Dialog.Title>
-      <div className="mt-4">
-        <Input
-          label={t('name')}
-          placeholder={t('namePlaceholder')}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          data-testid="playlist-name-input"
-        />
-      </div>
-      <Dialog.Actions>
-        <Dialog.Close>{t('common:actions.cancel')}</Dialog.Close>
-        <Button onClick={handleCreate}>{t('create')}</Button>
-      </Dialog.Actions>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleCreate();
+        }}
+      >
+        <Dialog.Title>{t('createNew')}</Dialog.Title>
+        <div className="mt-4">
+          <Input
+            label={t('name')}
+            placeholder={t('namePlaceholder')}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            data-testid="playlist-name-input"
+            autoFocus
+          />
+        </div>
+        <Dialog.Actions>
+          <Dialog.Close>{t('common:actions.cancel')}</Dialog.Close>
+          <Button type="submit">{t('create')}</Button>
+        </Dialog.Actions>
+      </form>
     </Dialog.Root>
   );
 };

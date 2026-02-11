@@ -106,22 +106,28 @@ export const QueueHeaderActions: FC = () => {
         isOpen={saveDialogOpen}
         onClose={() => setSaveDialogOpen(false)}
       >
-        <Dialog.Title>{t('actions.saveAsPlaylist')}</Dialog.Title>
-        <div className="mt-4">
-          <Input
-            label={tPlaylists('name')}
-            placeholder={tPlaylists('namePlaceholder')}
-            value={playlistName}
-            onChange={(event) => setPlaylistName(event.target.value)}
-            data-testid="save-queue-playlist-name-input"
-          />
-        </div>
-        <Dialog.Actions>
-          <Dialog.Close>{t('common:actions.cancel')}</Dialog.Close>
-          <Button onClick={handleSaveAsPlaylist}>
-            {t('common:actions.save')}
-          </Button>
-        </Dialog.Actions>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            handleSaveAsPlaylist();
+          }}
+        >
+          <Dialog.Title>{t('actions.saveAsPlaylist')}</Dialog.Title>
+          <div className="mt-4">
+            <Input
+              label={tPlaylists('name')}
+              placeholder={tPlaylists('namePlaceholder')}
+              value={playlistName}
+              onChange={(event) => setPlaylistName(event.target.value)}
+              data-testid="save-queue-playlist-name-input"
+              autoFocus
+            />
+          </div>
+          <Dialog.Actions>
+            <Dialog.Close>{t('common:actions.cancel')}</Dialog.Close>
+            <Button type="submit">{t('common:actions.save')}</Button>
+          </Dialog.Actions>
+        </form>
       </Dialog.Root>
     </>
   );

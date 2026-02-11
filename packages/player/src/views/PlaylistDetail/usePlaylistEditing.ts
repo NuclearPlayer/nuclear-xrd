@@ -13,9 +13,11 @@ export const usePlaylistEditing = (
   const reorderTracks = usePlaylistStore((state) => state.reorderTracks);
 
   const handleRemove = useCallback(
-    (track: Track) => {
-      const item = items.find((i) => i.track.source.id === track.source.id);
-      removeTracks(playlistId, [item!.id]);
+    (_track: Track, index: number) => {
+      const item = items[index];
+      if (item) {
+        removeTracks(playlistId, [item.id]);
+      }
     },
     [items, playlistId, removeTracks],
   );

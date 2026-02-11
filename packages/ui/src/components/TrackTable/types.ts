@@ -34,7 +34,7 @@ export type TrackTableActions<T extends Track = Track> = {
   onPlayNext?: (track: T) => void;
   onAddToQueue?: (track: T) => void;
   onToggleFavorite?: (track: T) => void;
-  onRemove?: (track: T) => void;
+  onRemove?: (track: T, index: number) => void;
 };
 
 export type ContextMenuWrapperProps<T extends Track = Track> = {

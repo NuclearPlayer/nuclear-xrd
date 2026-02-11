@@ -1,6 +1,8 @@
 import {
   createContext,
+  useCallback,
   useContext,
+  useMemo,
   useState,
   type FC,
   type PropsWithChildren,
@@ -31,20 +33,29 @@ export const PlaylistsProvider: FC<PropsWithChildren> = ({ children }) => {
   const storeCreatePlaylist = usePlaylistStore((state) => state.createPlaylist);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
-  const createPlaylist = async (name: string) => {
-    await storeCreatePlaylist(name);
-    setIsCreateDialogOpen(false);
-  };
+  const openCreateDialog = useCallback(() => setIsCreateDialogOpen(true), []);
+  const closeCreateDialog = useCallback(() => setIsCreateDialogOpen(false), []);
+
+  const createPlaylist = useCallback(
+    async (name: string) => {
+      await storeCreatePlaylist(name);
+      setIsCreateDialogOpen(false);
+    },
+    [storeCreatePlaylist],
+  );
+
+  const value = useMemo(
+    () => ({
+      isCreateDialogOpen,
+      openCreateDialog,
+      closeCreateDialog,
+      createPlaylist,
+    }),
+    [isCreateDialogOpen, openCreateDialog, closeCreateDialog, createPlaylist],
+  );
 
   return (
-    <PlaylistsContext.Provider
-      value={{
-        isCreateDialogOpen,
-        openCreateDialog: () => setIsCreateDialogOpen(true),
-        closeCreateDialog: () => setIsCreateDialogOpen(false),
-        createPlaylist,
-      }}
-    >
+    <PlaylistsContext.Provider value={value}>
       {children}
     </PlaylistsContext.Provider>
   );

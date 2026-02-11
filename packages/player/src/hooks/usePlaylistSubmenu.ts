@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import type { PlaylistIndexEntry } from '@nuclearplayer/model';
 
@@ -23,12 +23,15 @@ export const usePlaylistSubmenu = () => {
     return filtered.slice(0, MAX_VISIBLE_ITEMS);
   }, [playlistIndex, filterText]);
 
+  const resetFilter = useCallback(() => setFilterText(''), []);
+
   return {
     playlists: filteredPlaylists,
     hasPlaylists: playlistIndex.length > 0,
     showFilter,
     filterText,
     setFilterText,
+    resetFilter,
     addTracks,
   };
 };

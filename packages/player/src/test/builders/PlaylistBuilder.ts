@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash-es/cloneDeep';
 import { v4 as uuidv4 } from 'uuid';
 
 import type {
@@ -83,10 +84,7 @@ export class PlaylistBuilder {
   }
 
   build(): Playlist {
-    return {
-      ...this.playlist,
-      items: this.playlist.items.map((item) => ({ ...item })),
-    };
+    return cloneDeep(this.playlist);
   }
 
   buildIndexEntry(): PlaylistIndexEntry {

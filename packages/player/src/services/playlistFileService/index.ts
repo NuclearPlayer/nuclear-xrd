@@ -31,7 +31,7 @@ export class PlaylistFileService {
 
   async savePlaylist(playlist: Playlist): Promise<PlaylistIndexEntry[]> {
     await this.#fileStore.save(playlist);
-    const index = await this.#indexStore.load();
+    const index = [...(await this.#indexStore.load())];
     const entry = toIndexEntry(playlist);
     const existing = index.findIndex((e) => e.id === playlist.id);
     if (existing >= 0) {

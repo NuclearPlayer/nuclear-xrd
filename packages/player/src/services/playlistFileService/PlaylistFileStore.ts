@@ -36,15 +36,20 @@ export class PlaylistFileStore {
       if (evictId) {
         const store = this.#stores.get(evictId);
         if (store) {
-          await store.close();
           this.#stores.delete(evictId);
+          await store.close();
         }
       }
     }
   }
 
   async load(id: string): Promise<Playlist | null> {
-    return loadValidated(this.#get(id), 'playlist', playlistSchema);
+    return loadValidated(
+      this.#get(id),
+      'playlist',
+      playlistSchema,
+      'playlists',
+    );
   }
 
   async save(playlist: Playlist): Promise<void> {

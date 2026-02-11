@@ -8,7 +8,7 @@ export const loadValidated = async <T>(
   store: LazyStore,
   key: string,
   schema: z.ZodType<T, z.ZodTypeDef, unknown>,
-  domain: LogScope = 'playlists',
+  domain: LogScope,
 ): Promise<T | null> => {
   const raw = await store.get<unknown>(key);
   if (raw == null) {
