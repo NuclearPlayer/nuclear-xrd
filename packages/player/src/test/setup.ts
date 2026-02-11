@@ -10,6 +10,11 @@ process.env.TZ = 'UTC';
 
 setupResizeObserverMock();
 
+Element.prototype.hasPointerCapture = vi.fn().mockReturnValue(false);
+Element.prototype.setPointerCapture = vi.fn();
+Element.prototype.releasePointerCapture = vi.fn();
+Element.prototype.scrollIntoView = vi.fn();
+
 // Silences react's pointless warning spam
 // give it a rest already
 const originalError = console.error;
