@@ -9,6 +9,7 @@ import { useSidebarResize } from './hooks';
 
 export type PlayerWorkspaceSidebarPropsBase = {
   children?: ReactNode;
+  headerActions?: ReactNode;
   isCollapsed: boolean;
   width: number;
   onWidthChange: (width: number) => void;
@@ -22,6 +23,7 @@ type PlayerWorkspaceSidebarProps = PlayerWorkspaceSidebarPropsBase & {
 
 export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
   children,
+  headerActions,
   isCollapsed,
   width,
   onWidthChange,
@@ -76,6 +78,11 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
         >
           {side === 'left' ? <PanelLeft /> : <PanelRight />}
         </Button>
+        {!isCollapsed && headerActions && (
+          <span className="flex flex-1 items-center justify-end gap-1">
+            {headerActions}
+          </span>
+        )}
       </span>
       <AnimatePresence mode="wait">
         {!isCollapsed && (

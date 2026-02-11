@@ -1043,6 +1043,9 @@ exports[`Artist view > (Snapshot) renders the artist view 1`] = `
               />
             </svg>
           </button>
+          <span
+            class="flex flex-1 items-center justify-end gap-1"
+          />
         </span>
         <div
           animate="[object Object]"

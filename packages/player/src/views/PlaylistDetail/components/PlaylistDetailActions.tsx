@@ -71,7 +71,7 @@ export const PlaylistDetailActions: FC<PlaylistDetailActionsProps> = ({
               onClick={() => setIsDeleteDialogOpen(true)}
               data-testid="delete-playlist-action"
             >
-              <Trash2Icon size={14} />
+              <Trash2Icon size={16} />
               {t('delete')}
             </button>
           </div>

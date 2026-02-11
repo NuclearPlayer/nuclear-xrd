@@ -1,11 +1,14 @@
-import { FC } from 'react';
+import { useNavigate } from '@tanstack/react-router';
+import { EllipsisIcon, Trash2Icon } from 'lucide-react';
+import { FC, useState } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
-import { QueuePanel } from '@nuclearplayer/ui';
+import { Button, Dialog, Input, Popover, QueuePanel } from '@nuclearplayer/ui';
 
 import { useCurrentQueueItem } from '../hooks/useCurrentQueueItem';
 import { useQueue } from '../hooks/useQueue';
 import { useQueueActions } from '../hooks/useQueueActions';
+import { usePlaylistStore } from '../stores/playlistStore';
 
 type ConnectedQueuePanelProps = {
   isCollapsed?: boolean;
@@ -47,5 +50,79 @@ export const ConnectedQueuePanel: FC<ConnectedQueuePanelProps> = ({
         playbackError: t('errors.playback'),
       }}
     />
+  );
+};
+
+export const QueueHeaderActions: FC = () => {
+  const { t } = useTranslation('queue');
+  const { t: tPlaylists } = useTranslation('playlists');
+  const navigate = useNavigate();
+  const queue = useQueue();
+  const { clearQueue } = useQueueActions();
+  const saveQueueAsPlaylist = usePlaylistStore(
+    (state) => state.saveQueueAsPlaylist,
+  );
+
+  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [playlistName, setPlaylistName] = useState('');
+
+  const handleSaveAsPlaylist = async () => {
+    if (!playlistName.trim()) {
+      return;
+    }
+    const playlistId = await saveQueueAsPlaylist(playlistName.trim());
+    setSaveDialogOpen(false);
+    setPlaylistName('');
+    navigate({ to: '/playlists/$playlistId', params: { playlistId } });
+  };
+
+  if (queue.items.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      <Button size="icon" data-testid="clear-queue-button" onClick={clearQueue}>
+        <Trash2Icon />
+      </Button>
+      <Popover
+        className="relative"
+        trigger={
+          <Button size="icon" data-testid="queue-more-button">
+            <EllipsisIcon />
+          </Button>
+        }
+        anchor="bottom end"
+      >
+        <button
+          className="hover:bg-background-secondary flex w-full cursor-pointer items-center gap-2 rounded px-3 py-1.5 text-left text-sm whitespace-nowrap"
+          onClick={() => setSaveDialogOpen(true)}
+          data-testid="save-queue-as-playlist"
+        >
+          {t('actions.saveAsPlaylist')}
+        </button>
+      </Popover>
+      <Dialog.Root
+        isOpen={saveDialogOpen}
+        onClose={() => setSaveDialogOpen(false)}
+      >
+        <Dialog.Title>{t('actions.saveAsPlaylist')}</Dialog.Title>
+        <div className="mt-4">
+          <Input
+            label={tPlaylists('name')}
+            placeholder={tPlaylists('namePlaceholder')}
+            value={playlistName}
+            onChange={(event) => setPlaylistName(event.target.value)}
+            data-testid="save-queue-playlist-name-input"
+          />
+        </div>
+        <Dialog.Actions>
+          <Dialog.Close>{t('common:actions.cancel')}</Dialog.Close>
+          <Button onClick={handleSaveAsPlaylist}>
+            {t('common:actions.save')}
+          </Button>
+        </Dialog.Actions>
+      </Dialog.Root>
+    </>
   );
 };

@@ -818,6 +818,9 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
               />
             </svg>
           </button>
+          <span
+            class="flex flex-1 items-center justify-end gap-1"
+          />
         </span>
         <div
           animate="[object Object]"
