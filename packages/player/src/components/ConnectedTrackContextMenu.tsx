@@ -70,11 +70,10 @@ export const ConnectedTrackContextMenu: FC<ConnectedTrackContextMenuProps> = ({
             </TrackContextMenu.Submenu.Trigger>
             <TrackContextMenu.Submenu.Content>
               {playlistSubmenu.showFilter && (
-                <div
-                  className="p-2"
-                  onKeyDown={(event) => event.stopPropagation()}
-                >
+                <div onKeyDown={(event) => event.stopPropagation()}>
                   <Input
+                    size="sm"
+                    variant="borderless"
                     placeholder={tPlaylists('filterPlaylists')}
                     value={playlistSubmenu.filterText}
                     onChange={(event) =>

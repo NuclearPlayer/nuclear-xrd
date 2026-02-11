@@ -17,6 +17,8 @@ const inputVariants = cva(
         text: '',
         number: '',
         password: '',
+        borderless:
+          'border-b-border !rounded-none rounded-none !border-r-0 !border-l-0 border-t-transparent px-6 outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
       },
       tone: {
         primary: 'bg-background-input',
@@ -46,7 +48,7 @@ const inputVariants = cva(
   },
 );
 
-type InputProps = Omit<ComponentPropsWithoutRef<'input'>, 'type'> &
+type InputProps = Omit<ComponentPropsWithoutRef<'input'>, 'type' | 'size'> &
   VariantProps<typeof inputVariants> & {
     label?: string;
     description?: string;
