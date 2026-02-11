@@ -80,7 +80,7 @@ export const usePlaylistStore = create<PlaylistStore>((set, get) => ({
   addTracks: async (playlistId: string, tracks: Track[]) => {
     const playlist = await get().loadPlaylist(playlistId);
     if (!playlist) {
-      return [];
+      throw new Error(`Playlist ${playlistId} not found`);
     }
 
     const now = new Date().toISOString();

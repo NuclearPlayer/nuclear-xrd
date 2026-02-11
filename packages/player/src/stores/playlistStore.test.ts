@@ -95,13 +95,12 @@ describe('playlistStore', () => {
     expect(updated?.items[0].track.title).toBe('Added While Uncached');
   });
 
-  it('does nothing when adding tracks to a nonexistent playlist', async () => {
+  it('throws when adding tracks to a nonexistent playlist', async () => {
     const track = createMockTrack('Orphan');
 
-    await usePlaylistStore.getState().addTracks('nonexistent', [track]);
-
-    expect(usePlaylistStore.getState().index).toHaveLength(0);
-    expect(usePlaylistStore.getState().playlists.size).toBe(0);
+    await expect(
+      usePlaylistStore.getState().addTracks('nonexistent', [track]),
+    ).rejects.toThrow('Playlist nonexistent not found');
   });
 
   it('removes tracks by item IDs', async () => {
