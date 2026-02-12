@@ -36,7 +36,8 @@
     "collection": "Collection",
     "favoriteAlbums": "Albums favoris",
     "favoriteTracks": "Morceaux favoris",
-    "favoriteArtists": "Artistes favoris"
+    "favoriteArtists": "Artistes favoris",
+    "playlists": "Playlists"
   },
   "favorites": {
     "albums": {
@@ -54,6 +55,31 @@
       "empty": "No favorite artists yet",
       "emptyDescription": "Artists you mark as favorites will appear here"
     }
+  },
+  "playlists": {
+    "title": "Playlists",
+    "empty": "No playlists yet",
+    "emptyDescription": "Create a playlist or import one to get started",
+    "emptyTracks": "No tracks in this playlist",
+    "emptyTracksDescription": "Add tracks from search results or your library",
+    "create": "Create new",
+    "importJson": "Import from JSON",
+    "add": "Add",
+    "delete": "Delete playlist",
+    "deleteConfirm": "Are you sure you want to delete this playlist?",
+    "play": "Play",
+    "addToQueue": "Add to queue",
+    "saveLocally": "Save locally",
+    "readOnlyBadge": "External playlist",
+    "readOnlyTooltip": "This playlist is from {{source}} and is read-only. Save a local copy to edit it.",
+    "trackCount": "{{count}} track",
+    "trackCount_other": "{{count}} tracks",
+    "addToPlaylist": "Add to playlist",
+    "filterPlaylists": "Filter playlists...",
+    "createNew": "Create new playlist",
+    "saveQueueAsPlaylist": "Save queue as playlist",
+    "name": "Name",
+    "namePlaceholder": "Playlist name..."
   },
   "search": {
     "title": "Rechercher",
@@ -205,7 +231,9 @@
       "subtitle": "Add tracks to start playing"
     },
     "actions": {
-      "remove": "Remove from queue"
+      "remove": "Remove from queue",
+      "clear": "Clear queue",
+      "saveAsPlaylist": "Save queue as playlist"
     },
     "errors": {
       "playback": "Playback error"
