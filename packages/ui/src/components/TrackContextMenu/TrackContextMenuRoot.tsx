@@ -1,20 +1,12 @@
-import { Menu } from '@headlessui/react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC, ReactNode } from 'react';
-
-import { cn } from '../../utils';
 
 type TrackContextMenuRootProps = {
   children: ReactNode;
-  className?: string;
 };
 
 export const TrackContextMenuRoot: FC<TrackContextMenuRootProps> = ({
   children,
-  className,
 }) => {
-  return (
-    <Menu as="div" className={cn('relative', className)}>
-      {children}
-    </Menu>
-  );
+  return <DropdownMenu.Root>{children}</DropdownMenu.Root>;
 };

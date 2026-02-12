@@ -91,26 +91,13 @@ export type Artist = {
   source: ProviderRef;
 };
 
-export type Playlist = {
-  id: string;
-  name: string;
-  lastModifiedIso?: string;
-  items: PlaylistItem[];
-};
-
-export type PlaylistItem = {
-  id: string;
-  title: string;
-  artists: ArtistCredit[];
-  album?: string;
-  durationMs?: number;
-  artwork?: ArtworkSet;
-  note?: string;
-  addedAtIso?: string;
-  source: ProviderRef;
-};
-
 export { pickArtwork } from './artwork';
+export type { Playlist, PlaylistIndexEntry, PlaylistItem } from './playlists';
 export type { QueueItem, RepeatMode, Queue } from './queue';
 export type { SearchCategory, SearchParams, SearchResults } from './search';
 export type { LocalFileInfo, Stream, StreamCandidate } from './streaming';
+export {
+  playlistSchema,
+  playlistIndexEntrySchema,
+  playlistIndexSchema,
+} from './schemas';

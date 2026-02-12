@@ -14,6 +14,7 @@ export type PopoverProps = {
   trigger: ReactNode;
   children: ReactNode;
   className?: string;
+  panelClassName?: string;
   anchor?: PopoverPanelProps['anchor'];
   backdrop?: boolean;
 };
@@ -22,6 +23,7 @@ export const Popover: FC<PopoverProps> = ({
   trigger,
   children,
   className,
+  panelClassName,
   anchor,
   backdrop,
 }) => {
@@ -49,6 +51,7 @@ export const Popover: FC<PopoverProps> = ({
                   exit={{ opacity: 0, y: 4, scale: 0.98 }}
                   className={cn(
                     'text-foreground bg-primary border-border rounded-md border-2 px-4 py-2 leading-5 select-none',
+                    panelClassName,
                     {
                       ['translate-y-0']: anchor === 'bottom',
                       ['-translate-y-4']: anchor === 'top',

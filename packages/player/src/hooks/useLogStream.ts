@@ -74,7 +74,7 @@ const createLogEntry = (
 const logBuffer = new RingBuffer<LogEntry>(MAX_LOG_ENTRIES);
 let logStreamInitialized = false;
 
-const initLogStream = () => {
+export const initLogStream = () => {
   if (logStreamInitialized) {
     return;
   }
@@ -112,8 +112,6 @@ export const useLogStream = () => {
   const [logs, setLogs] = useState<LogEntry[]>([]);
 
   useEffect(() => {
-    initLogStream();
-
     const flushInterval = setInterval(() => {
       setLogs(logBuffer.toArray());
     }, FLUSH_INTERVAL_MS);

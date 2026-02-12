@@ -10,6 +10,11 @@ process.env.TZ = 'UTC';
 
 setupResizeObserverMock();
 
+Element.prototype.hasPointerCapture = vi.fn().mockReturnValue(false);
+Element.prototype.setPointerCapture = vi.fn();
+Element.prototype.releasePointerCapture = vi.fn();
+Element.prototype.scrollIntoView = vi.fn();
+
 // Silences react's pointless warning spam
 // give it a rest already
 const originalError = console.error;
@@ -58,11 +63,9 @@ vi.mock('@tauri-apps/plugin-store', async () => {
   return { LazyStore: mod.LazyStore };
 });
 
-let uuidCounter = 0;
 vi.mock('uuid', async () => {
-  return {
-    v4: () => `mock-uuid-${uuidCounter++}`,
-  };
+  const { mockUuid } = await import('./utils/mockUuid');
+  return { v4: mockUuid.v4 };
 });
 
 vi.mock('framer-motion', async (importOriginal) => {

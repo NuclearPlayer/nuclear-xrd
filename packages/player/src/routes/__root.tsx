@@ -5,6 +5,7 @@ import {
   DiscIcon,
   GaugeIcon,
   LibraryIcon,
+  ListMusicIcon,
   MusicIcon,
   PaletteIcon,
   ScrollTextIcon,
@@ -25,7 +26,10 @@ import {
 } from '@nuclearplayer/ui';
 
 import { ConnectedPlayerBar } from '../components/ConnectedPlayerBar';
-import { ConnectedQueuePanel } from '../components/ConnectedQueuePanel';
+import {
+  ConnectedQueuePanel,
+  QueueHeaderActions,
+} from '../components/ConnectedQueuePanel';
 import { ConnectedTopBar } from '../components/ConnectedTopBar';
 import { DevTools } from '../components/DevTools';
 import { SoundProvider } from '../components/SoundProvider';
@@ -116,6 +120,12 @@ const RootComponent = () => {
                     {t('favoriteArtists')}
                   </SidebarNavigationItem>
                 </Link>
+                <Link to="/playlists">
+                  <SidebarNavigationItem>
+                    <ListMusicIcon />
+                    {t('playlists')}
+                  </SidebarNavigationItem>
+                </Link>
               </SidebarNavigationCollapsible>
             </SidebarNavigation>
           </PlayerWorkspace.LeftSidebar>
@@ -129,6 +139,7 @@ const RootComponent = () => {
             isCollapsed={rightSidebar.isCollapsed}
             onWidthChange={setRightSidebarWidth}
             onToggle={toggleRightSidebar}
+            headerActions={<QueueHeaderActions />}
           >
             <ConnectedQueuePanel isCollapsed={rightSidebar.isCollapsed} />
           </PlayerWorkspace.RightSidebar>

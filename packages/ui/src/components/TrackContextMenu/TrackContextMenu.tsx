@@ -4,11 +4,20 @@ import { TrackContextMenuAction } from './TrackContextMenuAction';
 import { TrackContextMenuContent } from './TrackContextMenuContent';
 import { TrackContextMenuHeader } from './TrackContextMenuHeader';
 import { TrackContextMenuRoot } from './TrackContextMenuRoot';
+import {
+  TrackContextMenuSubmenu,
+  TrackContextMenuSubmenuContent,
+  TrackContextMenuSubmenuTrigger,
+} from './TrackContextMenuSubmenu';
 import { TrackContextMenuTrigger } from './TrackContextMenuTrigger';
 
 type TrackContextMenuProps = {
   children: ReactNode;
-  className?: string;
+};
+
+type SubmenuComponent = typeof TrackContextMenuSubmenu & {
+  Trigger: typeof TrackContextMenuSubmenuTrigger;
+  Content: typeof TrackContextMenuSubmenuContent;
 };
 
 type TrackContextMenuComponent = FC<TrackContextMenuProps> & {
@@ -16,17 +25,11 @@ type TrackContextMenuComponent = FC<TrackContextMenuProps> & {
   Content: typeof TrackContextMenuContent;
   Header: typeof TrackContextMenuHeader;
   Action: typeof TrackContextMenuAction;
+  Submenu: SubmenuComponent;
 };
 
-const TrackContextMenuImpl: FC<TrackContextMenuProps> = ({
-  children,
-  className,
-}) => {
-  return (
-    <TrackContextMenuRoot className={className}>
-      {children}
-    </TrackContextMenuRoot>
-  );
+const TrackContextMenuImpl: FC<TrackContextMenuProps> = ({ children }) => {
+  return <TrackContextMenuRoot>{children}</TrackContextMenuRoot>;
 };
 
 export const TrackContextMenu =
@@ -35,3 +38,6 @@ TrackContextMenu.Trigger = TrackContextMenuTrigger;
 TrackContextMenu.Content = TrackContextMenuContent;
 TrackContextMenu.Header = TrackContextMenuHeader;
 TrackContextMenu.Action = TrackContextMenuAction;
+TrackContextMenu.Submenu = TrackContextMenuSubmenu as SubmenuComponent;
+TrackContextMenu.Submenu.Trigger = TrackContextMenuSubmenuTrigger;
+TrackContextMenu.Submenu.Content = TrackContextMenuSubmenuContent;

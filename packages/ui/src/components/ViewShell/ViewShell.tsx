@@ -17,7 +17,10 @@ export const ViewShell: FC<ViewShellProps> = ({
     className="bg-background relative flex h-full w-full flex-col items-start justify-start px-6 pt-6"
     data-testid={dataTestId}
   >
-    <h1 className="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold">
+    <h1
+      className="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+      data-testid="title"
+    >
       {title}
     </h1>
     {subtitle && (

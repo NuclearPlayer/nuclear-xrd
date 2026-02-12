@@ -20,6 +20,7 @@ exports[`Plugins view > (Snapshot) renders the plugins view 1`] = `
       >
         <h1
           class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+          data-testid="title"
         >
           Plugins
         </h1>

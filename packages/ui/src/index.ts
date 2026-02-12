@@ -8,3 +8,4 @@ export * from './utils';
 
 export { setupResizeObserverMock } from './test/resizeObserverMock';
 export { createFramerMotionMock } from './test/mockFramerMotion';
+export { DialogWrapper } from './test/DialogWrapper';

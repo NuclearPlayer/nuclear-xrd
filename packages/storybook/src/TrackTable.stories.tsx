@@ -100,18 +100,13 @@ export const DragAndDrop: Story = {
         {...args}
         tracks={tracksState}
         actions={{
-          onReorder: (ids: string[]) => {
-            const map = new Map(
-              tracksState.map((track: Track) => [track.source.id, track]),
-            );
-            const reordered = ids
-              .map((id) => map.get(id)!)
-              .filter(Boolean) as Track[];
-            const withUpdatedPositions = reordered.map((t, idx) => ({
-              ...t,
-              trackNumber: idx + 1,
-            }));
-            setTracksState(withUpdatedPositions);
+          onReorder: (fromIndex: number, toIndex: number) => {
+            setTracksState((prev) => {
+              const next = [...prev];
+              const [moved] = next.splice(fromIndex, 1);
+              next.splice(toIndex, 0, moved);
+              return next.map((t, idx) => ({ ...t, trackNumber: idx + 1 }));
+            });
           },
         }}
       />

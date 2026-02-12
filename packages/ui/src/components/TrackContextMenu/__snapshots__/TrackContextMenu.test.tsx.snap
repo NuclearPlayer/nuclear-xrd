@@ -1,289 +1,309 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`TrackContextMenu > (Snapshot) renders header without cover image 1`] = `
-<body>
-  <div>
-    <div
-      class="relative"
-      data-headlessui-state="open"
-      data-open=""
+<body
+  data-scroll-locked="1"
+  style="pointer-events: none;"
+>
+  <span
+    aria-hidden="true"
+    data-aria-hidden="true"
+    data-radix-focus-guard=""
+    style="outline: none; opacity: 0; position: fixed; pointer-events: none;"
+    tabindex="0"
+  />
+  <div
+    aria-hidden="true"
+    data-aria-hidden="true"
+  >
+    <button
+      aria-controls="radix-:r5:"
+      aria-expanded="true"
+      aria-haspopup="menu"
+      data-state="open"
+      id="radix-:r4:"
+      type="button"
     >
-      <div
-        aria-controls="headlessui-menu-items-:rb:"
-        aria-expanded="true"
-        aria-haspopup="menu"
-        data-active=""
-        data-headlessui-state="open active hover"
-        data-hover=""
-        data-open=""
-        id="headlessui-menu-button-:ra:"
-      >
-        <button>
-          Open
-        </button>
-      </div>
-    </div>
+      Open
+    </button>
   </div>
   <div
-    id="headlessui-portal-root"
+    data-radix-popper-content-wrapper=""
+    dir="ltr"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 4px); min-width: max-content; --radix-popper-available-width: 0px; --radix-popper-available-height: -4px; --radix-popper-anchor-width: 0px; --radix-popper-anchor-height: 0px; --radix-popper-transform-origin: 100% 0px;"
   >
     <div
-      data-headlessui-portal=""
+      aria-labelledby="radix-:r4:"
+      aria-orientation="vertical"
+      class="bg-background border-border data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg outline-none"
+      data-align="end"
+      data-orientation="vertical"
+      data-radix-menu-content=""
+      data-side="bottom"
+      data-state="open"
+      dir="ltr"
+      id="radix-:r5:"
+      role="menu"
+      style="outline: none; --radix-dropdown-menu-content-transform-origin: var(--radix-popper-transform-origin); --radix-dropdown-menu-content-available-width: var(--radix-popper-available-width); --radix-dropdown-menu-content-available-height: var(--radix-popper-available-height); --radix-dropdown-menu-trigger-width: var(--radix-popper-anchor-width); --radix-dropdown-menu-trigger-height: var(--radix-popper-anchor-height); pointer-events: auto;"
+      tabindex="-1"
     >
       <div
-        aria-labelledby="headlessui-menu-button-:ra:"
-        class="bg-background border-border z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg focus:outline-none"
-        data-anchor="bottom end"
-        data-floating-ui-focusable=""
-        data-headlessui-state="open"
-        data-open=""
-        id="headlessui-menu-items-:rb:"
-        role="menu"
-        style="position: absolute; left: 0px; top: 0px; --button-width: 0px; overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
-        tabindex="0"
+        class="border-border flex items-center gap-3 border-b"
       >
         <div
-          class="border-border flex items-center gap-3 border-b"
-          role="none"
+          class="min-w-0 flex-1 py-3 pr-3 pl-3"
         >
           <div
-            class="min-w-0 flex-1 py-3 pr-3 pl-3"
-            role="none"
+            class="text-foreground truncate text-sm font-bold"
           >
-            <div
-              class="text-foreground truncate text-sm font-bold"
-              role="none"
-            >
-              Paranoid Android
-            </div>
-            <div
-              class="text-foreground-secondary truncate text-xs"
-              role="none"
-            >
-              Radiohead
-            </div>
+            Paranoid Android
+          </div>
+          <div
+            class="text-foreground-secondary truncate text-xs"
+          >
+            Radiohead
           </div>
         </div>
-        <button
-          class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
-          data-headlessui-state=""
-          id="headlessui-menu-item-:re:"
-          role="menuitem"
-          tabindex="-1"
+      </div>
+      <div
+        class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm outline-none not-last:border-b data-[highlighted]:bg-background-secondary data-[highlighted]:border-border nth-[2]:border-t-transparent"
+        data-orientation="vertical"
+        data-radix-collection-item=""
+        role="menuitem"
+        tabindex="-1"
+      >
+        <span
+          class="shrink-0"
         >
-          <span
-            class="shrink-0"
-          >
-            <span>
-              •
-            </span>
-          </span>
           <span>
-            Play Now
+            •
           </span>
-        </button>
+        </span>
+        <span>
+          Play Now
+        </span>
       </div>
     </div>
   </div>
+  <span
+    aria-hidden="true"
+    data-aria-hidden="true"
+    data-radix-focus-guard=""
+    style="outline: none; opacity: 0; position: fixed; pointer-events: none;"
+    tabindex="0"
+  />
 </body>
 `;
 
 exports[`TrackContextMenu > (Snapshot) renders header without subtitle 1`] = `
-<body>
-  <div>
-    <div
-      class="relative"
-      data-headlessui-state="open"
-      data-open=""
+<body
+  data-scroll-locked="1"
+  style="pointer-events: none;"
+>
+  <span
+    aria-hidden="true"
+    data-aria-hidden="true"
+    data-radix-focus-guard=""
+    style="outline: none; opacity: 0; position: fixed; pointer-events: none;"
+    tabindex="0"
+  />
+  <div
+    aria-hidden="true"
+    data-aria-hidden="true"
+  >
+    <button
+      aria-controls="radix-:r8:"
+      aria-expanded="true"
+      aria-haspopup="menu"
+      data-state="open"
+      id="radix-:r7:"
+      type="button"
     >
-      <div
-        aria-controls="headlessui-menu-items-:ri:"
-        aria-expanded="true"
-        aria-haspopup="menu"
-        data-active=""
-        data-headlessui-state="open active hover"
-        data-hover=""
-        data-open=""
-        id="headlessui-menu-button-:rh:"
-      >
-        <button>
-          Open
-        </button>
-      </div>
-    </div>
+      Open
+    </button>
   </div>
   <div
-    id="headlessui-portal-root"
+    data-radix-popper-content-wrapper=""
+    dir="ltr"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 4px); min-width: max-content; --radix-popper-available-width: 0px; --radix-popper-available-height: -4px; --radix-popper-anchor-width: 0px; --radix-popper-anchor-height: 0px; --radix-popper-transform-origin: 100% 0px;"
   >
     <div
-      data-headlessui-portal=""
+      aria-labelledby="radix-:r7:"
+      aria-orientation="vertical"
+      class="bg-background border-border data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg outline-none"
+      data-align="end"
+      data-orientation="vertical"
+      data-radix-menu-content=""
+      data-side="bottom"
+      data-state="open"
+      dir="ltr"
+      id="radix-:r8:"
+      role="menu"
+      style="outline: none; --radix-dropdown-menu-content-transform-origin: var(--radix-popper-transform-origin); --radix-dropdown-menu-content-available-width: var(--radix-popper-available-width); --radix-dropdown-menu-content-available-height: var(--radix-popper-available-height); --radix-dropdown-menu-trigger-width: var(--radix-popper-anchor-width); --radix-dropdown-menu-trigger-height: var(--radix-popper-anchor-height); pointer-events: auto;"
+      tabindex="-1"
     >
       <div
-        aria-labelledby="headlessui-menu-button-:rh:"
-        class="bg-background border-border z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg focus:outline-none"
-        data-anchor="bottom end"
-        data-floating-ui-focusable=""
-        data-headlessui-state="open"
-        data-open=""
-        id="headlessui-menu-items-:ri:"
-        role="menu"
-        style="position: absolute; left: 0px; top: 0px; --button-width: 0px; overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
-        tabindex="0"
+        class="border-border flex items-center gap-3 border-b"
       >
+        <img
+          alt=""
+          class="border-border size-16 border-r object-cover"
+          src="https://example.com/night-at-the-opera.jpg"
+        />
         <div
-          class="border-border flex items-center gap-3 border-b"
-          role="none"
+          class="min-w-0 flex-1 py-3 pr-3"
         >
-          <img
-            alt=""
-            class="border-border size-16 border-r object-cover"
-            role="none"
-            src="https://example.com/night-at-the-opera.jpg"
-          />
           <div
-            class="min-w-0 flex-1 py-3 pr-3"
-            role="none"
+            class="text-foreground truncate text-sm font-bold"
           >
-            <div
-              class="text-foreground truncate text-sm font-bold"
-              role="none"
-            >
-              Bohemian Rhapsody
-            </div>
+            Bohemian Rhapsody
           </div>
         </div>
-        <button
-          class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
-          data-headlessui-state=""
-          id="headlessui-menu-item-:rl:"
-          role="menuitem"
-          tabindex="-1"
+      </div>
+      <div
+        class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm outline-none not-last:border-b data-[highlighted]:bg-background-secondary data-[highlighted]:border-border nth-[2]:border-t-transparent"
+        data-orientation="vertical"
+        data-radix-collection-item=""
+        role="menuitem"
+        tabindex="-1"
+      >
+        <span
+          class="shrink-0"
         >
-          <span
-            class="shrink-0"
-          >
-            <span>
-              •
-            </span>
-          </span>
           <span>
-            Play Now
+            •
           </span>
-        </button>
+        </span>
+        <span>
+          Play Now
+        </span>
       </div>
     </div>
   </div>
+  <span
+    aria-hidden="true"
+    data-aria-hidden="true"
+    data-radix-focus-guard=""
+    style="outline: none; opacity: 0; position: fixed; pointer-events: none;"
+    tabindex="0"
+  />
 </body>
 `;
 
 exports[`TrackContextMenu > (Snapshot) renders with header and actions 1`] = `
-<body>
-  <div>
-    <div
-      class="relative"
-      data-headlessui-state="open"
-      data-open=""
+<body
+  data-scroll-locked="1"
+  style="pointer-events: none;"
+>
+  <span
+    aria-hidden="true"
+    data-aria-hidden="true"
+    data-radix-focus-guard=""
+    style="outline: none; opacity: 0; position: fixed; pointer-events: none;"
+    tabindex="0"
+  />
+  <div
+    aria-hidden="true"
+    data-aria-hidden="true"
+  >
+    <button
+      aria-controls="radix-:r1:"
+      aria-expanded="true"
+      aria-haspopup="menu"
+      data-state="open"
+      id="radix-:r0:"
+      type="button"
     >
-      <div
-        aria-controls="headlessui-menu-items-:r3:"
-        aria-expanded="true"
-        aria-haspopup="menu"
-        data-active=""
-        data-headlessui-state="open active hover"
-        data-hover=""
-        data-open=""
-        id="headlessui-menu-button-:r2:"
-      >
-        <button>
-          Open
-        </button>
-      </div>
-    </div>
+      Open
+    </button>
   </div>
   <div
-    id="headlessui-portal-root"
+    data-radix-popper-content-wrapper=""
+    dir="ltr"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 4px); min-width: max-content; --radix-popper-available-width: 0px; --radix-popper-available-height: -4px; --radix-popper-anchor-width: 0px; --radix-popper-anchor-height: 0px; --radix-popper-transform-origin: 100% 0px;"
   >
     <div
-      data-headlessui-portal=""
+      aria-labelledby="radix-:r0:"
+      aria-orientation="vertical"
+      class="bg-background border-border data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg outline-none"
+      data-align="end"
+      data-orientation="vertical"
+      data-radix-menu-content=""
+      data-side="bottom"
+      data-state="open"
+      dir="ltr"
+      id="radix-:r1:"
+      role="menu"
+      style="outline: none; --radix-dropdown-menu-content-transform-origin: var(--radix-popper-transform-origin); --radix-dropdown-menu-content-available-width: var(--radix-popper-available-width); --radix-dropdown-menu-content-available-height: var(--radix-popper-available-height); --radix-dropdown-menu-trigger-width: var(--radix-popper-anchor-width); --radix-dropdown-menu-trigger-height: var(--radix-popper-anchor-height); pointer-events: auto;"
+      tabindex="-1"
     >
       <div
-        aria-labelledby="headlessui-menu-button-:r2:"
-        class="bg-background border-border z-50 w-56 origin-top-right overflow-hidden rounded-sm border-2 shadow-lg focus:outline-none"
-        data-anchor="bottom end"
-        data-floating-ui-focusable=""
-        data-headlessui-state="open"
-        data-open=""
-        id="headlessui-menu-items-:r3:"
-        role="menu"
-        style="position: absolute; left: 0px; top: 0px; --button-width: 0px; overflow: auto; max-width: 0px; max-height: min(var(--anchor-max-height, 100vh), 0px);"
-        tabindex="0"
+        class="border-border flex items-center gap-3 border-b"
       >
+        <img
+          alt=""
+          class="border-border size-16 border-r object-cover"
+          src="https://example.com/meddle.jpg"
+        />
         <div
-          class="border-border flex items-center gap-3 border-b"
-          role="none"
+          class="min-w-0 flex-1 py-3 pr-3"
         >
-          <img
-            alt=""
-            class="border-border size-16 border-r object-cover"
-            role="none"
-            src="https://example.com/meddle.jpg"
-          />
           <div
-            class="min-w-0 flex-1 py-3 pr-3"
-            role="none"
+            class="text-foreground truncate text-sm font-bold"
           >
-            <div
-              class="text-foreground truncate text-sm font-bold"
-              role="none"
-            >
-              Echoes
-            </div>
-            <div
-              class="text-foreground-secondary truncate text-xs"
-              role="none"
-            >
-              Pink Floyd
-            </div>
+            Echoes
+          </div>
+          <div
+            class="text-foreground-secondary truncate text-xs"
+          >
+            Pink Floyd
           </div>
         </div>
-        <button
-          class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
-          data-headlessui-state=""
-          id="headlessui-menu-item-:r6:"
-          role="menuitem"
-          tabindex="-1"
+      </div>
+      <div
+        class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm outline-none not-last:border-b data-[highlighted]:bg-background-secondary data-[highlighted]:border-border nth-[2]:border-t-transparent"
+        data-orientation="vertical"
+        data-radix-collection-item=""
+        role="menuitem"
+        tabindex="-1"
+      >
+        <span
+          class="shrink-0"
         >
-          <span
-            class="shrink-0"
-          >
-            <span>
-              •
-            </span>
-          </span>
           <span>
-            Play Now
+            •
           </span>
-        </button>
-        <button
-          class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
-          data-headlessui-state=""
-          id="headlessui-menu-item-:r7:"
-          role="menuitem"
-          tabindex="-1"
+        </span>
+        <span>
+          Play Now
+        </span>
+      </div>
+      <div
+        class="flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm outline-none not-last:border-b data-[highlighted]:bg-background-secondary data-[highlighted]:border-border nth-[2]:border-t-transparent"
+        data-orientation="vertical"
+        data-radix-collection-item=""
+        role="menuitem"
+        tabindex="-1"
+      >
+        <span
+          class="shrink-0"
         >
-          <span
-            class="shrink-0"
-          >
-            <span>
-              •
-            </span>
-          </span>
           <span>
-            Add to Queue
+            •
           </span>
-        </button>
+        </span>
+        <span>
+          Add to Queue
+        </span>
       </div>
     </div>
   </div>
+  <span
+    aria-hidden="true"
+    data-aria-hidden="true"
+    data-radix-focus-guard=""
+    style="outline: none; opacity: 0; position: fixed; pointer-events: none;"
+    tabindex="0"
+  />
 </body>
 `;

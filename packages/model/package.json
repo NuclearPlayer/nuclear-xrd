@@ -24,6 +24,9 @@
     "lint:fix": "eslint . --fix",
     "type-check": "tsc --noEmit"
   },
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
   "devDependencies": {
     "@nuclearplayer/eslint-config": "workspace:*",
     "@vitest/coverage-v8": "^3.2.4",

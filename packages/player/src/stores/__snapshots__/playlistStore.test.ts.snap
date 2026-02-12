@@ -1,0 +1,51 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`playlistStore > saves current queue as a new playlist 1`] = `
+{
+  "createdAtIso": "2026-01-01T00:00:00.000Z",
+  "id": "mock-uuid-2",
+  "isReadOnly": false,
+  "items": [
+    {
+      "addedAtIso": "2026-01-01T00:00:00.000Z",
+      "id": "mock-uuid-3",
+      "track": {
+        "artists": [
+          {
+            "name": "Test Artist",
+            "roles": [
+              "primary",
+            ],
+          },
+        ],
+        "source": {
+          "id": "queue track 1",
+          "provider": "test",
+        },
+        "title": "Queue Track 1",
+      },
+    },
+    {
+      "addedAtIso": "2026-01-01T00:00:00.000Z",
+      "id": "mock-uuid-4",
+      "track": {
+        "artists": [
+          {
+            "name": "Test Artist",
+            "roles": [
+              "primary",
+            ],
+          },
+        ],
+        "source": {
+          "id": "queue track 2",
+          "provider": "test",
+        },
+        "title": "Queue Track 2",
+      },
+    },
+  ],
+  "lastModifiedIso": "2026-01-01T00:00:00.000Z",
+  "name": "From Queue",
+}
+`;

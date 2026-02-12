@@ -7,7 +7,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 import { Track } from '@nuclearplayer/model';
 
@@ -27,8 +27,11 @@ import { TrackTableProps } from './types';
 import { DEFAULT_OVERSCAN, DEFAULT_ROW_HEIGHT } from './utils/constants';
 import { VirtualizedBody } from './VirtualizedBody';
 
+const defaultGetItemId = <T extends Track>(track: T) => track.source.id;
+
 export function TrackTable<T extends Track = Track>({
   tracks,
+  getItemId = defaultGetItemId,
   labels,
   classes,
   display,
@@ -49,8 +52,12 @@ export function TrackTable<T extends Track = Track>({
   };
 
   const { sorting, setSorting, isSorted } = useSorting();
-  const { onDragStart, onDragEnd } = useReorder<T>({
-    tracks,
+  const itemIds = useMemo(
+    () => tracks.map((t, i) => getItemId(t, i)),
+    [tracks, getItemId],
+  );
+  const { onDragStart, onDragEnd } = useReorder({
+    itemIds,
     onReorder: actions?.onReorder,
   });
   const { globalFilter, setGlobalFilter, globalFilterFn, hasFilter } =
@@ -102,7 +109,7 @@ export function TrackTable<T extends Track = Track>({
     resolvedFeatures?.reorderable && !isSorted && !hasFilter,
   );
 
-  const dndItems = virtualItems.map((v) => rows[v.index].original.source.id);
+  const dndItems = rows.map((row) => getItemId(row.original, row.index));
 
   const mockViewportHeight = rowHeight * 12;
 
@@ -162,8 +169,9 @@ export function TrackTable<T extends Track = Track>({
               rowHeight={rowHeight}
               renderRow={({ row, virtual }) => (
                 <SortableRow
-                  key={row.original.source.id}
+                  key={getItemId(row.original, row.index)}
                   row={row}
+                  itemId={getItemId(row.original, row.index)}
                   style={{ height: rowHeight }}
                   isReorderable={isReorderable}
                   data-index={virtual.index}

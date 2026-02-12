@@ -6,7 +6,7 @@ import { Track } from '@nuclearplayer/model';
 import { Button } from '../../Button';
 
 type RemoveCellMeta = {
-  onRemove: (track: Track) => void;
+  onRemove: (track: Track, index: number) => void;
 };
 
 export const RemoveCell = <T extends Track>({
@@ -23,7 +23,7 @@ export const RemoveCell = <T extends Track>({
         variant="text"
         onClick={(e) => {
           e.stopPropagation();
-          meta.onRemove(track);
+          meta.onRemove(track, row.index);
         }}
         aria-label="Remove from list"
       >

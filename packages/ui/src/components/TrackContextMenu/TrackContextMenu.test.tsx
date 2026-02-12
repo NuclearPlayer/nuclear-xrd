@@ -1,107 +1,46 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { ReactNode } from 'react';
+import { screen } from '@testing-library/react';
 
-import { TrackContextMenu } from '.';
-
-type ActionConfig = {
-  label: string;
-  onClick: () => void;
-};
-
-type RenderMenuOptions = {
-  title: string;
-  subtitle?: string;
-  coverUrl?: string;
-  actions?: ActionConfig[];
-  triggerLabel?: string;
-};
-
-const defaultActions: ActionConfig[] = [
-  { label: 'Play Now', onClick: () => {} },
-  { label: 'Add to Queue', onClick: () => {} },
-];
-
-const renderMenu = (options: RenderMenuOptions, wrapper?: ReactNode) => {
-  const {
-    title,
-    subtitle,
-    coverUrl,
-    actions = defaultActions,
-    triggerLabel = 'Open',
-  } = options;
-
-  const menu = (
-    <TrackContextMenu>
-      <TrackContextMenu.Trigger>
-        <button>{triggerLabel}</button>
-      </TrackContextMenu.Trigger>
-      <TrackContextMenu.Content>
-        <TrackContextMenu.Header
-          title={title}
-          subtitle={subtitle}
-          coverUrl={coverUrl}
-        />
-        {actions.map(({ label, onClick }) => (
-          <TrackContextMenu.Action
-            key={label}
-            icon={<span>•</span>}
-            onClick={onClick}
-          >
-            {label}
-          </TrackContextMenu.Action>
-        ))}
-      </TrackContextMenu.Content>
-    </TrackContextMenu>
-  );
-
-  return render(wrapper ? <div onClick={() => {}}>{menu}</div> : menu);
-};
-
-const openMenu = async (triggerLabel = 'Open') => {
-  await userEvent.click(screen.getByText(triggerLabel));
-};
+import { TrackContextMenuWrapper as Wrapper } from './TrackContextMenu.test-wrapper';
 
 describe('TrackContextMenu', () => {
   it('(Snapshot) renders with header and actions', async () => {
-    renderMenu({
+    Wrapper.mount({
       title: 'Echoes',
       subtitle: 'Pink Floyd',
       coverUrl: 'https://example.com/meddle.jpg',
     });
-    await openMenu();
+    await Wrapper.open();
     await screen.findByText('Echoes');
     expect(document.body).toMatchSnapshot();
   });
 
   it('(Snapshot) renders header without cover image', async () => {
-    renderMenu({
+    Wrapper.mount({
       title: 'Paranoid Android',
       subtitle: 'Radiohead',
       actions: [{ label: 'Play Now', onClick: () => {} }],
     });
-    await openMenu();
+    await Wrapper.open();
     await screen.findByText('Paranoid Android');
     expect(document.body).toMatchSnapshot();
   });
 
   it('(Snapshot) renders header without subtitle', async () => {
-    renderMenu({
+    Wrapper.mount({
       title: 'Bohemian Rhapsody',
       coverUrl: 'https://example.com/night-at-the-opera.jpg',
       actions: [{ label: 'Play Now', onClick: () => {} }],
     });
-    await openMenu();
+    await Wrapper.open();
     await screen.findByText('Bohemian Rhapsody');
     expect(document.body).toMatchSnapshot();
   });
 
   it('calls action onClick when action is clicked', async () => {
-    const user = userEvent.setup();
     const onPlay = vi.fn();
     const onAddToQueue = vi.fn();
 
-    renderMenu({
+    Wrapper.mount({
       title: 'Stairway to Heaven',
       subtitle: 'Led Zeppelin',
       actions: [
@@ -110,39 +49,78 @@ describe('TrackContextMenu', () => {
       ],
     });
 
-    await user.click(screen.getByText('Open'));
+    await Wrapper.open();
     await screen.findByText('Play Now');
-    await user.click(screen.getByText('Play Now'));
+    await Wrapper.action('Play Now').click();
 
     expect(onPlay).toHaveBeenCalledTimes(1);
     expect(onAddToQueue).not.toHaveBeenCalled();
   });
 
   it('stops propagation on trigger click', async () => {
-    const user = userEvent.setup();
     const onParentClick = vi.fn();
 
-    render(
-      <div onClick={onParentClick}>
-        <TrackContextMenu>
-          <TrackContextMenu.Trigger>
-            <button>Open Menu</button>
-          </TrackContextMenu.Trigger>
-          <TrackContextMenu.Content>
-            <TrackContextMenu.Header
-              title="Come Together"
-              subtitle="The Beatles"
-            />
-            <TrackContextMenu.Action icon={<span>•</span>} onClick={() => {}}>
-              Play Now
-            </TrackContextMenu.Action>
-          </TrackContextMenu.Content>
-        </TrackContextMenu>
-      </div>,
-    );
+    Wrapper.mount({
+      title: 'Come Together',
+      subtitle: 'The Beatles',
+      actions: [{ label: 'Play Now', onClick: () => {} }],
+      onParentClick,
+    });
 
-    await user.click(screen.getByText('Open Menu'));
+    await Wrapper.open();
 
     expect(onParentClick).not.toHaveBeenCalled();
+  });
+
+  describe('Submenu', () => {
+    const submenuItems = [
+      { label: 'Option A', onClick: vi.fn() },
+      { label: 'Option B', onClick: vi.fn() },
+    ];
+
+    const mountWithSubmenu = (items = submenuItems) => {
+      Wrapper.mount({
+        title: 'Test Track',
+        subtitle: 'Artist',
+        submenu: {
+          label: 'More options',
+          items,
+        },
+      });
+    };
+
+    it('renders the submenu trigger when menu is open', async () => {
+      mountWithSubmenu();
+
+      await Wrapper.open();
+      expect(Wrapper.submenu.trigger).toHaveTextContent('More options');
+    });
+
+    it('shows submenu content when trigger is clicked', async () => {
+      mountWithSubmenu();
+
+      await Wrapper.open();
+      await Wrapper.submenu.open();
+
+      expect(Wrapper.submenu.panel).toBeInTheDocument();
+      expect(Wrapper.submenu.item('Option A').element).toBeInTheDocument();
+      expect(Wrapper.submenu.item('Option B').element).toBeInTheDocument();
+    });
+
+    it('calls onClick when a submenu item is clicked', async () => {
+      const onClickA = vi.fn();
+      const onClickB = vi.fn();
+      mountWithSubmenu([
+        { label: 'Option A', onClick: onClickA },
+        { label: 'Option B', onClick: onClickB },
+      ]);
+
+      await Wrapper.open();
+      await Wrapper.submenu.open();
+      await Wrapper.submenu.item('Option A').click();
+
+      expect(onClickA).toHaveBeenCalledTimes(1);
+      expect(onClickB).not.toHaveBeenCalled();
+    });
   });
 });

@@ -45,7 +45,11 @@ export const PlayerBarControls: FC<PlayerBarControlsProps> = ({
     <Button size="icon" variant="text" onClick={onPrevious}>
       <SkipBack size={16} />
     </Button>
-    <Button size="icon" onClick={onPlayPause}>
+    <Button
+      size="icon"
+      onClick={onPlayPause}
+      data-testid={isPlaying ? 'player-pause-button' : 'player-play-button'}
+    >
       {isPlaying ? <Pause size={16} /> : <Play size={16} />}
     </Button>
     <Button size="icon" variant="text" onClick={onNext}>

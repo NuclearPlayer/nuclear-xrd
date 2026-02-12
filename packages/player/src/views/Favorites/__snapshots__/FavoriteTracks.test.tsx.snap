@@ -21,6 +21,7 @@ exports[`FavoriteTracks view > (Snapshot) renders empty state 1`] = `
       >
         <h1
           class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+          data-testid="title"
         >
           Favorite tracks
         </h1>
@@ -105,6 +106,7 @@ exports[`FavoriteTracks view > (Snapshot) renders with tracks 1`] = `
       >
         <h1
           class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+          data-testid="title"
         >
           Favorite tracks
         </h1>
@@ -358,55 +360,47 @@ exports[`FavoriteTracks view > (Snapshot) renders with tracks 1`] = `
                             />
                           </svg>
                         </button>
-                        <div
-                          class="relative"
+                        <button
+                          aria-expanded="false"
+                          aria-haspopup="menu"
+                          aria-label="Track options"
+                          class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
                           data-headlessui-state=""
+                          data-state="closed"
+                          data-testid="track-context-menu-button"
+                          id="radix-:ra:"
+                          type="button"
                         >
-                          <div
-                            aria-expanded="false"
-                            aria-haspopup="menu"
-                            data-headlessui-state=""
-                            id="headlessui-menu-button-:rc:"
+                          <svg
+                            aria-hidden="true"
+                            class="lucide lucide-ellipsis-vertical"
+                            fill="none"
+                            height="16"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <button
-                              aria-label="Track options"
-                              class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
-                              data-headlessui-state=""
-                              data-testid="track-context-menu-button"
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden="true"
-                                class="lucide lucide-ellipsis-vertical"
-                                fill="none"
-                                height="16"
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                width="16"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <circle
-                                  cx="12"
-                                  cy="12"
-                                  r="1"
-                                />
-                                <circle
-                                  cx="12"
-                                  cy="5"
-                                  r="1"
-                                />
-                                <circle
-                                  cx="12"
-                                  cy="19"
-                                  r="1"
-                                />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
+                            <circle
+                              cx="12"
+                              cy="12"
+                              r="1"
+                            />
+                            <circle
+                              cx="12"
+                              cy="5"
+                              r="1"
+                            />
+                            <circle
+                              cx="12"
+                              cy="19"
+                              r="1"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     </div>
                   </td>
@@ -511,55 +505,47 @@ exports[`FavoriteTracks view > (Snapshot) renders with tracks 1`] = `
                             />
                           </svg>
                         </button>
-                        <div
-                          class="relative"
+                        <button
+                          aria-expanded="false"
+                          aria-haspopup="menu"
+                          aria-label="Track options"
+                          class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
                           data-headlessui-state=""
+                          data-state="closed"
+                          data-testid="track-context-menu-button"
+                          id="radix-:rc:"
+                          type="button"
                         >
-                          <div
-                            aria-expanded="false"
-                            aria-haspopup="menu"
-                            data-headlessui-state=""
-                            id="headlessui-menu-button-:ri:"
+                          <svg
+                            aria-hidden="true"
+                            class="lucide lucide-ellipsis-vertical"
+                            fill="none"
+                            height="16"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <button
-                              aria-label="Track options"
-                              class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
-                              data-headlessui-state=""
-                              data-testid="track-context-menu-button"
-                              type="button"
-                            >
-                              <svg
-                                aria-hidden="true"
-                                class="lucide lucide-ellipsis-vertical"
-                                fill="none"
-                                height="16"
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                width="16"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <circle
-                                  cx="12"
-                                  cy="12"
-                                  r="1"
-                                />
-                                <circle
-                                  cx="12"
-                                  cy="5"
-                                  r="1"
-                                />
-                                <circle
-                                  cx="12"
-                                  cy="19"
-                                  r="1"
-                                />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
+                            <circle
+                              cx="12"
+                              cy="12"
+                              r="1"
+                            />
+                            <circle
+                              cx="12"
+                              cy="5"
+                              r="1"
+                            />
+                            <circle
+                              cx="12"
+                              cy="19"
+                              r="1"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     </div>
                   </td>

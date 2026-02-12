@@ -3,7 +3,11 @@ import { attachLogger } from '@tauri-apps/plugin-log';
 import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { resetLogStreamForTesting, useLogStream } from './useLogStream';
+import {
+  initLogStream,
+  resetLogStreamForTesting,
+  useLogStream,
+} from './useLogStream';
 
 vi.mock('@tauri-apps/api/core', () => ({
   invoke: vi.fn(),
@@ -26,6 +30,8 @@ describe('useLogStream', () => {
     });
 
     vi.mocked(invoke).mockResolvedValue([]);
+
+    initLogStream();
   });
 
   afterEach(() => {
@@ -34,6 +40,8 @@ describe('useLogStream', () => {
   });
 
   it('fetches startup logs on mount', async () => {
+    resetLogStreamForTesting();
+
     vi.mocked(invoke).mockResolvedValue([
       {
         timestamp: '2026-02-04T10:00:00Z',
@@ -41,6 +49,8 @@ describe('useLogStream', () => {
         message: '[INFO][webview] [app] Starting up',
       },
     ]);
+
+    initLogStream();
 
     const { result } = renderHook(() => useLogStream());
 
@@ -286,6 +296,8 @@ describe('useLogStream', () => {
   });
 
   it('preserves logs that arrive during startup log fetch', async () => {
+    resetLogStreamForTesting();
+
     let resolveStartupLogs: (value: unknown) => void;
     vi.mocked(invoke).mockImplementation(
       () =>
@@ -293,6 +305,8 @@ describe('useLogStream', () => {
           resolveStartupLogs = resolve;
         }),
     );
+
+    initLogStream();
 
     const { result } = renderHook(() => useLogStream());
 

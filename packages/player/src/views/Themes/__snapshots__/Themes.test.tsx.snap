@@ -537,6 +537,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
             >
               <h1
                 class="mb-6 flex w-full flex-0 flex-row text-center text-3xl font-bold"
+                data-testid="title"
               >
                 Themes
               </h1>
@@ -817,6 +818,9 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
               />
             </svg>
           </button>
+          <span
+            class="flex flex-1 items-center justify-end gap-1"
+          />
         </span>
         <div
           animate="[object Object]"
@@ -1032,6 +1036,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
             <button
               class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
               data-headlessui-state=""
+              data-testid="player-play-button"
               type="button"
             >
               <svg
