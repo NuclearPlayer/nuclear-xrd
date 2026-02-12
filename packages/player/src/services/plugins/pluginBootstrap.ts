@@ -1,3 +1,5 @@
+import { normalize } from '@tauri-apps/api/path';
+
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
 import { usePluginStore } from '../../stores/pluginStore';
@@ -19,8 +21,9 @@ import {
 } from './pluginRegistry';
 
 const isManagedPath = async (absPath: string): Promise<boolean> => {
-  const base = await getPluginsDir();
-  return absPath.startsWith(base);
+  const normalizedPath = await normalize(absPath);
+  const normalizedBase = await normalize(await getPluginsDir());
+  return normalizedPath.startsWith(normalizedBase);
 };
 
 export const hydratePluginsFromRegistry = async (): Promise<void> => {

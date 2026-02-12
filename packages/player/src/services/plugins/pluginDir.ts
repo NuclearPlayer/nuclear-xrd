@@ -1,4 +1,4 @@
-import { appDataDir, join } from '@tauri-apps/api/path';
+import { appDataDir, join, normalize } from '@tauri-apps/api/path';
 import { BaseDirectory, mkdir, remove } from '@tauri-apps/plugin-fs';
 
 import { reportError, resolveErrorMessage } from '../../utils/logging';
@@ -76,11 +76,14 @@ export const installPluginToManagedDir = async (
 const resolveRelativeManagedPath = async (
   absolutePath: string,
 ): Promise<string | undefined> => {
-  const base = await appDataDir();
-  if (!absolutePath.startsWith(base)) {
+  const normalizedPath = await normalize(absolutePath);
+  const normalizedBase = await normalize(await appDataDir());
+  if (!normalizedPath.startsWith(normalizedBase)) {
     return undefined;
   }
-  const trimmed = absolutePath.slice(base.length).replace(/^[/\\]/, '');
+  const trimmed = normalizedPath
+    .slice(normalizedBase.length)
+    .replace(/^[/\\]/, '');
   return trimmed;
 };
 

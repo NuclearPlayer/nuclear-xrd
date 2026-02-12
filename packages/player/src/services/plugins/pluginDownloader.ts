@@ -24,7 +24,7 @@ export const downloadAndExtractPlugin = async ({
   const downloadsDir = await getDownloadsDir();
   const zipPath = await join(downloadsDir, `${pluginId}.zip`);
   const extractPath = await join(downloadsDir, pluginId);
-  const relativeZipPath = `${DOWNLOADS_DIR}/${pluginId}.zip`;
+  const relativeZipPath = await join(DOWNLOADS_DIR, `${pluginId}.zip`);
 
   await downloadFile(downloadUrl, zipPath);
   await extractZip(zipPath, extractPath);
