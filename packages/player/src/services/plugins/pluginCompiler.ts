@@ -17,6 +17,13 @@
  * - Externalize bare module imports (e.g., @nuclearplayer/plugin-sdk) so plugins don't
  *   accidentally try to bundle our runtime dependencies.
  */
+import {
+  dirname,
+  extname,
+  isAbsolute,
+  resolve,
+  normalize as tauriNormalize,
+} from '@tauri-apps/api/path';
 import { readTextFile } from '@tauri-apps/plugin-fs';
 import type * as EsbuildTypes from 'esbuild-wasm';
 import wasmUrl from 'esbuild-wasm/esbuild.wasm?url';
@@ -64,30 +71,6 @@ const es = getEsbuildState();
 const cache = new Map<string, string>();
 
 const isTs = (p: string) => p.endsWith('.ts') || p.endsWith('.tsx');
-
-const toForwardSlashes = (p: string) => p.replace(/\\/g, '/');
-
-const normalize = (parts: string[]) => {
-  const out: string[] = [];
-  for (const part of parts) {
-    if (!part || part === '.') {
-      continue;
-    }
-    if (part === '..') {
-      out.pop();
-    } else {
-      out.push(part);
-    }
-  }
-  return '/' + out.join('/');
-};
-
-const resolvePath = (baseDir: string, rel: string) => {
-  if (rel.startsWith('/')) {
-    return rel;
-  }
-  return normalize((baseDir + '/' + rel).split('/'));
-};
 
 /**
  * Initialize esbuild-wasm exactly once within this JS context.
@@ -139,14 +122,14 @@ export async function compilePlugin(
     return undefined;
   }
   const entrySource = await readTextFile(entryPath);
-  entryPath = toForwardSlashes(entryPath);
+  entryPath = await tauriNormalize(entryPath);
   const key = entryPath + ':' + simpleHash(entrySource);
   if (cache.has(key)) {
     return cache.get(key);
   }
 
   const mod = await getEsbuild();
-  const entryDir = entryPath.slice(0, entryPath.lastIndexOf('/')) || '/';
+  const entryDir = await dirname(entryPath);
   const entryLoader: EsbuildTypes.Loader = entryPath.endsWith('.tsx')
     ? 'tsx'
     : entryPath.endsWith('.ts')
@@ -198,24 +181,24 @@ export async function compilePlugin(
           // and force them into a custom namespace ("tauri-fs"). Anything that
           // lands in this namespace will be loaded by our onLoad hook below,
           // using Tauri's readTextFile instead of Node's fs.
-          build.onResolve({ filter: /.*/ }, (args) => {
+          build.onResolve({ filter: /.*/ }, async (args) => {
             // 1) The entry point itself.
             //    Tag it with our namespace to keep it in the virtual fs flow.
             if (args.kind === 'entry-point') {
               return { path: args.path, namespace: 'tauri-fs' };
             }
 
-            // 2) Absolute paths like "/Users/…/index.ts".
+            // 2) Absolute paths like "/Users/…/index.ts" or "C:\Users\…\index.ts".
             //    Keep the absolute path as-is, just force the namespace.
-            if (args.path.startsWith('/')) {
+            if (await isAbsolute(args.path)) {
               return { path: args.path, namespace: 'tauri-fs' };
             }
 
             // 3) Relative paths like "./foo" or "../bar".
             //    Resolve them to an absolute path based on the current file's directory.
-            if (/^(\.\.?\/)/.test(args.path)) {
+            if (/^\.\.?[/\\]/.test(args.path)) {
               return {
-                path: resolvePath(args.resolveDir || entryDir, args.path),
+                path: await resolve(args.resolveDir || entryDir, args.path),
                 namespace: 'tauri-fs',
               };
             }
@@ -250,7 +233,13 @@ export async function compilePlugin(
                 }
               };
 
-              const hasExt = /\.[^/]+$/.test(args.path);
+              let hasExt = false;
+              try {
+                const ext = await extname(args.path);
+                hasExt = ext !== '';
+              } catch {
+                // Tauri's extname throws when the path has no extension
+              }
               const candidates: string[] = [];
 
               if (hasExt) {
@@ -274,7 +263,7 @@ export async function compilePlugin(
                     : p.endsWith('.ts')
                       ? 'ts'
                       : 'js';
-                  const thisDir = p.slice(0, p.lastIndexOf('/')) || '/';
+                  const thisDir = await dirname(p);
                   return { contents, loader, resolveDir: thisDir };
                 }
               }

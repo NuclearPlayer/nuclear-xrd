@@ -28,6 +28,12 @@ console.error = (...args) => {
 vi.mock('@tauri-apps/api/path', () => ({
   appDataDir: async () => '/home/user/.local/share/com.nuclearplayer',
   join: async (...parts: string[]) => path.join(...parts),
+  dirname: async (p: string) => path.dirname(p),
+  basename: async (p: string, ext?: string) => path.basename(p, ext),
+  extname: async (p: string) => path.extname(p),
+  isAbsolute: async (p: string) => path.isAbsolute(p),
+  resolve: async (...parts: string[]) => path.resolve(...parts),
+  normalize: async (p: string) => path.normalize(p),
 }));
 
 vi.mock('esbuild-wasm', () => ({
