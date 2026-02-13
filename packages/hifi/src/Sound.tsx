@@ -5,6 +5,7 @@ import { useAudioElementSource } from './hooks/useAudioElementSource';
 import { useAudioEvents } from './hooks/useAudioEvents';
 import { useAudioLoader } from './hooks/useAudioLoader';
 import { useAudioSeek } from './hooks/useAudioSeek';
+import { useHlsSource } from './hooks/useHlsSource';
 import { usePlaybackStatus } from './hooks/usePlaybackStatus';
 import { SoundProps } from './types';
 
@@ -28,6 +29,7 @@ export const Sound: React.FC<SoundProps> = ({
   usePlaybackStatus(audioRef, status, context, isReady);
   useAudioSeek(audioRef, seek, isReady);
   useAudioLoader(audioRef, src, isReady);
+  useHlsSource(audioRef, src, isReady);
 
   const { handleTimeUpdate, handleError } = useAudioEvents({
     onTimeUpdate,
@@ -45,9 +47,7 @@ export const Sound: React.FC<SoundProps> = ({
         onEnded={onEnd}
         onLoadStart={onLoadStart}
         onError={handleError}
-      >
-        <source src={src} />
-      </audio>
+      />
       {isReady &&
         context &&
         children &&
