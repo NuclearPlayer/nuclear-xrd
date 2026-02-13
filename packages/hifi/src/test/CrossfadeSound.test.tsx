@@ -1,7 +1,11 @@
 import { act, render } from '@testing-library/react';
 
 import { CrossfadeSound } from '../CrossfadeSound';
+import { AudioSource } from '../types';
 import { resetMediaSpies, setupAudioContextMock } from './test-utils';
+
+const srcA: AudioSource = { url: '/a.mp3', protocol: 'http' };
+const srcB: AudioSource = { url: '/b.mp3', protocol: 'http' };
 
 describe('CrossfadeSound', () => {
   it('ramps gains and flips active index after crossfade', async () => {
@@ -9,10 +13,10 @@ describe('CrossfadeSound', () => {
 
     vi.useFakeTimers();
     const { rerender, unmount, container } = render(
-      <CrossfadeSound src="/a.mp3" status="playing" crossfadeMs={50} />,
+      <CrossfadeSound src={srcA} status="playing" crossfadeMs={50} />,
     );
 
-    rerender(<CrossfadeSound src="/b.mp3" status="playing" crossfadeMs={50} />);
+    rerender(<CrossfadeSound src={srcB} status="playing" crossfadeMs={50} />);
 
     const sourcesBefore = container.querySelectorAll('audio > source');
     expect(sourcesBefore[0].getAttribute('src')).toBe('/a.mp3');
@@ -41,10 +45,10 @@ describe('CrossfadeSound', () => {
 
     vi.useFakeTimers();
     const { rerender, unmount } = render(
-      <CrossfadeSound src="/a.mp3" status="playing" crossfadeMs={25} />,
+      <CrossfadeSound src={srcA} status="playing" crossfadeMs={25} />,
     );
 
-    rerender(<CrossfadeSound src="/b.mp3" status="playing" crossfadeMs={25} />);
+    rerender(<CrossfadeSound src={srcB} status="playing" crossfadeMs={25} />);
 
     expect(playMock).toHaveBeenCalled();
 

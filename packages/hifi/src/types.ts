@@ -1,6 +1,10 @@
 import { ReactNode, ScriptHTMLAttributes } from 'react';
 
-export type AudioSource = string;
+export type AudioSource = {
+  url: string;
+  protocol: 'file' | 'http' | 'https' | 'hls';
+};
+
 export type SoundStatus = 'playing' | 'paused' | 'stopped';
 export type SoundProps = {
   src: AudioSource;

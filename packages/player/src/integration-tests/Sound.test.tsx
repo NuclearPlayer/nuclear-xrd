@@ -1,13 +1,19 @@
 import { act, waitFor } from '@testing-library/react';
 
+import { AudioSource } from '@nuclearplayer/hifi';
+
 import { SoundWrapper } from './Sound.test-wrapper';
+
+const trackSource: AudioSource = { url: '/track.mp3', protocol: 'http' };
+const srcA: AudioSource = { url: '/a.mp3', protocol: 'http' };
+const srcB: AudioSource = { url: '/b.mp3', protocol: 'http' };
 
 describe('Sound component', () => {
   it('mounts app and renders Sound only after src is set', async () => {
     await SoundWrapper.mount();
     expect(document.querySelectorAll('audio').length).toBe(0);
 
-    SoundWrapper.setSrc('/track.mp3');
+    SoundWrapper.setSrc(trackSource);
     await waitFor(() =>
       expect(document.querySelectorAll('audio').length).toBe(1),
     );
@@ -15,7 +21,7 @@ describe('Sound component', () => {
 
   it('plays, seeks, and pauses via store actions', async () => {
     await SoundWrapper.mount();
-    SoundWrapper.setSrc('/a.mp3');
+    SoundWrapper.setSrc(srcA);
     SoundWrapper.play();
 
     const playMock = window.HTMLMediaElement.prototype
@@ -44,11 +50,11 @@ describe('Sound component', () => {
   it('crossfades on src change when crossfadeMs > 0', async () => {
     await SoundWrapper.mount();
     SoundWrapper.setCrossfadeMs(40);
-    SoundWrapper.setSrc('/a.mp3');
+    SoundWrapper.setSrc(srcA);
     SoundWrapper.play();
 
     vi.useFakeTimers();
-    SoundWrapper.setSrc('/b.mp3');
+    SoundWrapper.setSrc(srcB);
     await act(async () => {
       await vi.runOnlyPendingTimersAsync();
     });

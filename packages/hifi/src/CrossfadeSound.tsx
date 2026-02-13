@@ -207,7 +207,9 @@ export const CrossfadeSound: React.FC<
           onLoadStart={onLoadStart}
           onError={handleError}
         >
-          <source src={activeIndex === adapter.id ? prevSrc.current : src} />
+          <source
+            src={activeIndex === adapter.id ? prevSrc.current.url : src.url}
+          />
         </audio>
       ))}
       {isReady &&

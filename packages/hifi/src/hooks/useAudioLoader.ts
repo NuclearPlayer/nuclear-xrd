@@ -7,20 +7,26 @@ export const useAudioLoader = (
   src: AudioSource,
   isReady: boolean,
 ) => {
-  const prevSrc = useRef<AudioSource | null>(null);
+  const prevUrl = useRef<string | null>(null);
 
   useEffect(() => {
     if (!isReady) {
       return;
     }
+
+    if (src.protocol === 'hls') {
+      return;
+    }
+
     const audio = audioRef.current;
     if (!audio) {
       return;
     }
 
-    if (src !== prevSrc.current) {
+    if (src.url !== prevUrl.current) {
+      audio.src = src.url;
       audio.load();
-      prevSrc.current = src;
+      prevUrl.current = src.url;
     }
   }, [src, isReady, audioRef]);
 };
