@@ -70,9 +70,10 @@ describe('Stream Resolution Integration', () => {
       await StreamResolutionWrapper.waitForPlayback();
 
       const src = StreamResolutionWrapper.getSoundState().src;
-      expect(src).toEqual(
-        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC0xLm1wMw',
-      );
+      expect(src).toEqual({
+        url: 'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC0xLm1wMw',
+        protocol: 'https',
+      });
 
       const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
       expect(currentItem?.status).toBe('success');
@@ -180,9 +181,10 @@ describe('Stream Resolution Integration', () => {
 
       await StreamResolutionWrapper.waitForPlayback();
 
-      expect(StreamResolutionWrapper.getSoundState().src).toBe(
-        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC1nb29kLm1wMw',
-      );
+      expect(StreamResolutionWrapper.getSoundState().src).toEqual({
+        url: 'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC1nb29kLm1wMw',
+        protocol: 'https',
+      });
 
       const currentItem = StreamResolutionWrapper.getCurrentQueueItem();
       expect(currentItem?.status).toBe('success');
@@ -221,9 +223,10 @@ describe('Stream Resolution Integration', () => {
         expect(resolvedTracks).toContain('Giant Steps');
       });
 
-      expect(StreamResolutionWrapper.getSoundState().src).toBe(
-        'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC1HaWFudCBTdGVwcy5tcDM',
-      );
+      expect(StreamResolutionWrapper.getSoundState().src).toEqual({
+        url: 'nuclear-stream://localhost/aHR0cHM6Ly9leGFtcGxlLmNvbS95dC1HaWFudCBTdGVwcy5tcDM',
+        protocol: 'https',
+      });
     });
   });
 });
