@@ -72,6 +72,11 @@ const cache = new Map<string, string>();
 
 const isTs = (p: string) => p.endsWith('.ts') || p.endsWith('.tsx');
 
+// esbuild-wasm operates in a forward-slash world. Tauri's path functions
+// return native separators (backslashes on Windows), so we normalize all
+// paths to forward slashes before passing them to esbuild.
+const toForwardSlashes = (p: string) => p.replace(/\\/g, '/');
+
 /**
  * Initialize esbuild-wasm exactly once within this JS context.
  *
@@ -122,14 +127,14 @@ export async function compilePlugin(
     return undefined;
   }
   const entrySource = await readTextFile(entryPath);
-  entryPath = await tauriNormalize(entryPath);
+  entryPath = toForwardSlashes(await tauriNormalize(entryPath));
   const key = entryPath + ':' + simpleHash(entrySource);
   if (cache.has(key)) {
     return cache.get(key);
   }
 
   const mod = await getEsbuild();
-  const entryDir = await dirname(entryPath);
+  const entryDir = toForwardSlashes(await dirname(entryPath));
   const entryLoader: EsbuildTypes.Loader = entryPath.endsWith('.tsx')
     ? 'tsx'
     : entryPath.endsWith('.ts')
@@ -198,7 +203,9 @@ export async function compilePlugin(
             //    Resolve them to an absolute path based on the current file's directory.
             if (/^\.\.?[/\\]/.test(args.path)) {
               return {
-                path: await resolve(args.resolveDir || entryDir, args.path),
+                path: toForwardSlashes(
+                  await resolve(args.resolveDir || entryDir, args.path),
+                ),
                 namespace: 'tauri-fs',
               };
             }
@@ -263,7 +270,7 @@ export async function compilePlugin(
                     : p.endsWith('.ts')
                       ? 'ts'
                       : 'js';
-                  const thisDir = await dirname(p);
+                  const thisDir = toForwardSlashes(await dirname(p));
                   return { contents, loader, resolveDir: thisDir };
                 }
               }
