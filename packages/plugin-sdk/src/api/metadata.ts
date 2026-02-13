@@ -21,8 +21,14 @@ export class MetadataAPI {
     return this.#withHost((h) => h.search(params, providerId));
   }
 
-  fetchArtistDetails(artistId: string, providerId?: string) {
-    return this.#withHost((h) => h.fetchArtistDetails(artistId, providerId));
+  fetchArtistBio(artistId: string, providerId?: string) {
+    return this.#withHost((h) => h.fetchArtistBio(artistId, providerId));
+  }
+
+  fetchArtistSocialStats(artistId: string, providerId?: string) {
+    return this.#withHost((h) =>
+      h.fetchArtistSocialStats(artistId, providerId),
+    );
   }
 
   fetchArtistAlbums(artistId: string, providerId?: string) {
@@ -31,6 +37,10 @@ export class MetadataAPI {
 
   fetchArtistTopTracks(artistId: string, providerId?: string) {
     return this.#withHost((h) => h.fetchArtistTopTracks(artistId, providerId));
+  }
+
+  fetchArtistPlaylists(artistId: string, providerId?: string) {
+    return this.#withHost((h) => h.fetchArtistPlaylists(artistId, providerId));
   }
 
   fetchArtistRelatedArtists(artistId: string, providerId?: string) {
