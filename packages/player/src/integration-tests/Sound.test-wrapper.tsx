@@ -1,5 +1,7 @@
 import { render, RenderResult } from '@testing-library/react';
 
+import { AudioSource } from '@nuclearplayer/hifi';
+
 import App from '../App';
 import { useSoundStore } from '../stores/soundStore';
 
@@ -7,7 +9,7 @@ export const SoundWrapper = {
   async mount(): Promise<RenderResult> {
     return render(<App />);
   },
-  setSrc(src: string) {
+  setSrc(src: AudioSource) {
     useSoundStore.getState().setSrc(src);
   },
   play() {

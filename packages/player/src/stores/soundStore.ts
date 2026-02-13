@@ -37,7 +37,7 @@ export const useSoundStore = create<SoundState & SoundActions>((set, get) => ({
   crossOrigin: '',
   setSrc: (src) => {
     set({ src, seek: 0, duration: 0 });
-    Logger.playback.debug(`Set source: ${src ?? 'null'}`);
+    Logger.playback.debug(`Set source: ${src?.url ?? 'null'}`);
   },
   play: () => {
     set({ status: 'playing' });

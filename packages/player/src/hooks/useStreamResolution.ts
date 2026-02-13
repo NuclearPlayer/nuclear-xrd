@@ -22,10 +22,14 @@ const proxyStreamUrl = (url: string): string => {
 const buildAudioSource = (candidate: StreamCandidate): AudioSource => {
   const { stream } = candidate;
   if (!stream) {
-    return candidate.id;
+    return { url: candidate.id, protocol: 'http' };
   }
 
-  return proxyStreamUrl(stream.url);
+  if (stream.protocol === 'hls') {
+    return { url: stream.url, protocol: 'hls' };
+  }
+
+  return { url: proxyStreamUrl(stream.url), protocol: stream.protocol };
 };
 
 const setItemError = (itemId: string, errorKey: string, t: TFunction): void => {
