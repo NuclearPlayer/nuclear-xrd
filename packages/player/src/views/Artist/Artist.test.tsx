@@ -19,7 +19,7 @@ describe('Artist view', () => {
     const provider = new MetadataProviderBuilder()
       .withSearchCapabilities(['unified', 'artists'])
       .withArtistMetadataCapabilities([
-        'artistDetails',
+        'artistBio',
         'artistAlbums',
         'artistTopTracks',
         'artistRelatedArtists',
@@ -46,7 +46,7 @@ describe('Artist view', () => {
           },
         ],
       }))
-      .withFetchArtistDetails(async () => ({
+      .withFetchArtistBio(async () => ({
         name: 'The Beatles',
         onTour: true,
         tags: ['rock', 'indie', 'brit-pop'],
@@ -153,7 +153,7 @@ describe('Artist view', () => {
       .withName('The provider that never resolves')
       .withSearchCapabilities(['unified', 'artists'])
       .withArtistMetadataCapabilities([
-        'artistDetails',
+        'artistBio',
         'artistAlbums',
         'artistTopTracks',
         'artistRelatedArtists',
@@ -169,7 +169,7 @@ describe('Artist view', () => {
           },
         ],
       }))
-      .withFetchArtistDetails(delay)
+      .withFetchArtistBio(delay)
       .withFetchArtistAlbums(delay)
       .withFetchArtistTopTracks(delay)
       .withFetchArtistRelatedArtists(delay)
@@ -197,34 +197,7 @@ describe('Artist view', () => {
     await ArtistWrapper.mount('The Beatles');
     await ArtistWrapper.toggleFavorite();
 
-    expect(useFavoritesStore.getState().artists).toMatchInlineSnapshot(`
-      [
-        {
-          "addedAtIso": "2026-01-30T12:00:00.000Z",
-          "ref": {
-            "artwork": {
-              "items": [
-                {
-                  "purpose": "avatar",
-                  "url": "https://img/avatar.jpg",
-                  "width": 300,
-                },
-                {
-                  "purpose": "cover",
-                  "url": "https://img/cover.jpg",
-                  "width": 1200,
-                },
-              ],
-            },
-            "name": "The Beatles",
-            "source": {
-              "id": "test-artist-id",
-              "provider": "test-metadata-provider",
-            },
-          },
-        },
-      ]
-    `);
+    expect(useFavoritesStore.getState().artists).toMatchSnapshot();
   });
 
   it('removes artist from favorites when clicking the heart button again', async () => {
@@ -233,5 +206,57 @@ describe('Artist view', () => {
     await ArtistWrapper.toggleFavorite();
 
     expect(useFavoritesStore.getState().artists).toHaveLength(0);
+  });
+
+  it('only renders widgets for capabilities the provider declares', async () => {
+    providersHost.clear();
+    const provider = new MetadataProviderBuilder()
+      .withSearchCapabilities(['unified', 'artists'])
+      .withArtistMetadataCapabilities(['artistBio', 'artistTopTracks'])
+      .withSearch(async () => ({
+        artists: [
+          {
+            name: 'Test Artist',
+            source: {
+              provider: 'test-metadata-provider',
+              id: 'test-artist-id',
+            },
+          },
+        ],
+      }))
+      .withFetchArtistBio(async () => ({
+        name: 'The Beatles',
+        onTour: false,
+        tags: [],
+        artwork: { items: [] },
+        source: { provider: 'test-metadata-provider', id: 'test-artist-id' },
+      }))
+      .withFetchArtistTopTracks(async () => [
+        {
+          title: 'Test Track',
+          artists: [
+            {
+              name: 'Test Artist',
+              source: {
+                provider: 'test-metadata-provider',
+                id: 'test-artist-id',
+              },
+            },
+          ],
+          source: { provider: 'test-metadata-provider', id: 'track-1' },
+        },
+      ])
+      .build();
+    providersHost.register(provider);
+
+    await ArtistWrapper.mount('The Beatles');
+
+    expect(
+      screen.queryByTestId('artist-albums-loader'),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId('similar-artists-loader'),
+    ).not.toBeInTheDocument();
+    expect(screen.queryAllByTestId('card')).toHaveLength(0);
   });
 });
