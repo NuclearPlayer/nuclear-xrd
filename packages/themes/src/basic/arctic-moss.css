@@ -1,0 +1,9 @@
+:root[data-theme-id='nuclear:arctic-moss'] {
+  --background: oklch(0.97 0.008 200);
+  --primary: oklch(0.7 0.12 175);
+}
+
+:root[data-theme-id='nuclear:arctic-moss'][data-theme='dark'] {
+  --background: oklch(0.22 0.015 200);
+  --primary: oklch(0.7 0.12 175);
+}

@@ -13,6 +13,7 @@ import './basic/aurora.css';
 import './basic/ember.css';
 import './basic/lagoon.css';
 import './basic/canyon.css';
+import './basic/arctic-moss.css';
 
 export type BasicThemeMeta = {
   id: string;
@@ -59,6 +60,16 @@ const BUILT_INS: BasicThemeMeta[] = [
       'oklch(0.975 0.02 70)',
       'oklch(0.68 0.19 38)',
       'oklch(0.36 0.03 30)',
+    ],
+  },
+  {
+    id: 'nuclear:arctic-moss',
+    name: 'Arctic Moss',
+    palette: [
+      'oklch(0.70 0.12 175)',
+      'oklch(0.97 0.008 200)',
+      'oklch(0.70 0.12 175)',
+      'oklch(0.22 0.015 200)',
     ],
   },
 ];
