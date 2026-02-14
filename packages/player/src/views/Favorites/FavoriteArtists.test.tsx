@@ -4,7 +4,9 @@ import userEvent from '@testing-library/user-event';
 
 import App from '../../App';
 import { routeTree } from '../../routeTree.gen';
+import { providersHost } from '../../services/providersHost';
 import { useFavoritesStore } from '../../stores/favoritesStore';
+import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
 import { createArtistRef } from '../../test/fixtures/favorites';
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 
@@ -18,6 +20,7 @@ const renderAtRoute = async (route: string) => {
 
 describe('FavoriteArtists view', () => {
   beforeEach(() => {
+    providersHost.clear();
     resetInMemoryTauriStore();
     useFavoritesStore.setState({
       tracks: [],
@@ -106,6 +109,17 @@ describe('FavoriteArtists view', () => {
     const artist = createArtistRef('test-provider', 'test-artist-id');
     artist.name = 'Test Artist';
 
+    const provider = new MetadataProviderBuilder()
+      .withId('test-provider')
+      .withArtistMetadataCapabilities(['artistBio'])
+      .withFetchArtistBio(async () => ({
+        name: 'Test Artist',
+        artwork: { items: [] },
+        source: { provider: 'test-provider', id: 'test-artist-id' },
+      }))
+      .build();
+    providersHost.register(provider);
+
     useFavoritesStore.setState({
       artists: [{ ref: artist, addedAtIso: '2026-01-15T10:00:00.000Z' }],
       loaded: true,
@@ -116,6 +130,6 @@ describe('FavoriteArtists view', () => {
     const card = screen.getByTestId('card');
     await user.click(card);
 
-    await screen.findByTestId('artist-header-loader');
+    await screen.findByRole('heading', { name: 'Test Artist' });
   });
 });
