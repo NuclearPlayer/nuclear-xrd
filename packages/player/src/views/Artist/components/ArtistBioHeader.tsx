@@ -6,14 +6,14 @@ import { pickArtwork } from '@nuclearplayer/model';
 import { Loader } from '@nuclearplayer/ui';
 
 import { ConnectedFavoriteButton } from '../../../components/ConnectedFavoriteButton';
-import { useArtistDetails } from '../hooks/useArtistDetails';
+import { useArtistBio } from '../hooks/useArtistBio';
 
-type ArtistHeaderProps = {
+type ArtistBioHeaderProps = {
   providerId: string;
   artistId: string;
 };
 
-export const ArtistHeader: FC<ArtistHeaderProps> = ({
+export const ArtistBioHeader: FC<ArtistBioHeaderProps> = ({
   providerId,
   artistId,
 }) => {
@@ -22,7 +22,7 @@ export const ArtistHeader: FC<ArtistHeaderProps> = ({
     data: artist,
     isLoading,
     isError,
-  } = useArtistDetails(providerId, artistId);
+  } = useArtistBio(providerId, artistId);
 
   if (isLoading) {
     return (

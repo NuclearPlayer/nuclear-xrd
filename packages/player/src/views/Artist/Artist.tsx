@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { ScrollableArea } from '@nuclearplayer/ui';
 
 import { ArtistAlbumsGrid } from './components/ArtistAlbumsGrid';
-import { ArtistHeader } from './components/ArtistHeader';
+import { ArtistBioHeader } from './components/ArtistBioHeader';
 import { ArtistPopularTracks } from './components/ArtistPopularTracks';
 import { ArtistSimilarArtists } from './components/ArtistSimilarArtists';
 
@@ -16,7 +16,7 @@ export const Artist: FC<ArtistProps> = () => {
   });
   return (
     <ScrollableArea className="bg-background">
-      <ArtistHeader providerId={providerId} artistId={artistId} />
+      <ArtistBioHeader providerId={providerId} artistId={artistId} />
 
       <div className="flex flex-col gap-6 p-6 md:flex-row">
         <div className="md:w-2/3">
