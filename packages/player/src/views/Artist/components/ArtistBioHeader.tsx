@@ -8,6 +8,8 @@ import { Loader } from '@nuclearplayer/ui';
 import { ConnectedFavoriteButton } from '../../../components/ConnectedFavoriteButton';
 import { useArtistBio } from '../hooks/useArtistBio';
 
+const AVATAR_SIZE_PX = 300;
+
 type ArtistBioHeaderProps = {
   providerId: string;
   artistId: string;
@@ -53,7 +55,7 @@ export const ArtistBioHeader: FC<ArtistBioHeaderProps> = ({
   }
 
   const cover = pickArtwork(artist.artwork, 'cover', 1200);
-  const avatar = pickArtwork(artist.artwork, 'avatar', 300);
+  const avatar = pickArtwork(artist.artwork, 'avatar', AVATAR_SIZE_PX);
 
   return (
     <div className="relative">

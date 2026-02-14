@@ -10,7 +10,9 @@ export const ArtistWrapper = {
     const component = await SearchWrapper.mount('test artist');
     const artistLink = await screen.findByText('Test Artist');
     await user.click(artistLink);
-    await screen.findByText(header);
+    await screen.findByRole('heading', {
+      name: new RegExp(header),
+    });
     return component;
   },
   async mountNoWait(): Promise<RenderResult> {

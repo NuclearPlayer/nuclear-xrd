@@ -4,8 +4,10 @@ import type { ArtistMetadataCapability } from '@nuclearplayer/plugin-sdk';
 
 import { ArtistAlbumsGrid } from './components/ArtistAlbumsGrid';
 import { ArtistBioHeader } from './components/ArtistBioHeader';
+import { ArtistPlaylistsGrid } from './components/ArtistPlaylistsGrid';
 import { ArtistPopularTracks } from './components/ArtistPopularTracks';
 import { ArtistSimilarArtists } from './components/ArtistSimilarArtists';
+import { ArtistSocialHeader } from './components/ArtistSocialHeader';
 
 export type ArtistWidgetProps = {
   providerId: string;
@@ -21,6 +23,7 @@ export type ArtistWidgetEntry = {
 
 export const ARTIST_WIDGETS: ArtistWidgetEntry[] = [
   { capability: 'artistBio', component: ArtistBioHeader },
+  { capability: 'artistSocialStats', component: ArtistSocialHeader },
   {
     capability: 'artistTopTracks',
     component: ArtistPopularTracks,
@@ -34,6 +37,7 @@ export const ARTIST_WIDGETS: ArtistWidgetEntry[] = [
     width: 'md:w-1/3',
   },
   { capability: 'artistAlbums', component: ArtistAlbumsGrid },
+  { capability: 'artistPlaylists', component: ArtistPlaylistsGrid },
 ];
 
 export type WidgetGroup = {
