@@ -1,12 +1,11 @@
 import { useParams } from '@tanstack/react-router';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
+import type { MetadataProvider } from '@nuclearplayer/plugin-sdk';
 import { ScrollableArea } from '@nuclearplayer/ui';
 
-import { ArtistAlbumsGrid } from './components/ArtistAlbumsGrid';
-import { ArtistBioHeader } from './components/ArtistBioHeader';
-import { ArtistPopularTracks } from './components/ArtistPopularTracks';
-import { ArtistSimilarArtists } from './components/ArtistSimilarArtists';
+import { providersHost } from '../../services/providersHost';
+import { ARTIST_WIDGETS, groupWidgets } from './artistWidgets';
 
 type ArtistProps = Record<string, never>;
 
@@ -14,26 +13,43 @@ export const Artist: FC<ArtistProps> = () => {
   const { providerId, artistId } = useParams({
     from: '/artist/$providerId/$artistId',
   });
+
+  const provider = useMemo(() => {
+    return providersHost.get(providerId) as MetadataProvider | undefined;
+  }, [providerId]);
+
+  const capabilities = new Set(provider?.artistMetadataCapabilities ?? []);
+
+  const activeWidgets = ARTIST_WIDGETS.filter((widget) =>
+    capabilities.has(widget.capability),
+  );
+
+  const widgetGroups = groupWidgets(activeWidgets);
+
   return (
     <ScrollableArea className="bg-background">
-      <ArtistBioHeader providerId={providerId} artistId={artistId} />
+      {widgetGroups.map((group) => {
+        if (group.entries.length === 1) {
+          const SingleWidget = group.entries[0].component;
+          return (
+            <SingleWidget
+              key={group.key}
+              providerId={providerId}
+              artistId={artistId}
+            />
+          );
+        }
 
-      <div className="flex flex-col gap-6 p-6 md:flex-row">
-        <div className="md:w-2/3">
-          <ArtistPopularTracks providerId={providerId} artistId={artistId} />
-        </div>
-        <div className="md:w-1/3">
-          <ArtistSimilarArtists providerId={providerId} artistId={artistId} />
-        </div>
-      </div>
-
-      <ScrollableArea>
-        <ArtistAlbumsGrid
-          providerId={providerId}
-          artistId={artistId}
-          data-testid="artist-albums-grid"
-        />
-      </ScrollableArea>
+        return (
+          <div key={group.key} className="flex flex-col gap-6 p-6 md:flex-row">
+            {group.entries.map(({ capability, component: Widget, width }) => (
+              <div key={capability} className={width}>
+                <Widget providerId={providerId} artistId={artistId} />
+              </div>
+            ))}
+          </div>
+        );
+      })}
     </ScrollableArea>
   );
 };
