@@ -74,10 +74,15 @@ export class MetadataProviderBuilder {
     return this;
   }
 
-  withFetchArtistDetails(
-    fetchArtistDetails: MetadataProvider['fetchArtistDetails'],
+  withFetchArtistBio(fetchArtistBio: MetadataProvider['fetchArtistBio']): this {
+    this.provider.fetchArtistBio = fetchArtistBio;
+    return this;
+  }
+
+  withFetchArtistSocialStats(
+    fetchArtistSocialStats: MetadataProvider['fetchArtistSocialStats'],
   ): this {
-    this.provider.fetchArtistDetails = fetchArtistDetails;
+    this.provider.fetchArtistSocialStats = fetchArtistSocialStats;
     return this;
   }
 
@@ -99,6 +104,13 @@ export class MetadataProviderBuilder {
     fetchArtistRelatedArtists: MetadataProvider['fetchArtistRelatedArtists'],
   ): this {
     this.provider.fetchArtistRelatedArtists = fetchArtistRelatedArtists;
+    return this;
+  }
+
+  withFetchArtistPlaylists(
+    fetchArtistPlaylists: MetadataProvider['fetchArtistPlaylists'],
+  ): this {
+    this.provider.fetchArtistPlaylists = fetchArtistPlaylists;
     return this;
   }
 
