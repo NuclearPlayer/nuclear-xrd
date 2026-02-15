@@ -113,11 +113,16 @@
     "topTracks": "Top tracks",
     "onTour": "De gira",
     "notOnTour": "No está de gira",
+    "followers": "Followers",
+    "followings": "Following",
+    "playlists": "Playlists",
     "errors": {
       "failedToLoadDetails": "Error al cargar los detalles del artista.",
       "failedToLoadAlbums": "Error al cargar los albums.",
       "failedToLoadPopularTracks": "Error al cargar los tracks populares.",
-      "failedToLoadSimilarArtists": "Error al cargar artistas similares."
+      "failedToLoadSimilarArtists": "Error al cargar artistas similares.",
+      "failedToLoadSocialStats": "Failed to load artist stats.",
+      "failedToLoadPlaylists": "Failed to load playlists."
     }
   },
   "album": {
