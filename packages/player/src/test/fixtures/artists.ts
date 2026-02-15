@@ -38,6 +38,7 @@ export const SEARCH_RESULT: SearchResults = {
 
 export const BIO_BEATLES: ArtistBio = {
   name: 'The Beatles',
+  bio: 'The Beatles were an English rock band formed in Liverpool in 1960. The group, whose best-known line-up comprised John Lennon, Paul McCartney, George Harrison and Ringo Starr, are regarded as the most influential band of all time.',
   onTour: true,
   tags: ['rock', 'indie', 'brit-pop'],
   artwork: {

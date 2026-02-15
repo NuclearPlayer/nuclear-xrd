@@ -372,14 +372,11 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                 style="scrollbar-width: none;"
               >
                 <div
-                  class="relative"
+                  class="border-border bg-primary shadow-shadow relative mx-6 mt-6 rounded-md border-2 p-6"
                 >
-                  <div
-                    class="absolute h-100 w-full bg-gradient-to-b from-transparent to-black"
-                  />
                   <button
                     aria-label="Add to favorites"
-                    class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center absolute top-4 right-4 z-10"
+                    class="inline-flex cursor-pointer items-center transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground size-10 justify-center bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
                     data-headlessui-state=""
                     data-testid="artist-favorite-button"
                     type="button"
@@ -403,43 +400,67 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                     </svg>
                   </button>
                   <div
-                    class="h-100 w-full bg-cover bg-center"
-                    style="background-image: url("https://img/cover.jpg");"
-                  />
-                  <div
-                    class="absolute bottom-0 left-0 flex flex-row items-center gap-8 p-8"
+                    class="flex gap-6"
                   >
-                    <img
-                      alt="The Beatles avatar"
-                      class="border-border bottom-0 h-30 w-30 rounded-full border-2 select-none"
-                      src="https://img/avatar.jpg"
-                    />
-                    <h1
-                      class="flex cursor-default flex-col gap-2 text-6xl text-white select-none"
+                    <div
+                      class="flex flex-1 flex-col gap-4"
                     >
-                      The Beatles
+                      <div
+                        class="flex items-center gap-5"
+                      >
+                        <img
+                          alt="The Beatles avatar"
+                          class="border-border shadow-shadow h-24 w-24 rounded-full border-2 object-cover"
+                          src="https://img/avatar.jpg"
+                        />
+                        <div
+                          class="flex flex-col gap-1"
+                        >
+                          <h1
+                            class="font-heading text-5xl font-extrabold tracking-tight"
+                          >
+                            The Beatles
+                          </h1>
+                        </div>
+                      </div>
                       <div
                         class="flex flex-wrap gap-2"
                       >
                         <span
-                          class="bg-primary rounded-md px-2 py-1 font-sans text-sm"
+                          class="border-border bg-background rounded-md border px-2 py-0.5 text-sm font-bold"
                         >
                           rock
                         </span>
                         <span
-                          class="bg-primary rounded-md px-2 py-1 font-sans text-sm"
+                          class="border-border bg-background rounded-md border px-2 py-0.5 text-sm font-bold"
                         >
                           indie
                         </span>
                         <span
-                          class="bg-primary rounded-md px-2 py-1 font-sans text-sm"
+                          class="border-border bg-background rounded-md border px-2 py-0.5 text-sm font-bold"
                         >
                           brit-pop
                         </span>
                       </div>
-                    </h1>
-                    <div>
-                      On Tour
+                      <span
+                        class="bg-accent-green border-border inline-flex w-fit rounded-md border px-2 py-0.5 text-sm font-bold"
+                      >
+                        On Tour
+                      </span>
+                      <p
+                        class="text-foreground-secondary line-clamp-3 text-sm leading-relaxed"
+                      >
+                        The Beatles were an English rock band formed in Liverpool in 1960. The group, whose best-known line-up comprised John Lennon, Paul McCartney, George Harrison and Ringo Starr, are regarded as the most influential band of all time.
+                      </p>
+                    </div>
+                    <div
+                      class="w-72 shrink-0 self-stretch"
+                    >
+                      <img
+                        alt="The Beatles cover"
+                        class="border-border shadow-shadow h-full w-full rounded-md border-2 object-cover"
+                        src="https://img/cover.jpg"
+                      />
                     </div>
                   </div>
                 </div>
@@ -1674,9 +1695,34 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                 style="scrollbar-width: none;"
               >
                 <div
-                  class="border-border bg-primary shadow-shadow mx-6 mt-6 rounded-md border-2 p-6"
+                  class="border-border bg-primary shadow-shadow relative mx-6 mt-6 rounded-md border-2 p-6"
                   data-testid="artist-social-header"
                 >
+                  <button
+                    aria-label="Add to favorites"
+                    class="inline-flex cursor-pointer items-center transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground size-10 justify-center bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
+                    data-headlessui-state=""
+                    data-testid="artist-favorite-button"
+                    type="button"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="lucide lucide-heart transition-colors text-foreground-secondary hover:text-foreground"
+                      fill="none"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+                      />
+                    </svg>
+                  </button>
                   <div
                     class="flex items-center gap-5"
                   >

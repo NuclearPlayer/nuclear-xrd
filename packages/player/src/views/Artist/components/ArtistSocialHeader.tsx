@@ -12,6 +12,7 @@ import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
 import { Loader } from '@nuclearplayer/ui';
 
+import { ConnectedFavoriteButton } from '../../../components/ConnectedFavoriteButton';
 import { useArtistSocialStats } from '../hooks/useArtistSocialStats';
 
 const AVATAR_SIZE_PX = 300;
@@ -108,9 +109,16 @@ export const ArtistSocialHeader: FC<ArtistSocialHeaderProps> = ({
 
   return (
     <div
-      className="border-border bg-primary shadow-shadow mx-6 mt-6 rounded-md border-2 p-6"
+      className="border-border bg-primary shadow-shadow relative mx-6 mt-6 rounded-md border-2 p-6"
       data-testid="artist-social-header"
     >
+      <ConnectedFavoriteButton
+        type="artist"
+        source={{ provider: providerId, id: artistId }}
+        data={{ name: stats.name, artwork: stats.artwork }}
+        className="bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
+        data-testid="artist-favorite-button"
+      />
       <div className="flex items-center gap-5">
         {avatar && (
           <img
