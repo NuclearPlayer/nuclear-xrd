@@ -448,7 +448,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                         On Tour
                       </span>
                       <p
-                        class="text-foreground-secondary line-clamp-3 text-sm leading-relaxed"
+                        class="text-foreground-secondary line-clamp-5 text-sm leading-relaxed"
                       >
                         The Beatles were an English rock band formed in Liverpool in 1960. The group, whose best-known line-up comprised John Lennon, Paul McCartney, George Harrison and Ringo Starr, are regarded as the most influential band of all time.
                       </p>
@@ -1774,36 +1774,40 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                     <div
                       class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
                     >
-                      <svg
-                        aria-hidden="true"
-                        class="lucide lucide-users shrink-0"
-                        fill="none"
-                        height="16"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                        width="16"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-                        />
-                        <path
-                          d="M16 3.128a4 4 0 0 1 0 7.744"
-                        />
-                        <path
-                          d="M22 21v-2a4 4 0 0 0-3-3.87"
-                        />
-                        <circle
-                          cx="9"
-                          cy="7"
-                          r="4"
-                        />
-                      </svg>
                       <span
-                        class="font-heading text-lg leading-none font-extrabold"
+                        class="shrink-0"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="lucide lucide-users"
+                          fill="none"
+                          height="16"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                          />
+                          <path
+                            d="M16 3.128a4 4 0 0 1 0 7.744"
+                          />
+                          <path
+                            d="M22 21v-2a4 4 0 0 0-3-3.87"
+                          />
+                          <circle
+                            cx="9"
+                            cy="7"
+                            r="4"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="font-heading text-lg font-extrabold"
                       >
                         5.4M
                       </span>
@@ -1816,42 +1820,46 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                     <div
                       class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
                     >
-                      <svg
-                        aria-hidden="true"
-                        class="lucide lucide-user-plus shrink-0"
-                        fill="none"
-                        height="16"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                        width="16"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-                        />
-                        <circle
-                          cx="9"
-                          cy="7"
-                          r="4"
-                        />
-                        <line
-                          x1="19"
-                          x2="19"
-                          y1="8"
-                          y2="14"
-                        />
-                        <line
-                          x1="22"
-                          x2="16"
-                          y1="11"
-                          y2="11"
-                        />
-                      </svg>
                       <span
-                        class="font-heading text-lg leading-none font-extrabold"
+                        class="shrink-0"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="lucide lucide-user-plus"
+                          fill="none"
+                          height="16"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                          />
+                          <circle
+                            cx="9"
+                            cy="7"
+                            r="4"
+                          />
+                          <line
+                            x1="19"
+                            x2="19"
+                            y1="8"
+                            y2="14"
+                          />
+                          <line
+                            x1="22"
+                            x2="16"
+                            y1="11"
+                            y2="11"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="font-heading text-lg font-extrabold"
                       >
                         120
                       </span>
@@ -1864,35 +1872,39 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                     <div
                       class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
                     >
-                      <svg
-                        aria-hidden="true"
-                        class="lucide lucide-music shrink-0"
-                        fill="none"
-                        height="16"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                        width="16"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M9 18V5l12-2v13"
-                        />
-                        <circle
-                          cx="6"
-                          cy="18"
-                          r="3"
-                        />
-                        <circle
-                          cx="18"
-                          cy="16"
-                          r="3"
-                        />
-                      </svg>
                       <span
-                        class="font-heading text-lg leading-none font-extrabold"
+                        class="shrink-0"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="lucide lucide-music"
+                          fill="none"
+                          height="16"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M9 18V5l12-2v13"
+                          />
+                          <circle
+                            cx="6"
+                            cy="18"
+                            r="3"
+                          />
+                          <circle
+                            cx="18"
+                            cy="16"
+                            r="3"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="font-heading text-lg font-extrabold"
                       >
                         340
                       </span>
@@ -1905,37 +1917,41 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                     <div
                       class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
                     >
-                      <svg
-                        aria-hidden="true"
-                        class="lucide lucide-list-music shrink-0"
-                        fill="none"
-                        height="16"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                        width="16"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M21 15V6"
-                        />
-                        <path
-                          d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"
-                        />
-                        <path
-                          d="M12 12H3"
-                        />
-                        <path
-                          d="M16 6H3"
-                        />
-                        <path
-                          d="M12 18H3"
-                        />
-                      </svg>
                       <span
-                        class="font-heading text-lg leading-none font-extrabold"
+                        class="shrink-0"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="lucide lucide-list-music"
+                          fill="none"
+                          height="16"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M21 15V6"
+                          />
+                          <path
+                            d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"
+                          />
+                          <path
+                            d="M12 12H3"
+                          />
+                          <path
+                            d="M16 6H3"
+                          />
+                          <path
+                            d="M12 18H3"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="font-heading text-lg font-extrabold"
                       >
                         22
                       </span>

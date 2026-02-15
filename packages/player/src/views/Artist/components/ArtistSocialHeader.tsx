@@ -10,7 +10,7 @@ import { FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
-import { Loader } from '@nuclearplayer/ui';
+import { Loader, StatChip } from '@nuclearplayer/ui';
 
 import { ConnectedFavoriteButton } from '../../../components/ConnectedFavoriteButton';
 import { useArtistSocialStats } from '../hooks/useArtistSocialStats';
@@ -142,18 +142,12 @@ export const ArtistSocialHeader: FC<ArtistSocialHeaderProps> = ({
       {statDefinitions.length > 0 && (
         <div className="mt-5 flex flex-wrap gap-3">
           {statDefinitions.map((stat) => (
-            <div
+            <StatChip
               key={stat.key}
-              className="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
-            >
-              <stat.icon size={16} className="shrink-0" />
-              <span className="font-heading text-lg leading-none font-extrabold">
-                {formatCompact(stat.value)}
-              </span>
-              <span className="text-foreground-secondary text-xs font-bold tracking-wide uppercase">
-                {t(stat.labelKey)}
-              </span>
-            </div>
+              value={formatCompact(stat.value)}
+              label={t(stat.labelKey)}
+              icon={<stat.icon size={16} />}
+            />
           ))}
         </div>
       )}

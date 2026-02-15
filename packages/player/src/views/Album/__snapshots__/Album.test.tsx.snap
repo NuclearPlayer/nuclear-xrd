@@ -373,11 +373,11 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
                 style="scrollbar-width: none;"
               >
                 <div
-                  class="bg-primary border-border relative flex flex-col gap-6 border-b-2 p-8 md:flex-row"
+                  class="border-border bg-primary shadow-shadow relative mx-6 mt-6 flex flex-col gap-6 rounded-md border-2 p-6 md:flex-row"
                 >
                   <button
                     aria-label="Add to favorites"
-                    class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center absolute top-4 right-4"
+                    class="inline-flex cursor-pointer items-center transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground size-10 justify-center bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
                     data-headlessui-state=""
                     data-testid="album-favorite-button"
                     type="button"
@@ -402,7 +402,7 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
                   </button>
                   <img
                     alt="Prism"
-                    class="border-border h-60 w-60 border-2 object-cover select-none"
+                    class="border-border shadow-shadow h-60 w-60 rounded-md border-2 object-cover select-none"
                     src="https://img/album-cover.jpg"
                   />
                   <div
@@ -412,7 +412,7 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
                       class="flex flex-col gap-2"
                     >
                       <h1
-                        class="text-5xl font-bold"
+                        class="font-heading text-5xl font-extrabold tracking-tight"
                       >
                         Prism
                       </h1>
@@ -423,31 +423,49 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
                       </div>
                     </div>
                     <div
-                      class="text-text-secondary flex flex-col flex-wrap gap-2 text-sm"
+                      class="flex flex-wrap gap-3"
                     >
-                      <div>
+                      <div
+                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                      >
                         <span
-                          class="text-text-primary font-semibold"
+                          class="font-heading text-lg font-extrabold"
                         >
-                          Genre:
+                          Folk, World, Country
                         </span>
-                         Folk, World, Country
+                        <span
+                          class="text-foreground-secondary text-xs font-bold tracking-wide uppercase"
+                        >
+                          Genre
+                        </span>
                       </div>
-                      <div>
+                      <div
+                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                      >
                         <span
-                          class="text-text-primary font-semibold"
+                          class="font-heading text-lg font-extrabold"
                         >
-                          Year:
+                          2025
                         </span>
-                         2025
+                        <span
+                          class="text-foreground-secondary text-xs font-bold tracking-wide uppercase"
+                        >
+                          Year
+                        </span>
                       </div>
-                      <div>
+                      <div
+                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                      >
                         <span
-                          class="text-text-primary font-semibold"
+                          class="font-heading text-lg font-extrabold"
                         >
-                          Tracks:
+                          2
                         </span>
-                         2
+                        <span
+                          class="text-foreground-secondary text-xs font-bold tracking-wide uppercase"
+                        >
+                          Tracks
+                        </span>
                       </div>
                     </div>
                   </div>

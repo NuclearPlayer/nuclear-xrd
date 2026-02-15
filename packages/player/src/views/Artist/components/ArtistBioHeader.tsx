@@ -97,7 +97,7 @@ export const ArtistBioHeader: FC<ArtistBioHeaderProps> = ({
             </span>
           )}
           {artist.bio && (
-            <p className="text-foreground-secondary line-clamp-3 text-sm leading-relaxed">
+            <p className="text-foreground-secondary line-clamp-5 text-sm leading-relaxed">
               {artist.bio}
             </p>
           )}

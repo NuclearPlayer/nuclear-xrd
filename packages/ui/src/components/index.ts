@@ -27,6 +27,7 @@ export * from './SectionShell';
 export * from './Select';
 export * from './SidebarNavigation';
 export * from './Slider';
+export * from './StatChip';
 export * from './Tabs';
 export * from './ThemeController';
 export * from './Toaster';

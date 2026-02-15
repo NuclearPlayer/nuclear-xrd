@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import { pickArtwork } from '@nuclearplayer/model';
-import { Loader } from '@nuclearplayer/ui';
+import { Loader, StatChip } from '@nuclearplayer/ui';
 
 import { ConnectedFavoriteButton } from '../../../components/ConnectedFavoriteButton';
 import { useAlbumDetails } from '../hooks/useAlbumDetails';
@@ -47,53 +47,38 @@ export const AlbumHeader: FC<AlbumHeaderProps> = ({ providerId, albumId }) => {
   const trackCount = album.tracks?.length ?? 0;
 
   return (
-    <div className="bg-primary border-border relative flex flex-col gap-6 border-b-2 p-8 md:flex-row">
+    <div className="border-border bg-primary shadow-shadow relative mx-6 mt-6 flex flex-col gap-6 rounded-md border-2 p-6 md:flex-row">
       <ConnectedFavoriteButton
         type="album"
         source={{ provider: providerId, id: albumId }}
         data={{ title: album.title, artwork: album.artwork }}
-        className="absolute top-4 right-4"
+        className="bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
         data-testid="album-favorite-button"
       />
       {cover && (
         <img
           src={cover.url}
           alt={album.title}
-          className="border-border h-60 w-60 border-2 object-cover select-none"
+          className="border-border shadow-shadow h-60 w-60 rounded-md border-2 object-cover select-none"
         />
       )}
 
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <h1 className="text-5xl font-bold">{album.title}</h1>
+          <h1 className="font-heading text-5xl font-extrabold tracking-tight">
+            {album.title}
+          </h1>
           <div className="text-text-secondary text-lg">
             by {album.artists.map((a) => a.name).join(', ')}
           </div>
         </div>
 
-        <div className="text-text-secondary flex flex-col flex-wrap gap-2 text-sm">
+        <div className="flex flex-wrap gap-3">
           {album.genres && album.genres.length > 0 && (
-            <div>
-              <span className="text-text-primary font-semibold">
-                {t('genre')}:
-              </span>{' '}
-              {album.genres.join(', ')}
-            </div>
+            <StatChip value={album.genres.join(', ')} label={t('genre')} />
           )}
-          {releaseYear && (
-            <div>
-              <span className="text-text-primary font-semibold">
-                {t('year')}:
-              </span>{' '}
-              {releaseYear}
-            </div>
-          )}
-          <div>
-            <span className="text-text-primary font-semibold">
-              {t('tracks')}:
-            </span>{' '}
-            {trackCount}
-          </div>
+          {releaseYear && <StatChip value={releaseYear} label={t('year')} />}
+          <StatChip value={trackCount} label={t('tracks')} />
         </div>
       </div>
     </div>
