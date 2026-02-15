@@ -168,7 +168,7 @@ export async function compilePlugin(
 
     // Keep a neutral working directory. Real resolution happens inside our
     // virtual "tauri-fs" plugin (below).
-    absWorkingDir: '/',
+    absWorkingDir: entryDir,
 
     // Inline tsconfig so esbuild doesn't try to read tsconfig.json from disk.
     tsconfigRaw: { compilerOptions: {} },
@@ -190,13 +190,19 @@ export async function compilePlugin(
             // 1) The entry point itself.
             //    Tag it with our namespace to keep it in the virtual fs flow.
             if (args.kind === 'entry-point') {
-              return { path: args.path, namespace: 'tauri-fs' };
+              return {
+                path: toForwardSlashes(args.path),
+                namespace: 'tauri-fs',
+              };
             }
 
             // 2) Absolute paths like "/Users/…/index.ts" or "C:\Users\…\index.ts".
             //    Keep the absolute path as-is, just force the namespace.
             if (await isAbsolute(args.path)) {
-              return { path: args.path, namespace: 'tauri-fs' };
+              return {
+                path: toForwardSlashes(args.path),
+                namespace: 'tauri-fs',
+              };
             }
 
             // 3) Relative paths like "./foo" or "../bar".
@@ -223,7 +229,7 @@ export async function compilePlugin(
             { filter: /.*/, namespace: 'tauri-fs' },
             async (args) => {
               // Special-case the entry file: we already have its contents and loader.
-              if (args.path === entryPath) {
+              if (toForwardSlashes(args.path) === entryPath) {
                 const thisDir = entryDir;
                 return {
                   contents: entrySource,
