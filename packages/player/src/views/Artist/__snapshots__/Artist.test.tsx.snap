@@ -1772,7 +1772,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                     class="mt-5 flex flex-wrap gap-3"
                   >
                     <div
-                      class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                      class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-2 py-1"
                     >
                       <span
                         class="shrink-0"
@@ -1818,7 +1818,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                       </span>
                     </div>
                     <div
-                      class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                      class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-2 py-1"
                     >
                       <span
                         class="shrink-0"
@@ -1870,7 +1870,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                       </span>
                     </div>
                     <div
-                      class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                      class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-2 py-1"
                     >
                       <span
                         class="shrink-0"
@@ -1915,7 +1915,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                       </span>
                     </div>
                     <div
-                      class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                      class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-2 py-1"
                     >
                       <span
                         class="shrink-0"

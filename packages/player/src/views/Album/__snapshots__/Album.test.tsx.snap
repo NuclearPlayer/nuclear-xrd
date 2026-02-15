@@ -426,7 +426,7 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
                       class="flex flex-wrap gap-3"
                     >
                       <div
-                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-2 py-1"
                       >
                         <span
                           class="font-heading text-lg font-extrabold"
@@ -440,7 +440,7 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
                         </span>
                       </div>
                       <div
-                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-2 py-1"
                       >
                         <span
                           class="font-heading text-lg font-extrabold"
@@ -454,7 +454,7 @@ exports[`Album view > (Snapshot) renders the album view 1`] = `
                         </span>
                       </div>
                       <div
-                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-3 py-2"
+                        class="border-border bg-background shadow-shadow flex items-center gap-2 rounded-md border-2 px-2 py-1"
                       >
                         <span
                           class="font-heading text-lg font-extrabold"
