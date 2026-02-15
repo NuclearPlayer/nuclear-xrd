@@ -113,11 +113,16 @@
     "topTracks": "Топ треки",
     "onTour": "В туре",
     "notOnTour": "Не в туре",
+    "followers": "Followers",
+    "followings": "Following",
+    "playlists": "Playlists",
     "errors": {
       "failedToLoadDetails": "Не удалось загрузить информацию об артисте.",
       "failedToLoadAlbums": "Не удалось загрузить альбомы.",
       "failedToLoadPopularTracks": "Не удалось загрузить популярные треки.",
-      "failedToLoadSimilarArtists": "Не удалось загрузить похожих артистов."
+      "failedToLoadSimilarArtists": "Не удалось загрузить похожих артистов.",
+      "failedToLoadSocialStats": "Failed to load artist stats.",
+      "failedToLoadPlaylists": "Failed to load playlists."
     }
   },
   "album": {
