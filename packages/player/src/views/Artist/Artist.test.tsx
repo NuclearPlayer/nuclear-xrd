@@ -1,237 +1,144 @@
-import { screen } from '@testing-library/react';
-
 import { providersHost } from '../../services/providersHost';
 import { useFavoritesStore } from '../../stores/favoritesStore';
 import { MetadataProviderBuilder } from '../../test/builders/MetadataProviderBuilder';
+import {
+  BIO_BEATLES,
+  SEARCH_RESULT,
+  TOP_TRACKS_BEATLES,
+} from '../../test/fixtures/artists';
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 import { ArtistWrapper } from './Artist.test-wrapper';
 
+const resetStores = () => {
+  providersHost.clear();
+  resetInMemoryTauriStore();
+  useFavoritesStore.setState({
+    tracks: [],
+    albums: [],
+    artists: [],
+    loaded: true,
+  });
+};
+
 describe('Artist view', () => {
-  beforeEach(() => {
-    providersHost.clear();
-    resetInMemoryTauriStore();
-    useFavoritesStore.setState({
-      tracks: [],
-      albums: [],
-      artists: [],
-      loaded: true,
+  describe('with bio provider', () => {
+    beforeEach(() => {
+      resetStores();
+      providersHost.register(
+        MetadataProviderBuilder.bioStyleProvider().build(),
+      );
     });
-    const provider = new MetadataProviderBuilder()
-      .withSearchCapabilities(['unified', 'artists'])
-      .withArtistMetadataCapabilities([
-        'artistDetails',
-        'artistAlbums',
-        'artistTopTracks',
-        'artistRelatedArtists',
-      ])
-      .withAlbumMetadataCapabilities(['albumDetails'])
-      .withSearch(async () => ({
-        artists: [
-          {
-            name: 'Test Artist',
-            artwork: {
-              items: [
-                {
-                  url: 'https://img/avatar.jpg',
-                  purpose: 'avatar',
-                  width: 300,
-                },
-                { url: 'https://img/cover.jpg', purpose: 'cover', width: 1200 },
-              ],
-            },
-            source: {
-              provider: 'test-metadata-provider',
-              id: 'test-artist-id',
-            },
-          },
-        ],
-      }))
-      .withFetchArtistDetails(async () => ({
-        name: 'The Beatles',
-        onTour: true,
-        tags: ['rock', 'indie', 'brit-pop'],
-        artwork: {
-          items: [
-            { url: 'https://img/avatar.jpg', purpose: 'avatar', width: 300 },
-            { url: 'https://img/cover.jpg', purpose: 'cover', width: 1200 },
-          ],
-        },
-        source: { provider: 'test-metadata-provider', id: 'test-artist-id' },
-      }))
-      .withFetchArtistAlbums(async () => [
-        {
-          title: 'Hello World LP',
-          artists: [
-            {
-              name: 'Test Artist',
-              source: {
-                provider: 'test-metadata-provider',
-                id: 'test-artist-id',
-              },
-            },
-          ],
-          artwork: {
-            items: [
-              { url: 'https://img/debut.jpg', purpose: 'cover', width: 300 },
-            ],
-          },
-          source: { provider: 'test-metadata-provider', id: 'album-1' },
-        },
-      ])
-      .withFetchArtistTopTracks(async () => [
-        {
-          title: 'Smells Like Cheap Spirit',
-          artists: [
-            {
-              name: 'Test Artist',
-              source: {
-                provider: 'test-metadata-provider',
-                id: 'test-artist-id',
-              },
-            },
-          ],
-          artwork: {
-            items: [
-              { url: 'https://img/track.jpg', purpose: 'thumbnail', width: 64 },
-            ],
-          },
-          source: { provider: 'test-metadata-provider', id: 'track-1' },
-        },
-      ])
-      .withFetchArtistRelatedArtists(async () => [
-        {
-          name: 'John Lennon',
-          artwork: {
-            items: [
-              { url: 'https://img/similar1.jpg', purpose: 'avatar', width: 64 },
-            ],
-          },
-          source: { provider: 'test-metadata-provider', id: 'artist-2' },
-        },
-        {
-          name: 'Kurt Cobain',
-          artwork: {
-            items: [
-              { url: 'https://img/similar2.jpg', purpose: 'avatar', width: 64 },
-            ],
-          },
-          source: { provider: 'test-metadata-provider', id: 'artist-3' },
-        },
-      ])
-      .build();
 
-    providersHost.register(provider);
+    it('(Snapshot) renders the artist view', async () => {
+      const component = await ArtistWrapper.mount('The Beatles');
+      expect(component.asFragment()).toMatchSnapshot();
+    });
+
+    it('shows loading states for bio, top tracks, related artists, and albums', async () => {
+      providersHost.clear();
+      const delay = () => new Promise<never>(() => {});
+      providersHost.register(
+        MetadataProviderBuilder.bioStyleProvider()
+          .withId('bio-never-resolves')
+          .withFetchArtistBio(delay)
+          .withFetchArtistAlbums(delay)
+          .withFetchArtistTopTracks(delay)
+          .withFetchArtistRelatedArtists(delay)
+          .build(),
+      );
+
+      await ArtistWrapper.mountNoWait();
+
+      expect(await ArtistWrapper.bioHeader.findLoader()).toBeInTheDocument();
+      expect(await ArtistWrapper.albums.findLoader()).toBeInTheDocument();
+      expect(
+        await ArtistWrapper.popularTracks.findLoader(),
+      ).toBeInTheDocument();
+      expect(
+        await ArtistWrapper.similarArtists.findLoader(),
+      ).toBeInTheDocument();
+    });
+
+    it('adds artist to favorites when clicking the heart button', async () => {
+      vi.setSystemTime(new Date('2026-01-30T12:00:00.000Z'));
+      await ArtistWrapper.mount('The Beatles');
+      await ArtistWrapper.toggleFavorite();
+
+      expect(useFavoritesStore.getState().artists).toMatchSnapshot();
+    });
+
+    it('removes artist from favorites when clicking the heart button again', async () => {
+      await ArtistWrapper.mount('The Beatles');
+      await ArtistWrapper.toggleFavorite();
+      await ArtistWrapper.toggleFavorite();
+
+      expect(useFavoritesStore.getState().artists).toHaveLength(0);
+    });
+
+    it('only renders widgets for capabilities the provider declares', async () => {
+      providersHost.clear();
+      providersHost.register(
+        new MetadataProviderBuilder()
+          .withSearchCapabilities(['unified', 'artists'])
+          .withArtistMetadataCapabilities(['artistBio', 'artistTopTracks'])
+          .withSearch(async () => SEARCH_RESULT)
+          .withFetchArtistBio(async () => BIO_BEATLES)
+          .withFetchArtistTopTracks(async () => TOP_TRACKS_BEATLES)
+          .build(),
+      );
+
+      await ArtistWrapper.mount('The Beatles');
+
+      expect(ArtistWrapper.socialHeader.element).not.toBeInTheDocument();
+      expect(ArtistWrapper.albums.loader).not.toBeInTheDocument();
+      expect(ArtistWrapper.similarArtists.loader).not.toBeInTheDocument();
+      expect(ArtistWrapper.albums.cards).toHaveLength(0);
+    });
   });
 
-  it('(Snapshot) renders the artist view', async () => {
-    const component = await ArtistWrapper.mount('The Beatles');
-    expect(component.asFragment()).toMatchSnapshot();
-  });
+  describe('with social stats provider', () => {
+    beforeEach(() => {
+      resetStores();
+      providersHost.register(
+        MetadataProviderBuilder.socialStatsStyleProvider().build(),
+      );
+    });
 
-  it.skip('(Snapshot) renders artist view with details, popular tracks, similar artists, and albums', async () => {
-    await ArtistWrapper.mount('The Beatles');
-    const header = ArtistWrapper.getHeader('The Beatles');
-    expect(header).toBeInTheDocument();
+    it('(Snapshot) renders the artist view with social stats', async () => {
+      const component = await ArtistWrapper.mount('Deadmau5');
+      expect(component.asFragment()).toMatchSnapshot();
+    });
 
-    const tracksTable = ArtistWrapper.getTracksTable();
-    expect(tracksTable).toMatchSnapshot();
+    it('shows loading states for social stats, top tracks, playlists, and related artists', async () => {
+      providersHost.clear();
+      const delay = () => new Promise<never>(() => {});
+      providersHost.register(
+        MetadataProviderBuilder.socialStatsStyleProvider()
+          .withId('social-never-resolves')
+          .withFetchArtistSocialStats(delay)
+          .withFetchArtistTopTracks(delay)
+          .withFetchArtistPlaylists(delay)
+          .withFetchArtistRelatedArtists(delay)
+          .build(),
+      );
 
-    const similar = ArtistWrapper.getSimilarArtistItems();
-    expect(similar).toMatchSnapshot();
+      await ArtistWrapper.mountNoWait();
 
-    const albums = ArtistWrapper.getAlbums();
-    expect(albums).toMatchSnapshot();
-  });
+      expect(await ArtistWrapper.socialHeader.findLoader()).toBeInTheDocument();
+      expect(
+        await ArtistWrapper.popularTracks.findLoader(),
+      ).toBeInTheDocument();
+      expect(await ArtistWrapper.playlists.findLoader()).toBeInTheDocument();
+      expect(
+        await ArtistWrapper.similarArtists.findLoader(),
+      ).toBeInTheDocument();
+    });
 
-  it('shows loading states for details, top tracks, related artists, and albums', async () => {
-    providersHost.clear();
-    const delay = () => {
-      return new Promise<never>(() => {});
-    };
-    const provider = new MetadataProviderBuilder()
-      .withId('query-cache-busted')
-      .withName('The provider that never resolves')
-      .withSearchCapabilities(['unified', 'artists'])
-      .withArtistMetadataCapabilities([
-        'artistDetails',
-        'artistAlbums',
-        'artistTopTracks',
-        'artistRelatedArtists',
-      ])
-      .withSearch(async () => ({
-        artists: [
-          {
-            name: 'Test Artist',
-            source: {
-              provider: 'test-metadata-provider',
-              id: 'test-artist-id',
-            },
-          },
-        ],
-      }))
-      .withFetchArtistDetails(delay)
-      .withFetchArtistAlbums(delay)
-      .withFetchArtistTopTracks(delay)
-      .withFetchArtistRelatedArtists(delay)
-      .build();
-    providersHost.register(provider);
+    it('does not render bio header or albums grid', async () => {
+      await ArtistWrapper.mount('Deadmau5');
 
-    await ArtistWrapper.mountNoWait();
-
-    expect(
-      await screen.findByTestId('artist-header-loader'),
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByTestId('artist-albums-loader'),
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByTestId('popular-tracks-loader'),
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByTestId('similar-artists-loader'),
-    ).toBeInTheDocument();
-  });
-
-  it('adds artist to favorites when clicking the heart button', async () => {
-    vi.setSystemTime(new Date('2026-01-30T12:00:00.000Z'));
-    await ArtistWrapper.mount('The Beatles');
-    await ArtistWrapper.toggleFavorite();
-
-    expect(useFavoritesStore.getState().artists).toMatchInlineSnapshot(`
-      [
-        {
-          "addedAtIso": "2026-01-30T12:00:00.000Z",
-          "ref": {
-            "artwork": {
-              "items": [
-                {
-                  "purpose": "avatar",
-                  "url": "https://img/avatar.jpg",
-                  "width": 300,
-                },
-                {
-                  "purpose": "cover",
-                  "url": "https://img/cover.jpg",
-                  "width": 1200,
-                },
-              ],
-            },
-            "name": "The Beatles",
-            "source": {
-              "id": "test-artist-id",
-              "provider": "test-metadata-provider",
-            },
-          },
-        },
-      ]
-    `);
-  });
-
-  it('removes artist from favorites when clicking the heart button again', async () => {
-    await ArtistWrapper.mount('The Beatles');
-    await ArtistWrapper.toggleFavorite();
-    await ArtistWrapper.toggleFavorite();
-
-    expect(useFavoritesStore.getState().artists).toHaveLength(0);
+      expect(ArtistWrapper.bioHeader.loader).not.toBeInTheDocument();
+      expect(ArtistWrapper.albums.loader).not.toBeInTheDocument();
+    });
   });
 });

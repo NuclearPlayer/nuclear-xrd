@@ -1,7 +1,52 @@
 import { MetadataProvider } from '@nuclearplayer/plugin-sdk';
 
+import {
+  ALBUMS_BEATLES,
+  BIO_BEATLES,
+  PLAYLISTS_DEADMAU5,
+  RELATED_ARTISTS_BEATLES,
+  RELATED_ARTISTS_DEADMAU5,
+  SEARCH_RESULT,
+  SOCIAL_STATS_DEADMAU5,
+  TOP_TRACKS_BEATLES,
+  TOP_TRACKS_DEADMAU5,
+} from '../fixtures/artists';
+
 export class MetadataProviderBuilder {
   private provider: MetadataProvider;
+
+  static bioStyleProvider(): MetadataProviderBuilder {
+    return new MetadataProviderBuilder()
+      .withSearchCapabilities(['unified', 'artists'])
+      .withArtistMetadataCapabilities([
+        'artistBio',
+        'artistAlbums',
+        'artistTopTracks',
+        'artistRelatedArtists',
+      ])
+      .withAlbumMetadataCapabilities(['albumDetails'])
+      .withSearch(async () => SEARCH_RESULT)
+      .withFetchArtistBio(async () => BIO_BEATLES)
+      .withFetchArtistAlbums(async () => ALBUMS_BEATLES)
+      .withFetchArtistTopTracks(async () => TOP_TRACKS_BEATLES)
+      .withFetchArtistRelatedArtists(async () => RELATED_ARTISTS_BEATLES);
+  }
+
+  static socialStatsStyleProvider(): MetadataProviderBuilder {
+    return new MetadataProviderBuilder()
+      .withSearchCapabilities(['unified', 'artists'])
+      .withArtistMetadataCapabilities([
+        'artistSocialStats',
+        'artistTopTracks',
+        'artistPlaylists',
+        'artistRelatedArtists',
+      ])
+      .withSearch(async () => SEARCH_RESULT)
+      .withFetchArtistSocialStats(async () => SOCIAL_STATS_DEADMAU5)
+      .withFetchArtistTopTracks(async () => TOP_TRACKS_DEADMAU5)
+      .withFetchArtistPlaylists(async () => PLAYLISTS_DEADMAU5)
+      .withFetchArtistRelatedArtists(async () => RELATED_ARTISTS_DEADMAU5);
+  }
 
   constructor() {
     this.provider = {
@@ -74,10 +119,15 @@ export class MetadataProviderBuilder {
     return this;
   }
 
-  withFetchArtistDetails(
-    fetchArtistDetails: MetadataProvider['fetchArtistDetails'],
+  withFetchArtistBio(fetchArtistBio: MetadataProvider['fetchArtistBio']): this {
+    this.provider.fetchArtistBio = fetchArtistBio;
+    return this;
+  }
+
+  withFetchArtistSocialStats(
+    fetchArtistSocialStats: MetadataProvider['fetchArtistSocialStats'],
   ): this {
-    this.provider.fetchArtistDetails = fetchArtistDetails;
+    this.provider.fetchArtistSocialStats = fetchArtistSocialStats;
     return this;
   }
 
@@ -99,6 +149,13 @@ export class MetadataProviderBuilder {
     fetchArtistRelatedArtists: MetadataProvider['fetchArtistRelatedArtists'],
   ): this {
     this.provider.fetchArtistRelatedArtists = fetchArtistRelatedArtists;
+    return this;
+  }
+
+  withFetchArtistPlaylists(
+    fetchArtistPlaylists: MetadataProvider['fetchArtistPlaylists'],
+  ): this {
+    this.provider.fetchArtistPlaylists = fetchArtistPlaylists;
     return this;
   }
 

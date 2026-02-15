@@ -81,13 +81,25 @@ export type Album = {
   source: ProviderRef;
 };
 
-export type Artist = {
+export type ArtistBio = {
   name: string;
   disambiguation?: string;
   bio?: string;
   onTour?: boolean;
   artwork?: ArtworkSet;
   tags?: string[];
+  source: ProviderRef;
+};
+
+export type ArtistSocialStats = {
+  name: string;
+  artwork?: ArtworkSet;
+  city?: string;
+  country?: string;
+  followersCount?: number;
+  followingsCount?: number;
+  trackCount?: number;
+  playlistCount?: number;
   source: ProviderRef;
 };
 

@@ -1,8 +1,9 @@
 import type {
   Album,
   AlbumRef,
-  Artist,
+  ArtistBio,
   ArtistRef,
+  ArtistSocialStats,
   PlaylistRef,
   SearchCategory,
   SearchParams,
@@ -16,9 +17,11 @@ import type { ProviderDescriptor } from './providers';
 export type SearchCapability = SearchCategory | 'unified';
 
 export type ArtistMetadataCapability =
-  | 'artistDetails'
-  | 'artistAlbums'
+  | 'artistBio'
+  | 'artistSocialStats'
   | 'artistTopTracks'
+  | 'artistAlbums'
+  | 'artistPlaylists'
   | 'artistRelatedArtists';
 
 export type AlbumMetadataCapability = 'albumDetails';
@@ -35,10 +38,12 @@ export type MetadataProvider = ProviderDescriptor<'metadata'> & {
     params: Omit<SearchParams, 'types'>,
   ) => Promise<PlaylistRef[]>;
 
-  fetchArtistDetails?: (query: string) => Promise<Artist>;
+  fetchArtistBio?: (artistId: string) => Promise<ArtistBio>;
+  fetchArtistSocialStats?: (artistId: string) => Promise<ArtistSocialStats>;
   fetchAlbumDetails?: (query: string) => Promise<Album>;
-  fetchArtistAlbums?: (artistId: string) => Promise<AlbumRef[]>;
   fetchArtistTopTracks?: (artistId: string) => Promise<TrackRef[]>;
+  fetchArtistAlbums?: (artistId: string) => Promise<AlbumRef[]>;
+  fetchArtistPlaylists?: (artistId: string) => Promise<PlaylistRef[]>;
   fetchArtistRelatedArtists?: (artistId: string) => Promise<ArtistRef[]>;
 };
 

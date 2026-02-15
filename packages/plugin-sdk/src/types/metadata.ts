@@ -1,8 +1,10 @@
 import type {
   Album,
   AlbumRef,
-  Artist,
+  ArtistBio,
   ArtistRef,
+  ArtistSocialStats,
+  PlaylistRef,
   SearchParams,
   SearchResults,
   TrackRef,
@@ -10,10 +12,11 @@ import type {
 
 export type MetadataHost = {
   search: (params: SearchParams, providerId?: string) => Promise<SearchResults>;
-  fetchArtistDetails: (
+  fetchArtistBio: (artistId: string, providerId?: string) => Promise<ArtistBio>;
+  fetchArtistSocialStats: (
     artistId: string,
     providerId?: string,
-  ) => Promise<Artist>;
+  ) => Promise<ArtistSocialStats>;
   fetchArtistAlbums: (
     artistId: string,
     providerId?: string,
@@ -22,6 +25,10 @@ export type MetadataHost = {
     artistId: string,
     providerId?: string,
   ) => Promise<TrackRef[]>;
+  fetchArtistPlaylists: (
+    artistId: string,
+    providerId?: string,
+  ) => Promise<PlaylistRef[]>;
   fetchArtistRelatedArtists: (
     artistId: string,
     providerId?: string,

@@ -1,8 +1,10 @@
 import type {
   Album,
   AlbumRef,
-  Artist,
+  ArtistBio,
   ArtistRef,
+  ArtistSocialStats,
+  PlaylistRef,
   SearchCategory,
   SearchParams,
   SearchResults,
@@ -10,6 +12,7 @@ import type {
 } from '@nuclearplayer/model';
 import {
   MissingCapabilityError,
+  type ArtistMetadataCapability,
   type MetadataHost,
   type MetadataProvider,
 } from '@nuclearplayer/plugin-sdk';
@@ -104,6 +107,22 @@ export const createMetadataHost = (): MetadataHost => {
     return providers[0] as MetadataProvider | undefined;
   };
 
+  const withArtistCapability =
+    <TResult>(
+      capability: ArtistMetadataCapability,
+      method: keyof MetadataProvider,
+    ) =>
+    async (entityId: string, providerId?: string): Promise<TResult> => {
+      const provider = getProvider(providerId);
+      if (!provider) {
+        throw new Error('No metadata provider available');
+      }
+      if (!provider.artistMetadataCapabilities?.includes(capability)) {
+        throw new MissingCapabilityError(capability);
+      }
+      return (provider[method] as (id: string) => Promise<TResult>)!(entityId);
+    };
+
   return {
     search: async (
       params: SearchParams,
@@ -116,63 +135,30 @@ export const createMetadataHost = (): MetadataHost => {
       return executeMetadataSearch(provider, params);
     },
 
-    fetchArtistDetails: async (
-      artistId: string,
-      providerId?: string,
-    ): Promise<Artist> => {
-      const provider = getProvider(providerId);
-      if (!provider) {
-        throw new Error('No metadata provider available');
-      }
-      if (!provider.artistMetadataCapabilities?.includes('artistDetails')) {
-        throw new MissingCapabilityError('artistDetails');
-      }
-      return provider.fetchArtistDetails!(artistId)!;
-    },
-
-    fetchArtistAlbums: async (
-      artistId: string,
-      providerId?: string,
-    ): Promise<AlbumRef[]> => {
-      const provider = getProvider(providerId);
-      if (!provider) {
-        throw new Error('No metadata provider available');
-      }
-      if (!provider.artistMetadataCapabilities?.includes('artistAlbums')) {
-        throw new MissingCapabilityError('artistAlbums');
-      }
-      return provider.fetchArtistAlbums!(artistId)!;
-    },
-
-    fetchArtistTopTracks: async (
-      artistId: string,
-      providerId?: string,
-    ): Promise<TrackRef[]> => {
-      const provider = getProvider(providerId);
-      if (!provider) {
-        throw new Error('No metadata provider available');
-      }
-      if (!provider.artistMetadataCapabilities?.includes('artistTopTracks')) {
-        throw new MissingCapabilityError('artistTopTracks');
-      }
-      return provider.fetchArtistTopTracks!(artistId)!;
-    },
-
-    fetchArtistRelatedArtists: async (
-      artistId: string,
-      providerId?: string,
-    ): Promise<ArtistRef[]> => {
-      const provider = getProvider(providerId);
-      if (!provider) {
-        throw new Error('No metadata provider available');
-      }
-      if (
-        !provider.artistMetadataCapabilities?.includes('artistRelatedArtists')
-      ) {
-        throw new MissingCapabilityError('artistRelatedArtists');
-      }
-      return provider.fetchArtistRelatedArtists!(artistId)!;
-    },
+    fetchArtistBio: withArtistCapability<ArtistBio>(
+      'artistBio',
+      'fetchArtistBio',
+    ),
+    fetchArtistSocialStats: withArtistCapability<ArtistSocialStats>(
+      'artistSocialStats',
+      'fetchArtistSocialStats',
+    ),
+    fetchArtistAlbums: withArtistCapability<AlbumRef[]>(
+      'artistAlbums',
+      'fetchArtistAlbums',
+    ),
+    fetchArtistTopTracks: withArtistCapability<TrackRef[]>(
+      'artistTopTracks',
+      'fetchArtistTopTracks',
+    ),
+    fetchArtistPlaylists: withArtistCapability<PlaylistRef[]>(
+      'artistPlaylists',
+      'fetchArtistPlaylists',
+    ),
+    fetchArtistRelatedArtists: withArtistCapability<ArtistRef[]>(
+      'artistRelatedArtists',
+      'fetchArtistRelatedArtists',
+    ),
 
     fetchAlbumDetails: async (
       albumId: string,

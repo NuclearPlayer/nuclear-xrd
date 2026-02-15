@@ -153,9 +153,14 @@ describe('metadataHost', () => {
   describe('artist metadata', () => {
     it.each([
       {
-        method: 'fetchArtistDetails',
-        mockMethod: 'withFetchArtistDetails',
-        capability: 'artistDetails',
+        method: 'fetchArtistBio',
+        mockMethod: 'withFetchArtistBio',
+        capability: 'artistBio',
+      },
+      {
+        method: 'fetchArtistSocialStats',
+        mockMethod: 'withFetchArtistSocialStats',
+        capability: 'artistSocialStats',
       },
       {
         method: 'fetchArtistAlbums',
@@ -166,6 +171,11 @@ describe('metadataHost', () => {
         method: 'fetchArtistTopTracks',
         mockMethod: 'withFetchArtistTopTracks',
         capability: 'artistTopTracks',
+      },
+      {
+        method: 'fetchArtistPlaylists',
+        mockMethod: 'withFetchArtistPlaylists',
+        capability: 'artistPlaylists',
       },
       {
         method: 'fetchArtistRelatedArtists',
@@ -199,9 +209,11 @@ describe('metadataHost', () => {
     });
 
     it.each([
-      { method: 'fetchArtistDetails', capability: 'artistDetails' },
+      { method: 'fetchArtistBio', capability: 'artistBio' },
+      { method: 'fetchArtistSocialStats', capability: 'artistSocialStats' },
       { method: 'fetchArtistAlbums', capability: 'artistAlbums' },
       { method: 'fetchArtistTopTracks', capability: 'artistTopTracks' },
+      { method: 'fetchArtistPlaylists', capability: 'artistPlaylists' },
       {
         method: 'fetchArtistRelatedArtists',
         capability: 'artistRelatedArtists',

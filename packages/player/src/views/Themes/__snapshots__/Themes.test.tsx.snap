@@ -706,6 +706,41 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                               />
                             </div>
                           </button>
+                          <button
+                            class="cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50 text-foreground h-auto bg-background-secondary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y flex flex-col justify-between gap-2 rounded-md border-2 px-4 py-2 transition hover:shadow-none"
+                            data-headlessui-state=""
+                            type="button"
+                          >
+                            <span
+                              class="text-foreground text-left text-base font-bold"
+                            >
+                              Arctic Moss
+                            </span>
+                            <div
+                              class="block"
+                            >
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.7 0.12 175);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.97 0.008 200);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.7 0.12 175);"
+                              />
+                              <span
+                                aria-hidden="true"
+                                class="ring-border inline-block size-5 rounded-full ring-2"
+                                style="background-color: oklch(0.22 0.015 200);"
+                              />
+                            </div>
+                          </button>
                         </div>
                       </div>
                     </section>
