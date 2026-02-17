@@ -22,16 +22,11 @@ export * from './types/queue';
 export * from './types/streaming';
 export * from './types/metadata';
 export * from './types/favorites';
+export * from './types/dashboard';
 export type {
   ProvidersHost,
   ProviderKind,
   ProviderDescriptor,
 } from './types/providers';
-export type {
-  AttributedResult,
-  DashboardCapability,
-  DashboardHost,
-  DashboardProvider,
-} from './types/dashboard';
 export { useSetting } from './react/useSetting';
 export * from '@nuclearplayer/model';
