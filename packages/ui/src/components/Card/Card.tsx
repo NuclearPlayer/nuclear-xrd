@@ -56,7 +56,10 @@ export const Card: FC<CardProps> = ({
     {(title || subtitle) && (
       <div className="min-w-0">
         {title && (
-          <div className="text-foreground truncate text-sm font-bold">
+          <div
+            data-testid="card-title"
+            className="text-foreground truncate text-sm font-bold"
+          >
             {title}
           </div>
         )}

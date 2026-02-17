@@ -1,13 +1,12 @@
 import isEmpty from 'lodash-es/isEmpty';
 import { ChevronLeft, ChevronRight, Filter } from 'lucide-react';
-import { FC, useMemo, useRef, useState } from 'react';
+import { FC } from 'react';
 
 import { cn } from '../../utils';
 import { Button } from '../Button';
 import { Card } from '../Card';
 import { Input } from '../Input';
-
-const SCROLL_INCREMENT = 176;
+import { useCardsRow } from './useCardsRow';
 
 export type CardsRowItem = {
   id: string;
@@ -37,36 +36,15 @@ export const CardsRow: FC<CardsRowProps> = ({
   className,
   'data-testid': testId = 'cards-row',
 }) => {
-  const [filterText, setFilterText] = useState('');
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const filteredItems = useMemo(() => {
-    if (isEmpty(filterText.trim())) {
-      return items;
-    }
-    const lowerFilter = filterText.toLowerCase();
-    return items.filter((item) =>
-      item.title.toLowerCase().includes(lowerFilter),
-    );
-  }, [items, filterText]);
-
-  const handleScrollLeft = () => {
-    scrollContainerRef.current?.scrollBy({
-      left: -SCROLL_INCREMENT,
-      behavior: 'smooth',
-    });
-  };
-
-  const handleScrollRight = () => {
-    scrollContainerRef.current?.scrollBy({
-      left: SCROLL_INCREMENT,
-      behavior: 'smooth',
-    });
-  };
-
-  const handleClearFilter = () => {
-    setFilterText('');
-  };
+  const {
+    filterText,
+    setFilterText,
+    clearFilter,
+    filteredItems,
+    scrollContainerRef,
+    scrollLeft,
+    scrollRight,
+  } = useCardsRow(items);
 
   return (
     <div data-testid={testId} className={cn('flex flex-col gap-3', className)}>
@@ -85,7 +63,7 @@ export const CardsRow: FC<CardsRowProps> = ({
                 data-testid="cards-row-clear-filter"
                 type="button"
                 className="text-foreground cursor-pointer"
-                onClick={handleClearFilter}
+                onClick={clearFilter}
               >
                 <Filter size={14} />
               </button>
@@ -95,7 +73,7 @@ export const CardsRow: FC<CardsRowProps> = ({
             <Button
               data-testid="cards-row-scroll-left"
               size="icon"
-              onClick={handleScrollLeft}
+              onClick={scrollLeft}
               variant="noShadow"
             >
               <ChevronLeft size={16} />
@@ -103,7 +81,7 @@ export const CardsRow: FC<CardsRowProps> = ({
             <Button
               data-testid="cards-row-scroll-right"
               size="icon"
-              onClick={handleScrollRight}
+              onClick={scrollRight}
               variant="noShadow"
             >
               <ChevronRight size={16} />

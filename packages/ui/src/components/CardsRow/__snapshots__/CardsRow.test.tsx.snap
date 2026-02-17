@@ -60,9 +60,11 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
           </div>
         </div>
       </div>
-      <div>
+      <div
+        class="flex items-center gap-2"
+      >
         <button
-          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-8 justify-center"
+          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-10 justify-center"
           data-headlessui-state=""
           data-testid="cards-row-scroll-left"
           type="button"
@@ -85,10 +87,8 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
             />
           </svg>
         </button>
-      </div>
-      <div>
         <button
-          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-8 justify-center"
+          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border border-2 size-10 justify-center"
           data-headlessui-state=""
           data-testid="cards-row-scroll-right"
           type="button"
@@ -115,17 +115,17 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
     </div>
   </div>
   <div
-    class="scrollbar-hide flex gap-2 overflow-x-auto overflow-y-visible pb-2 [scroll-behavior:smooth]"
+    class="scrollbar-hide flex gap-2 overflow-x-auto overflow-y-visible [scroll-behavior:smooth] pb-2"
     style="scrollbar-width: none;"
   >
     <button
-      class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left flex-shrink-0"
+      class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left flex-shrink-0"
       data-headlessui-state=""
       data-testid="card"
       type="button"
     >
       <div
-        class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+        class="border-border text-foreground flex h-full rounded-md border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
       >
         <div
           class="overflow-hidden absolute inset-0"
@@ -142,7 +142,7 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="lucide lucide-cassette-tape animate-pulse opacity-70"
+              class="lucide lucide-cassette-tape animate-pulse opacity-20"
               fill="none"
               height="96"
               stroke="currentColor"
@@ -185,6 +185,7 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
       >
         <div
           class="text-foreground truncate text-sm font-bold"
+          data-testid="card-title"
         >
           Midnight Drive
         </div>
@@ -196,13 +197,13 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
       </div>
     </button>
     <button
-      class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left flex-shrink-0"
+      class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left flex-shrink-0"
       data-headlessui-state=""
       data-testid="card"
       type="button"
     >
       <div
-        class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+        class="border-border text-foreground flex h-full rounded-md border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
       >
         <div
           class="overflow-hidden absolute inset-0"
@@ -219,7 +220,7 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="lucide lucide-cassette-tape animate-pulse opacity-70"
+              class="lucide lucide-cassette-tape animate-pulse opacity-20"
               fill="none"
               height="96"
               stroke="currentColor"
@@ -262,6 +263,7 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
       >
         <div
           class="text-foreground truncate text-sm font-bold"
+          data-testid="card-title"
         >
           Northern Lights
         </div>
@@ -273,13 +275,13 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
       </div>
     </button>
     <button
-      class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left flex-shrink-0"
+      class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left flex-shrink-0"
       data-headlessui-state=""
       data-testid="card"
       type="button"
     >
       <div
-        class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+        class="border-border text-foreground flex h-full rounded-md border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
       >
         <div
           class="overflow-hidden absolute inset-0"
@@ -296,7 +298,7 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="lucide lucide-cassette-tape animate-pulse opacity-70"
+              class="lucide lucide-cassette-tape animate-pulse opacity-20"
               fill="none"
               height="96"
               stroke="currentColor"
@@ -339,6 +341,7 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
       >
         <div
           class="text-foreground truncate text-sm font-bold"
+          data-testid="card-title"
         >
           Echoes of Silence
         </div>
