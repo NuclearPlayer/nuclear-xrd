@@ -193,6 +193,12 @@ Tests use Vitest + React Testing Library. Globals enabled (`describe`, `it`, `ex
 - When semantic queries aren't possible, add `data-testid` attributes. And don't be shy with them
 - Don't use defensive measures like try-catch or conditional checks in tests. The test will fail anyway if our assumptions are wrong.
 
+### Test-first for views
+
+When building a new view, write the test wrapper and tests **before** any implementation code. The tests describe what the user sees and does — they define the contract. Then implement to make them pass.
+
+Don't start with unit tests for internal utilities (grouping functions, registries, etc.). Start from the outside: what does the user see on the page? The internal structure is an implementation detail that falls out of making the tests green.
+
 ### Test Wrappers for Views
 
 Player views and some components use a `*.test-wrapper.tsx` file that creates a domain-specific abstraction layer over the DOM. This lets tests read like user stories, and if the implementation changes, only the wrapper needs updating.
@@ -205,6 +211,34 @@ Player views and some components use a `*.test-wrapper.tsx` file that creates a 
 - The wrapper is the only place that knows about test IDs, roles, and DOM structure
 - Don't use queryX methods in the wrapper - always get or find as appropriate.
 - Never use fireEvent. Always use userEvent for interactions.
+
+### Test fixtures
+
+To populate the app with testing data, use fixtures. See `packages/player/src/test/fixtures` for examples.
+
+### Wrapper fixtures
+
+Test wrappers can expose a `fixtures` object with factory methods that return pre-configured builders for common test scenarios. This keeps test setup readable and co-located with the wrapper, while the raw fixture data itself lives in `packages/player/src/test/fixtures/`.
+
+```tsx
+// Dashboard.test-wrapper.tsx
+import { TOP_TRACKS_RADIOHEAD } from '../../test/fixtures/dashboard';
+
+export const DashboardWrapper = {
+  // ... mount, getters, etc.
+
+  fixtures: {
+    topTracksProvider() {
+      return new DashboardProviderBuilder()
+        .withCapabilities('topTracks')
+        .withFetchTopTracks(async () => TOP_TRACKS_RADIOHEAD);
+    },
+  },
+};
+
+// Dashboard.test.tsx
+DashboardWrapper.seedProvider(DashboardWrapper.fixtures.topTracksProvider());
+```
 
 ### The builder pattern for tests
 
