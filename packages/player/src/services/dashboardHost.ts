@@ -6,6 +6,7 @@ import {
   type DashboardProvider,
 } from '@nuclearplayer/plugin-sdk';
 
+import { reportError } from '../utils/logging';
 import { providersHost } from './providersHost';
 
 type FetchMethod = keyof {
@@ -62,32 +63,33 @@ const createAttributedFetcher =
       provider.capabilities.includes(capability),
     );
 
-    for (const provider of providers) {
-      const fetchFn = provider[method];
-      if (!fetchFn) {
-        throw new MissingCapabilityError(capability, provider.name);
-      }
-    }
-
-    const results = await Promise.allSettled(
-      providers.map(async (provider) => {
-        const fetchFn = provider[method] as () => Promise<T[]>;
-        const items = await fetchFn();
-        return {
-          providerId: provider.id,
-          metadataProviderId: provider.metadataProviderId,
-          providerName: provider.name,
-          items,
-        } satisfies AttributedResult<T>;
-      }),
-    );
-
-    return results
-      .filter(
-        (result): result is PromiseFulfilledResult<AttributedResult<T>> =>
-          result.status === 'fulfilled' && result.value !== null,
+    return (
+      await Promise.all(
+        providers.map(async (provider): Promise<AttributedResult<T> | null> => {
+          try {
+            const fetchFn = provider[method] as
+              | (() => Promise<T[]>)
+              | undefined;
+            if (!fetchFn) {
+              throw new MissingCapabilityError(capability, provider.name);
+            }
+            const items = await fetchFn();
+            return {
+              providerId: provider.id,
+              metadataProviderId: provider.metadataProviderId,
+              providerName: provider.name,
+              items,
+            };
+          } catch (error) {
+            await reportError('dashboard', {
+              userMessage: 'A dashboard provider failed to load data',
+              error,
+            });
+            return null;
+          }
+        }),
       )
-      .map((result) => result.value);
+    ).filter((result): result is AttributedResult<T> => result !== null);
   };
 
 export const createDashboardHost = (): DashboardHost => ({

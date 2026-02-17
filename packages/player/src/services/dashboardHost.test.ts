@@ -1,8 +1,13 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { DashboardProviderBuilder } from '../test/builders/DashboardProviderBuilder';
+import { reportError } from '../utils/logging';
 import { createDashboardHost } from './dashboardHost';
 import { providersHost } from './providersHost';
+
+vi.mock('../utils/logging', () => ({
+  reportError: vi.fn(),
+}));
 
 describe('dashboardHost', () => {
   afterEach(() => {
@@ -143,21 +148,51 @@ describe('dashboardHost', () => {
     expect(results).toEqual([]);
   });
 
-  it('throws when a provider declares a capability but lacks the fetch method', async () => {
-    const provider = new DashboardProviderBuilder()
+  it('reports an error and skips a provider that declares a capability but lacks the fetch method', async () => {
+    const brokenProvider = new DashboardProviderBuilder()
       .withId('broken-provider')
       .withName('Broken')
       .withMetadataProviderId('broken-metadata')
       .withCapabilities('topTracks')
       .build();
 
-    providersHost.register(provider);
+    const workingTracks = [
+      {
+        title: 'Track 1',
+        artists: [],
+        source: { id: '1', provider: 'working' },
+      },
+    ];
+    const workingProvider = new DashboardProviderBuilder()
+      .withId('working-provider')
+      .withName('Working')
+      .withMetadataProviderId('working-metadata')
+      .withCapabilities('topTracks')
+      .withFetchTopTracks(vi.fn().mockResolvedValue(workingTracks))
+      .build();
+
+    providersHost.register(brokenProvider);
+    providersHost.register(workingProvider);
 
     const host = createDashboardHost();
+    const results = await host.fetchTopTracks();
 
-    await expect(host.fetchTopTracks()).rejects.toThrow(
-      'Provider "Broken" declared capability "topTracks" but does not implement it',
-    );
+    expect(reportError).toHaveBeenCalledWith('dashboard', {
+      userMessage: 'A dashboard provider failed to load data',
+      error: expect.objectContaining({
+        message: expect.stringContaining(
+          'Provider "Broken" declared capability "topTracks"',
+        ),
+      }),
+    });
+    expect(results).toEqual([
+      {
+        providerId: 'working-provider',
+        metadataProviderId: 'working-metadata',
+        providerName: 'Working',
+        items: workingTracks,
+      },
+    ]);
   });
 
   it('returns empty array when targeted provider lacks the requested capability', async () => {
@@ -211,6 +246,10 @@ describe('dashboardHost', () => {
     const results = await host.fetchTopTracks();
 
     expect(failingFetch).toHaveBeenCalled();
+    expect(reportError).toHaveBeenCalledWith('dashboard', {
+      userMessage: 'A dashboard provider failed to load data',
+      error: expect.objectContaining({ message: 'Network error' }),
+    });
     expect(results).toEqual([
       {
         providerId: 'working-provider',
