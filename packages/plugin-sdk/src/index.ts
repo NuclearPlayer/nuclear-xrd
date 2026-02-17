@@ -27,5 +27,11 @@ export type {
   ProviderKind,
   ProviderDescriptor,
 } from './types/providers';
+export type {
+  AttributedResult,
+  DashboardCapability,
+  DashboardHost,
+  DashboardProvider,
+} from './types/dashboard';
 export { useSetting } from './react/useSetting';
 export * from '@nuclearplayer/model';

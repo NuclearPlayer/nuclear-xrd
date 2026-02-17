@@ -1,4 +1,9 @@
-export type ProviderKind = 'metadata' | 'streaming' | 'lyrics' | (string & {});
+export type ProviderKind =
+  | 'metadata'
+  | 'streaming'
+  | 'lyrics'
+  | 'dashboard'
+  | (string & {});
 
 export type ProviderDescriptor<K extends ProviderKind = ProviderKind> = {
   id: string;
