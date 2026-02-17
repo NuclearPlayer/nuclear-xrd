@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import type { NuclearPlugin, PluginMetadata } from '@nuclearplayer/plugin-sdk';
 import { NuclearPluginAPI } from '@nuclearplayer/plugin-sdk';
 
+import { dashboardHost } from '../services/dashboardHost';
 import { favoritesHost } from '../services/favoritesHost';
 import { httpHost } from '../services/httpHost';
 import { Logger } from '../services/logger';
@@ -155,6 +156,7 @@ export const usePluginStore = create<PluginStore>((set, get) => ({
         httpHost,
         ytdlpHost,
         favoritesHost,
+        dashboardHost,
         loggerHost: createLoggerHost(id),
       });
 
