@@ -144,7 +144,13 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "content": "Dashboard view"
+    "empty-state": "No dashboard data available",
+    "empty-state-description": "Enable a plugin that provides dashboard content.",
+    "top-tracks": "Top Tracks",
+    "top-artists": "Top Artists",
+    "top-albums": "Top Albums",
+    "editorial-playlists": "Top Playlists",
+    "new-releases": "New Releases"
   },
   "plugins": {
     "title": "Plugins",

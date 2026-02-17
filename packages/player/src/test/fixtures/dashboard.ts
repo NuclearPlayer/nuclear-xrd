@@ -2,17 +2,17 @@ import type {
   AlbumRef,
   ArtistRef,
   PlaylistRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 
 const TEST_PROVIDER_ID = 'test-dashboard-provider';
 
 const testSource = (id: string) => ({ provider: TEST_PROVIDER_ID, id });
 
-export const TOP_TRACKS_RADIOHEAD: TrackRef[] = [
+export const TOP_TRACKS_RADIOHEAD: Track[] = [
   {
     title: 'Everything In Its Right Place',
-    artists: [{ name: 'Radiohead', source: testSource('artist-1') }],
+    artists: [{ name: 'Radiohead', roles: [] }],
     artwork: {
       items: [
         {
@@ -26,7 +26,7 @@ export const TOP_TRACKS_RADIOHEAD: TrackRef[] = [
   },
   {
     title: 'Idioteque',
-    artists: [{ name: 'Radiohead', source: testSource('artist-1') }],
+    artists: [{ name: 'Radiohead', roles: [] }],
     artwork: {
       items: [
         {

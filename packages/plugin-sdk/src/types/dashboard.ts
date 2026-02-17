@@ -2,7 +2,7 @@ import type {
   AlbumRef,
   ArtistRef,
   PlaylistRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 
 import type { ProviderDescriptor } from './providers';
@@ -18,7 +18,7 @@ export type DashboardProvider = ProviderDescriptor<'dashboard'> & {
   metadataProviderId: string;
   capabilities: DashboardCapability[];
 
-  fetchTopTracks?: () => Promise<TrackRef[]>;
+  fetchTopTracks?: () => Promise<Track[]>;
   fetchTopArtists?: () => Promise<ArtistRef[]>;
   fetchTopAlbums?: () => Promise<AlbumRef[]>;
   fetchEditorialPlaylists?: () => Promise<PlaylistRef[]>;
@@ -33,9 +33,7 @@ export type AttributedResult<T> = {
 };
 
 export type DashboardHost = {
-  fetchTopTracks: (
-    providerId?: string,
-  ) => Promise<AttributedResult<TrackRef>[]>;
+  fetchTopTracks: (providerId?: string) => Promise<AttributedResult<Track>[]>;
   fetchTopArtists: (
     providerId?: string,
   ) => Promise<AttributedResult<ArtistRef>[]>;

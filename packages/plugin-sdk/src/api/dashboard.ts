@@ -2,7 +2,7 @@ import type {
   AlbumRef,
   ArtistRef,
   PlaylistRef,
-  TrackRef,
+  Track,
 } from '@nuclearplayer/model';
 
 import type { AttributedResult, DashboardHost } from '../types/dashboard';
@@ -22,7 +22,7 @@ export class DashboardAPI {
     return fn(host);
   }
 
-  fetchTopTracks(providerId?: string): Promise<AttributedResult<TrackRef>[]> {
+  fetchTopTracks(providerId?: string): Promise<AttributedResult<Track>[]> {
     return this.#withHost((host) => host.fetchTopTracks(providerId));
   }
 
