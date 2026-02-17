@@ -143,6 +143,40 @@ describe('dashboardHost', () => {
     expect(results).toEqual([]);
   });
 
+  it('throws when a provider declares a capability but lacks the fetch method', async () => {
+    const provider = new DashboardProviderBuilder()
+      .withId('broken-provider')
+      .withName('Broken')
+      .withMetadataProviderId('broken-metadata')
+      .withCapabilities('topTracks')
+      .build();
+
+    providersHost.register(provider);
+
+    const host = createDashboardHost();
+
+    await expect(host.fetchTopTracks()).rejects.toThrow(
+      'Provider "Broken" declared capability "topTracks" but does not implement it',
+    );
+  });
+
+  it('returns empty array when targeted provider lacks the requested capability', async () => {
+    const provider = new DashboardProviderBuilder()
+      .withId('partial-provider')
+      .withName('Partial')
+      .withMetadataProviderId('partial-metadata')
+      .withCapabilities('topTracks')
+      .withFetchTopTracks(vi.fn().mockResolvedValue([]))
+      .build();
+
+    providersHost.register(provider);
+
+    const host = createDashboardHost();
+    const results = await host.fetchNewReleases('partial-provider');
+
+    expect(results).toEqual([]);
+  });
+
   it('skips a provider that fails and still returns results from other providers', async () => {
     const failingFetch = vi.fn().mockRejectedValue(new Error('Network error'));
     const workingTracks = [
@@ -176,6 +210,7 @@ describe('dashboardHost', () => {
     const host = createDashboardHost();
     const results = await host.fetchTopTracks();
 
+    expect(failingFetch).toHaveBeenCalled();
     expect(results).toEqual([
       {
         providerId: 'working-provider',

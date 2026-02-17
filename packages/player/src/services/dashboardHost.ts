@@ -1,8 +1,9 @@
-import type {
-  AttributedResult,
-  DashboardCapability,
-  DashboardHost,
-  DashboardProvider,
+import {
+  MissingCapabilityError,
+  type AttributedResult,
+  type DashboardCapability,
+  type DashboardHost,
+  type DashboardProvider,
 } from '@nuclearplayer/plugin-sdk';
 
 import { providersHost } from './providersHost';
@@ -32,7 +33,10 @@ const createAttributedFetcher =
     const method = CAPABILITY_TO_METHOD[capability];
 
     if (providerId) {
-      const provider = providersHost.get<DashboardProvider>(providerId);
+      const provider = providersHost.get<DashboardProvider>(
+        providerId,
+        'dashboard',
+      );
       if (!provider) {
         throw new Error(`Dashboard provider not found: ${providerId}`);
       }
@@ -41,7 +45,7 @@ const createAttributedFetcher =
       }
       const fetchFn = provider[method] as (() => Promise<T[]>) | undefined;
       if (!fetchFn) {
-        return [];
+        throw new MissingCapabilityError(capability, provider.name);
       }
       const items = await fetchFn();
       return [
@@ -58,12 +62,16 @@ const createAttributedFetcher =
       provider.capabilities.includes(capability),
     );
 
+    for (const provider of providers) {
+      const fetchFn = provider[method];
+      if (!fetchFn) {
+        throw new MissingCapabilityError(capability, provider.name);
+      }
+    }
+
     const results = await Promise.allSettled(
       providers.map(async (provider) => {
-        const fetchFn = provider[method] as (() => Promise<T[]>) | undefined;
-        if (!fetchFn) {
-          return null;
-        }
+        const fetchFn = provider[method] as () => Promise<T[]>;
         const items = await fetchFn();
         return {
           providerId: provider.id,

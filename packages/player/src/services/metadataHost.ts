@@ -101,7 +101,7 @@ const executeMetadataSearch = async (
 export const createMetadataHost = (): MetadataHost => {
   const getProvider = (providerId?: string): MetadataProvider | undefined => {
     if (providerId) {
-      return providersHost.get(providerId) as MetadataProvider | undefined;
+      return providersHost.get<MetadataProvider>(providerId, 'metadata');
     }
     const providers = providersHost.list<'metadata'>('metadata');
     return providers[0] as MetadataProvider | undefined;
@@ -118,7 +118,7 @@ export const createMetadataHost = (): MetadataHost => {
         throw new Error('No metadata provider available');
       }
       if (!provider.artistMetadataCapabilities?.includes(capability)) {
-        throw new MissingCapabilityError(capability);
+        throw new MissingCapabilityError(capability, provider.name);
       }
       return (provider[method] as (id: string) => Promise<TResult>)!(entityId);
     };
@@ -169,7 +169,7 @@ export const createMetadataHost = (): MetadataHost => {
         throw new Error('No metadata provider available');
       }
       if (!provider.albumMetadataCapabilities?.includes('albumDetails')) {
-        throw new MissingCapabilityError('albumDetails');
+        throw new MissingCapabilityError('albumDetails', provider.name);
       }
       return provider.fetchAlbumDetails!(albumId)!;
     },

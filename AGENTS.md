@@ -206,6 +206,15 @@ Player views and some components use a `*.test-wrapper.tsx` file that creates a 
 - Don't use queryX methods in the wrapper - always get or find as appropriate.
 - Never use fireEvent. Always use userEvent for interactions.
 
+### The builder pattern for tests
+
+We use builders to create test data and various entities cleanly. You can see them in `packages/player/src/test/builders`.
+
+- A builder is a class that has an instance of the object it's building
+- When the builder is instantiated, it creates a default object with reasonable defaults
+- The builder has methods that mutate the object and return `this` for chaining
+- The `build()` method returns the final object, which can then be used in tests
+
 ```tsx
 // Playlists.test-wrapper.tsx
 export const PlaylistsWrapper = {

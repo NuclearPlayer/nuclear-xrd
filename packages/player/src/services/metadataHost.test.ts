@@ -230,7 +230,9 @@ describe('metadataHost', () => {
         metadataHost[method as keyof typeof metadataHost](
           'artist-id' as string & SearchParams,
         ),
-      ).rejects.toThrowError(`Missing capability: ${capability}`);
+      ).rejects.toThrowError(
+        `Provider "Test Metadata Provider" declared capability "${capability}" but does not implement it`,
+      );
     });
   });
 
@@ -261,7 +263,9 @@ describe('metadataHost', () => {
 
       await expect(
         metadataHost.fetchAlbumDetails('album-id'),
-      ).rejects.toThrowError('Missing capability: albumDetails');
+      ).rejects.toThrowError(
+        'Provider "Test Metadata Provider" declared capability "albumDetails" but does not implement it',
+      );
     });
   });
 });
