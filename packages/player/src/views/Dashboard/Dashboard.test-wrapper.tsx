@@ -1,5 +1,7 @@
+import { QueryClient } from '@tanstack/react-query';
 import { createMemoryHistory, createRouter } from '@tanstack/react-router';
 import { render, RenderResult, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import App from '../../App';
 import { routeTree } from '../../routeTree.gen';
@@ -14,6 +16,19 @@ import {
 } from '../../test/fixtures/dashboard';
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 
+type MountResult = RenderResult & {
+  router: ReturnType<typeof createRouter<typeof routeTree>>;
+};
+
+const findCard = (section: HTMLElement, text: string, label: string) => {
+  const cards = within(section).getAllByTestId('card');
+  const card = cards.find((card) => within(card).queryByText(text));
+  if (!card) {
+    throw new Error(`${label} "${text}" not found`);
+  }
+  return card;
+};
+
 export const DashboardWrapper = {
   reset() {
     providersHost.clear();
@@ -24,12 +39,17 @@ export const DashboardWrapper = {
     providersHost.register(builder.build());
   },
 
-  async mount(): Promise<RenderResult> {
+  async mount(): Promise<MountResult> {
     const history = createMemoryHistory({ initialEntries: ['/dashboard'] });
     const router = createRouter({ routeTree, history });
-    const component = render(<App routerProp={router} />);
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+    const component = render(
+      <App routerProp={router} queryClientProp={queryClient} />,
+    );
     await screen.findByTestId('dashboard-view');
-    return component;
+    return { ...component, router };
   },
 
   get emptyState() {
@@ -43,13 +63,6 @@ export const DashboardWrapper = {
     get table() {
       return screen.queryByTestId('dashboard-top-tracks');
     },
-    async findTable() {
-      return screen.findByTestId('dashboard-top-tracks');
-    },
-    track(title: string) {
-      const table = screen.getByTestId('dashboard-top-tracks');
-      return within(table).queryByText(title);
-    },
     async findTrack(title: string) {
       const table = await screen.findByTestId('dashboard-top-tracks');
       return within(table).findByText(title);
@@ -61,53 +74,74 @@ export const DashboardWrapper = {
       return screen.queryByRole('heading', { name: /top artists/i });
     },
     artist(name: string) {
-      const section = screen.getByTestId('dashboard-top-artists');
-      return within(section).queryByText(name);
-    },
-    async findArtist(name: string) {
-      const section = await screen.findByTestId('dashboard-top-artists');
-      return within(section).findByText(name);
+      return {
+        async find() {
+          const section = await screen.findByTestId('dashboard-top-artists');
+          return within(section).findByText(name);
+        },
+        async click() {
+          const section = await screen.findByTestId('dashboard-top-artists');
+          await userEvent.click(findCard(section, name, 'Artist card'));
+        },
+      };
     },
   },
 
   topAlbums: {
-    get section() {
-      return screen.queryByTestId('dashboard-top-albums');
-    },
     get heading() {
       return screen.queryByRole('heading', { name: /top albums/i });
     },
-    async findAlbum(title: string) {
-      const section = await screen.findByTestId('dashboard-top-albums');
-      return within(section).findByText(title);
+    album(title: string) {
+      return {
+        async find() {
+          const section = await screen.findByTestId('dashboard-top-albums');
+          return within(section).findByText(title);
+        },
+        async click() {
+          const section = await screen.findByTestId('dashboard-top-albums');
+          await userEvent.click(findCard(section, title, 'Album card'));
+        },
+      };
     },
   },
 
   editorialPlaylists: {
-    get section() {
-      return screen.queryByTestId('dashboard-editorial-playlists');
-    },
     get heading() {
       return screen.queryByRole('heading', { name: /top playlists/i });
     },
-    async findPlaylist(name: string) {
-      const section = await screen.findByTestId(
-        'dashboard-editorial-playlists',
-      );
-      return within(section).findByText(name);
+    playlist(name: string) {
+      return {
+        async find() {
+          const section = await screen.findByTestId(
+            'dashboard-editorial-playlists',
+          );
+          return within(section).findByText(name);
+        },
+        async click() {
+          const section = await screen.findByTestId(
+            'dashboard-editorial-playlists',
+          );
+          await userEvent.click(findCard(section, name, 'Playlist card'));
+        },
+      };
     },
   },
 
   newReleases: {
-    get section() {
-      return screen.queryByTestId('dashboard-new-releases');
-    },
     get heading() {
       return screen.queryByRole('heading', { name: /new releases/i });
     },
-    async findRelease(title: string) {
-      const section = await screen.findByTestId('dashboard-new-releases');
-      return within(section).findByText(title);
+    release(title: string) {
+      return {
+        async find() {
+          const section = await screen.findByTestId('dashboard-new-releases');
+          return within(section).findByText(title);
+        },
+        async click() {
+          const section = await screen.findByTestId('dashboard-new-releases');
+          await userEvent.click(findCard(section, title, 'Release card'));
+        },
+      };
     },
   },
 
@@ -147,6 +181,14 @@ export const DashboardWrapper = {
         .withName('Acme Music')
         .withCapabilities('newReleases')
         .withFetchNewReleases(async () => NEW_RELEASES_DASHBOARD);
+    },
+    topArtistsProviderWithoutMetadata() {
+      return new DashboardProviderBuilder()
+        .withId('discovery-dashboard')
+        .withName('Discovery')
+        .withMetadataProviderId(undefined)
+        .withCapabilities('topArtists')
+        .withFetchTopArtists(async () => TOP_ARTISTS_DASHBOARD);
     },
   },
 };

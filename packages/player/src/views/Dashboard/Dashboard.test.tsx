@@ -49,10 +49,10 @@ describe('Dashboard view', () => {
 
     expect(DashboardWrapper.topArtists.heading).toBeInTheDocument();
     expect(
-      await DashboardWrapper.topArtists.findArtist('Radiohead'),
+      await DashboardWrapper.topArtists.artist('Radiohead').find(),
     ).toBeInTheDocument();
     expect(
-      await DashboardWrapper.topArtists.findArtist('Björk'),
+      await DashboardWrapper.topArtists.artist('Björk').find(),
     ).toBeInTheDocument();
   });
 
@@ -64,7 +64,7 @@ describe('Dashboard view', () => {
     await DashboardWrapper.mount();
 
     expect(
-      await DashboardWrapper.topAlbums.findAlbum('Kid A'),
+      await DashboardWrapper.topAlbums.album('Kid A').find(),
     ).toBeInTheDocument();
     expect(DashboardWrapper.topAlbums.heading).toBeInTheDocument();
   });
@@ -77,9 +77,9 @@ describe('Dashboard view', () => {
     await DashboardWrapper.mount();
 
     expect(
-      await DashboardWrapper.editorialPlaylists.findPlaylist(
-        'Art Rock Essentials',
-      ),
+      await DashboardWrapper.editorialPlaylists
+        .playlist('Art Rock Essentials')
+        .find(),
     ).toBeInTheDocument();
     expect(DashboardWrapper.editorialPlaylists.heading).toBeInTheDocument();
   });
@@ -92,9 +92,22 @@ describe('Dashboard view', () => {
     await DashboardWrapper.mount();
 
     expect(
-      await DashboardWrapper.newReleases.findRelease('In Rainbows'),
+      await DashboardWrapper.newReleases.release('In Rainbows').find(),
     ).toBeInTheDocument();
     expect(DashboardWrapper.newReleases.heading).toBeInTheDocument();
+  });
+
+  it('navigates to search when clicking an artist card without metadataProviderId', async () => {
+    DashboardWrapper.seedProvider(
+      DashboardWrapper.fixtures.topArtistsProviderWithoutMetadata(),
+    );
+
+    const { router } = await DashboardWrapper.mount();
+
+    await DashboardWrapper.topArtists.artist('Radiohead').click();
+
+    expect(router.state.location.pathname).toBe('/search');
+    expect(router.state.location.search).toEqual({ q: 'Radiohead' });
   });
 
   it('shows tracks from multiple providers', async () => {
