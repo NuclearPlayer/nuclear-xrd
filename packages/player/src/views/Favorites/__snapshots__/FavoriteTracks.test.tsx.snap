@@ -123,10 +123,10 @@ exports[`FavoriteTracks view > (Snapshot) renders with tracks 1`] = `
                 class="flex w-full flex-col gap-2"
               >
                 <div
-                  class="inline-flex w-full items-stretch"
+                  class="border-border inline-flex w-full items-stretch overflow-hidden rounded-md border-2 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-black has-[:focus-visible]:ring-offset-2"
                 >
                   <input
-                    class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-l border-t-2 border-r-0 border-b-2 border-l-2"
+                    class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-black focus-visible:outline-none bg-background-input h-10 rounded-l border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                     data-headlessui-state=""
                     id="input-:r7:"
                     placeholder="Filter tracks"
@@ -134,7 +134,7 @@ exports[`FavoriteTracks view > (Snapshot) renders with tracks 1`] = `
                     value=""
                   />
                   <div
-                    class="bg-primary border-border flex items-center gap-2 rounded-r border-2 border-l-0 px-3 text-sm"
+                    class="bg-primary border-border flex items-center gap-2 border-l-2 px-3 text-sm"
                   >
                     <svg
                       aria-hidden="true"

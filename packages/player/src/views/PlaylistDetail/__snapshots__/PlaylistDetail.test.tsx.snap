@@ -47,7 +47,7 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
             class="mb-6 flex items-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
               data-headlessui-state=""
               data-testid="play-all-button"
               type="button"
@@ -82,7 +82,7 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
                 id="headlessui-popover-button-:r5:"
               >
                 <button
-                  class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
+                  class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
                   data-headlessui-state=""
                   data-testid="playlist-actions-button"
                   type="button"
@@ -130,10 +130,10 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
                 class="flex w-full flex-col gap-2"
               >
                 <div
-                  class="inline-flex w-full items-stretch"
+                  class="border-border inline-flex w-full items-stretch overflow-hidden rounded-md border-2 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-black has-[:focus-visible]:ring-offset-2"
                 >
                   <input
-                    class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background-input h-10 rounded-l border-t-2 border-r-0 border-b-2 border-l-2"
+                    class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-black focus-visible:outline-none bg-background-input h-10 rounded-l border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                     data-headlessui-state=""
                     id="input-:r7:"
                     placeholder="Filter tracks"
@@ -141,7 +141,7 @@ exports[`PlaylistDetail view > (Snapshot) renders playlist detail with tracks 1`
                     value=""
                   />
                   <div
-                    class="bg-primary border-border flex items-center gap-2 rounded-r border-2 border-l-0 px-3 text-sm"
+                    class="bg-primary border-border flex items-center gap-2 border-l-2 px-3 text-sm"
                   >
                     <svg
                       aria-hidden="true"
