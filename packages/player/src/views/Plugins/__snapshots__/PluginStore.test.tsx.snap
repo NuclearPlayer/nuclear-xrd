@@ -39,7 +39,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
               <button
                 aria-controls="headlessui-tabs-panel-:r9:"
                 aria-selected="false"
-                class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
+                class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-10 px-4 py-2"
                 data-headlessui-state=""
                 id="headlessui-tabs-tab-:r5:"
                 role="tab"
@@ -51,7 +51,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
               <button
                 aria-controls="headlessui-tabs-panel-:rb:"
                 aria-selected="true"
-                class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
+                class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
                 data-headlessui-state="hover"
                 data-hover=""
                 data-selected=""
@@ -216,7 +216,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
                                 class="shrink-0"
                               >
                                 <button
-                                  class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2 w-28"
+                                  class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2 w-28"
                                   data-headlessui-state=""
                                   type="button"
                                 >
@@ -292,7 +292,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
                                 class="shrink-0"
                               >
                                 <button
-                                  class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2 w-28"
+                                  class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2 w-28"
                                   data-headlessui-state=""
                                   type="button"
                                 >
@@ -368,7 +368,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
                                 class="shrink-0"
                               >
                                 <button
-                                  class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2 w-28"
+                                  class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2 w-28"
                                   data-headlessui-state=""
                                   type="button"
                                 >
