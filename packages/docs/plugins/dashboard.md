@@ -1,5 +1,5 @@
 ---
-description: Supply dashboard content: top tracks, trending artists, curated playlists, and more.
+description: "Supply dashboard content: top tracks, trending artists, curated playlists, and more."
 ---
 
 # Dashboard
