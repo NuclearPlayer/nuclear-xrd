@@ -6,6 +6,9 @@ import { routeTree } from '../../routeTree.gen';
 import { providersHost } from '../../services/providersHost';
 import { DashboardProviderBuilder } from '../../test/builders/DashboardProviderBuilder';
 import {
+  EDITORIAL_PLAYLISTS_DASHBOARD,
+  NEW_RELEASES_DASHBOARD,
+  TOP_ALBUMS_DASHBOARD,
   TOP_ARTISTS_DASHBOARD,
   TOP_TRACKS_RADIOHEAD,
 } from '../../test/fixtures/dashboard';
@@ -67,6 +70,47 @@ export const DashboardWrapper = {
     },
   },
 
+  topAlbums: {
+    get section() {
+      return screen.queryByTestId('dashboard-top-albums');
+    },
+    get heading() {
+      return screen.queryByRole('heading', { name: /top albums/i });
+    },
+    async findAlbum(title: string) {
+      const section = await screen.findByTestId('dashboard-top-albums');
+      return within(section).findByText(title);
+    },
+  },
+
+  editorialPlaylists: {
+    get section() {
+      return screen.queryByTestId('dashboard-editorial-playlists');
+    },
+    get heading() {
+      return screen.queryByRole('heading', { name: /top playlists/i });
+    },
+    async findPlaylist(name: string) {
+      const section = await screen.findByTestId(
+        'dashboard-editorial-playlists',
+      );
+      return within(section).findByText(name);
+    },
+  },
+
+  newReleases: {
+    get section() {
+      return screen.queryByTestId('dashboard-new-releases');
+    },
+    get heading() {
+      return screen.queryByRole('heading', { name: /new releases/i });
+    },
+    async findRelease(title: string) {
+      const section = await screen.findByTestId('dashboard-new-releases');
+      return within(section).findByText(title);
+    },
+  },
+
   fixtures: {
     topTracksProvider() {
       return new DashboardProviderBuilder()
@@ -82,6 +126,27 @@ export const DashboardWrapper = {
         .withCapabilities('topTracks', 'topArtists')
         .withFetchTopTracks(async () => TOP_TRACKS_RADIOHEAD)
         .withFetchTopArtists(async () => TOP_ARTISTS_DASHBOARD);
+    },
+    topAlbumsProvider() {
+      return new DashboardProviderBuilder()
+        .withId('acme-dashboard')
+        .withName('Acme Music')
+        .withCapabilities('topAlbums')
+        .withFetchTopAlbums(async () => TOP_ALBUMS_DASHBOARD);
+    },
+    editorialPlaylistsProvider() {
+      return new DashboardProviderBuilder()
+        .withId('acme-dashboard')
+        .withName('Acme Music')
+        .withCapabilities('editorialPlaylists')
+        .withFetchEditorialPlaylists(async () => EDITORIAL_PLAYLISTS_DASHBOARD);
+    },
+    newReleasesProvider() {
+      return new DashboardProviderBuilder()
+        .withId('acme-dashboard')
+        .withName('Acme Music')
+        .withCapabilities('newReleases')
+        .withFetchNewReleases(async () => NEW_RELEASES_DASHBOARD);
     },
   },
 };

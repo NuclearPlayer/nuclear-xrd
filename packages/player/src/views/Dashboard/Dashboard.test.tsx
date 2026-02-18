@@ -56,6 +56,47 @@ describe('Dashboard view', () => {
     ).toBeInTheDocument();
   });
 
+  it('renders album cards when a provider supplies top albums', async () => {
+    DashboardWrapper.seedProvider(
+      DashboardWrapper.fixtures.topAlbumsProvider(),
+    );
+
+    await DashboardWrapper.mount();
+
+    expect(
+      await DashboardWrapper.topAlbums.findAlbum('Kid A'),
+    ).toBeInTheDocument();
+    expect(DashboardWrapper.topAlbums.heading).toBeInTheDocument();
+  });
+
+  it('renders playlist cards when a provider supplies editorial playlists', async () => {
+    DashboardWrapper.seedProvider(
+      DashboardWrapper.fixtures.editorialPlaylistsProvider(),
+    );
+
+    await DashboardWrapper.mount();
+
+    expect(
+      await DashboardWrapper.editorialPlaylists.findPlaylist(
+        'Art Rock Essentials',
+      ),
+    ).toBeInTheDocument();
+    expect(DashboardWrapper.editorialPlaylists.heading).toBeInTheDocument();
+  });
+
+  it('renders release cards when a provider supplies new releases', async () => {
+    DashboardWrapper.seedProvider(
+      DashboardWrapper.fixtures.newReleasesProvider(),
+    );
+
+    await DashboardWrapper.mount();
+
+    expect(
+      await DashboardWrapper.newReleases.findRelease('In Rainbows'),
+    ).toBeInTheDocument();
+    expect(DashboardWrapper.newReleases.heading).toBeInTheDocument();
+  });
+
   it('shows tracks from multiple providers', async () => {
     DashboardWrapper.seedProvider(
       new DashboardProviderBuilder()
