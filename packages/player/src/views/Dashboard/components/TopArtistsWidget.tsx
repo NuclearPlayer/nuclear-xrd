@@ -1,4 +1,3 @@
-import { useNavigate } from '@tanstack/react-router';
 import { FC, useCallback } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
@@ -7,24 +6,27 @@ import type { AttributedResult } from '@nuclearplayer/plugin-sdk';
 import type { CardsRowItem } from '@nuclearplayer/ui';
 
 import { useDashboardTopArtists } from '../hooks/useDashboardData';
+import { useNavigateToEntity } from '../hooks/useNavigateToEntity';
 import { DashboardCardsWidget } from './DashboardCardsWidget';
 
 export const TopArtistsWidget: FC = () => {
   const { t } = useTranslation('dashboard');
-  const navigate = useNavigate();
   const { data: results, isLoading } = useDashboardTopArtists();
+  const navigateToEntity = useNavigateToEntity();
 
   const mapArtist = useCallback(
     (artist: ArtistRef, result: AttributedResult<ArtistRef>): CardsRowItem => ({
-      id: `${result.metadataProviderId}-${artist.source.id}`,
+      id: `${result.providerId}-${artist.source.id}`,
       title: artist.name,
       imageUrl: pickArtwork(artist.artwork, 'cover', 300)?.url,
       onClick: () =>
-        navigate({
-          to: `/artist/${result.metadataProviderId}/${artist.source.id}`,
-        }),
+        navigateToEntity(
+          { name: artist.name, sourceId: artist.source.id },
+          result,
+          'artist',
+        ),
     }),
-    [navigate],
+    [navigateToEntity],
   );
 
   return (

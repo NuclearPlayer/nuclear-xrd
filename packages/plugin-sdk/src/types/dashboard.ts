@@ -15,7 +15,7 @@ export type DashboardCapability =
   | 'newReleases';
 
 export type DashboardProvider = ProviderDescriptor<'dashboard'> & {
-  metadataProviderId: string;
+  metadataProviderId?: string;
   capabilities: DashboardCapability[];
 
   fetchTopTracks?: () => Promise<Track[]>;
@@ -27,7 +27,7 @@ export type DashboardProvider = ProviderDescriptor<'dashboard'> & {
 
 export type AttributedResult<T> = {
   providerId: string;
-  metadataProviderId: string;
+  metadataProviderId?: string;
   providerName: string;
   items: T[];
 };
