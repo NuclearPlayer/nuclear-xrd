@@ -15,7 +15,7 @@ export const Artist: FC<ArtistProps> = () => {
   });
 
   const provider = useMemo(() => {
-    return providersHost.get(providerId) as MetadataProvider | undefined;
+    return providersHost.get<MetadataProvider>(providerId, 'metadata');
   }, [providerId]);
 
   const capabilities = new Set(provider?.artistMetadataCapabilities ?? []);

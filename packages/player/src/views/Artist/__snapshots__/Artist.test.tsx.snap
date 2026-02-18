@@ -122,7 +122,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
           class="mb-4 flex flex-row items-center justify-end"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-left"
             type="button"
@@ -167,7 +167,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -226,7 +226,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -285,7 +285,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -376,7 +376,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                 >
                   <button
                     aria-label="Add to favorites"
-                    class="inline-flex cursor-pointer items-center transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground size-10 justify-center bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
+                    class="inline-flex cursor-pointer items-center transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground size-10 justify-center bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
                     data-headlessui-state=""
                     data-testid="artist-favorite-button"
                     type="button"
@@ -595,7 +595,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                               >
                                 <button
                                   aria-label="Add to favorites"
-                                  class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center"
+                                  class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center"
                                   data-headlessui-state=""
                                   type="button"
                                 >
@@ -655,7 +655,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                                   >
                                     <button
                                       aria-label="Add to queue"
-                                      class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
+                                      class="inline-flex cursor-pointer items-center rounded-md outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
                                       data-headlessui-state=""
                                       data-testid="add-to-queue-button"
                                       type="button"
@@ -685,7 +685,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                                       aria-expanded="false"
                                       aria-haspopup="menu"
                                       aria-label="Track options"
-                                      class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
+                                      class="inline-flex cursor-pointer items-center rounded-md outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
                                       data-headlessui-state=""
                                       data-state="closed"
                                       data-testid="track-context-menu-button"
@@ -782,13 +782,13 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                   role="grid"
                 >
                   <button
-                    class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                    class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                     data-headlessui-state=""
                     data-testid="card"
                     type="button"
                   >
                     <div
-                      class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                      class="border-border text-foreground flex h-full rounded-md border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
                     >
                       <div
                         class="overflow-hidden absolute inset-0"
@@ -805,7 +805,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                         >
                           <svg
                             aria-hidden="true"
-                            class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                            class="lucide lucide-cassette-tape animate-pulse opacity-20"
                             fill="none"
                             height="96"
                             stroke="currentColor"
@@ -848,6 +848,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                     >
                       <div
                         class="text-foreground truncate text-sm font-bold"
+                        data-testid="card-title"
                       >
                         Hello World LP
                       </div>
@@ -873,7 +874,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
           class="mb-4 flex flex-row items-center justify-start"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-right"
             type="button"
@@ -1058,7 +1059,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
             class="flex items-center justify-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -1093,7 +1094,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -1119,7 +1120,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
               data-headlessui-state=""
               data-testid="player-play-button"
               type="button"
@@ -1143,7 +1144,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -1169,7 +1170,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -1209,7 +1210,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
             class="flex items-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -1445,7 +1446,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
           class="mb-4 flex flex-row items-center justify-end"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-left"
             type="button"
@@ -1490,7 +1491,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -1549,7 +1550,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -1608,7 +1609,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -1700,7 +1701,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                 >
                   <button
                     aria-label="Add to favorites"
-                    class="inline-flex cursor-pointer items-center transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground size-10 justify-center bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
+                    class="inline-flex cursor-pointer items-center transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground size-10 justify-center bg-background border-border absolute top-4 right-4 z-10 rounded-md border-2"
                     data-headlessui-state=""
                     data-testid="artist-favorite-button"
                     type="button"
@@ -2094,7 +2095,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                               >
                                 <button
                                   aria-label="Add to favorites"
-                                  class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center"
+                                  class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center"
                                   data-headlessui-state=""
                                   type="button"
                                 >
@@ -2154,7 +2155,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                                   >
                                     <button
                                       aria-label="Add to queue"
-                                      class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
+                                      class="inline-flex cursor-pointer items-center rounded-md outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
                                       data-headlessui-state=""
                                       data-testid="add-to-queue-button"
                                       type="button"
@@ -2184,7 +2185,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                                       aria-expanded="false"
                                       aria-haspopup="menu"
                                       aria-label="Track options"
-                                      class="inline-flex cursor-pointer items-center rounded-md disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
+                                      class="inline-flex cursor-pointer items-center rounded-md outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-8 justify-center opacity-0 transition-none group-hover:opacity-100"
                                       data-headlessui-state=""
                                       data-state="closed"
                                       data-testid="track-context-menu-button"
@@ -2267,13 +2268,13 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                   role="grid"
                 >
                   <button
-                    class="cursor-pointer rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+                    class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
                     data-headlessui-state=""
                     data-testid="card"
                     type="button"
                   >
                     <div
-                      class="border-border text-foreground flex h-full rounded-md border bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
+                      class="border-border text-foreground flex h-full rounded-md border-2 bg-primary shadow-none relative aspect-square w-full items-center justify-center overflow-hidden p-0"
                     >
                       <div
                         class="overflow-hidden absolute inset-0"
@@ -2290,7 +2291,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                         >
                           <svg
                             aria-hidden="true"
-                            class="lucide lucide-cassette-tape animate-pulse opacity-70"
+                            class="lucide lucide-cassette-tape animate-pulse opacity-20"
                             fill="none"
                             height="96"
                             stroke="currentColor"
@@ -2333,6 +2334,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                     >
                       <div
                         class="text-foreground truncate text-sm font-bold"
+                        data-testid="card-title"
                       >
                         mau5trap selects
                       </div>
@@ -2353,7 +2355,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
           class="mb-4 flex flex-row items-center justify-start"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-right"
             type="button"
@@ -2538,7 +2540,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
             class="flex items-center justify-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -2573,7 +2575,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -2599,7 +2601,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
               data-headlessui-state=""
               data-testid="player-play-button"
               type="button"
@@ -2623,7 +2625,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -2649,7 +2651,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -2689,7 +2691,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
             class="flex items-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >

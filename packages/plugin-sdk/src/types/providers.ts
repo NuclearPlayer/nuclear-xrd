@@ -1,4 +1,9 @@
-export type ProviderKind = 'metadata' | 'streaming' | 'lyrics' | (string & {});
+export type ProviderKind =
+  | 'metadata'
+  | 'streaming'
+  | 'lyrics'
+  | 'dashboard'
+  | (string & {});
 
 export type ProviderDescriptor<K extends ProviderKind = ProviderKind> = {
   id: string;
@@ -13,6 +18,9 @@ export type ProvidersHost = {
   list<K extends ProviderKind = ProviderKind>(
     kind?: K,
   ): ProviderDescriptor<K>[];
-  get<T extends ProviderDescriptor>(providerId: string): T | undefined;
+  get<T extends ProviderDescriptor>(
+    providerId: string,
+    kind: ProviderKind,
+  ): T | undefined;
   clear(): void;
 };

@@ -48,8 +48,10 @@ export type MetadataProvider = ProviderDescriptor<'metadata'> & {
 };
 
 export class MissingCapabilityError extends Error {
-  constructor(capability: string) {
-    super(`Missing capability: ${capability}`);
+  constructor(capability: string, providerName: string) {
+    super(
+      `Missing capability: Provider "${providerName}" declared capability "${capability}" but does not implement it`,
+    );
     this.name = 'MissingCapabilityError';
   }
 }

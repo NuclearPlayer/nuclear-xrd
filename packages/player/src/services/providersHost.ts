@@ -47,8 +47,12 @@ export const createProvidersHost = (): ProvidersHost => {
       return all as ProviderDescriptor<K>[];
     },
 
-    get<T extends ProviderDescriptor>(providerId: string) {
-      return byId.get(providerId) as T | undefined;
+    get<T extends ProviderDescriptor>(providerId: string, kind: ProviderKind) {
+      const provider = byId.get(providerId);
+      if (!provider || provider.kind !== kind) {
+        return undefined;
+      }
+      return provider as T | undefined;
     },
 
     clear() {

@@ -1,28 +1,79 @@
 ---
-description: Extend Nuclear with custom metadata providers through the Providers API.
+description: Register providers that supply metadata, audio streams, dashboard content, and more to Nuclear.
 ---
 
 # Providers
 
 ## Providers API for Plugins
 
-The Providers API allows plugins to register custom providers that supply metadata for tracks, albums, and artists. This enables Nuclear to integrate with any music service or database.
+Providers are modules that fulfill specific data requests from Nuclear. When the player needs to search for tracks, stream audio, or populate the dashboard, it queries the providers for that kind of request. Different provider kinds serve different purposes, and plugins can register as many providers as they need.
+
+All registration and lookup goes through `api.Providers`.
 
 {% hint style="info" %}
-Access providers via `NuclearAPI.Providers.*` in your plugin's lifecycle hooks. Only metadata providers are supported.
+Every provider extends the `ProviderDescriptor` base type, which requires an `id`, `kind`, and `name`. Each provider kind then adds its own domain-specific methods (e.g., `search` for metadata, `getStreamUrl` for streaming).
 {% endhint %}
 
----
+## Provider kinds
 
-## Core concepts
+| Kind | Purpose | Guide |
+|------|---------|-------|
+| `'metadata'` | Search results, artist & album details | [Metadata](metadata.md) |
+| `'streaming'` | Audio stream URLs for playback | [Streaming](streaming.md) |
+| `'dashboard'` | Dashboard content (top tracks, new releases, etc.) | [Dashboard](dashboard.md) |
+| `'lyrics'` | Song lyrics *(planned)* | N/A |
 
-### What are providers?
+## Registration
 
-Providers are modules that fulfill specific data requests from Nuclear. When the app needs information (like album art, track metadata, or artist details), it queries the selected provider.
+Register providers in your plugin's `onEnable` hook and unregister them in `onDisable`:
 
-### Provider types
+```ts
+import type { NuclearPluginAPI, MetadataProvider } from '@nuclearplayer/plugin-sdk';
 
-**Metadata Providers** (current)
-- Supply information about tracks, albums, and artists
-- Examples: MusicBrainz, Last.fm, Discogs
-- Used for search, library management, and display
+let providerId: string;
+
+export default {
+  onEnable(api: NuclearPluginAPI) {
+    const provider: MetadataProvider = {
+      id: 'my-metadata-source',
+      kind: 'metadata',
+      name: 'My Metadata Source',
+      search: async (query) => { /* ... */ },
+      fetchArtist: async (artistId) => { /* ... */ },
+      fetchAlbum: async (albumId) => { /* ... */ },
+    };
+
+    providerId = api.Providers.register(provider);
+  },
+
+  onDisable(api: NuclearPluginAPI) {
+    api.Providers.unregister(providerId);
+  },
+};
+```
+
+`register()` returns the provider's ID, which you pass to `unregister()` later.
+
+## Provider lifecycle
+
+Always register in `onEnable` and unregister in `onDisable`. If you skip unregistration, the provider stays in Nuclear's registry after your plugin is disabled, and the player may still pass queries to that phantom provider.
+
+| Hook | Action |
+|------|--------|
+| `onEnable` | `api.Providers.register(provider)` |
+| `onDisable` | `api.Providers.unregister(providerId)` |
+
+## Base type
+
+All providers share this shape:
+
+```ts
+type ProviderDescriptor<K extends ProviderKind = ProviderKind> = {
+  id: string;
+  kind: K;
+  name: string;
+  pluginId?: string;
+};
+```
+
+Each provider kind (e.g., `MetadataProvider`, `StreamingProvider`, `DashboardProvider`) extends `ProviderDescriptor` with its own methods. See the individual guides linked above for details.

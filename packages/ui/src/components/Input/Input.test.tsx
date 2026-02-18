@@ -29,4 +29,15 @@ describe('Input', () => {
     );
     expect(container.firstChild).toMatchSnapshot();
   });
+
+  it('(Snapshot) renders with endAddon', () => {
+    const { container } = render(
+      <Input
+        id="input-with-addon"
+        placeholder="Filter..."
+        endAddon={<button type="button">X</button>}
+      />,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });

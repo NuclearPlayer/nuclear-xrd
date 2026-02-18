@@ -1,3 +1,4 @@
+import type { DashboardHost } from '../types/dashboard';
 import type { FavoritesHost } from '../types/favorites';
 import type { HttpHost } from '../types/http';
 import type { LoggerHost } from '../types/logger';
@@ -7,6 +8,7 @@ import type { QueueHost } from '../types/queue';
 import type { SettingsHost } from '../types/settings';
 import type { StreamingHost } from '../types/streaming';
 import type { YtdlpHost } from '../types/ytdlp';
+import { DashboardAPI } from './dashboard';
 import { FavoritesAPI } from './favorites';
 import { HttpAPI } from './http';
 import { LoggerAPI } from './logger';
@@ -27,6 +29,7 @@ export class NuclearAPI {
   readonly Ytdlp: YtdlpAPI;
   readonly Favorites: FavoritesAPI;
   readonly Logger: LoggerAPI;
+  readonly Dashboard: DashboardAPI;
 
   constructor(opts?: {
     settingsHost?: SettingsHost;
@@ -38,6 +41,7 @@ export class NuclearAPI {
     ytdlpHost?: YtdlpHost;
     favoritesHost?: FavoritesHost;
     loggerHost?: LoggerHost;
+    dashboardHost?: DashboardHost;
   }) {
     this.Settings = new Settings(opts?.settingsHost);
     this.Providers = new Providers(opts?.providersHost);
@@ -48,6 +52,7 @@ export class NuclearAPI {
     this.Ytdlp = new YtdlpAPI(opts?.ytdlpHost);
     this.Favorites = new FavoritesAPI(opts?.favoritesHost);
     this.Logger = new LoggerAPI(opts?.loggerHost);
+    this.Dashboard = new DashboardAPI(opts?.dashboardHost);
   }
 }
 

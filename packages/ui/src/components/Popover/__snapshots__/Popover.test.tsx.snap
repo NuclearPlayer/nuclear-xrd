@@ -19,7 +19,7 @@ exports[`Popover > (Snapshot) renders with all props 1`] = `
         id="headlessui-popover-button-:r2:"
       >
         <button
-          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2"
+          class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
           data-headlessui-state="hover"
           data-hover=""
           type="button"
@@ -89,7 +89,7 @@ exports[`Popover > (Snapshot) renders with backdrop 1`] = `
         id="headlessui-popover-button-:r8:"
       >
         <button
-          class="inline-flex cursor-pointer items-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border hover:shadow-none h-10 px-4 py-2"
+          class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-10 px-4 py-2"
           data-headlessui-state="hover"
           data-hover=""
           type="button"

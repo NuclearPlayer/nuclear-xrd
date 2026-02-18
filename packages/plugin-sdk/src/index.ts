@@ -1,4 +1,5 @@
 export { NuclearPluginAPI, NuclearAPI } from './api';
+export { DashboardAPI } from './api/dashboard';
 export { FavoritesAPI } from './api/favorites';
 export { HttpAPI } from './api/http';
 export { LoggerAPI } from './api/logger';
@@ -22,6 +23,7 @@ export * from './types/queue';
 export * from './types/streaming';
 export * from './types/metadata';
 export * from './types/favorites';
+export * from './types/dashboard';
 export type {
   ProvidersHost,
   ProviderKind,

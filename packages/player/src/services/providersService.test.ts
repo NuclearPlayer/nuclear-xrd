@@ -24,11 +24,11 @@ describe('Providers service', () => {
   it('register returns id and re-register replaces implementation', () => {
     const p1 = createProvider('test-prov-1', 'metadata', 'One');
     expect(providersHost.register(p1)).toBe('test-prov-1');
-    expect(providersHost.get('test-prov-1')?.name).toBe('One');
+    expect(providersHost.get('test-prov-1', 'metadata')?.name).toBe('One');
 
     const p1b = createProvider('test-prov-1', 'metadata', 'Two');
     expect(providersHost.register(p1b)).toBe('test-prov-1');
-    expect(providersHost.get('test-prov-1')?.name).toBe('Two');
+    expect(providersHost.get('test-prov-1', 'metadata')?.name).toBe('Two');
 
     const listMeta = providersHost.list('metadata');
     expect(listMeta).toMatchInlineSnapshot(`
@@ -90,7 +90,7 @@ describe('Providers service', () => {
   it('get by id returns descriptor', () => {
     const p = createProvider('test-prov-4', 'metadata', 'Getter');
     providersHost.register(p);
-    expect(providersHost.get('test-prov-4')).toMatchInlineSnapshot(`
+    expect(providersHost.get('test-prov-4', 'metadata')).toMatchInlineSnapshot(`
       {
         "id": "test-prov-4",
         "kind": "metadata",
@@ -104,12 +104,19 @@ describe('Providers service', () => {
     providersHost.register(p);
 
     expect(providersHost.unregister('test-prov-5')).toBe(true);
-    expect(providersHost.get('test-prov-5')).toBeUndefined();
+    expect(providersHost.get('test-prov-5', 'metadata')).toBeUndefined();
 
     expect(providersHost.list('metadata').length).toBe(0);
   });
 
   it('unregister returns false for non-existent id', () => {
     expect(providersHost.unregister('missing-id')).toBe(false);
+  });
+
+  it('get returns undefined when kind does not match', () => {
+    const provider = createProvider('test-prov-6', 'metadata', 'WrongKind');
+    providersHost.register(provider);
+
+    expect(providersHost.get('test-prov-6', 'streaming')).toBeUndefined();
   });
 });

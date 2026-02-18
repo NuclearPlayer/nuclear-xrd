@@ -47,7 +47,7 @@ export const Card: FC<CardProps> = ({
           <CassetteTape
             size={96}
             absoluteStrokeWidth
-            className="animate-pulse opacity-70"
+            className="animate-pulse opacity-20"
           />
         }
       />
@@ -56,7 +56,10 @@ export const Card: FC<CardProps> = ({
     {(title || subtitle) && (
       <div className="min-w-0">
         {title && (
-          <div className="text-foreground truncate text-sm font-bold">
+          <div
+            data-testid="card-title"
+            className="text-foreground truncate text-sm font-bold"
+          >
             {title}
           </div>
         )}

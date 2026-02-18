@@ -49,7 +49,7 @@ const TabsImpl: FC<TabsProps> = ({
   panelClassName,
 }) => {
   if (!items || items.length === 0) {
-    // Composition mode only — consumer uses Tabs.Root + subcomponents
+    // Composition mode only. Consumer uses Tabs.Root + subcomponents
     return (
       <TabsRoot
         defaultIndex={defaultIndex}
