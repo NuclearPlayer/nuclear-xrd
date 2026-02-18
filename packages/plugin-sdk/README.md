@@ -100,6 +100,22 @@ export default {
 };
 ```
 
+## Domain APIs
+
+The `api` object passed to lifecycle hooks provides access to these domain APIs:
+
+| API | Description |
+|-----|-------------|
+| `api.Settings` | Define, read, and persist plugin settings |
+| `api.Queue` | Read and manipulate the playback queue |
+| `api.Favorites` | Manage the user's favorite tracks |
+| `api.Providers` | Register and unregister providers |
+| `api.Streaming` | Resolve audio stream URLs for tracks |
+| `api.Metadata` | Search and fetch artist/album/track details |
+| `api.Dashboard` | Fetch dashboard content (top tracks, new releases, etc.) |
+
+See the [full documentation](https://docs.nuclearplayer.com/nuclear-xrd) for detailed guides on each API.
+
 ## Permissions
 
 Declare what your plugin does in the `permissions` array. Permissions are currently informational. Future versions might show UI for this.

@@ -30,7 +30,7 @@ Each favorite entry includes a timestamp (`addedAtIso`) recording when it was ad
 
 ### Identity and deduplication
 
-Favorites are identified by their `source` field—a combination of provider name and ID. Because each metadata provider stores music data differently, **favorites from each provider are treated separately**.
+Favorites are identified by their `source` fiels. It's a combination of provider name and ID. Because each metadata provider stores music data differently, **favorites from each provider are treated separately**.
 
 ```typescript
 type ProviderRef = {

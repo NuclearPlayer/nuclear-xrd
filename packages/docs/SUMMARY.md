@@ -9,6 +9,7 @@
 * [Favorites](plugins/favorites.md)
 * [Streaming](plugins/streaming.md)
 * [Metadata](plugins/metadata.md)
+* [Dashboard](plugins/dashboard.md)
 * [Providers](plugins/providers.md)
 
 ## Theming

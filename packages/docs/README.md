@@ -1,5 +1,5 @@
 ---
-description: Nuclear Music Player. Play the web!
+description: Nuclear Music Player docs
 ---
 
 # Nuclear Documentation
@@ -19,7 +19,7 @@ Nuclear is a free, open‑source music player that acts as a hub for many servic
 ## For users
 
 - Themes: Nuclear supports theming. You can load your own JSON themes or choose built‑ins.
-- Plugins: Extend Nuclear with plugins. There is no sandbox—plugins can control the player directly. Only install plugins you trust.
+- Plugins: Extend Nuclear with plugins. There is no sandbox, plugins can control the player directly. Only install plugins you trust.
 
 ## What is in this repo?
 
@@ -42,7 +42,7 @@ This is a pnpm/turbo monorepo with these major packages:
 - TypeScript everywhere
 - Tauri (desktop shell)
 - React 18
-- Tailwind v4 configured via CSS (@theme/@layer) — no tailwind.config.js
+- Tailwind v4 configured via CSS (@theme/@layer), no tailwind.config.js
 - TanStack Router (routing)
 - TanStack Query v5 (HTTP and client‑side server state; no backend server)
 - Vitest + React Testing Library (tests)
