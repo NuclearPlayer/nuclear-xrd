@@ -144,7 +144,18 @@
   },
   "dashboard": {
     "title": "Painel",
-    "content": "Visualização do painel"
+    "empty-state": "No dashboard data available",
+    "empty-state-description": "Enable a plugin that provides dashboard content.",
+    "top-tracks": "Top Tracks",
+    "top-artists": "Top Artists",
+    "top-albums": "Top Albums",
+    "editorial-playlists": "Top Playlists",
+    "new-releases": "New Releases",
+    "filter-artists": "Filter artists...",
+    "filter-albums": "Filter albums...",
+    "filter-playlists": "Filter playlists...",
+    "filter-releases": "Filter releases...",
+    "nothing-found": "Nothing found"
   },
   "plugins": {
     "title": "Plugins",
