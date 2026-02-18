@@ -1,24 +1,53 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { ArtistRef, Track } from '@nuclearplayer/model';
-import type { AttributedResult } from '@nuclearplayer/plugin-sdk';
+import type {
+  AlbumRef,
+  ArtistRef,
+  PlaylistRef,
+  Track,
+} from '@nuclearplayer/model';
+import type {
+  AttributedResult,
+  DashboardCapability,
+} from '@nuclearplayer/plugin-sdk';
 
 import { dashboardHost } from '../../../services/dashboardHost';
 
 const FIVE_MINUTES = 5 * 60 * 1000;
 
-export const useDashboardTopTracks = () => {
-  return useQuery<AttributedResult<Track>[]>({
-    queryKey: ['dashboard', 'topTracks'],
-    queryFn: () => dashboardHost.fetchTopTracks(),
-    staleTime: FIVE_MINUTES,
-  });
+const createDashboardDataFetchHook = <T>(
+  capability: DashboardCapability,
+  fetchFn: () => Promise<AttributedResult<T>[]>,
+) => {
+  return () =>
+    useQuery<AttributedResult<T>[]>({
+      queryKey: ['dashboard', capability],
+      queryFn: fetchFn,
+      staleTime: FIVE_MINUTES,
+    });
 };
 
-export const useDashboardTopArtists = () => {
-  return useQuery<AttributedResult<ArtistRef>[]>({
-    queryKey: ['dashboard', 'topArtists'],
-    queryFn: () => dashboardHost.fetchTopArtists(),
-    staleTime: FIVE_MINUTES,
-  });
-};
+export const useDashboardTopTracks = createDashboardDataFetchHook<Track>(
+  'topTracks',
+  () => dashboardHost.fetchTopTracks(),
+);
+
+export const useDashboardTopArtists = createDashboardDataFetchHook<ArtistRef>(
+  'topArtists',
+  () => dashboardHost.fetchTopArtists(),
+);
+
+export const useDashboardTopAlbums = createDashboardDataFetchHook<AlbumRef>(
+  'topAlbums',
+  () => dashboardHost.fetchTopAlbums(),
+);
+
+export const useDashboardEditorialPlaylists =
+  createDashboardDataFetchHook<PlaylistRef>('editorialPlaylists', () =>
+    dashboardHost.fetchEditorialPlaylists(),
+  );
+
+export const useDashboardNewReleases = createDashboardDataFetchHook<AlbumRef>(
+  'newReleases',
+  () => dashboardHost.fetchNewReleases(),
+);
