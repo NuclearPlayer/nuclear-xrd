@@ -8,11 +8,15 @@ exports[`CardsRow > (Snapshot) renders correctly with items 1`] = `
   <div
     class="flex items-center justify-between gap-4"
   >
-    <h2
-      class="text-foreground text-lg font-bold"
+    <div
+      class="flex items-center gap-2"
     >
-      Top Albums
-    </h2>
+      <h2
+        class="text-foreground text-lg font-bold"
+      >
+        Top Albums
+      </h2>
+    </div>
     <div
       class="flex items-center gap-2"
     >

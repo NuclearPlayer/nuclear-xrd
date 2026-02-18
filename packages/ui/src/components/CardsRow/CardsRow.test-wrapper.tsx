@@ -33,6 +33,7 @@ const defaultItems: CardsRowItem[] = [
 
 type MountOptions = {
   title?: string;
+  badge?: string;
   items?: CardsRowItem[];
   labels?: CardsRowLabels;
 };
@@ -41,11 +42,14 @@ export const CardsRowWrapper = {
   mount(options: MountOptions = {}): RenderResult {
     const {
       title = 'Top Albums',
+      badge,
       items = defaultItems,
       labels = defaultLabels,
     } = options;
 
-    return render(<CardsRow title={title} items={items} labels={labels} />);
+    return render(
+      <CardsRow title={title} badge={badge} items={items} labels={labels} />,
+    );
   },
 
   get container() {
@@ -63,6 +67,10 @@ export const CardsRowWrapper = {
           within(card).queryByTestId('card-title')?.textContent === title,
       ) ?? null
     );
+  },
+
+  get badge() {
+    return within(this.container).queryByTestId('cards-row-badge');
   },
 
   get nothingFound() {

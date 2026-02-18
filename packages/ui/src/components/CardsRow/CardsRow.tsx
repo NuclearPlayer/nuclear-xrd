@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Filter } from 'lucide-react';
 import { FC } from 'react';
 
 import { cn } from '../../utils';
+import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Card } from '../Card';
 import { Input } from '../Input';
@@ -23,6 +24,7 @@ export type CardsRowLabels = {
 
 export type CardsRowProps = {
   title: string;
+  badge?: string;
   items: CardsRowItem[];
   labels: CardsRowLabels;
   className?: string;
@@ -31,6 +33,7 @@ export type CardsRowProps = {
 
 export const CardsRow: FC<CardsRowProps> = ({
   title,
+  badge,
   items,
   labels,
   className,
@@ -49,7 +52,14 @@ export const CardsRow: FC<CardsRowProps> = ({
   return (
     <div data-testid={testId} className={cn('flex flex-col gap-3', className)}>
       <div className="flex items-center justify-between gap-4">
-        <h2 className="text-foreground text-lg font-bold">{title}</h2>
+        <div className="flex items-center gap-2">
+          <h2 className="text-foreground text-lg font-bold">{title}</h2>
+          {badge && (
+            <Badge data-testid="cards-row-badge" variant="pill" color="green">
+              {badge}
+            </Badge>
+          )}
+        </div>
         <div className="flex items-center gap-2">
           <Input
             data-testid="cards-row-filter"

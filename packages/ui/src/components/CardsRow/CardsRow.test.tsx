@@ -46,6 +46,19 @@ describe('CardsRow', () => {
     expect(Wrapper.filter.input).toHaveValue('');
   });
 
+  it('renders a badge next to the title when badge is set', () => {
+    Wrapper.mount({ badge: 'Acme Music' });
+
+    expect(Wrapper.badge).toBeInTheDocument();
+    expect(Wrapper.badge).toHaveTextContent('Acme Music');
+  });
+
+  it('does not render a badge when badge is not set', () => {
+    Wrapper.mount();
+
+    expect(Wrapper.badge).not.toBeInTheDocument();
+  });
+
   it('calls onClick when a card is clicked', async () => {
     const handleClick = vi.fn();
     Wrapper.mount({

@@ -90,6 +90,15 @@ export const WithItems: Story = {
   },
 };
 
+export const WithBadge: Story = {
+  args: {
+    title: 'Top Albums',
+    badge: 'Acme Music',
+    items,
+    labels,
+  },
+};
+
 export const Empty: Story = {
   args: {
     title: 'Top Albums',
