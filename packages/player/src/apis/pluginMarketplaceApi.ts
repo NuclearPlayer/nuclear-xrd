@@ -8,7 +8,14 @@ const MarketplacePluginSchema = z.object({
   description: z.string(),
   author: z.string().min(1),
   repo: z.string().regex(/^[^/]+\/[^/]+$/),
-  category: z.enum(['streaming', 'metadata', 'lyrics', 'scrobbling', 'other']),
+  category: z.enum([
+    'streaming',
+    'metadata',
+    'lyrics',
+    'scrobbling',
+    'dashboard',
+    'other',
+  ]),
   tags: z.array(z.string()).optional(),
   addedAt: z.string().datetime(),
 });
