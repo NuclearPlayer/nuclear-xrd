@@ -32,6 +32,7 @@ import {
 } from '../components/ConnectedQueuePanel';
 import { ConnectedTopBar } from '../components/ConnectedTopBar';
 import { DevTools } from '../components/DevTools';
+import { FlatpakWarningBanner } from '../components/FlatpakWarningBanner';
 import { SoundProvider } from '../components/SoundProvider';
 import { useLayoutStore } from '../stores/layoutStore';
 
@@ -48,7 +49,10 @@ const RootComponent = () => {
 
   return (
     <PlayerShell>
-      <ConnectedTopBar />
+      <div>
+        <FlatpakWarningBanner />
+        <ConnectedTopBar />
+      </div>
       <SoundProvider>
         <PlayerWorkspace>
           <PlayerWorkspace.LeftSidebar

@@ -26,6 +26,7 @@ pub fn run() {
             stream_proxy::handle_stream_request(ctx.app_handle(), request, responder);
         })
         .invoke_handler(tauri::generate_handler![
+            commands::is_flatpak,
             commands::copy_dir_recursive,
             commands::extract_zip,
             commands::download_file,
