@@ -3,7 +3,7 @@
 exports[`Playlists view > renders playlist cards when playlists exist 1`] = `
 [
   <button
-    class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+    class="cursor-pointer rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
     data-headlessui-state=""
     data-testid="card"
     type="button"
@@ -74,7 +74,7 @@ exports[`Playlists view > renders playlist cards when playlists exist 1`] = `
     </div>
   </button>,
   <button
-    class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
+    class="cursor-pointer rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none h-auto flex w-42 flex-col items-stretch gap-2 p-2 text-left"
     data-headlessui-state=""
     data-testid="card"
     type="button"
