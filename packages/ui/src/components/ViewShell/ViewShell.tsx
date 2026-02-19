@@ -28,7 +28,7 @@ export const ViewShell: FC<ViewShellProps> = ({
         {subtitle}
       </h2>
     )}
-    <div className="flex w-full flex-1 flex-col overflow-hidden">
+    <div className="flex w-full flex-1 flex-col overflow-y-auto">
       {children}
     </div>
   </div>

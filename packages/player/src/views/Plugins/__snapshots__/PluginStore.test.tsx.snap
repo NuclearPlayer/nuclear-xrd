@@ -25,7 +25,7 @@ exports[`Plugin Store > (Snapshot) renders the plugin store with plugins from th
           Plugins
         </h1>
         <div
-          class="flex w-full flex-1 flex-col overflow-hidden"
+          class="flex w-full flex-1 flex-col overflow-y-auto"
         >
           <div
             class="max-h-full w-full gap-2 flex flex-1 flex-col overflow-hidden"

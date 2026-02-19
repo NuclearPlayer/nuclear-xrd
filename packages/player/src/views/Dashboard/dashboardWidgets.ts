@@ -17,8 +17,8 @@ export type DashboardWidgetEntry = {
 
 export const DASHBOARD_WIDGETS: DashboardWidgetEntry[] = [
   { capability: 'editorialPlaylists', component: EditorialPlaylistsWidget },
-  { capability: 'topTracks', component: TopTracksWidget },
   { capability: 'topArtists', component: TopArtistsWidget },
   { capability: 'topAlbums', component: TopAlbumsWidget },
   { capability: 'newReleases', component: NewReleasesWidget },
+  { capability: 'topTracks', component: TopTracksWidget },
 ];

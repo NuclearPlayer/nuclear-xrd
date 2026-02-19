@@ -542,7 +542,7 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                 Settings
               </h1>
               <div
-                class="flex w-full flex-1 flex-col overflow-hidden"
+                class="flex w-full flex-1 flex-col overflow-y-auto"
               >
                 <div
                   class="flex w-full flex-col items-center justify-center overflow-hidden"

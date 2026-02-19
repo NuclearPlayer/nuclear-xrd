@@ -382,7 +382,7 @@ exports[`Search view > (Snapshot) renders the search view 1`] = `
                 Query: "test"
               </h2>
               <div
-                class="flex w-full flex-1 flex-col overflow-hidden"
+                class="flex w-full flex-1 flex-col overflow-y-auto"
               >
                 <button
                   aria-hidden="true"

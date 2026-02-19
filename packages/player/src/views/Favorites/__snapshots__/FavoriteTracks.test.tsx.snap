@@ -26,7 +26,7 @@ exports[`FavoriteTracks view > (Snapshot) renders empty state 1`] = `
           Favorite tracks
         </h1>
         <div
-          class="flex w-full flex-1 flex-col overflow-hidden"
+          class="flex w-full flex-1 flex-col overflow-y-auto"
         >
           <div
             class="flex flex-col items-center justify-center text-center gap-4 p-8 flex-1"
@@ -111,7 +111,7 @@ exports[`FavoriteTracks view > (Snapshot) renders with tracks 1`] = `
           Favorite tracks
         </h1>
         <div
-          class="flex w-full flex-1 flex-col overflow-hidden"
+          class="flex w-full flex-1 flex-col overflow-y-auto"
         >
           <div
             class="flex justify-end m-2"

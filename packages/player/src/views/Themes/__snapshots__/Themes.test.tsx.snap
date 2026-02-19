@@ -542,7 +542,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                 Themes
               </h1>
               <div
-                class="flex w-full flex-1 flex-col overflow-hidden"
+                class="flex w-full flex-1 flex-col overflow-y-auto"
               >
                 <div
                   class="relative h-full w-full overflow-hidden"
