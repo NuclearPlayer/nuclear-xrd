@@ -17,11 +17,13 @@ export const FlatpakWarningBanner: FC = () => {
       return;
     }
 
-    isFlatpak().then((result) => {
-      if (result) {
-        setVisible(true);
-      }
-    });
+    isFlatpak()
+      .then((result) => {
+        if (result) {
+          setVisible(true);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const dismiss = () => {
