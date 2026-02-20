@@ -127,14 +127,16 @@ export async function compilePlugin(
     return undefined;
   }
   const entrySource = await readTextFile(entryPath);
-  entryPath = toForwardSlashes(await tauriNormalize(entryPath));
+  const nativeEntryPath = await tauriNormalize(entryPath);
+  entryPath = toForwardSlashes(nativeEntryPath);
   const key = entryPath + ':' + simpleHash(entrySource);
   if (cache.has(key)) {
     return cache.get(key);
   }
 
   const mod = await getEsbuild();
-  const entryDir = toForwardSlashes(await dirname(entryPath));
+  const nativeEntryDir = await dirname(nativeEntryPath);
+  const entryDir = toForwardSlashes(nativeEntryDir);
   const entryLoader: EsbuildTypes.Loader = entryPath.endsWith('.tsx')
     ? 'tsx'
     : entryPath.endsWith('.ts')
@@ -167,8 +169,9 @@ export async function compilePlugin(
     external: ['@nuclearplayer/plugin-sdk'],
 
     // Keep a neutral working directory. Real resolution happens inside our
-    // virtual "tauri-fs" plugin (below).
-    absWorkingDir: entryDir,
+    // virtual "tauri-fs" plugin (below). Use native path separators here
+    // because esbuild validates this as an OS-native absolute path.
+    absWorkingDir: nativeEntryDir,
 
     // Inline tsconfig so esbuild doesn't try to read tsconfig.json from disk.
     tsconfigRaw: { compilerOptions: {} },
