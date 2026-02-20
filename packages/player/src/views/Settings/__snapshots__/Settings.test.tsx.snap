@@ -296,7 +296,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                   href="/settings"
                 >
                   <div
-                    class="flex flex-row items-center justify-start gap-2 px-2"
+                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md px-2 py-1 bg-primary border-border border-t-2 border-r-2 border-b-2 font-bold"
+                    data-testid="sidebar-navigation-item"
                   >
                     <svg
                       aria-hidden="true"
@@ -335,7 +336,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                   href="/plugins"
                 >
                   <div
-                    class="flex flex-row items-center justify-start gap-2 px-2"
+                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md px-2 py-1"
+                    data-testid="sidebar-navigation-item"
                   >
                     <svg
                       aria-hidden="true"
@@ -368,7 +370,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                   href="/themes"
                 >
                   <div
-                    class="flex flex-row items-center justify-start gap-2 px-2"
+                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md px-2 py-1"
+                    data-testid="sidebar-navigation-item"
                   >
                     <svg
                       aria-hidden="true"
@@ -418,7 +421,8 @@ exports[`Settings view > (Snapshot) renders the settings view 1`] = `
                   href="/logs"
                 >
                   <div
-                    class="flex flex-row items-center justify-start gap-2 px-2"
+                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md px-2 py-1"
+                    data-testid="sidebar-navigation-item"
                   >
                     <svg
                       aria-hidden="true"

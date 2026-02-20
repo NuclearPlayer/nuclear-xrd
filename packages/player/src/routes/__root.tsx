@@ -1,4 +1,4 @@
-import { createRootRoute, Link } from '@tanstack/react-router';
+import { createRootRoute } from '@tanstack/react-router';
 import {
   BlocksIcon,
   CompassIcon,
@@ -66,70 +66,52 @@ const RootComponent = () => {
                 title={t('explore')}
                 icon={<CompassIcon />}
               >
-                <Link to="/dashboard">
-                  <SidebarNavigationItem>
-                    <GaugeIcon />
-                    {t('dashboard')}
-                  </SidebarNavigationItem>
-                </Link>
+                <SidebarNavigationItem to="/dashboard">
+                  <GaugeIcon />
+                  {t('dashboard')}
+                </SidebarNavigationItem>
               </SidebarNavigationCollapsible>
               <SidebarNavigationCollapsible
                 title={t('preferences')}
                 icon={<SettingsIcon />}
               >
-                <Link to="/settings">
-                  <SidebarNavigationItem>
-                    <Settings2Icon />
-                    {t('settings')}
-                  </SidebarNavigationItem>
-                </Link>
-                <Link to="/plugins">
-                  <SidebarNavigationItem>
-                    <BlocksIcon />
-                    {t('plugins')}
-                  </SidebarNavigationItem>
-                </Link>
-                <Link to="/themes">
-                  <SidebarNavigationItem>
-                    <PaletteIcon />
-                    {t('themes')}
-                  </SidebarNavigationItem>
-                </Link>
-                <Link to="/logs">
-                  <SidebarNavigationItem>
-                    <ScrollTextIcon />
-                    {t('logs')}
-                  </SidebarNavigationItem>
-                </Link>
+                <SidebarNavigationItem to="/settings">
+                  <Settings2Icon />
+                  {t('settings')}
+                </SidebarNavigationItem>
+                <SidebarNavigationItem to="/plugins">
+                  <BlocksIcon />
+                  {t('plugins')}
+                </SidebarNavigationItem>
+                <SidebarNavigationItem to="/themes">
+                  <PaletteIcon />
+                  {t('themes')}
+                </SidebarNavigationItem>
+                <SidebarNavigationItem to="/logs">
+                  <ScrollTextIcon />
+                  {t('logs')}
+                </SidebarNavigationItem>
               </SidebarNavigationCollapsible>
               <SidebarNavigationCollapsible
                 title={t('collection')}
                 icon={<LibraryIcon />}
               >
-                <Link to="/favorites/albums">
-                  <SidebarNavigationItem>
-                    <DiscIcon />
-                    {t('favoriteAlbums')}
-                  </SidebarNavigationItem>
-                </Link>
-                <Link to="/favorites/tracks">
-                  <SidebarNavigationItem>
-                    <MusicIcon />
-                    {t('favoriteTracks')}
-                  </SidebarNavigationItem>
-                </Link>
-                <Link to="/favorites/artists">
-                  <SidebarNavigationItem>
-                    <UserIcon />
-                    {t('favoriteArtists')}
-                  </SidebarNavigationItem>
-                </Link>
-                <Link to="/playlists">
-                  <SidebarNavigationItem>
-                    <ListMusicIcon />
-                    {t('playlists')}
-                  </SidebarNavigationItem>
-                </Link>
+                <SidebarNavigationItem to="/favorites/albums">
+                  <DiscIcon />
+                  {t('favoriteAlbums')}
+                </SidebarNavigationItem>
+                <SidebarNavigationItem to="/favorites/tracks">
+                  <MusicIcon />
+                  {t('favoriteTracks')}
+                </SidebarNavigationItem>
+                <SidebarNavigationItem to="/favorites/artists">
+                  <UserIcon />
+                  {t('favoriteArtists')}
+                </SidebarNavigationItem>
+                <SidebarNavigationItem to="/playlists">
+                  <ListMusicIcon />
+                  {t('playlists')}
+                </SidebarNavigationItem>
               </SidebarNavigationCollapsible>
             </SidebarNavigation>
           </PlayerWorkspace.LeftSidebar>
