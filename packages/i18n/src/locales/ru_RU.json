@@ -196,6 +196,10 @@
   "updater": {
     "updateAvailable": "Update available"
   },
+  "flatpak": {
+    "sandboxWarning": "You're running Nuclear in a Flatpak sandbox. Some features may not work correctly. If you experience issues, try the .deb or AppImage instead.",
+    "dismiss": "Got it"
+  },
   "settings": {
     "title": "Параметры",
     "categories": {
