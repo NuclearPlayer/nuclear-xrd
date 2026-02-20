@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.nuclearplayer.Nuclear</id>
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>AGPL-3.0-only</project_license>
+  <name>Nuclear</name>
+  <summary>Listen to music, your way</summary>
+
+  <developer id="com.nuclearplayer">
+    <name>nukeop</name>
+  </developer>
+
+  <!-- Migration from old Flatpak ID -->
+  <provides>
+    <id>org.js.nuclear.Nuclear</id>
+  </provides>
+  <replaces>
+    <id>org.js.nuclear.Nuclear</id>
+  </replaces>
+
+  <description>
+    <p>
+      Nuclear is a free, open-source music player. No ads, no tracking,
+      no account required. Search for any song or artist, build playlists,
+      and start listening.
+    </p>
+    <ul>
+      <li>Search for music across multiple sources with a single query</li>
+      <li>Explore new releases, top tracks, and editorial playlists</li>
+      <li>Extend the player with plugins - add new music sources, metadata providers, and more</li>
+      <li>Customize the look and feel with themes</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">com.nuclearplayer.Nuclear.desktop</launchable>
+
+  <url type="homepage">https://nuclearplayer.com</url>
+  <url type="bugtracker">https://github.com/NuclearPlayer/nuclear-xrd/issues</url>
+  <url type="vcs-browser">https://github.com/NuclearPlayer/nuclear-xrd</url>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#B7C3E6</color>
+    <color type="primary" scheme_preference="dark">#1F212D</color>
+  </branding>
+
+  <content_rating type="oars-1.1" />
+
+  <keywords>
+    <keyword>music</keyword>
+    <keyword>player</keyword>
+    <keyword>audio</keyword>
+    <keyword>streaming</keyword>
+    <keyword>radio</keyword>
+  </keywords>
+
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+
+  <requires>
+    <display_length compare="ge">768</display_length>
+  </requires>
+
+  <project_group>Nuclear</project_group>
+
+  <releases>
+    <release version="1.5.0" date="2026-02-19">
+      <description>
+        <p>First release of the rewritten Nuclear Music Player.</p>
+      </description>
+    </release>
+  </releases>
+</component>

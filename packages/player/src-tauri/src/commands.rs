@@ -5,6 +5,11 @@ use tauri::command;
 use zip::ZipArchive;
 
 #[command]
+pub fn is_flatpak() -> bool {
+    std::env::var("FLATPAK_ID").is_ok()
+}
+
+#[command]
 pub fn copy_dir_recursive(from: PathBuf, to: PathBuf) -> Result<(), String> {
     fn inner(from: &Path, to: &Path) -> Result<(), std::io::Error> {
         fs::create_dir_all(to)?;

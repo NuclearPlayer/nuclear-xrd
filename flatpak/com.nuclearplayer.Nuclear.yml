@@ -1,0 +1,64 @@
+id: com.nuclearplayer.Nuclear
+
+runtime: org.gnome.Platform
+runtime-version: "48"
+sdk: org.gnome.Sdk
+
+command: nuclear-music-player
+
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+  - --socket=pulseaudio
+  - --filesystem=xdg-music
+  - --filesystem=xdg-download
+  - --own-name=org.mpris.MediaPlayer2.nuclear
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+
+modules:
+  - name: nuclear-music-player
+    buildsystem: simple
+    sources:
+      # The .deb built by CI (copied into this directory before building)
+      - type: file
+        path: nuclear.deb
+
+      # Metadata files (copied from the repo by CI)
+      - type: file
+        path: com.nuclearplayer.Nuclear.desktop
+      - type: file
+        path: com.nuclearplayer.Nuclear.metainfo.xml
+      - type: file
+        path: icon-512.png
+      - type: file
+        path: icon-256.png
+      - type: file
+        path: icon-128.png
+      - type: file
+        path: icon-32.png
+      - type: file
+        path: LICENSE
+
+    build-commands:
+      - ar x nuclear.deb
+      - tar xf data.tar.*
+
+      - install -Dm755 usr/bin/nuclear-music-player /app/bin/nuclear-music-player
+
+      - if [ -d usr/lib ]; then mkdir -p /app/lib && cp -r usr/lib/* /app/lib/ 2>/dev/null || true; fi
+
+      - if [ -d usr/share/nuclear-music-player ]; then mkdir -p /app/share/nuclear-music-player && cp -r usr/share/nuclear-music-player/* /app/share/nuclear-music-player/; fi
+
+      - install -Dm644 com.nuclearplayer.Nuclear.desktop /app/share/applications/com.nuclearplayer.Nuclear.desktop
+      - install -Dm644 com.nuclearplayer.Nuclear.metainfo.xml /app/share/metainfo/com.nuclearplayer.Nuclear.metainfo.xml
+
+      - install -Dm644 icon-512.png /app/share/icons/hicolor/512x512/apps/com.nuclearplayer.Nuclear.png
+      - install -Dm644 icon-256.png /app/share/icons/hicolor/256x256/apps/com.nuclearplayer.Nuclear.png
+      - install -Dm644 icon-128.png /app/share/icons/hicolor/128x128/apps/com.nuclearplayer.Nuclear.png
+      - install -Dm644 icon-32.png /app/share/icons/hicolor/32x32/apps/com.nuclearplayer.Nuclear.png
+
+      - install -Dm644 LICENSE /app/share/licenses/com.nuclearplayer.Nuclear/LICENSE

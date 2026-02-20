@@ -5,111 +5,113 @@ exports[`App > should render snapshot 1`] = `
   <div
     class="grid h-screen w-screen grid-rows-[auto_1fr_auto] overflow-hidden"
   >
-    <header
-      class="bg-background-secondary border-border grid h-12 grid-cols-[1fr_4fr_1fr] items-center gap-2 border-b-2 px-4"
-    >
-      <div
-        class="flex flex-row items-center gap-4"
+    <div>
+      <header
+        class="bg-background-secondary border-border grid h-12 grid-cols-[1fr_4fr_1fr] items-center gap-2 border-b-2 px-4"
       >
-        <svg
-          class="inline-flex h-6 w-6"
-          height="100"
-          viewBox="0 0 100 100"
-          width="100"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g
-            fill="none"
-            stroke="currentColor"
-            stroke-width="8"
-            transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
-          >
-            <rect
-              height="96"
-              rx="19.2"
-              ry="19.2"
-              width="96"
-              x="2"
-              y="2"
-            />
-            <path
-              d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
-            />
-          </g>
-        </svg>
-      </div>
-      <div
-        class="flex w-full flex-col gap-2"
-      >
-        <input
-          class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background rounded-md border-2 h-8"
-          data-headlessui-state=""
-          data-testid="search-box"
-          id="input-:r0:"
-          placeholder="Search"
-          type="text"
-          value=""
-        />
-      </div>
-      <button
-        aria-checked="false"
-        aria-label="Toggle theme"
-        class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group justify-self-end"
-        data-headlessui-state=""
-        id="headlessui-switch-:r2:"
-        role="switch"
-        tabindex="0"
-        type="button"
-      >
-        <span
-          class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1 group-data-checked:translate-x-5"
+        <div
+          class="flex flex-row items-center gap-4"
         >
           <svg
-            aria-hidden="true"
-            class="lucide lucide-sun text-foreground"
-            fill="none"
-            height="12"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="12"
+            class="inline-flex h-6 w-6"
+            height="100"
+            viewBox="0 0 100 100"
+            width="100"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle
-              cx="12"
-              cy="12"
-              r="4"
-            />
-            <path
-              d="M12 2v2"
-            />
-            <path
-              d="M12 20v2"
-            />
-            <path
-              d="m4.93 4.93 1.41 1.41"
-            />
-            <path
-              d="m17.66 17.66 1.41 1.41"
-            />
-            <path
-              d="M2 12h2"
-            />
-            <path
-              d="M20 12h2"
-            />
-            <path
-              d="m6.34 17.66-1.41 1.41"
-            />
-            <path
-              d="m19.07 4.93-1.41 1.41"
-            />
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-width="8"
+              transform="matrix(.96157 0 0 .95989 1.9231 1.9198)"
+            >
+              <rect
+                height="96"
+                rx="19.2"
+                ry="19.2"
+                width="96"
+                x="2"
+                y="2"
+              />
+              <path
+                d="m30 23.6 20 26.4 20-26.4zm20 26.4 20 26.4 20-26.4zm0 0h-40l20 26.4z"
+              />
+            </g>
           </svg>
-        </span>
-      </button>
-    </header>
+        </div>
+        <div
+          class="flex w-full flex-col gap-2"
+        >
+          <input
+            class="border-border text-foreground placeholder:text-foreground-secondary w-full px-3 transition-colors focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none bg-background rounded-md border-2 h-8"
+            data-headlessui-state=""
+            data-testid="search-box"
+            id="input-:r0:"
+            placeholder="Search"
+            type="text"
+            value=""
+          />
+        </div>
+        <button
+          aria-checked="false"
+          aria-label="Toggle theme"
+          class="border-border relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full border-2 transition-all focus:ring-2 focus:ring-black focus:ring-offset-2 focus:outline-none data-checked:bg-primary bg-white data-disabled:cursor-not-allowed data-disabled:opacity-50 group justify-self-end"
+          data-headlessui-state=""
+          id="headlessui-switch-:r2:"
+          role="switch"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="border-border pointer-events-none flex h-4 w-4 items-center justify-center rounded-full border-2 bg-white ring-0 transition-transform [&>svg]:fill-white dark:[&>svg]:fill-black translate-x-1 group-data-checked:translate-x-5"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-sun text-foreground"
+              fill="none"
+              height="12"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="4"
+              />
+              <path
+                d="M12 2v2"
+              />
+              <path
+                d="M12 20v2"
+              />
+              <path
+                d="m4.93 4.93 1.41 1.41"
+              />
+              <path
+                d="m17.66 17.66 1.41 1.41"
+              />
+              <path
+                d="M2 12h2"
+              />
+              <path
+                d="M20 12h2"
+              />
+              <path
+                d="m6.34 17.66-1.41 1.41"
+              />
+              <path
+                d="m19.07 4.93-1.41 1.41"
+              />
+            </svg>
+          </span>
+        </button>
+      </header>
+    </div>
     <div
       class="bg-background-secondary relative grid h-full min-h-0 grid-cols-[auto_1fr_auto]"
     >
@@ -122,7 +124,7 @@ exports[`App > should render snapshot 1`] = `
           class="mb-4 flex flex-row items-center justify-end"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
+            class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 right-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-left"
             type="button"
@@ -167,7 +169,7 @@ exports[`App > should render snapshot 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -226,7 +228,7 @@ exports[`App > should render snapshot 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -285,7 +287,7 @@ exports[`App > should render snapshot 1`] = `
               class="mb-4 flex w-full flex-col text-sm"
             >
               <button
-                class="cursor-pointer rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
+                class="cursor-pointer rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent h-9 px-3 inline-flex flex-row items-center justify-between"
                 data-headlessui-state=""
                 type="button"
               >
@@ -456,7 +458,7 @@ exports[`App > should render snapshot 1`] = `
           class="mb-4 flex flex-row items-center justify-start"
         >
           <button
-            class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
+            class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center top-2 px-2 left-1"
             data-headlessui-state=""
             data-testid="sidebar-toggle-right"
             type="button"
@@ -641,7 +643,7 @@ exports[`App > should render snapshot 1`] = `
             class="flex items-center justify-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -676,7 +678,7 @@ exports[`App > should render snapshot 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -702,7 +704,7 @@ exports[`App > should render snapshot 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-10 justify-center"
               data-headlessui-state=""
               data-testid="player-play-button"
               type="button"
@@ -726,7 +728,7 @@ exports[`App > should render snapshot 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -752,7 +754,7 @@ exports[`App > should render snapshot 1`] = `
               </svg>
             </button>
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >
@@ -792,7 +794,7 @@ exports[`App > should render snapshot 1`] = `
             class="flex items-center gap-2"
           >
             <button
-              class="inline-flex cursor-pointer items-center rounded-md transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-transparent size-10 justify-center"
               data-headlessui-state=""
               type="button"
             >

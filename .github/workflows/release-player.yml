@@ -103,3 +103,55 @@ jobs:
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
+
+      - name: Upload .deb for Flatpak build
+        if: matrix.platform == 'ubuntu-22.04'
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-deb
+          path: packages/player/src-tauri/target/release/bundle/deb/*.deb
+          retention-days: 1
+
+  flatpak:
+    needs: release
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-48
+      options: --privileged
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        shell: bash
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/player@}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Download .deb artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-deb
+          path: flatpak/
+
+      - name: Prepare Flatpak build files
+        shell: bash
+        run: flatpak/prepare-build.sh flatpak/*.deb
+
+      - name: Build Flatpak bundle
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: nuclear-music-player.flatpak
+          manifest-path: flatpak/com.nuclearplayer.Nuclear.yml
+          cache-key: flatpak-builder-${{ github.sha }}
+
+      - name: Upload Flatpak to GitHub Release
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "player@${{ steps.version.outputs.version }}" \
+            nuclear-music-player.flatpak \
+            --clobber

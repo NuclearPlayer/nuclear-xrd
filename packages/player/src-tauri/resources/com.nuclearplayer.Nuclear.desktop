@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=Nuclear Music Player
+GenericName=Music Player
+Comment=Free desktop music player. No ads, no tracking. Listen to music however you want.
+Comment[es]=Reproductor de música de escritorio gratuito. Sin anuncios, sin rastreo. Escucha música como quieras.
+Comment[fr]=Lecteur de musique de bureau gratuit. Sans publicité, sans pistage. Écoutez votre musique comme vous voulez.
+Comment[de]=Kostenloser Desktop-Musikplayer. Keine Werbung, kein Tracking. Hör Musik, wie du willst.
+Comment[pt]=Reprodutor de música gratuito. Sem anúncios, sem rastreamento. Ouça música do seu jeito.
+Comment[ru]=Бесплатный музыкальный плеер. Без рекламы, без слежки. Слушайте музыку так, как хотите.
+Comment[zh_CN]=免费桌面音乐播放器。无广告，无追踪。随心听音乐。
+Comment[pl]=Darmowy odtwarzacz muzyki. Bez reklam, bez śledzenia. Słuchaj muzyki po swojemu.
+Comment[ja]=無料のデスクトップ音楽プレーヤー。広告なし、追跡なし。好きなように音楽を聴こう。
+Exec=nuclear-music-player %u
+Icon=com.nuclearplayer.Nuclear
+Terminal=false
+Type=Application
+Categories=Audio;AudioVideo;Network;Player;Music;
+Keywords=Music;Player;Streaming;Audio;
+StartupWMClass=nuclear-music-player
