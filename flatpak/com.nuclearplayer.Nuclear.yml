@@ -47,11 +47,8 @@ modules:
       - ar x nuclear.deb
       - tar xf data.tar.*
 
-      - install -Dm755 usr/bin/nuclear-music-player /app/bin/nuclear-music-player
-
-      - if [ -d usr/lib ]; then mkdir -p /app/lib && cp -r usr/lib/* /app/lib/ 2>/dev/null || true; fi
-
-      - if [ -d usr/share/nuclear-music-player ]; then mkdir -p /app/share/nuclear-music-player && cp -r usr/share/nuclear-music-player/* /app/share/nuclear-music-player/; fi
+      # Binary is named "player" in the deb (Cargo package name)
+      - install -Dm755 usr/bin/player /app/bin/nuclear-music-player
 
       - install -Dm644 com.nuclearplayer.Nuclear.desktop /app/share/applications/com.nuclearplayer.Nuclear.desktop
       - install -Dm644 com.nuclearplayer.Nuclear.metainfo.xml /app/share/metainfo/com.nuclearplayer.Nuclear.metainfo.xml
