@@ -471,4 +471,26 @@ describe('LogViewer', () => {
     expect(queryByText('Rate limited')).toBeInTheDocument();
     expect(queryByText('Application started')).toBeInTheDocument();
   });
+
+  it('scope chips for scopes not in the scopes prop are not clickable', () => {
+    const partialScopes = ['plugins', 'http'];
+    const { getAllByTestId } = render(
+      <LogViewer
+        logs={sampleLogs}
+        scopes={partialScopes}
+        onClear={vi.fn()}
+        onExport={vi.fn()}
+        onOpenLogFolder={vi.fn()}
+      />,
+    );
+
+    const scopeChips = getAllByTestId('log-scope');
+    const pluginsChip = scopeChips.find(
+      (chip) => chip.textContent === 'plugins',
+    )!;
+    const appChip = scopeChips.find((chip) => chip.textContent === 'app')!;
+
+    expect(pluginsChip.tagName).toBe('BUTTON');
+    expect(appChip.tagName).toBe('SPAN');
+  });
 });

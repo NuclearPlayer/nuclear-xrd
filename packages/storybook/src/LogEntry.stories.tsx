@@ -47,7 +47,7 @@ export const LongSingleLineMessage: Story = {
   ),
 };
 
-export const CollapsibleMessage: Story = {
+export const ChevronToggle: Story = {
   render: () => (
     <div className="bg-background flex flex-col">
       <LogEntry
@@ -56,6 +56,37 @@ export const CollapsibleMessage: Story = {
         onLevelClick={(level) => console.log('Level clicked:', level)}
         onScopeClick={(scope) => console.log('Scope clicked:', scope)}
       />
+      <LogEntry
+        entry={longSingleLineEntry}
+        index={1}
+        onLevelClick={(level) => console.log('Level clicked:', level)}
+        onScopeClick={(scope) => console.log('Scope clicked:', scope)}
+      />
+      <LogEntry
+        entry={allVariantEntries[2]}
+        index={2}
+        onLevelClick={(level) => console.log('Level clicked:', level)}
+        onScopeClick={(scope) => console.log('Scope clicked:', scope)}
+      />
+    </div>
+  ),
+};
+
+export const HoverActionPanel: Story = {
+  render: () => (
+    <div className="bg-background flex flex-col">
+      <p className="text-foreground/60 px-2 py-4 text-sm">
+        Hover over a log entry to see the copy button
+      </p>
+      {allVariantEntries.slice(0, 3).map((entry, index) => (
+        <LogEntry
+          key={entry.id}
+          entry={entry}
+          index={index}
+          onLevelClick={(level) => console.log('Level clicked:', level)}
+          onScopeClick={(scope) => console.log('Scope clicked:', scope)}
+        />
+      ))}
     </div>
   ),
 };

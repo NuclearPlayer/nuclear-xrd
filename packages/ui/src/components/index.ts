@@ -4,7 +4,6 @@ export * from './Box';
 export * from './Button';
 export * from './Card';
 export * from './CardsRow';
-export * from './CollapsibleText';
 export * from './Dialog';
 export * from './FavoriteButton';
 export * from './CardGrid';

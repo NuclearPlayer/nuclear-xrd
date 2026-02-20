@@ -1,9 +1,11 @@
 import { cva } from 'class-variance-authority';
+import { ChevronRight } from 'lucide-react';
 import { DateTime } from 'luxon';
-import { ComponentProps, FC } from 'react';
+import { ComponentProps, FC, memo } from 'react';
 
+import { useCollapsibleText } from '../../hooks';
 import { cn } from '../../utils';
-import { CollapsibleText } from '../CollapsibleText';
+import { CopyButton } from './CopyButton';
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error';
 
@@ -63,13 +65,15 @@ export type LogEntryProps = ComponentProps<'div'> & {
   index?: number;
   onLevelClick: (level: string) => void;
   onScopeClick: (scope: string) => void;
+  isScopeClickable?: (scope: string) => boolean;
 };
 
-export const LogEntry: FC<LogEntryProps> = ({
+const LogEntryImpl: FC<LogEntryProps> = ({
   entry,
   index,
   onLevelClick,
   onScopeClick,
+  isScopeClickable,
   className,
   ...props
 }) => {
@@ -79,16 +83,39 @@ export const LogEntry: FC<LogEntryProps> = ({
 
   const displayLabel = entry.source.scope || entry.target;
 
+  const { isCollapsible, displayedText, isExpanded, toggle } =
+    useCollapsibleText(entry.message);
+
+  const scopeClickable =
+    !isScopeClickable || isScopeClickable(entry.source.scope);
+
   return (
     <div
       className={cn(
-        'border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm',
+        'group border-border/50 relative grid grid-cols-[auto_auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm',
         levelBorderVariants({ level: entry.level }),
-        index !== undefined && index % 2 === 1 ? 'bg-foreground/[0.03]' : '', // ugly but needed due to virtualization
+        index !== undefined && index % 2 === 1 ? 'bg-foreground/[0.03]' : '',
         className,
       )}
       {...props}
     >
+      <div className="flex w-4 items-center justify-center pt-0.5">
+        {isCollapsible ? (
+          <button
+            type="button"
+            data-testid="log-expand-toggle"
+            className={cn(
+              'text-foreground/40 hover:text-foreground/60 cursor-pointer transition-transform duration-150',
+              isExpanded && 'rotate-90',
+            )}
+            onClick={toggle}
+          >
+            <ChevronRight className="size-4" />
+          </button>
+        ) : (
+          <span className="size-4" />
+        )}
+      </div>
       <span
         data-testid="log-timestamp"
         className="text-foreground/60 whitespace-nowrap"
@@ -106,23 +133,41 @@ export const LogEntry: FC<LogEntryProps> = ({
       >
         {entry.level.toUpperCase()}
       </button>
-      {displayLabel && (
-        <button
-          type="button"
-          data-testid="log-scope"
-          className={cn(
-            sourceChipVariants({ type: entry.source.type }),
-            'cursor-pointer hover:opacity-80',
-          )}
-          onClick={() => onScopeClick(entry.source.scope)}
-        >
-          {displayLabel}
-        </button>
-      )}
-      <CollapsibleText
-        text={entry.message}
+      {displayLabel &&
+        (scopeClickable ? (
+          <button
+            type="button"
+            data-testid="log-scope"
+            className={cn(
+              sourceChipVariants({ type: entry.source.type }),
+              'cursor-pointer hover:opacity-80',
+            )}
+            onClick={() => onScopeClick(entry.source.scope)}
+          >
+            {displayLabel}
+          </button>
+        ) : (
+          <span
+            data-testid="log-scope"
+            className={sourceChipVariants({ type: entry.source.type })}
+          >
+            {displayLabel}
+          </span>
+        ))}
+      <span
+        data-testid="log-message"
         className="text-foreground break-all whitespace-pre-wrap"
-      />
+      >
+        {isExpanded ? entry.message : displayedText}
+      </span>
+      <div
+        data-testid="log-action-panel"
+        className="absolute top-1 right-2 hidden group-hover:block"
+      >
+        <CopyButton text={entry.message} />
+      </div>
     </div>
   );
 };
+
+export const LogEntry = memo(LogEntryImpl);

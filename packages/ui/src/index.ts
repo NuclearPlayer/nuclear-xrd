@@ -4,6 +4,7 @@ import '@fontsource/dm-sans/700.css';
 import '@fontsource/bricolage-grotesque/800.css';
 
 export * from './components';
+export * from './hooks';
 export * from './utils';
 
 export { setupResizeObserverMock } from './test/resizeObserverMock';

@@ -524,8 +524,15 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(0px);"
       >
         <div
-          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-red"
+          class="group border-border/50 relative grid grid-cols-[auto_auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-red"
         >
+          <div
+            class="flex w-4 items-center justify-center pt-0.5"
+          >
+            <span
+              class="size-4"
+            />
+          </div>
           <span
             class="text-foreground/60 whitespace-nowrap"
             data-testid="log-timestamp"
@@ -546,13 +553,48 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             plugins
           </button>
-          <div>
-            <span
-              class="text-foreground break-all whitespace-pre-wrap"
-              data-testid="log-message"
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Plugin failed to load
+          </span>
+          <div
+            class="absolute top-1 right-2 hidden group-hover:block"
+            data-testid="log-action-panel"
+          >
+            <button
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-8 justify-center"
+              data-headlessui-state=""
+              data-testid="log-copy-button"
+              type="button"
             >
-              Plugin failed to load
-            </span>
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-copy size-3.5"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="14"
+                  rx="2"
+                  ry="2"
+                  width="14"
+                  x="8"
+                  y="8"
+                />
+                <path
+                  d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -562,8 +604,15 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(32px);"
       >
         <div
-          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-yellow bg-foreground/[0.03]"
+          class="group border-border/50 relative grid grid-cols-[auto_auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-yellow bg-foreground/[0.03]"
         >
+          <div
+            class="flex w-4 items-center justify-center pt-0.5"
+          >
+            <span
+              class="size-4"
+            />
+          </div>
           <span
             class="text-foreground/60 whitespace-nowrap"
             data-testid="log-timestamp"
@@ -584,13 +633,48 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             http
           </button>
-          <div>
-            <span
-              class="text-foreground break-all whitespace-pre-wrap"
-              data-testid="log-message"
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Rate limited
+          </span>
+          <div
+            class="absolute top-1 right-2 hidden group-hover:block"
+            data-testid="log-action-panel"
+          >
+            <button
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-8 justify-center"
+              data-headlessui-state=""
+              data-testid="log-copy-button"
+              type="button"
             >
-              Rate limited
-            </span>
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-copy size-3.5"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="14"
+                  rx="2"
+                  ry="2"
+                  width="14"
+                  x="8"
+                  y="8"
+                />
+                <path
+                  d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -600,8 +684,15 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(64px);"
       >
         <div
-          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-cyan"
+          class="group border-border/50 relative grid grid-cols-[auto_auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-cyan"
         >
+          <div
+            class="flex w-4 items-center justify-center pt-0.5"
+          >
+            <span
+              class="size-4"
+            />
+          </div>
           <span
             class="text-foreground/60 whitespace-nowrap"
             data-testid="log-timestamp"
@@ -622,13 +713,48 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             app
           </button>
-          <div>
-            <span
-              class="text-foreground break-all whitespace-pre-wrap"
-              data-testid="log-message"
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Application started
+          </span>
+          <div
+            class="absolute top-1 right-2 hidden group-hover:block"
+            data-testid="log-action-panel"
+          >
+            <button
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-8 justify-center"
+              data-headlessui-state=""
+              data-testid="log-copy-button"
+              type="button"
             >
-              Application started
-            </span>
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-copy size-3.5"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="14"
+                  rx="2"
+                  ry="2"
+                  width="14"
+                  x="8"
+                  y="8"
+                />
+                <path
+                  d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -638,8 +764,15 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(96px);"
       >
         <div
-          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-purple bg-foreground/[0.03]"
+          class="group border-border/50 relative grid grid-cols-[auto_auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-purple bg-foreground/[0.03]"
         >
+          <div
+            class="flex w-4 items-center justify-center pt-0.5"
+          >
+            <span
+              class="size-4"
+            />
+          </div>
           <span
             class="text-foreground/60 whitespace-nowrap"
             data-testid="log-timestamp"
@@ -660,13 +793,48 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             streaming
           </button>
-          <div>
-            <span
-              class="text-foreground break-all whitespace-pre-wrap"
-              data-testid="log-message"
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Resolving stream
+          </span>
+          <div
+            class="absolute top-1 right-2 hidden group-hover:block"
+            data-testid="log-action-panel"
+          >
+            <button
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-8 justify-center"
+              data-headlessui-state=""
+              data-testid="log-copy-button"
+              type="button"
             >
-              Resolving stream
-            </span>
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-copy size-3.5"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="14"
+                  rx="2"
+                  ry="2"
+                  width="14"
+                  x="8"
+                  y="8"
+                />
+                <path
+                  d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -676,8 +844,15 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(128px);"
       >
         <div
-          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-foreground/30"
+          class="group border-border/50 relative grid grid-cols-[auto_auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-foreground/30"
         >
+          <div
+            class="flex w-4 items-center justify-center pt-0.5"
+          >
+            <span
+              class="size-4"
+            />
+          </div>
           <span
             class="text-foreground/60 whitespace-nowrap"
             data-testid="log-timestamp"
@@ -698,13 +873,48 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             playback
           </button>
-          <div>
-            <span
-              class="text-foreground break-all whitespace-pre-wrap"
-              data-testid="log-message"
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Buffer status
+          </span>
+          <div
+            class="absolute top-1 right-2 hidden group-hover:block"
+            data-testid="log-action-panel"
+          >
+            <button
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-8 justify-center"
+              data-headlessui-state=""
+              data-testid="log-copy-button"
+              type="button"
             >
-              Buffer status
-            </span>
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-copy size-3.5"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="14"
+                  rx="2"
+                  ry="2"
+                  width="14"
+                  x="8"
+                  y="8"
+                />
+                <path
+                  d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -714,8 +924,15 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(160px);"
       >
         <div
-          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-cyan bg-foreground/[0.03]"
+          class="group border-border/50 relative grid grid-cols-[auto_auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-cyan bg-foreground/[0.03]"
         >
+          <div
+            class="flex w-4 items-center justify-center pt-0.5"
+          >
+            <span
+              class="size-4"
+            />
+          </div>
           <span
             class="text-foreground/60 whitespace-nowrap"
             data-testid="log-timestamp"
@@ -736,13 +953,48 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             youtube-music
           </button>
-          <div>
-            <span
-              class="text-foreground break-all whitespace-pre-wrap"
-              data-testid="log-message"
+          <span
+            class="text-foreground break-all whitespace-pre-wrap"
+            data-testid="log-message"
+          >
+            Searching...
+          </span>
+          <div
+            class="absolute top-1 right-2 hidden group-hover:block"
+            data-testid="log-action-panel"
+          >
+            <button
+              class="inline-flex cursor-pointer items-center rounded-md whitespace-nowrap transition-all outline-none disabled:cursor-not-allowed disabled:opacity-50 text-foreground bg-primary border-border shadow-shadow hover:translate-x-shadow-x hover:translate-y-shadow-y border-2 hover:shadow-none size-8 justify-center"
+              data-headlessui-state=""
+              data-testid="log-copy-button"
+              type="button"
             >
-              Searching...
-            </span>
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-copy size-3.5"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  height="14"
+                  rx="2"
+                  ry="2"
+                  width="14"
+                  x="8"
+                  y="8"
+                />
+                <path
+                  d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
