@@ -368,4 +368,107 @@ describe('LogViewer', () => {
     const logContainer = getByRole('log');
     expect(logContainer).toHaveAttribute('aria-label', 'Log entries');
   });
+
+  it('clicking a level badge in a log entry filters by that level', async () => {
+    const user = userEvent.setup();
+    const { getAllByTestId, queryByText } = render(
+      <LogViewer
+        logs={sampleLogs}
+        scopes={[
+          'plugins',
+          'http',
+          'app',
+          'streaming',
+          'playback',
+          'youtube-music',
+        ]}
+        onClear={vi.fn()}
+        onExport={vi.fn()}
+        onOpenLogFolder={vi.fn()}
+      />,
+    );
+
+    expect(queryByText('Plugin failed to load')).toBeInTheDocument();
+    expect(queryByText('Rate limited')).toBeInTheDocument();
+
+    const levelBadges = getAllByTestId('log-level');
+    const warnBadge = levelBadges.find(
+      (badge) => badge.textContent === 'WARN',
+    )!;
+    await user.click(warnBadge);
+
+    expect(queryByText('Rate limited')).toBeInTheDocument();
+    expect(queryByText('Plugin failed to load')).not.toBeInTheDocument();
+    expect(queryByText('Application started')).not.toBeInTheDocument();
+  });
+
+  it('clicking a scope chip in a log entry filters by that scope', async () => {
+    const user = userEvent.setup();
+    const { getAllByTestId, queryByText } = render(
+      <LogViewer
+        logs={sampleLogs}
+        scopes={[
+          'plugins',
+          'http',
+          'app',
+          'streaming',
+          'playback',
+          'youtube-music',
+        ]}
+        onClear={vi.fn()}
+        onExport={vi.fn()}
+        onOpenLogFolder={vi.fn()}
+      />,
+    );
+
+    expect(queryByText('Plugin failed to load')).toBeInTheDocument();
+    expect(queryByText('Rate limited')).toBeInTheDocument();
+
+    const scopeChips = getAllByTestId('log-scope');
+    const httpChip = scopeChips.find((chip) => chip.textContent === 'http')!;
+    await user.click(httpChip);
+
+    expect(queryByText('Rate limited')).toBeInTheDocument();
+    expect(queryByText('Plugin failed to load')).not.toBeInTheDocument();
+    expect(queryByText('Application started')).not.toBeInTheDocument();
+  });
+
+  it('clicking the same level badge again clears the level filter', async () => {
+    const user = userEvent.setup();
+    const { getAllByTestId, queryByText } = render(
+      <LogViewer
+        logs={sampleLogs}
+        scopes={[
+          'plugins',
+          'http',
+          'app',
+          'streaming',
+          'playback',
+          'youtube-music',
+        ]}
+        onClear={vi.fn()}
+        onExport={vi.fn()}
+        onOpenLogFolder={vi.fn()}
+      />,
+    );
+
+    const levelBadges = getAllByTestId('log-level');
+    const errorBadge = levelBadges.find(
+      (badge) => badge.textContent === 'ERROR',
+    )!;
+    await user.click(errorBadge);
+
+    expect(queryByText('Plugin failed to load')).toBeInTheDocument();
+    expect(queryByText('Rate limited')).not.toBeInTheDocument();
+
+    const filteredLevelBadges = getAllByTestId('log-level');
+    const errorBadgeAfterFilter = filteredLevelBadges.find(
+      (badge) => badge.textContent === 'ERROR',
+    )!;
+    await user.click(errorBadgeAfterFilter);
+
+    expect(queryByText('Plugin failed to load')).toBeInTheDocument();
+    expect(queryByText('Rate limited')).toBeInTheDocument();
+    expect(queryByText('Application started')).toBeInTheDocument();
+  });
 });

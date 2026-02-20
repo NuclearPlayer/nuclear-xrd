@@ -101,7 +101,7 @@ export const LogViewerRoot: FC<LogViewerRootProps> = ({
 
   return (
     <LogViewerContext.Provider value={contextValue}>
-      <div className={cn('flex h-full flex-col gap-4', className)}>
+      <div className={cn('flex h-full flex-col gap-4 pb-6', className)}>
         {children}
       </div>
     </LogViewerContext.Provider>

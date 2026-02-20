@@ -1,5 +1,5 @@
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { FC, memo, useRef } from 'react';
+import { FC, memo, useCallback, useRef } from 'react';
 
 import { LogEntry } from '../LogEntry';
 import { useLogViewerContext } from './context';
@@ -7,7 +7,15 @@ import { useLogViewerContext } from './context';
 const ESTIMATED_ROW_HEIGHT = 32;
 
 const LogViewerVirtualizedListImpl: FC = () => {
-  const { filteredLogs, searchResult, labels } = useLogViewerContext();
+  const {
+    filteredLogs,
+    searchResult,
+    labels,
+    selectedLevels,
+    setSelectedLevels,
+    selectedScopes,
+    setSelectedScopes,
+  } = useLogViewerContext();
   const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualizer({
@@ -16,6 +24,28 @@ const LogViewerVirtualizedListImpl: FC = () => {
     estimateSize: () => ESTIMATED_ROW_HEIGHT,
     overscan: 5,
   });
+
+  const handleLevelClick = useCallback(
+    (level: string) => {
+      if (selectedLevels.length === 1 && selectedLevels[0] === level) {
+        setSelectedLevels([]);
+      } else {
+        setSelectedLevels([level]);
+      }
+    },
+    [selectedLevels, setSelectedLevels],
+  );
+
+  const handleScopeClick = useCallback(
+    (scope: string) => {
+      if (selectedScopes.length === 1 && selectedScopes[0] === scope) {
+        setSelectedScopes([]);
+      } else {
+        setSelectedScopes([scope]);
+      }
+    },
+    [selectedScopes, setSelectedScopes],
+  );
 
   return (
     <div
@@ -52,7 +82,12 @@ const LogViewerVirtualizedListImpl: FC = () => {
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                <LogEntry entry={log} />
+                <LogEntry
+                  entry={log}
+                  index={virtualRow.index}
+                  onLevelClick={handleLevelClick}
+                  onScopeClick={handleScopeClick}
+                />
               </div>
             );
           })}

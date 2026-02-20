@@ -1,7 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-import { LogEntryData, LogViewer } from '@nuclearplayer/ui';
+import { LogViewer } from '@nuclearplayer/ui';
+
+import {
+  clickableChipsLogs,
+  generateLogs,
+  longMessageLogs,
+} from './log-stories.data';
 
 const meta = {
   title: 'Components/LogViewer',
@@ -13,58 +19,10 @@ export default meta;
 
 type Story = StoryObj<typeof LogViewer>;
 
-const generateLogs = (count: number): LogEntryData[] => {
-  const levels: LogEntryData['level'][] = [
-    'error',
-    'warn',
-    'info',
-    'debug',
-    'trace',
-  ];
-  const sources: Array<{ scope: string; type: 'core' | 'plugin' }> = [
-    { scope: 'app', type: 'core' },
-    { scope: 'plugins', type: 'core' },
-    { scope: 'http', type: 'core' },
-    { scope: 'streaming', type: 'core' },
-    { scope: 'playback', type: 'core' },
-    { scope: 'youtube-music', type: 'plugin' },
-    { scope: 'spotify', type: 'plugin' },
-  ];
-  const messages = [
-    'Application started',
-    'Plugin loaded successfully',
-    'HTTP request to api.example.com/v1/search',
-    'Stream resolution started',
-    'Playback state changed to playing',
-    'Rate limited, backing off for 5s',
-    'Failed to authenticate: Invalid credentials',
-    'Searching for: Artist - Track Title',
-    'Buffer status: 45.2s remaining',
-    'Theme changed to dark mode',
-    'Settings saved to disk',
-    'Queue updated: 12 tracks',
-  ];
-
-  const now = Date.now();
-  return Array.from({ length: count }).map((_, i) => {
-    const level = levels[i % levels.length];
-    const source = sources[i % sources.length];
-    const message = messages[i % messages.length];
-
-    return {
-      id: `log-${i}`,
-      timestamp: new Date(now - i * 1000),
-      level,
-      source,
-      message,
-    };
-  });
-};
-
 export const Interactive: Story = {
   render: () => {
     const [logs, setLogs] = useState(() => generateLogs(50));
-    const scopes = [...new Set(logs.map((l) => l.source.scope))];
+    const scopes = [...new Set(logs.map((log) => log.source.scope))];
 
     const handleClear = () => setLogs([]);
     const handleExport = async () => {
@@ -92,7 +50,7 @@ export const Interactive: Story = {
 export const ManyLogs: Story = {
   render: () => {
     const [logs] = useState(() => generateLogs(1000));
-    const scopes = [...new Set(logs.map((l) => l.source.scope))];
+    const scopes = [...new Set(logs.map((log) => log.source.scope))];
 
     return (
       <div className="bg-background h-[600px] p-4">
@@ -109,12 +67,28 @@ export const ManyLogs: Story = {
 };
 
 export const Empty: Story = {
+  render: () => (
+    <div className="bg-background h-[400px] p-4">
+      <LogViewer
+        logs={[]}
+        scopes={[]}
+        onClear={() => {}}
+        onExport={() => {}}
+        onOpenLogFolder={() => {}}
+      />
+    </div>
+  ),
+};
+
+export const LongMessages: Story = {
   render: () => {
+    const scopes = [...new Set(longMessageLogs.map((log) => log.source.scope))];
+
     return (
-      <div className="bg-background h-[400px] p-4">
+      <div className="bg-background h-[600px] p-4">
         <LogViewer
-          logs={[]}
-          scopes={[]}
+          logs={longMessageLogs}
+          scopes={scopes}
           onClear={() => {}}
           onExport={() => {}}
           onOpenLogFolder={() => {}}
@@ -124,35 +98,17 @@ export const Empty: Story = {
   },
 };
 
-export const LongMessages: Story = {
+export const ClickableChips: Story = {
   render: () => {
-    const logs: LogEntryData[] = [
-      {
-        id: '1',
-        timestamp: new Date(),
-        level: 'error',
-        source: { type: 'core', scope: 'plugins' },
-        message: `Plugin failed to load: youtube-music
-Error: Cannot read property 'search' of undefined
-    at PluginLoader.load (plugin-loader.ts:45)
-    at async loadAllPlugins (index.ts:12)
-    at async App.initialize (app.ts:23)`,
-      },
-      {
-        id: '2',
-        timestamp: new Date(Date.now() - 1000),
-        level: 'debug',
-        source: { type: 'core', scope: 'http' },
-        message:
-          'HTTP Response: {"status":"ok","data":{"tracks":[{"id":"abc123","title":"Very Long Track Title That Goes On And On","artist":"Some Artist With A Really Long Name"}]}}',
-      },
+    const scopes = [
+      ...new Set(clickableChipsLogs.map((log) => log.source.scope)),
     ];
 
     return (
-      <div className="bg-background h-[400px] p-4">
+      <div className="bg-background h-[600px] p-4">
         <LogViewer
-          logs={logs}
-          scopes={['plugins', 'http']}
+          logs={clickableChipsLogs}
+          scopes={scopes}
           onClear={() => {}}
           onExport={() => {}}
           onOpenLogFolder={() => {}}

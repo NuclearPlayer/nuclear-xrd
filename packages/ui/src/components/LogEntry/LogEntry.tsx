@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { ComponentProps, FC } from 'react';
 
 import { cn } from '../../utils';
+import { CollapsibleText } from '../CollapsibleText';
 
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error';
 
@@ -33,6 +34,18 @@ const levelBadgeVariants = cva(
   },
 );
 
+const levelBorderVariants = cva('border-l-[3px]', {
+  variants: {
+    level: {
+      error: 'border-l-accent-red',
+      warn: 'border-l-accent-yellow',
+      info: 'border-l-accent-cyan',
+      debug: 'border-l-accent-purple',
+      trace: 'border-l-foreground/30',
+    },
+  },
+});
+
 const sourceChipVariants = cva(
   'inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium',
   {
@@ -47,9 +60,19 @@ const sourceChipVariants = cva(
 
 export type LogEntryProps = ComponentProps<'div'> & {
   entry: LogEntryData;
+  index?: number;
+  onLevelClick: (level: string) => void;
+  onScopeClick: (scope: string) => void;
 };
 
-export const LogEntry: FC<LogEntryProps> = ({ entry, className, ...props }) => {
+export const LogEntry: FC<LogEntryProps> = ({
+  entry,
+  index,
+  onLevelClick,
+  onScopeClick,
+  className,
+  ...props
+}) => {
   const formattedTime = DateTime.fromJSDate(entry.timestamp).toFormat(
     'HH:mm:ss.SSS',
   );
@@ -59,7 +82,9 @@ export const LogEntry: FC<LogEntryProps> = ({ entry, className, ...props }) => {
   return (
     <div
       className={cn(
-        'grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm',
+        'border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm',
+        levelBorderVariants({ level: entry.level }),
+        index !== undefined && index % 2 === 1 ? 'bg-foreground/[0.03]' : '', // ugly but needed due to virtualization
         className,
       )}
       {...props}
@@ -70,26 +95,34 @@ export const LogEntry: FC<LogEntryProps> = ({ entry, className, ...props }) => {
       >
         {formattedTime}
       </span>
-      <span
+      <button
+        type="button"
         data-testid="log-level"
-        className={levelBadgeVariants({ level: entry.level })}
+        className={cn(
+          levelBadgeVariants({ level: entry.level }),
+          'cursor-pointer hover:opacity-80',
+        )}
+        onClick={() => onLevelClick(entry.level)}
       >
         {entry.level.toUpperCase()}
-      </span>
+      </button>
       {displayLabel && (
-        <span
+        <button
+          type="button"
           data-testid="log-scope"
-          className={sourceChipVariants({ type: entry.source.type })}
+          className={cn(
+            sourceChipVariants({ type: entry.source.type }),
+            'cursor-pointer hover:opacity-80',
+          )}
+          onClick={() => onScopeClick(entry.source.scope)}
         >
           {displayLabel}
-        </span>
+        </button>
       )}
-      <span
-        data-testid="log-message"
+      <CollapsibleText
+        text={entry.message}
         className="text-foreground break-all whitespace-pre-wrap"
-      >
-        {entry.message}
-      </span>
+      />
     </div>
   );
 };

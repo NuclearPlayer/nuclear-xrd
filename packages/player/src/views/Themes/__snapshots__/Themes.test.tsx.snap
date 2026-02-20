@@ -293,7 +293,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                   href="/settings"
                 >
                   <div
-                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md px-2 py-1"
+                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md border-y-2 border-transparent px-2 py-1"
                     data-testid="sidebar-navigation-item"
                   >
                     <svg
@@ -333,7 +333,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                   href="/plugins"
                 >
                   <div
-                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md px-2 py-1"
+                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md border-y-2 border-transparent px-2 py-1"
                     data-testid="sidebar-navigation-item"
                   >
                     <svg
@@ -370,7 +370,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                   href="/themes"
                 >
                   <div
-                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md px-2 py-1 bg-primary border-border border-t-2 border-r-2 border-b-2 font-bold"
+                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md border-y-2 px-2 py-1 bg-primary border-border border-t-2 border-r-2 border-b-2 font-bold"
                     data-testid="sidebar-navigation-item"
                   >
                     <svg
@@ -421,7 +421,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
                   href="/logs"
                 >
                   <div
-                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md px-2 py-1"
+                    class="flex w-full flex-row items-center justify-start gap-2 rounded-r-md border-y-2 border-transparent px-2 py-1"
                     data-testid="sidebar-navigation-item"
                   >
                     <svg

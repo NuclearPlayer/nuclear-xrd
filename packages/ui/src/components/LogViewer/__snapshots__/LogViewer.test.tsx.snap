@@ -2,7 +2,7 @@
 
 exports[`LogViewer > (Snapshot) renders empty state 1`] = `
 <div
-  class="flex h-full flex-col gap-4"
+  class="flex h-full flex-col gap-4 pb-6"
 >
   <div
     class="flex flex-wrap items-center gap-4"
@@ -232,7 +232,7 @@ exports[`LogViewer > (Snapshot) renders empty state 1`] = `
 
 exports[`LogViewer > (Snapshot) renders with logs 1`] = `
 <div
-  class="flex h-full flex-col gap-4"
+  class="flex h-full flex-col gap-4 pb-6"
 >
   <div
     class="flex flex-wrap items-center gap-4"
@@ -524,7 +524,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(0px);"
       >
         <div
-          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-red"
         >
           <span
             class="text-foreground/60 whitespace-nowrap"
@@ -532,24 +532,28 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             10:00:00.000
           </span>
-          <span
-            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-red text-foreground"
+          <button
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-red text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-level"
+            type="button"
           >
             ERROR
-          </span>
-          <span
-            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+          </button>
+          <button
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-scope"
+            type="button"
           >
             plugins
-          </span>
-          <span
-            class="text-foreground break-all whitespace-pre-wrap"
-            data-testid="log-message"
-          >
-            Plugin failed to load
-          </span>
+          </button>
+          <div>
+            <span
+              class="text-foreground break-all whitespace-pre-wrap"
+              data-testid="log-message"
+            >
+              Plugin failed to load
+            </span>
+          </div>
         </div>
       </div>
       <div
@@ -558,7 +562,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(32px);"
       >
         <div
-          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-yellow bg-foreground/[0.03]"
         >
           <span
             class="text-foreground/60 whitespace-nowrap"
@@ -566,24 +570,28 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             10:00:01.000
           </span>
-          <span
-            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-yellow text-foreground"
+          <button
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-yellow text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-level"
+            type="button"
           >
             WARN
-          </span>
-          <span
-            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+          </button>
+          <button
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-scope"
+            type="button"
           >
             http
-          </span>
-          <span
-            class="text-foreground break-all whitespace-pre-wrap"
-            data-testid="log-message"
-          >
-            Rate limited
-          </span>
+          </button>
+          <div>
+            <span
+              class="text-foreground break-all whitespace-pre-wrap"
+              data-testid="log-message"
+            >
+              Rate limited
+            </span>
+          </div>
         </div>
       </div>
       <div
@@ -592,7 +600,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(64px);"
       >
         <div
-          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-cyan"
         >
           <span
             class="text-foreground/60 whitespace-nowrap"
@@ -600,24 +608,28 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             10:00:02.000
           </span>
-          <span
-            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground"
+          <button
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-level"
+            type="button"
           >
             INFO
-          </span>
-          <span
-            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+          </button>
+          <button
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-scope"
+            type="button"
           >
             app
-          </span>
-          <span
-            class="text-foreground break-all whitespace-pre-wrap"
-            data-testid="log-message"
-          >
-            Application started
-          </span>
+          </button>
+          <div>
+            <span
+              class="text-foreground break-all whitespace-pre-wrap"
+              data-testid="log-message"
+            >
+              Application started
+            </span>
+          </div>
         </div>
       </div>
       <div
@@ -626,7 +638,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(96px);"
       >
         <div
-          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-purple bg-foreground/[0.03]"
         >
           <span
             class="text-foreground/60 whitespace-nowrap"
@@ -634,24 +646,28 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             10:00:03.000
           </span>
-          <span
-            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-purple text-foreground"
+          <button
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-purple text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-level"
+            type="button"
           >
             DEBUG
-          </span>
-          <span
-            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+          </button>
+          <button
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-scope"
+            type="button"
           >
             streaming
-          </span>
-          <span
-            class="text-foreground break-all whitespace-pre-wrap"
-            data-testid="log-message"
-          >
-            Resolving stream
-          </span>
+          </button>
+          <div>
+            <span
+              class="text-foreground break-all whitespace-pre-wrap"
+              data-testid="log-message"
+            >
+              Resolving stream
+            </span>
+          </div>
         </div>
       </div>
       <div
@@ -660,7 +676,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(128px);"
       >
         <div
-          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-foreground/30"
         >
           <span
             class="text-foreground/60 whitespace-nowrap"
@@ -668,24 +684,28 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             10:00:04.000
           </span>
-          <span
-            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-foreground/50 text-background"
+          <button
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-foreground/50 text-background cursor-pointer hover:opacity-80"
             data-testid="log-level"
+            type="button"
           >
             TRACE
-          </span>
-          <span
-            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground"
+          </button>
+          <button
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-foreground/10 text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-scope"
+            type="button"
           >
             playback
-          </span>
-          <span
-            class="text-foreground break-all whitespace-pre-wrap"
-            data-testid="log-message"
-          >
-            Buffer status
-          </span>
+          </button>
+          <div>
+            <span
+              class="text-foreground break-all whitespace-pre-wrap"
+              data-testid="log-message"
+            >
+              Buffer status
+            </span>
+          </div>
         </div>
       </div>
       <div
@@ -694,7 +714,7 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
         style="transform: translateY(160px);"
       >
         <div
-          class="grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 px-2 py-1 font-mono text-sm"
+          class="border-border/50 grid grid-cols-[auto_auto_auto_1fr] items-start gap-2 border-b px-2 py-2 font-mono text-sm border-l-[3px] border-l-accent-cyan bg-foreground/[0.03]"
         >
           <span
             class="text-foreground/60 whitespace-nowrap"
@@ -702,24 +722,28 @@ exports[`LogViewer > (Snapshot) renders with logs 1`] = `
           >
             10:00:05.000
           </span>
-          <span
-            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground"
+          <button
+            class="inline-flex w-14 items-center justify-center rounded px-1.5 py-0.5 text-xs font-bold uppercase bg-accent-cyan text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-level"
+            type="button"
           >
             INFO
-          </span>
-          <span
-            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-accent-orange/50 text-foreground"
+          </button>
+          <button
+            class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium bg-accent-orange/50 text-foreground cursor-pointer hover:opacity-80"
             data-testid="log-scope"
+            type="button"
           >
             youtube-music
-          </span>
-          <span
-            class="text-foreground break-all whitespace-pre-wrap"
-            data-testid="log-message"
-          >
-            Searching...
-          </span>
+          </button>
+          <div>
+            <span
+              class="text-foreground break-all whitespace-pre-wrap"
+              data-testid="log-message"
+            >
+              Searching...
+            </span>
+          </div>
         </div>
       </div>
     </div>
