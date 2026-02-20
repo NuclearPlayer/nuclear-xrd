@@ -65,6 +65,11 @@
   <project_group>Nuclear</project_group>
 
   <releases>
+    <release version="1.6.2" date="2026-02-20">
+      <description>
+        <p>Fix Flatpak upload — git safe.directory in container.</p>
+      </description>
+    </release>
     <release version="1.6.1" date="2026-02-20">
       <description>
         <p>Fix Flatpak build — correct binary path in manifest.</p>

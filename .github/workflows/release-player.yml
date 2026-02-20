@@ -152,6 +152,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           gh release upload "player@${{ steps.version.outputs.version }}" \
             nuclear-music-player.flatpak \
             --clobber
