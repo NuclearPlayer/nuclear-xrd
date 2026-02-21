@@ -79,4 +79,22 @@ export const PlaylistsWrapper = {
       await PlaylistsWrapper.createDialog.submitButton.click();
     },
   },
+
+  importButton: {
+    get element() {
+      return screen.getByTestId('import-playlist-button');
+    },
+    async click() {
+      await user.click(this.element);
+    },
+  },
+
+  importJsonOption: {
+    get element() {
+      return screen.getByTestId('import-json-option');
+    },
+    async click() {
+      await user.click(this.element);
+    },
+  },
 };
