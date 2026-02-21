@@ -150,5 +150,38 @@ describe('Playlists view', () => {
       expect(PlaylistsWrapper.cards).toHaveLength(0);
       expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
     });
+
+    it('shows an error toast when reading the file fails', async () => {
+      (dialog.open as Mock).mockResolvedValueOnce('/path/to/playlist.json');
+      (fs.readTextFile as Mock).mockRejectedValueOnce(
+        new Error('Permission denied'),
+      );
+
+      await PlaylistsWrapper.mount();
+      await PlaylistsWrapper.importButton.click();
+      await PlaylistsWrapper.importJsonOption.click();
+
+      await vi.waitFor(() => {
+        expect(toastError).toHaveBeenCalled();
+      });
+      expect(PlaylistsWrapper.cards).toHaveLength(0);
+      expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
+    });
+
+    it('shows an error toast when the file dialog fails', async () => {
+      (dialog.open as Mock).mockRejectedValueOnce(
+        new Error('Dialog unavailable'),
+      );
+
+      await PlaylistsWrapper.mount();
+      await PlaylistsWrapper.importButton.click();
+      await PlaylistsWrapper.importJsonOption.click();
+
+      await vi.waitFor(() => {
+        expect(toastError).toHaveBeenCalled();
+      });
+      expect(PlaylistsWrapper.cards).toHaveLength(0);
+      expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
+    });
   });
 });
