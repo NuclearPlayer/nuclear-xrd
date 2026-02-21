@@ -1,4 +1,7 @@
+import * as dialog from '@tauri-apps/plugin-dialog';
+import * as fs from '@tauri-apps/plugin-fs';
 import { screen } from '@testing-library/react';
+import { type Mock } from 'vitest';
 
 import { PlayerBarWrapper } from '../../integration-tests/PlayerBar.test-wrapper';
 import { QueueWrapper } from '../../integration-tests/Queue.test-wrapper';
@@ -7,6 +10,16 @@ import { PlaylistBuilder } from '../../test/builders/PlaylistBuilder';
 import { resetInMemoryTauriStore } from '../../test/utils/inMemoryTauriStore';
 import { mockUuid } from '../../test/utils/mockUuid';
 import { PlaylistDetailWrapper } from './PlaylistDetail.test-wrapper';
+
+vi.mock('@tauri-apps/plugin-dialog', () => ({
+  open: vi.fn(),
+  save: vi.fn(),
+}));
+
+vi.mock('@tauri-apps/plugin-fs', () => ({
+  readTextFile: vi.fn(),
+  writeTextFile: vi.fn(),
+}));
 
 const defaultPlaylist = () =>
   new PlaylistBuilder()
@@ -20,6 +33,7 @@ describe('PlaylistDetail view', () => {
     resetInMemoryTauriStore();
     useQueueStore.setState({ items: [], currentIndex: 0 });
     PlaylistDetailWrapper.seedPlaylist(defaultPlaylist());
+    (dialog.save as Mock).mockResolvedValue(null);
   });
 
   it('(Snapshot) renders playlist detail with tracks', async () => {
@@ -166,5 +180,30 @@ describe('PlaylistDetail view', () => {
     expect(queueItems[0]?.title).toBe('Existing Track');
     expect(queueItems[1]?.title).toBe('Giant Steps');
     expect(queueItems[2]?.title).toBe('So What');
+  });
+
+  it('exports playlist as JSON file via save dialog', async () => {
+    const expectedPath = '/downloads/Test Playlist.json';
+    (dialog.save as Mock).mockResolvedValue(expectedPath);
+
+    await PlaylistDetailWrapper.mount('test-playlist');
+    await PlaylistDetailWrapper.exportJsonOption.click();
+
+    expect(dialog.save).toHaveBeenCalledWith(
+      expect.objectContaining({
+        defaultPath: 'Test Playlist.json',
+        filters: [{ name: 'JSON Files', extensions: ['json'] }],
+      }),
+    );
+
+    expect(fs.writeTextFile).toHaveBeenCalledWith(
+      expectedPath,
+      expect.any(String),
+    );
+
+    const writtenJson = (fs.writeTextFile as Mock).mock.calls[0][1];
+    const parsed = JSON.parse(writtenJson);
+    expect(parsed.name).toBe('Test Playlist');
+    expect(parsed.tracks).toHaveLength(2);
   });
 });
