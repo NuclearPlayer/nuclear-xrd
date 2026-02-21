@@ -21,6 +21,11 @@ vi.mock('@tauri-apps/plugin-fs', () => ({
   writeTextFile: vi.fn(),
 }));
 
+const toastError = vi.fn();
+vi.mock('sonner', () => ({
+  toast: { error: (...args: unknown[]) => toastError(...args) },
+}));
+
 const defaultPlaylist = () =>
   new PlaylistBuilder()
     .withId('test-playlist')
@@ -34,6 +39,7 @@ describe('PlaylistDetail view', () => {
     useQueueStore.setState({ items: [], currentIndex: 0 });
     PlaylistDetailWrapper.seedPlaylist(defaultPlaylist());
     (dialog.save as Mock).mockResolvedValue(null);
+    toastError.mockClear();
   });
 
   it('(Snapshot) renders playlist detail with tracks', async () => {
@@ -182,28 +188,72 @@ describe('PlaylistDetail view', () => {
     expect(queueItems[2]?.title).toBe('So What');
   });
 
-  it('exports playlist as JSON file via save dialog', async () => {
-    const expectedPath = '/downloads/Test Playlist.json';
-    (dialog.save as Mock).mockResolvedValue(expectedPath);
+  describe('JSON export', () => {
+    it('exports playlist as JSON file via save dialog', async () => {
+      const expectedPath = '/downloads/Test Playlist.json';
+      (dialog.save as Mock).mockResolvedValue(expectedPath);
 
-    await PlaylistDetailWrapper.mount('test-playlist');
-    await PlaylistDetailWrapper.exportJsonOption.click();
+      await PlaylistDetailWrapper.mount('test-playlist');
+      await PlaylistDetailWrapper.exportJsonOption.click();
 
-    expect(dialog.save).toHaveBeenCalledWith(
-      expect.objectContaining({
-        defaultPath: 'Test Playlist.json',
-        filters: [{ name: 'JSON Files', extensions: ['json'] }],
-      }),
-    );
+      expect(dialog.save).toHaveBeenCalledWith(
+        expect.objectContaining({
+          defaultPath: 'Test Playlist.json',
+          filters: [{ name: 'JSON Files', extensions: ['json'] }],
+        }),
+      );
 
-    expect(fs.writeTextFile).toHaveBeenCalledWith(
-      expectedPath,
-      expect.any(String),
-    );
+      expect(fs.writeTextFile).toHaveBeenCalledWith(
+        expectedPath,
+        expect.any(String),
+      );
 
-    const writtenJson = (fs.writeTextFile as Mock).mock.calls[0][1];
-    const parsed = JSON.parse(writtenJson);
-    expect(parsed.name).toBe('Test Playlist');
-    expect(parsed.tracks).toHaveLength(2);
+      const writtenJson = (fs.writeTextFile as Mock).mock.calls[0][1];
+      const parsed = JSON.parse(writtenJson);
+      expect(parsed.name).toBe('Test Playlist');
+      expect(parsed.tracks).toHaveLength(2);
+    });
+
+    it('does nothing when the user cancels the save dialog', async () => {
+      (dialog.save as Mock).mockResolvedValueOnce(null);
+
+      await PlaylistDetailWrapper.mount('test-playlist');
+      await PlaylistDetailWrapper.exportJsonOption.click();
+
+      expect(fs.writeTextFile).not.toHaveBeenCalled();
+    });
+
+    it('shows an error toast when writing the file fails', async () => {
+      (dialog.save as Mock).mockResolvedValueOnce(
+        '/downloads/Test Playlist.json',
+      );
+      (fs.writeTextFile as Mock).mockRejectedValueOnce(
+        new Error('Permission denied'),
+      );
+
+      await PlaylistDetailWrapper.mount('test-playlist');
+      await PlaylistDetailWrapper.exportJsonOption.click();
+
+      await vi.waitFor(() => {
+        expect(toastError).toHaveBeenCalledWith('Failed to export playlist', {
+          description: 'Permission denied',
+        });
+      });
+    });
+
+    it('shows an error toast when the save dialog fails', async () => {
+      (dialog.save as Mock).mockRejectedValueOnce(
+        new Error('Dialog unavailable'),
+      );
+
+      await PlaylistDetailWrapper.mount('test-playlist');
+      await PlaylistDetailWrapper.exportJsonOption.click();
+
+      await vi.waitFor(() => {
+        expect(toastError).toHaveBeenCalledWith('Failed to export playlist', {
+          description: 'Dialog unavailable',
+        });
+      });
+    });
   });
 });
