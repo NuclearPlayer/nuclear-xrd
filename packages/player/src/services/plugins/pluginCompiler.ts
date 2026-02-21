@@ -176,20 +176,32 @@ export async function compilePlugin(
           // using Tauri's readTextFile instead of Node's fs.
           build.onResolve({ filter: /.*/ }, async (args) => {
             if (args.kind === 'entry-point') {
+              console.log('[tauri-fs resolve] entry-point:', args.path);
               return { path: args.path, namespace: 'tauri-fs' };
             }
 
             if (await isAbsolute(args.path)) {
+              console.log('[tauri-fs resolve] absolute:', args.path);
               return { path: args.path, namespace: 'tauri-fs' };
             }
 
             if (/^\.\.?[/\\]/.test(args.path)) {
-              return {
-                path: await resolve(args.resolveDir || entryDir, args.path),
-                namespace: 'tauri-fs',
-              };
+              const resolved = await resolve(
+                args.resolveDir || entryDir,
+                args.path,
+              );
+              console.log(
+                '[tauri-fs resolve] relative:',
+                args.path,
+                'resolveDir:',
+                args.resolveDir,
+                'resolved:',
+                resolved,
+              );
+              return { path: resolved, namespace: 'tauri-fs' };
             }
 
+            console.log('[tauri-fs resolve] external:', args.path);
             return { path: args.path, external: true };
           });
           // Given a path in our "tauri-fs" namespace, fetch the file content
@@ -198,6 +210,12 @@ export async function compilePlugin(
             { filter: /.*/, namespace: 'tauri-fs' },
             async (args) => {
               // Special-case the entry file: we already have its contents and loader.
+              console.log(
+                '[tauri-fs load] args.path:',
+                args.path,
+                'entryPath:',
+                entryPath,
+              );
               if (args.path === entryPath) {
                 const thisDir = entryDir;
                 return {
@@ -237,6 +255,7 @@ export async function compilePlugin(
                 );
               }
 
+              console.log('[tauri-fs load] candidates:', candidates);
               for (const p of candidates) {
                 const contents = await tryRead(p);
                 if (contents != null) {
