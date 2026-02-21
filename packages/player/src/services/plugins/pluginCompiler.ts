@@ -17,13 +17,7 @@
  * - Externalize bare module imports (e.g., @nuclearplayer/plugin-sdk) so plugins don't
  *   accidentally try to bundle our runtime dependencies.
  */
-import {
-  dirname,
-  extname,
-  isAbsolute,
-  resolve,
-  normalize as tauriNormalize,
-} from '@tauri-apps/api/path';
+import { dirname, extname, isAbsolute, resolve } from '@tauri-apps/api/path';
 import { readTextFile } from '@tauri-apps/plugin-fs';
 import type * as EsbuildTypes from 'esbuild-wasm';
 import wasmUrl from 'esbuild-wasm/esbuild.wasm?url';
@@ -71,11 +65,6 @@ const es = getEsbuildState();
 const cache = new Map<string, string>();
 
 const isTs = (p: string) => p.endsWith('.ts') || p.endsWith('.tsx');
-
-// esbuild-wasm operates in a forward-slash world. Tauri's path functions
-// return native separators (backslashes on Windows), so we normalize all
-// paths to forward slashes before passing them to esbuild.
-const toForwardSlashes = (p: string) => p.replace(/\\/g, '/');
 
 /**
  * Initialize esbuild-wasm exactly once within this JS context.
@@ -127,16 +116,13 @@ export async function compilePlugin(
     return undefined;
   }
   const entrySource = await readTextFile(entryPath);
-  const nativeEntryPath = await tauriNormalize(entryPath);
-  entryPath = toForwardSlashes(nativeEntryPath);
   const key = entryPath + ':' + simpleHash(entrySource);
   if (cache.has(key)) {
     return cache.get(key);
   }
 
   const mod = await getEsbuild();
-  const nativeEntryDir = await dirname(nativeEntryPath);
-  const entryDir = toForwardSlashes(nativeEntryDir);
+  const entryDir = await dirname(entryPath);
   const entryLoader: EsbuildTypes.Loader = entryPath.endsWith('.tsx')
     ? 'tsx'
     : entryPath.endsWith('.ts')
@@ -155,7 +141,6 @@ export async function compilePlugin(
     stdin: {
       contents: entrySource,
       sourcefile: entryPath,
-      resolveDir: entryDir,
       loader: entryLoader,
     },
     bundle: true,
@@ -169,9 +154,8 @@ export async function compilePlugin(
     external: ['@nuclearplayer/plugin-sdk'],
 
     // Keep a neutral working directory. Real resolution happens inside our
-    // virtual "tauri-fs" plugin (below). Use native path separators here
-    // because esbuild validates this as an OS-native absolute path.
-    absWorkingDir: nativeEntryDir,
+    // virtual "tauri-fs" plugin (below).
+    absWorkingDir: '/',
 
     // Inline tsconfig so esbuild doesn't try to read tsconfig.json from disk.
     tsconfigRaw: { compilerOptions: {} },
@@ -190,40 +174,22 @@ export async function compilePlugin(
           // lands in this namespace will be loaded by our onLoad hook below,
           // using Tauri's readTextFile instead of Node's fs.
           build.onResolve({ filter: /.*/ }, async (args) => {
-            // 1) The entry point itself.
-            //    Tag it with our namespace to keep it in the virtual fs flow.
             if (args.kind === 'entry-point') {
-              return {
-                path: toForwardSlashes(args.path),
-                namespace: 'tauri-fs',
-              };
+              return { path: entryPath, namespace: 'tauri-fs' };
             }
 
-            // 2) Absolute paths like "/Users/…/index.ts" or "C:\Users\…\index.ts".
-            //    Keep the absolute path as-is, just force the namespace.
             if (await isAbsolute(args.path)) {
-              return {
-                path: toForwardSlashes(args.path),
-                namespace: 'tauri-fs',
-              };
+              return { path: args.path, namespace: 'tauri-fs' };
             }
 
-            // 3) Relative paths like "./foo" or "../bar".
-            //    Resolve them to an absolute path based on the current file's directory.
             if (/^\.\.?[/\\]/.test(args.path)) {
-              return {
-                path: toForwardSlashes(
-                  await resolve(args.resolveDir || entryDir, args.path),
-                ),
-                namespace: 'tauri-fs',
-              };
+              const importerDir = args.importer
+                ? await dirname(args.importer)
+                : entryDir;
+              const resolved = await resolve(importerDir, args.path);
+              return { path: resolved, namespace: 'tauri-fs' };
             }
 
-            // 4) Bare module specifiers (e.g., "react", "@nuclearplayer/plugin-sdk").
-            //    We do not bundle those. The host app should provide them at runtime.
-            if (args.path === '@nuclearplayer/plugin-sdk') {
-              return { path: args.path, external: true };
-            }
             return { path: args.path, external: true };
           });
           // Given a path in our "tauri-fs" namespace, fetch the file content
@@ -231,13 +197,10 @@ export async function compilePlugin(
           build.onLoad(
             { filter: /.*/, namespace: 'tauri-fs' },
             async (args) => {
-              // Special-case the entry file: we already have its contents and loader.
-              if (toForwardSlashes(args.path) === entryPath) {
-                const thisDir = entryDir;
+              if (args.path === entryPath) {
                 return {
                   contents: entrySource,
                   loader: entryLoader,
-                  resolveDir: thisDir,
                 };
               }
 
@@ -279,8 +242,7 @@ export async function compilePlugin(
                     : p.endsWith('.ts')
                       ? 'ts'
                       : 'js';
-                  const thisDir = toForwardSlashes(await dirname(p));
-                  return { contents, loader, resolveDir: thisDir };
+                  return { contents, loader };
                 }
               }
 
