@@ -9,6 +9,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FC, ReactNode } from 'react';
 
 import { cn } from '../../utils';
+import { PopoverItem } from './PopoverItem';
+import { PopoverMenu } from './PopoverMenu';
 
 export type PopoverProps = {
   trigger: ReactNode;
@@ -19,7 +21,12 @@ export type PopoverProps = {
   backdrop?: boolean;
 };
 
-export const Popover: FC<PopoverProps> = ({
+type PopoverComponent = FC<PopoverProps> & {
+  Item: typeof PopoverItem;
+  Menu: typeof PopoverMenu;
+};
+
+const PopoverImpl: FC<PopoverProps> = ({
   trigger,
   children,
   className,
@@ -71,3 +78,7 @@ export const Popover: FC<PopoverProps> = ({
     </HeadlessPopover>
   );
 };
+
+export const Popover = PopoverImpl as PopoverComponent;
+Popover.Item = PopoverItem;
+Popover.Menu = PopoverMenu;

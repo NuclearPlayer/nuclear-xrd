@@ -94,13 +94,14 @@ export const QueueHeaderActions: FC = () => {
         }
         anchor="bottom end"
       >
-        <button
-          className="hover:bg-background-secondary flex w-full cursor-pointer items-center gap-2 rounded px-3 py-1.5 text-left text-sm whitespace-nowrap"
-          onClick={() => setSaveDialogOpen(true)}
-          data-testid="save-queue-as-playlist"
-        >
-          {t('actions.saveAsPlaylist')}
-        </button>
+        <Popover.Menu>
+          <Popover.Item
+            onClick={() => setSaveDialogOpen(true)}
+            data-testid="save-queue-as-playlist"
+          >
+            {t('actions.saveAsPlaylist')}
+          </Popover.Item>
+        </Popover.Menu>
       </Popover>
       <Dialog.Root
         isOpen={saveDialogOpen}

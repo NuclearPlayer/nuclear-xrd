@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
+import { PencilIcon, Trash2Icon } from 'lucide-react';
 
 import { Button, Popover } from '@nuclearplayer/ui';
 
@@ -50,5 +51,35 @@ export const AllAnchors: Story = {
         anchor="left"
       />
     </div>
+  ),
+};
+
+export const DropdownMenu: Story = {
+  render: () => (
+    <Popover
+      className="relative"
+      panelClassName="bg-background px-0 py-0"
+      trigger={<Button>Actions</Button>}
+      anchor="bottom"
+    >
+      <Popover.Menu>
+        <Popover.Item
+          icon={<PencilIcon size={16} />}
+          onClick={() => console.log('edit')}
+        >
+          Edit
+        </Popover.Item>
+        <Popover.Item onClick={() => console.log('duplicate')}>
+          Duplicate
+        </Popover.Item>
+        <Popover.Item
+          intent="danger"
+          icon={<Trash2Icon size={16} />}
+          onClick={() => console.log('delete')}
+        >
+          Delete
+        </Popover.Item>
+      </Popover.Menu>
+    </Popover>
   ),
 };

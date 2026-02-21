@@ -34,7 +34,7 @@ const PlaylistsContent: FC = () => {
         </Button>
         <Popover
           className="relative"
-          panelClassName="bg-background px-0 py-1"
+          panelClassName="bg-background px-0 py-0"
           trigger={
             <Button size="icon" data-testid="import-playlist-button">
               <Import size={16} />
@@ -42,15 +42,14 @@ const PlaylistsContent: FC = () => {
           }
           anchor="bottom start"
         >
-          <div className="flex flex-col">
-            <button
-              className="hover:border-border hover:bg-background-secondary flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
+          <Popover.Menu>
+            <Popover.Item
               onClick={importFromJson}
               data-testid="import-json-option"
             >
               {t('importJson')}
-            </button>
-          </div>
+            </Popover.Item>
+          </Popover.Menu>
         </Popover>
       </div>
 
