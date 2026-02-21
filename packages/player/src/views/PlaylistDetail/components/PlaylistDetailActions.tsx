@@ -2,6 +2,7 @@ import { useNavigate } from '@tanstack/react-router';
 import {
   EllipsisVerticalIcon,
   PlayIcon,
+  PlusIcon,
   ShareIcon,
   Trash2Icon,
 } from 'lucide-react';
@@ -67,6 +68,7 @@ export const PlaylistDetailActions: FC<PlaylistDetailActionsProps> = ({
         >
           <Popover.Menu>
             <Popover.Item
+              icon={<PlusIcon size={16} />}
               onClick={handleAddToQueue}
               data-testid="add-to-queue-action"
             >
