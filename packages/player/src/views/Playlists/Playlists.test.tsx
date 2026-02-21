@@ -15,8 +15,12 @@ vi.mock('@tauri-apps/plugin-dialog', () => ({
 }));
 
 const toastError = vi.fn();
+const toastSuccess = vi.fn();
 vi.mock('sonner', () => ({
-  toast: { error: (...args: unknown[]) => toastError(...args) },
+  toast: {
+    error: (...args: unknown[]) => toastError(...args),
+    success: (...args: unknown[]) => toastSuccess(...args),
+  },
 }));
 
 vi.mock('@tauri-apps/plugin-fs', async () => ({
@@ -25,7 +29,7 @@ vi.mock('@tauri-apps/plugin-fs', async () => ({
 }));
 
 const mockPlaylistFile = (playlist: Playlist) =>
-  JSON.stringify(playlist, null, 2);
+  JSON.stringify({ version: 1, ...playlist }, null, 2);
 
 describe('Playlists view', () => {
   beforeEach(() => {
@@ -106,6 +110,10 @@ describe('Playlists view', () => {
         expect(PlaylistsWrapper.cards).toHaveLength(1);
       });
       expect(PlaylistsWrapper.card(0).name).toBe('Imported Playlist');
+
+      await vi.waitFor(() => {
+        expect(toastSuccess).toHaveBeenCalledWith('Playlist imported');
+      });
     });
 
     it('does nothing when the user cancels the file picker', async () => {

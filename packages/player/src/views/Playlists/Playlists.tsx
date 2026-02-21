@@ -44,6 +44,7 @@ const PlaylistsContent: FC = () => {
         >
           <Popover.Menu>
             <Popover.Item
+              icon={<Import size={16} />}
               onClick={importFromJson}
               data-testid="import-json-option"
             >

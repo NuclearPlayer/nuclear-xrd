@@ -32,7 +32,7 @@ export const PopoverItem: FC<PopoverItemProps> = ({
   ...props
 }) => (
   <button className={cn(popoverItemVariants({ intent, className }))} {...props}>
-    <span className="w-8 shrink-0">{icon}</span>
+    <span className="w-4 shrink-0">{icon}</span>
     <span>{children}</span>
   </button>
 );

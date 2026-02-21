@@ -109,6 +109,7 @@ export type { QueueItem, RepeatMode, Queue } from './queue';
 export type { SearchCategory, SearchParams, SearchResults } from './search';
 export type { LocalFileInfo, Stream, StreamCandidate } from './streaming';
 export {
+  PLAYLIST_EXPORT_VERSION,
   playlistSchema,
   playlistIndexEntrySchema,
   playlistIndexSchema,

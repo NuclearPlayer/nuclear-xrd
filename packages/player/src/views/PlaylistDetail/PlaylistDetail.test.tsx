@@ -216,7 +216,7 @@ describe('PlaylistDetail view', () => {
       const parsed = JSON.parse(writtenJson);
       expect(parsed.version).toBe(1);
       expect(parsed.name).toBe('Test Playlist');
-      expect(parsed.tracks).toHaveLength(2);
+      expect(parsed.items).toHaveLength(2);
 
       await vi.waitFor(() => {
         expect(toastSuccess).toHaveBeenCalledWith('Playlist exported');

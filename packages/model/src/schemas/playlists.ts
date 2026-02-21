@@ -40,7 +40,10 @@ const playlistItemSchema = z.object({
   addedAtIso: z.string(),
 });
 
+export const PLAYLIST_EXPORT_VERSION = 1;
+
 export const playlistSchema = z.object({
+  version: z.number().optional(),
   id: z.string(),
   name: z.string(),
   description: z.string().optional(),
