@@ -34,10 +34,12 @@ import { ConnectedTopBar } from '../components/ConnectedTopBar';
 import { DevTools } from '../components/DevTools';
 import { FlatpakWarningBanner } from '../components/FlatpakWarningBanner';
 import { SoundProvider } from '../components/SoundProvider';
+import { useAppVersion } from '../hooks/useAppVersion';
 import { useLayoutStore } from '../stores/layoutStore';
 
 const RootComponent = () => {
   const { t } = useTranslation('navigation');
+  const { version: appVersion, commitHash } = useAppVersion();
   const {
     leftSidebar,
     rightSidebar,
@@ -46,6 +48,10 @@ const RootComponent = () => {
     setLeftSidebarWidth,
     setRightSidebarWidth,
   } = useLayoutStore();
+
+  const versionString = appVersion
+    ? `v${appVersion}${commitHash ? ` (${commitHash})` : ''}`
+    : null;
 
   return (
     <PlayerShell>
@@ -60,6 +66,13 @@ const RootComponent = () => {
             isCollapsed={leftSidebar.isCollapsed}
             onWidthChange={setLeftSidebarWidth}
             onToggle={toggleLeftSidebar}
+            footer={
+              versionString && (
+                <span className="text-muted-foreground cursor-text px-2 py-1 text-xs select-all">
+                  {versionString}
+                </span>
+              )
+            }
           >
             <SidebarNavigation>
               <SidebarNavigationCollapsible

@@ -10,6 +10,7 @@ import { useSidebarResize } from './hooks';
 export type PlayerWorkspaceSidebarPropsBase = {
   children?: ReactNode;
   headerActions?: ReactNode;
+  footer?: ReactNode;
   isCollapsed: boolean;
   width: number;
   onWidthChange: (width: number) => void;
@@ -24,6 +25,7 @@ type PlayerWorkspaceSidebarProps = PlayerWorkspaceSidebarPropsBase & {
 export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
   children,
   headerActions,
+  footer,
   isCollapsed,
   width,
   onWidthChange,
@@ -87,7 +89,7 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
       <AnimatePresence mode="wait">
         {!isCollapsed && (
           <motion.div
-            className="flex-1 overflow-hidden"
+            className="flex flex-1 flex-col overflow-hidden"
             initial={{ opacity: 0, x: side === 'left' ? -20 : 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: side === 'left' ? -20 : 20 }}
@@ -99,6 +101,9 @@ export const PlayerWorkspaceSidebar: FC<PlayerWorkspaceSidebarProps> = ({
             }}
           >
             {children}
+            {footer && (
+              <div className="mt-auto flex justify-center">{footer}</div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

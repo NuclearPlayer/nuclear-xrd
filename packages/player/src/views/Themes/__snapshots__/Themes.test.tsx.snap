@@ -157,7 +157,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
         </span>
         <div
           animate="[object Object]"
-          class="flex-1 overflow-hidden"
+          class="flex flex-1 flex-col overflow-hidden"
           exit="[object Object]"
           initial="[object Object]"
           transition="[object Object]"
@@ -865,7 +865,7 @@ exports[`Themes view > (Snapshot) renders the themes view 1`] = `
         </span>
         <div
           animate="[object Object]"
-          class="flex-1 overflow-hidden"
+          class="flex flex-1 flex-col overflow-hidden"
           exit="[object Object]"
           initial="[object Object]"
           transition="[object Object]"

@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 /// <reference types="vite-plugin-svgr/client" />
+import { execSync } from 'child_process';
 import { codecovVitePlugin } from '@codecov/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import { devtools } from '@tanstack/devtools-vite';
@@ -8,7 +9,18 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
-export default defineConfig(async () => ({
+const commitHash = (() => {
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim();
+  } catch {
+    return 'unknown';
+  }
+})();
+
+export default defineConfig(() => ({
+  define: {
+    __COMMIT_HASH__: JSON.stringify(commitHash),
+  },
   plugins: [
     devtools(),
     react(),

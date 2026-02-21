@@ -142,7 +142,7 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
       </span>
       <div
         animate="[object Object]"
-        class="flex-1 overflow-hidden"
+        class="flex flex-1 flex-col overflow-hidden"
         exit="[object Object]"
         initial="[object Object]"
         transition="[object Object]"
@@ -197,7 +197,7 @@ exports[`PlayerWorkspace > (Snapshot) both sidebars expanded 1`] = `
       </span>
       <div
         animate="[object Object]"
-        class="flex-1 overflow-hidden"
+        class="flex flex-1 flex-col overflow-hidden"
         exit="[object Object]"
         initial="[object Object]"
         transition="[object Object]"
