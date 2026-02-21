@@ -22,8 +22,12 @@ vi.mock('@tauri-apps/plugin-fs', () => ({
 }));
 
 const toastError = vi.fn();
+const toastSuccess = vi.fn();
 vi.mock('sonner', () => ({
-  toast: { error: (...args: unknown[]) => toastError(...args) },
+  toast: {
+    error: (...args: unknown[]) => toastError(...args),
+    success: (...args: unknown[]) => toastSuccess(...args),
+  },
 }));
 
 const defaultPlaylist = () =>
@@ -210,8 +214,13 @@ describe('PlaylistDetail view', () => {
 
       const writtenJson = (fs.writeTextFile as Mock).mock.calls[0][1];
       const parsed = JSON.parse(writtenJson);
+      expect(parsed.version).toBe(1);
       expect(parsed.name).toBe('Test Playlist');
       expect(parsed.tracks).toHaveLength(2);
+
+      await vi.waitFor(() => {
+        expect(toastSuccess).toHaveBeenCalledWith('Playlist exported');
+      });
     });
 
     it('does nothing when the user cancels the save dialog', async () => {

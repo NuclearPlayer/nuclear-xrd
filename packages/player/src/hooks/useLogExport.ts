@@ -4,6 +4,7 @@ import { save } from '@tauri-apps/plugin-dialog';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import { revealItemInDir } from '@tauri-apps/plugin-opener';
 import { useCallback } from 'react';
+import { toast } from 'sonner';
 
 import type { LogEntryData } from '@nuclearplayer/ui';
 
@@ -53,6 +54,7 @@ export const useLogExport = (logs: LogEntryData[]) => {
 
     const content = await generateExportContent(logs);
     await writeTextFile(filePath, content);
+    toast.success('Logs exported');
   }, [logs]);
 
   const openLogFolder = useCallback(async () => {
