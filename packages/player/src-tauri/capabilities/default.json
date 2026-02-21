@@ -8,6 +8,8 @@
   "permissions": [
     "core:default",
     "dialog:allow-open",
+    "dialog:allow-save",
+    "fs:allow-write-text-file",
     "log:default",
     {
       "identifier": "fs:allow-exists",
