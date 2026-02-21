@@ -14,6 +14,11 @@ vi.mock('@tauri-apps/plugin-dialog', () => ({
   save: vi.fn(),
 }));
 
+const toastError = vi.fn();
+vi.mock('sonner', () => ({
+  toast: { error: (...args: unknown[]) => toastError(...args) },
+}));
+
 vi.mock('@tauri-apps/plugin-fs', async () => ({
   readTextFile: vi.fn(),
   writeTextFile: vi.fn(),
@@ -100,7 +105,7 @@ describe('Playlists view', () => {
       await vi.waitFor(() => {
         expect(PlaylistsWrapper.cards).toHaveLength(1);
       });
-      expect(PlaylistsWrapper.cards[0]).toHaveTextContent('Imported Playlist');
+      expect(PlaylistsWrapper.card(0).name).toBe('Imported Playlist');
     });
 
     it('does nothing when the user cancels the file picker', async () => {
@@ -110,6 +115,38 @@ describe('Playlists view', () => {
       await PlaylistsWrapper.importButton.click();
       await PlaylistsWrapper.importJsonOption.click();
 
+      expect(PlaylistsWrapper.cards).toHaveLength(0);
+      expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
+    });
+
+    it('shows an error toast when the file contains invalid JSON', async () => {
+      (dialog.open as Mock).mockResolvedValueOnce('/path/to/bad.json');
+      (fs.readTextFile as Mock).mockResolvedValueOnce('not valid json {{{');
+
+      await PlaylistsWrapper.mount();
+      await PlaylistsWrapper.importButton.click();
+      await PlaylistsWrapper.importJsonOption.click();
+
+      await vi.waitFor(() => {
+        expect(toastError).toHaveBeenCalled();
+      });
+      expect(PlaylistsWrapper.cards).toHaveLength(0);
+      expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
+    });
+
+    it('shows an error toast when the file is valid JSON but not a valid playlist', async () => {
+      (dialog.open as Mock).mockResolvedValueOnce('/path/to/not-playlist.json');
+      (fs.readTextFile as Mock).mockResolvedValueOnce(
+        JSON.stringify({ title: 'not a playlist' }),
+      );
+
+      await PlaylistsWrapper.mount();
+      await PlaylistsWrapper.importButton.click();
+      await PlaylistsWrapper.importJsonOption.click();
+
+      await vi.waitFor(() => {
+        expect(toastError).toHaveBeenCalled();
+      });
       expect(PlaylistsWrapper.cards).toHaveLength(0);
       expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
     });
