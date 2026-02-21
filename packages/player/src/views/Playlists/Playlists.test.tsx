@@ -128,7 +128,10 @@ describe('Playlists view', () => {
       await PlaylistsWrapper.importJsonOption.click();
 
       await vi.waitFor(() => {
-        expect(toastError).toHaveBeenCalled();
+        expect(toastError).toHaveBeenCalledWith(
+          'Failed to import playlist',
+          expect.objectContaining({ description: expect.any(String) }),
+        );
       });
       expect(PlaylistsWrapper.cards).toHaveLength(0);
       expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
@@ -145,7 +148,10 @@ describe('Playlists view', () => {
       await PlaylistsWrapper.importJsonOption.click();
 
       await vi.waitFor(() => {
-        expect(toastError).toHaveBeenCalled();
+        expect(toastError).toHaveBeenCalledWith(
+          'Failed to import playlist',
+          expect.objectContaining({ description: expect.any(String) }),
+        );
       });
       expect(PlaylistsWrapper.cards).toHaveLength(0);
       expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
@@ -162,7 +168,9 @@ describe('Playlists view', () => {
       await PlaylistsWrapper.importJsonOption.click();
 
       await vi.waitFor(() => {
-        expect(toastError).toHaveBeenCalled();
+        expect(toastError).toHaveBeenCalledWith('Failed to import playlist', {
+          description: 'Permission denied',
+        });
       });
       expect(PlaylistsWrapper.cards).toHaveLength(0);
       expect(PlaylistsWrapper.emptyState).toBeInTheDocument();
@@ -178,7 +186,9 @@ describe('Playlists view', () => {
       await PlaylistsWrapper.importJsonOption.click();
 
       await vi.waitFor(() => {
-        expect(toastError).toHaveBeenCalled();
+        expect(toastError).toHaveBeenCalledWith('Failed to import playlist', {
+          description: 'Dialog unavailable',
+        });
       });
       expect(PlaylistsWrapper.cards).toHaveLength(0);
       expect(PlaylistsWrapper.emptyState).toBeInTheDocument();

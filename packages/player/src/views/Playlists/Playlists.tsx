@@ -1,16 +1,18 @@
 import { useNavigate } from '@tanstack/react-router';
 import isEmpty from 'lodash-es/isEmpty';
-import { ListMusic, Plus } from 'lucide-react';
+import { Import, ListMusic, Plus } from 'lucide-react';
 import { type FC } from 'react';
 
 import { useTranslation } from '@nuclearplayer/i18n';
 import {
   Button,
   EmptyState,
+  Popover,
   ScrollableArea,
   ViewShell,
 } from '@nuclearplayer/ui';
 
+import { usePlaylistImport } from '../../hooks/usePlaylistImport';
 import { usePlaylistStore } from '../../stores/playlistStore';
 import { CreatePlaylistDialog } from './components/CreatePlaylistDialog';
 import { PlaylistCardGrid } from './components/PlaylistCardGrid';
@@ -21,6 +23,7 @@ const PlaylistsContent: FC = () => {
   const navigate = useNavigate();
   const index = usePlaylistStore((state) => state.index);
   const { openCreateDialog } = usePlaylistsContext();
+  const { importFromJson } = usePlaylistImport();
 
   return (
     <ViewShell data-testid="playlists-view" title={t('title')}>
@@ -29,6 +32,26 @@ const PlaylistsContent: FC = () => {
           <Plus size={16} />
           {t('create')}
         </Button>
+        <Popover
+          className="relative"
+          panelClassName="bg-background px-0 py-1"
+          trigger={
+            <Button size="icon" data-testid="import-playlist-button">
+              <Import size={16} />
+            </Button>
+          }
+          anchor="bottom start"
+        >
+          <div className="flex flex-col">
+            <button
+              className="hover:border-border hover:bg-background-secondary flex w-full cursor-pointer items-center gap-3 border-t border-transparent px-3 py-2 text-left text-sm not-last:border-b"
+              onClick={importFromJson}
+              data-testid="import-json-option"
+            >
+              {t('importJson')}
+            </button>
+          </div>
+        </Popover>
       </div>
 
       {isEmpty(index) ? (
