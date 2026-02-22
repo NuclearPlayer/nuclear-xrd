@@ -374,7 +374,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                 style="scrollbar-width: none;"
               >
                 <div
-                  class="border-border bg-primary shadow-shadow relative mx-6 mt-6 rounded-md border-2 p-6"
+                  class="border-border bg-primary shadow-shadow relative m-4 rounded-md border-2 p-6"
                 >
                   <button
                     aria-label="Add to favorites"
@@ -467,7 +467,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                   </div>
                 </div>
                 <div
-                  class="flex flex-col gap-6 p-6 md:flex-row"
+                  class="mx-4 mb-4 flex flex-col gap-4 md:flex-row"
                 >
                   <div
                     class="md:w-2/3"
@@ -780,7 +780,7 @@ exports[`Artist view > with bio provider > (Snapshot) renders the artist view 1`
                   </div>
                 </div>
                 <div
-                  class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4 px-4"
+                  class="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-4 mx-4"
                   role="grid"
                 >
                   <button
@@ -1700,7 +1700,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                 style="scrollbar-width: none;"
               >
                 <div
-                  class="border-border bg-primary shadow-shadow relative mx-6 mt-6 rounded-md border-2 p-6"
+                  class="border-border bg-primary shadow-shadow relative m-4 rounded-md border-2 p-6"
                   data-testid="artist-social-header"
                 >
                   <button
@@ -1969,7 +1969,7 @@ exports[`Artist view > with social stats provider > (Snapshot) renders the artis
                   </div>
                 </div>
                 <div
-                  class="flex flex-col gap-6 p-6 md:flex-row"
+                  class="mx-4 mb-4 flex flex-col gap-4 md:flex-row"
                 >
                   <div
                     class="md:w-2/3"
