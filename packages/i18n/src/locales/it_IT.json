@@ -64,6 +64,7 @@
     "emptyTracksDescription": "Add tracks from search results or your library",
     "create": "Create new",
     "importJson": "Import from JSON",
+    "exportJson": "Export as JSON",
     "add": "Add",
     "delete": "Delete playlist",
     "deleteConfirm": "Are you sure you want to delete this playlist?",
@@ -79,7 +80,11 @@
     "createNew": "Create new playlist",
     "saveQueueAsPlaylist": "Save queue as playlist",
     "name": "Name",
-    "namePlaceholder": "Playlist name..."
+    "namePlaceholder": "Playlist name...",
+    "exportSuccess": "Playlist exported",
+    "exportError": "Failed to export playlist",
+    "importSuccess": "Playlist imported",
+    "importError": "Failed to import playlist"
   },
   "search": {
     "title": "Cerca",
@@ -289,6 +294,7 @@
     "noLogsMessage": "No logs to display",
     "invalidRegexMessage": "Invalid regex pattern",
     "entryCount": "{{count}} entry",
-    "entryCount_other": "{{count}} entries"
+    "entryCount_other": "{{count}} entries",
+    "exportSuccess": "Logs exported"
   }
 }
