@@ -49,7 +49,7 @@ export const ArtistSocialHeader: FC<ArtistSocialHeaderProps> = ({
   if (isLoading) {
     return (
       <div
-        className="flex items-center justify-center p-8"
+        className="m-4 flex items-center justify-center"
         data-testid="artist-social-header"
       >
         <Loader data-testid="artist-social-header-loader" />
@@ -60,7 +60,7 @@ export const ArtistSocialHeader: FC<ArtistSocialHeaderProps> = ({
   if (isError) {
     return (
       <div
-        className="flex flex-col items-start gap-3 p-8"
+        className="m-4 flex flex-col items-start gap-3"
         data-testid="artist-social-header"
       >
         <div className="text-accent-red">
@@ -109,7 +109,7 @@ export const ArtistSocialHeader: FC<ArtistSocialHeaderProps> = ({
 
   return (
     <div
-      className="border-border bg-primary shadow-shadow relative mx-6 mt-6 rounded-md border-2 p-6"
+      className="border-border bg-primary shadow-shadow relative m-4 rounded-md border-2 p-6"
       data-testid="artist-social-header"
     >
       <ConnectedFavoriteButton

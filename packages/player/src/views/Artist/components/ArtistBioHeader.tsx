@@ -28,7 +28,7 @@ export const ArtistBioHeader: FC<ArtistBioHeaderProps> = ({
 
   if (isLoading) {
     return (
-      <div className="border-border bg-primary shadow-shadow mx-6 mt-6 flex items-center justify-center rounded-md border-2 p-6">
+      <div className="border-border bg-primary shadow-shadow m-4 flex items-center justify-center rounded-md border-2 p-6">
         <Loader size="xl" data-testid="artist-header-loader" />
       </div>
     );
@@ -36,7 +36,7 @@ export const ArtistBioHeader: FC<ArtistBioHeaderProps> = ({
 
   if (isError) {
     return (
-      <div className="border-border bg-primary shadow-shadow mx-6 mt-6 rounded-md border-2 p-6">
+      <div className="border-border bg-primary shadow-shadow m-4 rounded-md border-2 p-6">
         <div className="text-accent-red">{t('errors.failedToLoadDetails')}</div>
       </div>
     );
@@ -50,7 +50,7 @@ export const ArtistBioHeader: FC<ArtistBioHeaderProps> = ({
   const avatar = pickArtwork(artist.artwork, 'avatar', AVATAR_SIZE_PX);
 
   return (
-    <div className="border-border bg-primary shadow-shadow relative mx-6 mt-6 rounded-md border-2 p-6">
+    <div className="border-border bg-primary shadow-shadow relative m-4 rounded-md border-2 p-6">
       <ConnectedFavoriteButton
         type="artist"
         source={{ provider: providerId, id: artistId }}

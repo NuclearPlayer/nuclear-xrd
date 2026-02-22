@@ -56,7 +56,7 @@ export const ArtistAlbumsGrid: FC<ArtistAlbumsGridProps> = ({
   }
 
   return (
-    <CardGrid data-testid={dataTestId} className="px-4">
+    <CardGrid data-testid={dataTestId} className="mx-4">
       {albums?.map((album) => (
         <Card
           key={album.source.id}

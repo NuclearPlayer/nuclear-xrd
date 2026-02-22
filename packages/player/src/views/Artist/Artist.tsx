@@ -41,7 +41,10 @@ export const Artist: FC<ArtistProps> = () => {
         }
 
         return (
-          <div key={group.key} className="flex flex-col gap-6 p-6 md:flex-row">
+          <div
+            key={group.key}
+            className="mx-4 mb-4 flex flex-col gap-4 md:flex-row"
+          >
             {group.entries.map(({ capability, component: Widget, width }) => (
               <div key={capability} className={width}>
                 <Widget providerId={providerId} artistId={artistId} />
