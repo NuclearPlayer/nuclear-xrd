@@ -33,6 +33,7 @@ export * from './Tabs';
 export * from './ThemeController';
 export * from './Toaster';
 export * from './Toggle';
+export * from './Tooltip';
 export * from './TopBar';
 export * from './TopBarLogo';
 export * from './TrackContextMenu';
