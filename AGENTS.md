@@ -317,11 +317,11 @@ Releases are triggered by git tags. The workflow builds for macOS (arm64/x64), L
 # 1. Update version in packages/player/package.json
 # 2. Update version in packages/player/src-tauri/tauri.conf.json
 # 3. Commit the version bump
-git add -A && git commit -m "chore: bump player to X.Y.Z"
+git add packages/player/package.json packages/player/src-tauri/tauri.conf.json && git commit -m "player@X.Y.Z"
 
 # 4. Tag and push
 git tag player@X.Y.Z
-git push origin main --tags
+git push origin master --tags
 ```
 
 The `release-player.yml` workflow creates a GitHub release with platform binaries.
@@ -333,11 +333,11 @@ Published to npm via the `release-plugin-sdk.yml` workflow.
 ```bash
 # 1. Update version in packages/plugin-sdk/package.json
 # 2. Commit the version bump
-git add -A && git commit -m "chore: bump plugin-sdk to X.Y.Z"
+git add packages/plugin-sdk/package.json && git commit -m "plugin-sdk@X.Y.Z"
 
 # 3. Tag and push
 git tag plugin-sdk@X.Y.Z
-git push origin main --tags
+git push origin master --tags
 ```
 
 The workflow builds with `build:npm`, runs tests, and publishes to npm.
