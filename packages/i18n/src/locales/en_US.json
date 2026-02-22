@@ -80,7 +80,11 @@
     "createNew": "Create new playlist",
     "saveQueueAsPlaylist": "Save queue as playlist",
     "name": "Name",
-    "namePlaceholder": "Playlist name..."
+    "namePlaceholder": "Playlist name...",
+    "exportSuccess": "Playlist exported",
+    "exportError": "Failed to export playlist",
+    "importSuccess": "Playlist imported",
+    "importError": "Failed to import playlist"
   },
   "search": {
     "title": "Search",
@@ -290,6 +294,7 @@
     "noLogsMessage": "No logs to display",
     "invalidRegexMessage": "Invalid regex pattern",
     "entryCount": "{{count}} entry",
-    "entryCount_other": "{{count}} entries"
+    "entryCount_other": "{{count}} entries",
+    "exportSuccess": "Logs exported"
   }
 }

@@ -29,7 +29,7 @@ vi.mock('@tauri-apps/plugin-fs', async () => ({
 }));
 
 const mockPlaylistFile = (playlist: Playlist) =>
-  JSON.stringify({ version: 1, ...playlist }, null, 2);
+  JSON.stringify({ version: 1, playlist }, null, 2);
 
 describe('Playlists view', () => {
   beforeEach(() => {

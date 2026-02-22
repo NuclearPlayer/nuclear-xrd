@@ -43,7 +43,6 @@ const playlistItemSchema = z.object({
 export const PLAYLIST_EXPORT_VERSION = 1;
 
 export const playlistSchema = z.object({
-  version: z.number().optional(),
   id: z.string(),
   name: z.string(),
   description: z.string().optional(),
@@ -55,6 +54,11 @@ export const playlistSchema = z.object({
   isReadOnly: z.boolean(),
   parentId: z.string().optional(),
   items: z.array(playlistItemSchema),
+});
+
+export const playlistExportSchema = z.object({
+  version: z.number(),
+  playlist: playlistSchema,
 });
 
 export const playlistIndexEntrySchema = z.object({

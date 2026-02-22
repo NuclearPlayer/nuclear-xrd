@@ -215,8 +215,8 @@ describe('PlaylistDetail view', () => {
       const writtenJson = (fs.writeTextFile as Mock).mock.calls[0][1];
       const parsed = JSON.parse(writtenJson);
       expect(parsed.version).toBe(1);
-      expect(parsed.name).toBe('Test Playlist');
-      expect(parsed.items).toHaveLength(2);
+      expect(parsed.playlist.name).toBe('Test Playlist');
+      expect(parsed.playlist.items).toHaveLength(2);
 
       await vi.waitFor(() => {
         expect(toastSuccess).toHaveBeenCalledWith('Playlist exported');

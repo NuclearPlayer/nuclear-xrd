@@ -111,6 +111,7 @@ export type { LocalFileInfo, Stream, StreamCandidate } from './streaming';
 export {
   PLAYLIST_EXPORT_VERSION,
   playlistSchema,
+  playlistExportSchema,
   playlistIndexEntrySchema,
   playlistIndexSchema,
 } from './schemas';

@@ -6,6 +6,7 @@ import { revealItemInDir } from '@tauri-apps/plugin-opener';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
 
+import { useTranslation } from '@nuclearplayer/i18n';
 import type { LogEntryData } from '@nuclearplayer/ui';
 
 import { Logger } from '../services/logger';
@@ -42,6 +43,8 @@ export const generateExportContent = async (
 };
 
 export const useLogExport = (logs: LogEntryData[]) => {
+  const { t } = useTranslation('logs');
+
   const exportLogs = useCallback(async () => {
     const filePath = await save({
       defaultPath: `nuclear-logs-${new Date().toISOString().slice(0, 10)}.txt`,
@@ -54,8 +57,8 @@ export const useLogExport = (logs: LogEntryData[]) => {
 
     const content = await generateExportContent(logs);
     await writeTextFile(filePath, content);
-    toast.success('Logs exported');
-  }, [logs]);
+    toast.success(t('exportSuccess'));
+  }, [logs, t]);
 
   const openLogFolder = useCallback(async () => {
     const logDir = await appLogDir();

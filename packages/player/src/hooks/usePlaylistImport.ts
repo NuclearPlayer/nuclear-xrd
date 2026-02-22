@@ -3,12 +3,15 @@ import { readTextFile } from '@tauri-apps/plugin-fs';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
 
-import { playlistSchema } from '@nuclearplayer/model';
+import { useTranslation } from '@nuclearplayer/i18n';
+import { playlistExportSchema } from '@nuclearplayer/model';
 
 import { usePlaylistStore } from '../stores/playlistStore';
 import { reportError } from '../utils/logging';
 
 export const usePlaylistImport = () => {
+  const { t } = useTranslation('playlists');
+
   const importFromJson = useCallback(async () => {
     try {
       const filePath = await open({
@@ -21,16 +24,16 @@ export const usePlaylistImport = () => {
 
       const content = await readTextFile(filePath as string);
       const parsed = JSON.parse(content);
-      const playlist = playlistSchema.parse(parsed);
+      const { playlist } = playlistExportSchema.parse(parsed);
       await usePlaylistStore.getState().importPlaylist(playlist);
-      toast.success('Playlist imported');
+      toast.success(t('importSuccess'));
     } catch (error) {
       await reportError('playlists', {
-        userMessage: 'Failed to import playlist',
+        userMessage: t('importError'),
         error,
       });
     }
-  }, []);
+  }, [t]);
 
   return { importFromJson };
 };
