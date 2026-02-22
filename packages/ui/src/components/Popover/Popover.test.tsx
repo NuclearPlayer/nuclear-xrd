@@ -30,4 +30,33 @@ describe('Popover', () => {
     await screen.findByText('Popover Content');
     expect(document.body).toMatchSnapshot();
   });
+
+  it('(Snapshot) renders menu with items', async () => {
+    render(
+      <Popover trigger={<Button>Open</Button>} anchor="bottom">
+        <Popover.Menu>
+          <Popover.Item>Action One</Popover.Item>
+          <Popover.Item>Action Two</Popover.Item>
+          <Popover.Item intent="danger">Delete</Popover.Item>
+        </Popover.Menu>
+      </Popover>,
+    );
+    await userEvent.click(screen.getByText('Open'));
+    await screen.findByText('Action One');
+    expect(document.body).toMatchSnapshot();
+  });
+
+  it('calls onClick when a menu item is clicked', async () => {
+    const handleClick = vi.fn();
+    render(
+      <Popover trigger={<Button>Open</Button>} anchor="bottom">
+        <Popover.Menu>
+          <Popover.Item onClick={handleClick}>Action</Popover.Item>
+        </Popover.Menu>
+      </Popover>,
+    );
+    await userEvent.click(screen.getByText('Open'));
+    await userEvent.click(screen.getByText('Action'));
+    expect(handleClick).toHaveBeenCalledOnce();
+  });
 });

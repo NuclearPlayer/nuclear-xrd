@@ -1,5 +1,5 @@
 import { createMemoryHistory, createRouter } from '@tanstack/react-router';
-import { render, RenderResult, screen } from '@testing-library/react';
+import { render, RenderResult, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { DialogWrapper } from '@nuclearplayer/ui';
@@ -40,6 +40,9 @@ export const PlaylistsWrapper = {
       get element() {
         return screen.getAllByTestId('card')[index];
       },
+      get name() {
+        return within(this.element).getByTestId('card-title').textContent;
+      },
       async click() {
         await user.click(this.element);
       },
@@ -77,6 +80,24 @@ export const PlaylistsWrapper = {
     async createPlaylist(name: string) {
       await PlaylistsWrapper.createDialog.typeName(name);
       await PlaylistsWrapper.createDialog.submitButton.click();
+    },
+  },
+
+  importButton: {
+    get element() {
+      return screen.getByTestId('import-playlist-button');
+    },
+    async click() {
+      await user.click(this.element);
+    },
+  },
+
+  importJsonOption: {
+    get element() {
+      return screen.getByTestId('import-json-option');
+    },
+    async click() {
+      await user.click(this.element);
     },
   },
 };

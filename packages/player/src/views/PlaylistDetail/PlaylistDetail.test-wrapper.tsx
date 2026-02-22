@@ -59,6 +59,16 @@ export const PlaylistDetailWrapper = {
     },
   },
 
+  exportJsonOption: {
+    get element() {
+      return screen.getByTestId('export-json-action');
+    },
+    async click() {
+      await PlaylistDetailWrapper.actionsButton.click();
+      await user.click(this.element);
+    },
+  },
+
   deleteDialog: {
     isOpen: () => DialogWrapper.isOpen(),
     async openFromActions() {

@@ -55,7 +55,7 @@ export const CardsRow: FC<CardsRowProps> = ({
         <div className="flex items-center gap-2">
           <h2 className="text-foreground text-lg font-bold">{title}</h2>
           {badge && (
-            <Badge data-testid="cards-row-badge" variant="pill" color="green">
+            <Badge data-testid="cards-row-badge" variant="pill" color="purple">
               {badge}
             </Badge>
           )}
