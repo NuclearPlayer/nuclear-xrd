@@ -28,11 +28,6 @@
   "navigation": {
     "explore": "Entdecken",
     "dashboard": "Dashboard",
-    "preferences": "Einstellungen",
-    "settings": "Einstellungen",
-    "plugins": "Plugins",
-    "themes": "Themes",
-    "logs": "Logs",
     "collection": "Sammlung",
     "favoriteAlbums": "Lieblingsalben",
     "favoriteTracks": "Lieblingstitel",
@@ -205,39 +200,36 @@
     "sandboxWarning": "You're running Nuclear in a Flatpak sandbox. Some features may not work correctly. If you experience issues, try the .deb or AppImage instead.",
     "dismiss": "Got it"
   },
-  "settings": {
-    "title": "Einstellungen",
-    "categories": {
-      "general": "Allgemein",
-      "appearance": "Erscheinungsbild",
-      "playback": "Wiedergabe",
-      "layout": "Layout",
-      "updates": "Updates"
-    },
+  "preferences": {
+    "title": "Preferences",
     "general": {
+      "title": "General",
       "language": {
-        "title": "Sprache",
-        "description": "Wählen Sie Ihre bevorzugte Sprache"
+        "title": "Language",
+        "description": "Select your preferred language"
       }
     },
-    "updates": {
-      "checkForUpdates": {
-        "title": "Check for updates",
-        "description": "Automatically check for new versions on startup"
-      },
-      "autoInstall": {
-        "title": "Auto-install updates",
-        "description": "Download and install updates automatically when available"
-      }
+    "plugins": {
+      "title": "Plugins"
+    },
+    "themes": {
+      "title": "Themes"
+    },
+    "logs": {
+      "title": "Logs"
+    },
+    "appearance": {
+      "title": "Appearance"
     },
     "playback": {
+      "title": "Playback",
       "skipSeconds": {
-        "title": "Sprungdauer",
-        "description": "Anzahl der Sekunden zum Vor-/Zurückspringen"
+        "title": "Skip duration",
+        "description": "Number of seconds to skip forward/backward"
       },
       "crossfadeMs": {
-        "title": "Überblendung",
-        "description": "Überblendungsdauer zwischen Titeln in Millisekunden"
+        "title": "Crossfade",
+        "description": "Crossfade duration between tracks in milliseconds"
       },
       "streamExpiryMs": {
         "title": "Stream expiry time",
@@ -246,6 +238,20 @@
       "streamResolutionRetries": {
         "title": "Stream resolution retries",
         "description": "Number of times to retry resolving a stream URL before moving to the next candidate"
+      }
+    },
+    "layout": {
+      "title": "Layout"
+    },
+    "updates": {
+      "title": "Updates",
+      "checkForUpdates": {
+        "title": "Check for updates",
+        "description": "Automatically check for new versions on startup"
+      },
+      "autoInstall": {
+        "title": "Auto-install updates",
+        "description": "Download and install updates automatically when available"
       }
     }
   },
